@@ -19,7 +19,7 @@ Notes:
 
 Pre-work for the current release begins at the code complete date of the previous release. See "Code Complete" section below for details.
 
-### B. (T-minus 15 working days) Cut-off for submitting major features
+### B. (T-minus 15 working day) Cut-off for submitting major features
 
 No pull requests for major features should be **submitted** to the current release after this date (except if release manager decides to add "release-exception" label to Jira ticket).
 
