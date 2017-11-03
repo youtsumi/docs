@@ -20,7 +20,7 @@ Creating a Personal Access Token
 .. image:: ../../source/images/access_token_manage_roles.png
   :width: 500 px
 
-4 - Select **Allow this account to generate personal access tokens.**
+4 - Select **Allow this account to generate personal access tokens.** Note that removing this permission doesn't delete existing tokens. To delete them, go to the user's Manage Tokens menu.
 
 .. image:: ../../source/images/access_tokens_additional_roles.png
   :width: 500 px
@@ -53,6 +53,8 @@ Revoking a Personal Access Token
 A personal access token can be revoked by deleting the token from either the user's account settings or from the System Console.
 
 Once deleted, all sessions using the token are deleted and any attempts using the token to interact with the Mattermost server are blocked.
+
+Moreover, tokens are automatically disabled if the user is deactivated.
 
 Account Settings
 .................
