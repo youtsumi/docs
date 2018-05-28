@@ -1,6 +1,6 @@
 .. _data-format:
 
-Data Format
+Data Format 
 ===========
 
 The input data file must be a valid `JSONL
