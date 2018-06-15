@@ -136,6 +136,8 @@ html_context = {
     'github_repo': 'docs',
     'github_version': 'master/source/',
 
+    'customer_thermometer_embed_code': 'dGVtcGVyYXR1cmVfaWQ9MyZ0aGVybW9tZXRlcl9pZD01MjMwMQ==',
+    
     'css_files': []
 }
 

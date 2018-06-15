@@ -1,20 +1,25 @@
-<hr/>
 <style type="text/css">
-	.red_rating, .red_rating:visited, .red_rating:hover {
+	/* For Customer Thermometer Ratings */
+	span#red_rating {
 		color: red;
 		font-size: 120%;
 	}
-	.yellow_rating, .yellow_rating:visited, .yellow_rating:hover {
+	span#yellow_rating {
 		color: gold;
 		font-size: 120%;
 	}
-	.green_rating, .green_rating:visited, .green_rating:hover {
+	span#green_rating {
 		color: green;
 		font-size: 120%;
 	}
-	.gold_rating, .gold_rating:visited, .gold_rating:hover {
+	span#gold_rating {
 		color: goldenrod;
 		font-size: 90%;
+	}
+
+	span.cr_link {
+		cursor: pointer !important;
+		margin-left: 5px;
 	}
 </style>
 <script type="text/javascript">
@@ -26,20 +31,21 @@
 		window.open(url, 'newwindow', 'width=920,height=720')
 	}
 </script>
+<hr/>
 <div id="page-rating">
 	<p>How would you rate this documentation?
-		<a rel="nofollow" href="#" onclick="w('https://app.customerthermometer.com/?template=log_feedback&hash=12800aab&embed_data=dGVtcGVyYXR1cmVfaWQ9NCZ0aGVybW9tZXRlcl9pZD01MjMwMQ==&c1={{ pagename|urlencode }}')" class="red_rating" onmouseover="txt('Needs work')" onmouseout="txt('');">
-			&#9679;
-		</a>
-		<a rel="nofollow" href="#" onclick="w('https://app.customerthermometer.com/?template=log_feedback&hash=9f02bfd4&embed_data=dGVtcGVyYXR1cmVfaWQ9MyZ0aGVybW9tZXRlcl9pZD01MjMwMQ==&c1={{ pagename|urlencode }}')" class="yellow_rating" onmouseover="txt('Could be better')" onmouseout="txt('');">
-			&#9679;
-		</a>
-		<a rel="nofollow" href="#" onclick="w('https://app.customerthermometer.com/?template=log_feedback&hash=58ca392f&embed_data=dGVtcGVyYXR1cmVfaWQ9MiZ0aGVybW9tZXRlcl9pZD01MjMwMQ==&c1={{ pagename|urlencode }}')" class="green_rating" onmouseover="txt('Pretty good')" onmouseout="txt('');">
-			&#9679;
-		</a>
-		<a rel="nofollow" href="#" onclick="w('https://app.customerthermometer.com/?template=log_feedback&hash=a870c987&embed_data=dGVtcGVyYXR1cmVfaWQ9MSZ0aGVybW9tZXRlcl9pZD01MjMwMQ==&c1={{ pagename|urlencode }}')" class="gold_rating" onmouseover="txt('Great!')" onmouseout="txt('');">
+		<span class="cr_link" onclick="w('https://app.customerthermometer.com/?template=log_feedback&hash=a870c987&embed_data={{ customer_thermometer_embed_code }}&c1={{ pagename|urlencode }}')" id="gold_rating" onmouseover="txt('Great!')" onmouseout="txt('');">
 			&#9733;
-		</a>
+		</span>
+		<span class="cr_link" onclick="w('https://app.customerthermometer.com/?template=log_feedback&hash=58ca392f&embed_data={{ customer_thermometer_embed_code }}&c1={{ pagename|urlencode }}')" id="green_rating" onmouseover="txt('Pretty good')" onmouseout="txt('');">
+			&#9679;
+		</span>
+		<span class="cr_link" onclick="w('https://app.customerthermometer.com/?template=log_feedback&hash=9f02bfd4&embed_data={{ customer_thermometer_embed_code }}&c1={{ pagename|urlencode }}')" id="yellow_rating" onmouseover="txt('Could be better')" onmouseout="txt('');">
+			&#9679;
+		</span>
+		<span class="cr_link" onclick="w('https://app.customerthermometer.com/?template=log_feedback&hash=12800aab&embed_data={{ customer_thermometer_embed_code }}&c1={{ pagename|urlencode }}')" id="red_rating" onmouseover="txt('Needs work')" onmouseout="txt('');">
+			&#9679;
+		</span>
 		<span id="rating">
 
 		</span>
