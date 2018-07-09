@@ -50,6 +50,7 @@ No pull requests for major features should be **merged** to the current release 
     - Submit NOTICE.txt PR for any new libraries added from dev, if not added already. The following two files contain a list of dependencies:
         - https://github.com/mattermost/mattermost-webapp/blob/master/package.json
         - https://github.com/mattermost/mattermost-server/blob/master/Gopkg.lock
+        - https://github.com/mattermost/mattermost-mobile/blob/master/package.json
     - Start posting a daily Zero Bug Balance query (posted until zero bugs or day of release)
 3. Dev:
     - Prioritize reviewing, updating, and merging of pull requests for current release until there are no more tickets in the [pull request queue](https://github.com/mattermost/mattermost-server/pulls) marked for the current release
@@ -122,7 +123,7 @@ Day when Leads and PMs decide which major features are included in the release, 
 3. QA:
     - Confirm up to date with testing merged PRs and resolved tickets
     - Confirm up to date with test updates and known issues in release testing spreadsheet
-    - Assign release testing areas to team members, communicate process to new teammates who have been added to testing
+    - Assign release testing areas to team members, communicate process to new teammates who have been added to testing, DM team members who are not QA or devs
     - After RC1 is cut: Update rctesting and CI server invite links in Release Testing spreadsheet
     - After RC1 is cut: Lock Selenium server to RC1
 4. Build:
@@ -156,6 +157,8 @@ Day when Leads and PMs decide which major features are included in the release, 
     - Update Release Discussion header with links to RC instances and testing spreadsheet ([template](https://pre-release.mattermost.com/core/pl/db3sur4r53d9tyih1i4wrmi9wy))
     - Post release testing instructions to Release Discussion channel ([template](https://pre-release.mattermost.com/core/pl/uprogtcqzpbk7nkmdkfnhqkcac))
     - Post "Bug Hunter Coin" message to Reception channel ([see example](https://pre-release.mattermost.com/core/pl/3o15eoq89fdq5m1ac5dyp4nc3e))
+    - Begin running all Selenium IDE tests
+    - At end of day, post reminders about release testing in Release Discussion and Announcements channels, DM any team members who have zero test cells marked Done
 4. Dev:
     - Run load tests against the release candidate to find potential performance issues
     - Make PRs for bug fixes to the release branch
@@ -166,7 +169,7 @@ Day when Leads and PMs decide which major features are included in the release, 
     - Push next RC to acceptance and announce in Town Square with new RC link
     - Check CI servers running on release branch
 
-### I. (T-minus 5 working days) Release Candidate Testing Finished
+### I. (T-minus 6 working days) Release Candidate Testing Finished
 
 1. **(Team) Daily Release Update Meeting**
     - Confirm testing assigned in the release testing spreadsheet is complete 
@@ -184,13 +187,18 @@ Day when Leads and PMs decide which major features are included in the release, 
     - Finish drafts of all art work (screenshots, GIFs and twitter banners) used for the blog post and review with PMs before sending to marketing lead for review
     - Find [www-gitlab-com merge request](https://gitlab.com/gitlab-com/www-gitlab-com/merge_requests?scope=all&utf8=%E2%9C%93&state=opened&label_name%5B%5D=blog%20post&label_name%5B%5D=release) for latest GitLab release blog post and make request for adding GitLab Mattermost update (see [example request](https://gitlab.com/gitlab-com/www-gitlab-com/merge_requests/2910#note_14096885), [example update](https://about.gitlab.com/2016/07/22/gitlab-8-10-released/#gitlab-mattermost-32)). Post to Release Discussion channel with link to request.
 4. QA:
+    - Midday: Post at-channel reminders about testing, and DM team members whose tests are not marked Done
+    - Find QA or other teammates to help finish unfinished tests if needed
+    - End of day: Verify all release tests are finished
+    - Go through all tabs of testing spreadsheet and verify all comments and questions have been filed in JIRA as needed
+    - Verify all JIRA tickets other than newly filed bugs have been tested, verified, and closed
     - As bug fixes are merged and RCs are cut, verify fixes on new RCs and post in Release Channel after testing
     - As RCs are cut, update selenium.mattermost.com to latest RC
-    - Update Selenium and manual smoke tests as needed, to prepare to run on each RC after it is cut
+
 
 ### J. (T-minus 2 working days) Release Build Cut
 
-The final release is cut. If an urgent and important issue needs to be addressed between major releases, a bug fix release (e.g. 1.1.1) may be created.
+The final release is cut - RC cuts and bug fixes should be completed by this date. Only urgent and critical issues are considered for fixing.
 
 1. Release Manager:
     - Post this checklist in Release Checklist channel
@@ -246,7 +254,7 @@ If a security fix release is required, run through the following steps:
     - PRs for hotfixes are made to release branch (**Dev**)
     - Review PRs made from release branch and merge changes into the release branch as required and merge the release branch back into master once per day (**Dev**)
 2. T-3 Release Candidate Cut
-    - Verify with Release Manager before cutting any new dot release RCs (approved fixes should be merged) (**Build:**)
+    - Verify with Release Manager before cutting any new dot release RCs (approved fixes should be merged) (**Build**)
 3. T-2 Release Candidate Testing
     - If the dot release takes place during a regular release, update ``ci-linux-mysql-prev`` to dot-release RCs for the previous release and keep ``rctesting.reddogsofwar`` on the latest regular release version (**QA**)
     - Test the new RC to verify fixes merged to the release branch work (**QA**)
@@ -288,11 +296,11 @@ If a bug fix release is required, run through the following steps:
     - PRs for hotfixes are made to release branch (**Dev**)
     - Review PRs made from release branch and merge changes into the release branch as required and merge the release branch back into master once per day (**Dev**)
 2. T-3 Release Candidate Cut
-    - Verify with Release Manager before cutting any new dot release RCs (approved fixes should be merged) (**Build:**)
+    - Verify with Release Manager before cutting any new dot release RCs (approved fixes should be merged) (**Build**)
 3. T-2 Release Candidate Testing
-    - If the dot release takes place during a regular release, update ``ci-linux-mysql-prev`` to dot-release RCs for the previous release and keep ``rctesting.reddogsofwar`` on the latest regular release version (**QA:**)
-    - Test the new RC to verify fixes merged to the release branch work (**QA:**)
-    - Post in Release Discussion channel after testing (**QA:**)
+    - If the dot release takes place during a regular release, update ``ci-linux-mysql-prev`` to dot-release RCs for the previous release and keep ``rctesting.reddogsofwar`` on the latest regular release version (**QA**)
+    - Test the new RC to verify fixes merged to the release branch work (**QA**)
+    - Post in Release Discussion channel after testing (**QA**)
 
 Once bug fix release is ready to cut:
 
@@ -357,7 +365,6 @@ Once bug fix release is ready to cut:
     - Put CI servers and translation server back onto master, and post in Release Discussion channel once done
     - Update [ci-linux-mysql-prev](https://ci-linux-mysql-prev.mattermost.com) to the previous release version
 5. Dev:
-    - Delete RCs after final version is shipped
     - Confirm gitlab.mattermost.com is updated to final build
     - Merge changes made to release branch into `master`
     - Update existing tickets or create new ones for the next release

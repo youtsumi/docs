@@ -113,3 +113,12 @@ As a Value-Added Reseller you can request a renewable 1-year E20 license for up 
 - Go to https://about.mattermost.com/trial/ to complete a trial form, enter [RESELLER] after your organization name.
 - In the “Tell us more” section enter “1 Year Reseller License Request” so your application can be reviewed and matched against our certified reseller database.
 - Please expect delivery in 2-3 business days
+
+Mattermost Partner Program FAQ 
+------------------------------------------------
+Frequently asked questions from Mattermost partners.
+
+Can a partner sell Mattermost products without revealing the name of an end customer? 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+No. Mattermost, Inc. must know all end customers with whom it does business. This is important for Mattermost to be able to service and renew the end customer if the reseller relationship is discontinued. Moreover, Mattermost cannot do business with customers in countries embargoed by the United States and this must be confirmed in any commercial transaction. 
