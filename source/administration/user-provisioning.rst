@@ -33,7 +33,7 @@ User Deprovisioning
 Users in Mattermost can be deactivated in the following ways:
 
 - **AD/LDAP Synchronization**: AD/LDAP users can be deactivated in Mattermost based on their status in the directory server via synchronization. Learn more in `AD/LDAP documentation <https://docs.mattermost.com/deployment/sso-ldap.html#how-does-deactivating-users-work>`__.
-- **System Console**: User management screen in **System Console > Users** allows administrators to deactiveate users with email/password login.
+- **System Console**: User management screen in **System Console > Users** allows administrators to deactiveate users with email/password login. You can see deactivated users by selecting ``Inactive`` in the **User Status** filter.   
 - **RESTful API** The Mattermost API can be used to deactivate users. See `API documentation to learn more <https://api.mattermost.com/#tag/users%2Fpaths%2F~1users~1%7Buser_id%7D%2Fdelete>`__.
 - **Command Line Interface**: The Mattermost CLI can be used to deactivate users. See `CLI documentation to learn more <https://docs.mattermost.com/administration/command-line-tools.html#mattermost-user-deactivate>`__.
 
