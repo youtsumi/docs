@@ -467,10 +467,6 @@ mattermost command modify
   Description
     Modify a slash command. Commands can be specified by command ID.
 
-.. note::
-    Only fields that you want to modify need to be specified.  Also, when modifying the command's creator, the new creator specified must have the permission to create commands. 
-
-
   Format
     .. code-block:: none
 
@@ -495,6 +491,10 @@ mattermost command modify
           --autocompleteDesc string          Short command description for autocomplete list
           --autocompleteHint string          Command arguments displayed as help in autocomplete list
           --post bool                        Use POST method for callback URL, else use GET method
+
+.. note::
+    Only fields that you want to modify need to be specified.  Also, when modifying the command's creator, the new creator specified must have the permission to create commands. 
+
 
 mattermost command move
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -569,9 +569,6 @@ mattermost config migrate
   Description
     Migrate a file-based configuration to (or from) a database-based configuration. Point the Mattermost server at the target configuration to start using it. If using SAML, ensure the SAML certificates and keys are accessible to also migrate into the database.
     
-.. note::   
-    If a ``from`` parameter is not specified, the command will fall back to what is specified in --config.
-    
   Format
     .. code-block:: none
 
@@ -581,6 +578,9 @@ mattermost config migrate
     .. code-block:: none
 
        ./mattermost config migrate  path/to/config.json "postgres://mmuser:mostest@dockerhost:5432/mattermost_test?sslmode=disable&connect_timeout=10"
+
+.. note::   
+    If a ``from`` parameter is not specified, the command will fall back to what is specified in --config.
     
 mattermost config set
 ~~~~~~~~~~~~~~~~~~~~~
@@ -764,9 +764,6 @@ mattermost group channel enable
 
   Description
     Enables group constraint on the specified channel. When a channel is group constrained, channel membership is managed by linked groups instead of managed by manually adding and removing users.
-    
-.. note::
-  To enable a group constraint on a specific channel, you must already have at least one group associated. See `AD/LDAP Group documentation <https://docs.mattermost.com/deployment/ldap-group-sync.html#add-default-teams-or-channels-for-the-group>`_ for more details on how to associate a group to a channel.
 
   Format
     .. code-block:: none
@@ -777,6 +774,9 @@ mattermost group channel enable
     .. code-block:: none
 
       ./mattermost group channel enable myteam:mychannel
+      
+.. note::
+  To enable a group constraint on a specific channel, you must already have at least one group associated. See `AD/LDAP Group documentation <https://docs.mattermost.com/deployment/ldap-group-sync.html#add-default-teams-or-channels-for-the-group>`_ for more details on how to associate a group to a channel.      
       
 mattermost group channel disable 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -844,9 +844,6 @@ mattermost group team enable
 
   Description
     Enables group constraint on the specified team. When a team is group constrained, team membership is managed by linked groups instead of managed by manually inviting and removing users.
-    
-.. note::
-  To enable a group constraint on a specific team, you must already have at least one group associated. See `AD/LDAP Group documentation <https://docs.mattermost.com/deployment/ldap-group-sync.html#add-default-teams-or-channels-for-the-group>`_ for more details on how to associate a group to a team.
 
   Format
     .. code-block:: none
@@ -857,6 +854,9 @@ mattermost group team enable
     .. code-block:: none
 
       ./mattermost group team enable myteam
+      
+.. note::
+  To enable a group constraint on a specific team, you must already have at least one group associated. See `AD/LDAP Group documentation <https://docs.mattermost.com/deployment/ldap-group-sync.html#add-default-teams-or-channels-for-the-group>`_ for more details on how to associate a group to a team.      
       
 mattermost group team disable 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
