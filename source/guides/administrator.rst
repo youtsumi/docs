@@ -21,13 +21,13 @@ Installing Mattermost
 Learn how to get Mattermost running on your environment.
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :glob:
 
    /install/requirements.rst
+   Installing on Kubernetes </install/install-kubernetes.rst>
    Installing on Ubuntu 16.04 LTS </install/install-ubuntu-1604.rst>
    Installing on Ubuntu 18.04 LTS </install/install-ubuntu-1804.rst>
-   Installing on Kubernetes </install/install-kubernetes.rst>
    Installing on Debian Stretch </install/install-debian.rst>
    Installing on RHEL 6 </install/install-rhel-6.rst>
    Installing on RHEL 7 </install/install-rhel-7.rst>
