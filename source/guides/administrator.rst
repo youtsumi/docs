@@ -21,7 +21,7 @@ Installing Mattermost
 Learn how to get Mattermost running on your environment.
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :glob:
 
    /install/requirements.rst
