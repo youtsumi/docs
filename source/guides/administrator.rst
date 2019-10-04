@@ -21,11 +21,12 @@ Installing Mattermost
 Learn how to get Mattermost running on your environment.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :glob:
 
    /install/requirements.rst
-   /install/install-linux.rst
+   Installing on Kubernetes </install/install-kubernetes.rst>
+   /install/install-linux.rst*
    Instructions On Setting Up a Socket-based Mattermost Database </install/sockets-db.rst>
    /install/ee-install*
    /install/deploy-bitnami*
