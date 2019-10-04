@@ -1,4 +1,4 @@
-.. _install-Linux:
+.. _install-linux:
 
 =========================================
 Installing Mattermost on Linux
