@@ -1,20 +1,13 @@
 .. _install-kubernetes-mattermost:
 
-Deploying a Mattermost Installation
-===================================
+Deploy a Mattermost Installation
+============================
 
-This guide describes deploying a complete Mattermost installation in Kubernetes including a database. In most
-cases you'll create and apply a single manifest. In the case of an Enterprise installation, two manifests will be applied.
+Deploying a Mattermost installation is very simple and just requires creating and applying a single manifest.
 
-Manifest files contain the configurations needed for the
-operator to perform tasks and communicate with Kubernetes. Create the manifest file locally,
-copy and paste the contents, and save the file with the relevant name.
+**1. (Enterprise only) Create your Mattermost license secret**
 
-**1. (Enterprise only) Create a Mattermost License Secret**
-
-Open a text editor and create a text file with the following details.
-**Note:** Replace ``%LICENSE_FILE_CONTENTS%`` with the contents of your Mattermost license file.
-
+Save the following in a file named ``mattermost-license-secret.yaml``:
 
 .. code-block:: yaml
 
@@ -26,17 +19,17 @@ Open a text editor and create a text file with the following details.
   stringData:
     license: %LICENSE_FILE_CONTENTS%
 
-Save the file as ``mattermost-license-secret.yaml``. Apply the file, specifying the correct path, using:
+Replace ``%LICENSE_FILE_CONTENTS%`` with the contents of your Mattermost license file. 
+
+Apply it with:
 
 .. code-block:: sh
 
   $ kubectl apply -f /path/to/mattermost-license-secret.yaml
 
-**2. Create an Installation Manifest File**
+**2. Create your installation manifest file**
 
-Open a text editor and create a text file with the following details.
-
-Save the file as ``mattermost-installation.yaml``:
+Save the following into a file named ``mattermost-installation.yaml``:
 
 .. code-block:: yaml
 
@@ -46,7 +39,7 @@ Save the file as ``mattermost-installation.yaml``:
     name: mm-example-full
   spec:
     size: 5000users
-    ingressName: example.mattermost-example.com
+    ingressName: example.mattermost-example.com 
     ingressAnnotations:
       kubernetes.io/ingress.class: nginx
     version: 5.14.0
@@ -60,9 +53,9 @@ Save the file as ``mattermost-installation.yaml``:
       username: ""
       password: ""
 
-**3. Edit the Installation Manifest File**
+**3. Edit your installation manifest file**
 
-The Mattermost installation manifest contains fields which must be edited in line with your configuration and environment requirements.
+Depending on your desired configuration, edit the following fields in your manifest. There are a few fields that must be modified, which are marked accordingly in the table below.
 
 .. csv-table::
     :header: "Field", "Description", "Must Edit"
@@ -81,28 +74,27 @@ The Mattermost installation manifest contains fields which must be edited in lin
 
 There are more advanced fields documented `here <https://raw.githubusercontent.com/mattermost/mattermost-operator/master/docs/examples/full.yaml>`__.
 
-**4. Apply the Installation Manifest File**
+**4. Apply your installation manifest file**
 
-To initiate deployment, apply the file, specifying the correct path, using:
+To deploy your installation, apply it with:
 
 .. code-block:: sh
 
   $ kubectl create ns mattermost
   $ kubectl apply -n mattermost -f /path/to/mattermost-installation.yaml
 
-The deployment process can be monitored in the Kubernetes user interface.
+Make sure to replace ``/path/to/mattermost-installation.yaml`` with the correct path.
 
 **4. Configure DNS and Use Mattermost**
 
-When the deployment is complete, obtain the hostname or IP address of your Mattermost deployment using the following command:
+After waiting 3-5 minutes for your deployment to complete, run the following to get the hostname or IP address to access Mattermost at:
 
 .. code-block:: sh
 
   $ kubectl -n mattermost get ingress
 
-Copy the resulting hostname or IP address from the ``ADDRESS`` column, open your browser, and connect to Mattermost.
+This will give you either a hostname or IP address under the ``ADDRESS`` column. Copy that address.
 
-Use your domain registration service to create a canonical name or IP address record for the ``ingressName`` in your manifest,
-pointing to the address you just copied. For example, on AWS you would do this within a hosted zone in Route53.
+Use your domain registration service to create a canonical name or IP address record for the ``ingressName`` in your manifest, pointing to the address you just copied. For example, on AWS you would do this within a hosted zone in Route53.
 
-Navigate to the ``ingressName`` URL in your browser and use Mattermost.
+Go to your ``ingressName`` URL in your browser and use Mattermost.
