@@ -1,0 +1,705 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>DevOps Command Center &mdash; Mattermost 5.25 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Atlassian Tools" href="../deployment/atlassian-integrations.html" />
+    <link rel="prev" title="Mattermost Developer Toolkit" href="../developer/toolkit.html" />
+	<!-- Bizible Script -->
+	<script src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
+
+	
+		<!-- Google Analytics -->
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-67846571-2', 'auto');
+			ga('send', 'pageview');
+		</script>
+		<!-- End Google Analytics -->
+	
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-67846571-1"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'UA-67846571-1');
+	</script>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<!-- Second Google Analytics tag to assist mapping with mattermost.com visits --> 
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120238482-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-120238482-1');
+	</script>
+
+	<!-- LeadLander -->
+	<script type="text/javascript" language="javascript">
+		var sf14gv = 31865;
+		(function() {
+			var sf14g = document.createElement('script');
+			sf14g.src = 'https://tracking.leadlander.com/lt.min.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sf14g, s);
+		})();
+	</script>
+
+	<!-- Munchkin code -->
+	<script type="text/javascript">
+		(function() {
+			var didInit = false;
+			function initMunchkin() {
+			if(didInit === false) {
+				didInit = true;
+				Munchkin.init('161-FBE-733');
+			}
+			}
+			var s = document.createElement('script');
+			s.type = 'text/javascript';
+			s.async = true;
+			s.src = '//munchkin.marketo.net/munchkin.js';
+			s.onreadystatechange = function() {
+			if (this.readyState == 'complete' || this.readyState == 'loaded') {
+				initMunchkin();
+			}
+			};
+			s.onload = initMunchkin;
+			document.getElementsByTagName('head')[0].appendChild(s);
+		})();
+	</script>
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.25
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../developer/toolkit.html">Mattermost Developer Toolkit</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">DevOps Command Center</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user-s-guide">User’s Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#administrator-s-guide">Administrator’s Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#exporting-channels">Exporting channels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#telemetry">Telemetry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#glossary">Glossary</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/atlassian-integrations.html">Atlassian Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/microsoft-integrations.html">Microsoft Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/ci-cd-tools.html">CI/CD Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/incident-response-and-monitoring.html">Incident Response and Monitoring Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/bots.html">Bots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/video-and-audio-calling.html">Voice, video, and screensharing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/productivity-tools.html">Productivity Tools</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#unofficial-enhancements">Unofficial Enhancements</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/education.html">Training and Education</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/administrator.html">Administrator’s Guide</a> &raquo;</li>
+    
+    <li>DevOps Command Center</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/administration/devops-command-center.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="devops-command-center">
+<h1>DevOps Command Center<a class="headerlink" href="#devops-command-center" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#overview" id="id1">Overview</a></li>
+<li><a class="reference internal" href="#user-s-guide" id="id2">User’s Guide</a><ul>
+<li><a class="reference internal" href="#starting-incidents" id="id3">Starting incidents</a></li>
+<li><a class="reference internal" href="#active-incidents" id="id4">Active incidents</a></li>
+<li><a class="reference internal" href="#using-playbooks" id="id5">Using playbooks</a></li>
+<li><a class="reference internal" href="#viewing-and-creating-playbooks" id="id6">Viewing and creating playbooks</a></li>
+<li><a class="reference internal" href="#creating-checklists" id="id7">Creating checklists</a></li>
+<li><a class="reference internal" href="#editing-checklists" id="id8">Editing checklists</a></li>
+<li><a class="reference internal" href="#ending-incidents" id="id9">Ending incidents</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#administrator-s-guide" id="id10">Administrator’s Guide</a><ul>
+<li><a class="reference internal" href="#permissions" id="id11">Permissions</a></li>
+<li><a class="reference internal" href="#incidents-backstage" id="id12">Incidents Backstage</a></li>
+<li><a class="reference internal" href="#viewing-incident-details" id="id13">Viewing incident details</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#exporting-channels" id="id14">Exporting channels</a></li>
+<li><a class="reference internal" href="#telemetry" id="id15">Telemetry</a></li>
+<li><a class="reference internal" href="#glossary" id="id16">Glossary</a></li>
+</ul>
+</div>
+<div class="section" id="overview">
+<h2><a class="toc-backref" href="#contents">Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Incident Response is a Mattermost plugin designed to help organizations monitor, coordinate, and measure their incident response processes, increasing transparency, maximizing effectiveness, and ultimately saving costs by cutting down time taken to respond and resolve incidents.</p>
+</div>
+<div class="section" id="user-s-guide">
+<h2><a class="toc-backref" href="#contents">User’s Guide</a><a class="headerlink" href="#user-s-guide" title="Permalink to this headline">¶</a></h2>
+<p>Incidents are events within Mattermost that are initiated to manage a specific situation/response in real-time. When the situation/response is complete, the incident is ended. Events that occurred within the incident can be reused in future incidents as playbooks and checklists.</p>
+<div class="section" id="starting-incidents">
+<h3><a class="toc-backref" href="#contents">Starting incidents</a><a class="headerlink" href="#starting-incidents" title="Permalink to this headline">¶</a></h3>
+<p>The incident channel is the central place for discussion related to the incident. You can start an incident in one of three ways:</p>
+<ul class="simple">
+<li>Use the slash command <em>/incident start</em> from any channel.</li>
+<li>Select <strong>!</strong> from the channel header.</li>
+<li>Use the context menu of a post and select <strong>Start incident</strong>.</li>
+</ul>
+<p>When you create an incident, the name provided is applied to the new incident channel that is created. You can also select an optional playbook.</p>
+<ul class="simple">
+<li>If a playbook is selected, a corresponding checklist is used as a template to start the incident.</li>
+<li>If no playbook is selected, the incident starts with an empty checklist.</li>
+</ul>
+<p>The creator of an incident automatically becomes the incident commander, responsible for managing the incident.</p>
+<p>The commander of the incident can:</p>
+<ul class="simple">
+<li>Select a playbook when starting an incident.</li>
+<li>Create checklists.</li>
+<li>Invite people to the channel.</li>
+<li>Hand over the commander role to another channel member.</li>
+</ul>
+<p>To change commanders, select the current commander’s name and use the search bar to locate the username of the new commander. Only members of the channel may be selected as commanders. To assign a commander who is not in the channel, that user must first be invited to the channel using the existing Mattermost user interface (<strong>Manage Members</strong> in the channel header, or the <em>/invite</em> slash command). Changing the commander takes effect immediately, and members are notified of the change in the channel.</p>
+</div>
+<div class="section" id="active-incidents">
+<h3><a class="toc-backref" href="#contents">Active incidents</a><a class="headerlink" href="#active-incidents" title="Permalink to this headline">¶</a></h3>
+<p>To view details about active incidents select <strong>!</strong> in the channel header, to open the right-hand side (RHS) panel and list of current active incidents. Select an incident to see its commander, channel, and checklist.</p>
+<p>When an incident has started and the incident channel is created, a message from the incident bot is posted to the incident channel naming the creator of the incident. If an incident is started from the context of a post, the text of the post is posted to the channel along with a permalink.</p>
+<p>Incidents that are displayed in the RHS are visible to all members of the relevant team, even if they are not a member of the corresponding incident channel. It is not possible to view incidents from teams other than the currently selected team.</p>
+</div>
+<div class="section" id="using-playbooks">
+<h3><a class="toc-backref" href="#contents">Using playbooks</a><a class="headerlink" href="#using-playbooks" title="Permalink to this headline">¶</a></h3>
+<p>Playbooks are templates which are applied to an incident and define a set of steps to be followed in order to resolve the incident. Playbooks can be refined over a period of time to match the changing parameters of future related incidents.</p>
+<p>The set of steps contained within a playbook is called a checklist.</p>
+</div>
+<div class="section" id="viewing-and-creating-playbooks">
+<h3><a class="toc-backref" href="#contents">Viewing and creating playbooks</a><a class="headerlink" href="#viewing-and-creating-playbooks" title="Permalink to this headline">¶</a></h3>
+<p>Select <strong>!</strong> in the channel header to open the RHS panel. Select the <strong>Playbooks</strong> icon to open the playbooks backstage and list all playbooks associated with the current team. Select <strong>+ New Playbook</strong> to start a new playbook and checklist. Enter a playbook name and choose <strong>Save Playbook</strong>.</p>
+</div>
+<div class="section" id="creating-checklists">
+<h3><a class="toc-backref" href="#contents">Creating checklists</a><a class="headerlink" href="#creating-checklists" title="Permalink to this headline">¶</a></h3>
+<p>Checklists are created within a playbook and provide steps to follow during an incident. Checklists can be created ahead of time as part of a playbook, or during an incident.</p>
+</div>
+<div class="section" id="editing-checklists">
+<h3><a class="toc-backref" href="#contents">Editing checklists</a><a class="headerlink" href="#editing-checklists" title="Permalink to this headline">¶</a></h3>
+<p>You can add steps and edit checklist items during an active incident. You can also edit checklist items in playbooks that are not being used in active incidents.</p>
+<p>To edit a checklist, choose <strong>Edit</strong>.</p>
+<ul class="simple">
+<li>Select the text field to edit the item details.</li>
+<li>Hover over an input box and select the <strong>X</strong> to remove the checklist item.</li>
+<li>Drag the hamburger menu to rearrange the checklist items.</li>
+</ul>
+<p>Choose <strong>Done</strong> to save the changes.</p>
+</div>
+<div class="section" id="ending-incidents">
+<h3><a class="toc-backref" href="#contents">Ending incidents</a><a class="headerlink" href="#ending-incidents" title="Permalink to this headline">¶</a></h3>
+<p>There are two ways to end an incident:</p>
+<ul class="simple">
+<li>Using slash command <em>/incident end</em> from within the incident channel.</li>
+<li>Using the <strong>End Incident</strong> button in the RHS panel while in the incident channel.</li>
+</ul>
+<p>The incident will become inactive, be removed from the list of active incidents, and the associated channel will be archived.</p>
+</div>
+</div>
+<div class="section" id="administrator-s-guide">
+<h2><a class="toc-backref" href="#contents">Administrator’s Guide</a><a class="headerlink" href="#administrator-s-guide" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="permissions">
+<h3><a class="toc-backref" href="#contents">Permissions</a><a class="headerlink" href="#permissions" title="Permalink to this headline">¶</a></h3>
+<p>Incidents and playbooks are associated with teams in Mattermost. Participants can be added by inviting them to the incident’s channel.</p>
+<p>To view incidents associated with your Mattermost team, select <strong>!</strong> in the channel header to open the RHS menu. If there are no active incidents, you can start one or you can view details of incidents that have ended.</p>
+</div>
+<div class="section" id="incidents-backstage">
+<h3><a class="toc-backref" href="#contents">Incidents Backstage</a><a class="headerlink" href="#incidents-backstage" title="Permalink to this headline">¶</a></h3>
+<p>To open the Incidents backstage, which lists all incidents associated with the current team, select <strong>Incidents &amp; Playbooks</strong> from the Main Menu. All incidents for the current team are listed for review with the following details for each incident:</p>
+<ul class="simple">
+<li>Name</li>
+<li>Status (<strong>Ongoing</strong> or <strong>Ended</strong>)</li>
+<li>Start Date</li>
+<li>End Date, if ended, otherwise <strong>–</strong></li>
+<li>Commander</li>
+</ul>
+</div>
+<div class="section" id="viewing-incident-details">
+<h3><a class="toc-backref" href="#contents">Viewing incident details</a><a class="headerlink" href="#viewing-incident-details" title="Permalink to this headline">¶</a></h3>
+<p>To view details of active incidents, select <strong>! Incidents</strong> from the plugin menu, or <strong>!</strong> in the channel header to open the RHS panel.</p>
+<p>Listed incidents include the following information:</p>
+<ul class="simple">
+<li>The current commander’s profile picture and username.</li>
+<li>Zero or more checklist items.</li>
+<li>The channels associated with the incident.</li>
+<li>A button to end the incident.</li>
+</ul>
+<p>If the incident is active, but in a private channel, you won’t be able to see the incident channel name or select <strong>End Incident</strong>. However, the commander name and incident checklist are displayed. If you’re a participant in an incident channel, you can modify incident details from within that channel.</p>
+<p>You can view all incidents in the incident Backstage via <strong>Main Menu &gt; Incidents &amp; Playbooks</strong> and then select an incident to view the following details:</p>
+<ul class="simple">
+<li>Incident name</li>
+<li>A link icon to open the corresponding incident channel</li>
+<li>Status (<strong>Ongoing</strong> or <strong>Ended</strong>)</li>
+<li>The commander, including profile picture and username</li>
+<li>A prompt to <a class="reference external" href="#exporting-channels">Export the Incident Channel</a></li>
+<li>The <strong>Duration</strong> widget displays the duration of the incident. While the incident is ongoing, the end time is displayed as <strong>Ongoing</strong>. When the incident has ended, it shows the end time (in the user’s timezone).</li>
+<li>The <strong>Members Involved</strong> widget indicates the total number of users that participated in the channel, either by posting a message, being assigned as commander, or interacting with a checklist. This number is not affected by users leaving the channel, or users joining the channel but not participating.</li>
+<li>The total number of messages displayed includes messages posted by both users and bots (including the incident response bot). It does not include system or ephemeral messages.</li>
+<li>A graph depicting when each checklist item was completed.</li>
+</ul>
+<p><strong>Filtering incidents</strong></p>
+<p>Incidents can be filtered by incident name, commander, and incident status.</p>
+<p><strong>Browsing related channels</strong></p>
+<p>Incident participants see a link to the incident channel at the bottom of the incident details. Clicking the channel name navigates to the incident channel. This section is not displayed when the active user is not an incident participant.</p>
+</div>
+</div>
+<div class="section" id="exporting-channels">
+<h2><a class="toc-backref" href="#contents">Exporting channels</a><a class="headerlink" href="#exporting-channels" title="Permalink to this headline">¶</a></h2>
+<p>If your server is licensed for E20, and the channel export plugin is installed and active, navigate to <strong>Main Menu &gt; Incidents &amp; Playbooks</strong>, select an incident, then choose <strong>Export Incident Channel</strong> in the top-right corner to download the contents of the incident channel as a CSV. The file excludes attachments, but includes system messages.</p>
+<p>If you have an E20 license but the channel export plugin is not installed, or the plugin is installed but not enabled, it’s not possible to select <strong>Export Incident Channel</strong>.</p>
+<p>You can install and activate the plugin via the <a class="reference external" href="https://docs.mattermost.com/administration/plugins.html#plugin-marketplace">Plugin Marketplace</a>.</p>
+</div>
+<div class="section" id="telemetry">
+<h2><a class="toc-backref" href="#contents">Telemetry</a><a class="headerlink" href="#telemetry" title="Permalink to this headline">¶</a></h2>
+<p>During beta early access, events for the Incident Response plugin are collected regardless of the server telemetry configuration. In other words, even if telemetry is disabled in your Mattermost server, the information described on this page is still collected.</p>
+<p>We only track the events that create, delete, or update items. We never track the specific content of the items. In particular, we do not collect the name of the incidents or the contents of the checklist items.</p>
+<p>Every event we track is accompanied with metadata that help us identify each event and isolate it from the rest of the servers. We can group all events that are coming from a single server, and if that server is licensed, we are able to identify the buyer of the license. The following list details the metadata that accompanies every event:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">diagnosticID</span></code>: Unique identifier of the server the plugin is running on.</li>
+<li><code class="docutils literal notranslate"><span class="pre">serverVersion</span></code>: Version of the server the plugin is running on.</li>
+<li><code class="docutils literal notranslate"><span class="pre">pluginVersion</span></code>: Version of the plugin.</li>
+<li>Fields automatically generated by Rudder:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">eventTimeStamp</span></code>: Timestamp indicating when the event was queued to send to the server.</li>
+<li><code class="docutils literal notranslate"><span class="pre">createdAt</span></code>: Timestamp indicating when the event was sent to the server.</li>
+<li><code class="docutils literal notranslate"><span class="pre">id</span></code>: Unique identifier of the event.</li>
+<li><code class="docutils literal notranslate"><span class="pre">event</span> <span class="pre">integrations</span></code>: Unused field. It always contains the value null.</li>
+<li><code class="docutils literal notranslate"><span class="pre">event</span> <span class="pre">originalTimestamp</span></code>: Timestamp indicating when the event actually happened. It always equals <code class="docutils literal notranslate"><span class="pre">eventTimeStamp</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">type</span></code>: Type of the event. It always contains the string <code class="docutils literal notranslate"><span class="pre">track</span></code>.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Events data</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Event</th>
+<th class="head">Triggers</th>
+<th class="head">Information collected</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Incident created</td>
+<td><ul class="first last simple">
+<li>Any user sends the <code class="docutils literal notranslate"><span class="pre">/incident</span> <span class="pre">start</span></code> command and creates an incident.</li>
+<li>Any user clicks on the <code class="docutils literal notranslate"><span class="pre">+</span></code> button on the <strong>Incident List</strong> view, in the RHS and creates an incident.</li>
+<li>Any user clicks on the drop-down menu of any post, clicks on the <strong>Start incident</strong> option, and creates an incident.</li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">ID</span></code>: Unique identifier of the incident.</li>
+<li><code class="docutils literal notranslate"><span class="pre">IsActive</span></code>: Boolean  value indicating if the incident is active. It always equals <code class="docutils literal notranslate"><span class="pre">true</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">CommanderUserID</span></code>: Unique identifier of the commander of the incident. It equals the identifier of the user that created the incident.</li>
+<li><code class="docutils literal notranslate"><span class="pre">TeamID</span></code>: Unique identifier of the team where the incident channel is created.</li>
+<li><code class="docutils literal notranslate"><span class="pre">CreatedAt</span></code>: Timestamp of the incident creation.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ChannelIDs</span></code>: A list containing a single element, the channel created along with the incident.</li>
+<li><code class="docutils literal notranslate"><span class="pre">PostID</span></code>: Unique identifier of the post.</li>
+<li><code class="docutils literal notranslate"><span class="pre">NumChecklists</span></code>: Number of checklists. It always equals 1.</li>
+<li><code class="docutils literal notranslate"><span class="pre">TotalChecklistItems</span></code>: Number of checklist items this incident starts with. It always equals 0.</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>Incident finished</td>
+<td><ul class="first last simple">
+<li>Any user sends the <code class="docutils literal notranslate"><span class="pre">/incident</span> <span class="pre">end</span></code> command.</li>
+<li>Any user clicks on the <strong>End Incident</strong> button through the incident details view, in the RHS.</li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">ID</span></code>: Unique identifier of the incident.</li>
+<li><code class="docutils literal notranslate"><span class="pre">IsActive</span></code>: Boolean  value indicating if the incident is active. It always equals <code class="docutils literal notranslate"><span class="pre">false</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">CommanderUserID</span></code>: Unique identifier of the commander of the incident. It equals the identifier of the user that created the incident.</li>
+<li><code class="docutils literal notranslate"><span class="pre">UserID</span></code>: Unique identifier of user that ended the incident.</li>
+<li><code class="docutils literal notranslate"><span class="pre">TeamID</span></code>: Unique identifier of the team where the incident channel is created.</li>
+<li><code class="docutils literal notranslate"><span class="pre">CreatedAt</span></code>: Timestamp of the incident creation.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ChannelIDs</span></code>: A list containing a single element, the channel created along with the incident.</li>
+<li><code class="docutils literal notranslate"><span class="pre">PostID</span></code>: Unique identifier of the post.</li>
+<li><code class="docutils literal notranslate"><span class="pre">NumChecklists</span></code>: Number of checklists. It always equals 1.</li>
+<li><code class="docutils literal notranslate"><span class="pre">TotalChecklistItems</span></code>: Number of checklist items this incident starts with. It always equals 0.</li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>Checklist item created</td>
+<td><ul class="first last simple">
+<li>Any user creates a new checklist item through the incident details view, in the RHS.</li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">IncidentID</span></code>: Unique identifier of the incident where the item was created.</li>
+<li><code class="docutils literal notranslate"><span class="pre">UserID</span></code>: Unique identifier of the user that created the item.</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>Checklist item removed</td>
+<td><ul class="first last simple">
+<li>Any user deletes a checklist item through the incident details view, in the RHS.</li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">IncidentID</span></code>: Unique identifier of the incident where the item was.</li>
+<li><code class="docutils literal notranslate"><span class="pre">UserID</span></code>: Unique identifier of the user that removed the item.</li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>Checklist item renamed.</td>
+<td><ul class="first last simple">
+<li>Any user edit the contents of a checklist item through the incident details view, in the RHS.</li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">IncidentID</span></code>: Unique identifier of the incident where the item was.</li>
+<li><code class="docutils literal notranslate"><span class="pre">UserID</span></code>: Unique identifier of the user that removed the item.</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>Checklist item moved</td>
+<td><ul class="first last simple">
+<li>Any user moves the position of a checklist item in the list through the incident details view, in the RHS.</li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">IncidentID</span></code>: Unique identifier of the incident where the item is.</li>
+<li><code class="docutils literal notranslate"><span class="pre">UserID</span></code>: Unique identifier of the user that edited the item.</li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>Unchecked checklist item checked</td>
+<td><ul class="first last simple">
+<li>Any user checks an unchecked checklist item through the incident details view, in the RHS.</li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">IncidentID</span></code>: Unique identifier of the incident where the item is.</li>
+<li><code class="docutils literal notranslate"><span class="pre">UserID</span></code>: Unique identifier of the user that checked the item.</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>Checked checklist item unchecked</td>
+<td><ul class="first last simple">
+<li>Any user unchecks a checked checklist item through the incident details view, in the RHS.</li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">IncidentID</span></code>: Unique identifier of the incident where the item is.</li>
+<li><code class="docutils literal notranslate"><span class="pre">UserID</span></code>: Unique identifier of the user that unchecked the item.</li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>Playbook created</td>
+<td><ul class="first last simple">
+<li>Any user clicks on the <strong>+ New Playbook</strong> button on the backstage and saves it.</li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">PlaybookID</span></code>: Unique identifier of the playbook.</li>
+<li><code class="docutils literal notranslate"><span class="pre">TeamID</span></code>: Unique identifier of the team where the playbook is created.</li>
+<li><code class="docutils literal notranslate"><span class="pre">NumChecklists</span></code>: Number of checklists this playbook has after the update.</li>
+<li><code class="docutils literal notranslate"><span class="pre">TotalChecklistItems</span></code>: Number of checklist items, among all checklists, this playbook has after the update.</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>Playbook deleted</td>
+<td><ul class="first last simple">
+<li>Any user clicks on the <strong>Delete</strong> button next to a playbook on the backstage and confirms.</li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">PlaybookID</span></code>: Unique identifier of the playbook.</li>
+<li><code class="docutils literal notranslate"><span class="pre">TeamID</span></code>: Unique identifier of the team where the playbook was located.</li>
+<li><code class="docutils literal notranslate"><span class="pre">NumChecklists</span></code>: Number of checklists this playbook had immediately prior to deletion.</li>
+<li><code class="docutils literal notranslate"><span class="pre">TotalChecklistItems</span></code>: Number of checklist items, among all checklists, this playbook had immediately prior to deletion.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="glossary">
+<h2><a class="toc-backref" href="#contents">Glossary</a><a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><strong>Incident</strong>: An event requiring the coordinated actions of one or more Mattermost users. An incident is either ongoing or closed.</li>
+<li><strong>Playbook</strong>: A set of steps to execute as part of resolving an incident. It consists of one or more checklists, with each checklist item representing a single step.</li>
+<li><strong>Commander</strong>: The Mattermost user currently responsible for transitioning an incident from ongoing to closed.</li>
+<li><strong>Incident channel</strong>: A Mattermost channel dedicated to real-time conversation about the incident.</li>
+<li><strong>Incident participant</strong>: A Mattermost user with access to the corresponding incident channel.</li>
+<li><strong>The RHS</strong>: The incident list and incident details displayed on the right hand side of the webapp. Clicking an incident from the list in the RHS surfaces details of the selected incident. It is not available on mobile.</li>
+<li><strong>The Backstage</strong>: The full-screen analytics and configuration screens accessible from the webapp. It is not available on mobile.</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../deployment/atlassian-integrations.html" class="btn btn-neutral float-right" title="Atlassian Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../developer/toolkit.html" class="btn btn-neutral" title="Mattermost Developer Toolkit" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/administration/devops-command-center.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="http://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

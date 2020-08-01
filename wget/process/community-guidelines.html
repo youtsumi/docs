@@ -1,0 +1,798 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Community Playbook &mdash; Mattermost 5.25 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+	<!-- Bizible Script -->
+	<script src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
+
+	
+		<!-- Google Analytics -->
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-67846571-2', 'auto');
+			ga('send', 'pageview');
+		</script>
+		<!-- End Google Analytics -->
+	
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-67846571-1"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'UA-67846571-1');
+	</script>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<!-- Second Google Analytics tag to assist mapping with mattermost.com visits --> 
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120238482-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-120238482-1');
+	</script>
+
+	<!-- LeadLander -->
+	<script type="text/javascript" language="javascript">
+		var sf14gv = 31865;
+		(function() {
+			var sf14g = document.createElement('script');
+			sf14g.src = 'https://tracking.leadlander.com/lt.min.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sf14g, s);
+		})();
+	</script>
+
+	<!-- Munchkin code -->
+	<script type="text/javascript">
+		(function() {
+			var didInit = false;
+			function initMunchkin() {
+			if(didInit === false) {
+				didInit = true;
+				Munchkin.init('161-FBE-733');
+			}
+			}
+			var s = document.createElement('script');
+			s.type = 'text/javascript';
+			s.async = true;
+			s.src = '//munchkin.marketo.net/munchkin.js';
+			s.onreadystatechange = function() {
+			if (this.readyState == 'complete' || this.readyState == 'loaded') {
+				initMunchkin();
+			}
+			};
+			s.onload = initMunchkin;
+			document.getElementsByTagName('head')[0].appendChild(s);
+		})();
+	</script>
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.25
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/administrator.html">Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/education.html">Training and Education</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+    <li>Community Playbook</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/process/community-guidelines.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="community-playbook">
+<h1>Community Playbook<a class="headerlink" href="#community-playbook" title="Permalink to this headline">¶</a></h1>
+<p>This document provides easy-to-follow community guidelines for:</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#how-to-get-community-involved-in-a-campaign" id="id8">How to get community involved in a campaign?</a><ul>
+<li><a class="reference internal" href="#onboarding" id="id9">Onboarding</a></li>
+<li><a class="reference internal" href="#retention" id="id10">Retention</a></li>
+<li><a class="reference internal" href="#off-boarding" id="id11">Off-boarding</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#how-to-run-a-community-design-meeting" id="id12">How to run a community design meeting?</a><ul>
+<li><a class="reference internal" href="#objectives" id="id13">Objectives</a></li>
+<li><a class="reference internal" href="#preparations" id="id14">Preparations</a></li>
+<li><a class="reference internal" href="#announce" id="id15">Announce</a></li>
+<li><a class="reference internal" href="#holding-the-meeting" id="id16">Holding the Meeting</a></li>
+<li><a class="reference internal" href="#after-the-meeting" id="id17">After the Meeting</a></li>
+<li><a class="reference internal" href="#tips" id="id18">Tips</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#how-to-run-a-hackathon" id="id19">How to run a Hackathon?</a></li>
+<li><a class="reference internal" href="#github-help-wanted-issues-in-mattermost-server-repository" id="id20">GitHub Help Wanted Issues in Mattermost-Server Repository</a><ul>
+<li><a class="reference internal" href="#goal" id="id21">Goal</a></li>
+<li><a class="reference internal" href="#principles" id="id22">Principles</a></li>
+<li><a class="reference internal" href="#creating-help-wanted-issues" id="id23">Creating Help Wanted Issues</a></li>
+<li><a class="reference internal" href="#managing-help-wanted-issues" id="id24">Managing Help Wanted Issues</a></li>
+<li><a class="reference internal" href="#closing-help-wanted-issues" id="id25">Closing Help Wanted Issues</a></li>
+<li><a class="reference internal" href="#help-wanted-issue-links" id="id26">Help Wanted Issue Links</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mattermost-community-forums" id="id27">Mattermost Community Forums</a><ul>
+<li><a class="reference internal" href="#id4" id="id28">Principles</a></li>
+<li><a class="reference internal" href="#response-writing-tips" id="id29">Response Writing Tips</a></li>
+<li><a class="reference internal" href="#sample-responses" id="id30">Sample Responses</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mattermost-twitter" id="id31">Mattermost Twitter</a><ul>
+<li><a class="reference internal" href="#id5" id="id32">Principles</a></li>
+<li><a class="reference internal" href="#id6" id="id33">Response Writing Tips</a></li>
+<li><a class="reference internal" href="#id7" id="id34">Sample Responses</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="how-to-get-community-involved-in-a-campaign">
+<h2><a class="toc-backref" href="#contents">How to get community involved in a campaign?</a><a class="headerlink" href="#how-to-get-community-involved-in-a-campaign" title="Permalink to this headline">¶</a></h2>
+<p>Examples include React Native Apps, Redux, and APIv4 campaigns.</p>
+<div class="section" id="onboarding">
+<h3><a class="toc-backref" href="#contents">Onboarding</a><a class="headerlink" href="#onboarding" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Create a blog post for the <a class="reference external" href="https://developers.mattermost.com/blog/">Developer Blog</a> letting developers know about the campaign and ways to contribute.</li>
+<li>Create a contribution guide. This can be part of the blog post.</li>
+<li>Create Help Wanted tickets that a community member could work on.</li>
+</ol>
+<p>For a high priority Help Wanted ticket, reach out to contributors directly in the GitHub repository for best engagement.</p>
+</div>
+<div class="section" id="retention">
+<h3><a class="toc-backref" href="#contents">Retention</a><a class="headerlink" href="#retention" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Identify active contributors and thank them personally for their work.</li>
+<li>For Work in Progress tickets or submitted pull requests, follow up with contributor once a week for status updates and questions to make sure contributors aren’t blocked and feel comfortable asking questions. If there hasn’t been activity in more than two weeks, ask if you can help them in some way.</li>
+<li>Recognize everyone’s contributions (either intrinsic rewards like having their name listed on a contributor’s page or tangible like swag or gift cards).</li>
+<li>If applicable, assign roles to top contributors (such as team lead, code reviewer, tester) to give a sense of ownership to the contributor.</li>
+</ol>
+</div>
+<div class="section" id="off-boarding">
+<h3><a class="toc-backref" href="#contents">Off-boarding</a><a class="headerlink" href="#off-boarding" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>When a campaign is finished, offer suggestions for other campaigns or projects they might be interested in.</li>
+</ol>
+</div>
+</div>
+<div class="section" id="how-to-run-a-community-design-meeting">
+<h2><a class="toc-backref" href="#contents">How to run a community design meeting?</a><a class="headerlink" href="#how-to-run-a-community-design-meeting" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="objectives">
+<h3><a class="toc-backref" href="#contents">Objectives</a><a class="headerlink" href="#objectives" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Avoid blindspots in design by shaping requirements and use cases with user communities.</li>
+<li>Confirm proposed approach for design aligns with solving the problem discussed.</li>
+<li>Brainstorm ideas for solving open design questions.</li>
+</ol>
+</div>
+<div class="section" id="preparations">
+<h3><a class="toc-backref" href="#contents">Preparations</a><a class="headerlink" href="#preparations" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Research existing solutions to understand potential use cases brought up by communities.</li>
+<li>Draft a proposed design for the problem - this can be a rough outline, more concrete mockups or final design.</li>
+<li>Decide two meeting times: one for European and Asian communities, another for North and South American communities.</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>Avoid regional holidays</li>
+<li>Aim for typical working hours in the regions</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li>Prepare agenda.</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>Introductions of Mattermost team members part of the meeting</li>
+<li>Review of use cases</li>
+<li>Review of proposed design approach</li>
+<li>Open discussion and Q&amp;A</li>
+<li>Actions and decisions</li>
+<li>Review of next steps</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li>Create a public meeting link everyone has permission to access, such as a Zoom link.</li>
+<li>Prepare an RSVP form for customers, see <a class="reference external" href="https://docs.google.com/forms/d/e/1FAIpQLSdg5NWkI4JcAmGwL3KgoYdtirXTS4wb1GJRXd_20kX2lTo3mw/viewform">example here</a>.</li>
+</ol>
+</div>
+<div class="section" id="announce">
+<h3><a class="toc-backref" href="#contents">Announce</a><a class="headerlink" href="#announce" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Prepare a forum post, see <a class="reference external" href="https://forum.mattermost.org/t/community-design-meeting-folded-reply-threads/6729">example here</a>.</li>
+<li>Tweet about it, see <a class="reference external" href="https://twitter.com/mattermost/status/1100235276436365312">example here</a>.</li>
+<li>Post in appropriate channels on <a class="reference external" href="https://community.mattermost.com">https://community.mattermost.com</a>.</li>
+<li>Post in UserVoice if related to an existing feature proposal, see <a class="reference external" href="https://mattermost.uservoice.com/forums/306457-general/suggestions/19572469-make-threads-collapsible#{toggle_previous_statuses}">example here</a>.</li>
+<li>Ask customer success teams to share with interested customers.</li>
+</ol>
+</div>
+<div class="section" id="holding-the-meeting">
+<h3><a class="toc-backref" href="#contents">Holding the Meeting</a><a class="headerlink" href="#holding-the-meeting" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Record the meeting. Mention that sharing video is optional.</li>
+<li>Follow the agenda.</li>
+<li>Thank everyone for joining the call.</li>
+</ol>
+</div>
+<div class="section" id="after-the-meeting">
+<h3><a class="toc-backref" href="#contents">After the Meeting</a><a class="headerlink" href="#after-the-meeting" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Share a summary in all respective channels, including the meeting recording.</li>
+<li>Send a survey asking how valuable the meeting was, feedback on additional use cases, and feedback on improving the meeting in the future. <a class="reference external" href="https://community.mattermost.com/core/pl/jfcmekbw738o3f3ykbbhofkg8r">See example here</a>.</li>
+</ol>
+</div>
+<div class="section" id="tips">
+<h3><a class="toc-backref" href="#contents">Tips</a><a class="headerlink" href="#tips" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Do not use your personal Zoom meeting link for the call.</li>
+<li>Note in all announcements that sharing video is optional.</li>
+<li>Use <cite>Mattermost</cite> in your name to identify staff from community members on the call.</li>
+<li>Consider sequencing design review meetings with design priorities.</li>
+<li>Encourage less vocal attendees to share feedback via written chat.</li>
+</ol>
+</div>
+</div>
+<div class="section" id="how-to-run-a-hackathon">
+<h2><a class="toc-backref" href="#contents">How to run a Hackathon?</a><a class="headerlink" href="#how-to-run-a-hackathon" title="Permalink to this headline">¶</a></h2>
+<p>See <a class="reference internal" href="how-to-run-a-hackathon.html"><span class="doc">How to Run a Hackathon page</span></a>.</p>
+</div>
+<div class="section" id="github-help-wanted-issues-in-mattermost-server-repository">
+<h2><a class="toc-backref" href="#contents">GitHub Help Wanted Issues in Mattermost-Server Repository</a><a class="headerlink" href="#github-help-wanted-issues-in-mattermost-server-repository" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="goal">
+<h3><a class="toc-backref" href="#contents">Goal</a><a class="headerlink" href="#goal" title="Permalink to this headline">¶</a></h3>
+<p>Increase Mattermost usage through larger and more numerous deployments via a vibrant open source community that contributes features that would not otherwise be offered.</p>
+</div>
+<div class="section" id="principles">
+<h3><a class="toc-backref" href="#contents">Principles</a><a class="headerlink" href="#principles" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Contributors get a worthwhile benefit from their contributions, from the feature directly and/or from social recognition.</li>
+<li>Community members should have a low barrier to contribute.</li>
+<li>Community development workflow should be clear, efficient and effective.</li>
+<li>Help Wanted issues should avoid updates to the Enterprise repository due to complexity in code changes and unit tests.</li>
+</ul>
+</div>
+<div class="section" id="creating-help-wanted-issues">
+<h3><a class="toc-backref" href="#contents">Creating Help Wanted Issues</a><a class="headerlink" href="#creating-help-wanted-issues" title="Permalink to this headline">¶</a></h3>
+<p>To create a Help Wanted issue in the <a class="reference external" href="https://github.com/mattermost/mattermost-server">mattermost-server repository</a>, follow these steps:</p>
+<ol class="arabic simple">
+<li>Create a ticket in Jira that is well-defined and unambiguous.</li>
+</ol>
+<p>The issue should be written with the mindset that the contributor might have no or limited experience with the Mattermost code base and limited exposure to the Mattermost product.</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Below are a few reasons why Jira tickets for Help Wanted issues are recommended:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li>Jira tickets can be used to prioritize Help Wanted issues internally and are easily searchable by Mattermost staff, community, and customers.</li>
+<li>Each Jira ticket goes through the <a class="reference external" href="https://docs.mattermost.com/process/training.html#triage-meeting">triage meeting</a> for dev and PM approval.</li>
+<li>Zapier integration automatically creates GitHub Help Wanted issues from labelled Jira tickets, requiring no additional mana.</li>
+<li>Resolved Jira tickets are automatically assigned to a QA, who tests them against the <code class="docutils literal notranslate"><span class="pre">master</span></code> branch.</li>
+</ul>
+</div></blockquote>
+</div>
+</div></blockquote>
+<ol class="arabic" start="2">
+<li><p class="first">After creating the ticket, add “(Proposed APR)” to its title, so the triage team knows to consider it for a <code class="docutils literal notranslate"><span class="pre">help-wanted</span></code> label.</p>
+</li>
+<li><p class="first">If the Jira ticket is accepted as a Help Wanted issue during <a class="reference external" href="https://docs.mattermost.com/process/training.html#triage-meeting">triage</a>, a <code class="docutils literal notranslate"><span class="pre">help-wanted</span></code> label is added. This action automatically triggers a zap that creates a new issue in the <a class="reference external" href="https://github.com/mattermost/mattermost-server">mattermost-server repository</a>.</p>
+<blockquote>
+<div><ul class="simple">
+<li>To accept a ticket as a Help Wanted issue, the description should be unambiguous, and include UI description and help text so the change can be implemented and tested by any contributor.</li>
+<li>The Triage team also adds the appropriate difficulty level (one of <code class="docutils literal notranslate"><span class="pre">Introductory</span></code>, <code class="docutils literal notranslate"><span class="pre">Intermediate</span></code> and <code class="docutils literal notranslate"><span class="pre">Advanced</span></code>) and programming language (<code class="docutils literal notranslate"><span class="pre">Go</span></code> and <code class="docutils literal notranslate"><span class="pre">ReactJS</span></code>) to the description of the Jira ticket.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">After triage, the PM on community rotation reviews formatting of the GitHub issue and adds appropriate labels for difficulty level and programming language as defined by the Triage team.</p>
+</li>
+</ol>
+<p><a class="reference external" href="https://github.com/mattermost/mattermost-server/issues/4755">See an example Help Wanted issue here</a>.</p>
+</div>
+<div class="section" id="managing-help-wanted-issues">
+<h3><a class="toc-backref" href="#contents">Managing Help Wanted Issues</a><a class="headerlink" href="#managing-help-wanted-issues" title="Permalink to this headline">¶</a></h3>
+<p>Once a Help Wanted issue is added, the PM on community rotation is responsible for:</p>
+<ul class="simple">
+<li>Answering questions from community members, which get automatically posted in the <a class="reference external" href="https://community.mattermost.com/core/channels/community-heartbeat">Community Heartbeat channel</a>.</li>
+<li>Following up with a community member if there hasn’t been a response for more than two weeks.</li>
+</ul>
+</div>
+<div class="section" id="closing-help-wanted-issues">
+<h3><a class="toc-backref" href="#contents">Closing Help Wanted Issues</a><a class="headerlink" href="#closing-help-wanted-issues" title="Permalink to this headline">¶</a></h3>
+<p>Once a pull request for an open GitHub Help Wanted issue is merged, please ensure:</p>
+<ul class="simple">
+<li>The corresponding GitHub Help Wanted issue is closed, thanking the contributor.</li>
+<li>The corresponding Jira ticket is resolved.</li>
+</ul>
+</div>
+<div class="section" id="help-wanted-issue-links">
+<h3><a class="toc-backref" href="#contents">Help Wanted Issue Links</a><a class="headerlink" href="#help-wanted-issue-links" title="Permalink to this headline">¶</a></h3>
+<p>Below is a list of permanent redirects to Help Wanted issue queries:</p>
+<ol class="arabic simple">
+<li><cite>mattermost</cite> - <a class="reference external" href="https://mattermost.com/pl/help-wanted">https://mattermost.com/pl/help-wanted</a> which redirects to <a class="reference external" href="https://github.com/search?utf8=%E2%9C%93&amp;q=is%3Aopen+archived%3Afalse+org%3Amattermost+label%3A%22Help+Wanted%22++label%3A%22Up+For+Grabs%22">https://github.com/search?utf8=%E2%9C%93&amp;q=is%3Aopen+archived%3Afalse+org%3Amattermost+label%3A%22Help+Wanted%22++label%3A%22Up+For+Grabs%22</a></li>
+<li><cite>mattermost/mattermost-server</cite> - <a class="reference external" href="https://mattermost.com/pl/help-wanted-mattermost-server">https://mattermost.com/pl/help-wanted-mattermost-server</a> which redirects to <a class="reference external" href="https://github.com/mattermost/mattermost-server/issues?utf8=%E2%9C%93&amp;q&amp;q=label%3A%22Help+Wanted%22+label%3A%22Tech%2FGo%22+label%3A%22Up+For+Grabs%22+is%3Aopen+is%3Aissue">https://github.com/mattermost/mattermost-server/issues?utf8=%E2%9C%93&amp;q&amp;q=label%3A%22Help+Wanted%22+label%3A%22Tech%2FGo%22+label%3A%22Up+For+Grabs%22+is%3Aopen+is%3Aissue</a></li>
+<li><cite>mattermost/desktop</cite> - <a class="reference external" href="https://mattermost.com/pl/help-wanted-desktop">https://mattermost.com/pl/help-wanted-desktop</a> which redirects to <a class="reference external" href="https://github.com/mattermost/desktop/issues?utf8=%E2%9C%93&amp;q&amp;q=label%3A%22Help+Wanted%22+label%3A%22Up+For+Grabs%22+is%3Aopen+is%3Aissue">https://github.com/mattermost/desktop/issues?utf8=%E2%9C%93&amp;q&amp;q=label%3A%22Help+Wanted%22+label%3A%22Up+For+Grabs%22+is%3Aopen+is%3Aissue</a></li>
+<li><cite>mattermost/mattermost-mobile</cite> - <a class="reference external" href="https://mattermost.com/pl/help-wanted-mattermost-mobile">https://mattermost.com/pl/help-wanted-mattermost-mobile</a> which redirects to <a class="reference external" href="https://github.com/mattermost/mattermost-server/issues?utf8=%E2%9C%93&amp;q&amp;q=label%3A%22Help+Wanted%22+label%3A%22Tech%2FReact+Native%22+label%3A%22Up+For+Grabs%22+is%3Aopen+is%3Aissue">https://github.com/mattermost/mattermost-server/issues?utf8=%E2%9C%93&amp;q&amp;q=label%3A%22Help+Wanted%22+label%3A%22Tech%2FReact+Native%22+label%3A%22Up+For+Grabs%22+is%3Aopen+is%3Aissue</a></li>
+<li><cite>mattermost/mattermost/webapp</cite> - <a class="reference external" href="https://mattermost.com/pl/help-wanted-mattermost-webapp">https://mattermost.com/pl/help-wanted-mattermost-webapp</a> which redirects to <a class="reference external" href="https://github.com/mattermost/mattermost-server/issues?utf8=%E2%9C%93&amp;q&amp;q=label%3A%22Help+Wanted%22+label%3A%22Tech%2FReactJS%22+label%3A%22Up+For+Grabs%22+is%3Aopen+is%3Aissue">https://github.com/mattermost/mattermost-server/issues?utf8=%E2%9C%93&amp;q&amp;q=label%3A%22Help+Wanted%22+label%3A%22Tech%2FReactJS%22+label%3A%22Up+For+Grabs%22+is%3Aopen+is%3Aissue</a></li>
+<li><cite>mattermost/mattermost-redux</cite> - <a class="reference external" href="https://mattermost.com/pl/help-wanted-mattermost-redux">https://mattermost.com/pl/help-wanted-mattermost-redux</a> which redirects to <a class="reference external" href="https://github.com/mattermost/mattermost-server/issues?utf8=%E2%9C%93&amp;q&amp;q=label%3A%22Help+Wanted%22+label%3A%22Tech%2FRedux%22+label%3A%22Up+For+Grabs%22+is%3Aopen+is%3Aissue">https://github.com/mattermost/mattermost-server/issues?utf8=%E2%9C%93&amp;q&amp;q=label%3A%22Help+Wanted%22+label%3A%22Tech%2FRedux%22+label%3A%22Up+For+Grabs%22+is%3Aopen+is%3Aissue</a></li>
+</ol>
+</div>
+</div>
+<div class="section" id="mattermost-community-forums">
+<h2><a class="toc-backref" href="#contents">Mattermost Community Forums</a><a class="headerlink" href="#mattermost-community-forums" title="Permalink to this headline">¶</a></h2>
+<p>Guidelines for Mattermost <a class="reference external" href="https://forum.mattermost.org">community forums</a> and public Mattermost <a class="reference external" href="https://github.com/mattermost">GitHub repositories</a>.</p>
+<div class="section" id="id4">
+<h3><a class="toc-backref" href="#contents">Principles</a><a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Support (answer everything correctly)</li>
+<li>Prioritize (focus help on those who help others)</li>
+<li>Empower (give them time to answer)</li>
+<li>Elevate (thank, recognize and approve their work)</li>
+<li>Grow (invite people to help as experts, promote people)</li>
+</ul>
+</div>
+<div class="section" id="response-writing-tips">
+<h3><a class="toc-backref" href="#contents">Response Writing Tips</a><a class="headerlink" href="#response-writing-tips" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>Don’t answer if unsure</strong>
+- Ask someone who knows for sure instead of replying with an assumption or incomplete understanding.
+- Don’t be afraid to re-route if you don’t have the answer and are having trouble figuring it out.</li>
+<li><strong>Don’t make promises</strong>
+- Don’t say “we’ll work on it” or something similar that sets expectations that aren’t met later (e.g. after presenting to core team it turns out you can’t do it).
+- Be careful saying “that’s a good idea”, don’t just say it to be polite. Instead say something akin to “thanks for the idea”.</li>
+<li><strong>Choose positivity over negativity</strong>
+- Avoid excuses like “we’re busy”, or “our team is small” and turn a missing feature into an invitation to share a feature idea to be upvoted.</li>
+<li><strong>Do your best to link documentation as answers</strong>
+- Allows answers to be easily updated dynamically as documentation is updated.
+- Any questions that should be answered in docs that aren’t should turn into tickets to create that documentation (and post ticket in response).</li>
+<li><strong>Keep community end-user information secure</strong>
+- If you come across a post that includes the person’s IP address, domain name, or other information you think should not be disclosed publicly, edit the post to remove this information. Then click the <strong>hide revision</strong> button so that your edits won’t be visible to others on the forum.</li>
+<li><strong>Be thankful</strong>
+- Communities really respond well to being praised and thanked for their work.</li>
+</ul>
+</div>
+<div class="section" id="sample-responses">
+<h3><a class="toc-backref" href="#contents">Sample Responses</a><a class="headerlink" href="#sample-responses" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="general-issues">
+<h4>General Issues<a class="headerlink" href="#general-issues" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic simple">
+<li>If an issue has a PR submitted by community, but no associated Jira ticket, leave it open until the PR is merged.</li>
+<li>If an issue has a Jira ticket with a <code class="docutils literal notranslate"><span class="pre">help-wanted</span></code> label, there is a Help Wanted ticket in GitHub. It can be closed with the following note:</li>
+</ol>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Hi @username
+
+Thanks for the report! We have created a [Help Wanted issue here](link to GitHub issue) and are looking for community&#39;s help. Would you be interested helping with a pull request?
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>If an issue has a Jira ticket without a <code class="docutils literal notranslate"><span class="pre">help-wanted</span></code> label and assigned to the current release fix version for a developer to fix, it can be closed with the following note:</li>
+</ol>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Hi @username
+
+Thanks for the report! We have created a [Jira ticket](link to Jira ticket) to track it. If you&#39;re interested helping with a pull request, please let us know.
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li>If an issue has a Jira ticket without a <code class="docutils literal notranslate"><span class="pre">help-wanted</span></code> label but not assigned to the current release fix version, queue Jira ticket back to triage to ask if a Help Wanted issue could be created for it.</li>
+<li>If the reporter doesn’t respond in two weeks, close the issue with the following note:</li>
+</ol>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Hi @username, we haven&#39;t received an update so we&#39;ll assume that the problem is fixed or is no longer valid.
+
+If you still experience the same problem, try upgrading to the latest version.
+
+If the issue persists, reopen this issue with the relevant information and we&#39;d be glad to help you where we can.
+</pre></div>
+</div>
+</div>
+<div class="section" id="feature-requests">
+<h4>Feature Requests<a class="headerlink" href="#feature-requests" title="Permalink to this headline">¶</a></h4>
+<p>Respond to the issue with the following note:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Thanks, appreciate your feedback @{username}.
+
+Would you like to [contribute this in the feature idea forum](https://mattermost.uservoice.com/forums/306457-general/) so it can be discussed, upvoted, and considered for a [Help Wanted ticket](https://handbook.mattermost.com/contributors/contributors/help-wanted)?
+
+Please include a link back to this GitHub issue. If you&#39;re interested in implementing, please say so and we&#39;ll prioritize the review.
+
+You get **10** votes in the feature idea forum, and each one influences the future of the project.
+</pre></div>
+</div>
+</div>
+<div class="section" id="licensing">
+<h4>Licensing<a class="headerlink" href="#licensing" title="Permalink to this headline">¶</a></h4>
+<p>To ask someone to add a license to a GitHub repo, open an issue with the following note, titled <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">an</span> <span class="pre">open</span> <span class="pre">source</span> <span class="pre">license?</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Thanks for sharing this project! We&#39;d love to use it as part of the Mattermost open source project (https://about.mattermost.com/) in our [React Native mobile app](https://github.com/mattermost/mattermost-mobile) (which uses an [Apache 2.0 license](https://github.com/mattermost/mattermost-mobile/blob/master/LICENSE.txt)).
+
+Would you consider adding a license, such as an MIT or an Apache 2.0 license?
+
+To do so, in GitHub you can hit &quot;Create new file&quot; and name a file `LICENSE.txt`.
+
+![image](https://cloud.githubusercontent.com/assets/177788/19657017/36238482-99d7-11e6-9fd0-f507970891c7.png)
+
+This will prompt GitHub to offer a license template:
+
+![image](https://cloud.githubusercontent.com/assets/177788/19657044/5a2d8b66-99d7-11e6-8164-ac7f90b10646.png)
+
+If you use a license it would make it easy to promote your open source project with the Mattermost community.
+
+Thanks kindly for your consideration.
+</pre></div>
+</div>
+</div>
+<div class="section" id="difficult-questions">
+<h4>Difficult Questions<a class="headerlink" href="#difficult-questions" title="Permalink to this headline">¶</a></h4>
+<p>To respond to tough questions, use the <a class="reference external" href="https://www.mandel.com/top-ten-reasons/tools-methodology/scipab">SCIPAB method</a> to help formulate a response and send for community lead to review.</p>
+<dl class="docutils">
+<dt>Situation:</dt>
+<dd>State what you know about your listeners’ circumstances that are relevant to your discussion or presentation, e.g., current state of their business, technology, industry, or plans.</dd>
+<dt>Complication:</dt>
+<dd>Identify the critical issues (changes, pressures, demands, etc.) that are impacting the Situation and creating problems, challenges, or opportunities.</dd>
+<dt>Implication:</dt>
+<dd>Show the personal or business consequences of failing to act on the problems or opportunities described in the Complication.</dd>
+<dt>Position:</dt>
+<dd>State clearly and confidently your opinion about what needs to be done to solve your listeners’ problem.</dd>
+<dt>Action:</dt>
+<dd>Help listeners understand the role you want them to play, or the questions you’d like them to consider, during your presentation or conversation.</dd>
+<dt>Benefit:</dt>
+<dd>Describe how your recommended Position and Action will address listeners’ specific needs. State the results clearly and quantifiably.</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="section" id="mattermost-twitter">
+<h2><a class="toc-backref" href="#contents">Mattermost Twitter</a><a class="headerlink" href="#mattermost-twitter" title="Permalink to this headline">¶</a></h2>
+<p>Guidelines for Mattermost <a class="reference external" href="https://twitter.com/mattermost">Twitter responses</a>.</p>
+<div class="section" id="id5">
+<h3><a class="toc-backref" href="#contents">Principles</a><a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><strong>Avoid acronyms.</strong> Avoid acronyms when possible. For example, say “pull request” instead of “PR”, since only a subset of tweet readers are active GitHub users.</li>
+<li><strong>Use the active voice.</strong> Avoid “has”, “was”, “have been” when possible. For example, instead of “Hackfest has started!” say “Hackfest starts now!”</li>
+<li><strong>Include at most one link.</strong> To provide a clear call to action, include at most one link per tweet and place it near the end of the tweet.</li>
+<li><strong>Use exclamation marks only for exciting announcements.</strong> An exclamation mark can be used when the announcement is exciting, but using an exclamation mark should be avoided when it can be confused with a signal for community to panic, e.g. “Security update released!”.</li>
+<li><strong>Be welcoming.</strong> When asking someone to take action, use “Would you be open to” instead of “Would you like to”.</li>
+</ol>
+</div>
+<div class="section" id="id6">
+<h3><a class="toc-backref" href="#contents">Response Writing Tips</a><a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>When to like (heart) a tweet where Mattermost is mentioned?</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>Our team is on site at an event and tags our handle.</li>
+<li>A community member shares an event we are at, received a Mattermug, or shared a positive experience and mentions us.</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li>When to retweet a post?</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>A community member released an integration and mentions us.</li>
+<li>Mattermug tweets from community members.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id7">
+<h3><a class="toc-backref" href="#contents">Sample Responses</a><a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Requests for more information such as a preview of our product.</li>
+</ol>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Thank you for your interest in Mattermost. You can learn more about us at www.mattermost.com where you can also download a trial of our product.
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Requests for a specific feature or group of features.</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>Multiple Feature Requests:</li>
+</ul>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Thank you for the suggestions @username. Would you be open to contributing them in the feature idea forum so they can be discussed and upvoted by the community? You get 10 votes in the feature idea forum, and each one influences the future of the project.
+
+https://mattermost.uservoice.com/
+</pre></div>
+</div>
+</div></blockquote>
+<ul class="simple">
+<li>Single Feature Request:</li>
+</ul>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Thank you for the suggestion @username. Would you be open to contributing it in the feature idea forum so it can be discussed and upvoted by the community? You get 10 votes in the feature idea forum, and each one influences the future of the project.
+
+https://mattermost.uservoice.com/
+</pre></div>
+</div>
+</div></blockquote>
+<ul class="simple">
+<li>Planned Feature Request:</li>
+</ul>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Thank you for your feedback. We are excited to share that [feature] will be available in our [edition] Edition soon. Please see our forum post for more information: [link to forum post].
+</pre></div>
+</div>
+</div></blockquote>
+<ul class="simple">
+<li>Shipped Feature Request:</li>
+</ul>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Thank you for your feedback. Mattermost already supports [feature]. You can learn more about it in our documentation: [link to docs].
+</pre></div>
+</div>
+</div></blockquote>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li>Feedback about their experience, not specific to a feature or a product.</li>
+</ol>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Appreciate the feedback. If your team has suggestions on how to improve Mattermost, we would love to hear more in our feature proposal forum. You get 10 votes there, and each one influences the future of the project: https://mattermost.uservoice.com/.
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Thanks @{username}, highly appreciate your feedback. If you have additional feedback about your experience, we&#39;d love to hear. You can share at http://forum.mattermost.org to start a discussion.
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li>Tweet of forum post, asking someone from Mattermost team to respond.</li>
+</ol>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Thank you for reaching out. Our team responded to you in the forums and we&#39;re happy to help with further questions there.
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Thank you for reaching out. Our team monitors and responds to forum inquiries. We&#39;re happy to help with further questions there.
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li>Customer requesting help to address an issue they are having with a deployment or specific feature in the system.</li>
+</ol>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Thank you for reaching out. We recommend opening a support ticket where our team can best help you troubleshoot the issue. For more information about Enterprise Edition support levels, see https://about.mattermost.com/support/.
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/process/community-guidelines.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="http://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>
