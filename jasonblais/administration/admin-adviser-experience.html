@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>User Satisfaction Surveys &mdash; Mattermost 5.25 documentation</title>
+  <title>Admin Adviser Experience (AAE) &mdash; Mattermost 5.25 documentation</title>
   
 
   
@@ -31,8 +31,8 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Health Check" href="../administration/health-check.html" />
-    <link rel="prev" title="Statistics" href="../administration/statistics.html" />
+    <link rel="next" title="Scripts" href="scripts.html" />
+    <link rel="prev" title="mmctl Command Line Tool (Beta)" href="mmctl-cli-tool.html" />
 	<!-- Bizible Script -->
 	<script src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
 
@@ -168,19 +168,18 @@
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../administration/command-line-tools.html">Command Line Tools</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../administration/mmctl-cli-tool.html">mmctl Command Line Tool (Beta)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../administration/admin-adviser-experience.html">Admin Adviser Experience (AAE)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../administration/scripts.html">Scripts</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../administration/statistics.html">Statistics</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">User Satisfaction Surveys</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#administration">Administration</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#survey-data">Survey Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-line-tools.html">Command Line Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mmctl-cli-tool.html">mmctl Command Line Tool (Beta)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Admin Adviser Experience (AAE)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#aae-message-code-system">AAE Message Code System</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../administration/health-check.html">Health Check</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../administration/announcement-banner.html">Announcement Banner (E10)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../administration/bulk-export.html">Bulk Export Tool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scripts.html">Scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="statistics.html">Statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../integrations/net-promoter-score.html">User Satisfaction Surveys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="health-check.html">Health Check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="announcement-banner.html">Announcement Banner (E10)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bulk-export.html">Bulk Export Tool</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
@@ -229,11 +228,11 @@
     
       <li><a href="../guides/administrator.html">Administrator’s Guide</a> &raquo;</li>
     
-    <li>User Satisfaction Surveys</li>
+    <li>Admin Adviser Experience (AAE)</li>
     <li class="wy-breadcrumbs-aside">
       
         
-          <a href="https://github.com/mattermost/docs/blob/master/source/integrations/net-promoter-score.rst" class="fa fa-github"> Edit</a>
+          <a href="https://github.com/mattermost/docs/blob/master/source/administration/admin-adviser-experience.rst" class="fa fa-github"> Edit</a>
         
       
     </li>
@@ -243,105 +242,121 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="user-satisfaction-surveys">
-<h1>User Satisfaction Surveys<a class="headerlink" href="#user-satisfaction-surveys" title="Permalink to this headline">¶</a></h1>
-<p>Mattermost is introducing in-product feedback surveys beginning in v5.12. Feedback is used to measure user satisfaction and improve product quality by hearing directly from users. Please refer to our <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/master/build/PRIVACY_POLICY.md">privacy policy</a> for more information on the collection and use of information received through our services.</p>
-<div class="contents local topic" id="contents">
+  <div class="section" id="admin-adviser-experience-aae">
+<h1>Admin Adviser Experience (AAE)<a class="headerlink" href="#admin-adviser-experience-aae" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Mattermost AAE Message Codes were introduced in version 5.26. They are added retroactively to existing System Admin messages.</p>
+</div>
+<p>Administrator Adviser Experience (“AAE”) is a set of notifications and workflows to guide System Admins through the proper activation and configuration of system capabilities as the needs of their user base evolves.</p>
+<p>AAE includes:</p>
 <ul class="simple">
-<li><a class="reference internal" href="#administration" id="id2">Administration</a><ul>
-<li><a class="reference internal" href="#is-the-survey-enabled-by-default" id="id3">Is the survey enabled by default?</a></li>
-<li><a class="reference internal" href="#how-can-surveys-be-disabled" id="id4">How can surveys be disabled?</a></li>
-<li><a class="reference internal" href="#when-is-the-survey-scheduled" id="id5">When is the survey scheduled?</a></li>
-<li><a class="reference internal" href="#how-will-i-be-notified-a-survey-is-scheduled" id="id6">How will I be notified a survey is scheduled?</a></li>
+<li>Bot notifications to System Admins</li>
+<li>Notification alerts in the channel header (only visible to System Admins)</li>
+<li>A coding system to look up more information on errors and warnings</li>
 </ul>
-</li>
-<li><a class="reference internal" href="#survey-data" id="id7">Survey Data</a><ul>
-<li><a class="reference internal" href="#how-is-the-survey-received" id="id8">How is the survey received?</a></li>
-<li><a class="reference internal" href="#what-data-is-collected" id="id9">What data is collected?</a></li>
-<li><a class="reference internal" href="#will-this-data-be-sent-through-my-firewall" id="id10">Will this data be sent through my firewall?</a></li>
-</ul>
-</li>
-</ul>
+<div class="section" id="aae-message-code-system">
+<h2>AAE Message Code System<a class="headerlink" href="#aae-message-code-system" title="Permalink to this headline">¶</a></h2>
+<p>Since Mattermost may be deployed in air-gapped networks where links to documentation aren’t always available, AAE uses human-readable message codes to uniquely identify errors, warnings and recommendations. These codes can be manually referenced in downloaded documentation, or through web search on a separate internet-connected device.</p>
+<p>Example: Please check connection, Mattermost unreachable. If issue persists, ask administrator to check WebSocket port. AAE-000-0010</p>
+<p>The “AAE-010-0010” message code represents an entry within a directory of message codes that can be downloaded locally and used to troubleshoot common issues.</p>
+<div class="section" id="aae-message-code-syntax">
+<h3>AAE Message Code Syntax<a class="headerlink" href="#aae-message-code-syntax" title="Permalink to this headline">¶</a></h3>
+<p>AAE Message Codes consists of 12 characters, with the first four characters starting with “AAE-” followed by a three digit “Category &amp; Subcategory” code, a hyphen, then a “Message ID” code. The format specifically is:</p>
+<p>“AAE-” &amp; [Category &amp; Subcategory] &amp; “-” &amp; [Message ID]</p>
 </div>
-<div class="section" id="administration">
-<h2><a class="toc-backref" href="#id2">Administration</a><a class="headerlink" href="#administration" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="is-the-survey-enabled-by-default">
-<h3><a class="toc-backref" href="#id3">Is the survey enabled by default?</a><a class="headerlink" href="#is-the-survey-enabled-by-default" title="Permalink to this headline">¶</a></h3>
-<p>The user satisfaction survey is a pre-packaged plugin, and surveys are enabled by default on all servers when upgrading to v5.12 or later. However, the plugin will not be activated on any servers that have <a class="reference external" href="https://docs.mattermost.com/administration/telemetry.html">Error and Diagnostic Reporting</a> disabled, meaning no surveys or data collection occurs.</p>
+<div class="section" id="aae-category-subcategory">
+<h3>AAE Category &amp; Subcategory<a class="headerlink" href="#aae-category-subcategory" title="Permalink to this headline">¶</a></h3>
+<p>AAE Message Codes are categorized as follows:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Category</th>
+<th class="head">Subcategory</th>
+<th class="head">Category &amp; Subcategory Code</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>System Administration</td>
+<td>Common Issues</td>
+<td>010</td>
+</tr>
+</tbody>
+</table>
+<p>The classification of AAE codes is an iterative work in progress. We will use the AAE-010-XXX0 name space for the first few hundred issues, then analyze, categorize and subcategorize the AAE Categories and Subcategories, migrate to new codes, and deprecate the original AAE-010-XXX0, with information preserved for legacy deployments.</p>
 </div>
-<div class="section" id="how-can-surveys-be-disabled">
-<h3><a class="toc-backref" href="#id4">How can surveys be disabled?</a><a class="headerlink" href="#how-can-surveys-be-disabled" title="Permalink to this headline">¶</a></h3>
-<p>Disabling the <strong>User Satisfaction Surveys</strong> plugin from <strong>System Console &gt; Plugins (Beta) &gt; Plugin Management</strong> will disable surveys and all data collection by the plugin. If surveys have been disabled from the plugin configuration in <strong>System Console &gt; Plugins (Beta) &gt; User Satisfaction Surveys</strong> but the plugin itself is still enabled, surveys will not be scheduled but users can still send written feedback by messaging Surveybot.</p>
-<p>If the plugin or surveys in the plugin configuration are disabled, they will remain disabled for subsequent server upgrades.</p>
+<div class="section" id="aae-message-code-registry">
+<h3>AAE Message Code Registry<a class="headerlink" href="#aae-message-code-registry" title="Permalink to this headline">¶</a></h3>
+<p>The following section lists out AAE codes with links to troubleshooting documentation.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">AAE Code</th>
+<th class="head">Initial Release Version</th>
+<th class="head">Message</th>
+<th class="head">More Information</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>AAE-010-0010</td>
+<td>5.26</td>
+<td>Please check connection, Mattermost unreachable. If issue persists, ask administrator to check WebSocket port. AAE-000-0010</td>
+<td>Potential proxy configuration issue. See <a class="reference external" href="https://docs.mattermost.com/install/troubleshooting.html#please-check-connection-mattermost-unreachable-if-issue-persists-ask-administrator-to-check-websocket-port">troubleshooting guide</a> to diagnose network connection.</td>
+</tr>
+<tr class="row-odd"><td>AAE-010-0011</td>
+<td>5.26</td>
+<td>Preview Mode: Email notifications have not been configured. AAE-000-0011</td>
+<td>To run in production with email-based authentication, Mattermost requires SMTP to be configured for email notifications and password reset. See <a class="reference external" href="https://docs.mattermost.com/install/smtp-email-setup.html">SMTP setup guide</a> to configure email notifications.</td>
+</tr>
+<tr class="row-even"><td>AAE-010-0012</td>
+<td>5.26</td>
+<td>Please configure your site URL on the System Console. AAE-010-0012</td>
+<td>Site URL is required for email notifications, authentication and plugins to operate properly. See <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#site-url">configuration settings docs</a> to configure your site URL.</td>
+</tr>
+<tr class="row-odd"><td>AAE-010-0013</td>
+<td>5.26</td>
+<td>Please configure your site URL either on the System Console or, if you’re using GitLab Mattermost, in gitlab.rb. AAE-010-0013</td>
+<td>Site URL is required for email notifications, authentication and plugins to operate properly. See <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#site-url">configuration settings docs</a> to configure your site URL. If you’re using GitLab Mattermost, refer to <a class="reference external" href="https://docs.gitlab.com/omnibus/gitlab-mattermost/#getting-started">GitLab configuration docs</a>.</td>
+</tr>
+<tr class="row-even"><td>AAE-010-0014</td>
+<td>5.26</td>
+<td>Enterprise license expires on {date}. Please renew. AAE-010-0014</td>
+<td>Enterprise features are disabled after your Enterprise license expires. <a class="reference external" href="https://mattermost.com/renew/">Renew your Enterprise Edition subscription.</a></td>
+</tr>
+<tr class="row-odd"><td>AAE-010-1010</td>
+<td>5.26</td>
+<td>Team exceeds {number of} users. Consider activating user management access controls to ensure compliance. AAE-010-1010</td>
+<td>Mattermost Team Edition scales to dozens of users. For larger systems, consider activating <a class="reference external" href="https://docs.mattermost.com/deployment/advanced-permissions.html">user management access controls</a>. Learn more about <a class="reference external" href="https://docs.mattermost.com/overview/product.html#mattermost-editions">Mattermost Editions</a>.</td>
+</tr>
+<tr class="row-even"><td>AAE-010-1011</td>
+<td>5.26</td>
+<td>Warning: More than {number of} messages sent through test push proxy service today. Consider switching to a production-grade hosted push notification service to ensure reliability. AAE-010-1011</td>
+<td>Mattermost test push proxy service is offered for testing setups. For production systems, consider using the <a class="reference external" href="https://docs.mattermost.com/mobile/mobile-hpns.html">Hosted Push Notification Service (HPNS)</a> to ensure production-level uptime.</td>
+</tr>
+<tr class="row-odd"><td>AAE-010-1012</td>
+<td>5.26</td>
+<td>Messages exceed {number of}. Consider activating system monitoring and elasticsearch to avoid degraded performance. AAE-010-1012</td>
+<td>Mattermost Team Edition scales to 10,000s of messages. For larger systems, consider activating system monitoring and elasticsearch. Learn more about <a class="reference external" href="https://docs.mattermost.com/overview/product.html#mattermost-editions">Mattermost Editions</a>.</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div class="section" id="when-is-the-survey-scheduled">
-<h3><a class="toc-backref" href="#id5">When is the survey scheduled?</a><a class="headerlink" href="#when-is-the-survey-scheduled" title="Permalink to this headline">¶</a></h3>
-<p>Users will receive surveys 21 days after every server upgrade starting with v5.12, assuming the following conditions are true:</p>
-<ul class="simple">
-<li>User Satisfaction Surveys plugin is enabled in <strong>System Console &gt; Plugins (Beta) &gt; Plugin Management</strong></li>
-<li>Surveys are enabled in the plugin configuration in <strong>System Console &gt; Plugins (Beta) &gt; User Satisfaction Surveys</strong></li>
-<li>User account is greater than 21 days old</li>
-<li>User has not completed a survey in the last 90 days</li>
-<li>User has not been sent a survey in the last 90 days</li>
-<li>Current server version is greater than the server version of the last survey, excluding dot releases</li>
-</ul>
-<p>The above conditions mean that at maximum frequency a user will receive a survey every 90 days, assuming the server is upgraded within that time period.</p>
+<div class="section" id="frequently-asked-questions">
+<h3>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="what-happens-when-i-click-contact-support">
+<h4>What happens when I click “Contact Support”?<a class="headerlink" href="#what-happens-when-i-click-contact-support" title="Permalink to this headline">¶</a></h4>
+<p>When you choose to contact support from the Mattermost system, an email is sent to support[at]mattermost.com with the Administrative Adviser Experience (AAE) message code summarizing your issue.</p>
+<p>The email also includes the name and email address of the System Admin requesting support, along with site URL, user count and diagnostic ID to help the support team diagnose your issue.</p>
 </div>
-<div class="section" id="how-will-i-be-notified-a-survey-is-scheduled">
-<h3><a class="toc-backref" href="#id6">How will I be notified a survey is scheduled?</a><a class="headerlink" href="#how-will-i-be-notified-a-survey-is-scheduled" title="Permalink to this headline">¶</a></h3>
-<p>System Administrators will receive an email notification and in-product Direct Message from “Surveybot” mentioning the scheduled date the survey will be triggered.</p>
-<img alt="../_images/nps-admin.png" src="../_images/nps-admin.png" />
-</div>
-</div>
-<div class="section" id="survey-data">
-<h2><a class="toc-backref" href="#id7">Survey Data</a><a class="headerlink" href="#survey-data" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="how-is-the-survey-received">
-<h3><a class="toc-backref" href="#id8">How is the survey received?</a><a class="headerlink" href="#how-is-the-survey-received" title="Permalink to this headline">¶</a></h3>
-<p>Once the survey is triggered on the server, all users will receive an in-product Direct Messages from “Surveybot” on their next login or page refresh in Mattermost.</p>
-<p>Users can optionally select a 0-10 score on how likely they are to recommend Mattermost and then provide written feedback about their experience. Selecting a score and providing feedback are optional, and the survey can be ignored without interrupting usage of Mattermost.</p>
-<img alt="../_images/nps-survey.png" src="../_images/nps-survey.png" />
-</div>
-<div class="section" id="what-data-is-collected">
-<h3><a class="toc-backref" href="#id9">What data is collected?</a><a class="headerlink" href="#what-data-is-collected" title="Permalink to this headline">¶</a></h3>
-<p>Data is only collected when a user selects a score or provides written feedback in response to survey questions. Please refer to our <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/master/build/PRIVACY_POLICY.md">privacy policy</a> for more information on the collection and use of information received through our services. The following <strong>non-personally identifiable information</strong> is collected:</p>
-<ul class="simple">
-<li><dl class="first docutils">
-<dt>Survey information:</dt>
-<dd><ul class="first last">
-<li>Score (0-10) submitted by the user</li>
-<li>Written feedback submitted by the user (if applicable)</li>
-<li>Timestamp of the survey submission</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>Server information:</dt>
-<dd><ul class="first last">
-<li>Server/webapp version the survey was submitted on</li>
-<li>Installation date of the server</li>
-<li>Diagnostic ID used for error and diagnostics reporting</li>
-<li>License ID used for error and diagnostics reporting (if applicable)</li>
-<li>E10 or E20 (if applicable)</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>User information:</dt>
-<dd><ul class="first last">
-<li>User role (System Admin, Team Admin or member)</li>
-<li>Account creation timestamp</li>
-<li>User ID of the surveyed user</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-</div>
-<div class="section" id="will-this-data-be-sent-through-my-firewall">
-<h3><a class="toc-backref" href="#id10">Will this data be sent through my firewall?</a><a class="headerlink" href="#will-this-data-be-sent-through-my-firewall" title="Permalink to this headline">¶</a></h3>
-<p>If Mattermost is hosted in a private network with firewall then data from the User Satisfaction Surveys plugin is not sent unless outbound connections are allowed or specifically configured for this plugin.</p>
 </div>
 </div>
 </div>
@@ -354,10 +369,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../administration/health-check.html" class="btn btn-neutral float-right" title="Health Check" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="scripts.html" class="btn btn-neutral float-right" title="Scripts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../administration/statistics.html" class="btn btn-neutral" title="Statistics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="mmctl-cli-tool.html" class="btn btn-neutral" title="mmctl Command Line Tool (Beta)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -399,7 +414,7 @@
             </dd>
             
             <dd>
-                <a href="https://github.com/mattermost/docs/blob/master/source/integrations/net-promoter-score.rst"> Edit on GitHub</a>
+                <a href="https://github.com/mattermost/docs/blob/master/source/administration/admin-adviser-experience.rst"> Edit on GitHub</a>
             </dd>
             
         </dl>
