@@ -167,6 +167,7 @@
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="config-settings.html">Configuration Settings</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Configuration in the Mattermost Database</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-migrate-configuration-to-the-database">How to Migrate Configuration to the Database</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
 </ul>
 </li>
@@ -251,27 +252,151 @@
 <li>Automatically deploy SAML certificates and keys to all servers in the cluster.</li>
 </ul>
 </div></blockquote>
-<p>To start using configuration in database, pass the database connection string via the <code class="docutils literal notranslate"><span class="pre">--config</span></code> flag or <code class="docutils literal notranslate"><span class="pre">MM_CONFIG</span></code> environment variable. For example:</p>
-<blockquote>
-<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>bin/mattermost --config=&quot;postgres://mmuser:mostest@localhost:5432/mattermost_test?sslmode=disable\u0026connect_timeout=10&quot;
+<div class="section" id="how-to-migrate-configuration-to-the-database">
+<h2>How to Migrate Configuration to the Database<a class="headerlink" href="#how-to-migrate-configuration-to-the-database" title="Permalink to this headline">¶</a></h2>
+<p>These instructions cover migrating the Mattermost configuration to the database and updating your <code class="docutils literal notranslate"><span class="pre">systemd</span></code> configuration to load it from the database.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">These instructions assume you have Mattermost server installed at <code class="docutils literal notranslate"><span class="pre">/opt/mattermost</span></code> If you are running Mattermost in a different directory you will have to modify the paths to match your environment.</p>
+</div>
+<div class="section" id="get-your-database-connection-string">
+<h3>1. Get your Database Connection String<a class="headerlink" href="#get-your-database-connection-string" title="Permalink to this headline">¶</a></h3>
+<p>The first step is to get your master database connection string. There are several ways to do this, but the easiest is to use <code class="docutils literal notranslate"><span class="pre">mattermost</span> <span class="pre">config</span> <span class="pre">get</span></code> command like this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo su mattermost
+<span class="nb">cd</span> /opt/mattermost
+bin/mattermost config get SqlSettings.DataSource
 </pre></div>
 </div>
-</div></blockquote>
-<p>To migrate an existing config.json into the database, use the <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">migrate</span></code> <a class="reference external" href="https://docs.mattermost.com/administration/command-line-tools.html#mattermost-config-migrate">command</a>. For example:</p>
-<blockquote>
-<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>bin/mattermost config migrate  path/to/config.json &quot;postgres://mmuser:mostest@localhost:5432/mattermost_test?sslmode=disable&amp;connect_timeout=10&quot;
+<p>Example Output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>SqlSettings.DataSource: &quot;mmuser:really_secure_password@tcp(127.0.0.1:3306)/mattermost?charset=utf8mb4,utf8\u0026readTimeout=30s\u0026writeTimeout=30s&quot;
 </pre></div>
 </div>
-</div></blockquote>
-<p>Any existing SAML certificates and private keys will also be migrated to the database.</p>
+<p><strong>NOTE:</strong> Be sure to run this command as the <code class="docutils literal notranslate"><span class="pre">mattermost</span></code> user and <em>not</em> root. Running the Mattermost binary as root will cause permissions errors.</p>
+<p>Another way is to view your <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file and get the value in <code class="docutils literal notranslate"><span class="pre">SqlSettings.DataSource</span></code>.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">SqlSettings.DataSource</span></code> does not start with <code class="docutils literal notranslate"><span class="pre">postgres://</span></code> then you have to add <code class="docutils literal notranslate"><span class="pre">mysql://</span></code> to the beginning. Also, if you see <code class="docutils literal notranslate"><span class="pre">\u0026</span></code> replace it with <code class="docutils literal notranslate"><span class="pre">&amp;</span></code>.</p>
+<p>Here are two example connection strings:</p>
+<p><em>MySQL</em></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>mysql://mmuser:really_secure_password@tcp(127.0.0.1:3306)/mattermost?charset=utf8mb4,utf8&amp;readTimeout=30s&amp;writeTimeout=30s
+</pre></div>
+</div>
+<p><em>PostgreSQL</em></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>postgres://mmuser:really_secure_password@localhost:5432/mattermost?sslmode=disable&amp;connect_timeout=10
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-environment-file">
+<h3>2. Create Environment File:<a class="headerlink" href="#create-environment-file" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you are running Mattermost in an HA cluster this step must be done on <strong>all</strong> servers in the cluster.</p>
+</div>
+<p>Create the file  <code class="docutils literal notranslate"><span class="pre">/opt/mattermost/config/mattermost.environment</span></code>  to set the <code class="docutils literal notranslate"><span class="pre">MM_CONFIG</span></code> environment variable to the database connection string. For example:</p>
+<p><em>MySQL</em></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>MM_CONFIG=&#39;mysql://mmuser:mostest@tcp(127.0.0.1:3306)/mattermost?charset=utf8mb4,utf8&amp;readTimeout=30s&amp;writeTimeout=30s&#39;
+</pre></div>
+</div>
+<p><em>PostgreSQL</em></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>MM_CONFIG=&#39;postgres://mmuser:mostest@localhost:5432/mattermost_test?sslmode=disable&amp;connect_timeout=10&#39;
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Be sure to escape any single quotes in the database connection string by placing a <code class="docutils literal notranslate"><span class="pre">\</span></code> in front of them like this <code class="docutils literal notranslate"><span class="pre">\'</span></code>. For example: <code class="docutils literal notranslate"><span class="pre">MM_CONFIG='mysql://mmuser:it\'s-a-password!&#64;tcp(127.0.0.1:3306)/mattermost?charset=utf8mb4,utf8&amp;readTimeout=30s&amp;writeTimeout=30s'</span></code></p>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>MM_CONFIG=&#39;mysql://mmuser:it\&#39;s-a-password!@tcp(127.0.0.1:3306)/mattermost?charset=utf8mb4,utf8&amp;readTimeout=30s&amp;writeTimeout=30s&#39;
+</pre></div>
+</div>
+<p>Finally, run this command to verify the permissions on your Mattermost directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo chown -R mattermost:mattermost /opt/mattermost
+</pre></div>
+</div>
+</div>
+<div class="section" id="modify-mattermost-systemd-file">
+<h3>3. Modify Mattermost systemd file<a class="headerlink" href="#modify-mattermost-systemd-file" title="Permalink to this headline">¶</a></h3>
+<p>First, find the <code class="docutils literal notranslate"><span class="pre">mattermost.service</span></code> file by first running this command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo systemctl status mattermost.service
+</pre></div>
+</div>
+<p>The second line of output will have the location of the running <code class="docutils literal notranslate"><span class="pre">mattermost.service</span></code></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Loaded: loaded (/lib/systemd/system/mattermost.service; enabled; vendor preset: enabled)
+</pre></div>
+</div>
+<p>Edit this file as <em>root</em> to add this line just before the line that beings with <code class="docutils literal notranslate"><span class="pre">ExecStart</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>EnvironmentFile=/opt/mattermost/config/mm.environment
+</pre></div>
+</div>
+<p>Here is a complete <code class="docutils literal notranslate"><span class="pre">mattermost.service</span></code> file with the <code class="docutils literal notranslate"><span class="pre">EnvironmentFile</span></code> line added:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[Unit]
+Description=Mattermost
+After=network.target
+After=mysql.service
+Requires=mysql.service
+
+[Service]
+Type=notify
+EnvironmentFile=/opt/mattermost/config/mm.environment
+ExecStart=/opt/mattermost/bin/mattermost
+TimeoutStartSec=3600
+Restart=always
+RestartSec=10
+WorkingDirectory=/opt/mattermost
+User=mattermost
+Group=mattermost
+LimitNOFILE=49152
+
+[Install]
+WantedBy=mysql.service
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you are using PostgreSQL as your database the <code class="docutils literal notranslate"><span class="pre">mysql.service</span></code> must be replaced with <code class="docutils literal notranslate"><span class="pre">postgresql.service</span></code>. The easiest way to avoid making a mistake is to just add the <code class="docutils literal notranslate"><span class="pre">EnvironmentFile</span></code> line and not copy the entire example.</p>
+</div>
+</div>
+<div class="section" id="migrate-configuration-from-config-json">
+<h3>4. Migrate configuration from <code class="docutils literal notranslate"><span class="pre">config.json</span></code><a class="headerlink" href="#migrate-configuration-from-config-json" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you are using an HA cluster you only need to run this on a single server in the cluster.</p>
+</div>
+<p>Like before, the command to migrate the config to the database should always be run as the <em>mattermost</em> user.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo su mattermost
+<span class="nb">cd</span> /opt/mattermost
+bin/mattermost config migrate ./config/config.json <span class="s1">&#39;mysql://mmuser:mostest@tcp(127.0.0.1:3306)/mattermost?charset=utf8mb4,utf8&amp;readTimeout=30s&amp;writeTimeout=30s&#39;</span>
+</pre></div>
+</div>
+<p>As with the environment file you will have to escape any single quotes in the database connection string. Also, any existing SAML certificates will be migrated into the database as well so they are available for all servers in the cluster.</p>
 <p>With configuration in the database enabled, any changes to the configuration are recorded to the <code class="docutils literal notranslate"><span class="pre">Configurations</span></code> and <code class="docutils literal notranslate"><span class="pre">ConfigurationFiles</span></code> tables. Furthermore, <code class="docutils literal notranslate"><span class="pre">ClusterSettings.ReadOnlyConfig</span></code> is ignored, enabling full use of the System Console.</p>
-<p>Note that environment variable overrides remain fully supported using the configuration in the database, allowing per-server customization as required. A long-standing bug has also been fixed, ensuring environment variables are no longer written back to the configuration when other changes are made.</p>
+<p>If you have configuration settings that must be set on a per-server basis you should add them as environment variables to the <code class="docutils literal notranslate"><span class="pre">mm.environment</span></code> file. These must be on their own line, and you must escape them properly.</p>
+</div>
+<div class="section" id="verify-that-the-configuration-was-migrated-correctly">
+<h3>5. Verify that the configuration was migrated correctly.<a class="headerlink" href="#verify-that-the-configuration-was-migrated-correctly" title="Permalink to this headline">¶</a></h3>
+<p>Configurations are stored in the <code class="docutils literal notranslate"><span class="pre">Configurations</span></code> table in the database. To verify that you have migrated the configuration successfully run this query:</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">Configurations</span> <span class="k">WHERE</span> <span class="n">Active</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>There should be exactly one line returned, and the <code class="docutils literal notranslate"><span class="pre">Value</span></code> field for that line should match your <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file.</p>
+</div>
+<div class="section" id="reload-systemd-files-and-restart-mattermost">
+<h3>6. Reload <code class="docutils literal notranslate"><span class="pre">systemd</span></code> files and restart Mattermost<a class="headerlink" href="#reload-systemd-files-and-restart-mattermost" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you are running Mattermost in HA this step must be run on all servers in the cluster.</p>
+</div>
+<p>Finally, run these commands to reload the daemon and restart Mattermost using the new <code class="docutils literal notranslate"><span class="pre">MM_CONFIG</span></code> environment variable.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sudo systemctl daemon-reload
+sudo systemctl restart mattermost
+</pre></div>
+</div>
+</div>
+<div class="section" id="rolling-back">
+<h3>Rolling Back<a class="headerlink" href="#rolling-back" title="Permalink to this headline">¶</a></h3>
+<p>If you run into issues with your configuration in the database you can roll back to the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file by commenting out the <code class="docutils literal notranslate"><span class="pre">MM_CONFIG</span></code> line in <code class="docutils literal notranslate"><span class="pre">/opt/mattermost/config/mm.environment</span></code> and restarting Mattermost with <code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">restart</span> <span class="pre">mattermost</span></code></p>
+</div>
+</div>
 <div class="section" id="troubleshooting">
 <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="server-fails-to-start">
-<h3>Server fails to start<a class="headerlink" href="#server-fails-to-start" title="Permalink to this headline">¶</a></h3>
 <p>Providing the <code class="docutils literal notranslate"><span class="pre">--disableconfigwatch</span></code> flag while not actually pointing at a file will fail to start the server with an appropriate error message.</p>
-</div>
 </div>
 </div>
 
