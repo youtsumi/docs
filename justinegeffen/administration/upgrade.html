@@ -171,8 +171,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Upgrading Mattermost Server</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#upgrading-to-the-latest-version">Upgrading to the Latest Version</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#upgrading-team-edition-to-enterprise-edition">Upgrading Team Edition to Enterprise Edition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#upgrading-to-the-latest-version">Upgrading to the Latest Version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#uploading-a-license-key">Uploading a License Key</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="important-upgrade-notes.html">Important Upgrade Notes</a></li>
@@ -251,9 +252,13 @@
 <p class="first admonition-title">Important</p>
 <p class="last">Support for server <a class="reference external" href="https://docs.mattermost.com/administration/extended-support-release.html">Extended Support Release</a> (ESR) 5.19 is coming to the end of its lifecycle on October 15th, 2020. Upgrading to server v5.25 or later is highly recommended.</p>
 </div>
+<div class="section" id="upgrading-team-edition-to-enterprise-edition">
+<h2>Upgrading Team Edition to Enterprise Edition<a class="headerlink" href="#upgrading-team-edition-to-enterprise-edition" title="Permalink to this headline">¶</a></h2>
+<p>To upgrade from the Team Edition to the Enterprise Edition, follow the normal upgrade instructions below, making sure that you download the Enterprise Edition in Step 3.</p>
+</div>
 <div class="section" id="upgrading-to-the-latest-version">
 <h2>Upgrading to the Latest Version<a class="headerlink" href="#upgrading-to-the-latest-version" title="Permalink to this headline">¶</a></h2>
-<p>If you are upgrading from version 3.0 or later, these instructions apply to you. If you are upgrading from a version earlier than 3.0.0, you must first <a class="reference external" href="../administration/upgrading-to-3.0.html">upgrade to version 3.0.3</a>.</p>
+<p>If you are upgrading from version 3.0 or later, these instructions apply to you. If you are upgrading from a version prioer to 3.0.0, you must first <a class="reference external" href="../administration/upgrading-to-3.0.html">upgrade to version 3.0.3</a>.</p>
 <p id="before-you-begin"><strong>Before you begin</strong></p>
 <p>Read these instructions carefully from start to finish. Make sure that you understand each step before starting the upgrade. If you have questions or concerns, you can ask on the Mattermost forum at <a class="reference external" href="https://forum.mattermost.org/">https://forum.mattermost.org/</a>.</p>
 <div class="admonition important">
@@ -270,12 +275,12 @@
 <dd>If you don’t know where Mattermost Server is installed, use the <code class="docutils literal notranslate"><span class="pre">whereis</span> <span class="pre">mattermost</span></code> command. The output should be similar to <em>/opt/mattermost/bin/mattermost</em>. The install directory is everything before the first occurrence of the string <em>/mattermost</em>. In this example, the <em>{install-path}</em> is <code class="docutils literal notranslate"><span class="pre">/opt</span></code>.
 If that command does not produce any results because your version is older, try <code class="docutils literal notranslate"><span class="pre">whereis</span> <span class="pre">platform</span></code> instead.</dd>
 <dt>Location of your local storage directory</dt>
-<dd>The local storage directory contains all the files that users have attached to their messages. If you don’t know its location, open the System Console and go to <strong>Files &gt; Storage</strong> in prior versions or <strong>Environment&gt; File Storage</strong> in versions after 5.12 and read the value in <strong>Local Storage Directory</strong>. Relative paths are relative to the <code class="docutils literal notranslate"><span class="pre">mattermost</span></code> directory. For example, if the local storage directory is <code class="docutils literal notranslate"><span class="pre">./data/</span></code> then the absolute path is <code class="docutils literal notranslate"><span class="pre">{install-path}/mattermost/data</span></code>.</dd>
+<dd>The local storage directory contains all the files that users have attached to their messages. If you don’t know its location, open the System Console and go to <strong>Environment&gt; File Storage</strong> (or <strong>Files &gt; Storage</strong> in versions prior to 5.12) and read the value in <strong>Local Storage Directory</strong>. Relative paths are relative to the <code class="docutils literal notranslate"><span class="pre">mattermost</span></code> directory. For example, if the local storage directory is <code class="docutils literal notranslate"><span class="pre">./data/</span></code> then the absolute path is <code class="docutils literal notranslate"><span class="pre">{install-path}/mattermost/data</span></code>.</dd>
 </dl>
 <p><strong>To upgrade Mattermost Server</strong>:</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">If you are upgrading an HA cluster, <a class="reference external" href="https://docs.mattermost.com/deployment/cluster.html#upgrade-guide">review these upgrade notes instead</a>.</p>
+<p class="last">If you are upgrading a High Availability cluster, <a class="reference external" href="https://docs.mattermost.com/deployment/cluster.html#upgrade-guide">review these upgrade notes instead</a>.</p>
 </div>
 <ol class="arabic">
 <li><p class="first">Review the <a class="reference internal" href="important-upgrade-notes.html"><span class="doc">Important Upgrade Notes</span></a> to make sure you are aware of any actions you need to take before or after upgrading from your particular version.</p>
@@ -296,7 +301,7 @@ If that command does not produce any results because your version is older, try 
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">transform</span></code> option adds a suffix to the topmost extracted directory so it does not conflict with the usual install directory.</p>
 </li>
-<li><p class="first">Stop Mattermost Server.</p>
+<li><p class="first">Stop your Mattermost server.</p>
 <p>On Ubuntu 14.04 and RHEL 6:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo service mattermost stop
 </pre></div>
@@ -348,7 +353,7 @@ sudo setcap <span class="nv">cap_net_bind_service</span><span class="o">=</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Start Mattermost server.</p>
+<li><p class="first">Start your Mattermost server.</p>
 <p>On Ubuntu 14.04 and RHEL 6:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo service mattermost start
 </pre></div>
@@ -360,7 +365,7 @@ sudo setcap <span class="nv">cap_net_bind_service</span><span class="o">=</span>
 </li>
 <li><p class="first">Upgrade your <code class="docutils literal notranslate"><span class="pre">config.json</span></code> schema:</p>
 <ol class="arabic simple">
-<li>Open the System Console and change a setting, then revert it. This should enable the Save button for that page.</li>
+<li>Open the System Console and change a setting, then revert it. This will enable the <strong>Save</strong> button for that page.</li>
 <li>Click <strong>Save</strong>.</li>
 <li>Refresh the page.</li>
 </ol>
@@ -369,10 +374,9 @@ sudo setcap <span class="nv">cap_net_bind_service</span><span class="o">=</span>
 </ol>
 <p>After the server is upgraded, users might need to refresh their browsers to experience any new features.</p>
 </div>
-<div class="section" id="upgrading-team-edition-to-enterprise-edition">
-<h2>Upgrading Team Edition to Enterprise Edition<a class="headerlink" href="#upgrading-team-edition-to-enterprise-edition" title="Permalink to this headline">¶</a></h2>
-<p>To upgrade from the Team Edition to the Enterprise Edition, follow the normal upgrade instructions above, but make sure that you download the Enterprise Edition in Step 3.</p>
-<p>After the Enterprise Edition is running, open the <em>System Console</em> and go to <strong>OTHER &gt; Edition and License &gt; License Key</strong> in prior versions or <strong>System Console &gt; About &gt; Editions and License</strong> in versions after 5.12 and upload your license key file.</p>
+<div class="section" id="uploading-a-license-key">
+<h2>Uploading a License Key<a class="headerlink" href="#uploading-a-license-key" title="Permalink to this headline">¶</a></h2>
+<p>When Enterprise Edition is running, open <strong>System Console &gt; About &gt; Editions and License</strong> and upload your license key.</p>
 </div>
 </div>
 
