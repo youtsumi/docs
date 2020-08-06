@@ -166,7 +166,15 @@
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/integration.html#admininstrator-s-guide">Admininstrator’s Guide</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../administration/plugins.html">Plugins (Beta)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="jira.html">Jira Plugin</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Zoom Plugin</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Zoom Plugin</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#zoom-configuration">Zoom Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#usage-setup-guide">Usage &amp; Setup Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#development">Development</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#server">Server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#web-app">Web App</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="zapier.html">Zapier Integration</a></li>
 </ul>
 </li>
@@ -226,7 +234,57 @@
             
   <div class="section" id="zoom-plugin">
 <h1>Zoom Plugin<a class="headerlink" href="#zoom-plugin" title="Permalink to this headline">¶</a></h1>
-<p>This page has moved.  Please see the Documentation page for the Zoom Plugin <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-zoom/blob/master/README.md">here</a>.</p>
+<p>The Mattermost/Zoom integration allows team members to initiate a Zoom meeting at the push of a button.  All participants in a channel can easily join the Zoom meeting and the shared link is updated when the meeting is over.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p><strong>Install via Plugin Marketplace (Recommended)</strong></p>
+<ol class="arabic simple">
+<li>Go to Main Menu &gt; Plugin Marketplace in Mattermost</li>
+<li>Search for “Zoom” or manually find the plugin from the list and click Install</li>
+<li>After the plugin has downloaded and been installed, follow the instructions on Zoom Configuration4. After finishing the Zoom Configuration, follow the instructions on Mattermost Setup</li>
+</ol>
+<p><strong>(Alternative) Install via Manual Upload</strong></p>
+<p>If your server doesn’t have access to the internet, you can download the latest plugin binary release and upload it to your server via System Console &gt; Plugin Management. The binary releases on the page above, are the same as used by the Marketplace.</p>
+</div>
+<div class="section" id="zoom-configuration">
+<h2>Zoom Configuration<a class="headerlink" href="#zoom-configuration" title="Permalink to this headline">¶</a></h2>
+<p>You’ll need to choose which authnetication method you want your users to connect their Zoom accounts
+Zoom supports two authentication methods for your users to connect Mattermost and Zoom. Choose between using OAuth and JWT/Password based authentication:</p>
+<p><strong>Oauth</strong></p>
+<ul class="simple">
+<li>Each user will need to connect their Zoom account with their Mattermost account before they can use the integration.  When they try to create a meeting for the first time, they will receive a message to connect their account, and will need to click “Approve” on a pop-up web page.</li>
+<li>Users can connect their MM/Zoom accounts even if their emails do not match.</li>
+</ul>
+<p><strong>JWT/Password</strong></p>
+<ul class="simple">
+<li>Users don’t have to connect their account to use the integration which makes it easy to get started.</li>
+<li>Uses JWT to pass security tokens.  This may not be sufficiently secure for some customers.</li>
+</ul>
+</div>
+<div class="section" id="usage-setup-guide">
+<h2>Usage &amp; Setup Guide<a class="headerlink" href="#usage-setup-guide" title="Permalink to this headline">¶</a></h2>
+<p>Commands</p>
+<p><code class="docutils literal notranslate"><span class="pre">/zoom</span> <span class="pre">start</span></code> — Start a zoom meeting.
+<code class="docutils literal notranslate"><span class="pre">/zoom</span> <span class="pre">disconnect</span></code> — Disconnect from zoom (if OAuth is enabled).
+<code class="docutils literal notranslate"><span class="pre">/zoom</span> <span class="pre">help</span></code> — Display help message.</p>
+<p>Check our GitBook for further documentation about this plugin.</p>
+</div>
+<div class="section" id="development">
+<h2>Development<a class="headerlink" href="#development" title="Permalink to this headline">¶</a></h2>
+<p>This plugin contains both a server and web app portion.</p>
+<ul class="simple">
+<li>Use <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">dist</span></code> to build distributions of the plugin that you can upload to a Mattermost server for testing.</li>
+<li>Use <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">check-style</span></code> to check the style for the whole plugin.</li>
+</ul>
+</div>
+<div class="section" id="server">
+<h2>Server<a class="headerlink" href="#server" title="Permalink to this headline">¶</a></h2>
+<p>Inside the <code class="docutils literal notranslate"><span class="pre">/server</span></code> directory, you will find the Go files that make up the server-side of the plugin. Within there, build the plugin like you would any other Go application.</p>
+</div>
+<div class="section" id="web-app">
+<h2>Web App<a class="headerlink" href="#web-app" title="Permalink to this headline">¶</a></h2>
+<p>Inside the <code class="docutils literal notranslate"><span class="pre">/webapp</span></code> directory, you will find the JS and React files that make up the client-side of the plugin. Within there, modify files and components as necessary. Test your syntax by running npm run build.</p>
+</div>
 </div>
 
 
