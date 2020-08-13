@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Managing Team and Channel Members (E20) &mdash; Mattermost 5.25 documentation</title>
+  <title>Managing Team and Channel Members (E20) &mdash; Mattermost 5.26 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.25
+                5.26
               </div>
             
           
@@ -255,12 +255,13 @@
             
   <div class="section" id="managing-team-and-channel-members-e20">
 <h1>Managing Team and Channel Members (E20)<a class="headerlink" href="#managing-team-and-channel-members-e20" title="Permalink to this headline">¶</a></h1>
-<p>System Admins can manage team and channel configuration in the System Console.</p>
+<p>System Admins can manage channel configuration in the System Console.</p>
 <ul class="simple">
-<li><strong>Management</strong>. Manage sync, moderation, and membership settings.</li>
-<li><strong>Promoting/demoting Team and Channel Admins</strong>. Team and Channel Admins can be demoted via the System Console.</li>
-<li><strong>View channel members</strong>. System Admins can view members of a channel without having to join the channel.</li>
-<li><strong>Member count</strong>. Total member count in a team or channel.</li>
+<li><strong>Management:</strong> Manage sync, moderation, and membership settings.</li>
+<li><strong>Promoting/demoting Team and Channel Admins:</strong> Team and Channel Admins can be demoted via the System Console.</li>
+<li><strong>View channel members:</strong> System Admins can view members of a channel without having to join the channel.</li>
+<li><strong>Member count:</strong> Total member count in a team or channel.</li>
+<li><strong>Archive channels:</strong> System Admins can archive channels without having to join the channel.</li>
 </ul>
 <div class="section" id="teams">
 <h2>Teams<a class="headerlink" href="#teams" title="Permalink to this headline">¶</a></h2>
@@ -283,16 +284,29 @@
 </div>
 <div class="section" id="members">
 <h3>Members<a class="headerlink" href="#members" title="Permalink to this headline">¶</a></h3>
-<p>A list of all members in a channel is visible to System Admins. Members can be added and removed from the team members and be promoted or demoted to a Team Admin/Member role.</p>
+<p>A list of all members in a channel is visible to System Admins. Members can be added and removed from the team members and be promoted or demoted to a Team Admin/Member role. Use the role <strong>Filter</strong> to refine your search results. You can use one filter, or combine filters to search by multiple roles:</p>
+<ul class="simple">
+<li>Guest</li>
+<li>Member</li>
+<li>Team Admin</li>
+<li>System Admin</li>
+</ul>
 </div>
 </div>
 <div class="section" id="channels">
 <h2>Channels<a class="headerlink" href="#channels" title="Permalink to this headline">¶</a></h2>
-<p>To view and manage channel information, navigate to <strong>System Console &gt; Channels</strong>. Teams can be managed by <strong>Group Sync</strong> or <strong>Manual Invites</strong>. The type of management in use may affect the management options available for that team.</p>
-<p>Select a team to view its configuration options.</p>
+<p>To view and manage channel information, navigate to <strong>System Console &gt; Channels</strong>. Channels can be managed by <strong>Group Sync</strong> or <strong>Manual Invites</strong>. The type of management in use may affect the management options available for that channel. Use the <strong>Filter</strong> to refine your search results. You can use one filter, or combine filters to search by channel and management type:</p>
+<ul class="simple">
+<li>Public channels</li>
+<li>Private channels</li>
+<li>Archived channels</li>
+<li>Channels that are synchronized to an AD/LDAP Group</li>
+<li>Channels with users who were invited manually (not synced from LDAP)</li>
+</ul>
+<p>Select a channel to view its configuration options.</p>
 <div class="section" id="profile">
 <h3>Profile<a class="headerlink" href="#profile" title="Permalink to this headline">¶</a></h3>
-<p>The name and description of the channel.</p>
+<p>The name and description of the channel. To archive the channel, select <strong>Archive Channel &gt; Save</strong>. The channel is still searchable in the <strong>Channels</strong> list. To unarchive the channel, select <strong>Unarchive Channel</strong> and <strong>Save</strong>.</p>
 </div>
 <div class="section" id="channel-management">
 <h3>Channel Management<a class="headerlink" href="#channel-management" title="Permalink to this headline">¶</a></h3>
@@ -303,7 +317,7 @@
 </div>
 <div class="section" id="channel-moderation-beta-e20">
 <h3>Channel Moderation (Beta) (E20)<a class="headerlink" href="#channel-moderation-beta-e20" title="Permalink to this headline">¶</a></h3>
-<p><em>Available in Enterprise Edition E20</em></p>
+<p><em>Available in Enterprise Edition E20.</em></p>
 <p>From v5.22, the channel moderation settings allow Admins to restrict actions within specific channels. These actions include:</p>
 <ul class="simple">
 <li><strong>Make channel read-only:</strong> The ability for Admins to turn off posting in specified channels.</li>
@@ -312,8 +326,10 @@
 <li><strong>Channel member management:</strong> Only Admins have the ability to add and remove channel members in the specified channels.</li>
 </ul>
 <p>These settings are modified in <strong>System Console &gt; User Management &gt; Channels</strong>.</p>
-<p><strong>Note:</strong>
-These settings are applicable only to Guests and Members. System, Team, and Channel Admins are not affected. If you wish to grant posting ability to a specific member, you must first promote that member to Channel Admin.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">These settings are applicable only to Guests and Members. System, Team, and Channel Admins are not affected. If you wish to grant posting ability to a specific member, you must first promote that member to Channel Admin.</p>
+</div>
 <p>The availability of channel moderation settings can also be affected by existing system and team permissions configurations. If there are existing configurations that override the channel settings you would like to apply, it will be indicated in the user interface. These settings can then be adjusted in the relevant panel in the <strong>Permissions</strong> section of the System Console.</p>
 <p><strong>Configure a channel so that members can post/reply/react but guests can only read and react.</strong></p>
 <ol class="arabic simple">
@@ -324,7 +340,7 @@ These settings are applicable only to Guests and Members. System, Team, and Chan
 <li>Choose <strong>Save</strong>.</li>
 </ol>
 <p>The channel is available for all members and guests to access, but guests can only read messages and react to them.</p>
-<p><strong>Create an Announcement Channel where only channel admins are able to post (read-only).</strong></p>
+<p><strong>Create an Announcement Channel where only Channel Admins are able to post (read-only).</strong></p>
 <ol class="arabic simple">
 <li>Create a new channel (either Public or Private).</li>
 <li>Navigate to <strong>System Console &gt; User Management &gt; Channels</strong>.</li>
@@ -333,7 +349,7 @@ These settings are applicable only to Guests and Members. System, Team, and Chan
 <li>In the <strong>Post Reactions</strong> panel, uncheck <strong>Guests</strong> and <strong>Members</strong>.</li>
 <li>Choose <strong>Save</strong>.</li>
 </ol>
-<p>The channel is available for all members and guests to access but only admins can post.</p>
+<p>The channel is available for all members and guests to access but only Admins can post.</p>
 </div>
 <div class="section" id="id1">
 <h3>Groups<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
@@ -341,7 +357,13 @@ These settings are applicable only to Guests and Members. System, Team, and Chan
 </div>
 <div class="section" id="id2">
 <h3>Members<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
-<p>A list of all members in a channel is visible to System Admins. Members can be added and removed from the team members and be promoted or demoted to a Team Admin/Member role.</p>
+<p>A list of all members in a channel is visible to System Admins. Members can be added and removed from the team members and be promoted or demoted to a Team Admin/Member role. Use the role <strong>Filter</strong> to refine your search results. You can use one filter, or combine filters to search by multiple roles:</p>
+<ul class="simple">
+<li>Guest</li>
+<li>Member</li>
+<li>Channel Admin</li>
+<li>System Admin</li>
+</ul>
 </div>
 </div>
 </div>
