@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Important Upgrade Notes &mdash; Mattermost 5.26 documentation</title>
+  <title>Important Upgrade Notes &mdash; Mattermost 5.25 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.26
+                5.25
               </div>
             
           
@@ -244,7 +244,7 @@
 <h1>Important Upgrade Notes<a class="headerlink" href="#important-upgrade-notes" title="Permalink to this headline">¶</a></h1>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
-<p class="last">PostgreSQL ended long-term support for <a class="reference external" href="https://www.postgresql.org/support/versioning">version 9.4 in February 2020</a>. Mattermost is officially supporting PostgreSQL version 10 with v5.26 release as PostgreSQL 9.4 is no longer supported. New installs will require PostgreSQL 10+. Previous Mattermost versions, including our current ESR, will continue to be compatible with PostgreSQL 9.4. In our 6.0 release (date to be announced), we plan on fully deprecating PostgreSQL 9.4. Please follow the instructions under the Upgrading Section within <a class="reference external" href="https://www.postgresql.org/support/versioning/">the PostgreSQL documentation</a>.</p>
+<p class="last">PostgreSQL ended long-term support for <a class="reference external" href="https://www.postgresql.org/support/versioning">version 9.4 in February 2020</a>. Mattermost will officially be supporting PostgreSQL version 10 with v5.26 release as PostgreSQL 9.4 is no longer supported. New installs will require PostgreSQL 10+. Previous Mattermost versions, including our current ESR, will continue to be compatible with PostgreSQL 9.4. In our 6.0 release (date to be announced), we plan on fully deprecating PostgreSQL 9.4. Please follow the instructions under the Upgrading Section within <a class="reference external" href="https://www.postgresql.org/support/versioning/">the PostgreSQL documentation</a>.</p>
 </div>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
@@ -266,22 +266,6 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td rowspan="2">v5.26.0</td>
-<td colspan="2">In v5.26, Elasticsearch indexes needed to be recreated. Admins should re-index Elasticsearh using the <strong>Purge index</strong> and then <strong>Index now</strong> button so that all
-the changes will be included in the index. Systems may be left with a limited search during the indexing, so it should be done during a time when there is
-little to no activity because it may take several hours.</td>
-</tr>
-<tr class="row-odd"><td colspan="2"><p class="first">An <code class="docutils literal notranslate"><span class="pre">EnableExperimentalGossipEncryption</span></code> option was added under <code class="docutils literal notranslate"><span class="pre">ClusterSettings</span></code>. If this is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, and <code class="docutils literal notranslate"><span class="pre">UseExperimentalGossip</span></code> is also <code class="docutils literal notranslate"><span class="pre">true</span></code>,
-all communication through the cluster using the gossip protocol will be encrypted. The encryption uses <code class="docutils literal notranslate"><span class="pre">AES-256</span></code> by default, and it is not kept configurable
-by design. However, if one wishes, they can set the value in Systems table manually for the <code class="docutils literal notranslate"><span class="pre">ClusterEncryptionKey</span></code> row. A key is a byte array converted to
-base64. It should be either 16, 24, or 32 bytes to select AES-128, AES-192, or AES-256.</p>
-<p>To update the key, one can execute:
-<code class="docutils literal notranslate"><span class="pre">UPDATE</span> <span class="pre">Systems</span> <span class="pre">SET</span> <span class="pre">Value='&lt;value&gt;'</span> <span class="pre">WHERE</span> <span class="pre">Name='ClusterEncryptionKey';</span></code> in MySQL and
-<code class="docutils literal notranslate"><span class="pre">UPDATE</span> <span class="pre">systems</span> <span class="pre">SET</span> <span class="pre">value='&lt;value&gt;'</span> <span class="pre">WHERE</span> <span class="pre">name='ClusterEncryptionKey'</span></code> for PostgreSQL.</p>
-<p class="last">For any change in this config setting to take effect, the whole cluster must be shutdown first. Then the config change made, and then restarted. In a cluster,
-all servers either will completely use encryption or not. There cannot be any partial usage.</p>
-</td>
-</tr>
 <tr class="row-even"><td>v5.25.0</td>
 <td colspan="2">Some incorrect instructions regarding SAML setup with Active Directory ADFS for setting the “Relying party trust identifier” were corrected. Although the
 settings will continue to work, it is encouraged that you
