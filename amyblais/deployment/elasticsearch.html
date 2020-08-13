@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Elasticsearch (E20) &mdash; Mattermost 5.25 documentation</title>
+  <title>Elasticsearch (E20) &mdash; Mattermost 5.26 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.25
+                5.26
               </div>
             
           
@@ -253,6 +253,10 @@
 <h3>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h3>
 <p>Elasticsearch allows you to search large volumes of data quickly, in near real time, by creating and managing an index of post data. The indexing process can be managed from the System Console after setting up and connecting an Elasticsearch server. The post index is stored on the Elasticsearch server and is updated constantly after new posts are made. In order to index existing posts, a bulk index of the entire post database must be generated.</p>
 <p>Elasticsearch v5.x, v6.x, and v7.x are supported.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">From Mattermost v5.26, you can now filter inactive users, search by user role, and also search for terms inside links. This update introduces a breaking change which affects the “from” part of the search. To avoid this, reindex your Elasticsearch instance/cluster prior to upgrading.</p>
+</div>
 </div>
 <div class="section" id="when-to-use-elasticsearch">
 <h3>When to Use Elasticsearch<a class="headerlink" href="#when-to-use-elasticsearch" title="Permalink to this headline">¶</a></h3>
@@ -328,12 +332,10 @@
 <ol class="arabic simple" start="7">
 <li>Restart the Mattermost server.</li>
 </ol>
-<blockquote>
-<div><div class="admonition note">
+<div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Additional advanced Elasticsearch settings for large deployments can be configured outside the System Console in the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file. Please see <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#elasticsearch">documentation to learn more</a>.</p>
+<p class="last">Additional advanced Elasticsearch settings for large deployments can be configured outside the System Console in the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file. Read the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#elasticsearch">documentation to learn more</a>.</p>
 </div>
-</div></blockquote>
 </div>
 </div>
 <div class="section" id="limitations">
@@ -376,8 +378,8 @@
 </div>
 <div class="section" id="how-do-i-monitor-system-health-of-an-elasticsearch-server">
 <h3>How do I monitor system health of an Elasticsearch server?<a class="headerlink" href="#how-do-i-monitor-system-health-of-an-elasticsearch-server" title="Permalink to this headline">¶</a></h3>
-<p>You can use this Prometheus exporter to monitor <a class="reference external" href="https://github.com/justwatchcom/elasticsearch_exporter#metrics">various metrics</a> about Elasticsearch: <a class="reference external" href="https://github.com/justwatchcom/elasticsearch_exporter">justwatchcom/elasticsearch_exporter</a></p>
-<p>You may also refer to this <a class="reference external" href="https://www.datadoghq.com/blog/monitor-elasticsearch-performance-metrics/#key-elasticsearch-performance-metrics-to-monitor">article about Elasticsearch performance monitoring</a>. It is not written specifically for Prometheus, which <a class="reference external" href="https://docs.mattermost.com/deployment/metrics.html">Mattermost’s performance monitoring</a> system uses, but has several tips and best practices.</p>
+<p>You can use this Prometheus exporter to monitor <a class="reference external" href="https://github.com/justwatchcom/elasticsearch_exporter#metrics">various metrics</a> about Elasticsearch: <a class="reference external" href="https://github.com/justwatchcom/elasticsearch_exporter">justwatchcom/elasticsearch_exporter</a>.</p>
+<p>You can also refer to this <a class="reference external" href="https://www.datadoghq.com/blog/monitor-elasticsearch-performance-metrics/#key-elasticsearch-performance-metrics-to-monitor">article about Elasticsearch performance monitoring</a>. It’s not written specifically for Prometheus, which <a class="reference external" href="https://docs.mattermost.com/deployment/metrics.html">Mattermost’s performance monitoring</a> system uses, but has several tips and best practices.</p>
 </div>
 <div class="section" id="why-does-a-25-000-post-database-take-a-long-time-to-index-in-elasticsearch">
 <h3>Why does a 25,000 post database take a long time to index in Elasticsearch?<a class="headerlink" href="#why-does-a-25-000-post-database-take-a-long-time-to-index-in-elasticsearch" title="Permalink to this headline">¶</a></h3>
