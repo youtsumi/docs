@@ -254,24 +254,25 @@
 <ul class="simple">
 <li><a class="reference internal" href="#overview" id="id1">Overview</a></li>
 <li><a class="reference internal" href="#user-s-guide" id="id2">User’s Guide</a><ul>
-<li><a class="reference internal" href="#starting-incidents" id="id3">Starting incidents</a></li>
-<li><a class="reference internal" href="#active-incidents" id="id4">Active incidents</a></li>
-<li><a class="reference internal" href="#using-playbooks" id="id5">Using playbooks</a></li>
-<li><a class="reference internal" href="#viewing-and-creating-playbooks" id="id6">Viewing and creating playbooks</a></li>
-<li><a class="reference internal" href="#creating-checklists" id="id7">Creating checklists</a></li>
-<li><a class="reference internal" href="#editing-checklists" id="id8">Editing checklists</a></li>
-<li><a class="reference internal" href="#ending-incidents" id="id9">Ending incidents</a></li>
+<li><a class="reference internal" href="#using-playbooks" id="id3">Using playbooks</a></li>
+<li><a class="reference internal" href="#stages-and-steps" id="id4">Stages and steps</a></li>
+<li><a class="reference internal" href="#starting-incidents" id="id5">Starting incidents</a></li>
+<li><a class="reference internal" href="#active-incidents" id="id6">Active incidents</a></li>
+<li><a class="reference internal" href="#public-and-private-incidents" id="id7">Public and private incidents</a></li>
+<li><a class="reference internal" href="#ending-incidents" id="id8">Ending incidents</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#administrator-s-guide" id="id10">Administrator’s Guide</a><ul>
-<li><a class="reference internal" href="#permissions" id="id11">Permissions</a></li>
-<li><a class="reference internal" href="#incidents-backstage" id="id12">Incidents Backstage</a></li>
-<li><a class="reference internal" href="#viewing-incident-details" id="id13">Viewing incident details</a></li>
+<li><a class="reference internal" href="#administrator-s-guide" id="id9">Administrator’s Guide</a><ul>
+<li><a class="reference internal" href="#permissions" id="id10">Permissions</a></li>
+<li><a class="reference internal" href="#managing-incident-channel-visibility" id="id11">Managing incident channel visibility</a></li>
+<li><a class="reference internal" href="#managing-playbooks" id="id12">Managing playbooks</a></li>
+<li><a class="reference internal" href="#incidents-backstage" id="id13">Incidents backstage</a></li>
+<li><a class="reference internal" href="#viewing-incident-details" id="id14">Viewing incident details</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#exporting-channels" id="id14">Exporting channels</a></li>
-<li><a class="reference internal" href="#telemetry" id="id15">Telemetry</a></li>
-<li><a class="reference internal" href="#glossary" id="id16">Glossary</a></li>
+<li><a class="reference internal" href="#exporting-channels" id="id15">Exporting channels</a></li>
+<li><a class="reference internal" href="#telemetry" id="id16">Telemetry</a></li>
+<li><a class="reference internal" href="#glossary" id="id17">Glossary</a></li>
 </ul>
 </div>
 <div class="section" id="overview">
@@ -281,15 +282,32 @@
 <div class="section" id="user-s-guide">
 <h2><a class="toc-backref" href="#contents">User’s Guide</a><a class="headerlink" href="#user-s-guide" title="Permalink to this headline">¶</a></h2>
 <p>Incidents are events within Mattermost that are initiated to manage a specific situation/response in real-time. When the situation/response is complete, the incident is ended. Events that occurred within the incident can be reused in future incidents as playbooks and checklists.</p>
+<div class="section" id="using-playbooks">
+<h3><a class="toc-backref" href="#contents">Using playbooks</a><a class="headerlink" href="#using-playbooks" title="Permalink to this headline">¶</a></h3>
+<p>Playbooks are templates which are applied to an incident and define a group of tasks (stages) and steps to be followed in order to resolve the incident. Playbooks can be refined over a period of time to match the changing parameters of future related incidents. Incidents can only be started once they’re associated with a playbook. It’s not possible to start an incident from within the playbook backstage but you can create a playbook for use with a future incident.</p>
+<p>When you start an incident, you need to either create a playbook or select an existing one.</p>
+<p><strong>Creating a new playbook</strong></p>
+<p>The creator of a playbook is automatically added as the first member and can remove themselves once other members have been added. Only playbook members can use the playbook to start an incident - System Admins must be added to the member list to have access to a playbook.</p>
+<p>You can also create a new playbook outside of an incident. Select <strong>+ New Playbook</strong> to start a new playbook using either the blank template, or the <strong>Incident Response Playbook</strong> template provided.</p>
+<p><strong>Selecting an existing playbook</strong></p>
+<p>You can select any existing playbook that you have access to, from the drop-down list provided, when starting an incident.</p>
+<p><strong>Viewing playbooks</strong></p>
+<p>Open <strong>Main Menu &gt; Incidents &amp; Playbooks &gt; Playbooks</strong> to view the playbooks associated with the current team and create a new one.</p>
+</div>
+<div class="section" id="stages-and-steps">
+<h3><a class="toc-backref" href="#contents">Stages and steps</a><a class="headerlink" href="#stages-and-steps" title="Permalink to this headline">¶</a></h3>
+<p>When you create a playbook you can group your tasks into stages which have accompanying steps. Each step can be assigned a slash command. The steps within each stage must be completed in the order they’re listed.</p>
+<p>Stages and steps are optional, and can be left empty by default. You can add stages and steps to a playbook that’s being used in an active incident, but they won’t be applied to the active incident.</p>
+</div>
 <div class="section" id="starting-incidents">
 <h3><a class="toc-backref" href="#contents">Starting incidents</a><a class="headerlink" href="#starting-incidents" title="Permalink to this headline">¶</a></h3>
-<p>The incident channel is the central place for discussion related to the incident. You can start an incident in one of three ways:</p>
+<p>When you start an incident, a channel is created. You can start an incident in one of three ways:</p>
 <ul class="simple">
 <li>Use the slash command <em>/incident start</em> from any channel.</li>
 <li>Select <strong>!</strong> from the channel header.</li>
 <li>Use the context menu of a post and select <strong>Start incident</strong>.</li>
 </ul>
-<p>When you create an incident, the name provided is applied to the new incident channel that is created. You can also select an optional playbook.</p>
+<p>The incident channel is the central place for discussion related to the incident.  When you create an incident, the name provided is applied to the new incident channel that is created. You can also select an optional playbook.</p>
 <ul class="simple">
 <li>If a playbook is selected, a corresponding checklist is used as a template to start the incident.</li>
 <li>If no playbook is selected, the incident starts with an empty checklist.</li>
@@ -306,54 +324,106 @@
 </div>
 <div class="section" id="active-incidents">
 <h3><a class="toc-backref" href="#contents">Active incidents</a><a class="headerlink" href="#active-incidents" title="Permalink to this headline">¶</a></h3>
-<p>To view details about active incidents select <strong>!</strong> in the channel header, to open the right-hand side (RHS) panel and list of current active incidents. Select an incident to see its commander, channel, and checklist.</p>
 <p>When an incident has started and the incident channel is created, a message from the incident bot is posted to the incident channel naming the creator of the incident. If an incident is started from the context of a post, the text of the post is posted to the channel along with a permalink.</p>
-<p>Incidents that are displayed in the RHS are visible to all members of the relevant team, even if they are not a member of the corresponding incident channel. It is not possible to view incidents from teams other than the currently selected team.</p>
+<p>It is not possible to view incidents from teams other than the currently selected team.</p>
+<p>To view details about active incidents select <strong>Main Menu &gt; Incidents &amp; Playbooks</strong>. Select an incident to see its duration, members, and messages.</p>
 </div>
-<div class="section" id="using-playbooks">
-<h3><a class="toc-backref" href="#contents">Using playbooks</a><a class="headerlink" href="#using-playbooks" title="Permalink to this headline">¶</a></h3>
-<p>Playbooks are templates which are applied to an incident and define a set of steps to be followed in order to resolve the incident. Playbooks can be refined over a period of time to match the changing parameters of future related incidents.</p>
-<p>The set of steps contained within a playbook is called a checklist.</p>
-</div>
-<div class="section" id="viewing-and-creating-playbooks">
-<h3><a class="toc-backref" href="#contents">Viewing and creating playbooks</a><a class="headerlink" href="#viewing-and-creating-playbooks" title="Permalink to this headline">¶</a></h3>
-<p>Select <strong>!</strong> in the channel header to open the RHS panel. Select the <strong>Playbooks</strong> icon to open the playbooks backstage and list all playbooks associated with the current team. Select <strong>+ New Playbook</strong> to start a new playbook and checklist. Enter a playbook name and choose <strong>Save Playbook</strong>.</p>
-</div>
-<div class="section" id="creating-checklists">
-<h3><a class="toc-backref" href="#contents">Creating checklists</a><a class="headerlink" href="#creating-checklists" title="Permalink to this headline">¶</a></h3>
-<p>Checklists are created within a playbook and provide steps to follow during an incident. Checklists can be created ahead of time as part of a playbook, or during an incident.</p>
-</div>
-<div class="section" id="editing-checklists">
-<h3><a class="toc-backref" href="#contents">Editing checklists</a><a class="headerlink" href="#editing-checklists" title="Permalink to this headline">¶</a></h3>
-<p>You can add steps and edit checklist items during an active incident. You can also edit checklist items in playbooks that are not being used in active incidents.</p>
-<p>To edit a checklist, choose <strong>Edit</strong>.</p>
+<div class="section" id="public-and-private-incidents">
+<h3><a class="toc-backref" href="#contents">Public and private incidents</a><a class="headerlink" href="#public-and-private-incidents" title="Permalink to this headline">¶</a></h3>
+<p>Incident channels can be public or private, based on the incident’s playbook.</p>
 <ul class="simple">
-<li>Select the text field to edit the item details.</li>
-<li>Hover over an input box and select the <strong>X</strong> to remove the checklist item.</li>
-<li>Drag the hamburger menu to rearrange the checklist items.</li>
+<li><strong>Public:</strong> Anyone in the team can view the incident details and join the incident channel. The incident details are visible to all team members during the active incident and after the incident has ended.</li>
 </ul>
-<p>Choose <strong>Done</strong> to save the changes.</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>Private:</strong> Only incident members who are members of the incident channel have access to the ongoing incident and incident details after the incident has ended. Private incidents can’t be made public once they’ve been started.</li>
+</ul>
+</div></blockquote>
+<p><strong>Creating a public playbook and incident</strong></p>
+<ol class="arabic simple">
+<li>Navigate to <strong>Main Menu &gt; Incidents &amp; Playbooks &gt; Playbooks</strong>.</li>
+<li>Select <strong>+ New Playbook</strong>.</li>
+<li>Replace <strong>Untitled Playbook</strong> with the name of the playbook.</li>
+<li>Under <strong>Settings</strong> select <strong>Public</strong>.</li>
+<li>Select <strong>Save</strong>.</li>
+<li>Return to the channel view using the <strong>&lt;</strong>.</li>
+<li>Select <strong>!</strong> in the channel header and then <strong>+ Start Incident</strong>.</li>
+</ol>
+<p><strong>Creating a private playbook and incident</strong></p>
+<ol class="arabic simple">
+<li>Navigate to <strong>Main Menu &gt; Incidents &amp; Playbooks &gt; Playbooks</strong>.</li>
+<li>Select <strong>+ New Playbook</strong>.</li>
+<li>Replace <strong>Untitled Playbook</strong> with the name of the playbook.</li>
+<li>Under <strong>Settings</strong> select <strong>Private</strong>.</li>
+<li>Select <strong>Save</strong>.</li>
+<li>Return to the channel view using the <strong>&lt;</strong>.</li>
+<li>Select <strong>!</strong> in the channel header and then <strong>+ Start Incident</strong>.</li>
+</ol>
 </div>
 <div class="section" id="ending-incidents">
 <h3><a class="toc-backref" href="#contents">Ending incidents</a><a class="headerlink" href="#ending-incidents" title="Permalink to this headline">¶</a></h3>
-<p>There are two ways to end an incident:</p>
+<p>To end an active incident:</p>
 <ul class="simple">
-<li>Using slash command <em>/incident end</em> from within the incident channel.</li>
-<li>Using the <strong>End Incident</strong> button in the RHS panel while in the incident channel.</li>
+<li>Use the slash command <em>/incident end</em> from within the incident channel.</li>
+<li>Use the <strong>End Incident</strong> button in the RHS panel while in the incident channel.</li>
 </ul>
-<p>The incident will become inactive, be removed from the list of active incidents, and the associated channel will be archived.</p>
 </div>
 </div>
 <div class="section" id="administrator-s-guide">
 <h2><a class="toc-backref" href="#contents">Administrator’s Guide</a><a class="headerlink" href="#administrator-s-guide" title="Permalink to this headline">¶</a></h2>
+<p>Incidents and playbooks are associated with teams in Mattermost. Incident channels are created based on playbooks, and are public or private depending on the playbook’s settings. Read more about <a class="reference external" href="https://docs.mattermost.com/help/getting-started/organizing-conversations.html">public and private channels</a>.</p>
 <div class="section" id="permissions">
 <h3><a class="toc-backref" href="#contents">Permissions</a><a class="headerlink" href="#permissions" title="Permalink to this headline">¶</a></h3>
-<p>Incidents and playbooks are associated with teams in Mattermost. Participants can be added by inviting them to the incident’s channel.</p>
-<p>To view incidents associated with your Mattermost team, select <strong>!</strong> in the channel header to open the RHS menu. If there are no active incidents, you can start one or you can view details of incidents that have ended.</p>
+<p>Membership of playbooks and incidents is independent. System Admins can edit the visibility of, and access to, playbooks and incidents so that:</p>
+<ul class="simple">
+<li>Users who are removed from an incident channel by a System Admin can no longer access the incident’s playbook.</li>
+<li>Incident members can’t have access to playbooks removed by other members of the team.</li>
+<li>Team members can’t be removed from an incident by other members of the team.</li>
+<li>Incident members can invite other team members to manage private playbooks.</li>
+</ul>
+</div>
+<div class="section" id="managing-incident-channel-visibility">
+<h3><a class="toc-backref" href="#contents">Managing incident channel visibility</a><a class="headerlink" href="#managing-incident-channel-visibility" title="Permalink to this headline">¶</a></h3>
+<p>System Admins can manage the visibility of public incident channels by converting them into private incident channels. These steps are only applicable if the incident’s playbook is <strong>Public</strong>.</p>
+<p><strong>Creating a private incident channel</strong></p>
+<ol class="arabic simple">
+<li>Create an incident via <strong>! &gt; + Start Incident</strong>, select or create a playbook, and choose <strong>Start Incident</strong>.</li>
+<li>From the channel header, click the dropdown and select <strong>Convert to Private Channel</strong>.</li>
+<li>In the confirmation box, select “Yes.”</li>
+<li>Open the incident backstage, select the incident, and confirm that it is listed as <strong>Private</strong>.</li>
+</ol>
+<p><strong>Converting a public incident channel into a private incident channel as a participant</strong></p>
+<ol class="arabic simple">
+<li>Join an active incident channel.</li>
+<li>From the channel header, click the dropdown and select <strong>Convert to Private Channel</strong>.</li>
+<li>In the confirmation box, select “Yes.”</li>
+<li>Open the incident backstage, select the incident, and confirm that it is listed as <strong>Private</strong>.</li>
+</ol>
+</div>
+<div class="section" id="managing-playbooks">
+<h3><a class="toc-backref" href="#contents">Managing playbooks</a><a class="headerlink" href="#managing-playbooks" title="Permalink to this headline">¶</a></h3>
+<p>Any member of a playbook as well as all System Admins can modify playbook editing permissions and visibility.</p>
+<p><strong>Adding a playbook editor</strong></p>
+<ol class="arabic simple">
+<li>Navigate to <strong>Main Menu &gt; Incidents &amp; Playbooks &gt; Playbooks</strong>.</li>
+<li>Search for the playbook you want to edit.</li>
+<li>Select <strong>Edit</strong>.</li>
+<li>Invite a team member to edit the playbook.</li>
+<li>Select <strong>Save Playbook</strong>.</li>
+</ol>
+<p><strong>Removing a playbook member</strong></p>
+<ol class="arabic simple">
+<li>Navigate to <strong>Main Menu &gt; Incidents &amp; Playbooks &gt; Playbooks</strong>.</li>
+<li>Search for the playbook you want to edit.</li>
+<li>Select <strong>Edit</strong>.</li>
+<li>Search for the user in the list provided.</li>
+<li>Remove the user from the playbook.</li>
+<li>Select <strong>Save Playbook</strong>.</li>
+</ol>
 </div>
 <div class="section" id="incidents-backstage">
-<h3><a class="toc-backref" href="#contents">Incidents Backstage</a><a class="headerlink" href="#incidents-backstage" title="Permalink to this headline">¶</a></h3>
-<p>To open the Incidents backstage, which lists all incidents associated with the current team, select <strong>Incidents &amp; Playbooks</strong> from the Main Menu. All incidents for the current team are listed for review with the following details for each incident:</p>
+<h3><a class="toc-backref" href="#contents">Incidents backstage</a><a class="headerlink" href="#incidents-backstage" title="Permalink to this headline">¶</a></h3>
+<p>To open the incidents backstage, which lists all incidents associated with the current team, select <strong>Main Menu &gt; Incidents &amp; Playbooks</strong>. All incidents for the current team are listed for review with the following details for each incident:</p>
 <ul class="simple">
 <li>Name</li>
 <li>Status (<strong>Ongoing</strong> or <strong>Ended</strong>)</li>
@@ -364,8 +434,8 @@
 </div>
 <div class="section" id="viewing-incident-details">
 <h3><a class="toc-backref" href="#contents">Viewing incident details</a><a class="headerlink" href="#viewing-incident-details" title="Permalink to this headline">¶</a></h3>
-<p>To view details of active incidents, select <strong>! Incidents</strong> from the plugin menu, or <strong>!</strong> in the channel header to open the RHS panel.</p>
-<p>Listed incidents include the following information:</p>
+<p>To view details of ongoing and ended incidents associated with your Mattermost team, open <strong>Main Menu &gt; Incidents &amp; Playbooks</strong>. Select an incident’s name to view its details.</p>
+<p>Incident details include the following information:</p>
 <ul class="simple">
 <li>The current commander’s profile picture and username.</li>
 <li>Zero or more checklist items.</li>
@@ -379,7 +449,7 @@
 <li>A link icon to open the corresponding incident channel</li>
 <li>Status (<strong>Ongoing</strong> or <strong>Ended</strong>)</li>
 <li>The commander, including profile picture and username</li>
-<li>A prompt to <a class="reference external" href="#exporting-channels">Export the Incident Channel</a></li>
+<li>A prompt to <a class="reference external" href="#exporting-channels">Export the Incident Channel</a>.</li>
 <li>The <strong>Duration</strong> widget displays the duration of the incident. While the incident is ongoing, the end time is displayed as <strong>Ongoing</strong>. When the incident has ended, it shows the end time (in the user’s timezone).</li>
 <li>The <strong>Members Involved</strong> widget indicates the total number of users that participated in the channel, either by posting a message, being assigned as commander, or interacting with a checklist. This number is not affected by users leaving the channel, or users joining the channel but not participating.</li>
 <li>The total number of messages displayed includes messages posted by both users and bots (including the incident response bot). It does not include system or ephemeral messages.</li>
@@ -568,13 +638,14 @@
 <div class="section" id="glossary">
 <h2><a class="toc-backref" href="#contents">Glossary</a><a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><strong>Incident</strong>: An event requiring the coordinated actions of one or more Mattermost users. An incident is either ongoing or closed.</li>
-<li><strong>Playbook</strong>: A set of steps to execute as part of resolving an incident. It consists of one or more checklists, with each checklist item representing a single step.</li>
-<li><strong>Commander</strong>: The Mattermost user currently responsible for transitioning an incident from ongoing to closed.</li>
-<li><strong>Incident channel</strong>: A Mattermost channel dedicated to real-time conversation about the incident.</li>
-<li><strong>Incident participant</strong>: A Mattermost user with access to the corresponding incident channel.</li>
-<li><strong>The RHS</strong>: The incident list and incident details displayed on the right hand side of the webapp. Clicking an incident from the list in the RHS surfaces details of the selected incident. It is not available on mobile.</li>
-<li><strong>The Backstage</strong>: The full-screen analytics and configuration screens accessible from the webapp. It is not available on mobile.</li>
+<li><strong>Incident:</strong> An event requiring the coordinated actions of one or more Mattermost users. An incident is either ongoing or closed.</li>
+<li><strong>Playbook:</strong> A set of steps to execute as part of resolving an incident. It consists of one or more checklists, with each checklist item representing a single step.</li>
+<li><strong>Commander:</strong> The Mattermost user currently responsible for transitioning an incident from ongoing to closed.</li>
+<li><strong>Incident channel:</strong> A Mattermost channel dedicated to real-time conversation about the incident.</li>
+<li><strong>Incident participant:</strong> A Mattermost user with access to the corresponding incident channel.</li>
+<li><strong>The RHS:</strong> The incident list and incident details displayed on the right hand side of the webapp. Clicking an incident from the list in the RHS surfaces details of the selected incident. It is not available on mobile.</li>
+<li><strong>Incident backstage:</strong> The full-screen analytics and configuration screens accessible from the webapp. It is not available on mobile.</li>
+<li><strong>Active incident:</strong> An incident that has not been ended.</li>
 </ul>
 </div>
 </div>
