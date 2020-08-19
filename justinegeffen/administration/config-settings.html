@@ -6711,7 +6711,10 @@
 <p>Set whether or not this Mattermost server will schedule tasks that will be completed by a Worker.</p>
 <p>When running Mattermost on a single machine, this setting should always be enabled.</p>
 <p>When running Mattermost in High Availablity mode, this setting should always be enabled. In a High Availability cluster, exactly one of the servers will be designated as the Scheduler at a time to ensure that duplicate tasks aren’t created. See <a class="reference external" href="https://docs.mattermost.com/deployment/cluster.html#job-server">High Availability documentation</a> for more details.</p>
-<p>It is strongly recommended not to change this setting from the default setting of <code class="docutils literal notranslate"><span class="pre">true</span></code> as this prevents the <code class="docutils literal notranslate"><span class="pre">ClusterLeader</span></code> from being able to run the scheduler. As a result, recurring jobs such as LDAP sync, Compliance Export, and data retention will no longer be scheduled.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">It is strongly recommended not to change this setting from the default setting of <code class="docutils literal notranslate"><span class="pre">true</span></code> as this prevents the <code class="docutils literal notranslate"><span class="pre">ClusterLeader</span></code> from being able to run the scheduler. As a result, recurring jobs such as LDAP sync, Compliance Export, and data retention will no longer be scheduled.</p>
+</div>
 <p>In previous Mattermost Server versions, and this documentation, the instructions stated to run the Job Server with <code class="docutils literal notranslate"><span class="pre">RunScheduler:</span> <span class="pre">false</span></code>. The cluster design has evolved and this is no longer the case.</p>
 <table border="1" class="docutils">
 <colgroup>
