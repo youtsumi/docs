@@ -173,6 +173,8 @@
 <li class="toctree-l4"><a class="reference internal" href="#installing-mmctl">Installing mmctl</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#building-mmctl">Building mmctl</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#local-mode">Local mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#activate-local-mode">Activate local mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-local-mode">Using local mode</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#running-the-tests">Running the tests</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#authenticating-and-logging-in">Authenticating and logging in</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mmctl-bot">mmctl bot</a></li>
@@ -342,7 +344,15 @@
 <h2>Local mode<a class="headerlink" href="#local-mode" title="Permalink to this headline">¶</a></h2>
 <p>Local mode allows platform administrators with access to the Mattermost server to run mmctl commands against the API without needing to have a user registered. To ensure secure usage of this API, the server exposes a local socket that only a user with access to the server’s file system can access. The requests coming from the socket are treated as authorized, so they can reach the handlers without requiring a user session.</p>
 <p>The API that the socket exposes follows the same specification that can be found <a class="reference external" href="https://api.mattermost.com">in the API documentation</a>, so mmctl is able to interact with it without needing any modifications. When a request comes in through the socket, it is flagged as local by the server, and this flag is taken into account when checking for session permissions to correctly authorize the sessions.</p>
+</div>
+<div class="section" id="activate-local-mode">
+<h2>Activate local mode<a class="headerlink" href="#activate-local-mode" title="Permalink to this headline">¶</a></h2>
 <p>To use local mode, the Mattermost server first needs to <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-local-mode">have local mode enabled</a>. When local mode is enabled, a socket is created at <code class="docutils literal notranslate"><span class="pre">/var/tmp/mattermost_local.socket</span></code> by default.</p>
+</div>
+<div class="section" id="using-local-mode">
+<h2>Using local mode<a class="headerlink" href="#using-local-mode" title="Permalink to this headline">¶</a></h2>
+<p>You need to append <code class="docutils literal notranslate"><span class="pre">--local</span></code> to the command you want to use or set the environment variable as <code class="docutils literal notranslate"><span class="pre">MMCTL_LOCAL=true</span></code>.</p>
+<p>In versions prior to 5.26, only the commands <code class="docutils literal notranslate"><span class="pre">config</span></code>, <code class="docutils literal notranslate"><span class="pre">plugin</span></code>, and <code class="docutils literal notranslate"><span class="pre">license</span></code> are available.</p>
 </div>
 <div class="section" id="running-the-tests">
 <h2>Running the tests<a class="headerlink" href="#running-the-tests" title="Permalink to this headline">¶</a></h2>
