@@ -259,7 +259,7 @@
 </div>
 <p>Mattermost configuration settings are maintained in the configuration file <code class="docutils literal notranslate"><span class="pre">config.json</span></code>, located in the <code class="docutils literal notranslate"><span class="pre">mattermost/config</span></code> directory. You can modify the configuration file using the System Console, or by using a text editor to modify it directly.</p>
 <p>The default location of <code class="docutils literal notranslate"><span class="pre">config.json</span></code> is in the <code class="docutils literal notranslate"><span class="pre">mattermost/config</span></code> directory. Mattermost must have write permissions to <code class="docutils literal notranslate"><span class="pre">config.json</span></code>, otherwise changes made in the System Console will have no effect.</p>
-<p>On new installations starting in version 5.14, the default.json file used to create the initial <code class="docutils literal notranslate"><span class="pre">config.json</span></code> has been removed from the binary and replaced with a build step that generates a fresh <code class="docutils literal notranslate"><span class="pre">config.json</span></code>.  This is to ensure the initial configuration file has all the correct defaults provided in the server code. Existing <code class="docutils literal notranslate"><span class="pre">config.json</span></code> files are not affected by this change.</p>
+<p>On new installations starting from version 5.14, the <code class="docutils literal notranslate"><span class="pre">default.json</span></code> file used to create the initial <code class="docutils literal notranslate"><span class="pre">config.json</span></code> has been removed from the binary and replaced with a build step that generates a fresh <code class="docutils literal notranslate"><span class="pre">config.json</span></code>.  This is to ensure the initial configuration file has all the correct defaults provided in the server code. Existing <code class="docutils literal notranslate"><span class="pre">config.json</span></code> files are not affected by this change.</p>
 <p><strong>Configuration in Database</strong></p>
 <p>Storing configuration in the database is supported in v5.10 and later.  Please see more information on how to set this up <a class="reference external" href="https://docs.mattermost.com/administration/config-in-database.html">here</a>.</p>
 <p><strong>Environment Variables</strong></p>
@@ -6812,7 +6812,7 @@
 </div>
 <div class="section" id="jobs">
 <h3><a class="toc-backref" href="#id141">Jobs</a><a class="headerlink" href="#jobs" title="Permalink to this headline">¶</a></h3>
-<p>Settings to configure the how Mattermost schedules and completes periodic tasks such as the deletion of old posts with Data Retention enabled or indexing of posts with Elasticsearch. These settings control which Mattermost servers are designated as a Scheduler, a server that queues the tasks at the correct times, and as a Worker, a server that completes the given tasks.</p>
+<p>Settings to configure how Mattermost schedules and completes periodic tasks such as the deletion of old posts with Data Retention enabled or indexing posts with Elasticsearch. These settings control which Mattermost servers are designated as a Scheduler, a server that queues the tasks at the correct times, and as a Worker, a server that completes the given tasks.</p>
 <p>When running Mattermost on a single machine, both <code class="docutils literal notranslate"><span class="pre">RunJobs</span></code> and <code class="docutils literal notranslate"><span class="pre">RunScheduler</span></code> should be enabled. Without both of these enabled, Mattermost will not function properly.</p>
 <p>When running Mattermost in High Availability mode, <code class="docutils literal notranslate"><span class="pre">RunJobs</span></code> should be enabled on one or more servers while <code class="docutils literal notranslate"><span class="pre">RunScheduler</span></code> should be enabled on all servers under normal circumstances. A High Availability cluster will have one Scheduler and one or more Workers. See the below sections for more information.</p>
 <div class="section" id="run-jobs">
@@ -6835,6 +6835,11 @@
 <p>Set whether or not this Mattermost server will schedule tasks that will be completed by a Worker.</p>
 <p>When running Mattermost on a single machine, this setting should always be enabled.</p>
 <p>When running Mattermost in High Availablity mode, this setting should always be enabled. In a High Availability cluster, exactly one of the servers will be designated as the Scheduler at a time to ensure that duplicate tasks aren’t created. See <a class="reference external" href="https://docs.mattermost.com/deployment/cluster.html#job-server">High Availability documentation</a> for more details.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">It is strongly recommended not to change this setting from the default setting of <code class="docutils literal notranslate"><span class="pre">true</span></code> as this prevents the <code class="docutils literal notranslate"><span class="pre">ClusterLeader</span></code> from being able to run the scheduler. As a result, recurring jobs such as LDAP sync, Compliance Export, and data retention will no longer be scheduled.</p>
+</div>
+<p>In previous Mattermost Server versions, and this documentation, the instructions stated to run the Job Server with <code class="docutils literal notranslate"><span class="pre">RunScheduler:</span> <span class="pre">false</span></code>. The cluster design has evolved and this is no longer the case.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="100%" />
