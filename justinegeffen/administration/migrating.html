@@ -271,16 +271,13 @@
 <li><a class="reference internal" href="#migrating-from-slack-using-the-mattermost-mmetl-tool-and-bulk-import" id="id8">Migrating from Slack Using the Mattermost mmetl Tool and Bulk Import</a></li>
 <li><a class="reference internal" href="#migrating-from-slack-using-the-mattermost-web-app" id="id9">Migrating from Slack using the Mattermost Web App</a></li>
 <li><a class="reference internal" href="#migrating-from-slack-using-the-mattermost-cli" id="id10">Migrating from Slack Using the Mattermost CLI</a></li>
-<li><a class="reference internal" href="#migrating-from-slack-using-the-slack-import-feature" id="id11">Migrating from Slack Using the Slack Import Feature</a></li>
-<li><a class="reference internal" href="#supported-features" id="id12">Supported Features</a></li>
-<li><a class="reference internal" href="#limitations" id="id13">Limitations</a></li>
-<li><a class="reference internal" href="#using-the-imported-team" id="id14">Using the Imported Team</a></li>
+<li><a class="reference internal" href="#using-the-imported-team" id="id11">Using the Imported Team</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#migrating-from-bitnami" id="id15">Migrating from Bitnami</a></li>
-<li><a class="reference internal" href="#migrating-from-hipchat-server-and-hipchat-data-center-to-mattermost" id="id16">Migrating from HipChat Server and HipChat Data Center to Mattermost</a></li>
-<li><a class="reference internal" href="#migrating-from-jabber-to-mattermost" id="id17">Migrating from Jabber to Mattermost</a></li>
-<li><a class="reference internal" href="#migrating-from-pidgin-to-mattermost" id="id18">Migrating from Pidgin to Mattermost</a></li>
+<li><a class="reference internal" href="#migrating-from-bitnami" id="id12">Migrating from Bitnami</a></li>
+<li><a class="reference internal" href="#migrating-from-hipchat-server-and-hipchat-data-center-to-mattermost" id="id13">Migrating from HipChat Server and HipChat Data Center to Mattermost</a></li>
+<li><a class="reference internal" href="#migrating-from-jabber-to-mattermost" id="id14">Migrating from Jabber to Mattermost</a></li>
+<li><a class="reference internal" href="#migrating-from-pidgin-to-mattermost" id="id15">Migrating from Pidgin to Mattermost</a></li>
 </ul>
 </li>
 </ul>
@@ -460,49 +457,6 @@
 <p class="first admonition-title">Note</p>
 <p class="last">To run the CLI command, you must be in the directory that contains the Mattermost installation. On a default installation of Mattermost, the directory is <code class="docutils literal notranslate"><span class="pre">/opt/mattermost/</span></code>. Also, if you followed our <a class="reference external" href="../guides/administrator.html#installing-mattermost">installation process</a>, you must run the command as the user <em>mattermost</em>. The executable is in the <code class="docutils literal notranslate"><span class="pre">bin</span></code> subdirectory and is called <code class="docutils literal notranslate"><span class="pre">mattermost</span></code>.</p>
 </div>
-</div>
-<div class="section" id="migrating-from-slack-using-the-slack-import-feature">
-<h4><a class="toc-backref" href="#contents">Migrating from Slack Using the Slack Import Feature</a><a class="headerlink" href="#migrating-from-slack-using-the-slack-import-feature" title="Permalink to this headline">¶</a></h4>
-<p>The Slack Import feature in Mattermost is in Beta and focused on supporting migration of teams of less than 100 registered users. This feature can be accessed through the <a class="reference external" href="https://docs.mattermost.com/administration/migrating.html#migrating-from-slack-using-the-mattermost-web-app">Mattermost Web App</a> or using the <a class="reference external" href="https://docs.mattermost.com/administration/migrating.html#migrating-from-slack-using-the-mattermost-cli">CLI</a>.</p>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p><strong>It is highly recommended that you test Slack import before applying it to an instance intended for production.</strong></p>
-<p>If you use Docker, you can spin up a test instance in one line:</p>
-<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">--</span><span class="n">name</span> <span class="n">mattermost</span><span class="o">-</span><span class="n">preview</span> <span class="o">-</span><span class="n">d</span> <span class="o">--</span><span class="n">publish</span> <span class="mi">8065</span><span class="p">:</span><span class="mi">8065</span> <span class="o">--</span><span class="n">add</span><span class="o">-</span><span class="n">host</span> <span class="n">dockerhost</span><span class="p">:</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span> <span class="n">mattermost</span><span class="o">/</span><span class="n">mattermost</span><span class="o">-</span><span class="n">preview</span>
-</pre></div>
-</div>
-<p class="last">If you don’t use Docker, there are <a class="reference external" href="https://docs.mattermost.com/install/docker-local-machine.html">step-by-step instructions</a> to install Mattermost in preview mode in less than 5 minutes.</p>
-</div>
-</div>
-<div class="section" id="supported-features">
-<h4><a class="toc-backref" href="#contents">Supported Features</a><a class="headerlink" href="#supported-features" title="Permalink to this headline">¶</a></h4>
-<p>The following key features can be imported from Slack:</p>
-<ul class="simple">
-<li>User accounts</li>
-<li>Public and private channels and the text messages posted in them, with formatting</li>
-<li>Channel topic and purpose</li>
-<li>Imported users added automatically to their channels</li>
-<li>Messages and message threads</li>
-<li>Direct and group messages</li>
-</ul>
-<p>Messages with file attachments are imported as a message containing a link to Slack’s servers by default. The file attachments themselves can be imported to Mattermost by using the <a class="reference external" href="https://github.com/grundleborg/slack-advanced-exporter">Slack Advanced Exporter</a> tool to add them to your archive before importing it.</p>
-<p>Bot and Integration messages are imported by default, but if you would like them to display with the appropriate username when imported, you should ensure that <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-integrations-to-override-usernames">Enable Integrations to Override Usernames</a> is set in <strong>System Console &gt; Integrations &gt; Integration Management</strong> (or <strong>System Console &gt; Integrations &gt; Custom Integrations</strong> in versions prior to 5.12) <em>before</em> doing the import.</p>
-<p>When topic-change messages, purpose-change messages, and channel name-change messages are imported from Slack, they appear in Mattermost as posts from the System user.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Slack user accounts with the same email address as existing accounts on your Mattermost server will be merged into those accounts on import.</p>
-</div>
-</div>
-<div class="section" id="limitations">
-<h4><a class="toc-backref" href="#contents">Limitations</a><a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h4>
-<p>The following limitations are present when importing from Slack:</p>
-<ul class="simple">
-<li>The import is not idempotent, which means that duplicate posts are created if you import the same data more than once.</li>
-<li>Slack does not include direct or group messages and private channel messages when generating the export archive from their export tool. You will need to request a Corporate Export from them to access this data.</li>
-<li>If the handle of an imported Slack channel is the same handle as a deleted Mattermost channel, then a random handle is generated for the imported Slack channel.</li>
-<li>Pinned posts are not currently supported.</li>
-<li>Deleted users in Slack are currently not supported. They should be re-added to the file prior to import.  Mattermost will be providing a fix for this in the near future.</li>
-</ul>
 </div>
 <div class="section" id="using-the-imported-team">
 <h4><a class="toc-backref" href="#contents">Using the Imported Team</a><a class="headerlink" href="#using-the-imported-team" title="Permalink to this headline">¶</a></h4>
