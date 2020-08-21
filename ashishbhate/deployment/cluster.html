@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>High Availability Cluster (E20) &mdash; Mattermost 5.25 documentation</title>
+  <title>High Availability Cluster (E20) &mdash; Mattermost 5.26 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.25
+                5.26
               </div>
             
           
@@ -246,9 +246,9 @@
             
   <div class="section" id="high-availability-cluster-e20">
 <h1>High Availability Cluster (E20)<a class="headerlink" href="#high-availability-cluster-e20" title="Permalink to this headline">¶</a></h1>
-<p><em>Available in Enterprise Edition E20.</em></p>
-<p>A high availability cluster enables a Mattermost system to maintain service during outages and hardware failures through the use of redundant infrastructure.</p>
-<p>High availability in Mattermost consists of running redundant Mattermost application servers, redundant database servers, and redundant load balancers. The failure of any one of these components does not interrupt operation of the system.</p>
+<p><em>Available in Enterprise Edition E20</em></p>
+<p>A High Availability cluster enables a Mattermost system to maintain service during outages and hardware failures through the use of redundant infrastructure.</p>
+<p>High Availability in Mattermost consists of running redundant Mattermost application servers, redundant database servers, and redundant load balancers. The failure of any one of these components does not interrupt operation of the system.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This document applies to Mattermost Server version 4.0 and later. For previous versions, see <a class="reference internal" href="cluster-310.html"><span class="doc">High Availability Cluster (v3.10 and earlier)</span></a>.</p>
@@ -293,7 +293,7 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#frequently-asked-questions-faq" id="id29">Frequently Asked Questions (FAQ)</a><ul>
-<li><a class="reference internal" href="#does-mattermost-support-multi-region-high-availability-deployment" id="id30">Does Mattermost support multi-region high availability deployment?</a></li>
+<li><a class="reference internal" href="#does-mattermost-support-multi-region-high-availability-deployment" id="id30">Does Mattermost support multi-region High Availability deployment?</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#troubleshooting" id="id31">Troubleshooting</a><ul>
@@ -313,56 +313,56 @@
 <dd>Upon failure of one component, the remaining application servers, database servers, and load balancers must be sized and configured to carry the full load of the system. If this requirement is not met, an outage of one component can result in an overload of the remaining components, causing a complete system outage.</dd>
 <dt>Update sequence for continuous operation</dt>
 <dd><p class="first">You can apply most configuration changes and dot release security updates without interrupting service, provided that you update the system components in the correct sequence. See the <a class="reference internal" href="#upgrade-guide">Upgrade Guide</a> for instructions on how to do this.</p>
-<p class="last"><strong>Exception:</strong> Changes to configuration settings that require a server restart, and server version upgrades that involve a change to the database schema require a short period of downtime. Downtime for a server restart is around 5 seconds, and for a database schema update, downtime can be up to 30 seconds.</p>
+<p class="last"><strong>Exception:</strong> Changes to configuration settings that require a server restart, and server version upgrades that involve a change to the database schema require a short period of downtime. Downtime for a server restart is around 5 seconds. For a database schema update, downtime can be up to 30 seconds.</p>
 </dd>
 </dl>
 </div>
 <div class="section" id="deployment-guide">
 <h2><a class="toc-backref" href="#contents">Deployment Guide</a><a class="headerlink" href="#deployment-guide" title="Permalink to this headline">¶</a></h2>
-<p>Deployment guide to set up and maintain high availability on your Mattermost servers.</p>
+<p>Deployment guide to set up and maintain High Availability on your Mattermost servers.</p>
 <div class="section" id="initial-setup-guide-for-high-availability">
 <h3><a class="toc-backref" href="#contents">Initial Setup Guide for High Availability</a><a class="headerlink" href="#initial-setup-guide-for-high-availability" title="Permalink to this headline">¶</a></h3>
-<p>To ensure your instance and configuration are compatible with high availability, please review the <a class="reference internal" href="#configuration-and-compatibility">Configuration and Compatibility</a>  section.</p>
+<p>To ensure your instance and configuration are compatible with High Availability, please review the <a class="reference internal" href="#configuration-and-compatibility">Configuration and Compatibility</a> section.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Backup your Mattermost database and file storage locations before configuring high availability. For more information about backing up, see <a class="reference internal" href="../administration/backup.html"><span class="doc">Backup and Disaster Recovery</span></a>.</p>
+<p class="last">Back up your Mattermost database and file storage locations before configuring High Availability. For more information about backing up, see <a class="reference internal" href="../administration/backup.html"><span class="doc">Backup and Disaster Recovery</span></a>.</p>
 </div>
 <ol class="arabic simple">
 <li>Upgrade Mattermost Server to version 4.0 or later. See <a class="reference internal" href="../administration/upgrade.html"><span class="doc">Upgrading Mattermost Server</span></a>.</li>
 <li>Set up a new Mattermost server with version 4.0 or later by following one of our <strong>Install Guides</strong>. This server must use an identical copy of the configuration file, <code class="docutils literal notranslate"><span class="pre">config.json</span></code>. Verify the servers are functioning by hitting each independent server through its private IP address.</li>
-<li>Modify the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> files on both servers to add <em>ClusterSettings</em> as described in <a class="reference internal" href="../administration/prev-config-settings.html#high-availability"><span class="std std-ref">High Availability</span></a>.</li>
+<li>Modify the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> files on both servers to add <code class="docutils literal notranslate"><span class="pre">ClusterSettings`</span></code> as described in <a class="reference internal" href="../administration/prev-config-settings.html#high-availability"><span class="std std-ref">High Availability</span></a>.</li>
 <li>Verify the configuration files are identical on both servers then restart each machine in the cluster.</li>
 <li>Modify your NGINX setup so that it proxies to both servers. For more information about this, see <a class="reference internal" href="#proxy-server-configuration">Proxy Server Configuration</a>.</li>
-<li>Open <strong>System Console &gt; Advanced &gt; High Availability</strong> in prior versions or <strong>System Console &gt; Environment &gt; High Availability</strong> in versions after 5.12 to verify that each machine in the cluster is communicating as expected with green status indicators. If not, investigate the log files for any extra information.</li>
+<li>Open <strong>System Console &gt; Environment &gt; High Availability</strong> (or <strong>System Console &gt; Advanced &gt; High Availability</strong> in versions prior to 5.12) to verify that each machine in the cluster is communicating as expected with green status indicators. If not, investigate the log files for any extra information.</li>
 </ol>
 </div>
 <div class="section" id="adding-a-server-to-the-cluster">
 <h3><a class="toc-backref" href="#contents">Adding a Server to the Cluster</a><a class="headerlink" href="#adding-a-server-to-the-cluster" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
-<li>Backup your Mattermost database and the file storage location. For more information about backing up, see <a class="reference internal" href="../administration/backup.html"><span class="doc">Backup and Disaster Recovery</span></a>.</li>
+<li>Back up your Mattermost database and the file storage location. For more information about backing up, see <a class="reference internal" href="../administration/backup.html"><span class="doc">Backup and Disaster Recovery</span></a>.</li>
 <li>Set up a new Mattermost server. This server must use an identical copy of the configuration file, <code class="docutils literal notranslate"><span class="pre">config.json</span></code>. Verify the server is functioning by hitting the private IP address.</li>
 <li>Modify your NGINX setup to add the new server. For information about this, see <a class="reference internal" href="#proxy-server-configuration">Proxy Server Configuration</a>.</li>
-<li>Open <strong>System Console &gt; Advanced &gt; High Availability</strong> in prior versions or <strong>System Console &gt; Environment &gt; High Availability</strong> in versions after 5.12 to verify that all the machines in the cluster are communicating as expected with green status indicators. If not, investigate the log files for any extra information.</li>
+<li>Open <strong>System Console &gt; Environment &gt; High Availability</strong> (or <strong>System Console &gt; Advanced &gt; High Availability</strong> in versions prior to 5.12) to verify that all the machines in the cluster are communicating as expected with green status indicators. If not, investigate the log files for any extra information.</li>
 </ol>
 </div>
 <div class="section" id="removing-a-server-from-the-cluster">
 <h3><a class="toc-backref" href="#contents">Removing a Server from the Cluster</a><a class="headerlink" href="#removing-a-server-from-the-cluster" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
-<li>Backup your Mattermost database and the file storage location. For more information about backing up, see <a class="reference internal" href="../administration/backup.html"><span class="doc">Backup and Disaster Recovery</span></a>.</li>
+<li>Back up your Mattermost database and the file storage location. For more information about backing up, see <a class="reference internal" href="../administration/backup.html"><span class="doc">Backup and Disaster Recovery</span></a>.</li>
 <li>Modify your NGINX setup to remove the server. For information about this, see <a class="reference internal" href="#proxy-server-configuration">Proxy Server Configuration</a>.</li>
-<li>Open <strong>System Console &gt; Advanced &gt; High Availability</strong> in prior versions or <strong>System Console &gt; Environment &gt; High Availability</strong> in versions after 5.12 to verify that all the machines remaining in the cluster are communicating as expected with green status indicators. If not, investigate the log files for any extra information.</li>
+<li>Open <strong>System Console &gt; Environment &gt; High Availability</strong> (or <strong>System Console &gt; Advanced &gt; High Availability</strong> in versions prior to 5.12) to verify that all the machines remaining in the cluster are communicating as expected with green status indicators. If not, investigate the log files for any extra information.</li>
 </ol>
 </div>
 </div>
 <div class="section" id="configuration-and-compatibility">
 <h2><a class="toc-backref" href="#contents">Configuration and Compatibility</a><a class="headerlink" href="#configuration-and-compatibility" title="Permalink to this headline">¶</a></h2>
-<p>Details on configuring your system for high availability.</p>
+<p>Details on configuring your system for High Availability.</p>
 <div class="section" id="mattermost-server-configuration">
 <h3><a class="toc-backref" href="#contents">Mattermost Server Configuration</a><a class="headerlink" href="#mattermost-server-configuration" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="configuration-settings">
 <h4><a class="toc-backref" href="#contents">Configuration Settings</a><a class="headerlink" href="#configuration-settings" title="Permalink to this headline">¶</a></h4>
 <ol class="arabic simple">
-<li>High availability is configured in the <code class="docutils literal notranslate"><span class="pre">ClusterSettings</span></code> section of <code class="docutils literal notranslate"><span class="pre">config.json</span></code> and the settings are viewable in the System Console. When high availability is enabled, the System Console is set to read-only mode to ensure all the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> files on the Mattermost servers are always identical. However, for testing and validating a High Availability setup, you can set <em>ReadOnlyConfig</em> to <code class="docutils literal notranslate"><span class="pre">false</span></code>, which allows changes made in the System Console to be saved back to the configuration file.</li>
+<li>High Availability is configured in the <code class="docutils literal notranslate"><span class="pre">ClusterSettings</span></code> section of <code class="docutils literal notranslate"><span class="pre">config.json</span></code> and the settings are viewable in the System Console. When High Availability is enabled, the System Console is set to read-only mode to ensure all the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> files on the Mattermost servers are always identical. However, for testing and validating a High Availability setup, you can set <code class="docutils literal notranslate"><span class="pre">ReadOnlyConfig</span></code> to <code class="docutils literal notranslate"><span class="pre">false</span></code>, which allows changes made in the System Console to be saved back to the configuration file.</li>
 </ol>
 <blockquote>
 <div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;ClusterSettings&quot;: {
@@ -392,7 +392,7 @@
 </div>
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li>Increase the number of websocket connections</li>
+<li>Increase the number of WebSocket connections</li>
 </ol>
 <blockquote>
 <div><p>Modify <code class="docutils literal notranslate"><span class="pre">/etc/sysctl.conf</span></code> on each machine that hosts a Mattermost server by adding the following lines:</p>
@@ -414,9 +414,9 @@ net.ipv4.tcp_max_syn_backlog = 8192
 <p>In short, you should use:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li>IpAddress discovery if the first non-local address can be seen from the other machines.</li>
+<li>IP address discovery if the first non-local address can be seen from the other machines.</li>
 <li>Override Hostname on the operating system so that it’s a proper discoverable name for the other nodes in the cluster.</li>
-<li>Override Hostname in <code class="docutils literal notranslate"><span class="pre">config.json</span></code> if the above steps do not work. You can put an IpAddress in this field if needed. The <code class="docutils literal notranslate"><span class="pre">config.json</span></code> will be different for each cluster node.</li>
+<li>Override Hostname in <code class="docutils literal notranslate"><span class="pre">config.json</span></code> if the above steps do not work. You can put an IP address in this field if needed. The <code class="docutils literal notranslate"><span class="pre">config.json</span></code> will be different for each cluster node.</li>
 </ol>
 </div></blockquote>
 </div>
@@ -428,12 +428,12 @@ net.ipv4.tcp_max_syn_backlog = 8192
 <h4><a class="toc-backref" href="#contents">State</a><a class="headerlink" href="#state" title="Permalink to this headline">¶</a></h4>
 <p>The Mattermost Server is designed to have very little state to allow for horizontal scaling. The items in state considered for scaling Mattermost are listed below:</p>
 <ul class="simple">
-<li>In memory session cache for quick validation and channel access</li>
-<li>In memory online/offline cache for quick response</li>
-<li>System configuration file that is loaded and stored in memory</li>
-<li>WebSocket connections from clients used to send messages</li>
+<li>In memory session cache for quick validation and channel access.</li>
+<li>In memory online/offline cache for quick response.</li>
+<li>System configuration file that is loaded and stored in memory.</li>
+<li>WebSocket connections from clients used to send messages.</li>
 </ul>
-<p>When the Mattermost Server is configured for high availability, the servers  use an inter-node communication protocol on a different listening address to keep the state in sync. When a state changes it is written back to the database and an inter-node message is sent to notify the other servers of the state change. The true state of the items can always be read from the database. Mattermost also uses inter-node communication to forward WebSocket messages to the other servers in the cluster for real-time messages such as  “[User X] is typing.”</p>
+<p>When the Mattermost server is configured for High Availability, the servers  use an inter-node communication protocol on a different listening address to keep the state in sync. When a state changes it is written back to the database and an inter-node message is sent to notify the other servers of the state change. The true state of the items can always be read from the database. Mattermost also uses inter-node communication to forward WebSocket messages to the other servers in the cluster for real-time messages such as “[User X] is typing.”</p>
 </div>
 <div class="section" id="proxy-server-configuration">
 <h4><a class="toc-backref" href="#contents">Proxy Server Configuration</a><a class="headerlink" href="#proxy-server-configuration" title="Permalink to this headline">¶</a></h4>
@@ -486,7 +486,7 @@ net.ipv4.tcp_max_syn_backlog = 8192
 <ol class="last arabic simple">
 <li>File storage is assumed to be shared between all the machines that are using services such as NAS or Amazon S3.</li>
 <li>If <code class="docutils literal notranslate"><span class="pre">&quot;DriverName&quot;:</span> <span class="pre">&quot;local&quot;</span></code> is used then the directory at <code class="docutils literal notranslate"><span class="pre">&quot;FileSettings&quot;:</span></code> <code class="docutils literal notranslate"><span class="pre">&quot;Directory&quot;:</span> <span class="pre">&quot;./data/&quot;</span></code> is expected to be a NAS location mapped as a local directory, otherwise high availability will not function correctly and may corrupt your file storage.</li>
-<li>If you’re using Amazon S3 or Minio for file storage then no other configuration is required.</li>
+<li>If you’re using Amazon S3 or MinIO for file storage then no other configuration is required.</li>
 </ol>
 </div>
 <p>If you’re using the Compliance Reports feature in Enterprise Edition E20, you need to configure the <code class="docutils literal notranslate"><span class="pre">&quot;ComplianceSettings&quot;:</span></code> <code class="docutils literal notranslate"><span class="pre">&quot;Directory&quot;:</span> <span class="pre">&quot;./data/&quot;,</span></code> to share between all machines or the reports will only be available from the System Console on the local Mattermost server.</p>
@@ -494,7 +494,7 @@ net.ipv4.tcp_max_syn_backlog = 8192
 </div>
 <div class="section" id="database-configuration">
 <h4><a class="toc-backref" href="#contents">Database Configuration</a><a class="headerlink" href="#database-configuration" title="Permalink to this headline">¶</a></h4>
-<p>Use the read replica feature to scale the database. The Mattermost server can be set up to use one “master” database and multiple read replica databases. Mattermost distributes read requests across all databases, and sends write requests to the master database, and those changes are then sent to update the read replicas.</p>
+<p>Use the read replica feature to scale the database. The Mattermost server can be set up to use one master database and multiple read replica databases. Mattermost distributes read requests across all databases, and sends write requests to the master database, and those changes are then sent to update the read replicas.</p>
 <p>On large deployments, consider using the search replica feature to isolate search queries onto one or more database servers. A search replica is similar to a read replica, but is used only for handling search queries.</p>
 <p>If there are no search replicas, the server uses the read replicas instead. Similarly, if there are no read replicas, the server falls back to master.</p>
 <div class="section" id="sizing-databases">
@@ -509,7 +509,7 @@ net.ipv4.tcp_max_syn_backlog = 8192
 <li>Update the <code class="docutils literal notranslate"><span class="pre">DataSource</span></code> setting in <code class="docutils literal notranslate"><span class="pre">config.json</span></code> with a connection string to your master database server. The connection string is based on the database type set in <code class="docutils literal notranslate"><span class="pre">DriverName</span></code>, either <code class="docutils literal notranslate"><span class="pre">postgres</span></code> or <code class="docutils literal notranslate"><span class="pre">mysql</span></code>.</li>
 <li>Update the <code class="docutils literal notranslate"><span class="pre">DataSourceReplicas</span></code> setting in <code class="docutils literal notranslate"><span class="pre">config.json</span></code> with a series of connection strings to your database read replica servers in the format <code class="docutils literal notranslate"><span class="pre">[&quot;readreplica1&quot;,</span> <span class="pre">&quot;readreplica2&quot;]</span></code>. Each connection should also be compatible with the <code class="docutils literal notranslate"><span class="pre">DriverName</span></code> setting.</li>
 </ol>
-<p>Here’s an example SqlSettings block for one master and two read replicas:</p>
+<p>Here’s an example <code class="docutils literal notranslate"><span class="pre">SqlSettings</span></code> block for one master and two read replicas:</p>
 <blockquote>
 <div><dl class="docutils">
 <dt>“SqlSettings”: {</dt>
@@ -534,30 +534,30 @@ net.ipv4.tcp_max_syn_backlog = 8192
 <h5><a class="toc-backref" href="#contents">Loading a Multi-database Configuration onto an Active Server</a><a class="headerlink" href="#loading-a-multi-database-configuration-onto-an-active-server" title="Permalink to this headline">¶</a></h5>
 <p>After a multi-database configuration has been defined in <code class="docutils literal notranslate"><span class="pre">config.json</span></code>, the following procedure can be used to apply the settings without shutting down the Mattermost server:</p>
 <ol class="arabic simple">
-<li>Go to <strong>System Console &gt; Configuration</strong> in prior versions or <strong>System Console &gt; Environment &gt; Web Server</strong>  and click <strong>Reload Configuration from Disk</strong> in versions after 5.12 to reload configuration settings for the Mattermost server from <code class="docutils literal notranslate"><span class="pre">config.json</span></code>.</li>
-<li>Go to <strong>System Console &gt; Database</strong> in prior versions or <strong>System Console &gt; Environment &gt; Database</strong> and click <strong>Recycle Database Connections</strong> in versions after 5.12 to take down existing database connections and set up new connections in the multi-database configuration.</li>
+<li>Go to <strong>System Console &gt; Environment &gt; Web Server</strong> and click <strong>Reload Configuration from Disk</strong> (or <strong>System Console &gt; Configuration</strong> in versions prior to 5.12) to reload configuration settings for the Mattermost server from <code class="docutils literal notranslate"><span class="pre">config.json</span></code>.</li>
+<li>Go to <strong>System Console &gt; Environment &gt; Database</strong> and click <strong>Recycle Database Connections</strong> (or <strong>System Console &gt; Database</strong> in versions prior to 5.12) to take down existing database connections and set up new connections in the multi-database configuration.</li>
 </ol>
 <p>While the connection settings are changing, there might be a brief moment when writes to the master database are unsuccessful. The process waits for all existing connections to finish and starts serving new requests with the new connections. End users attempting to send messages while the switch is happening will have an experience similar to losing connection to the Mattermost server.</p>
 </div>
 <div class="section" id="manual-failover-for-master-database">
 <h5><a class="toc-backref" href="#contents">Manual Failover for Master Database</a><a class="headerlink" href="#manual-failover-for-master-database" title="Permalink to this headline">¶</a></h5>
-<p>If the need arises to switch from the current master database–for example, if it is running out of disk space, or requires maintenance updates, or for other reasons–you can switch Mattermost server to use one of its read replicas as a master database by updating <code class="docutils literal notranslate"><span class="pre">DataSource</span></code> in <code class="docutils literal notranslate"><span class="pre">config.json</span></code>.</p>
+<p>If the need arises to switch from the current master database - for example, if it is running out of disk space, or requires maintenance updates, or for other reasons - you can switch Mattermost server to use one of its read replicas as a master database by updating <code class="docutils literal notranslate"><span class="pre">DataSource</span></code> in <code class="docutils literal notranslate"><span class="pre">config.json</span></code>.</p>
 <p>To apply the settings without shutting down the Mattermost server:</p>
 <ol class="arabic simple">
-<li>Go to <strong>System Console &gt; Configuration</strong> in prior versions or <strong>System Console &gt; Environment &gt; Web Server</strong> and click <strong>Reload Configuration from Disk</strong> in versions after 5.12 to reload configuration settings for the Mattermost server from <code class="docutils literal notranslate"><span class="pre">config.json</span></code>.</li>
-<li>Go to <strong>System Console &gt; Database</strong> in prior versions or <strong>System Console &gt; Environment &gt; Database</strong> and click <strong>Recycle Database Connections</strong> in versions after 5.12 to take down existing database connections and set up new connections in the multi-database configuration.</li>
+<li>Go to <strong>System Console &gt; Environment &gt; Web Server</strong> (or <strong>System Console &gt; Configuration</strong> in versions prior to 5.12) and click <strong>Reload Configuration from Disk</strong> to reload configuration settings for the Mattermost server from <code class="docutils literal notranslate"><span class="pre">config.json</span></code>.</li>
+<li>Go to <strong>System Console &gt; Environment &gt; Database</strong> (or <strong>System Console &gt; Database</strong> in versions prior to 5.12)and click <strong>Recycle Database Connections</strong> to take down existing database connections and set up new connections in the multi-database configuration.</li>
 </ol>
 <p>While the connection settings are changing, there might be a brief moment when writes to the master database are unsuccessful. The process waits for all existing connections to finish and starts serving new requests with the new connections. End users attempting to send messages while the switch is happening can have an experience similar to losing connection to the Mattermost server.</p>
 </div>
 <div class="section" id="transparent-failover">
 <h5><a class="toc-backref" href="#contents">Transparent Failover</a><a class="headerlink" href="#transparent-failover" title="Permalink to this headline">¶</a></h5>
-<p>The database can be configured for high availability and transparent failover use the existing database technologies. We recommend MySQL Clustering, Postgres Clustering, or Amazon Aurora. Database transparent failover is beyond the scope of this documentation.</p>
+<p>The database can be configured for High Availability and transparent failover use the existing database technologies. We recommend MySQL Clustering, Postgres Clustering, or Amazon Aurora. Database transparent failover is beyond the scope of this documentation.</p>
 </div>
 </div>
 <div class="section" id="leader-election">
 <h4><a class="toc-backref" href="#contents">Leader Election</a><a class="headerlink" href="#leader-election" title="Permalink to this headline">¶</a></h4>
 <p>In Mattermost v4.2 and later, a cluster leader election process assigns any scheduled task such as LDAP sync to run on a single node in a multi-node cluster environment.</p>
-<p>The process is based on a widely used <a class="reference external" href="https://en.wikipedia.org/wiki/Bully_algorithm">bully leader election algorithm</a> where the process with the lowest node ID number from amongst the non-failed processes is selected as the “leader”.</p>
+<p>The process is based on a widely used <a class="reference external" href="https://en.wikipedia.org/wiki/Bully_algorithm">bully leader election algorithm</a> where the process with the lowest node ID number from amongst the non-failed processes is selected as the leader.</p>
 </div>
 <div class="section" id="job-server">
 <h4><a class="toc-backref" href="#contents">Job Server</a><a class="headerlink" href="#job-server" title="Permalink to this headline">¶</a></h4>
@@ -570,15 +570,19 @@ net.ipv4.tcp_max_syn_backlog = 8192
 <li>Elasticsearch indexing</li>
 </ul>
 </div></blockquote>
-<p>Make sure you have set <code class="docutils literal notranslate"><span class="pre">JobSettings.RunScheduler</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code> in config.json for all app and job servers in the cluster. The cluster leader will then be responsible for scheduling recurring jobs.</p>
+<p>Make sure you have set <code class="docutils literal notranslate"><span class="pre">JobSettings.RunScheduler</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code> in <code class="docutils literal notranslate"><span class="pre">config.json</span></code> for all app and job servers in the cluster. The cluster leader will then be responsible for scheduling recurring jobs.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It is strongly recommended not to change this setting from the default setting of <code class="docutils literal notranslate"><span class="pre">true</span></code> as this prevents the <code class="docutils literal notranslate"><span class="pre">ClusterLeader</span></code> from being able to run the scheduler. As a result, recurring jobs such as LDAP sync, Compliance Export, and data retention will no longer be scheduled.</p>
+</div>
+<p>In previous Mattermost Server versions, and this documentation, the instructions stated to run the Job Server with <code class="docutils literal notranslate"><span class="pre">RunScheduler:</span> <span class="pre">false</span></code>. The cluster design has evolved and this is no longer the case.</p>
 </div>
 <div class="section" id="plugins-and-high-availability">
 <h4><a class="toc-backref" href="#contents">Plugins and High Availability</a><a class="headerlink" href="#plugins-and-high-availability" title="Permalink to this headline">¶</a></h4>
 <p>As of Mattermost 5.14, when you install or upgrade a plugin, it is propagated across the servers in the cluster automatically.</p>
 <p>File storage is assumed to be shared between all the machines that are using services such as NAS or Amazon S3.</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">&quot;DriverName&quot;:</span> <span class="pre">&quot;local&quot;</span></code> is used then the directory at <code class="docutils literal notranslate"><span class="pre">&quot;FileSettings&quot;:</span></code> <code class="docutils literal notranslate"><span class="pre">&quot;Directory&quot;:</span> <span class="pre">&quot;./data/&quot;</span></code> is expected to be a NAS location mapped as a local directory. If this is not the case high availability will not function correctly and may corrupt your file storage.</p>
-<p>Note a slight behavior change in 5.15:
-When you reinstall a plugin in 5.14, the previous <strong>Enabled</strong> or <strong>Disabled</strong> state is retained. As of 5.15, a reinstalled plugin’s initial state is <strong>Disabled</strong>.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">&quot;DriverName&quot;:</span> <span class="pre">&quot;local&quot;</span></code> is used then the directory at <code class="docutils literal notranslate"><span class="pre">&quot;FileSettings&quot;:</span></code> <code class="docutils literal notranslate"><span class="pre">&quot;Directory&quot;:</span> <span class="pre">&quot;./data/&quot;</span></code> is expected to be a NAS location mapped as a local directory. If this is not the case High Availability will not function correctly and may corrupt your file storage.</p>
+<p>Note a slight behavior change in 5.15: When you reinstall a plugin in 5.14, the previous <strong>Enabled</strong> or <strong>Disabled</strong> state is retained. As of 5.15, a reinstalled plugin’s initial state is <strong>Disabled</strong>.</p>
 </div>
 </div>
 </div>
@@ -588,17 +592,17 @@ When you reinstall a plugin in 5.14, the previous <strong>Enabled</strong> or <s
 <div class="section" id="updating-configuration-changes-while-operating-continuously">
 <h3><a class="toc-backref" href="#contents">Updating Configuration Changes While Operating Continuously</a><a class="headerlink" href="#updating-configuration-changes-while-operating-continuously" title="Permalink to this headline">¶</a></h3>
 <p>A service interruption is not required for most configuration updates. See <a class="reference internal" href="#server-upgrades-requiring-service-interruption">Server Upgrades Requiring Service Interruption</a> for a list of configuration updates that require a service interruption.</p>
-<p>You can apply updates during a period of low load, but if your HA cluster is sized correctly, you can do it at any time. The system downtime is brief, and depends on the number of Mattermost servers in your cluster. Note that you are not restarting the machines, only the Mattermost server applications. A Mattermost server restart generally takes about 5 seconds.</p>
+<p>You can apply updates during a period of low load, but if your High Availability cluster is sized correctly, you can do it at any time. The system downtime is brief, and depends on the number of Mattermost servers in your cluster. Note that you are not restarting the machines, only the Mattermost server applications. A Mattermost server restart generally takes about 5 seconds.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Do not modify configuration settings through the System Console. Otherwise you will have two servers with different <cite>config.json</cite> files in an HA cluster causing a refresh every time a user connects to a different app server.</p>
+<p class="last">Do not modify configuration settings through the System Console. Otherwise you will have two servers with different <code class="docutils literal notranslate"><span class="pre">config.json</span></code> files in a High Availability cluster causing a refresh every time a user connects to a different app server.</p>
 </div>
 <ol class="arabic simple">
 <li>Make a backup of your existing <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file.</li>
 <li>For one of the Mattermost servers, make the configuration changes to <code class="docutils literal notranslate"><span class="pre">config.json</span></code> and save the file. Do not reload the file yet.</li>
 <li>Copy the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file to the other servers.</li>
 <li>Shut down Mattermost on all but one server.</li>
-<li>Reload the configuration file on the server that is still running. Go to <strong>System Console &gt; Configuration</strong> in prior versions or <strong>System Console &gt; Environment &gt; Web Server</strong> in versions after 5.12 and click <strong>Reload Configuration from Disk</strong></li>
+<li>Reload the configuration file on the server that is still running. Go to in prior versions or <strong>System Console &gt; Environment &gt; Web Server</strong> (or  <strong>System Console &gt; Configuration</strong> in versions prior to 5.12) and click <strong>Reload Configuration from Disk</strong></li>
 <li>Start the other servers.</li>
 </ol>
 </div>
@@ -613,7 +617,7 @@ When you reinstall a plugin in 5.14, the previous <strong>Enabled</strong> or <s
 <li>Set your proxy to move all new requests to a single server. If you are using NGINX and it’s configured with an upstream backend section in <code class="docutils literal notranslate"><span class="pre">/etc/nginx/sites-available/mattermost</span></code> then comment out all but the one server that you intend to update first, and reload NGINX.</li>
 <li>Shut down Mattermost on each server except the one that you are updating first.</li>
 <li>Update each Mattermost instance that is shut down.</li>
-<li>On each server, replace the new <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file with your backed-up copy.</li>
+<li>On each server, replace the new <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file with your backed up copy.</li>
 <li>Start the Mattermost servers.</li>
 <li>Repeat the update procedure for the server that was left running.</li>
 </ol>
@@ -637,7 +641,7 @@ When you reinstall a plugin in 5.14, the previous <strong>Enabled</strong> or <s
 <li>Make a backup of your existing <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file.</li>
 <li>Stop NGINX.</li>
 <li>Upgrade each Mattermost instance.</li>
-<li>On each server, replace the new <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file with your backed-up copy.</li>
+<li>On each server, replace the new <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file with your backed up copy.</li>
 <li>Start one of the Mattermost servers.</li>
 <li>When the server is running, start the other servers.</li>
 <li>Restart NGINX.</li>
@@ -645,11 +649,11 @@ When you reinstall a plugin in 5.14, the previous <strong>Enabled</strong> or <s
 </div>
 <div class="section" id="upgrading-to-version-4-0-and-later">
 <h3><a class="toc-backref" href="#contents">Upgrading to Version 4.0 and Later</a><a class="headerlink" href="#upgrading-to-version-4-0-and-later" title="Permalink to this headline">¶</a></h3>
-<p>Starting with Mattermost Server version 4.0, when a server starts up it can automatically discover other servers in the same cluster. You can add and remove servers without the need to make changes to the configuration file, <code class="docutils literal notranslate"><span class="pre">config.json</span></code>. To support this capability, new items were added to the <em>ClusterSettings</em> section of <code class="docutils literal notranslate"><span class="pre">config.json</span></code>. When upgrading from 3.10 or earlier to 4.0 or later, you must manually add the new items to your existing <code class="docutils literal notranslate"><span class="pre">config.json</span></code>.</p>
+<p>Starting with Mattermost Server version 4.0, when a server starts up it can automatically discover other servers in the same cluster. You can add and remove servers without the need to make changes to the configuration file, <code class="docutils literal notranslate"><span class="pre">config.json</span></code>. To support this capability, new items were added to the <code class="docutils literal notranslate"><span class="pre">ClusterSettings</span></code> section of <code class="docutils literal notranslate"><span class="pre">config.json</span></code>. When upgrading from 3.10 or earlier to 4.0 or later, you must manually add the new items to your existing <code class="docutils literal notranslate"><span class="pre">config.json</span></code>.</p>
 <ol class="arabic simple">
 <li>Review the upgrade procedure in <a class="reference internal" href="../administration/upgrade.html"><span class="doc">Upgrading Mattermost Server</span></a>.</li>
 <li>Make a backup of your existing <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file.</li>
-<li>Revise your existing <code class="docutils literal notranslate"><span class="pre">config.json</span></code> to update the <em>ClusterSettings</em> section. The following settings should work in most cases:</li>
+<li>Revise your existing <code class="docutils literal notranslate"><span class="pre">config.json</span></code> to update the <code class="docutils literal notranslate"><span class="pre">ClusterSettings</span></code> section. The following settings should work in most cases:</li>
 </ol>
 <blockquote>
 <div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;ClusterSettings&quot;: {
@@ -679,7 +683,7 @@ When you reinstall a plugin in 5.14, the previous <strong>Enabled</strong> or <s
 <div class="section" id="frequently-asked-questions-faq">
 <h2><a class="toc-backref" href="#contents">Frequently Asked Questions (FAQ)</a><a class="headerlink" href="#frequently-asked-questions-faq" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="does-mattermost-support-multi-region-high-availability-deployment">
-<h3><a class="toc-backref" href="#contents">Does Mattermost support multi-region high availability deployment?</a><a class="headerlink" href="#does-mattermost-support-multi-region-high-availability-deployment" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#contents">Does Mattermost support multi-region High Availability deployment?</a><a class="headerlink" href="#does-mattermost-support-multi-region-high-availability-deployment" title="Permalink to this headline">¶</a></h3>
 <p>Yes. Although not officially tested, you can set up a cluster across AWS regions, for example, and it should work without issues.</p>
 </div>
 </div>
@@ -687,12 +691,12 @@ When you reinstall a plugin in 5.14, the previous <strong>Enabled</strong> or <s
 <h2><a class="toc-backref" href="#contents">Troubleshooting</a><a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="red-server-status">
 <h3><a class="toc-backref" href="#contents">Red Server Status</a><a class="headerlink" href="#red-server-status" title="Permalink to this headline">¶</a></h3>
-<p>When high availability is enabled, the System Console displays the server status as red or green, indicating if the servers are communicating correctly with the cluster. The servers use inter-node communication to ping the other machines in the cluster, and once a ping is established the servers exchange information, such as server version and configuration files.</p>
+<p>When High Availability is enabled, the System Console displays the server status as red or green, indicating if the servers are communicating correctly with the cluster. The servers use inter-node communication to ping the other machines in the cluster, and once a ping is established the servers exchange information, such as server version and configuration files.</p>
 <p>A server status of red can occur for the following reasons:</p>
 <ul class="simple">
-<li><strong>Configuration file mismatch</strong>: Mattermost will still attempt the inter-node communication, but the System Console will show a red status for the server since the high availability feature assumes the same configuration file to function properly.</li>
-<li><strong>Server version mismatch</strong>: Mattermost will still attempt the inter-node communication, but the System Console will show a red status for the server since the high availability feature assumes the same version of Mattermost is installed on each server in the cluster. It is recommended to use the <a class="reference external" href="https://www.mattermost.org/download/">latest version of Mattermost</a> on all servers. Follow the upgrade procedure in <a class="reference internal" href="../administration/upgrade.html"><span class="doc">Upgrading Mattermost Server</span></a> for any server that needs to be upgraded.</li>
-<li><strong>Server is down</strong>: If an inter-node communication fails to send a message it makes another attempt in 15 seconds. If the second attempt fails, the server is assumed to be down. An error message is written to the logs and the System Console shows a status of red for that server. The inter-node communication continues to ping the down server in 15 second intervals. When the server comes back up, any new messages are sent to it.</li>
+<li><strong>Configuration file mismatch:</strong> Mattermost will still attempt the inter-node communication, but the System Console will show a red status for the server since the High Availability feature assumes the same configuration file to function properly.</li>
+<li><strong>Server version mismatch:</strong> Mattermost will still attempt the inter-node communication, but the System Console will show a red status for the server since the High Availability feature assumes the same version of Mattermost is installed on each server in the cluster. It is recommended to use the <a class="reference external" href="https://www.mattermost.org/download/">latest version of Mattermost</a> on all servers. Follow the upgrade procedure in <a class="reference internal" href="../administration/upgrade.html"><span class="doc">Upgrading Mattermost Server</span></a> for any server that needs to be upgraded.</li>
+<li><strong>Server is down:</strong> If an inter-node communication fails to send a message it makes another attempt in 15 seconds. If the second attempt fails, the server is assumed to be down. An error message is written to the logs and the System Console shows a status of red for that server. The inter-node communication continues to ping the down server in 15 second intervals. When the server comes back up, any new messages are sent to it.</li>
 </ul>
 </div>
 <div class="section" id="websocket-disconnect">
@@ -701,12 +705,12 @@ When you reinstall a plugin in 5.14, the previous <strong>Enabled</strong> or <s
 </div>
 <div class="section" id="app-refreshes-continuously">
 <h3><a class="toc-backref" href="#contents">App Refreshes Continuously</a><a class="headerlink" href="#app-refreshes-continuously" title="Permalink to this headline">¶</a></h3>
-<p>When configuration settings are modified through the System Console, the client refreshes every time a user connects to a different app server. This occurs because the servers have different <cite>config.json</cite> files in an HA cluster.</p>
+<p>When configuration settings are modified through the System Console, the client refreshes every time a user connects to a different app server. This occurs because the servers have different <code class="docutils literal notranslate"><span class="pre">config.json</span></code> files in a High Availability cluster.</p>
 <p>Modify configuration settings directly through <code class="docutils literal notranslate"><span class="pre">config.json</span></code> <a class="reference external" href="https://docs.mattermost.com/deployment/cluster.html#updating-configuration-changes-while-operating-continuously">following these steps</a>.</p>
 </div>
 <div class="section" id="messages-do-not-post-until-after-reloading">
 <h3><a class="toc-backref" href="#contents">Messages Do Not Post Until After Reloading</a><a class="headerlink" href="#messages-do-not-post-until-after-reloading" title="Permalink to this headline">¶</a></h3>
-<p>When running in high-availability mode, make sure all Mattermost application servers are running the same version of Mattermost. If they are running different versions, it can lead to a state where the lower version app server cannot handle a request and the request will not be sent until the frontend application is refreshed and sent to a server with a valid Mattermost version. Symptoms to look for include requests failing seemingly at random or a single application server having a drastic rise in goroutines and API errors.</p>
+<p>When running in High Availability mode, make sure all Mattermost application servers are running the same version of Mattermost. If they are running different versions, it can lead to a state where the lower version app server cannot handle a request and the request will not be sent until the frontend application is refreshed and sent to a server with a valid Mattermost version. Symptoms to look for include requests failing seemingly at random or a single application server having a drastic rise in goroutines and API errors.</p>
 </div>
 </div>
 </div>
