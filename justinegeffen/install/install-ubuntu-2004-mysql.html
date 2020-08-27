@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installing Ubuntu Server 16.04 LTS &mdash; Mattermost 5.26 documentation</title>
+  <title>Installing MySQL Database Server &mdash; Mattermost 5.26 documentation</title>
   
 
   
@@ -195,11 +195,11 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
     
-    <li>Installing Ubuntu Server 16.04 LTS</li>
+    <li>Installing MySQL Database Server</li>
     <li class="wy-breadcrumbs-aside">
       
         
-          <a href="https://github.com/mattermost/docs/blob/master/source/install/install-ubuntu-1604-server.rst" class="fa fa-github"> Edit</a>
+          <a href="https://github.com/mattermost/docs/blob/master/source/install/install-ubuntu-2004-mysql.rst" class="fa fa-github"> Edit</a>
         
       
     </li>
@@ -209,23 +209,57 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="installing-ubuntu-server-16-04-lts">
-<span id="install-ubuntu-1604-server"></span><h1>Installing Ubuntu Server 16.04 LTS<a class="headerlink" href="#installing-ubuntu-server-16-04-lts" title="Permalink to this headline">¶</a></h1>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Ubuntu 16.04 is approaching its End of Life in April 2021. Because of this, we don’t recommend installing new instances of Mattermost on Ubuntu 16.04. Please refer to install guides for <a class="reference internal" href="install-ubuntu-1804.html"><span class="doc">Ubuntu 18.04 LTS</span></a> or <a class="reference internal" href="install-ubuntu-2004.html"><span class="doc">Ubuntu 20.04 LTS</span></a> instead.</p>
-</div>
-<p>Install the 64-bit version of Ubuntu Server on each machine that hosts one or more of the components.</p>
-<p><strong>To install Ubuntu Server 16.04</strong></p>
+  <div class="section" id="installing-mysql-database-server">
+<span id="install-ubuntu-2004-mysql"></span><h1>Installing MySQL Database Server<a class="headerlink" href="#installing-mysql-database-server" title="Permalink to this headline">¶</a></h1>
+<p>Install and set up the database for use by the Mattermost server. You can install either MySQL or PostgreSQL.</p>
+<p><strong>To install MySQL on Ubuntu Server 20.04:</strong></p>
 <ol class="arabic simple">
-<li>To install Ubuntu Server 16.04, see the <a class="reference external" href="https://help.ubuntu.com/16.04/installation-guide/amd64/index.html">Ubuntu Installation Guide</a>.</li>
-<li>After the system is installed, make sure that it’s up to date with the most recent security patches. Open a terminal window and issue the following commands:</li>
+<li>Log into the server that will host the database, and open a terminal window.</li>
+<li>Install MySQL.</li>
 </ol>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">update</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">upgrade</span></code></p>
+<div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">mysql-server</span></code></div></blockquote>
+<ol class="arabic simple" start="3">
+<li>Run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">mysql_secure_installation</span></code> and follow the instructions.</li>
+<li>Log in to MySQL as <em>root</em>.</li>
+</ol>
+<blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">mysql</span></code></div></blockquote>
+<ol class="arabic simple" start="5">
+<li>Create the Mattermost user <em>mmuser</em>.</li>
+</ol>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">mysql&gt;</span> <span class="pre">create</span> <span class="pre">user</span> <span class="pre">'mmuser'&#64;'%'</span> <span class="pre">identified</span> <span class="pre">by</span> <span class="pre">'mmuser-password';</span></code></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ol class="last arabic simple">
+<li>Use a password that is more secure than ‘mmuser-password’.</li>
+<li>The ‘%’ means that mmuser can connect from any machine on the network. However, it’s more secure to use the IP address of the machine that hosts Mattermost. For example, if you install Mattermost on the machine with IP address 10.10.10.2, then use the following command: <code class="docutils literal notranslate"><span class="pre">mysql&gt;</span> <span class="pre">create</span> <span class="pre">user</span> <span class="pre">'mmuser'&#64;'10.10.10.2'</span> <span class="pre">identified</span> <span class="pre">by</span> <span class="pre">'mmuser-password';</span></code></li>
+</ol>
+</div>
 </div></blockquote>
-<p>Now that the system is up to date, you can start installing the components that make up a Mattermost system.</p>
+<ol class="arabic simple" start="6">
+<li>Create the Mattermost database.</li>
+</ol>
+<blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">mysql&gt;</span> <span class="pre">create</span> <span class="pre">database</span> <span class="pre">mattermost;</span></code></div></blockquote>
+<ol class="arabic simple" start="7">
+<li>Grant access privileges to the user <em>mmuser</em>.</li>
+</ol>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">mysql&gt;</span> <span class="pre">grant</span> <span class="pre">all</span> <span class="pre">privileges</span> <span class="pre">on</span> <span class="pre">mattermost.*</span> <span class="pre">to</span> <span class="pre">'mmuser'&#64;'%';</span></code></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>This query grants the MySQL user we just created all privileges on the database for convenience. If you need more security you can use this query to grant the user only the privileges necessary to run Mattermost.</p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">mysql&gt;</span> <span class="pre">GRANT</span> <span class="pre">ALTER,</span> <span class="pre">CREATE,</span> <span class="pre">DELETE,</span> <span class="pre">DROP,</span> <span class="pre">INDEX,</span> <span class="pre">INSERT,</span> <span class="pre">SELECT,</span> <span class="pre">UPDATE</span> <span class="pre">ON</span> <span class="pre">mattermost.*</span> <span class="pre">TO</span> <span class="pre">'mmuser'&#64;'%';</span></code></p>
+</div>
+</div></blockquote>
+<ol class="arabic" start="8">
+<li><p class="first">Log out of MySQL.</p>
+<p><code class="docutils literal notranslate"><span class="pre">mysql&gt;</span> <span class="pre">exit</span></code></p>
+</li>
+</ol>
+<p>With the database installed and the initial setup complete, you can now install the Mattermost server.</p>
 </div>
 
 
@@ -272,7 +306,7 @@
             </dd>
             
             <dd>
-                <a href="https://github.com/mattermost/docs/blob/master/source/install/install-ubuntu-1604-server.rst"> Edit on GitHub</a>
+                <a href="https://github.com/mattermost/docs/blob/master/source/install/install-ubuntu-2004-mysql.rst"> Edit on GitHub</a>
             </dd>
             
         </dl>
