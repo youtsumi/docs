@@ -186,6 +186,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../deployment/customize-mattermost.html">Customizing Mattermost</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/customize-email.html">Email Templates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="branding.html">Custom Branding Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install/smtp-email-setup.html">SMTP Email Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install/config-cloudfront.html">Configuring CloudFront to host Mattermost static assets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install/outbound-proxy.html">Using an Outbound Proxy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install/i18n.html">Chinese, Japanese and Korean Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install/config-apache2.html">Configuring Apache2 (Unofficial)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
@@ -196,7 +201,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#unofficial-enhancements">Unofficial Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
@@ -259,7 +264,7 @@
 </div>
 <p>Mattermost configuration settings are maintained in the configuration file <code class="docutils literal notranslate"><span class="pre">config.json</span></code>, located in the <code class="docutils literal notranslate"><span class="pre">mattermost/config</span></code> directory. You can modify the configuration file using the System Console, or by using a text editor to modify it directly.</p>
 <p>The default location of <code class="docutils literal notranslate"><span class="pre">config.json</span></code> is in the <code class="docutils literal notranslate"><span class="pre">mattermost/config</span></code> directory. Mattermost must have write permissions to <code class="docutils literal notranslate"><span class="pre">config.json</span></code>, otherwise changes made in the System Console will have no effect.</p>
-<p>On new installations starting in version 5.14, the default.json file used to create the initial <code class="docutils literal notranslate"><span class="pre">config.json</span></code> has been removed from the binary and replaced with a build step that generates a fresh <code class="docutils literal notranslate"><span class="pre">config.json</span></code>.  This is to ensure the initial configuration file has all the correct defaults provided in the server code. Existing <code class="docutils literal notranslate"><span class="pre">config.json</span></code> files are not affected by this change.</p>
+<p>On new installations starting from version 5.14, the <code class="docutils literal notranslate"><span class="pre">default.json</span></code> file used to create the initial <code class="docutils literal notranslate"><span class="pre">config.json</span></code> has been removed from the binary and replaced with a build step that generates a fresh <code class="docutils literal notranslate"><span class="pre">config.json</span></code>.  This is to ensure the initial configuration file has all the correct defaults provided in the server code. Existing <code class="docutils literal notranslate"><span class="pre">config.json</span></code> files are not affected by this change.</p>
 <p><strong>Configuration in Database</strong></p>
 <p>Storing configuration in the database is supported in v5.10 and later.  Please see more information on how to set this up <a class="reference external" href="https://docs.mattermost.com/administration/config-in-database.html">here</a>.</p>
 <p><strong>Environment Variables</strong></p>
@@ -944,7 +949,7 @@
 <p>This button purges the entire Elasticsearch index. Typically only used if the index has corrupted and search is not behaving as expected. After purging the index a new index can be created with the <strong>Bulk Index</strong> button.</p>
 </div>
 <div class="section" id="enable-elasticsearch-for-search-queries">
-<h4>Enable Elasticsearch for search queries<a class="headerlink" href="#enable-elasticsearch-for-search-queries" title="Permalink to this headline">¶</a></h4>
+<h4>Enable Elasticsearch for Search Queries<a class="headerlink" href="#enable-elasticsearch-for-search-queries" title="Permalink to this headline">¶</a></h4>
 <p><strong>True</strong>: Elasticsearch will be used for all search queries using the latest index. Search results may be incomplete until a bulk index of the existing post database is finished.</p>
 <p><strong>False</strong>: Database search is used for search queries.</p>
 <table border="1" class="docutils">
@@ -958,7 +963,7 @@
 </table>
 </div>
 <div class="section" id="enable-elasticsearch-for-autocomplete-queries">
-<h4>Enable Elasticsearch for autocomplete queries<a class="headerlink" href="#enable-elasticsearch-for-autocomplete-queries" title="Permalink to this headline">¶</a></h4>
+<h4>Enable Elasticsearch for Autocomplete Queries<a class="headerlink" href="#enable-elasticsearch-for-autocomplete-queries" title="Permalink to this headline">¶</a></h4>
 <p><strong>True</strong>: Elasticsearch will be used for all autocompletion queries on users and channels using the latest index. Autocompletion results may be incomplete until a bulk index of the existing users and channels database is finished.</p>
 <p><strong>False</strong>: Database autocomplete is used.</p>
 <table border="1" class="docutils">
@@ -1034,7 +1039,10 @@
 <p class="first admonition-title">Warning</p>
 <p class="last">Verify server memory can support your setting choice. Large file sizes increase the risk of server crashes and failed uploads due to network disruptions.</p>
 </div>
-<p>If you use a proxy or load balancer in front of Mattermost its settings need to be adjusted accordingly. For NGINX use <code class="docutils literal notranslate"><span class="pre">client_max_body_size</span></code>. For Apache use <code class="docutils literal notranslate"><span class="pre">LimitRequestBody</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you use a proxy or load balancer in front of Mattermost its settings need to be adjusted accordingly. For NGINX use <code class="docutils literal notranslate"><span class="pre">client_max_body_size</span></code>. For Apache use <code class="docutils literal notranslate"><span class="pre">LimitRequestBody</span></code>.</p>
+</div>
 </div>
 <div class="section" id="amazon-s3-bucket">
 <h4>Amazon S3 Bucket<a class="headerlink" href="#amazon-s3-bucket" title="Permalink to this headline">¶</a></h4>
@@ -1995,7 +2003,7 @@
 </table>
 </div>
 <div class="section" id="allow-untrusted-internal-connections-to">
-<h4>Allow untrusted internal connections to<a class="headerlink" href="#allow-untrusted-internal-connections-to" title="Permalink to this headline">¶</a></h4>
+<h4>Allow Untrusted Internal Connections To<a class="headerlink" href="#allow-untrusted-internal-connections-to" title="Permalink to this headline">¶</a></h4>
 <p>This setting limits the ability for the Mattermost server to make untrusted requests within its local network. A request is considered “untrusted” when it’s made on behalf of a client. The following features make untrusted requests and are affected by this setting:</p>
 <ul class="simple">
 <li>Integrations using webhooks, slash commands, or message actions. This prevents them from requesting endpoints within the local network.</li>
@@ -2434,7 +2442,9 @@
 <div class="section" id="enable-email-notifications">
 <h4>Enable Email Notifications<a class="headerlink" href="#enable-email-notifications" title="Permalink to this headline">¶</a></h4>
 <p><strong>True</strong>: Enables sending of email notifications.</p>
-<p><strong>False</strong>: Disables email notifications for developers who may want to skip email setup for faster development. To remove the <strong>Preview Mode: Email notifications have not been configured</strong> banner, also set <code class="docutils literal notranslate"><span class="pre">Enable</span> <span class="pre">Preview</span> <span class="pre">Mode</span> <span class="pre">Banner</span></code> to <code class="docutils literal notranslate"><span class="pre">false</span></code>. If this setting is set to <code class="docutils literal notranslate"><span class="pre">false</span></code> and the SMTP server is set up, account related emails will be sent for user account changes such as password, email, username, user token, MFA, and signin type changes. Email invitations and account deactivation emails will also be sent.</p>
+<p><strong>False</strong>: Disables email notifications for posts. This is useful for developers who may want to skip email setup for faster development. In order to remove the <strong>Preview Mode: Email notifications have not been configured</strong> banner, you should also set <strong>Enable Preview Mode Banner</strong> to <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+<p>If this setting is set to <code class="docutils literal notranslate"><span class="pre">false</span></code> and the SMTP server is set up, account related emails (such as password, email, username, user token, MFA, and other authentication related changes) will be sent regardless of this setting.</p>
+<p>Email invitations and account deactivation emails are not affected by this setting.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="100%" />
@@ -6812,7 +6822,7 @@
 </div>
 <div class="section" id="jobs">
 <h3><a class="toc-backref" href="#id141">Jobs</a><a class="headerlink" href="#jobs" title="Permalink to this headline">¶</a></h3>
-<p>Settings to configure the how Mattermost schedules and completes periodic tasks such as the deletion of old posts with Data Retention enabled or indexing of posts with Elasticsearch. These settings control which Mattermost servers are designated as a Scheduler, a server that queues the tasks at the correct times, and as a Worker, a server that completes the given tasks.</p>
+<p>Settings to configure how Mattermost schedules and completes periodic tasks such as the deletion of old posts with Data Retention enabled or indexing posts with Elasticsearch. These settings control which Mattermost servers are designated as a Scheduler, a server that queues the tasks at the correct times, and as a Worker, a server that completes the given tasks.</p>
 <p>When running Mattermost on a single machine, both <code class="docutils literal notranslate"><span class="pre">RunJobs</span></code> and <code class="docutils literal notranslate"><span class="pre">RunScheduler</span></code> should be enabled. Without both of these enabled, Mattermost will not function properly.</p>
 <p>When running Mattermost in High Availability mode, <code class="docutils literal notranslate"><span class="pre">RunJobs</span></code> should be enabled on one or more servers while <code class="docutils literal notranslate"><span class="pre">RunScheduler</span></code> should be enabled on all servers under normal circumstances. A High Availability cluster will have one Scheduler and one or more Workers. See the below sections for more information.</p>
 <div class="section" id="run-jobs">
@@ -6835,6 +6845,11 @@
 <p>Set whether or not this Mattermost server will schedule tasks that will be completed by a Worker.</p>
 <p>When running Mattermost on a single machine, this setting should always be enabled.</p>
 <p>When running Mattermost in High Availablity mode, this setting should always be enabled. In a High Availability cluster, exactly one of the servers will be designated as the Scheduler at a time to ensure that duplicate tasks aren’t created. See <a class="reference external" href="https://docs.mattermost.com/deployment/cluster.html#job-server">High Availability documentation</a> for more details.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">It is strongly recommended not to change this setting from the default setting of <code class="docutils literal notranslate"><span class="pre">true</span></code> as this prevents the <code class="docutils literal notranslate"><span class="pre">ClusterLeader</span></code> from being able to run the scheduler. As a result, recurring jobs such as LDAP sync, Compliance Export, and data retention will no longer be scheduled.</p>
+</div>
+<p>In previous Mattermost Server versions, and this documentation, the instructions stated to run the Job Server with <code class="docutils literal notranslate"><span class="pre">RunScheduler:</span> <span class="pre">false</span></code>. The cluster design has evolved and this is no longer the case.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="100%" />
