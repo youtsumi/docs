@@ -172,6 +172,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#id1">Installing Mattermost Omnibus</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#installing-omnibus-package-and-mattermost-server">Installing Omnibus Package and Mattermost Server</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#updating-mattermost-omnibus">Updating Mattermost Omnibus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuring-mattermost-omnibus">Configuring Mattermost Omnibus</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#removing-mattermost-omnibus">Removing Mattermost Omnibus</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#backup-and-restore-using-the-mattermost-omnibus-cli">Backup and Restore using the Mattermost Omnibus CLI</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#frequently-asked-questions-faqs">Frequently Asked Questions (FAQs)</a></li>
@@ -303,6 +304,18 @@
 <p>Mattermost Omnibus is integrated with Ubuntu’s OS’s package manager. When a new Mattermost version is released, run:</p>
 <p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">update</span> <span class="pre">&amp;&amp;</span> <span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">upgrade</span></code></p>
 <p>This downloads the latest version of Mattermost and updates your Mattermost platform.</p>
+</div>
+<div class="section" id="configuring-mattermost-omnibus">
+<h2>Configuring Mattermost Omnibus<a class="headerlink" href="#configuring-mattermost-omnibus" title="Permalink to this headline">¶</a></h2>
+<p>Omnibus has its own configuration file located in <code class="docutils literal notranslate"><span class="pre">/etc/mattermost/mmomni.yml</span></code>. This file contains the data that Omnibus needs to configure the platform and connect all the services together. For Omnibus to work properly, there are some configuration parameters that are fixed and cannot be changed through the web interface (for example, the port that Mattermost uses to run) and some others that need to be configured directly through this file instead of in the Mattermost web interface or the configuration. The properties that you can configure in this file are:</p>
+<p><code class="docutils literal notranslate"><span class="pre">db_user</span></code>: the PostgreSQL database user. This value is generated during the Omnibus installation and should not be changed.
+<code class="docutils literal notranslate"><span class="pre">db_password</span></code>: the PostgreSQL database password. This value is generated during the Omnibus installation and should not be changed.
+<code class="docutils literal notranslate"><span class="pre">fqdn</span></code>: the domain name for the Mattermost application. This is the value that is asked during the install process, and it’s used to populate the ServiceSettings.SiteURL Mattermost configuration property, as well as to retrieve and configure the SSL certificate for the server.
+<code class="docutils literal notranslate"><span class="pre">email</span></code>: the email for certificate communications. This is the value that is asked during the install process, and it will not be used if https is disabled.
+<code class="docutils literal notranslate"><span class="pre">https</span></code>: this indicates if the platform should be configured to use https or http. It can have the <code class="docutils literal notranslate"><span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">false</span></code> values. The recommended way to install Mattermost is to use https, but you can disable it if required. You can read more about this here [[LINK TO THE FAQ]]
+<code class="docutils literal notranslate"><span class="pre">data_directory</span></code>: this is the directory where Mattermost stores its data
+<code class="docutils literal notranslate"><span class="pre">enable_plugin_uploads</span></code>: this setting is used to configure the <code class="docutils literal notranslate"><span class="pre">PluginSettings.EnableUploads</span></code> Mattermost configuration property. It can have the <code class="docutils literal notranslate"><span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">false</span></code> values
+<code class="docutils literal notranslate"><span class="pre">enable_local_mode</span></code>: this setting is used to configure the <code class="docutils literal notranslate"><span class="pre">ServiceSettings.EnableLocalMode</span></code> Mattermost configuration property. It can have the <code class="docutils literal notranslate"><span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">false</span></code> values</p>
 </div>
 <div class="section" id="removing-mattermost-omnibus">
 <h2>Removing Mattermost Omnibus<a class="headerlink" href="#removing-mattermost-omnibus" title="Permalink to this headline">¶</a></h2>
