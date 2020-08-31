@@ -169,8 +169,8 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Installing Mattermost Omnibus</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuring-mattermost-omnibus-repositories">Configuring Mattermost Omnibus Repositories</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id1">Installing Mattermost Omnibus</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id2">Installing Mattermost Omnibus</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#updating-mattermost-omnibus">Updating Mattermost Omnibus</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#configuring-mattermost-omnibus">Configuring Mattermost Omnibus</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#removing-mattermost-omnibus">Removing Mattermost Omnibus</a></li>
@@ -270,20 +270,20 @@
 <div class="section" id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>A clean Ubuntu server (18.04. Or 20.04)</li>
+<li>A clean Ubuntu server (18.04 or 20.04)</li>
 <li>A domain name pointing to that server</li>
 <li>Root level access to the server</li>
 </ul>
 </div>
-<div class="section" id="id1">
-<h2>Installing Mattermost Omnibus<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="configuring-mattermost-omnibus-repositories">
+<h2>Configuring Mattermost Omnibus Repositories<a class="headerlink" href="#configuring-mattermost-omnibus-repositories" title="Permalink to this headline">¶</a></h2>
 <p>The Omnibus repositories are configured using a cURL command:</p>
 <p><code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">-o-</span> <span class="pre">deb.packages.mattermost.com/repo-setup.sh</span> <span class="pre">|</span> <span class="pre">sudo</span> <span class="pre">bash</span></code></p>
 <p>This command configures the repositories needed for a <code class="docutils literal notranslate"><span class="pre">PostgreSQL</span></code> database, an <code class="docutils literal notranslate"><span class="pre">nginx</span></code> web server to act as a proxy, and <code class="docutils literal notranslate"><span class="pre">certbot</span></code> to issue and renew the SSL certificate.</p>
 <p>In order to issue that certificate, the installer requests a domain name and an email address from us. These are used to generate the certificate and deliver any related communications respectively.</p>
 </div>
-<div class="section" id="id2">
-<h2>Installing Mattermost Omnibus<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h2>Installing Mattermost Omnibus<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>If you’re installing Omnibus, and have a domain and SSL use:</p>
 <p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">mattermost-omnibus</span></code>.</p>
 <p>After all the packages are installed, Omnibus runs the ansible scripts that configure all the platform components and starts the server. To access Mattermost, open a browser, navigate to your domain, and create the System Admin user to start using the platform.</p>
@@ -298,7 +298,7 @@
 <h2>Configuring Mattermost Omnibus<a class="headerlink" href="#configuring-mattermost-omnibus" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Plugin uploads and HTTPS are enabled by default. These settings are modified in the <code class="docutils literal notranslate"><span class="pre">yaml</span></code> file using <a class="reference external" href="https://docs.mattermost.com/administration/mmctl-cli-tool.html#mmctl-config-edit">mmctl config edit</a>.</p>
+<p class="last">Plugin uploads, local mode and HTTPS are enabled by default. These settings are modified in the <code class="docutils literal notranslate"><span class="pre">yaml</span></code> file as described below.</p>
 </div>
 <p>With Mattermost Omnibus, the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file no longer exists as Omnibus has its own configuration file located in <code class="docutils literal notranslate"><span class="pre">/etc/mattermost/mmomni.yml</span></code>. This file contains the data that Omnibus needs to configure the platform and connect all the services together. So you’ll need to use mmctl to make changes to your Mattermost server configuration using <code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">config</span> <span class="pre">edit</span></code>. If you wish to manage your server locally, you may want to enable local mode for mmctl.</p>
 <p>For Omnibus to work properly, there are some configuration parameters that are fixed and cannot be changed through the web interface - for example, the port that Mattermost uses to run. Other parameters need to be configured directly in the <code class="docutils literal notranslate"><span class="pre">mmomni.yml</span></code> file instead of in the Mattermost web interface or the configuration.</p>
