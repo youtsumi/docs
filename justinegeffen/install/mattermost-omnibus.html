@@ -280,12 +280,12 @@
 <p>The Omnibus repositories are configured using a cURL command:</p>
 <p><code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">-o-</span> <span class="pre">deb.packages.mattermost.com/repo-setup.sh</span> <span class="pre">|</span> <span class="pre">sudo</span> <span class="pre">bash</span></code></p>
 <p>This command configures the repositories needed for a <code class="docutils literal notranslate"><span class="pre">PostgreSQL</span></code> database, an <code class="docutils literal notranslate"><span class="pre">nginx</span></code> web server to act as a proxy, and <code class="docutils literal notranslate"><span class="pre">certbot</span></code> to issue and renew the SSL certificate.</p>
-<p>In order to issue that certificate, the installer requests a domain name and an email address from us. These are used to generate the certificate and deliver any related communications respectively.</p>
 </div>
 <div class="section" id="id1">
 <h2>Installing Mattermost Omnibus<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>If you’re installing Omnibus, and have a domain and SSL use:</p>
 <p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">mattermost-omnibus</span></code>.</p>
+<p>In order to issue that certificate, the installer requests a domain name and an email address from us. These are used to generate the certificate and deliver any related communications respectively.</p>
 <p>After all the packages are installed, Omnibus runs the ansible scripts that configure all the platform components and starts the server. To access Mattermost, open a browser, navigate to your domain, and create the System Admin user to start using the platform.</p>
 </div>
 <div class="section" id="updating-mattermost-omnibus">
@@ -313,6 +313,7 @@
 <li><code class="docutils literal notranslate"><span class="pre">enable_plugin_uploads</span></code>: This setting can be <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code> and is used to configure the <code class="docutils literal notranslate"><span class="pre">PluginSettings.EnableUploads</span></code> Mattermost configuration property.</li>
 <li><code class="docutils literal notranslate"><span class="pre">enable_local_mode</span></code>: This setting can be <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code> and is used to configure the <code class="docutils literal notranslate"><span class="pre">ServiceSettings.EnableLocalMode</span></code> Mattermost configuration property.</li>
 </ul>
+<p>After modifying the <code class="docutils literal notranslate"><span class="pre">mmomni.yml</span></code> configuration file, you need to run <code class="docutils literal notranslate"><span class="pre">mmomni</span> <span class="pre">reconfigure</span></code> for Omnibus to apply the changes and restart Mattermost.</p>
 </div>
 <div class="section" id="removing-mattermost-omnibus">
 <h2>Removing Mattermost Omnibus<a class="headerlink" href="#removing-mattermost-omnibus" title="Permalink to this headline">¶</a></h2>
@@ -335,7 +336,7 @@
 <h3>What are the <code class="docutils literal notranslate"><span class="pre">mmomni</span></code> commands and what do they do?<a class="headerlink" href="#what-are-the-mmomni-commands-and-what-do-they-do" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">mmomni</span> <span class="pre">backup</span></code>: Takes a complete snapshot of your Mattermost server and places the backup file in a specified file location.
 <code class="docutils literal notranslate"><span class="pre">mmomni</span> <span class="pre">restore</span></code>: Restores specified backup file to your Mattermost server.
-<code class="docutils literal notranslate"><span class="pre">mmomni</span> <span class="pre">reconfigure</span></code>: Reruns the process that changes domain, SSL, or any Omnibus-specified restrictions such as the ability to upload plugins. It also applies to any changes made to the <code class="docutils literal notranslate"><span class="pre">mmomni.yml</span></code> configuration file.
+<code class="docutils literal notranslate"><span class="pre">mmomni</span> <span class="pre">reconfigure</span></code>: Reruns the process that changes domain, SSL, or any Omnibus-specified restrictions such as the ability to upload plugins. It also applies any changes made to the <code class="docutils literal notranslate"><span class="pre">mmomni.yml</span></code> configuration file.
 <code class="docutils literal notranslate"><span class="pre">mmomni</span> <span class="pre">status</span></code>: Shows current status of all Omnibus components.
 <code class="docutils literal notranslate"><span class="pre">mmomni</span> <span class="pre">tail</span></code>: Runs a join tail of logs of all Omnibus components.</p>
 </div>
