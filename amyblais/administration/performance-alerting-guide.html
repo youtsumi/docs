@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Mattermost Performance Alerting Guide &mdash; Mattermost 5.26 documentation</title>
+  <title>Mattermost Performance Alerting Guide &mdash; Mattermost 5.27 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.26
+                5.27
               </div>
             
           
@@ -184,13 +184,12 @@
 <li class="toctree-l4"><a class="reference internal" href="#number-of-goroutines">Number of Goroutines</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#number-of-api-errors-per-second">Number of API Errors per Second</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mean-api-request-time">Mean API Request Time</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#plugin-hooks">Plugin Hooks</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#other-alerts">Other Alerts</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#unofficial-enhancements">Unofficial Enhancements</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
@@ -269,13 +268,13 @@
 </ol>
 <blockquote>
 <div><ol class="loweralpha simple">
-<li>Under the alert icon in the sidebar, click <strong>Notification channels</strong></li>
-<li>Click <strong>Add channel</strong></li>
-<li>Enter <strong>Mattermost Alerts Channel</strong> as the name</li>
-<li>For type, select <strong>Slack</strong></li>
+<li>Under the alert icon in the sidebar, click ‘’Notification channels’‘</li>
+<li>Click ‘’Add channel’‘</li>
+<li>Enter ‘’Mattermost Alerts Channel’’ as the name</li>
+<li>For type, select ‘’Slack’‘</li>
 <li>Paste your webhook URL into the URL field</li>
 <li>Include an &#64; mention in the mention field, if you want to send mentions when an alert is posted to Mattermost</li>
-<li>Press <strong>Send Test</strong> to test the alert</li>
+<li>Press ‘’Send Test’’ to test the alert</li>
 </ol>
 </div></blockquote>
 <p>If you would also like to get email alerts, you can follow <a class="reference external" href="http://docs.grafana.org/alerting/notifications/#email.">these instructions</a> to set that up.</p>
@@ -290,20 +289,20 @@
 </ul>
 <p>To configure alerts, set an appropriate threshold and enable notifications. Enabling notifications is the same for each chart, but setting the correct threshold can have some variances that are better handled on a per-chart basis.</p>
 <ol class="arabic simple">
-<li>For each chart, click on the chart name and click <strong>Edit</strong>:</li>
+<li>For each chart, click on the chart name and click ‘’Edit’‘:</li>
 </ol>
 <img alt="../_images/perf-1.png" src="../_images/perf-1.png" />
 <ol class="arabic simple" start="2">
-<li>Then click on the <strong>Alert</strong> tab:</li>
+<li>Then click on the ‘’Alert’’ tab:</li>
 </ol>
 <img alt="../_images/perf-2.png" src="../_images/perf-2.png" />
 <ol class="arabic simple" start="3">
-<li>The alert threshold, which will be discussed in the sections below, is the last field under <strong>Conditions</strong> (the one set to 600 in the screenshot above).</li>
+<li>The alert threshold, which will be discussed in the sections below, is the last field under ‘’Conditions’’ (the one set to 600 in the screenshot above).</li>
 </ol>
 <p>See the sections below for how to set the threshold for each individual chart. If you would like to add your own custom alert conditions, configure them here.</p>
 <img alt="../_images/perf-3.png" src="../_images/perf-3.png" />
 <ol class="arabic simple" start="4">
-<li>To enable the notifications for any alerts, click on the <strong>Notification</strong> tab on the left and select <strong>Mattermost Alerts Channel</strong> under <strong>Send to</strong>:</li>
+<li>To enable the notifications for any alerts, click on the ‘’Notification’’ tab on the left and select ‘’Mattermost Alerts Channel’’ under ‘’Send to’‘:</li>
 </ol>
 <img alt="../_images/perf-4.png" src="../_images/perf-4.png" />
 <p>Enter a message if you would like to add more context to the alert.</p>
@@ -320,21 +319,21 @@
 <div class="section" id="memory-usage">
 <h2>Memory Usage<a class="headerlink" href="#memory-usage" title="Permalink to this headline">¶</a></h2>
 <p>Memory Usage tracks the megabytes of RAM that your app servers are using. Set the threshold similar to the CPU Utilization Rate: below maximum available memory and above your average usage during peak times.</p>
-<p>Here’s how we have the alert set on our Community server:</p>
+<p>Here’s how we have the alert set on our community server:</p>
 <img alt="../_images/perf-6.png" src="../_images/perf-6.png" />
 </div>
 <div class="section" id="number-of-goroutines">
 <h2>Number of Goroutines<a class="headerlink" href="#number-of-goroutines" title="Permalink to this headline">¶</a></h2>
 <p>Goroutines are functions or methods that run concurrently with other functions and methods. Goroutines are like lightweight threads with low-creation costs. A rising number of goroutines can be a good measure of the performance of your app servers. A continuous increase indicates your app server can’t keep up and is creating goroutines faster than they can complete their tasks and stop.</p>
 <p>Set the threshold somewhere above the average number of goroutines you see during peak load times. Small spikes are usually nothing to worry about. It’s the uncontrolled climbing of goroutines that you want to watch out for.</p>
-<p>Here’s how we have it set on our Community server:</p>
+<p>Here’s how we have it set on our community server:</p>
 <img alt="../_images/perf-7.png" src="../_images/perf-7.png" />
 </div>
 <div class="section" id="number-of-api-errors-per-second">
 <h2>Number of API Errors per Second<a class="headerlink" href="#number-of-api-errors-per-second" title="Permalink to this headline">¶</a></h2>
-<p>Any 4xx or 5xx HTTP response status codes are counted as a REST API error. API errors themselves are not necessarily a problem. There are many legitimate reasons for an API error to occur, such as users’ sessions expiring or clients requesting to see if a resource exists and is being given a <code class="docutils literal notranslate"><span class="pre">404</span> <span class="pre">Not</span> <span class="pre">Found</span></code> response. It is normal to have some API errors that scale with your installation base.</p>
+<p>Any 4xx or 5xx HTTP response status codes are counted as a REST API error. API errors themselves are not necessarily a problem. There are many legitimate reasons for an API error to occur, such as users’ sessions expiring or clients requesting to see if a resource exists and is being given a ‘‘404 Not Found’’ response. It is normal to have some API errors that scale with your installation base.</p>
 <p>That said, errors against the REST API can be indicative of deployment and other issues. For example, if one of your app servers did not deploy correctly for whatever reason, it may begin returning a high number of API errors. Another example would be a rogue bot spamming the API with bad requests. Alerts on API errors per second would help catch these and other issues.</p>
-<p>Here’s how it’s set on our Community server:</p>
+<p>Here’s how it’s set on our community server:</p>
 <img alt="../_images/perf-8.png" src="../_images/perf-8.png" />
 </div>
 <div class="section" id="mean-api-request-time">
@@ -343,33 +342,6 @@
 <p>You’ll want to set the alert threshold a little above what the mean request time is during your peak load times.</p>
 <p>Here’s how it’s set on our community server:</p>
 <img alt="../_images/perf-9-b.png" src="../_images/perf-9-b.png" />
-</div>
-<div class="section" id="plugin-hooks">
-<h2>Plugin Hooks<a class="headerlink" href="#plugin-hooks" title="Permalink to this headline">¶</a></h2>
-<p>You can trace hooks and plugin API calls with Prometheus. Below are some examples of hooks and API Prometheus metrics that you may want to be aware of when troubleshooting or monitoring your server’s performance.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># HELP mattermost_plugin_hook_time Time to execute plugin hook handler in seconds.
-# TYPE mattermost_plugin_hook_time histogram
-mattermost_plugin_hook_time_bucket{hook_name=&quot;ChannelHasBeenCreated&quot;,plugin_id=&quot;com.mattermost.demo-plugin&quot;,success=&quot;true&quot;,le=&quot;0.005&quot;} 0
-mattermost_plugin_hook_time_bucket{hook_name=&quot;ChannelHasBeenCreated&quot;,plugin_id=&quot;com.mattermost.demo-plugin&quot;,success=&quot;true&quot;,le=&quot;0.01&quot;} 0
-</pre></div>
-</div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># HELP mattermost_plugin_multi_hook_time Time to execute multiple plugin hook handler in seconds.
-# TYPE mattermost_plugin_multi_hook_time histogram
-mattermost_plugin_multi_hook_time_bucket{plugin_id=&quot;com.mattermost.custom-attributes&quot;,le=&quot;0.005&quot;} 100
-mattermost_plugin_multi_hook_time_bucket{plugin_id=&quot;com.mattermost.custom-attributes&quot;,le=&quot;0.01&quot;} 100
-</pre></div>
-</div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># HELP mattermost_plugin_multi_hook_server_time Time for the server to execute multiple plugin hook handlers in seconds.
-# TYPE mattermost_plugin_multi_hook_server_time histogram
-mattermost_plugin_multi_hook_server_time_bucket{le=&quot;0.005&quot;} 1043
-</pre></div>
-</div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># HELP mattermost_plugin_api_time Time to execute plugin API handlers in seconds.
-# TYPE mattermost_plugin_api_time histogram
-mattermost_plugin_api_time_bucket{api_name=&quot;AddUserToChannel&quot;,plugin_id=&quot;com.mattermost.plugin-incident-response&quot;,success=&quot;true&quot;,le=&quot;0.005&quot;} 0
-mattermost_plugin_api_time_bucket{api_name=&quot;AddUserToChannel&quot;,plugin_id=&quot;com.mattermost.plugin-incident-response&quot;,success=&quot;true&quot;,le=&quot;0.01&quot;} 0
-</pre></div>
-</div>
 </div>
 <div class="section" id="other-alerts">
 <h2>Other Alerts<a class="headerlink" href="#other-alerts" title="Permalink to this headline">¶</a></h2>
