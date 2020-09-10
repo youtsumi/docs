@@ -244,7 +244,8 @@
   <div class="section" id="elasticsearch-e20">
 <h1>Elasticsearch (E20)<a class="headerlink" href="#elasticsearch-e20" title="Permalink to this headline">¶</a></h1>
 <p><em>Available in Enterprise Edition E20.</em></p>
-<p><a class="reference external" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Elasticsearch</a> is a distributed, RESTful search engine supporting highly efficient database searches in a <a class="reference external" href="https://docs.mattermost.com/deployment/cluster.html">cluster environment</a>.</p>
+<p>The Elasticsearch module in Mattermost E20 is recommended for enterprise-scale deployments to optimize search performance and avoid performance degradation and timeouts.</p>
+<p>The implementation uses <a class="reference external" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Elasticsearch</a> as a distributed, RESTful search engine supporting highly efficient database searches in a <a class="reference external" href="https://docs.mattermost.com/deployment/cluster.html">cluster environment</a>.</p>
 <div class="toctree-wrapper compound">
 </div>
 <div class="section" id="deployment-guide">
@@ -254,7 +255,7 @@
 <p>Elasticsearch allows you to search large volumes of data quickly, in near real time, by creating and managing an index of post data. The indexing process can be managed from the System Console after setting up and connecting an Elasticsearch server. The post index is stored on the Elasticsearch server and is updated constantly after new posts are made. In order to index existing posts, a bulk index of the entire post database must be generated.</p>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
-<p class="last">The default Mattermost database search starts to show performance degradation at around 2.5 million posts, depending on the specifications for the database server. If you expect your Mattermost server to have more than 2.5 million posts, we recommend using Elasticsearch for optimum search performance.</p>
+<p class="last">The default Mattermost database search starts to show performance degradation at around 2.5 million posts, depending on the specifications for the database server. If you expect your Mattermost server to have more than 2.5 million posts, we recommend using Elasticsearch for optimum search performance. For deployments with over 5 million posts, Elasticsearch is required to avoid significant performance issues (such as timeouts) with search and at-mentions.</p>
 </div>
 <p>Elasticsearch v5.x, v6.x, and v7.x are supported.</p>
 <div class="admonition note">
