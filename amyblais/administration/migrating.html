@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Migration Guide &mdash; Mattermost 5.27 documentation</title>
+  <title>Migration Guide &mdash; Mattermost 5.26 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.27
+                5.26
               </div>
             
           
@@ -179,6 +179,13 @@
 <li class="toctree-l3"><a class="reference internal" href="../deployment/sso-ldap.html">Active Directory/LDAP Setup (E10/E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/auth.html">Multi-factor Authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/ldap-group-sync.html">AD/LDAP Groups (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/ldap-group-constrained-team-channel.html">Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/ldap-group-constrained-team-channel.html#managing-membership-of-a-team-or-channel-with-synchronized-groups">Managing Membership of a Team or Channel with Synchronized Groups</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/ldap-group-constrained-team-channel.html#add-or-remove-groups-from-teams">Add or Remove Groups from Teams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/ldap-group-constrained-team-channel.html#add-or-remove-groups-from-private-channels">Add or Remove Groups from Private Channels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/ldap-group-constrained-team-channel.html#managing-members">Managing Members</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/ldap-group-constrained-team-channel.html#disabling-group-synchronized-management-of-teams-and-private-channels">Disabling Group Synchronized Management of Teams and Private Channels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/ldap-group-constrained-team-channel.html#faqs">FAQs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/sso-saml.html">SAML Single Sign-On (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/sso-saml-technical.html">SAML Single-Sign-On (E20): Technical Documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/sso-gitlab.html">GitLab Single Sign-On</a></li>
@@ -198,7 +205,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#unofficial-enhancements">Unofficial Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
@@ -268,18 +275,16 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#migrating-from-slack" id="id7">Migrating from Slack</a><ul>
-<li><a class="reference internal" href="#supported-features" id="id8">Supported Features</a></li>
-<li><a class="reference internal" href="#limitations" id="id9">Limitations</a></li>
-<li><a class="reference internal" href="#migrating-from-slack-using-the-mattermost-web-app" id="id10">Migrating from Slack using the Mattermost Web App</a></li>
-<li><a class="reference internal" href="#migrating-from-slack-using-the-mattermost-cli" id="id11">Migrating from Slack Using the Mattermost CLI</a></li>
-<li><a class="reference internal" href="#migrating-from-slack-using-the-mattermost-mmetl-tool-and-bulk-import" id="id12">Migrating from Slack Using the Mattermost mmetl Tool and Bulk Import</a></li>
-<li><a class="reference internal" href="#using-the-imported-team" id="id13">Using the Imported Team</a></li>
+<li><a class="reference internal" href="#migrating-from-slack-using-the-mattermost-mmetl-tool-and-bulk-import" id="id8">Migrating from Slack Using the Mattermost mmetl Tool and Bulk Import</a></li>
+<li><a class="reference internal" href="#migrating-from-slack-using-the-mattermost-web-app" id="id9">Migrating from Slack using the Mattermost Web App</a></li>
+<li><a class="reference internal" href="#migrating-from-slack-using-the-mattermost-cli" id="id10">Migrating from Slack Using the Mattermost CLI</a></li>
+<li><a class="reference internal" href="#using-the-imported-team" id="id11">Using the Imported Team</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#migrating-from-bitnami" id="id14">Migrating from Bitnami</a></li>
-<li><a class="reference internal" href="#migrating-from-hipchat-server-and-hipchat-data-center-to-mattermost" id="id15">Migrating from HipChat Server and HipChat Data Center to Mattermost</a></li>
-<li><a class="reference internal" href="#migrating-from-jabber-to-mattermost" id="id16">Migrating from Jabber to Mattermost</a></li>
-<li><a class="reference internal" href="#migrating-from-pidgin-to-mattermost" id="id17">Migrating from Pidgin to Mattermost</a></li>
+<li><a class="reference internal" href="#migrating-from-bitnami" id="id12">Migrating from Bitnami</a></li>
+<li><a class="reference internal" href="#migrating-from-hipchat-server-and-hipchat-data-center-to-mattermost" id="id13">Migrating from HipChat Server and HipChat Data Center to Mattermost</a></li>
+<li><a class="reference internal" href="#migrating-from-jabber-to-mattermost" id="id14">Migrating from Jabber to Mattermost</a></li>
+<li><a class="reference internal" href="#migrating-from-pidgin-to-mattermost" id="id15">Migrating from Pidgin to Mattermost</a></li>
 </ul>
 </li>
 </ul>
@@ -289,7 +294,7 @@
 <p>The following instructions migrate Mattermost from one server to another by backing up and restoring the Mattermost database and <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file. For these instructions <strong>SOURCE</strong> refers to the Mattermost server <em>from which</em> your system will be migrated and <strong>DESTINATION</strong> refers to the Mattermost server <em>to which</em> your system will be migrated.</p>
 <ol class="arabic simple">
 <li><dl class="first docutils">
-<dt>Backup your SOURCE Mattermost server.</dt>
+<dt>Back up your SOURCE Mattermost server.</dt>
 <dd><ol class="first last arabic">
 <li>See <a class="reference external" href="https://docs.mattermost.com/administration/backup.html">Backup Guide</a>.</li>
 </ol>
@@ -397,17 +402,17 @@
 <p>Migrating from bespoke messengers to Mattermost can be challenging. Because of the difficulty of upgrading and maintaining bespoke solutions, the format for storing data is unpredictable, and the community around any single legacy release is small.</p>
 <p>If your data in the bespoke messenger is vital, consider:</p>
 <ol class="arabic simple">
-<li><a class="reference external" href="https://docs.mattermost.com/deployment/bulk-loading.html">Mattermost Bulk Load Tool</a> - Use the Mattermost bulk load tool to ETL from your bespoke system to Mattermost.</li>
+<li><a class="reference external" href="https://docs.mattermost.com/deployment/bulk-loading.html">Mattermost Bulk Load tool</a> - Use the Mattermost Bulk Load tool to ETL from your bespoke system to Mattermost.</li>
 <li><a class="reference external" href="https://github.com/Brightscout/mattermost-etl">Mattermost ETL framework from BrightScout</a>- Consider the Mattermost ETL framework from BrightScout to custom-configure an adapter to plug in to the Bulk Load tool mentioned above.</li>
 <li><strong>Legacy Slack import</strong> - If you only recently switched from Slack to a bespoke tool, consider going back to import the data and users from the old Slack instance directly into Mattermost, leveraging the extensive support for Slack-import provided.</li>
-<li><strong>Export to Slack, then import to Mattermost</strong> - <a class="reference external" href="https://get.slack.help/hc/en-us/articles/201748703-Import-message-history">Export HipChat, Flowdock, Campfire, Chatwork, Hall or CSV files to Slack</a> and then export to a Slack export file and import the file into Mattermost.</li>
+<li><strong>Export to Slack, then import to Mattermost</strong> - <a class="reference external" href="https://get.slack.help/hc/en-us/articles/201748703-Import-message-history">Export HipChat, Flowdock, Campfire, Chatwork, Hall, or CSV files to Slack</a> and then export to a Slack export file and import the file into Mattermost.</li>
 </ol>
 <p>If your data in the bespoke messenger is not vital, consider:</p>
 <ol class="arabic simple">
 <li><strong>Parallel systems</strong> - Running Mattermost in parallel with your bespoke system until the majority of workflow and collaboration has moved to Mattermost</li>
 <li><strong>Hard switch</strong> - Announce a “hard switch” to Mattermost after a period of time of running both systems in parallel. Often this has been done due to security concerns in bespoke products or products nearing end-of-life.</li>
 </ol>
-<p>Sometimes systems running in parallel turn into a hard switch migration when a bespoke or deprecated system experiences a major outage or a security exploit. In 2017, this was experienced by many companies using Mattermost and HipChat.com in parallel when <a class="reference external" href="https://thenextweb.com/insider/2017/04/24/hipchat-hacked-weekend-bad/#.tnw_lAotA9OV">HipChat suffered a major security breach where customer data was stolen by an unknown attacker.</a></p>
+<p>Sometimes systems running in parallel turn into a hard switch migration when a bespoke or deprecated system experiences a major outage or a security exploit. In 2017, this was experienced by many companies using Mattermost and HipChat.com in parallel when <a class="reference external" href="https://thenextweb.com/insider/2017/04/24/hipchat-hacked-weekend-bad/#.tnw_lAotA9OV">HipChat suffered a major security breach where customer data was stolen by an unknown attacker</a>.</p>
 <p>When IT adopts management of Mattermost, often they will purchase the commercial version for additional compliance, access control, and scale features, in addition to high quality commercial support for upgrades and migrations. Teams can <a class="reference external" href="https://about.mattermost.com/pricing/">purchase Mattermost Enterpise Edition with a credit card online</a> or <a class="reference external" href="https://about.mattermost.com/contact/">contact sales</a> to engage in an enterprise procurement process.</p>
 </div>
 </div>
@@ -422,45 +427,17 @@
 <p class="first admonition-title">Note</p>
 <p class="last">As a proprietary SaaS service, Slack is able to change its export format quickly and without notice. If you encounter issues not mentioned in the documentation below, please alert the product team by <a class="reference external" href="https://www.mattermost.org/filing-issues/">filing an issue</a>.</p>
 </div>
-<p>The Slack Import feature in Mattermost is in Beta and focused on supporting migration of teams of less than 100 registered users. This feature can be accessed through the <a class="reference external" href="https://docs.mattermost.com/administration/migrating.html#migrating-from-slack-using-the-mattermost-web-app">Mattermost Web App</a> or using the <a class="reference external" href="https://docs.mattermost.com/administration/migrating.html#migrating-from-slack-using-the-mattermost-cli">CLI</a>.</p>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p><strong>It is highly recommended that you test Slack import before applying it to an instance intended for production.</strong></p>
-<p>If you use Docker, you can spin up a test instance in one line:</p>
-<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">--</span><span class="n">name</span> <span class="n">mattermost</span><span class="o">-</span><span class="n">preview</span> <span class="o">-</span><span class="n">d</span> <span class="o">--</span><span class="n">publish</span> <span class="mi">8065</span><span class="p">:</span><span class="mi">8065</span> <span class="o">--</span><span class="n">add</span><span class="o">-</span><span class="n">host</span> <span class="n">dockerhost</span><span class="p">:</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span> <span class="n">mattermost</span><span class="o">/</span><span class="n">mattermost</span><span class="o">-</span><span class="n">preview</span>
-</pre></div>
-</div>
-<p class="last">If you don’t use Docker, there are <a class="reference external" href="https://docs.mattermost.com/install/docker-local-machine.html">step-by-step instructions</a> to install Mattermost in preview mode in less than 5 minutes.</p>
-</div>
-<div class="section" id="supported-features">
-<h4><a class="toc-backref" href="#contents">Supported Features</a><a class="headerlink" href="#supported-features" title="Permalink to this headline">¶</a></h4>
-<p>The following key features can be imported from Slack:</p>
-<ul class="simple">
-<li>User accounts</li>
-<li>Public and private channels and the text messages posted in them, with formatting</li>
-<li>Channel topic and purpose</li>
-<li>Imported users added automatically to their channels</li>
-<li>Messages and message threads</li>
-<li>Direct and group messages</li>
-</ul>
-<p>Messages with file attachments are imported as a message containing a link to Slack’s servers by default. The file attachments themselves can be imported to Mattermost by using the <a class="reference external" href="https://github.com/grundleborg/slack-advanced-exporter">Slack Advanced Exporter</a> tool to add them to your archive before importing it.</p>
-<p>Bot and Integration messages are imported by default, but if you would like them to display with the appropriate username when imported, you should ensure that <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-integrations-to-override-usernames">Enable Integrations to Override Usernames</a> is set in <strong>System Console &gt; Integrations &gt; Integration Management</strong> (or <strong>System Console &gt; Integrations &gt; Custom Integrations</strong> in versions prior to 5.12) <em>before</em> doing the import.</p>
-<p>When topic-change messages, purpose-change messages, and channel name-change messages are imported from Slack, they appear in Mattermost as posts from the System user.</p>
+<div class="section" id="migrating-from-slack-using-the-mattermost-mmetl-tool-and-bulk-import">
+<h4><a class="toc-backref" href="#contents">Migrating from Slack Using the Mattermost mmetl Tool and Bulk Import</a><a class="headerlink" href="#migrating-from-slack-using-the-mattermost-mmetl-tool-and-bulk-import" title="Permalink to this headline">¶</a></h4>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Slack user accounts with the same email address as existing accounts on your Mattermost server will be merged into those accounts on import.</p>
+<p class="last">This method is the recommended way to import Slack’s corporate export file. It can be used with Mattermost v5.0 and onwards.</p>
 </div>
-</div>
-<div class="section" id="limitations">
-<h4><a class="toc-backref" href="#contents">Limitations</a><a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h4>
-<p>The following limitations are present when importing from Slack:</p>
-<ul class="simple">
-<li>The import is not idempotent, which means that duplicate posts are created if you import the same data more than once.</li>
-<li>Slack does not include direct or group messages and private channel messages when generating the export archive from their export tool. You will need to request a Corporate Export from them to access this data.</li>
-<li>If the handle of an imported Slack channel is the same handle as a deleted Mattermost channel, then a random handle is generated for the imported Slack channel.</li>
-<li>Pinned posts are not currently supported.</li>
-<li>Deleted users in Slack are currently not supported. They should be re-added to the file prior to import.  Mattermost will be providing a fix for this in the near future.</li>
-</ul>
+<ol class="arabic simple">
+<li>Use the <a class="reference external" href="https://github.com/grundleborg/slack-advanced-exporter">slack-advanced-exporter</a> to download attachments and add users’ email addresses to your Slack corporate export file.</li>
+<li>Use the <a class="reference external" href="https://github.com/mattermost/mmetl">mmetl tool</a> to transform Slack’s corporate export file into the <code class="docutils literal notranslate"><span class="pre">jsonl</span></code> format required by the bulk import tool.</li>
+<li>Bulk load the files using the steps provided in the <a class="reference external" href="https://docs.mattermost.com/deployment/bulk-loading.html#bulk-loading-data">bulk loading documentation</a>.</li>
+</ol>
 </div>
 <div class="section" id="migrating-from-slack-using-the-mattermost-web-app">
 <h4><a class="toc-backref" href="#contents">Migrating from Slack using the Mattermost Web App</a><a class="headerlink" href="#migrating-from-slack-using-the-mattermost-web-app" title="Permalink to this headline">¶</a></h4>
@@ -488,18 +465,6 @@
 <p class="last">To run the CLI command, you must be in the directory that contains the Mattermost installation. On a default installation of Mattermost, the directory is <code class="docutils literal notranslate"><span class="pre">/opt/mattermost/</span></code>. Also, if you followed our <a class="reference external" href="../guides/administrator.html#installing-mattermost">installation process</a>, you must run the command as the user <em>mattermost</em>. The executable is in the <code class="docutils literal notranslate"><span class="pre">bin</span></code> subdirectory and is called <code class="docutils literal notranslate"><span class="pre">mattermost</span></code>.</p>
 </div>
 </div>
-<div class="section" id="migrating-from-slack-using-the-mattermost-mmetl-tool-and-bulk-import">
-<h4><a class="toc-backref" href="#contents">Migrating from Slack Using the Mattermost mmetl Tool and Bulk Import</a><a class="headerlink" href="#migrating-from-slack-using-the-mattermost-mmetl-tool-and-bulk-import" title="Permalink to this headline">¶</a></h4>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This method is the recommended way to import Slack’s corporate export file.</p>
-</div>
-<ol class="arabic simple">
-<li>Use the <a class="reference external" href="https://github.com/grundleborg/slack-advanced-exporter">slack-advanced-exporter</a> to download attachments and add users’ email addresses to your Slack corporate export file.</li>
-<li>Use the <a class="reference external" href="https://github.com/mattermost/mmetl">mmetl tool</a> to transform Slack’s corporate export file into the <code class="docutils literal notranslate"><span class="pre">jsonl</span></code> format required by the bulk import tool.</li>
-<li>Bulk load the files using the steps provided in the <a class="reference external" href="https://docs.mattermost.com/deployment/bulk-loading.html#bulk-loading-data">bulk loading documentation</a>.</li>
-</ol>
-</div>
 <div class="section" id="using-the-imported-team">
 <h4><a class="toc-backref" href="#contents">Using the Imported Team</a><a class="headerlink" href="#using-the-imported-team" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
@@ -526,7 +491,7 @@
 </div>
 <div class="section" id="migrating-from-pidgin-to-mattermost">
 <h3><a class="toc-backref" href="#contents">Migrating from Pidgin to Mattermost</a><a class="headerlink" href="#migrating-from-pidgin-to-mattermost" title="Permalink to this headline">¶</a></h3>
-<p>In some cases people are using Pidgin clients with different backends to communicate. To continue using Pidgin with a Mattermost backend consider using <a class="reference external" href="https://github.com/Brightscout/mattermost-etl">Mattermost ETL tool</a> created by BrightScout to migrate data from your existing backend into Mattermost, then use the <a class="reference external" href="https://github.com/EionRobb/purple-mattermost">Pidgin-Mattermost plugin</a> (complete with an installer for end-user machines) to continue to support legacy Pidgin users while offering a whole new Mattermost experience on web, mobile, and PCs.</p>
+<p>In some cases people are using Pidgin clients with different backends to communicate. To continue using Pidgin with a Mattermost backend consider using <a class="reference external" href="https://github.com/Brightscout/mattermost-etl">Mattermost ETL tool</a> created by BrightScout to migrate data from your existing backend into Mattermost, then use the <a class="reference external" href="https://github.com/EionRobb/purple-mattermost">Pidgin-Mattermost plugin</a> (complete with an installer for end user machines) to continue to support legacy Pidgin users while offering a whole new Mattermost experience on web, mobile, and PC.</p>
 </div>
 </div>
 </div>
