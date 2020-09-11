@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>AD/LDAP Groups (E20) &mdash; Mattermost 5.25 documentation</title>
+  <title>AD/LDAP Groups (E20) &mdash; Mattermost 5.26 documentation</title>
   
 
   
@@ -31,7 +31,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="SAML Single Sign-On (E20)" href="sso-saml.html" />
+    <link rel="next" title="Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership" href="ldap-group-constrained-team-channel.html" />
     <link rel="prev" title="Multi-factor Authentication" href="auth.html" />
 	<!-- Bizible Script -->
 	<script src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.25
+                5.26
               </div>
             
           
@@ -192,6 +192,13 @@
 <li class="toctree-l4"><a class="reference internal" href="#frequently-asked-questions">Frequently Asked Questions</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html">Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html#managing-membership-of-a-team-or-channel-with-synchronized-groups">Managing Membership of a Team or Channel with Synchronized Groups</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html#add-or-remove-groups-from-teams">Add or Remove Groups from Teams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html#add-or-remove-groups-from-private-channels">Add or Remove Groups from Private Channels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html#managing-members">Managing Members</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html#disabling-group-synchronized-management-of-teams-and-private-channels">Disabling Group Synchronized Management of Teams and Private Channels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html#faqs">FAQs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-saml.html">SAML Single Sign-On (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-saml-technical.html">SAML Single-Sign-On (E20): Technical Documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-gitlab.html">GitLab Single Sign-On</a></li>
@@ -211,7 +218,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#unofficial-enhancements">Unofficial Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
@@ -312,7 +319,7 @@
 <div><ul class="simple">
 <li>Users that have been added to an AD/LDAP group will be added to the linked Mattermost group and to teams and channels configured for that group.</li>
 <li>Mattermost groups that are linked to AD/LDAP groups no longer included in your filter are deleted.</li>
-<li>Users removed from an AD/LDAP group are removed from the linked Mattermost group, but their channel and team membership is not revoked.</li>
+<li>Users removed from an AD/LDAP group are removed from the linked Mattermost group, but their channel and team membership is only revoked when the channel or team is synchronized to an AD/LDAP group.</li>
 </ul>
 </div></blockquote>
 <img alt="../_images/Group_Group_Member_Sync.png" src="../_images/Group_Group_Member_Sync.png" />
@@ -364,7 +371,7 @@
 <h2>Viewing Users Belonging to The Group<a class="headerlink" href="#viewing-users-belonging-to-the-group" title="Permalink to this headline">¶</a></h2>
 <p>Users who have logged in and accessed Mattermost will be visible in the members list on the group object. Members are read-only at this time and new members can be added through management in your AD/LDAP system.</p>
 <img alt="../_images/Group_Members.png" src="../_images/Group_Members.png" />
-<p>Users can be removed from the Mattermost group on subsequent synchronizations. However, they will not be removed from teams and channels.</p>
+<p>Users can be removed from the Mattermost group on subsequent synchronizations. However, they will not be removed from teams and channels unless the team or channel is group-synced.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">When a member removes themselves manually from a channel, that action is tracked in the <strong>Channel Member History</strong> table.  Users are not re-added to channels from which they previously removed themselves.</p>
@@ -544,7 +551,7 @@ Members who have been synced as part of a group cannot have their role changed v
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="sso-saml.html" class="btn btn-neutral float-right" title="SAML Single Sign-On (E20)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="ldap-group-constrained-team-channel.html" class="btn btn-neutral float-right" title="Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="auth.html" class="btn btn-neutral" title="Multi-factor Authentication" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
