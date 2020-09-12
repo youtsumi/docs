@@ -340,9 +340,11 @@
 </pre></div>
 </div>
 <p>In the Mattermost System Console, retry the upgrade. When the upgrade is complete, return to the command prompt on the Mattermost server and run the following command to restore the file permissions, replacing &lt;OriginalFileOwner&gt; with the appropriate value:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>\n\n```\nchown {{.FileUsername}} \&quot;{{.Path}}\&quot;\nchmod -w \&quot;{{.Path}}\&quot;\n```&quot;
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
+<p>chown &lt;OriginalFileOwner&gt; &lt;PathToBinaryFile&gt;</p>
+<p>chmod -w &lt;PathToBinaryFile&gt;</p>
 <p>Note that automated updates or actions performed by other System Admins after the conversion can overwrite the changes, possibly reverting the system to Team Edition. This includes the <code class="docutils literal notranslate"><span class="pre">run</span> <span class="pre">gitlab-ctl</span> <span class="pre">configure</span></code> command to update Mattermost within GitLab Omnibus. If this occurs, you will not be able to use Enterprise Edition features until converting the server back, but none of your data will be affected.</p>
 </div>
 <div class="section" id="troubleshooting">
