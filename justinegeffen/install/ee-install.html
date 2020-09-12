@@ -339,11 +339,11 @@
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>\n\n```\nchown {{.MattermostUsername}} \&quot;{{.Path}}\&quot;\nchmod +w \&quot;{{.Path}}\&quot;\n```\n\
 </pre></div>
 </div>
-<p>In the Mattermost System Console, retry the upgrade. When the upgrade is complete, return to the command prompt on the Mattermost server and run the following command to restore the file permissions:</p>
+<p>In the Mattermost System Console, retry the upgrade. When the upgrade is complete, return to the command prompt on the Mattermost server and run the following command to restore the file permissions, replacing &lt;OriginalFileOwner&gt; with the appropriate value:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>\n\n```\nchown {{.FileUsername}} \&quot;{{.Path}}\&quot;\nchmod -w \&quot;{{.Path}}\&quot;\n```&quot;
 </pre></div>
 </div>
-<p>Note that any future automated updates or actions performed by other System Admins after the conversion will overwrite the conversion once the <code class="docutils literal notranslate"><span class="pre">run</span> <span class="pre">gitlab-ctl</span> <span class="pre">configure</span></code> command is run. This automatically updates Mattermost to the new version of Mattermost Team Edition, and overwrites Enterprise Edition. Any Enterprise Edition features you were using will no longer be accessible - but none of your user data will be affected.</p>
+<p>Note that automated updates or actions performed by other System Admins after the conversion can overwrite the changes, possibly reverting the system to Team Edition. This includes the <code class="docutils literal notranslate"><span class="pre">run</span> <span class="pre">gitlab-ctl</span> <span class="pre">configure</span></code> command to update Mattermost within GitLab Omnibus. If this occurs, you will not be able to use Enterprise Edition features until converting the server back, but none of your data will be affected.</p>
 </div>
 <div class="section" id="troubleshooting">
 <h3>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h3>
@@ -352,17 +352,19 @@
 <p>If you converted Team Edition to Enterprise Edition on a managed deployment and then upgraded, the upgrade will have overwritten Enterprise Edition with the latest version of Team Edition.</p>
 <p>You can convert to Enterprise Edition again by following the steps above. If you plan to use Mattermost Enterprise Edition permanently, we recommend migrating your server to a self-managed one.</p>
 </div>
-<div class="section" id="the-manual-process-reset-my-file-permissions-how-do-i-get-them-back">
-<h4>The manual process reset my file permissions. How do I get them back?<a class="headerlink" href="#the-manual-process-reset-my-file-permissions-how-do-i-get-them-back" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="the-manual-process-reset-my-file-permissions">
+<h4>The manual process reset my file permissions<a class="headerlink" href="#the-manual-process-reset-my-file-permissions" title="Permalink to this headline">¶</a></h4>
 <p>If you manually changed your file permissions, you can change them back.</p>
 <ol class="arabic simple">
 <li>Open the command line tool on the Mattermost server.</li>
 <li><cite>cd</cite> to the Mattermost installation directory.</li>
 <li>Enter:</li>
 </ol>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>\n\n```\nchown {{.FileUsername}} \&quot;{{.Path}}\&quot;\nchmod -w \&quot;{{.Path}}\&quot;\n```&quot;
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
+<p>chown &lt;OriginalFileOwner&gt; &lt;PathToBinaryFile&gt;</p>
+<p>chmod -w &lt;PathToBinaryFile&gt;</p>
 </div>
 <div class="section" id="file-permissions-error">
 <h4>File permissions error<a class="headerlink" href="#file-permissions-error" title="Permalink to this headline">¶</a></h4>
@@ -380,8 +382,8 @@
 <h4>Incompatible system architecture<a class="headerlink" href="#incompatible-system-architecture" title="Permalink to this headline">¶</a></h4>
 <p>This tool is currently only compatible with Linux systems using x86-64 architecture. If you’re running Mattermost on a different architecture, please follow the manual upgrade process.</p>
 </div>
-<div class="section" id="cant-get-file">
-<h4>Can’t get file<a class="headerlink" href="#cant-get-file" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="cant-retrieve-enterprise-edition-binary-file">
+<h4>Can’t retrieve Enterprise Edition binary file<a class="headerlink" href="#cant-retrieve-enterprise-edition-binary-file" title="Permalink to this headline">¶</a></h4>
 <p>If the upgrade fails due to file retrieval failure, unavailable binary, or connectivity error, please check your proxy settings and try again. If the problem persists, follow the manual upgrade process instead.</p>
 </div>
 </div>

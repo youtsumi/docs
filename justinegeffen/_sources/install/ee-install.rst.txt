@@ -99,13 +99,13 @@ To change the permissions using the command line on the Mattermost server, you n
 
   \n\n```\nchown {{.MattermostUsername}} \"{{.Path}}\"\nchmod +w \"{{.Path}}\"\n```\n\
 
-In the Mattermost System Console, retry the upgrade. When the upgrade is complete, return to the command prompt on the Mattermost server and run the following command to restore the file permissions:
+In the Mattermost System Console, retry the upgrade. When the upgrade is complete, return to the command prompt on the Mattermost server and run the following command to restore the file permissions, replacing <OriginalFileOwner> with the appropriate value:
 
 .. code-block:: none
 
   \n\n```\nchown {{.FileUsername}} \"{{.Path}}\"\nchmod -w \"{{.Path}}\"\n```"
 
-Note that any future automated updates or actions performed by other System Admins after the conversion will overwrite the conversion once the ``run gitlab-ctl configure`` command is run. This automatically updates Mattermost to the new version of Mattermost Team Edition, and overwrites Enterprise Edition. Any Enterprise Edition features you were using will no longer be accessible - but none of your user data will be affected.
+Note that automated updates or actions performed by other System Admins after the conversion can overwrite the changes, possibly reverting the system to Team Edition. This includes the ``run gitlab-ctl configure`` command to update Mattermost within GitLab Omnibus. If this occurs, you will not be able to use Enterprise Edition features until converting the server back, but none of your data will be affected.
 
 Troubleshooting
 ~~~~~~~~~~~~~~~~
@@ -117,7 +117,7 @@ If you converted Team Edition to Enterprise Edition on a managed deployment and 
 
 You can convert to Enterprise Edition again by following the steps above. If you plan to use Mattermost Enterprise Edition permanently, we recommend migrating your server to a self-managed one.
 
-The manual process reset my file permissions. How do I get them back?
+The manual process reset my file permissions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 If you manually changed your file permissions, you can change them back.
@@ -128,7 +128,9 @@ If you manually changed your file permissions, you can change them back.
 
 .. code-block:: none
   
-  \n\n```\nchown {{.FileUsername}} \"{{.Path}}\"\nchmod -w \"{{.Path}}\"\n```"
+chown <OriginalFileOwner> <PathToBinaryFile>
+
+chmod -w <PathToBinaryFile>
 
 File permissions error
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -148,7 +150,7 @@ Incompatible system architecture
 
 This tool is currently only compatible with Linux systems using x86-64 architecture. If you’re running Mattermost on a different architecture, please follow the manual upgrade process.
 
-Can’t get file
+Can’t retrieve Enterprise Edition binary file
 ^^^^^^^^^^^^^^^^
 
 If the upgrade fails due to file retrieval failure, unavailable binary, or connectivity error, please check your proxy settings and try again. If the problem persists, follow the manual upgrade process instead.
