@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installing Mattermost on RHEL 6 &mdash; Mattermost 5.26 documentation</title>
+  <title>Installing Mattermost on RHEL 6 &mdash; Mattermost 5.27 documentation</title>
   
 
   
@@ -31,6 +31,8 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Installing Mattermost on RHEL 7" href="install-rhel-7.html" />
+    <link rel="prev" title="Installing Mattermost on Debian Buster" href="install-debian.html" />
 	<!-- Bizible Script -->
 	<script src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
 
@@ -131,7 +133,7 @@
             
             
               <div class="version">
-                5.26
+                5.27
               </div>
             
           
@@ -155,10 +157,64 @@
               
             
             
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/administrator.html">Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="requirements.html">Software and Hardware Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-ubuntu-1604.html">Installing on Ubuntu 16.04 LTS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-ubuntu-1804.html">Installing on Ubuntu 18.04 LTS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-kubernetes.html">Installing on Kubernetes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-debian.html">Installing on Debian Buster</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Installing on RHEL 6</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#installing-red-hat-enterprise-linux-6">Installing Red Hat Enterprise Linux 6</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#installing-mysql-database-server">Installing MySQL Database Server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#installing-postgresql-database">Installing PostgreSQL Database</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#installing-mattermost-server">Installing Mattermost Server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuring-mattermost-server">Configuring Mattermost Server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuring-tls-on-mattermost-server">Configuring TLS on Mattermost Server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#installing-nginx-server">Installing NGINX Server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuring-nginx-as-a-proxy-for-mattermost-server">Configuring NGINX as a proxy for Mattermost Server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuring-nginx-with-ssl-and-http-2">Configuring NGINX with SSL and HTTP/2</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="install-rhel-7.html">Installing on RHEL 7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-centos-oracle-scientific.html">Installing on CentOS, Oracle Linux, and Scientific Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sockets-db.html">Instructions On Setting Up a Socket-based Mattermost Database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ee-install.html">Enterprise Install and Upgrade</a></li>
+<li class="toctree-l3"><a class="reference internal" href="transport-encryption/config.html">Configuring Transport Encryption</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deploy-bitnami.html">Deploy Mattermost on Bitnami</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docker-local-machine.html">Local Machine Setup using Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prod-docker.html">Deploy Mattermost on Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docker-ebs.html">AWS Elastic Beanstalk Docker Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deploy-cloudron.html">Deploy Mattermost on Cloudron (Unofficial)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-mmte-helm-gitlab-helm.html">Installing Mattermost Team Edition in GitLab Helm Chart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trouble_mysql.html">MySQL Installation Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="desktop.html">Desktop Application Install Guides</a></li>
+<li class="toctree-l3"><a class="reference internal" href="desktop-managed-resources.html">Desktop - Managed Resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="desktop-msi-gpo.html">Desktop MSI Installer and Group Policy Installation Guides (Beta)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smtp-email-setup.html">SMTP Email Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config-cloudfront.html">Configuring CloudFront to host Mattermost static assets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="outbound-proxy.html">Using an Outbound Proxy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i18n.html">Chinese, Japanese and Korean Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config-apache2.html">Configuring Apache2 (Unofficial)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#unofficial-enhancements">Unofficial Enhancements</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/education.html">Training and Education</a></li>
@@ -195,6 +251,8 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
     
+      <li><a href="../guides/administrator.html">Administrator’s Guide</a> &raquo;</li>
+    
     <li>Installing Mattermost on RHEL 6</li>
     <li class="wy-breadcrumbs-aside">
       
@@ -211,12 +269,7 @@
             
   <div class="section" id="installing-mattermost-on-rhel-6">
 <span id="install-rhel-6"></span><h1>Installing Mattermost on RHEL 6<a class="headerlink" href="#installing-mattermost-on-rhel-6" title="Permalink to this headline">¶</a></h1>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">RHEL 6 is approaching its End of Life in December 2020.
-Because of this, we don’t recommend installing new instances of Mattermost on RHEL 6.</p>
-</div>
-<p>You can use these instructions to install Mattermost on CentOS 6, Oracle Linux 6, or Scientific Linux 6. With the exception of the operating system that you install, the process is identical.</p>
+<p>You can also use these instructions to install Mattermost on CentOS 6, Oracle Linux 6, or Scientific Linux 6. With the exception of the operating system that you install, the process is identical.</p>
 <p>A complete Mattermost installation consists of three major components: a proxy server, a database server, and the Mattermost server. You can install all components on one machine, or you can install each component on its own machine. If you have only two machines, then install the proxy and the Mattermost server on one machine, and install the database on the other machine.</p>
 <p>For the database, you can install either MySQL or PostgreSQL. The proxy is NGINX.</p>
 <div class="admonition note">
@@ -1132,6 +1185,15 @@ location / {
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="install-rhel-7.html" class="btn btn-neutral float-right" title="Installing Mattermost on RHEL 7" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="install-debian.html" class="btn btn-neutral" title="Installing Mattermost on Debian Buster" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
