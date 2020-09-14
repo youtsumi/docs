@@ -250,7 +250,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#unofficial-enhancements">Unofficial Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
@@ -400,7 +400,22 @@
 </div>
 <div class="section" id="release-v5-26-feature-release">
 <h2>Release v5.26 - <a class="reference external" href="https://docs.mattermost.com/administration/release-definitions.html#feature-release">Feature Release</a><a class="headerlink" href="#release-v5-26-feature-release" title="Permalink to this headline">¶</a></h2>
-<p><strong>Release day: 2020-08-16</strong></p>
+<ul class="simple">
+<li><strong>v5.26.2, released 2020-09-03</strong><ul>
+<li>Forcefully disabled the SAML Setting “Use Improved SAML Library (Beta)”, as we have identified some issues in this feature. Please follow instructions at https://docs.mattermost.com/deployment/sso-saml-before-you-begin.html for enabling SAML using the feature-equivalent <code class="docutils literal notranslate"><span class="pre">xmlsec1</span></code> utility.</li>
+</ul>
+</li>
+<li><strong>v5.26.1, released 2020-08-25</strong><ul>
+<li>Fixed an issue where users were unable to use the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#profile-picture-attribute"><code class="docutils literal notranslate"><span class="pre">PictureAttribute</span></code> setting</a> with SAML authentication. <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-27852">MM-27852</a></li>
+<li>Fixed an issue where users got unexpectedly logged out from the mobile app when <code class="docutils literal notranslate"><span class="pre">ExtendSessionLengthWithActivity</span></code> was enabled as opening the mobile app called an API that overrode session extension triggers of typing, channel change, and posts. <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-27184">MM-27184</a></li>
+<li>Fixed an issue where users experienced a kernel panic during LDAP sync when AuthData value was null. <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-27965">MM-27965</a></li>
+</ul>
+</li>
+<li><strong>v5.26.0, released 2020-08-16</strong><ul>
+<li>Original 5.26.0 release</li>
+</ul>
+</li>
+</ul>
 <div class="section" id="compatibility">
 <h3>Compatibility<a class="headerlink" href="#compatibility" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
@@ -410,7 +425,7 @@
 <div class="section" id="breaking-changes">
 <h3>Breaking Changes<a class="headerlink" href="#breaking-changes" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>In v5.26, Elasticsearch indexes needed to be recreated. Admins should re-index Elasticsearh using the <strong>Purge index</strong> and then <strong>Index now</strong> button so that all the changes will be included in the index. Systems may be left with a limited search during the indexing, so it should be done during a time when there is little to no activity because it may take several hours.</li>
+<li>In v5.26, Elasticsearch indexes needed to be recreated. Admins should re-index Elasticsearch using the <strong>Purge index</strong> and then <strong>Index now</strong> button so that all the changes will be included in the index. Systems may be left with a limited search during the indexing, so it should be done during a time when there is little to no activity because it may take several hours.</li>
 <li>An <code class="docutils literal notranslate"><span class="pre">EnableExperimentalGossipEncryption</span></code> option was added under <code class="docutils literal notranslate"><span class="pre">ClusterSettings</span></code>. If this is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, and <code class="docutils literal notranslate"><span class="pre">UseExperimentalGossip</span></code> is also <code class="docutils literal notranslate"><span class="pre">true</span></code>, all communication through the cluster using the gossip protocol will be encrypted. The encryption uses <code class="docutils literal notranslate"><span class="pre">AES-256</span></code> by default, and it is not kept configurable by design. However, if one wishes, they can set the value in Systems table manually for the <code class="docutils literal notranslate"><span class="pre">ClusterEncryptionKey</span></code> row. A key is a byte array converted to base64. It should be either 16, 24, or 32 bytes to select AES-128, AES-192, or AES-256. To update the key, one can execute <code class="docutils literal notranslate"><span class="pre">UPDATE</span> <span class="pre">Systems</span> <span class="pre">SET</span> <span class="pre">Value='&lt;value&gt;'</span> <span class="pre">WHERE</span> <span class="pre">Name='ClusterEncryptionKey';</span></code> in MySQL and <code class="docutils literal notranslate"><span class="pre">UPDATE</span> <span class="pre">systems</span> <span class="pre">SET</span> <span class="pre">value='&lt;value&gt;'</span> <span class="pre">WHERE</span> <span class="pre">name='ClusterEncryptionKey'</span></code> for PostgreSQL. For any change in this config setting to take effect, the whole cluster must be shutdown first. Then the config change made, and then restarted. In a cluster, all servers either will completely use encryption or not. There cannot be any partial usage.</li>
 </ul>
 <p><strong>IMPORTANT:</strong> If you upgrade from a release earlier than 5.25, please read the other <a class="reference external" href="https://docs.mattermost.com/administration/important-upgrade-notes.html">Important Upgrade Notes</a>.</p>
@@ -521,7 +536,7 @@
 <li>Fixed an issue where an empty outgoing webhook response generated a spurious ERROR.</li>
 <li>Fixed an issue where quick switch user search was always falling back to the database.</li>
 <li>Fixed an issue where a user’s status was displayed as online while the database status was displayed as offline.</li>
-<li>Fixed an issue where Elasticsearh indexing job did not index users and/or channels older than the first post.</li>
+<li>Fixed an issue where Elasticsearch indexing job did not index users and/or channels older than the first post.</li>
 <li>Fixed an issue where Global Relay SMTP connection timeout was not independent of the regular SMTP email settings timeout.</li>
 <li>Fixed an issue with a poor performance when opening More Direct Messages modal.</li>
 <li>Fixed an issue where bot username validation message was unclear as it did not mention which value was invalid.</li>
@@ -627,6 +642,7 @@
 <li>Twitter link previews do not work in Mattermost.</li>
 <li>Pasted unicode emojis fail to appear once posted.</li>
 <li><code class="docutils literal notranslate"><span class="pre">CMD+SHIFT+V</span></code> does not paste copied text on MacOS on Safari 12 (Catalina) and Firefox.</li>
+<li>Enabling Bleve search engine makes the Command Line Interface (CLI) mutually exclusive with the running server. This issue does not apply when using <a class="reference external" href="https://docs.mattermost.com/administration/mmctl-cli-tool.html">mmctl Command Line Tool</a>.</li>
 <li>On a server using a subpath, the URL opens a blank page if the System Admin changes the Site URL in the System Console UI. To fix, the System Admin should restart the server.</li>
 <li>Login does not work when Custom Terms of Service is enabled and MFA is enforced.</li>
 <li>Google login fails on the Classic mobile apps.</li>
@@ -648,6 +664,17 @@
 <div class="section" id="release-v5-25-esr">
 <h2>Release v5.25 - <a class="reference external" href="https://docs.mattermost.com/administration/release-definitions.html#extended-support-release-esr">ESR</a><a class="headerlink" href="#release-v5-25-esr" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
+<li><strong>v5.25.5, released 2020-09-03</strong><ul>
+<li>Forcefully disabled the SAML Setting “Use Improved SAML Library (Beta)”, as we have identified some issues in this feature. Please follow instructions at https://docs.mattermost.com/deployment/sso-saml-before-you-begin.html for enabling SAML using the feature-equivalent <code class="docutils literal notranslate"><span class="pre">xmlsec1</span></code> utility.</li>
+</ul>
+</li>
+<li><strong>v5.25.4, released 2020-08-25</strong><ul>
+<li>Fixed an issue where users were unable to use the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#profile-picture-attribute"><code class="docutils literal notranslate"><span class="pre">PictureAttribute</span></code> setting</a> with SAML authentication. <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-27852">MM-27852</a></li>
+<li>Fixed an issue where users got unexpectedly logged out from the mobile app when <code class="docutils literal notranslate"><span class="pre">ExtendSessionLengthWithActivity</span></code> was enabled as opening the mobile app called an API that overrode session extension triggers of typing, channel change, and posts. <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-27184">MM-27184</a></li>
+<li>Fixed an issue where users experienced a kernel panic during LDAP sync when AuthData value was null. <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-27965">MM-27965</a></li>
+<li>Fixed an issue where users experienced the Mattermost server crashing on <code class="docutils literal notranslate"><span class="pre">(Status).ToClusterJson</span></code> calls. <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-24544">MM-24544</a></li>
+</ul>
+</li>
 <li><strong>v5.25.3, released 2020-08-12</strong><ul>
 <li>Fixed an issue where the permission to create user access tokens on environments with OpenID Connect login providers such as GitLab was denied for System Admins. <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-27623">MM-27623</a></li>
 <li>Fixed an issue where deactivated users were included in compliance exports. <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-27194">MM-27194</a></li>
@@ -744,6 +771,7 @@
 <li>Twitter link previews do not work in Mattermost.</li>
 <li>Highlight is missing when at-mentioning yourself, followed by period, underscore, or hyphen.</li>
 <li>Ctrl+Enter doesn’t post an edited message with “Send messages on Ctrl+Enter” enabled for all messages.</li>
+<li>Enabling Bleve search engine makes the Command Line Interface (CLI) mutually exclusive with the running server. This issue does not apply when using <a class="reference external" href="https://docs.mattermost.com/administration/mmctl-cli-tool.html">mmctl Command Line Tool</a>.</li>
 <li>On a server using a subpath, the URL opens a blank page if the System Admin changes the Site URL in the System Console UI. To fix, the System Admin should restart the server.</li>
 <li>Login does not work when Custom Terms of Service is enabled and MFA is enforced.</li>
 <li>Google login fails on the Classic mobile apps.</li>

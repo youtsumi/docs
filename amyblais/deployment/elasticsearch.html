@@ -186,7 +186,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../administration/performance-alerting-guide.html">Mattermost Performance Alerting Guide</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#unofficial-enhancements">Unofficial Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
@@ -244,7 +244,8 @@
   <div class="section" id="elasticsearch-e20">
 <h1>Elasticsearch (E20)<a class="headerlink" href="#elasticsearch-e20" title="Permalink to this headline">¶</a></h1>
 <p><em>Available in Enterprise Edition E20.</em></p>
-<p><a class="reference external" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Elasticsearch</a> is a distributed, RESTful search engine supporting highly efficient database searches in a <a class="reference external" href="https://docs.mattermost.com/deployment/cluster.html">cluster environment</a>.</p>
+<p>Elasticsearch provides enterprise-scale deployments with optimized search performance and prevents performance degradation and timeouts.</p>
+<p>The implementation uses <a class="reference external" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Elasticsearch</a> as a distributed, RESTful search engine supporting highly efficient database searches in a <a class="reference external" href="https://docs.mattermost.com/deployment/cluster.html">cluster environment</a>.</p>
 <div class="toctree-wrapper compound">
 </div>
 <div class="section" id="deployment-guide">
@@ -252,15 +253,15 @@
 <div class="section" id="overview">
 <h3>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h3>
 <p>Elasticsearch allows you to search large volumes of data quickly, in near real time, by creating and managing an index of post data. The indexing process can be managed from the System Console after setting up and connecting an Elasticsearch server. The post index is stored on the Elasticsearch server and is updated constantly after new posts are made. In order to index existing posts, a bulk index of the entire post database must be generated.</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">The default Mattermost database search starts to show performance degradation at around 2.5 million posts, depending on the specifications for the database server. If you expect your Mattermost server to have more than 2.5 million posts, we recommend using Elasticsearch for optimum search performance. For deployments with over 5 million posts, Elasticsearch is required to avoid significant performance issues (such as timeouts) with search and at-mentions.</p>
+</div>
 <p>Elasticsearch v5.x, v6.x, and v7.x are supported.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">From Mattermost v5.26, you can now filter inactive users, search by user role, and also search for terms inside links. This update introduces a breaking change which affects the “from” part of the search. To avoid this, reindex your Elasticsearch instance/cluster prior to upgrading.</p>
+<p class="last">From Mattermost v5.26, you can filter inactive users, search by user role, and also search for terms inside links. This update introduces a breaking change which affects the “from” part of the search. To avoid this, reindex your Elasticsearch instance/cluster prior to upgrading.</p>
 </div>
-</div>
-<div class="section" id="when-to-use-elasticsearch">
-<h3>When to Use Elasticsearch<a class="headerlink" href="#when-to-use-elasticsearch" title="Permalink to this headline">¶</a></h3>
-<p>The default Mattermost database search starts to show performance degradation at around 2.5 million posts, depending on the specifications for the database server. If you expect your Mattermost server to have more than 2.5 million posts, we recommend using Elasticsearch for optimum search performance.</p>
 </div>
 <div class="section" id="setting-up-an-elasticsearch-server">
 <h3>Setting Up an Elasticsearch Server<a class="headerlink" href="#setting-up-an-elasticsearch-server" title="Permalink to this headline">¶</a></h3>
@@ -358,7 +359,7 @@
 <h2>Frequently Asked Questions (FAQ)<a class="headerlink" href="#frequently-asked-questions-faq" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="do-i-need-to-use-elasticsearch">
 <h3>Do I need to use Elasticsearch?<a class="headerlink" href="#do-i-need-to-use-elasticsearch" title="Permalink to this headline">¶</a></h3>
-<p>The Elasticsearch engine is designed for large Enterprise deployments wanting to run highly efficient database searches in a cluster environment.</p>
+<p>The Elasticsearch engine is designed for large Enterprise deployments wanting to run highly efficient database searches in a cluster environment. The default Mattermost database search starts to show performance degradation at around 2.5 million posts, depending on the specifications for the database server. If you expect your Mattermost server to have more than 2.5 million posts, we recommend using Elasticsearch for optimum search performance.</p>
 </div>
 <div class="section" id="what-types-of-indexes-are-created">
 <h3>What types of indexes are created?<a class="headerlink" href="#what-types-of-indexes-are-created" title="Permalink to this headline">¶</a></h3>
@@ -370,7 +371,7 @@
 </div>
 <div class="section" id="are-there-any-new-search-features-offered-with-elasticsearch">
 <h3>Are there any new search features offered with Elasticsearch?<a class="headerlink" href="#are-there-any-new-search-features-offered-with-elasticsearch" title="Permalink to this headline">¶</a></h3>
-<p>The current implementation of Elasticsearch matches the search features currently available with database search. The Mattermost team is working on extending the Elasticsearch feature set with file name and content search, date filters, and operators, and modifiers.</p>
+<p>The current implementation of Elasticsearch matches the search features currently available with database search. The Mattermost team is working on extending the Elasticsearch feature set with file name and content search, date filters, and operators and modifiers.</p>
 </div>
 <div class="section" id="are-my-files-stored-in-elasticsearch">
 <h3>Are my files stored in Elasticsearch?<a class="headerlink" href="#are-my-files-stored-in-elasticsearch" title="Permalink to this headline">¶</a></h3>
