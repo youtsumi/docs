@@ -349,6 +349,7 @@
 <li>Choose <strong>Save</strong>.</li>
 </ol>
 <p>When the user accesses the Mattermost URL, they log in with same username and password that they use for organizational logins.</p>
+<p>Filters can also be used for excluding users who belong to certain groups. For Active Directory, the query to filter out groups is <code class="docutils literal notranslate"><span class="pre">(&amp;(memberof=cn=ACME_ALL,ou=Users,dc=sademo,dc=com)(!(memberof=cn=DEV_OPS,ou=Users,dc=sademo,dc=com)))</span></code>.</p>
 </div>
 <div class="section" id="guest-filter">
 <h4>Guest Filter<a class="headerlink" href="#guest-filter" title="Permalink to this headline">¶</a></h4>
@@ -432,7 +433,7 @@
 <li><strong>User deletion:</strong> If the user is completely removed from the AD/LDAP server, they will be deactivated in Mattermost on the next synchronization.</li>
 <li><strong>User filter:</strong> Set the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#user-filter">user filter</a> to only select the subset of AD/LDAP users you want to have access to Mattermost. When someone is removed from the selected group, they will be deactivated in Mattermost on the next synchronization.</li>
 </ol>
-<p>For Active Directory, to filter out deactivated users you must set the user filter to <code class="docutils literal notranslate"><span class="pre">(&amp;(objectCategory=Person)(!(UserAccountControl:1.2.840.113556.1.4.803:=2)))</span></code>.</p>
+<p>For Active Directory, to filter out deactivated users you must set the user filter to <code class="docutils literal notranslate"><span class="pre">(&amp;(objectCategory=Person)(!(UserAccountControl:1.2.840.113556.1.4.803:=2)))</span></code>. Filters can also be used for excluding users who belong to certain groups. For Active Directory, the query to filter out groups is <code class="docutils literal notranslate"><span class="pre">(&amp;(memberof=cn=ACME_ALL,ou=Users,dc=sademo,dc=com)(!(memberof=cn=DEV_OPS,ou=Users,dc=sademo,dc=com)))</span></code>.</p>
 <p>When a user is deactivated in Mattermost, all the user’s current sessions are revoked and they will be unable to log in or access Mattermost.</p>
 </div>
 <div class="section" id="can-i-connect-to-multiple-active-directory-servers">
