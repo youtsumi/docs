@@ -350,14 +350,17 @@ sudo setcap <span class="nv">cap_net_bind_service</span><span class="o">=</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">If you are using an HA deployment, please apply the steps above on all the nodes in your cluster. After that, the “Config File MD5” column in the “High Availability” should be green. If they are yellow, please ensure that all nodes have the same server version and the same config. If they still show yellow, then there’s a simple trick to trigger a config propagation across the cluster.</p>
-<ol class="arabic simple">
+<li><p class="first">If you’re using a High Availability deployment you need to apply the steps above on all the nodes in your cluster. Once complete, the <strong>Config File MD5</strong> columns in the High Availability interface should be green. If they’re yellow, please ensure that all nodes have the same server version and the same configuration.</p>
+</li>
+</ol>
+<p>If they still show yellow, then you need to trigger a config propagation across the cluster:</p>
+<blockquote>
+<div><ol class="arabic simple">
 <li>Open the System Console and change a setting, then revert it. This will enable the <strong>Save</strong> button for that page.</li>
 <li>Click <strong>Save</strong>.</li>
 </ol>
 <p>This will not change any config, but send the existing config to all nodes in the cluster.</p>
-</li>
-</ol>
+</div></blockquote>
 <p>After the server is upgraded, users might need to refresh their browsers to experience any new features.</p>
 </div>
 <div class="section" id="upgrading-team-edition-to-enterprise-edition">
