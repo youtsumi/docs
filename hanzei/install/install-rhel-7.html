@@ -281,7 +281,7 @@
 <li><a class="reference internal" href="#configuring-tls-on-mattermost-server" id="id6">Configuring TLS on Mattermost Server</a></li>
 <li><a class="reference internal" href="#installing-nginx-server" id="id7">Installing NGINX Server</a></li>
 <li><a class="reference internal" href="#configuring-nginx-as-a-proxy-for-mattermost-server" id="id8">Configuring NGINX as a proxy for Mattermost Server</a><ul>
-<li><a class="reference internal" href="#nginx-configuration-faq" id="id9"><strong>NGINX Configuration FAQ</strong></a></li>
+<li><a class="reference internal" href="#nginx-configuration-faq" id="id9">NGINX Configuration FAQ</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#configuring-nginx-with-ssl-and-http-2" id="id10">Configuring NGINX with SSL and HTTP/2</a></li>
@@ -912,8 +912,10 @@ enabled=1
 <blockquote>
 <div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">touch</span> <span class="pre">/etc/nginx/sites-available/mattermost</span></code></div></blockquote>
 <p>On RHEL 7: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">touch</span> <span class="pre">/etc/nginx/conf.d/mattermost</span></code></p>
-<p>3. Open the file <code class="docutils literal notranslate"><span class="pre">/etc/nginx/sites-available/mattermost</span></code> as root in a text editor and replace its contents, if any, with the following lines. Make sure that you use your own values for the Mattermost server IP address and FQDN for <em>server_name</em>.
-On RHEL 7, open the file <code class="docutils literal notranslate"><span class="pre">/etc/nginx/conf.d/mattermost</span></code>.</p>
+<ol class="arabic simple" start="3">
+<li>Open the file <code class="docutils literal notranslate"><span class="pre">/etc/nginx/sites-available/mattermost</span></code> as <em>root</em> user in a text editor and replace its contents, if any, with the following lines. Make sure that you use your own values for the Mattermost server IP address and FQDN for <em>server_name</em>.</li>
+</ol>
+<p>On RHEL 7, open the file <code class="docutils literal notranslate"><span class="pre">/etc/nginx/conf.d/mattermost</span></code>.</p>
 <blockquote>
 <div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>upstream backend {
    server 10.10.10.2:8065;
@@ -985,9 +987,7 @@ server {
 <li>Restart NGINX.</li>
 </ol>
 <blockquote>
-<div><p>On Ubuntu 14.04 and RHEL 6: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">service</span> <span class="pre">nginx</span> <span class="pre">restart</span></code></p>
-<p>On Ubuntu 16.04, Ubuntu 18.04, Debian Stretch, and RHEL 7: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">restart</span> <span class="pre">nginx</span></code></p>
-</div></blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">restart</span> <span class="pre">nginx</span></code></div></blockquote>
 <ol class="arabic simple" start="7">
 <li>Verify that you can see Mattermost through the proxy.</li>
 </ol>
@@ -998,14 +998,12 @@ server {
 <ol class="arabic simple" start="8">
 <li>Restrict access to port 8065.</li>
 </ol>
-<blockquote>
-<div>By default, the Mattermost server accepts connections on port 8065 from every machine on the network. Use your firewall to deny connections on port 8065 to all machines except the machine that hosts NGINX and the machine that you use to administer Mattermost server. If you’re installing on Amazon Web Services, you can use security groups to restrict access.</div></blockquote>
+<p>By default, the Mattermost server accepts connections on port 8065 from every machine on the network. Use your firewall to deny connections on port 8065 to all machines except the machine that hosts NGINX and the machine that you use to administer Mattermost server. If you’re installing on Amazon Web Services, you can use Security Groups to restrict access.</p>
 <p>Now that NGINX is installed and running, you can configure it to use SSL, which allows you to use HTTPS connections and the HTTP/2 protocol.</p>
 <div class="section" id="nginx-configuration-faq">
-<h3><a class="toc-backref" href="#install-and-configure-the-components-in-the-following-order-note-that-you-need-only-one-database-either-mysql-or-postgresql"><strong>NGINX Configuration FAQ</strong></a><a class="headerlink" href="#nginx-configuration-faq" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#install-and-configure-the-components-in-the-following-order-note-that-you-need-only-one-database-either-mysql-or-postgresql">NGINX Configuration FAQ</a><a class="headerlink" href="#nginx-configuration-faq" title="Permalink to this headline">¶</a></h3>
 <p><strong>Why are Websocket connections returning a 403 error?</strong></p>
-<p>This is likely due to a failing cross-origin check. A check is applied for WebSocket code to see if the <code class="docutils literal notranslate"><span class="pre">Origin</span></code> header is the same as the host header. If it’s not, a 403 error is returned.  Open the file <code class="docutils literal notranslate"><span class="pre">/etc/nginx/sites-available/mattermost</span></code>
-as root in a text editor and make sure that the host header being set in the proxy is dynamic:</p>
+<p>This is likely due to a failing cross-origin check. A check is applied for WebSocket code to see if the <code class="docutils literal notranslate"><span class="pre">Origin</span></code> header is the same as the host header. If it’s not, a 403 error is returned. Open the file <code class="docutils literal notranslate"><span class="pre">/etc/nginx/sites-available/mattermost</span></code> as root in a text editor and make sure that the host header being set in the proxy is dynamic:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>location ~ /api/v[0-9]+/(users/)?websocket$ {
   proxy_pass            http://backend;
   (...)
@@ -1033,7 +1031,7 @@ docker network connect mymattermost_default nginx-proxy
 </div>
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li>Restart the Mattermost Docker containers</li>
+<li>Restart the Mattermost Docker containers.</li>
 </ol>
 <blockquote>
 <div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>docker-compose stop app
@@ -1043,10 +1041,10 @@ docker-compose start app
 </div></blockquote>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
-<p class="last">There is no need to run the ‘web’ container, since NGINX proxy accepts incoming requests.</p>
+<p class="last">You don’t need to run the ‘web’ container, since NGINX proxy accepts incoming requests.</p>
 </div>
 <ol class="arabic simple" start="3">
-<li>Update your docker-compose.yml file to include a new environment variable <code class="docutils literal notranslate"><span class="pre">VIRTUAL_HOST</span></code> and an <code class="docutils literal notranslate"><span class="pre">expose</span></code> directive.</li>
+<li>Update your <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> file to include a new environment variable <code class="docutils literal notranslate"><span class="pre">VIRTUAL_HOST</span></code> and an <code class="docutils literal notranslate"><span class="pre">expose</span></code> directive.</li>
 </ol>
 <blockquote>
 <div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>environment:
@@ -1060,16 +1058,16 @@ expose:
 </pre></div>
 </div>
 </div></blockquote>
-<p>If you are using SSL, you may also need to expose port 443.</p>
+<p>If you’re using SSL, you may also need to expose port 443.</p>
 <p><strong>Why does NGINX fail when installing Gitlab CE with Mattermost on Azure?</strong></p>
-<p>You may need to update the Callback URLs for the Application entry of Mattermost inside your Gitlab instance.</p>
+<p>You may need to update the Callback URLs for the Application entry of Mattermost inside your GitLab instance.</p>
 <ol class="arabic simple">
-<li>Log into your GitLab instance as the admin</li>
-<li>Go to <strong>Admin &gt; Applications</strong></li>
-<li>Click <strong>Edit</strong> on GitLab-Mattermost</li>
-<li>Update the Callback URLs to your new domain/URL</li>
-<li>Save the changes</li>
-<li>Update the external URL for Gitlab and Mattermost in the <code class="docutils literal notranslate"><span class="pre">/etc/gitlab/gitlab.rb</span></code> configuration file.</li>
+<li>Log in to your GitLab instance as the admin.</li>
+<li>Go to <strong>Admin &gt; Applications</strong>.</li>
+<li>Click <strong>Edit</strong> on GitLab-Mattermost.</li>
+<li>Update the Callback URLs to your new domain/URL.</li>
+<li>Save the changes.</li>
+<li>Update the external URL for GitLab and Mattermost in the <code class="docutils literal notranslate"><span class="pre">/etc/gitlab/gitlab.rb</span></code> configuration file.</li>
 </ol>
 </div>
 </div>
