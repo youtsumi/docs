@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Security Overview &mdash; Mattermost 5.26 documentation</title>
+  <title>Security Overview &mdash; Mattermost 5.27 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.26
+                5.27
               </div>
             
           
@@ -275,7 +275,7 @@
 <li>Mattermost can run entirely behind your firewall as a single Linux binary with MySQL or PostgreSQL.</li>
 <li>Mattermost mobile apps can be deployed to an <a class="reference external" href="https://docs.mattermost.com/deployment/push.html#enterprise-app-store-eas">internal Enterprise App Store</a> by using source code available for Mattermost mobile apps and push notification service. Optionally <a class="reference external" href="https://docs.mattermost.com/deployment/deployment.html#vpn-setup">VPN clients on PC and mobile devices</a> can be used outside your private network.</li>
 <li>Optionally, Mattermost mobile apps can run without a VPN by opening standard ports on your Mattermost server, such as 80 or 443. In this configuration, you have the option of using compiled <a class="reference external" href="https://docs.mattermost.com/deployment/push.html#hosted-push-notifications-service-hpns">iOS and Android applications in iTunes and Google Play provided by Mattermost, Inc.</a> (E10, E20), as well as enabling <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-multi-factor-authentication-enterprise">multi-factor authentication</a> (E10, E20).</li>
-<li>User sessions across web, PC and mobile can be <a class="reference external" href="https://docs.mattermost.com/help/settings/account-settings.html#view-and-logout-of-active-sessions">remotely revoked through account settings</a>, or via the System Console by deactivating accounts.</li>
+<li>User sessions across web, PC, and mobile can be <a class="reference external" href="https://docs.mattermost.com/help/settings/account-settings.html#view-and-logout-of-active-sessions">remotely revoked through account settings</a>, or via the System Console by deactivating accounts.</li>
 <li>Mattermost apps can be packaged into leading Enterprise Mobility Management solutions including AirWatch and Blackberry through <a class="reference external" href="https://www.appdome.com/">AppDome</a>.</li>
 </ul>
 </div></blockquote>
@@ -333,17 +333,17 @@
 <p>To prevent account enumeration, if a user logs in and enters incorrect login details a generic error is presented.</p>
 <p>Security is a top concern for organizations who deploy Mattermost in a private network. While running under existing policies and auth protocols of the private network, we prioritize a better user experience (telling a user what went wrong on login) ahead of preventing users on the private network from enumerating accounts.</p>
 <p>Mattermost is optimized to be deployed in a highly secure environment. However, admins are given a choice as to the deployment environment.</p>
-<p>When Mattermost is deployed outside a firewall, Admins must be aware that their system is exposed to issues inherent in public cloud deployments. In this case, we generally follow the standards of leading online services. For example, Gmail offers APIs that not only confirm whether an email account exists, but also displays user’s profile picture by default.</p>
+<p>When Mattermost is deployed outside a firewall, Admins must be aware that their system is exposed to issues inherent in public cloud deployments. In this case, we generally follow the standards of leading online services. For example, Gmail offers APIs that not only confirm whether an email account exists, but also displays the user’s profile picture by default.</p>
 <p>Mattermost undergoes extensive penetration testing, security reviews, and <a class="reference external" href="http://about.mattermost.com/security-updates">security updates</a>. You can find further details and previous discussion <a class="reference external" href="https://github.com/mattermost/platform/issues/4321#issuecomment-258832013">in our GitHub thread</a>. In addition, the following policies are provided:</p>
 <blockquote>
 <div><ul class="simple">
-<li>Limit communications to specific users, private channels, or team-wide public channels</li>
+<li>Limit communications to specific users, private channels, or team-wide public channels.</li>
 <li>Increase system security <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#restrict-account-creation-to-specified-email-domains">by restricting email-based account creation to email addresses from a list of specific domains,</a> e.g. “corp.mattermost.com”, “mattermost.org”, etc.”</li>
-<li>Choose whether to restrict or enable <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-cross-origin-requests-from">cross-origin requests.</a></li>
+<li>Choose whether to restrict or enable <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-cross-origin-requests-from">cross-origin requests</a>.</li>
 <li>If sharing of public links for account creation or sharing of files and images are enabled, links can be invalidated via the System Console by <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#public-link-salt">regenerating salts</a>.</li>
 <li>Optionally add <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#password-requirements">advanced passwords requirements</a> with minimum numbers of symbols, numbers, lower, and uppercase letters.</li>
-<li>Optionally restrict <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#policy-enterprise">creation, renaming, archiving of channels, private channels and integrations to team admins, system admins, or end users</a> (E10)</li>
-<li>Optionally restrict <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#policy-enterprise">sending team invites to team admins, system admins, or end users</a> (E10).</li>
+<li>Optionally restrict <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#policy-enterprise">creation, renaming, archiving of channels, private channels and integrations to Team Admins, System Admins, or end users</a> (E10).</li>
+<li>Optionally restrict <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#policy-enterprise">sending team invites to Team Admins, System Admins, or end users</a> (E10).</li>
 </ul>
 </div></blockquote>
 </div>
@@ -373,8 +373,8 @@
 </div>
 <div class="section" id="security-policies">
 <h2><a class="toc-backref" href="#contents">Security Policies</a><a class="headerlink" href="#security-policies" title="Permalink to this headline">¶</a></h2>
-<p>For information on internal security policies, development guidelines, business continuity plans, and common security-related questions from enterprises, please see our <a class="reference external" href="https://docs.mattermost.com/process/security.html">Security Policies</a> documentation.</p>
-<p>Moreover, Mattermost performs a penetration test on the software no less than once per twelve (12) month period. Customers may request a copy of any penetration test results upon five (5) day written notice at any time, but no more than once per twelve (12) month period.</p>
+<p>For information on internal security policies, development guidelines, business continuity plans, and common security-related questions from enterprises, please see our <a class="reference external" href="https://handbook.mattermost.com/operations/operations/company-policies/security-policies">Security Policies</a> documentation.</p>
+<p>Moreover, Mattermost performs a penetration test on the software no less than once per twelve (12) month period. Customers may request a copy of any penetration test results upon five (5) days’ written notice at any time, but no more than once per twelve (12) month period.</p>
 </div>
 <div class="section" id="hipaa-compliance">
 <h2><a class="toc-backref" href="#contents">HIPAA compliance</a><a class="headerlink" href="#hipaa-compliance" title="Permalink to this headline">¶</a></h2>
@@ -419,7 +419,7 @@
 <div class="section" id="finra-compliance">
 <h2><a class="toc-backref" href="#contents">FINRA compliance</a><a class="headerlink" href="#finra-compliance" title="Permalink to this headline">¶</a></h2>
 <p>Mattermost Enterprise Edition E20 is designed to meet the <a class="reference external" href="http://www.finra.org/industry/cybersecurity">cybersecurity requirements of the United States Financial Industry Regulatory Authority (FINRA)</a> as part of a customer’s existing operational systems, including technology governance, system change management, risk assessments, technical controls, incident response, vendor management, data loss prevention, and staff training.</p>
-<p>FINRA reviews a firm’s ability to protect the confidentiality, integrity and availability of sensitive customer information. This includes reviewing each firm’s compliance with SEC regulations, including:</p>
+<p>FINRA reviews a firm’s ability to protect the confidentiality, integrity, and availability of sensitive customer information. This includes reviewing each firm’s compliance with SEC regulations, including:</p>
 <ul class="simple">
 <li>Regulation <a class="reference external" href="https://www.ecfr.gov/cgi-bin/text-idx?SID=226b4b62d8bf25d29cc88df5039cddde&amp;mc=true&amp;node=se17.4.248_130&amp;rgn=div8">S-P (17 CFR §248.30)</a>, which requires firms to adopt written policies and procedures to protect customer information against cyber-attacks and other forms of unauthorized access.</li>
 <li>Regulation <a class="reference external" href="https://www.ecfr.gov/cgi-bin/text-idx?SID=5621786ec1a831400e4b64f3e92198bd&amp;mc=true&amp;node=pt17.4.248&amp;rgn=div5#sp17.4.248.c">S-ID (17 CFR §248.201-202)</a>, which outlines a firm’s duties regarding the detection, prevention, and mitigation of identity theft.</li>
@@ -427,10 +427,10 @@
 </ul>
 <p>Mattermost supports FINRA compliance as part of a customer’s integrated operations in the following ways:</p>
 <ul class="simple">
-<li><strong>Continuous archiving</strong> - Configuration as a non-rewriteable, non-erasable system of record for all messages and files entered into the system. Moreover, automated compliance exports and integration support for Smarsh/Actiance and Global Relay provide third-party eDiscovery options.</li>
-<li><strong>Secure deployment</strong> - Deployment within private, public and on-premesis networks with existing FINRA-compliant safeguards and infrastructure to protect customer information from cyber attack.</li>
-<li><strong>Support for intrusion detection</strong> - Ability to support multi-layered intrusion detection from authentication systems to application servers to database access, including configuration of proxy, application, and database logging to deeply audit system interactions.</li>
-<li><strong>Multi-layered disaster recovery</strong> - High availability configuration, automated data back up, and enterprise information archiving integration to prevent data loss and recover from disaster.</li>
+<li><strong>Continuous archiving:</strong> Configuration as a non-rewriteable, non-erasable system of record for all messages and files entered into the system. Moreover, automated compliance exports and integration support for Smarsh/Actiance and Global Relay provide third-party eDiscovery options.</li>
+<li><strong>Secure deployment:</strong> Deployment within private, public, and on-premesis networks with existing FINRA-compliant safeguards and infrastructure to protect customer information from cyber attack.</li>
+<li><strong>Support for intrusion detection:</strong> Ability to support multi-layered intrusion detection from authentication systems to application servers to database access, including configuration of proxy, application, and database logging to deeply audit system interactions.</li>
+<li><strong>Multi-layered disaster recovery:</strong> High Availability configuration, automated data back up, and enterprise information archiving integration to prevent data loss and recover from disaster.</li>
 </ul>
 </div>
 </div>
