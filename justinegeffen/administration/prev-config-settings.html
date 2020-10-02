@@ -179,8 +179,8 @@
 <li class="toctree-l4"><a class="reference internal" href="#customization">Customization</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id22">Compliance</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#advanced">Advanced</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#settings-configurable-only-in-config-json">Settings configurable only in <code class="docutils literal notranslate"><span class="pre">config.json</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id36">Experimental Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#settings-configurable-only-in-config-json">Settings configurable only in config.json</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id36">Experimental settings</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/customize-mattermost.html">Customizing Mattermost</a></li>
@@ -264,10 +264,10 @@
 </div>
 <p>Mattermost configuration settings are maintained in the configuration file <code class="docutils literal notranslate"><span class="pre">config.json</span></code>, located in the <code class="docutils literal notranslate"><span class="pre">mattermost/config</span></code> directory. You can modify the configuration file using the System Console, or by using a text editor to modify it directly.</p>
 <p>The default location of <code class="docutils literal notranslate"><span class="pre">config.json</span></code> is in the <code class="docutils literal notranslate"><span class="pre">mattermost/config</span></code> directory. Mattermost must have write permissions to <code class="docutils literal notranslate"><span class="pre">config.json</span></code>, otherwise changes made in the System Console will have no effect.</p>
-<p><strong>Configuration in Database</strong></p>
-<p>Storing configuration in the database is supported in v5.10 and later.  Please see more information on how to set this up <a class="reference external" href="https://docs.mattermost.com/administration/config-in-database.html">here</a>.</p>
-<p><strong>Environment Variables</strong></p>
-<p>Starting in Mattermost version 3.8, you can use environment variables to manage the configuration. Environment variables override settings in <code class="docutils literal notranslate"><span class="pre">config.json</span></code>. If a change to a setting in <code class="docutils literal notranslate"><span class="pre">config.json</span></code> requires a restart for it to take effect, then changes to the corresponding environment variable also require a server restart.</p>
+<p><strong>Configuration in Database</strong>
+Storing configuration in the database is supported in v5.10 and later.  Please see more information on how to set this up <a class="reference external" href="https://docs.mattermost.com/administration/config-in-database.html">here</a>.</p>
+<p><strong>Environment Variables</strong>
+Starting in Mattermost version 3.8, you can use environment variables to manage the configuration. Environment variables override settings in <code class="docutils literal notranslate"><span class="pre">config.json</span></code>. If a change to a setting in <code class="docutils literal notranslate"><span class="pre">config.json</span></code> requires a restart for it to take effect, then changes to the corresponding environment variable also require a server restart.</p>
 <p>The name of the environment variable for any setting can be derived from the name of that setting in <code class="docutils literal notranslate"><span class="pre">config.json</span></code>. For example, to derive the name of the Site URL setting:</p>
 <ol class="arabic simple">
 <li>Find the setting in <code class="docutils literal notranslate"><span class="pre">config.json</span></code>. In this case, <em>ServiceSettings.SiteURL</em>.</li>
@@ -296,7 +296,7 @@
 <li><a class="reference internal" href="#authentication" id="id50">Authentication</a><ul>
 <li><a class="reference internal" href="#email-authentication" id="id51">Email Authentication</a></li>
 <li><a class="reference internal" href="#oauth-2-0" id="id52">OAuth 2.0</a></li>
-<li><a class="reference internal" href="#select-oauth-2-0-service-provider" id="id53">Select OAuth 2.0 service provider</a></li>
+<li><a class="reference internal" href="#select-oauth-2-0-service-provider" id="id53">Select OAuth 2.0 service provider:</a></li>
 <li><a class="reference internal" href="#gitlab" id="id54">GitLab</a></li>
 <li><a class="reference internal" href="#google" id="id55">Google</a></li>
 <li><a class="reference internal" href="#office-365" id="id56">Office 365</a></li>
@@ -359,7 +359,7 @@
 <li><a class="reference internal" href="#performance-monitoring" id="id97">Performance Monitoring</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#settings-configurable-only-in-config-json" id="id98">Settings configurable only in <code class="docutils literal notranslate"><span class="pre">config.json</span></code></a><ul>
+<li><a class="reference internal" href="#settings-configurable-only-in-config-json" id="id98">Settings configurable only in config.json</a><ul>
 <li><a class="reference internal" href="#service-settings" id="id99">Service Settings</a></li>
 <li><a class="reference internal" href="#sql-settings" id="id100">SQL Settings</a></li>
 <li><a class="reference internal" href="#team-settings" id="id101">Team Settings</a></li>
@@ -377,7 +377,7 @@
 <li><a class="reference internal" href="#plugin-settings-beta" id="id113">Plugin Settings (Beta)</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id36" id="id114">Experimental Settings</a><ul>
+<li><a class="reference internal" href="#id36" id="id114">Experimental settings</a><ul>
 <li><a class="reference internal" href="#id37" id="id115">Service Settings</a></li>
 <li><a class="reference internal" href="#id39" id="id116">Team Settings</a></li>
 <li><a class="reference internal" href="#id40" id="id117">Email Settings</a></li>
@@ -978,7 +978,7 @@
 <div class="section" id="allow-which-users-to-delete-messages">
 <h4>Allow which users to delete messages<a class="headerlink" href="#allow-which-users-to-delete-messages" title="Permalink to this headline">¶</a></h4>
 <p><em>Removed in June 16, 2018 release</em></p>
-<p>Restrict the permission level required to delete messages. Team Admins, Channel Admins, and System Admins can delete messages only in channels where they are members. Messages can be deleted any time.</p>
+<p>Restrict the permission level required to delete messages. Team Admins, Channel Admins, and System Admins can delete messages only in channels where they are members. Messages can be deleted anytime.</p>
 <p><strong>Message authors can delete their own messages, and Administrators can delete any message</strong>: Allow authors to delete their own messages, and allow Team Admins, Channel Admins, and System Admins to delete any message.</p>
 <p><strong>Team Admins and System Admins</strong>: Allow only Team Admins and System Admins to delete messages.</p>
 <p><strong>System Admins</strong>: Allow only System Admins to delete messages.</p>
@@ -1130,15 +1130,6 @@
 <p><strong>DEBUG</strong>: Prints high detail for developers debugging issues.</p>
 <p><strong>ERROR</strong>: Outputs only error messages.</p>
 <p><strong>INFO</strong>: Outputs error messages and information around startup and initialization.</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="100%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>This feature’s <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is <code class="docutils literal notranslate"><span class="pre">&quot;ConsoleLevel&quot;:</span> <span class="pre">&quot;DEBUG&quot;</span></code> with options <code class="docutils literal notranslate"><span class="pre">&quot;DEBUG&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;ERROR&quot;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&quot;INFO&quot;</span></code>.</td>
-</tr>
-</tbody>
-</table>
 </div>
 <div class="section" id="output-logs-to-file">
 <h4>Output logs to file<a class="headerlink" href="#output-logs-to-file" title="Permalink to this headline">¶</a></h4>
@@ -1309,7 +1300,7 @@
 <p>Settings to configure OAuth login for account creation and login.</p>
 </div>
 <div class="section" id="select-oauth-2-0-service-provider">
-<h3><a class="toc-backref" href="#id53">Select OAuth 2.0 service provider</a><a class="headerlink" href="#select-oauth-2-0-service-provider" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id53">Select OAuth 2.0 service provider:</a><a class="headerlink" href="#select-oauth-2-0-service-provider" title="Permalink to this headline">¶</a></h3>
 <p>Choose whether OAuth can be used for account creation and login. Options include:</p>
 <blockquote>
 <div><ul class="simple">
@@ -1495,7 +1486,7 @@
 <p class="first admonition-title">Note</p>
 <p class="last">In line with Microsoft ADFS guidance we recommend <a class="reference external" href="https://docs.microsoft.com/en-us/windows-server/identity/ad-fs/operations/configure-intranet-forms-based-authentication-for-devices-that-do-not-support-wia">configuring intranet forms-based authentication for devices that do not support WIA</a>.</p>
 </div>
-<p>Enable authentication with Office 365 by selecting <code class="docutils literal notranslate"><span class="pre">Office</span> <span class="pre">365</span> <span class="pre">(Beta)</span></code> from <strong>OAuth 2.0 &gt; Select OAuth 2.0 service provider</strong>.</p>
+<p>Enable authentication with Office 365 by selecting <code class="docutils literal notranslate"><span class="pre">Office</span> <span class="pre">365</span> <span class="pre">(Beta)</span></code> from <strong>OAuth 2.0 &gt; Select OAuth 2.0 service provider</strong></p>
 <p><strong>True</strong>: Allow team creation and account signup using Office 365 OAuth. To configure, input the <strong>Application ID</strong> and <strong>Application Secret Password</strong> credentials. See <a class="reference external" href="https://docs.mattermost.com/deployment/sso-office.html">the documentation</a> for more detail.</p>
 <p><strong>False</strong>: Office 365 OAuth cannot be used for team creation or account signup.</p>
 <table border="1" class="docutils">
@@ -1997,7 +1988,7 @@
 <p><strong>False</strong>: Mattermost uses the email attribute to bind users to SAML.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Moving from <code class="docutils literal notranslate"><span class="pre">true</span></code> to <code class="docutils literal notranslate"><span class="pre">false</span></code> will prevent the override from happening. To prevent the disabling of user accounts, SAML IDs must match the LDAP IDs when this feature is enabled. This setting should be set to <code class="docutils literal notranslate"><span class="pre">false</span></code> unless LDAP sync is enabled.</p>
+<p class="last">Moving from true to false will prevent the override from happening. To prevent the disabling of user accounts, SAML IDs must match the LDAP IDs when this feature is enabled. This setting should be set to false unless LDAP sync is enabled.</p>
 </div>
 <table border="1" class="docutils">
 <colgroup>
@@ -2268,7 +2259,7 @@
 <p>If you choose to run Mattermost outside your private network, bypassing your existing security protocols, it is recommended you set up a multi-factor authentication service specifically for accessing Mattermost.</p>
 <div class="section" id="enable-multi-factor-authentication">
 <h4>Enable Multi-factor Authentication<a class="headerlink" href="#enable-multi-factor-authentication" title="Permalink to this headline">¶</a></h4>
-<p><strong>True</strong>: When <code class="docutils literal notranslate"><span class="pre">true</span></code>, users with LDAP and email authentication will be given the option to require a phone-based passcode, in addition to their password-based authentication, to sign in to the Mattermost server. Specifically, they will be asked to download the <a class="reference external" href="https://en.wikipedia.org/wiki/Google_Authenticator">Google Authenticator</a> app to their iOS or Android mobile device, connect the app with their account, and then enter a passcode generated by the app on their phone whenever they log in to the Mattermost server.</p>
+<p><strong>True</strong>: When true, users with LDAP and email authentication will be given the option to require a phone-based passcode, in addition to their password-based authentication, to sign in to the Mattermost server. Specifically, they will be asked to download the <a class="reference external" href="https://en.wikipedia.org/wiki/Google_Authenticator">Google Authenticator</a> app to their iOS or Android mobile device, connect the app with their account, and then enter a passcode generated by the app on their phone whenever they log in to the Mattermost server.</p>
 <p><strong>False</strong>: Multi-factor authentication is disabled.</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -2283,7 +2274,7 @@
 <div class="section" id="enforce-multi-factor-authentication">
 <h4>Enforce Multi-factor Authentication<a class="headerlink" href="#enforce-multi-factor-authentication" title="Permalink to this headline">¶</a></h4>
 <p><em>Available in Enterprise Edition E10 and higher</em></p>
-<p><strong>True</strong>: When <code class="docutils literal notranslate"><span class="pre">true</span></code>, <a class="reference external" href="https://docs.mattermost.com/deployment/auth.html">multi-factor authentication (MFA)</a> is required for login. New users will be required to configure MFA on sign-up. Logged in users without MFA configured are redirected to the MFA setup page until configuration is complete. If your system has users with login options other than AD/LDAP and email, MFA must be enforced with the authentication provider outside of Mattermost.</p>
+<p><strong>True</strong>: When true, <a class="reference external" href="https://docs.mattermost.com/deployment/auth.html">multi-factor authentication (MFA)</a> is required for login. New users will be required to configure MFA on sign-up. Logged in users without MFA configured are redirected to the MFA setup page until configuration is complete. If your system has users with login options other than AD/LDAP and email, MFA must be enforced with the authentication provider outside of Mattermost.</p>
 <p><strong>False</strong>: Multi-factor authentication is optional.</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -2300,7 +2291,7 @@
 <hr class="docutils" />
 <div class="section" id="security">
 <h2><a class="toc-backref" href="#id61">Security</a><a class="headerlink" href="#security" title="Permalink to this headline">¶</a></h2>
-<p>Configure security settings for account creation, login, public links, and connection requests.</p>
+<p>Configure security settings for account creation, login, public links and connection requests.</p>
 <div class="section" id="sign-up">
 <h3><a class="toc-backref" href="#id62">Sign Up</a><a class="headerlink" href="#sign-up" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="require-email-verification">
@@ -2410,7 +2401,7 @@
 <div class="section" id="enable-public-file-links">
 <h4>Enable Public File Links<a class="headerlink" href="#enable-public-file-links" title="Permalink to this headline">¶</a></h4>
 <p><strong>True</strong>: Allow users to generate public links to files and images for sharing outside the Mattermost system with a public URL.</p>
-<p><strong>False</strong>: The <strong>Get Public Link</strong> option is hidden from the image preview user interface.</p>
+<p><strong>False</strong>: The Get Public Link option is hidden from the image preview user interface.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">When switched to <strong>False</strong>, anyone who tries to visit a previously generated public link will receive an error message saying public links have been disabled. When switched back to <strong>True</strong>, old public links will work again unless the <strong>Public Link Salt</strong> has been regenerated.</p>
@@ -2627,7 +2618,7 @@
 </div>
 <div class="section" id="enable-email-batching">
 <h4>Enable Email Batching<a class="headerlink" href="#enable-email-batching" title="Permalink to this headline">¶</a></h4>
-<p><strong>True</strong>: Users can select how often to receive email notifications, and multiple notifications within that timeframe will be combined into a single email. Batching will occur at a default interval of 15 minutes, configurable in <strong>Account Settings &gt; Notifications</strong>.</p>
+<p><strong>True</strong>: Users can select how often to receive email notifications, and multiple notifications within that timeframe will be combined into a single email. Batching will occur at a default interval of 15 minutes, configurable in <strong>Account Settings</strong> &gt; <strong>Notifications</strong>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Email batching cannot be enabled unless the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#site-url">SiteURL</a> is configured. Email batching in <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-high-availability-mode">High Availability mode</a> is planned but not yet supported.</p>
@@ -2849,7 +2840,7 @@
 <p>Please review the full documentation on <a class="reference external" href="http://docs.mattermost.com/deployment/push.html">push notifications and mobile applications</a> including guidance on compiling your own mobile apps and MPNS before deploying to production.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The <code class="docutils literal notranslate"><span class="pre">https://push-test.mattermost.com</span></code> server is provided for testing push notifications prior to compiling your own service please make sure <a class="reference external" href="http://docs.mattermost.com/deployment/push.html#push-notifications-for-team-edition-users">to read about its limitations</a>.</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">https://push-test.mattermost.com</span></code> is provided for testing push notifications prior to compiling your own service please make sure <a class="reference external" href="http://docs.mattermost.com/deployment/push.html#push-notifications-for-team-edition-users">to read about its limitations</a>.</p>
 </div>
 <table border="1" class="docutils">
 <colgroup>
@@ -2898,14 +2889,14 @@
 <hr class="docutils" />
 <div class="section" id="integrations">
 <h2><a class="toc-backref" href="#id70">Integrations</a><a class="headerlink" href="#integrations" title="Permalink to this headline">¶</a></h2>
-<p>Settings to configure webhooks, slash commands, and external integration services.</p>
+<p>Settings to configure webhooks, slash commands and external integration services.</p>
 <div class="section" id="custom-integrations">
 <h3><a class="toc-backref" href="#id71">Custom Integrations</a><a class="headerlink" href="#custom-integrations" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="enable-incoming-webhooks">
 <h4>Enable Incoming Webhooks<a class="headerlink" href="#enable-incoming-webhooks" title="Permalink to this headline">¶</a></h4>
 <p>Developers building integrations can create webhook URLs for public channels and private channels. Please see our <a class="reference external" href="http://docs.mattermost.com/developer/webhooks-incoming.html">documentation page</a> to learn about creating webhooks, view samples, and to let the community know about integrations you have built.</p>
 <p><strong>True</strong>: Incoming webhooks will be allowed. To manage incoming webhooks, go to <strong>Account Settings &gt; Integrations</strong>. The webhook URLs created in Account Settings can be used by external applications to create posts in any public or private channels that you have access to.</p>
-<p><strong>False</strong>: The <strong>Integrations &gt; Incoming Webhooks</strong> section of Account Settings is hidden and all incoming webhooks are disabled.</p>
+<p><strong>False</strong>: The Integrations &gt; Incoming Webhooks section of Account Settings is hidden and all incoming webhooks are disabled.</p>
 <p>Security note: By enabling this feature, users may be able to perform <a class="reference external" href="https://en.wikipedia.org/wiki/Phishing">phishing attacks</a> by attempting to impersonate other users. To combat these attacks, a BOT tag appears next to all posts from a webhook. Enable at your own risk.</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -2965,7 +2956,7 @@
 <div class="section" id="restrict-managing-integrations-to-admins">
 <h4>Restrict managing integrations to Admins<a class="headerlink" href="#restrict-managing-integrations-to-admins" title="Permalink to this headline">¶</a></h4>
 <p><em>This permission has been migrated to the database and changing the ``config.json`` value no longer takes effect after upgrading to v4.9, released on April 16th, 2018. This permission can be modified using the System Console user interface.</em></p>
-<p><strong>True</strong>: When <code class="docutils literal notranslate"><span class="pre">true</span></code>, webhooks and slash commands can only be created, edited, and viewed by Team and System Admins, and OAuth 2.0 applications by System Admins. Integrations are available to all users after they have been created by the System Admin.</p>
+<p><strong>True</strong>: When true, webhooks and slash commands can only be created, edited, and viewed by Team and System Admins, and OAuth 2.0 applications by System Admins. Integrations are available to all users after they have been created by the System Admin.</p>
 <p><strong>False</strong>: Any team members can create webhooks, slash commands, and OAuth 2.0 applications from <strong>Main Menu &gt; Integrations</strong>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -3011,7 +3002,7 @@
 </div>
 <div class="section" id="enable-personal-access-tokens">
 <h4>Enable Personal Access Tokens<a class="headerlink" href="#enable-personal-access-tokens" title="Permalink to this headline">¶</a></h4>
-<p><strong>True</strong>: When <code class="docutils literal notranslate"><span class="pre">true</span></code>, users can create <a class="reference external" href="https://about.mattermost.com/default-user-access-tokens">personal access tokens</a> for integrations in <strong>Account Settings &gt; Security</strong>. They can be used to authenticate against the API and give full access to the account.</p>
+<p><strong>True</strong>: When true, users can create <a class="reference external" href="https://about.mattermost.com/default-user-access-tokens">personal access tokens</a> for integrations in <strong>Account Settings &gt; Security</strong>. They can be used to authenticate against the API and give full access to the account.</p>
 <p>To manage who can create personal access tokens or to search users by token ID, go to the <strong>System Console &gt; Users</strong> page.</p>
 <p><strong>False</strong>: Personal access tokens are disabled on the server.</p>
 <table border="1" class="docutils">
@@ -3200,7 +3191,7 @@
 </div>
 <div class="section" id="amazon-s3-bucket">
 <h4>Amazon S3 Bucket<a class="headerlink" href="#amazon-s3-bucket" title="Permalink to this headline">¶</a></h4>
-<p>The name of the bucket for your S3-compatible object storage instance.</p>
+<p>The name of the bucket for your S3 compatible object storage instance.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">For MinIO, you can find this name in the left side bar of your MinIO browser if you want use an existing MinIO bucket or you can create a new one with the desired name.</p>
@@ -3363,7 +3354,7 @@
 </div>
 <div class="section" id="enable-amazon-s3-debugging">
 <h4>Enable Amazon S3 Debugging<a class="headerlink" href="#enable-amazon-s3-debugging" title="Permalink to this headline">¶</a></h4>
-<p><strong>True</strong>: When <code class="docutils literal notranslate"><span class="pre">true</span></code>, log additional debugging information to the system logs. Typically set to <code class="docutils literal notranslate"><span class="pre">false</span></code> in production.</p>
+<p><strong>True</strong>: When true, log additional debugging information to the system logs. Typically set to <code class="docutils literal notranslate"><span class="pre">false</span></code> in production.</p>
 <p><strong>False</strong>: No Amazon S3 debugging information is included in the system logs.</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -3444,7 +3435,7 @@
 </div>
 <div class="section" id="enable-image-proxy">
 <h4>Enable Image Proxy<a class="headerlink" href="#enable-image-proxy" title="Permalink to this headline">¶</a></h4>
-<p>When <code class="docutils literal notranslate"><span class="pre">true</span></code>, enables an image proxy for loading external images. The image proxy is used by the Mattermost apps to prevent them from connecting directly to remote servers. This anonymizes their connections and prevents them from accessing insecure content.</p>
+<p>When true, enables an image proxy for loading external images. The image proxy is used by the Mattermost apps to prevent them from connecting directly to remote servers. This anonymizes their connections and prevents them from accessing insecure content.</p>
 <p>See the <a class="reference internal" href="image-proxy.html"><span class="doc">documentation</span></a> to learn more.</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -3802,7 +3793,7 @@
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Mattermost deployments which are restricted to access behind a firewall must open port 443 to both <a class="reference external" href="https://api.gfycat.com/v1">https://api.gfycat.com/v1</a> and <a class="reference external" href="https://gfycat.com">https://gfycat.com</a>/&lt;id&gt; (for all request types) for this feature to work.</p>
+<p class="last">Mattermost deployments restricted to access behind a firewall must open port 443 to both <a class="reference external" href="https://api.gfycat.com/v1">https://api.gfycat.com/v1</a> and <a class="reference external" href="https://gfycat.com">https://gfycat.com</a>/&lt;id&gt; (for all request types) for this feature to work.</p>
 </div>
 </div>
 <div class="section" id="gfycat-api-key">
@@ -3851,7 +3842,7 @@
 </div>
 <div class="section" id="custom-url-schemes">
 <h4>Custom URL Schemes<a class="headerlink" href="#custom-url-schemes" title="Permalink to this headline">¶</a></h4>
-<p>A list of URL schemes that are used for autolinking in message text. <code class="docutils literal notranslate"><span class="pre">http</span></code>, <code class="docutils literal notranslate"><span class="pre">https</span></code>, <code class="docutils literal notranslate"><span class="pre">ftp</span></code>, <code class="docutils literal notranslate"><span class="pre">tel</span></code>, and <code class="docutils literal notranslate"><span class="pre">mailto</span></code> always create links.</p>
+<p>A list of URL schemes that are used for autolinking in message text. <code class="docutils literal notranslate"><span class="pre">http</span></code>, <code class="docutils literal notranslate"><span class="pre">https</span></code>, <code class="docutils literal notranslate"><span class="pre">ftp</span></code>, <code class="docutils literal notranslate"><span class="pre">tel</span></code> and <code class="docutils literal notranslate"><span class="pre">mailto</span></code> always create links.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="100%" />
@@ -3865,7 +3856,7 @@
 </div>
 </div>
 <div class="section" id="legal-and-support">
-<span id="legal-support-links"></span><h3><a class="toc-backref" href="#id85">Legal and Support</a><a class="headerlink" href="#legal-and-support" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id85">Legal and Support</a><a class="headerlink" href="#legal-and-support" title="Permalink to this headline">¶</a></h3>
 <p>Legal and Support links will be hidden in the user interface if these fields are left blank.</p>
 <div class="section" id="terms-of-service-link">
 <h4>Terms of Service link<a class="headerlink" href="#terms-of-service-link" title="Permalink to this headline">¶</a></h4>
@@ -4190,7 +4181,7 @@
 </div>
 <div class="section" id="advanced">
 <h2><a class="toc-backref" href="#id91">Advanced</a><a class="headerlink" href="#advanced" title="Permalink to this headline">¶</a></h2>
-<p>Advanced settings to configure rate limiting, databases, and developer options.</p>
+<p>Advanced settings to configure rate limiting, databases and developer options.</p>
 <div class="section" id="rate-limiting">
 <h3><a class="toc-backref" href="#id92">Rate Limiting</a><a class="headerlink" href="#rate-limiting" title="Permalink to this headline">¶</a></h3>
 <p>Changes to this setting require a server restart before taking effect.</p>
@@ -4297,8 +4288,8 @@
 <div class="section" id="driver-name">
 <h4>Driver Name<a class="headerlink" href="#driver-name" title="Permalink to this headline">¶</a></h4>
 <p>This setting can only be changed from <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file, it cannot be changed from the System Console user interface.</p>
-<p><strong>mysql</strong>: Enables driver to MySQL database.</p>
-<p><strong>postgres</strong>: Enables driver to PostgreSQL database.</p>
+<p><code class="docutils literal notranslate"><span class="pre">mysql</span></code>: enables driver to MySQL database.</p>
+<p><code class="docutils literal notranslate"><span class="pre">postgres</span></code>: enables driver to PostgreSQL database.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="100%" />
@@ -4665,7 +4656,7 @@
 <h4>Read Only Config<a class="headerlink" href="#read-only-config" title="Permalink to this headline">¶</a></h4>
 <p><strong>True</strong>: Changes made to settings in the System Console are ignored.</p>
 <p><strong>False</strong>: Changes made to settings in the System Console are written to <code class="docutils literal notranslate"><span class="pre">config.json</span></code>.</p>
-<p>When running in production it is recommended to set this to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+<p>When running in production it is recommended to set this to true.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="100%" />
@@ -4767,7 +4758,7 @@
 </div>
 <hr class="docutils" />
 <div class="section" id="settings-configurable-only-in-config-json">
-<h2><a class="toc-backref" href="#id98">Settings configurable only in <code class="docutils literal notranslate"><span class="pre">config.json</span></code></a><a class="headerlink" href="#settings-configurable-only-in-config-json" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id98">Settings configurable only in config.json</a><a class="headerlink" href="#settings-configurable-only-in-config-json" title="Permalink to this headline">¶</a></h2>
 <p>There are a number of settings customizable in <code class="docutils literal notranslate"><span class="pre">config.json</span></code> unavailable in the System Console and require updating from the file itself.</p>
 <div class="section" id="service-settings">
 <h3><a class="toc-backref" href="#id99">Service Settings</a><a class="headerlink" href="#service-settings" title="Permalink to this headline">¶</a></h3>
@@ -4857,15 +4848,6 @@
 <h4>Go Routine Health Threshold<a class="headerlink" href="#go-routine-health-threshold" title="Permalink to this headline">¶</a></h4>
 <p>Set a threshold on the number of Go Routines when the Mattermost system is considered to be in a healthy state. When Go Routines exceed this limit, a warning is returned in the server logs.</p>
 <p>To turn off checking for the threshold, set this value to <code class="docutils literal notranslate"><span class="pre">-1</span></code>.</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="100%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>This feature’s <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is <code class="docutils literal notranslate"><span class="pre">&quot;GoroutineHealthThreshold&quot;:</span> <span class="pre">-1</span></code> with numerical input.</td>
-</tr>
-</tbody>
-</table>
 </div>
 <div class="section" id="allow-cookies-for-subdomains">
 <h4>Allow Cookies for Subdomains<a class="headerlink" href="#allow-cookies-for-subdomains" title="Permalink to this headline">¶</a></h4>
@@ -5717,7 +5699,7 @@
 </div>
 <hr class="docutils" />
 <div class="section" id="id36">
-<h2><a class="toc-backref" href="#id114">Experimental Settings</a><a class="headerlink" href="#id36" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id114">Experimental settings</a><a class="headerlink" href="#id36" title="Permalink to this headline">¶</a></h2>
 <p>There are a number of settings considered “experimental” and these may be replaced or removed in a future release.</p>
 <div class="section" id="id37">
 <h3><a class="toc-backref" href="#id115">Service Settings</a><a class="headerlink" href="#id37" title="Permalink to this headline">¶</a></h3>
@@ -6203,7 +6185,7 @@
 <div class="section" id="supported-timezones-path">
 <h4>Supported Timezones Path<a class="headerlink" href="#supported-timezones-path" title="Permalink to this headline">¶</a></h4>
 <p><em>Removed in April 16, 2019 release</em></p>
-<p>Set the path of the JSON file that lists supported timezones when <code class="docutils literal notranslate"><span class="pre">ExperimentalTimezone</span></code> is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+<p>Set the path of the JSON file that lists supported timezones when <code class="docutils literal notranslate"><span class="pre">ExperimentalTimezone</span></code> is set to true.</p>
 <p>The file must be in the same directory as your <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file if you set a relative path. Defaults to <code class="docutils literal notranslate"><span class="pre">timezones.json</span></code>.</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -6219,17 +6201,13 @@
 <div class="section" id="jobs">
 <h3><a class="toc-backref" href="#id121">Jobs</a><a class="headerlink" href="#jobs" title="Permalink to this headline">¶</a></h3>
 <p>Settings to configure the how Mattermost schedules and completes periodic tasks such as the deletion of old posts with Data Retention enabled or indexing of posts with Elasticsearch. These settings control which Mattermost servers are designated as a Scheduler, a server that queues the tasks at the correct times, and as a Worker, a server that completes the given tasks.</p>
-<ul class="simple">
-<li>When running Mattermost on a single machine, both <code class="docutils literal notranslate"><span class="pre">RunJobs</span></code> and <code class="docutils literal notranslate"><span class="pre">RunScheduler</span></code> should be enabled. Without both of these enabled, Mattermost will not function properly.</li>
-<li>When running Mattermost in High Availability mode, <code class="docutils literal notranslate"><span class="pre">RunJobs</span></code> should be enabled on one or more servers while <code class="docutils literal notranslate"><span class="pre">RunScheduler</span></code> should be enabled on all servers under normal circumstances. A High Availability cluster will have one Scheduler and one or more Workers. See the below sections for more information.</li>
-</ul>
+<p>When running Mattermost on a single machine, both <code class="docutils literal notranslate"><span class="pre">RunJobs</span></code> and <code class="docutils literal notranslate"><span class="pre">RunScheduler</span></code> should be enabled. Without both of these enabled, Mattermost will not function properly.</p>
+<p>When running Mattermost in High Availability mode, <code class="docutils literal notranslate"><span class="pre">RunJobs</span></code> should be enabled on one or more servers while <code class="docutils literal notranslate"><span class="pre">RunScheduler</span></code> should be enabled on all servers under normal circumstances. A High Availability cluster will have one Scheduler and one or more Workers. See the below sections for more information.</p>
 <div class="section" id="run-jobs">
 <h4>Run Jobs<a class="headerlink" href="#run-jobs" title="Permalink to this headline">¶</a></h4>
 <p>Set whether or not this Mattermost server will handle tasks created by the Scheduler.</p>
-<ul class="simple">
-<li>When running Mattermost on a single machine, this setting should always be enabled.</li>
-<li>When running Mattermost in High Availablity mode, one or more servers should have this setting enabled. It is recommended that a High Availability cluster has one or more dedicated Workers with this setting enabled while the remaining Mattermost app servers have it disabled.</li>
-</ul>
+<p>When running Mattermost on a single machine, this setting should always be enabled.</p>
+<p>When running Mattermost in High Availablity mode, one or more servers should have this setting enabled. It is recommended that a High Availability cluster has one or more dedicated Workers with this setting enabled while the remaining Mattermost app servers have it disabled.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="100%" />
@@ -6243,10 +6221,8 @@
 <div class="section" id="run-scheduler">
 <h4>Run Scheduler<a class="headerlink" href="#run-scheduler" title="Permalink to this headline">¶</a></h4>
 <p>Set whether or not this Mattermost server will schedule tasks that will be completed by a Worker.</p>
-<ul class="simple">
-<li>When running Mattermost on a single machine, this setting should always be enabled.</li>
-<li>When running Mattermost in High Availablity mode, this setting should always be enabled. In a High Availability cluster, exactly one of the servers will be designated as the Scheduler at a time to ensure that duplicate tasks aren’t created. See <a class="reference external" href="https://docs.mattermost.com/deployment/cluster.html#job-server">High Availability documentation</a> for more details.</li>
-</ul>
+<p>When running Mattermost on a single machine, this setting should always be enabled.</p>
+<p>When running Mattermost in High Availablity mode, this setting should always be enabled. In a High Availability cluster, exactly one of the servers will be designated as the Scheduler at a time to ensure that duplicate tasks aren’t created. See <a class="reference external" href="https://docs.mattermost.com/deployment/cluster.html#job-server">High Availability documentation</a> for more details.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="100%" />
