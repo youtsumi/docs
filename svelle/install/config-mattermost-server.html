@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Configuring Mattermost Server &mdash; Mattermost 5.25 documentation</title>
+  <title>Configuring Mattermost Server &mdash; Mattermost 5.27 documentation</title>
   
 
   
@@ -131,7 +131,7 @@
             
             
               <div class="version">
-                5.25
+                5.27
               </div>
             
           
@@ -215,72 +215,61 @@
 <ol class="arabic simple">
 <li>Open a browser and navigate to your Mattermost instance. For example, if the IP address of the Mattermost server is <code class="docutils literal notranslate"><span class="pre">10.10.10.2</span></code> then go to <a class="reference external" href="http://10.10.10.2:8065">http://10.10.10.2:8065</a>.</li>
 <li>Create the first team and user. The first user in the system has the <code class="docutils literal notranslate"><span class="pre">system_admin</span></code> role, which gives you access to the System Console.</li>
-<li>Open the System Console. To open the System Console, click your username at the top of the navigation panel, and in the menu that opens, click <strong>System Console</strong>.</li>
+<li>To open the System Console, click your username at the top of the navigation panel and select <strong>System Console</strong>.</li>
 <li>Set the Site URL:</li>
 </ol>
 <blockquote>
-<div><ol class="loweralpha simple">
-<li>In the GENERAL section of the System Console, click <strong>Configuration</strong> in prior versions or <strong>System Console</strong> &gt; <strong>Environment</strong> &gt; <strong>Web Server</strong> in versions after 5.12.</li>
+<div><ul class="simple">
+<li>Open <strong>System Console &gt; Environment &gt; Web Server</strong>.</li>
 <li>In the <strong>Site URL</strong> field, set the URL that users point their browsers at. For example, <em>https://mattermost.example.com</em>. If you are using HTTPS, make sure that you set up TLS, either on Mattermost Server or on a proxy.</li>
-</ol>
+</ul>
 </div></blockquote>
 <ol class="arabic simple" start="5">
 <li>Set up email notifications.</li>
 </ol>
 <blockquote>
-<div><ol class="loweralpha simple">
-<li>In the NOTIFICATIONS section of the System Console, make the following changes:</li>
-</ol>
-<blockquote>
 <div><ul class="simple">
-<li>Set <strong>Enable Email Notifications</strong> to <em>true</em></li>
-<li>Set <strong>Notification Display Name</strong> to <em>No-Reply</em></li>
+<li>In <strong>Site Configuration &gt; Notifications</strong> make the following changes:<ul>
+<li>Set <strong>Enable Email Notifications</strong> to <strong>true</strong></li>
+<li>Set <strong>Notification Display Name</strong> to <strong>No-Reply</strong></li>
 <li>Set <strong>Notification From Address</strong> to <em>{your-domain-name}</em> For example, <em>example.com</em></li>
 </ul>
-<ol class="upperalpha simple" start="2">
-<li>In the NOTIFICATIONS section of the System Console in prior versions or <strong>System Console</strong> &gt; <strong>Environment</strong> &gt; <strong>SMTP</strong> in versions after 5.12, also make the following changes:</li>
-</ol>
-<ul class="simple">
+</li>
+<li>In <strong>System Console &gt; Environment &gt; SMTP</strong> make the following changes:<ul>
 <li>Set <strong>SMTP Server Username</strong> to <em>{SMTP-username}</em> For example, <em>admin&#64;example.com</em></li>
 <li>Set <strong>SMTP Server Password</strong> to <em>{SMTP-password}</em></li>
 <li>Set <strong>SMTP Server</strong> to <em>{SMTP-server}</em> For example, <em>mail.example.com</em></li>
 <li>Set <strong>SMTP Server Port</strong> to <em>465</em></li>
-<li>Set <strong>Connection Security</strong> to <em>TLS</em> or <em>STARTTLS</em>, depending on what the SMTP server accepts.</li>
+<li>Set <strong>Connection Security</strong> to <em>TLS</em> or <em>STARTTLS</em>, depending on what the SMTP server accepts</li>
+</ul>
+</li>
+<li>Click <strong>Test Connection</strong>.</li>
+<li>When the connection is confirmed as working, select <strong>Save</strong>.</li>
 </ul>
 </div></blockquote>
-<ol class="loweralpha simple" start="2">
-<li>Click <strong>Test Connection</strong>.</li>
-<li>After your connection is working, click <strong>Save</strong>.</li>
-</ol>
-</div></blockquote>
 <ol class="arabic simple" start="6">
-<li>Set up the file and image storage location.</li>
+<li>Open <strong>System Console</strong> &gt; <strong>Environment</strong> &gt; <strong>File Storage</strong> to set up the file and image storage location.</li>
 </ol>
 <blockquote>
-<div><div class="admonition note">
-<p class="first admonition-title">Note</p>
-<ol class="last arabic simple">
-<li>Files and images that users attach to their messages are not stored in the database. Instead, they are stored in a location that you specify. You can store the files on the local file system or in Amazon S3.</li>
-<li>Make sure that the location has enough free space. The amount of storage that’s required depends on the number of users and on the number and size of files that users attach to messages.</li>
-</ol>
-</div>
-<ol class="loweralpha simple">
-<li>In the FILES section of the System Console, click <strong>Storage</strong> in prior versions or <strong>System Console</strong> &gt; <strong>Environment</strong> &gt; <strong>File Storage</strong> in versions after 5.12.</li>
+<div><ul class="simple">
 <li>If you store the files locally, set <strong>File Storage System</strong> to <em>Local File System</em>, and then either accept the default for the <strong>Local Storage Directory</strong> or enter a location. The location must be a directory that exists and has write permissions for the Mattermost server. It can be an absolute path or a relative path. Relative paths are relative to the <code class="docutils literal notranslate"><span class="pre">mattermost</span></code> directory.</li>
 <li>If you store the files on Amazon S3, set <strong>File Storage System</strong> to <em>Amazon S3</em> and enter the appropriate values for your Amazon account.</li>
-<li>Click <strong>Save</strong>.</li>
-</ol>
+</ul>
 </div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>Files and images that users attach to their messages are not stored in the database. Instead, they’re stored in a location that you specify. You can store the files on the local file system or in Amazon S3.</li>
+<li>Make sure that the location has enough free space. The amount of storage that’s required depends on the number of users and on the number and size of files that users attach to messages.</li>
+</ul>
+</div>
 <ol class="arabic simple" start="7">
-<li>Review the other settings in the System Console to make sure everything is as you want it.</li>
-<li>Restart the Mattermost Service.</li>
+<li>Select <strong>Save</strong> to apply the configuration.</li>
+<li>Review and configure any other settings that may be applicable.</li>
+<li>Restart Mattermost.</li>
 </ol>
 <blockquote>
-<div><p>On Ubuntu 14.04 and RHEL 6:</p>
-<p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">restart</span> <span class="pre">mattermost</span></code></p>
-<p>On Ubuntu 16.04, 18.04, Debian Stretch, and RHEL 7:</p>
-<p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">restart</span> <span class="pre">mattermost</span></code></p>
-</div></blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">restart</span> <span class="pre">mattermost</span></code></div></blockquote>
 </div>
 
 
