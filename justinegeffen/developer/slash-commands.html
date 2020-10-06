@@ -250,7 +250,7 @@
 <p class="first admonition-title">Note</p>
 <p class="last">This is the admin documentation for slash commands. If you’re a developer looking to build an integration, see <a class="reference external" href="https://developers.mattermost.com/integrate">our developer documentation</a>.</p>
 </div>
-<p>Mattermost supports slash commands to easily integrate external applications into the server. They function similarly to <a class="reference internal" href="webhooks-outgoing.html"><span class="doc">outgoing webhooks</span></a>, except they can be used in any channel, including private channels and direct messages.</p>
+<p>Mattermost supports slash commands to easily integrate external applications into the server. They function similarly to <a class="reference internal" href="webhooks-outgoing.html"><span class="doc">outgoing webhooks</span></a>, except they can be used in any channel - including Private channels and direct messages.</p>
 <p>Messages that begin with <code class="docutils literal notranslate"><span class="pre">/</span></code> are interpreted as slash commands. The commands will send an HTTP POST request to a web service, and process a response back to Mattermost. Mattermost supports both <a class="reference external" href="https://docs.mattermost.com/developer/slash-commands.html#built-in-commands">built-in</a> and <a class="reference external" href="https://docs.mattermost.com/developer/slash-commands.html#custom-slash-command">custom slash commands</a>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -389,21 +389,25 @@
 <h2>Custom Slash Command<a class="headerlink" href="#custom-slash-command" title="Permalink to this headline">¶</a></h2>
 <p>Suppose you want to write an external application that is able to check the weather for certain cities. By creating a custom slash command, and setting up the application to handle the HTTP POST or GET from the command, you can let your users check the weather in their city using your command, say <code class="docutils literal notranslate"><span class="pre">/weather</span> <span class="pre">toronto</span> <span class="pre">week</span></code>.</p>
 <p>You can follow these general guidelines to set up a custom Mattermost slash command for your application.</p>
-<p>1 - First, go to <strong>Main Menu &gt; Integrations &gt; Slash Commands</strong>. If you don’t have the <strong>Integrations</strong> option in your Main Menu, slash commands may not be enabled on your Mattermost server or may be disabled for non-admins. Enable them from <strong>System Console &gt; Integrations &gt; Custom Integrations</strong> in prior versions or <strong>System Console &gt; Integrations &gt; Integration Management</strong> in versions after 5.12 or ask your System Administrator to do so.</p>
-<p>2 - Click <strong>Add Slash Command</strong> and add name and description for the command.</p>
-<p>3 - Set the <strong>Command Trigger Word</strong>. The trigger word must be unique and cannot begin with a slash or contain any spaces. It also cannot be one of the <a class="reference external" href="https://docs.mattermost.com/help/messaging/executing-commands.html#built-in-commands">built-in commands</a>.</p>
-<p>4 - Set the <strong>Request URL</strong> and <strong>Request Method</strong>. The request URL is the endpoint that Mattermost hits to reach your application, and the request method is either POST or GET and specifies the type of request sent to the request URL.</p>
-<p>5 - (Optional) Set the response username and icon the command will post messages as in Mattermost. If not set, the command will use your username and profile picture.</p>
-<blockquote>
-<div><div class="admonition note">
+<ol class="arabic simple">
+<li>Open <strong>Main Menu &gt; Integrations &gt; Slash Commands</strong>. If you don’t have the <strong>Integrations</strong> option in your Main Menu, slash commands may not be enabled on your Mattermost server or may be disabled for non-admins. Enable them from <strong>System Console &gt; Integrations &gt; Integration Management</strong> (or <strong>System Console &gt; Integrations &gt; Custom Integrations</strong> in versions prior to 5.12) or ask your Mattermost System Admin to do so.</li>
+<li>Click <strong>Add Slash Command</strong> and add name and description for the command.</li>
+<li>Set the <strong>Command Trigger Word</strong>. The trigger word must be unique and cannot begin with a slash or contain any spaces. It also cannot be one of the <a class="reference external" href="https://docs.mattermost.com/help/messaging/executing-commands.html#built-in-commands">built-in commands</a>.</li>
+<li>Set the <strong>Request URL</strong> and <strong>Request Method</strong>. The request URL is the endpoint that Mattermost hits to reach your application, and the request method is either POST or GET and specifies the type of request sent to the request URL.</li>
+<li>(Optional) Set the response username and icon the command will post messages as in Mattermost. If not set, the command will use your username and profile picture.</li>
+</ol>
+<div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last"><a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-integrations-to-override-usernames">Enable integrations to override usernames</a> must be set to <cite>true</cite> in <cite>config.json</cite> to override usernames, and <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-integrations-to-override-profile-picture-icons">similarly for profile picture icons</a>. Enable them from <strong>System Console &gt; Integrations &gt; Custom Integrations</strong> in prior versions or <strong>System Console &gt; Integrations &gt; Integration Management</strong> in versions after 5.12 or ask your System Administrator.</p>
+<p class="last"><a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-integrations-to-override-usernames">Enable integrations to override usernames</a> must be set to <code class="docutils literal notranslate"><span class="pre">true</span></code> in <code class="docutils literal notranslate"><span class="pre">config.json</span></code> to override usernames, and <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-integrations-to-override-profile-picture-icons">similarly for profile picture icons</a>. Enable them from <strong>System Console &gt; Integrations &gt; Integration Management</strong> (or <strong>System Console &gt; Integrations &gt; Custom Integrations</strong> in versions prior to 5.12) or ask your Mattermost System Admin.</p>
 </div>
-</div></blockquote>
-<p>6 - (Optional) Include the slash command in the command autocomplete list, displayed when typing <code class="docutils literal notranslate"><span class="pre">/</span></code> in an empty input box. Use it to make your command easier to discover by your teammates. You can also provide a hint listing the arguments of your command and a short description displayed in the autocomplete list.</p>
-<p>7 - Hit <strong>Save</strong>. On the next page, copy the <strong>Token</strong> value. This will be used in a later step.</p>
+<ol class="arabic simple" start="6">
+<li>(Optional) Include the slash command in the command autocomplete list, displayed when typing <code class="docutils literal notranslate"><span class="pre">/</span></code> in an empty input box. Use it to make your command easier to discover by your teammates. You can also provide a hint listing the arguments of your command and a short description displayed in the autocomplete list.</li>
+<li>Hit <strong>Save</strong>. On the next page, copy the <strong>Token</strong> value. This will be used in a later step.</li>
+</ol>
 <a class="reference internal image-reference" href="../_images/slash_commands_token.png"><img alt="../_images/slash_commands_token.png" src="../_images/slash_commands_token.png" style="width: 500px;" /></a>
-<p>8 - Next, write your external application. Include a function which receives HTTP POST or HTTP GET requests from Mattermost. The request will look something like this:</p>
+<ol class="arabic simple" start="8">
+<li>Next, write your external application. Include a function which receives HTTP POST or HTTP GET requests from Mattermost. The request will look something like this:</li>
+</ol>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>POST /slash-command HTTP/1.1
 Host: example.com
 User-Agent: Go-http-client/1.1
@@ -430,8 +434,10 @@ user_mentions_ids=[&quot;q5s3b7xzgprp5eid8h66j9epsy&quot;, &quot;czwmumrmw7dfxec
 </pre></div>
 </div>
 <p>If your integration sends back a JSON response, make sure it returns the <code class="docutils literal notranslate"><span class="pre">application/json</span></code> content-type.</p>
-<p>9 - Add a configurable <em>MATTERMOST_TOKEN</em> variable to your application and set it to the <strong>Token</strong> value from step 7. This value will be used by your application to confirm the HTTP POST or GET request came from Mattermost.</p>
-<p>10 - To have your application post a message back to <code class="docutils literal notranslate"><span class="pre">town-square</span></code>, it can respond to the HTTP POST request with a JSON response such as:</p>
+<ol class="arabic simple" start="9">
+<li>Add a configurable <em>MATTERMOST_TOKEN</em> variable to your application and set it to the <strong>Token</strong> value from step 7. This value will be used by your application to confirm the HTTP POST or GET request came from Mattermost.</li>
+<li>To have your application post a message back to <code class="docutils literal notranslate"><span class="pre">town-square</span></code>, it can respond to the HTTP POST request with a JSON response such as:</li>
+</ol>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{&quot;response_type&quot;: &quot;in_channel&quot;, &quot;text&quot;: &quot;
 ---
 #### Weather in Toronto, Ontario for the Week of February 16th, 2016
@@ -449,14 +455,16 @@ user_mentions_ids=[&quot;q5s3b7xzgprp5eid8h66j9epsy&quot;, &quot;czwmumrmw7dfxec
 &quot;}
 </pre></div>
 </div>
-<p>which would render in Mattermost as</p>
+<p>which would render in Mattermost as:</p>
 <img alt="Shows what the JSON response renders as in Mattermost" src="../_images/weatherBot.PNG" />
-<p>11 - You’re all set! See <a class="reference external" href="https://developers.mattermost.com/integrate/slash-commands">developer documentation</a> for details on what parameters are supported by slash commands. For instance, you can override the username and profile picture the messages post as, or specify a custom post type when sending a webhook message for use by <a class="reference external" href="https://about.mattermost.com/default-plugins">plugins</a>.</p>
+<ol class="arabic simple" start="11">
+<li>You’re all set! See <a class="reference external" href="https://developers.mattermost.com/integrate/slash-commands">developer documentation</a> for details on what parameters are supported by slash commands. For instance, you can override the username and profile picture the messages post as, or specify a custom post type when sending a webhook message for use by <a class="reference external" href="https://about.mattermost.com/default-plugins">plugins</a>.</li>
+</ol>
 <p>Messages with advanced formatting can be created by including an <a class="reference internal" href="message-attachments.html"><span class="doc">attachment array</span></a> and <a class="reference internal" href="interactive-messages.html"><span class="doc">interactive message buttons</span></a> in the JSON payload.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p><a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-integrations-to-override-usernames">Enable integrations to override usernames</a> must be set to <cite>true</cite> in <cite>config.json</cite> to override usernames. Enable them from <strong>System Console &gt; Integrations &gt; Custom Integrations</strong> in prior versions or <strong>System Console &gt; Integrations &gt; Integration Management</strong> in versions after 5.12 or ask your System Administrator. If not enabled, the username is set to <cite>webhook</cite>.</p>
-<p class="last">Similarly, <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-integrations-to-override-profile-picture-icons">Enable integrations to override profile picture icons</a> must be set to <cite>true</cite> in <cite>config.json</cite> to override usernames. Enable them from <strong>System Console &gt; Integrations &gt; Custom Integrations</strong> in prior versions or <strong>System Console &gt; Integrations &gt; Integration Management</strong> in versions after 5.12 or ask your System Administrator. If not enabled, the icon of the creator of the webhook URL is used to post messages.</p>
+<p><a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-integrations-to-override-usernames">Enable integrations to override usernames</a> must be set to <code class="docutils literal notranslate"><span class="pre">true</span></code> in <code class="docutils literal notranslate"><span class="pre">config.json</span></code> to override usernames. Enable them from <strong>System Console &gt; Integrations &gt; Integration Management</strong> (or <strong>System Console &gt; Integrations &gt; Custom Integrations</strong> in versions prior to 5.12) or ask your Mattermost System Admin. If not enabled, the username is set to <code class="docutils literal notranslate"><span class="pre">webhook</span></code>.</p>
+<p class="last">Similarly, <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-integrations-to-override-profile-picture-icons">Enable integrations to override profile picture icons</a> must be set to <code class="docutils literal notranslate"><span class="pre">true</span></code> in <code class="docutils literal notranslate"><span class="pre">config.json</span></code> to override usernames. Enable them from <strong>System Console &gt; Integrations &gt; Integration Management</strong> (or <strong>System Console &gt; Integrations &gt; Custom Integrations</strong> in versions prior to 5.12) or ask your Mattermost System Admin. If not enabled, the icon of the creator of the webhook URL is used to post messages.</p>
 </div>
 </div>
 <div class="section" id="tips-and-best-practices">
@@ -464,7 +472,7 @@ user_mentions_ids=[&quot;q5s3b7xzgprp5eid8h66j9epsy&quot;, &quot;czwmumrmw7dfxec
 <ol class="arabic simple">
 <li>Slash commands are designed to easily allow you to post messages. For other actions such as channel creation, you must also use the <a class="reference external" href="https://api.mattermost.com">Mattermost APIs</a>.</li>
 <li>Posts size is limited to 16393 characters for servers running <a class="reference external" href="https://docs.mattermost.com/administration/important-upgrade-notes.html">Mattermost Server v5.0 or later</a>. Use the <a class="reference external" href="https://developers.mattermost.com/integrate/slash-commands/#parameters">extra_responses</a> field to reply to a triggered slash command with more than one post.</li>
-<li>You can restrict who can create slash commands in <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#restrict-managing-integrations-to-admins">System Console &gt; Integrations &gt; Integration Management</a>.</li>
+<li>You can restrict who can create slash commands in <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#restrict-managing-integrations-to-admins">**System Console &gt; Integrations &gt; Integration Management**</a>.</li>
 <li>Mattermost outgoing webhooks are Slack-compatible. You can copy-and-paste code used for a Slack outgoing webhook to create Mattermost integrations. Mattermost <a class="reference external" href="https://docs.mattermost.com/developer/slash-commands.html?highlight=translate%20slack%20data%20format%20mattermost#translate-slack-s-data-format-to-mattermost">automatically translates Slack’s JSON format</a>.</li>
 <li>The external application may be written in any programming language. It needs to provide a URL which receives the request sent by your Mattermost server and responds with in the required JSON format.</li>
 </ol>
