@@ -442,11 +442,12 @@ recommended before use)</li>
 sudo -u mattermost bin/mattermost version
 </pre></div>
 </div>
+<p>Ensure you run the Mattermost binary as the <code class="docutils literal notranslate"><span class="pre">mattermost</span></code> user. Running it as <code class="docutils literal notranslate"><span class="pre">root</span></code> user (for example) may cause complications with permissions as the binary initiates plugins and accesses various files when running CLI commands. Running the server as <code class="docutils literal notranslate"><span class="pre">root</span></code> may result in ownership of the plugins and files to be overwritten as well as other potential permissions errors.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Ensure you run the Mattermost binary as the <code class="docutils literal notranslate"><span class="pre">mattermost</span></code> user. Running it as <code class="docutils literal notranslate"><span class="pre">root</span></code> user (for example) may cause complications with permissions as the binary initiates plugins and accesses various files when running CLI commands. Running the server as <code class="docutils literal notranslate"><span class="pre">root</span></code> may result in ownership of the plugins and files to be overwritten as well as other potential permissions errors.</p>
+<p class="last">When running CLI commands on a Mattermost installation that has the configuration stored in the database, you might need to pass the database connection string as follows:</p>
 </div>
-<p>When running CLI commands on a Mattermost installation that has the configuration stored in the database, you might need to pass the database connection string as follows:</p>
+<p><code class="docutils literal notranslate"><span class="pre">bin/mattermost</span> <span class="pre">--config=&quot;postgres://mmuser:mostest&#64;localhost:5432/mattermost_test?sslmode=disable\u0026connect_timeout=10&quot;</span></code></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bin/mattermost --config<span class="o">=</span><span class="s2">&quot;postgres://mmuser:mostest@localhost:5432/mattermost_test?sslmode=disable\u0026connect_timeout=10&quot;</span>
 </pre></div>
 </div>
@@ -3072,7 +3073,7 @@ bin/mattermost user invite user@example.com myteam1 myteam2
 <h3><a class="toc-backref" href="#contents">mattermost version</a><a class="headerlink" href="#mattermost-version" title="Permalink to this headline">¶</a></h3>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This command will be replaced in a future release with the mmctl command <a class="reference external" href="https://docs.mattermost.com/administration/mmctl-cli-tool.html#mmctl-version">mmctl version</a>.</p>
+<p class="last">This command will be replaced in a future release with the mmctl command <a class="reference external" href="https://docs.mattermost.com/administration/mmctl-cli-tool.html#mmctl-system-version">mmctl system version</a>.</p>
 </div>
 <dl class="docutils">
 <dt>Description</dt>
