@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Configure SAML with Microsoft ADFS for Windows Server 2012 &mdash; Mattermost 5.27 documentation</title>
+  <title>Configure SAML with Microsoft ADFS for Windows Server 2012 &mdash; Mattermost 5.28 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.27
+                5.28
               </div>
             
           
@@ -292,7 +292,11 @@
 </div>
 <div class="section" id="before-you-begin">
 <h2><a class="toc-backref" href="#contents">Before You Begin</a><a class="headerlink" href="#before-you-begin" title="Permalink to this headline">¶</a></h2>
-<p>Before you begin, you’ll need to install the XML Security Library.</p>
+<p>Starting with Mattermost version 5.20, a new SAML library implementation is available. This implementation does not require the installation of the XML Security Library. It is recommended that you use this new implementation as the old implementation will eventually be deprecated.</p>
+<p>To use the new implementation, navigate to <strong>System Console &gt; Experimental &gt; Features &gt; Use Improved SAML Library (Beta)</strong>. Select <code class="docutils literal notranslate"><span class="pre">true</span></code>, choose <strong>Save</strong>, and restart the server. The configuration change will not take effect until the server is restarted.</p>
+<p>To change the configuration file directly, edit <code class="docutils literal notranslate"><span class="pre">UseNewSAMLLibrary</span></code> using the configuration provided
+in the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#saml">Configuration Settings documentation</a>.</p>
+<p>To use the existing implementation in versions prior to 5.20:</p>
 <ol class="arabic simple">
 <li>Make sure you have the <a class="reference external" href="https://www.aleksey.com/xmlsec/download.html">XML Security Library</a> installed on your Mattermost instance. The XML Security Library is usually included as part of Debian GNU/Linux.</li>
 <li>Install the <em>xmlsec1-openssl</em> library</li>
