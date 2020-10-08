@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Corporate Directory Integration &mdash; Mattermost 5.27 documentation</title>
+  <title>Mattermost Cloud Overview &mdash; Mattermost 5.27 documentation</title>
   
 
   
@@ -31,8 +31,6 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Certifications and Compliance Overview" href="compliance.html" />
-    <link rel="prev" title="Licensing and Subscription" href="license-and-subscription.html" />
 	<!-- Bizible Script -->
 	<script src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
 
@@ -157,26 +155,8 @@
               
             
             
-              <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Overview</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="product.html">Product Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html">Security Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="architecture.html">Architecture Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations.html">Integrations Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="license-and-subscription.html">Licensing and Subscription</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Corporate Directory Integration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#basic-authentication">Basic authentication</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#security-features-for-authentication">Security features for authentication</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#active-directory-ldap-authentication">Active Directory / LDAP authentication</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#authentication-options-outside-of-a-private-network">Authentication options outside of a private network</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#future-authentication-methods">Future authentication methods</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="compliance.html">Certifications and Compliance Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="faq.html">Frequently Asked Questions (FAQ)</a></li>
-</ul>
-</li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/administrator.html">Administrator's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
@@ -215,13 +195,11 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
     
-      <li><a href="index.html">Mattermost Overview</a> &raquo;</li>
-    
-    <li>Corporate Directory Integration</li>
+    <li>Mattermost Cloud Overview</li>
     <li class="wy-breadcrumbs-aside">
       
         
-          <a href="https://github.com/mattermost/docs/blob/master/source/overview/auth.rst" class="fa fa-github"> Edit</a>
+          <a href="https://github.com/mattermost/docs/blob/master/source/overview/mattermost-cloud-overview.rst" class="fa fa-github"> Edit</a>
         
       
     </li>
@@ -231,65 +209,63 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="corporate-directory-integration">
-<h1>Corporate Directory Integration<a class="headerlink" href="#corporate-directory-integration" title="Permalink to this headline">¶</a></h1>
-<p>Mattermost Enterprise Edition offers advanced security and authentication options for integrating with corporate directories. This guide outlines the options available.</p>
-<div class="section" id="basic-authentication">
-<h2>Basic authentication<a class="headerlink" href="#basic-authentication" title="Permalink to this headline">¶</a></h2>
-<p>By default Mattermost offers authentication via email and password, which offers basic features including:</p>
+  <div class="section" id="mattermost-cloud-overview">
+<h1>Mattermost Cloud Overview<a class="headerlink" href="#mattermost-cloud-overview" title="Permalink to this headline">¶</a></h1>
+<p>Mattermost Cloud is offered as a monthly subscription service. It is available free, indefinitely, for all workspaces that have 10 or fewer active users. Your subscription is upgraded to  pay-as-you-go once you reach 11 or more active users.</p>
+<div class="section" id="how-billing-works">
+<h2>How Billing Works<a class="headerlink" href="#how-billing-works" title="Permalink to this headline">¶</a></h2>
+<p>Active users are defined as users who fulfil the following criteria:</p>
 <ul class="simple">
-<li>Account sign-up using email and password</li>
-<li>Password reset via email</li>
-<li>Ability to use same credentials to sign-in to web, desktop app and mobile app experiences</li>
-<li>Ability to use username and password in place of email and password</li>
+<li>Has created an account and joined a workspace and shows as <strong>Active</strong> in <strong>System Console &gt; Users</strong>.</li>
+<li>Counts towards your monthly bill for each day they are active in the billing period.</li>
 </ul>
+<p>If a user is deactivated by a System Administrator they no longer count toward your monthly bill.</p>
+<div class="section" id="billing-periods">
+<h3>Billing periods<a class="headerlink" href="#billing-periods" title="Permalink to this headline">¶</a></h3>
+<p>Billing periods end at 11:59 P.M. UTC on the final day of the month. We calculate usage for the billing period based on the number of users who were active and charge your credit card.</p>
+<p>When you first begin your Mattermost Cloud subscription, after upgrading from the free tier, your first charge is at the end of the calendar month.</p>
 </div>
-<div class="section" id="security-features-for-authentication">
-<h2>Security features for authentication<a class="headerlink" href="#security-features-for-authentication" title="Permalink to this headline">¶</a></h2>
-<p>A core set of features is available with all authentication options to help increase security:</p>
-<ul class="simple">
-<li>Ability to <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#id33">set session length</a> to define how long a user can use Mattermost before needing to re-enter credentials.</li>
-<li>Ability for users to remotely sign-out of devices.</li>
-<li>Ability for IT admin to force sign-out of a user from devices.</li>
-<li>Ability to set rate limits on authentication API calls to deter password-guessing attacks.</li>
-<li>Ability to require multi-factor authentication on sign-in.</li>
-<li>For advanced deployments, password requirements for length and special characters can be added.</li>
-</ul>
+<div class="section" id="adding-and-removing-users-in-the-middle-of-a-billing-period">
+<h3>Adding and removing users in the middle of a billing period<a class="headerlink" href="#adding-and-removing-users-in-the-middle-of-a-billing-period" title="Permalink to this headline">¶</a></h3>
+<p>If you add new users in the middle of a billing cycle, we’ll only charge for the days that the user was active. We’ll keep track of this for you, and bill you at the end of the cycle.</p>
+<p>Here’s an example:</p>
+<p><a href="#id1"><span class="problematic" id="id2">*</span></a>Your organization has a Mattermost Cloud workspace and you’re paying monthly by credit card a rate of $10 per user per month. You add a new user 11 days into your billing period and that user remains active for the subsequent 19 days remaining in the month for a total of 20 days.</p>
+<p>The prorated subscription cost for this user is determined by multiplying the monthly amount ($10) by the number of days they were active in the billing cycle (20) and dividing by the number of days in the month (30). The prorated subscription cost for the user added on day 11 is $6.67.*</p>
+<p>Similarly, if you deactivate users in the middle of a billing cycle, we will calculate the prorated amount using the formula above to determine the prorated charge.</p>
 </div>
-<div class="section" id="active-directory-ldap-authentication">
-<h2>Active Directory / LDAP authentication<a class="headerlink" href="#active-directory-ldap-authentication" title="Permalink to this headline">¶</a></h2>
-<p>AD/LDAP is the most popular corporate directory integration option for deploying Mattermost behind a corporate firewall. Features include:</p>
-<ul class="simple">
-<li>Account creation using AD/LDAP credentials</li>
-<li>AD/LDAP user filters to define which users get access to Mattermost in the form of a query</li>
-<li>Ability to use a low-privileged AD/LDAP account to run queries over a secure TLS or STARTTLS connection</li>
-<li>Attribute mapping to place First Name, Last Name, Nickname and other attributes from AD/LDAP into Mattermost</li>
-<li>Customization of login screen to specify whether users are logging in with email, username or other attribute</li>
-<li>Synchronization with AD/LDAP to disable, enable and update Mattermost users based on AD/LDAP</li>
-</ul>
-<p>Note:</p>
-<ul class="simple">
-<li>New user accounts are created when new users sign-in with their AD/LDAP credentials. You can optionally pre-create user accounts using the <a class="reference external" href="https://docs.mattermost.com/deployment/bulk-loading.html">bulk loading</a> tool.</li>
-<li>If you’re using email or username and password authentication <a class="reference external" href="https://docs.mattermost.com/deployment/sso-ldap.html#configure-ad-ldap-using-the-system-console-user-interface">users can switch to AD/LDAP manually</a>, and the <a class="reference external" href="https://docs.mattermost.com/administration/command-line-tools.html#mattermost-user-migrate-auth">conversion to AD/LDAP can also be done using the command line interface</a> by an IT admin.</li>
-</ul>
-<p>For very large AD/LDAP instances you can also configure max page size to divide a Mattermost AD/LDAP query into several pieces to not over-tax the authentication server when synchronizing.</p>
 </div>
-<div class="section" id="authentication-options-outside-of-a-private-network">
-<h2>Authentication options outside of a private network<a class="headerlink" href="#authentication-options-outside-of-a-private-network" title="Permalink to this headline">¶</a></h2>
-<p>When deploying Mattermost to a DMZ location outside the security of a private network, additional authentication options include:</p>
-<ul class="simple">
-<li><a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml-okta.html">Okta integration via SAML</a></li>
-<li><a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml-onelogin.html">OneLogin integration via SAML</a></li>
-<li><a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml-adfs.html">Active Directory Federation Services via SAML</a></li>
-<li><a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml.html">SAML 2.0 authentication</a></li>
-<li><a class="reference external" href="https://docs.mattermost.com/deployment/sso-google.html">Google Apps</a></li>
-<li><a class="reference external" href="https://docs.mattermost.com/deployment/sso-office.html">Office 365</a></li>
-</ul>
-<p>Generic OAuth and OpenID are not currently supported.</p>
+<div class="section" id="viewing-and-managing-billing-details">
+<h2>Viewing and Managing Billing details<a class="headerlink" href="#viewing-and-managing-billing-details" title="Permalink to this headline">¶</a></h2>
+<p>Billing details are presented in the System Console under Billing &amp; Account</p>
+<div class="section" id="subscription">
+<h3>Subscription<a class="headerlink" href="#subscription" title="Permalink to this headline">¶</a></h3>
+<p>The subscription screen outlines the details of the Mattermost Cloud plan, including the cost per user per month and the number of users currently registered in your workspace.</p>
+<p>Also on this screen is a summary of your last Invoice.</p>
+<p>&lt;screenshot&gt;</p>
 </div>
-<div class="section" id="future-authentication-methods">
-<h2>Future authentication methods<a class="headerlink" href="#future-authentication-methods" title="Permalink to this headline">¶</a></h2>
-<p>Mattermost Enterprise Edition releases new improvements monthly. Several additional authentication methods are planned, but not yet scheduled. If you’re an enterprise interested in deploying with an option not yet provided in our documenation, please contact <a class="reference external" href="mailto:sales&#37;&#52;&#48;mattermost&#46;com">sales<span>&#64;</span>mattermost<span>&#46;</span>com</a> to start a discussion.</p>
+<div class="section" id="billing-history">
+<h3>Billing History<a class="headerlink" href="#billing-history" title="Permalink to this headline">¶</a></h3>
+<p>The billing history screen contains a list of all your monthly invoices and payments.</p>
+<p>Invoices appear in your billing history immediately after the billing period ends.</p>
+<p>Billing periods end at 11:59 P.M. UTC on the last day of the month, at which time subscription costs are calculated and a credit card charge is automatically attempted. It may take up to a day for our billing systems to calculate, charge your credit card, and issue your invoice. Once charges are completed, the invoice will show as paid. The invoice is a downloadable PDF file.</p>
+<p>If you have a payment failure, your invoice will show payment failed. Please review the accuracy of your credit card information on the adjacent Payment Information screen (also under the Billing &amp; Account section of the System Console). Unresolved failed payments may result in a delinquency and an interruption to your subscription. Please see failed and delinquent payments &lt;link&gt; for more information.</p>
+<p>For questions regarding the details of your invoice please see  ‘How to read your invoice’</p>
+</div>
+<div class="section" id="company-information">
+<h3>Company Information<a class="headerlink" href="#company-information" title="Permalink to this headline">¶</a></h3>
+<p>The Company Information screen contains an area to add your company address where you are physically located. The company address will appear on your invoice if specified. Otherwise the billing address associated with the credit card on file will be used.</p>
+</div>
+<div class="section" id="payment-information">
+<h3>Payment Information<a class="headerlink" href="#payment-information" title="Permalink to this headline">¶</a></h3>
+<p>Credit cards are the only form of payment for customers on a monthly billing cycle. All major credit cards are accepted.</p>
+<p>To add a new credit card first delete the saved card, then click on ‘Add a Credit Card’ in the top right of the subsequent screen. Mattermost only stores information pertaining to one credit card.</p>
+<p>We offer pricing and billing only in U.S. Dollars at this time… payment will be made in USD? Converted using the exchange rate from ___ at the time of the transaction?</p>
+</div>
+<div class="section" id="sales-tax-and-vat">
+<h3>Sales Tax and VAT<a class="headerlink" href="#sales-tax-and-vat" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://slack.com/intl/en-ca/help/articles/226166647-Sales-tax-and-VAT">example</a>.</p>
+<p>Mattermost reserves the right to assess applicable taxes as required by local law. Depending on location, customers may be charged transaction taxes when purchasing our product. Prices on our website are exclusive of sales or VAT tax.</p>
+</div>
 </div>
 </div>
 
@@ -298,15 +274,6 @@
            
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="compliance.html" class="btn btn-neutral float-right" title="Certifications and Compliance Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="license-and-subscription.html" class="btn btn-neutral" title="Licensing and Subscription" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>
@@ -346,7 +313,7 @@
             </dd>
             
             <dd>
-                <a href="https://github.com/mattermost/docs/blob/master/source/overview/auth.rst"> Edit on GitHub</a>
+                <a href="https://github.com/mattermost/docs/blob/master/source/overview/mattermost-cloud-overview.rst"> Edit on GitHub</a>
             </dd>
             
         </dl>
