@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Encryption Options &mdash; Mattermost 5.27 documentation</title>
+  <title>Encryption Options &mdash; Mattermost 5.28 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.27
+                5.28
               </div>
             
           
@@ -170,7 +170,6 @@
 <li class="toctree-l3"><a class="reference internal" href="image-proxy.html">Image Proxy</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Encryption Options</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#encryption-in-transit">Encryption-in-transit</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#gossip-encryption-experimental">Gossip Encryption (Experimental):</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#encryption-at-rest">Encryption-at-rest</a></li>
 </ul>
 </li>
@@ -250,10 +249,9 @@
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><a class="reference internal" href="#encryption-in-transit" id="id1">Encryption-in-transit</a></li>
-<li><a class="reference internal" href="#gossip-encryption-experimental" id="id2">Gossip Encryption (Experimental):</a></li>
-<li><a class="reference internal" href="#encryption-at-rest" id="id3">Encryption-at-rest</a><ul>
-<li><a class="reference internal" href="#database" id="id4">Database</a></li>
-<li><a class="reference internal" href="#file-storage" id="id5">File Storage</a></li>
+<li><a class="reference internal" href="#encryption-at-rest" id="id2">Encryption-at-rest</a><ul>
+<li><a class="reference internal" href="#database" id="id3">Database</a></li>
+<li><a class="reference internal" href="#file-storage" id="id4">File Storage</a></li>
 </ul>
 </li>
 </ul>
@@ -261,12 +259,7 @@
 <div class="section" id="encryption-in-transit">
 <h2><a class="toc-backref" href="#contents">Encryption-in-transit</a><a class="headerlink" href="#encryption-in-transit" title="Permalink to this headline">¶</a></h2>
 <p>Mattermost supports TLS encryption including AES-256 with 2048-bit RSA on all data transmissions between Mattermost client applications and the Mattermost server. You may either set up TLS on the Mattermost Server or install a proxy such as NGINX and set up TLS on the proxy. Refer to our <a class="reference external" href="https://docs.mattermost.com/install/config-tls-mattermost.html">configuration guide for more details</a>.</p>
-<p>Connections to Active Directory/LDAP can <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#id9">optionally be secured with TLS or stunnel</a>.</p>
-</div>
-<div class="section" id="gossip-encryption-experimental">
-<h2><a class="toc-backref" href="#contents">Gossip Encryption (Experimental):</a><a class="headerlink" href="#gossip-encryption-experimental" title="Permalink to this headline">¶</a></h2>
-<p>In a High Availability mode, Mattermost supports encryption of cluster data in-transit when using the gossip protocol.</p>
-<p>The encryption uses AES-256 by default, and it is not configurable. However, it is possible to manually set the value in&nbsp;the <code class="docutils literal notranslate"><span class="pre">Systems</span></code>&nbsp;table for the <code class="docutils literal notranslate"><span class="pre">ClusterEncryptionKey</span></code> row. A key is a byte array converted to base64. It can be set to a length of 16, 24, or 32 bytes to select AES-128, AES-192, or AES-256 respectively.</p>
+<p>Connections to Active Directory/LDAP can <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#id11">optionally be secured with TLS or stunnel</a>.</p>
 </div>
 <div class="section" id="encryption-at-rest">
 <h2><a class="toc-backref" href="#contents">Encryption-at-rest</a><a class="headerlink" href="#encryption-at-rest" title="Permalink to this headline">¶</a></h2>
