@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>SAML Single Sign-On (E20) &mdash; Mattermost 5.28 documentation</title>
+  <title>SAML Single Sign-On (E20) &mdash; Mattermost 5.27 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.28
+                5.27
               </div>
             
           
@@ -267,13 +267,15 @@
             
   <div class="section" id="saml-single-sign-on-e20">
 <h1>SAML Single Sign-On (E20)<a class="headerlink" href="#saml-single-sign-on-e20" title="Permalink to this headline">¶</a></h1>
+<p>Single sign-on (SSO) is a way for users to log into multiple applications with a single user ID and password without having to re-enter their credentials. The SAML standard allows identity providers to pass credentials to service providers. Mattermost can be configured to act as a SAML 2.0 Service Provider.</p>
+<p>The SAML single-sign-on integration offers the following benefits:</p>
 <p>Mattermost can be configured to act as a SAML 2.0 Service Provider. The SAML Single sign-on integration offers the following benefits:</p>
 <ul class="simple">
 <li><strong>Single sign-on.</strong> Users can sign-in to Mattermost with their SAML credentials.</li>
-<li><strong>Centralized identity management.</strong> Mattermost accounts automatically pull user attributes from SAML upon login, such as full name, email and username.</li>
-<li><strong>Automatic account provisioning.</strong> New Mattermost user accounts are automatically created the first time a user signs in with their SAML credentials on the Mattermost server.</li>
+<li><strong>Centralized identity management.</strong> Mattermost accounts automatically pull user attributes from SAML upon login, such as full name, email, and username.</li>
+<li><strong>Automatic account creation.</strong> Mattermost user accounts are automatically created the first time a user signs in with their SAML credentials on the Mattermost server.</li>
 <li><strong>Sync groups to predefined roles in Mattermost.</strong> Assign team and channel roles to groups via LDAP Group Sync.</li>
-<li><strong>Compliance alignment with administrator management.</strong> Manage Administrator access to Mattermost in the System Console using SAML attributes.</li>
+<li><strong>Compliance alignment.</strong> Manage Administrator access to Mattermost in the System Console using SAML attributes.</li>
 </ul>
 <p>SAML Single sign-on itself does not support periodic updates of user attributes nor automatic deprovisioning. However, SAML with AD/LDAP sync can be configured to support these use cases.</p>
 <p>For more information about SAML, see <a class="reference external" href="https://www.varonis.com/blog/what-is-saml/">this article from Varonis</a>, and <a class="reference external" href="https://duo.com/blog/the-beer-drinkers-guide-to-saml">this conceptual example from DUO</a>.</p>
@@ -328,7 +330,7 @@
 </div>
 <div class="section" id="roadmap">
 <h2>Roadmap<a class="headerlink" href="#roadmap" title="Permalink to this headline">¶</a></h2>
-<p>In Mattermost v5.14, you can optionally configure Mattermost to sign the SAML request using a private key to meet InfoSec requirements at your organization.</p>
+<p>From Mattermost v5.14, you can optionally configure Mattermost to sign the SAML request using a private key to meet InfoSec requirements at your organization.</p>
 <p>In the future roadmap, the main consideration is an integration with SCIM, via plugin. Such an integration allows system administrators to create SAML-provisioned users before their first login, and sync them against Mattermost permissions.</p>
 <p>Currently user provisioning and deprovisioning can be handled with SAML sync, but relies on AD/LDAP. SCIM enables admins to control user provisioning and deprovisioning within the IdP itself.</p>
 <p>For examples, see <a class="reference external" href="https://docs.microsoft.com/en-us/azure/active-directory/manage-apps/use-scim-to-provision-users-and-groups">Microsoft Azure AD integration with SCIM</a> and <a class="reference external" href="https://www.okta.com/integrate/documentation/scim/">Okta user provisioning with SCIM</a>.</p>
@@ -337,7 +339,7 @@
 <h2>Configuration Assistance<a class="headerlink" href="#configuration-assistance" title="Permalink to this headline">¶</a></h2>
 <p>We are open to providing assistance when configuring your custom IdP by answering Mattermost technical configuration questions and working with your IdP provider in support of resolving issues as they relate to Mattermost SAML configuration settings. However, we cannot guarantee your connection will work with Mattermost.</p>
 <p>For technical documentation on SAML, see <a class="reference internal" href="sso-saml-technical.html"><span class="doc">SAML Single-Sign-On (E20): Technical Documentation</span></a>.</p>
-<p>To assist with the process of getting a user file for your custom IDP, see this <a class="reference external" href="https://github.com/icelander/mattermost_generate_user_file">documentation</a>.</p>
+<p>To assist with the process of getting a user file for your custom IdP, see this <a class="reference external" href="https://github.com/icelander/mattermost_generate_user_file">documentation</a>.</p>
 <p>Please note that we may not be able to guarantee that your connection will work with Mattermost, however we will consider improvements to our feature as we are able. You can see more information on getting support <a class="reference external" href="https://mattermost.com/support/">here</a> and submit requests for official support of a particular provider on our <a class="reference external" href="https://mattermost.uservoice.com">feature idea forum</a>.</p>
 </div>
 </div>
