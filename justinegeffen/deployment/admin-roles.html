@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Assigning Admin Roles &mdash; Mattermost 5.28 documentation</title>
+  <title>Additional System Admin Roles (E20) &mdash; Mattermost 5.28 documentation</title>
   
 
   
@@ -172,19 +172,9 @@
 <li class="toctree-l3"><a class="reference internal" href="../administration/hipchat-migration-guidelines.html">Migrating from HipChat to Mattermost</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../administration/migration-announcement-email-template.html">Migration Announcement Email</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../administration/user-provisioning.html">Provisioning Workflows</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Assigning Admin Roles</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#frequently-asked-questions">Frequently Asked Questions</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#can-a-user-manager-or-system-manager-reset-an-administrators-email-or-password-without-their-knowledge">Can a User Manager or System Manager reset an administrator’s email or password without their knowledge?</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#are-all-actions-of-admin-roles-logged">Are all actions of admin roles logged?</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#can-a-system-manager-change-their-own-permissions-or-elevate-their-role">Can a System Manager change their own permissions or elevate their role?</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#can-any-of-the-new-roles-view-api-keys-passwords-or-other-sensitive-information-within-the-system-console-such-as-smtp-aws-elastic-search">Can any of the new roles view API keys/passwords or other sensitive information within the System Console (such as SMTP, AWS, Elastic Search)?</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#if-download-links-for-compliance-exports-are-enabled-in-the-system-console-can-a-read-only-admin-download-the-reports">If download links for compliance exports are enabled in the System Console, can a Read Only Admin download the reports?</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#can-any-of-the-new-roles-force-join-private-channels">Can any of the new roles force-join Private channels?</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#can-i-create-a-new-role-or-clone-an-existing-role">Can I create a new role or clone an existing role?</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#can-i-use-an-ldap-filter-to-assign-these-roles">Can I use an LDAP filter to assign these roles?</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#can-i-rename-the-roles">Can I rename the roles?</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#can-a-system-manager-or-user-manager-demote-or-deactivate-another-admin-or-manager">Can a System Manager or User Manager demote or deactivate another Admin or Manager?</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#can-a-system-manager-or-user-manager-assign-or-unassign-admin-roles">Can a System Manager or User Manager assign or unassign admin roles?</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Additional System Admin Roles (E20)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#assigning-admin-roles">Assigning Admin Roles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#frequently-asked-questions">Frequently Asked Questions</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="sso-ldap.html">Active Directory/LDAP Setup (E10/E20)</a></li>
@@ -257,7 +247,7 @@
     
       <li><a href="../guides/administrator.html">Administrator’s Guide</a> &raquo;</li>
     
-    <li>Assigning Admin Roles</li>
+    <li>Additional System Admin Roles (E20)</li>
     <li class="wy-breadcrumbs-aside">
       
         
@@ -271,7 +261,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <p>From v5.28, System Admins can assign roles to members, allowing them access only to designated areas of the System Console. This allows other members of your organization to perform certain administrative tasks without providing access to all system administrative capabilities.</p>
+  <div class="section" id="additional-system-admin-roles-e20">
+<h1>Additional System Admin Roles (E20)<a class="headerlink" href="#additional-system-admin-roles-e20" title="Permalink to this headline">¶</a></h1>
+<p>From v5.28, System Admins can assign roles to members, allowing them access only to designated areas of the System Console. This allows other members of your organization to perform certain administrative tasks without providing access to all system administrative capabilities.</p>
 <ul class="simple">
 <li><strong>System Manager:</strong> The System Manager has read/write permissions for management areas of the System Console, such as user management and integrations (excluding permissions). This role has read only access to authentication, reporting, and license interfaces.</li>
 <li><strong>User Manager:</strong> The User Manager role is able to read/write to all the user management areas (excluding permissions). The authentication interface is read only.</li>
@@ -352,7 +344,7 @@
 </ul>
 </div></blockquote>
 <div class="section" id="assigning-admin-roles">
-<h1>Assigning Admin Roles<a class="headerlink" href="#assigning-admin-roles" title="Permalink to this headline">¶</a></h1>
+<h2>Assigning Admin Roles<a class="headerlink" href="#assigning-admin-roles" title="Permalink to this headline">¶</a></h2>
 <p>System Admins can assign roles and modify privileges using the mmctl tool. This can be done either locally or remotely.</p>
 <p>The format of the mmctl command is:</p>
 <p><code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">permissions</span> <span class="pre">role</span> <span class="pre">assign</span> <span class="pre">[role_name]</span> <span class="pre">[username...]</span></code></p>
@@ -363,50 +355,51 @@
 <p><code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">permissions</span> <span class="pre">role</span> <span class="pre">assign</span> <span class="pre">system_read_only_admin</span> <span class="pre">captain-marvel</span> <span class="pre">clark-kent</span></code></p>
 </div>
 <div class="section" id="frequently-asked-questions">
-<h1>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h1>
+<h2>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="can-a-user-manager-or-system-manager-reset-an-administrators-email-or-password-without-their-knowledge">
-<h2>Can a User Manager or System Manager reset an administrator’s email or password without their knowledge?<a class="headerlink" href="#can-a-user-manager-or-system-manager-reset-an-administrators-email-or-password-without-their-knowledge" title="Permalink to this headline">¶</a></h2>
+<h3>Can a User Manager or System Manager reset an administrator’s email or password without their knowledge?<a class="headerlink" href="#can-a-user-manager-or-system-manager-reset-an-administrators-email-or-password-without-their-knowledge" title="Permalink to this headline">¶</a></h3>
 <p>No. The ability to reset passwords, or email addresses of administrators is limited to System Admins.</p>
 </div>
 <div class="section" id="are-all-actions-of-admin-roles-logged">
-<h2>Are all actions of admin roles logged?<a class="headerlink" href="#are-all-actions-of-admin-roles-logged" title="Permalink to this headline">¶</a></h2>
+<h3>Are all actions of admin roles logged?<a class="headerlink" href="#are-all-actions-of-admin-roles-logged" title="Permalink to this headline">¶</a></h3>
 <p>Every change made by any admin is included in the audit log.</p>
 </div>
 <div class="section" id="can-a-system-manager-change-their-own-permissions-or-elevate-their-role">
-<h2>Can a System Manager change their own permissions or elevate their role?<a class="headerlink" href="#can-a-system-manager-change-their-own-permissions-or-elevate-their-role" title="Permalink to this headline">¶</a></h2>
+<h3>Can a System Manager change their own permissions or elevate their role?<a class="headerlink" href="#can-a-system-manager-change-their-own-permissions-or-elevate-their-role" title="Permalink to this headline">¶</a></h3>
 <p>No. System Managers can’t elevate their role, and aren’t able to elevate other members’ roles.</p>
 </div>
 <div class="section" id="can-any-of-the-new-roles-view-api-keys-passwords-or-other-sensitive-information-within-the-system-console-such-as-smtp-aws-elastic-search">
-<h2>Can any of the new roles view API keys/passwords or other sensitive information within the System Console (such as SMTP, AWS, Elastic Search)?<a class="headerlink" href="#can-any-of-the-new-roles-view-api-keys-passwords-or-other-sensitive-information-within-the-system-console-such-as-smtp-aws-elastic-search" title="Permalink to this headline">¶</a></h2>
+<h3>Can any of the new roles view API keys/passwords or other sensitive information within the System Console (such as SMTP, AWS, Elastic Search)?<a class="headerlink" href="#can-any-of-the-new-roles-view-api-keys-passwords-or-other-sensitive-information-within-the-system-console-such-as-smtp-aws-elastic-search" title="Permalink to this headline">¶</a></h3>
 <p>No, password information is only visible to System Admins and is obfuscated for other roles.</p>
 </div>
 <div class="section" id="if-download-links-for-compliance-exports-are-enabled-in-the-system-console-can-a-read-only-admin-download-the-reports">
-<h2>If download links for compliance exports are enabled in the System Console, can a Read Only Admin download the reports?<a class="headerlink" href="#if-download-links-for-compliance-exports-are-enabled-in-the-system-console-can-a-read-only-admin-download-the-reports" title="Permalink to this headline">¶</a></h2>
+<h3>If download links for compliance exports are enabled in the System Console, can a Read Only Admin download the reports?<a class="headerlink" href="#if-download-links-for-compliance-exports-are-enabled-in-the-system-console-can-a-read-only-admin-download-the-reports" title="Permalink to this headline">¶</a></h3>
 <p>Only roles that are explicitly granted access to <strong>System Console &gt; Compliance</strong> have access to download compliance reports.</p>
 </div>
 <div class="section" id="can-any-of-the-new-roles-force-join-private-channels">
-<h2>Can any of the new roles force-join Private channels?<a class="headerlink" href="#can-any-of-the-new-roles-force-join-private-channels" title="Permalink to this headline">¶</a></h2>
+<h3>Can any of the new roles force-join Private channels?<a class="headerlink" href="#can-any-of-the-new-roles-force-join-private-channels" title="Permalink to this headline">¶</a></h3>
 <p>Yes at this time they can, however, we will be improving on this behavior in the future with a prompt that lets them know they are entering a private channel. We are also planning on adding a permission which would remove the ability to access Private channels.</p>
 </div>
 <div class="section" id="can-i-create-a-new-role-or-clone-an-existing-role">
-<h2>Can I create a new role or clone an existing role?<a class="headerlink" href="#can-i-create-a-new-role-or-clone-an-existing-role" title="Permalink to this headline">¶</a></h2>
+<h3>Can I create a new role or clone an existing role?<a class="headerlink" href="#can-i-create-a-new-role-or-clone-an-existing-role" title="Permalink to this headline">¶</a></h3>
 <p>No, but we are actively seeking feedback on this capability.</p>
 </div>
 <div class="section" id="can-i-use-an-ldap-filter-to-assign-these-roles">
-<h2>Can I use an LDAP filter to assign these roles?<a class="headerlink" href="#can-i-use-an-ldap-filter-to-assign-these-roles" title="Permalink to this headline">¶</a></h2>
+<h3>Can I use an LDAP filter to assign these roles?<a class="headerlink" href="#can-i-use-an-ldap-filter-to-assign-these-roles" title="Permalink to this headline">¶</a></h3>
 <p>No, but we are considering this functionality for a future enhancement.</p>
 </div>
 <div class="section" id="can-i-rename-the-roles">
-<h2>Can I rename the roles?<a class="headerlink" href="#can-i-rename-the-roles" title="Permalink to this headline">¶</a></h2>
+<h3>Can I rename the roles?<a class="headerlink" href="#can-i-rename-the-roles" title="Permalink to this headline">¶</a></h3>
 <p>This is being considered for future development.</p>
 </div>
 <div class="section" id="can-a-system-manager-or-user-manager-demote-or-deactivate-another-admin-or-manager">
-<h2>Can a System Manager or User Manager demote or deactivate another Admin or Manager?<a class="headerlink" href="#can-a-system-manager-or-user-manager-demote-or-deactivate-another-admin-or-manager" title="Permalink to this headline">¶</a></h2>
+<h3>Can a System Manager or User Manager demote or deactivate another Admin or Manager?<a class="headerlink" href="#can-a-system-manager-or-user-manager-demote-or-deactivate-another-admin-or-manager" title="Permalink to this headline">¶</a></h3>
 <p>No privilege grants the authority to deactivate or demote another admin.</p>
 </div>
 <div class="section" id="can-a-system-manager-or-user-manager-assign-or-unassign-admin-roles">
-<h2>Can a System Manager or User Manager assign or unassign admin roles?<a class="headerlink" href="#can-a-system-manager-or-user-manager-assign-or-unassign-admin-roles" title="Permalink to this headline">¶</a></h2>
+<h3>Can a System Manager or User Manager assign or unassign admin roles?<a class="headerlink" href="#can-a-system-manager-or-user-manager-assign-or-unassign-admin-roles" title="Permalink to this headline">¶</a></h3>
 <p>Only the System Admin has access to edit system roles.</p>
+</div>
 </div>
 </div>
 
