@@ -82,7 +82,6 @@ The format of the mmctl command is:
 **To remove write access to the authentication section for all users with the User Manager role:**
 ``mmctl permissions remove system_user_manager sysconsole_write_authentication``
 
-WARNING: Use this functionality at your own risk. Granting access to roles outside of the default permissions set may expose security issues such as the ability to change passwords, edit admin filters, etc.   
 
 Frequently Asked Questions
 --------------------------
@@ -91,6 +90,10 @@ Can a User Manager or System Manager reset an administrator’s email or passwor
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This is not possible with the default priveleges of these roles. The ability to reset passwords, or email addresses of administrators is limited to System Admins.  
+
+Can a User Manager or System Manager access the configuration file? 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Yes. Any admin role will have the ability to read the config file using the ``mmctl config edit`` command. Their changes will only be applied if they have the appropriate permissions to do so. 
 
 Are all actions of admin roles logged?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
