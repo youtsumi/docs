@@ -174,6 +174,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../administration/user-provisioning.html">Provisioning Workflows</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Additional System Admin Roles (E20)</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#assigning-admin-roles">Assigning Admin Roles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#editing-privileges-of-admin-roles-advanced">Editing Privileges of Admin Roles (Advanced)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#frequently-asked-questions">Frequently Asked Questions</a></li>
 </ul>
 </li>
@@ -345,20 +346,33 @@
 </div></blockquote>
 <div class="section" id="assigning-admin-roles">
 <h2>Assigning Admin Roles<a class="headerlink" href="#assigning-admin-roles" title="Permalink to this headline">¶</a></h2>
-<p>System Admins can assign roles and modify privileges using the mmctl tool. This can be done either locally or remotely.</p>
+<p>System Admins can assign roles using the mmctl tool. This can be done either locally or remotely.</p>
 <p>The format of the mmctl command is:</p>
 <p><code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">permissions</span> <span class="pre">role</span> <span class="pre">assign</span> <span class="pre">[role_name]</span> <span class="pre">[username...]</span></code></p>
 <p><strong>To grant the System Manager role to a single user called Bob Smith:</strong></p>
 <p><code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">permissions</span> <span class="pre">role</span> <span class="pre">assign</span> <span class="pre">system_manager</span> <span class="pre">bob-smith</span></code></p>
 <p><strong>To grant the User Manager role to two users, Bob Smith and Sue Clark:</strong></p>
 <p><code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">permissions</span> <span class="pre">role</span> <span class="pre">assign</span> <span class="pre">system_user_manager</span> <span class="pre">bob-smith</span> <span class="pre">sue-clark</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">permissions</span> <span class="pre">role</span> <span class="pre">assign</span> <span class="pre">system_read_only_admin</span> <span class="pre">captain-marvel</span> <span class="pre">clark-kent</span></code></p>
+<p><strong>To grant the Read Only Admin role to two users, Bob Smith and Sue Clark:</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">permissions</span> <span class="pre">role</span> <span class="pre">assign</span> <span class="pre">system_read_only_admin</span> <span class="pre">bob-smith</span> <span class="pre">sue-clark</span></code></p>
+</div>
+<div class="section" id="editing-privileges-of-admin-roles-advanced">
+<h2>Editing Privileges of Admin Roles (Advanced)<a class="headerlink" href="#editing-privileges-of-admin-roles-advanced" title="Permalink to this headline">¶</a></h2>
+<p>Each of the admin roles have defined, default privileges as outlined above. However both read and write access to areas of the System Console can be granted or removed from each role by System Admins using the mmctl tool. This can be done either locally or remotely.</p>
+<p>The format of the mmctl command is:</p>
+<p><code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">permissions</span> <span class="pre">add</span> <span class="pre">[role_name]</span> <span class="pre">[permission...]</span></code></p>
+<p><strong>To grant write access to the authentication section for all users with the User Manager role:</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">permissions</span> <span class="pre">add</span> <span class="pre">system_user_manager</span> <span class="pre">sysconsole_write_authentication</span></code></p>
+<p><strong>To grant read only access to the authentication section for all users with the User Manager role:</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">permissions</span> <span class="pre">remove</span> <span class="pre">system_user_manager</span> <span class="pre">sysconsole_read_authentication</span></code></p>
+<p><strong>To remove write access to the authentication section for all users with the User Manager role:</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">permissions</span> <span class="pre">remove</span> <span class="pre">system_user_manager</span> <span class="pre">sysconsole_write_authentication</span></code></p>
 </div>
 <div class="section" id="frequently-asked-questions">
 <h2>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="can-a-user-manager-or-system-manager-reset-an-administrators-email-or-password-without-their-knowledge">
 <h3>Can a User Manager or System Manager reset an administrator’s email or password without their knowledge?<a class="headerlink" href="#can-a-user-manager-or-system-manager-reset-an-administrators-email-or-password-without-their-knowledge" title="Permalink to this headline">¶</a></h3>
-<p>No. The ability to reset passwords, or email addresses of administrators is limited to System Admins.</p>
+<p>This is not possible with the default priveleges of these roles. The ability to reset passwords, or email addresses of administrators is limited to System Admins.</p>
 </div>
 <div class="section" id="are-all-actions-of-admin-roles-logged">
 <h3>Are all actions of admin roles logged?<a class="headerlink" href="#are-all-actions-of-admin-roles-logged" title="Permalink to this headline">¶</a></h3>
@@ -394,7 +408,7 @@
 </div>
 <div class="section" id="can-a-system-manager-or-user-manager-demote-or-deactivate-another-admin-or-manager">
 <h3>Can a System Manager or User Manager demote or deactivate another Admin or Manager?<a class="headerlink" href="#can-a-system-manager-or-user-manager-demote-or-deactivate-another-admin-or-manager" title="Permalink to this headline">¶</a></h3>
-<p>No privilege grants the authority to deactivate or demote another admin.</p>
+<p>By default, no privilege grants the authority to deactivate or demote another admin.</p>
 </div>
 <div class="section" id="can-a-system-manager-or-user-manager-assign-or-unassign-admin-roles">
 <h3>Can a System Manager or User Manager assign or unassign admin roles?<a class="headerlink" href="#can-a-system-manager-or-user-manager-assign-or-unassign-admin-roles" title="Permalink to this headline">¶</a></h3>
