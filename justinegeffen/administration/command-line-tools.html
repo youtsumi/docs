@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Command Line Tools &mdash; Mattermost 5.28 documentation</title>
+  <title>Command Line Tools &mdash; Mattermost 5.27 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.28
+                5.27
               </div>
             
           
@@ -179,7 +179,6 @@
 <li class="toctree-l3"><a class="reference internal" href="scripts.html">Scripts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="statistics.html">Statistics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../integrations/net-promoter-score.html">User Satisfaction Surveys</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notices.html">In-Product Notices</a></li>
 <li class="toctree-l3"><a class="reference internal" href="health-check.html">Health Check</a></li>
 <li class="toctree-l3"><a class="reference internal" href="announcement-banner.html">Announcement Banner (E10)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="bulk-export.html">Bulk Export Tool</a></li>
@@ -439,28 +438,26 @@ recommended before use)</li>
 <h2><a class="toc-backref" href="#contents">Using the CLI</a><a class="headerlink" href="#using-the-cli" title="Permalink to this headline">¶</a></h2>
 <p>To run the CLI commands, you must be in the Mattermost root directory. On a default installation of Mattermost, the root directory is <code class="docutils literal notranslate"><span class="pre">/opt/mattermost</span></code>. If you followed our standard <a class="reference external" href="../guides/administrator.html#installing-mattermost">installation process</a>, you must run the commands as the user <code class="docutils literal notranslate"><span class="pre">mattermost</span></code>. The name of the executable is <code class="docutils literal notranslate"><span class="pre">mattermost</span></code>, and it can be found in the <code class="docutils literal notranslate"><span class="pre">/opt/mattermost/bin</span></code> directory.</p>
 <p><strong>For example, to get the Mattermost version on a default installation of Mattermost:</strong></p>
-<blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /opt/mattermost/
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /opt/mattermost/
 sudo -u mattermost bin/mattermost version
 </pre></div>
 </div>
-</div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Ensure you run the Mattermost binary as the <code class="docutils literal notranslate"><span class="pre">mattermost</span></code> user. Running it as <code class="docutils literal notranslate"><span class="pre">root</span></code> user (for example) may cause complications with permissions as the binary initiates plugins and accesses various files when running CLI commands. Running the server as <code class="docutils literal notranslate"><span class="pre">root</span></code> may result in ownership of the plugins and files to be overwritten as well as other potential permissions errors.</p>
 </div>
-<p>When running CLI commands on a Mattermost installation that has the configuration stored in the database, you might need to pass the database connection string as follows:
-<code class="docutils literal notranslate"><span class="pre">bin/mattermost</span> <span class="pre">--config=&quot;postgres://mmuser:mostest&#64;localhost:5432/mattermost_test?sslmode=disable\u0026connect_timeout=10&quot;</span></code></p>
+<p>When running CLI commands on a Mattermost installation that has the configuration stored in the database, you might need to pass the database connection string as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bin/mattermost --config<span class="o">=</span><span class="s2">&quot;postgres://mmuser:mostest@localhost:5432/mattermost_test?sslmode=disable\u0026connect_timeout=10&quot;</span>
+</pre></div>
+</div>
 <div class="section" id="using-the-cli-on-gitlab-omnibus">
 <h3><a class="toc-backref" href="#contents">Using the CLI on GitLab Omnibus</a><a class="headerlink" href="#using-the-cli-on-gitlab-omnibus" title="Permalink to this headline">¶</a></h3>
 <p>On GitLab Omnibus, you must be in the following directory when you run CLI commands: <code class="docutils literal notranslate"><span class="pre">/opt/gitlab/embedded/service/mattermost</span></code>. Also, you must run the commands as the user <em>mattermost</em> and specify the location of the configuration file. The executable is <code class="docutils literal notranslate"><span class="pre">/opt/gitlab/embedded/bin/mattermost</span></code>.</p>
 <p><strong>For example, to get the Mattermost version on GitLab Omnibus:</strong></p>
-<blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /opt/gitlab/embedded/service/mattermost
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /opt/gitlab/embedded/service/mattermost
 sudo /opt/gitlab/embedded/bin/chpst -e /opt/gitlab/etc/mattermost/env -P -U mattermost:mattermost -u mattermost:mattermost /opt/gitlab/embedded/bin/mattermost --config<span class="o">=</span>/var/opt/gitlab/mattermost/config.json version
 </pre></div>
 </div>
-</div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">The example commands in the documentation are for a default installation of Mattermost. You must modify the commands so that they work on GitLab Omnibus.</p>
@@ -470,11 +467,9 @@ sudo /opt/gitlab/embedded/bin/chpst -e /opt/gitlab/etc/mattermost/env -P -U matt
 <h3><a class="toc-backref" href="#contents">Using the CLI on Docker Install</a><a class="headerlink" href="#using-the-cli-on-docker-install" title="Permalink to this headline">¶</a></h3>
 <p>On Docker install, the <code class="docutils literal notranslate"><span class="pre">/mattermost/bin</span></code> directory was added to <code class="docutils literal notranslate"><span class="pre">PATH</span></code>, so you can use the CLI directly with the <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">exec</span></code> command. Note that the container name may be <code class="docutils literal notranslate"><span class="pre">mattermostdocker_app_1</span></code> if you installed Mattermost with <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code>.</p>
 <p><strong>For example, to get the Mattermost version on a Docker install:</strong></p>
-<blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker <span class="nb">exec</span> -it &lt;your-mattermost-container-name&gt; mattermost version
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker <span class="nb">exec</span> -it &lt;your-mattermost-container-name&gt; mattermost version
 </pre></div>
 </div>
-</div></blockquote>
 </div>
 <div class="section" id="using-the-cli-on-docker-preview">
 <h3><a class="toc-backref" href="#contents">Using the CLI on Docker Preview</a><a class="headerlink" href="#using-the-cli-on-docker-preview" title="Permalink to this headline">¶</a></h3>
@@ -492,7 +487,7 @@ sudo /opt/gitlab/embedded/bin/chpst -e /opt/gitlab/etc/mattermost/env -P -U matt
 <ul class="simple">
 <li>Parameters in CLI commands are order-specific.</li>
 <li>If special characters (<code class="docutils literal notranslate"><span class="pre">!</span></code>, <code class="docutils literal notranslate"><span class="pre">|</span></code>, <code class="docutils literal notranslate"><span class="pre">(</span></code>, <code class="docutils literal notranslate"><span class="pre">)</span></code>, <code class="docutils literal notranslate"><span class="pre">\</span></code>, <code class="docutils literal notranslate"><span class="pre">'</span></code>, and <code class="docutils literal notranslate"><span class="pre">&quot;</span></code>) are used, the entire argument needs to be surrounded by single quotes (e.g. <code class="docutils literal notranslate"><span class="pre">-password</span> <span class="pre">'mypassword!'</span></code>, or the individual characters need to be escaped out (e.g. <code class="docutils literal notranslate"><span class="pre">-password</span> <span class="pre">mypassword\!</span></code>).</li>
-<li>Team name and channel name refer to the handles, not the display names. So in the url <code class="docutils literal notranslate"><span class="pre">https://community.mattermost.com/core/channels/town-square</span></code> team name would be <code class="docutils literal notranslate"><span class="pre">core</span></code> and channel name would be <code class="docutils literal notranslate"><span class="pre">town-square</span></code></li>
+<li>Team name and channel name refer to the handles, not the display names. So in the url <code class="docutils literal notranslate"><span class="pre">https://community.mattermost.com/core/channels/town-square</span></code> team name would be <code class="docutils literal notranslate"><span class="pre">core</span></code> and channel name would be <code class="docutils literal notranslate"><span class="pre">town-square</span></code>.</li>
 </ul>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
@@ -2866,8 +2861,8 @@ bin/mattermost user invite user@example.com myteam1 myteam2
 <li><code class="docutils literal notranslate"><span class="pre">users_file</span></code>: The path of a JSON file with the usernames and emails of all users to migrate to SAML. The username and email must be the same as in your SAML service provider. Moreover, the email must match the email address of the Mattermost user account. An example of the users file is below:</li>
 </ul>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;user1@email.com&quot;</span><span class="p">:</span> <span class="s2">&quot;user.one&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;user2@email.com&quot;</span><span class="p">:</span> <span class="s2">&quot;user.two&quot;</span>
+  <span class="nt">&quot;user1@email.com&quot;</span><span class="p">:</span> <span class="s2">&quot;username.one&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;user2@email.com&quot;</span><span class="p">:</span> <span class="s2">&quot;username.two&quot;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
