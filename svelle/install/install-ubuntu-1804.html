@@ -181,6 +181,7 @@
 <li class="toctree-l3"><a class="reference internal" href="install-kubernetes.html">Installing on Kubernetes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="install-debian.html">Installing on Debian Buster</a></li>
 <li class="toctree-l3"><a class="reference internal" href="install-rhel-7.html">Installing on RHEL 7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-rhel-8.html">Installing on RHEL 8</a></li>
 <li class="toctree-l3"><a class="reference internal" href="install-centos-oracle-scientific.html">Installing on CentOS, Oracle Linux, and Scientific Linux</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sockets-db.html">Instructions On Setting Up a Socket-based Mattermost Database</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ee-install.html">Enterprise Install and Upgrade</a></li>
@@ -441,15 +442,19 @@
 <blockquote>
 <div><ol class="loweralpha simple">
 <li>Open <code class="docutils literal notranslate"><span class="pre">/etc/postgresql/10/main/pg_hba.conf</span></code> as root in a text editor.</li>
-<li>Find the following line:</li>
+<li>Find the following lines:</li>
 </ol>
 <blockquote>
-<div><code class="docutils literal notranslate"><span class="pre">local</span>&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">peer</span></code></div></blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">local</span>&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">peer</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">host</span>&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">::1/128</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">ident</span></code></p>
+</div></blockquote>
 <ol class="loweralpha simple" start="3">
-<li>Change <code class="docutils literal notranslate"><span class="pre">peer</span></code> to <code class="docutils literal notranslate"><span class="pre">trust</span></code>:</li>
+<li>Change <code class="docutils literal notranslate"><span class="pre">peer</span></code> and <code class="docutils literal notranslate"><span class="pre">ident</span></code> to <code class="docutils literal notranslate"><span class="pre">trust</span></code>:</li>
 </ol>
 <blockquote>
-<div><code class="docutils literal notranslate"><span class="pre">local</span>&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">trust</span></code></div></blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">local</span>&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">trust</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">host</span>&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">::1/128</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">trust</span></code></p>
+</div></blockquote>
 </div></blockquote>
 <p><strong>If the Mattermost server and the database are on different machines</strong>:</p>
 <blockquote>
@@ -864,11 +869,11 @@ sudo service nginx restart
 </ol>
 <blockquote>
 <div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">touch</span> <span class="pre">/etc/nginx/sites-available/mattermost</span></code></div></blockquote>
-<p>On RHEL 7: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">touch</span> <span class="pre">/etc/nginx/conf.d/mattermost</span></code></p>
+<p>On RHEL 7 and 8: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">touch</span> <span class="pre">/etc/nginx/conf.d/mattermost</span></code></p>
 <ol class="arabic simple" start="3">
 <li>Open the file <code class="docutils literal notranslate"><span class="pre">/etc/nginx/sites-available/mattermost</span></code> as <em>root</em> user in a text editor and replace its contents, if any, with the following lines. Make sure that you use your own values for the Mattermost server IP address and FQDN for <em>server_name</em>.</li>
 </ol>
-<p>On RHEL 7, open the file <code class="docutils literal notranslate"><span class="pre">/etc/nginx/conf.d/mattermost</span></code>.</p>
+<p>On RHEL 7 and 8, open the file <code class="docutils literal notranslate"><span class="pre">/etc/nginx/conf.d/mattermost</span></code>.</p>
 <blockquote>
 <div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>upstream backend {
    server 10.10.10.2:8065;
@@ -929,13 +934,13 @@ server {
 </ol>
 <blockquote>
 <div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">rm</span> <span class="pre">/etc/nginx/sites-enabled/default</span></code></div></blockquote>
-<p>On RHEL 7: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">rm</span> <span class="pre">/etc/nginx/conf.d/default</span></code></p>
+<p>On RHEL 7 and 8: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">rm</span> <span class="pre">/etc/nginx/conf.d/default</span></code></p>
 <ol class="arabic simple" start="5">
 <li>Enable the mattermost configuration.</li>
 </ol>
 <blockquote>
 <div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">ln</span> <span class="pre">-s</span> <span class="pre">/etc/nginx/sites-available/mattermost</span> <span class="pre">/etc/nginx/sites-enabled/mattermost</span></code></div></blockquote>
-<p>On RHEL 7: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">ln</span> <span class="pre">-s</span> <span class="pre">/etc/nginx/conf.d/mattermost</span> <span class="pre">/etc/nginx/conf.d/default.conf</span></code></p>
+<p>On RHEL 7 and 8: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">ln</span> <span class="pre">-s</span> <span class="pre">/etc/nginx/conf.d/mattermost</span> <span class="pre">/etc/nginx/conf.d/default.conf</span></code></p>
 <ol class="arabic simple" start="6">
 <li>Restart NGINX.</li>
 </ol>
@@ -1060,7 +1065,7 @@ expose:
 <blockquote>
 <div><p>On Ubuntu 14.04 and RHEL 6:</p>
 <p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">service</span> <span class="pre">nginx</span> <span class="pre">stop</span></code></p>
-<p>On Ubuntu 16.04, Ubuntu 18.04 and RHEL 7:</p>
+<p>On Ubuntu 18.04, RHEL 7, and RHEL 8:</p>
 <p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">stop</span> <span class="pre">nginx</span></code></p>
 </div></blockquote>
 <ol class="arabic simple" start="6">
@@ -1130,7 +1135,7 @@ location / {
 <blockquote>
 <div><p>On Ubuntu 14.04 and RHEL 6:</p>
 <p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">service</span> <span class="pre">nginx</span> <span class="pre">start</span></code></p>
-<p>On Ubuntu 16.04, Ubuntu 18.04 and RHEL 7:</p>
+<p>On Ubuntu 18.04, RHEL 7, and RHEL 8:</p>
 <p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">start</span> <span class="pre">nginx</span></code></p>
 </div></blockquote>
 <ol class="arabic simple" start="10">

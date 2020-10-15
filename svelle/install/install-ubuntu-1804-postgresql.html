@@ -289,15 +289,19 @@
 <blockquote>
 <div><ol class="loweralpha simple">
 <li>Open <code class="docutils literal notranslate"><span class="pre">/etc/postgresql/10/main/pg_hba.conf</span></code> as root in a text editor.</li>
-<li>Find the following line:</li>
+<li>Find the following lines:</li>
 </ol>
 <blockquote>
-<div><code class="docutils literal notranslate"><span class="pre">local</span>&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">peer</span></code></div></blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">local</span>&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">peer</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">host</span>&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">::1/128</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">ident</span></code></p>
+</div></blockquote>
 <ol class="loweralpha simple" start="3">
-<li>Change <code class="docutils literal notranslate"><span class="pre">peer</span></code> to <code class="docutils literal notranslate"><span class="pre">trust</span></code>:</li>
+<li>Change <code class="docutils literal notranslate"><span class="pre">peer</span></code> and <code class="docutils literal notranslate"><span class="pre">ident</span></code> to <code class="docutils literal notranslate"><span class="pre">trust</span></code>:</li>
 </ol>
 <blockquote>
-<div><code class="docutils literal notranslate"><span class="pre">local</span>&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">trust</span></code></div></blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">local</span>&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">trust</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">host</span>&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">::1/128</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">trust</span></code></p>
+</div></blockquote>
 </div></blockquote>
 <p><strong>If the Mattermost server and the database are on different machines</strong>:</p>
 <blockquote>
