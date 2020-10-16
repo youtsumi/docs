@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mmctl Command Line Tool (Beta) &mdash; Mattermost 5.26 documentation</title>
+  <title>mmctl Command Line Tool (Beta) &mdash; Mattermost 5.28 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.26
+                5.28
               </div>
             
           
@@ -186,11 +186,13 @@
 <li class="toctree-l4"><a class="reference internal" href="#mmctl-group">mmctl group</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mmctl-group-channel">mmctl group channel</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mmctl-group-team">mmctl group team</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mmctl-integrity">mmctl integrity</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mmctl-ldap">mmctl ldap</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mmctl-license">mmctl license</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mmctl-logs">mmctl logs</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mmctl-permissions">mmctl permissions</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mmctl-plugin">mmctl plugin</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mmctl-plugin-marketplace">mmctl plugin marketplace</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mmctl-post">mmctl post</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mmctl-roles">mmctl roles</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mmctl-system">mmctl system</a></li>
@@ -204,6 +206,7 @@
 <li class="toctree-l3"><a class="reference internal" href="scripts.html">Scripts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="statistics.html">Statistics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../integrations/net-promoter-score.html">User Satisfaction Surveys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notices.html">In-Product Notices</a></li>
 <li class="toctree-l3"><a class="reference internal" href="health-check.html">Health Check</a></li>
 <li class="toctree-l3"><a class="reference internal" href="announcement-banner.html">Announcement Banner (E10)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="bulk-export.html">Bulk Export Tool</a></li>
@@ -291,6 +294,7 @@
 <li><a class="reference internal" href="#mmctl-config">mmctl config</a> - Configuration Management</li>
 <li><a class="reference internal" href="#mmctl-docs">mmctl docs</a> - Generates mmctl documentation</li>
 <li><a class="reference internal" href="#mmctl-group">mmctl group</a> - Group Management</li>
+<li><a class="reference internal" href="#mmctl-integrity">mmctl integrity</a> - Database record integrity</li>
 <li><a class="reference internal" href="#mmctl-ldap">mmctl ldap</a> - LDAP Management</li>
 <li><a class="reference internal" href="#mmctl-license">mmctl license</a> - License Management</li>
 <li><a class="reference internal" href="#mmctl-logs">mmctl logs</a> - Log Management</li>
@@ -1459,6 +1463,7 @@ To configure your zsh shell to load completions <span class="k">for</span> each 
 <li><a class="reference internal" href="#mmctl-config-reset">mmctl config reset</a> - Reset the configuration</li>
 <li><a class="reference internal" href="#mmctl-config-set">mmctl config set</a> - Set the value of a configuration</li>
 <li><a class="reference internal" href="#mmctl-config-show">mmctl config show</a> - Writes the server configuration to STDOUT</li>
+<li><a class="reference internal" href="#mmctl-config-subpath">mmctl config subpath</a> - Update client asset loading to use the configured subpath</li>
 </ul>
 </dd>
 </dl>
@@ -1583,6 +1588,40 @@ To configure your zsh shell to load completions <span class="k">for</span> each 
 </div>
 <p><strong>Options</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help   <span class="nb">help</span> <span class="k">for</span> show
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
+--local                       allows communicating with the server through a unix socket
+--strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
+<div class="section" id="mmctl-config-subpath">
+<h3>mmctl config subpath<a class="headerlink" href="#mmctl-config-subpath" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<blockquote>
+<div>Update the hard-coded production client asset paths to take into account Mattermost running on a subpath. This command needs access to the Mattermost assets directory to be able to rewrite the paths.</div></blockquote>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl config subpath <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># you can rewrite the assets to use a subpath</span>
+mmctl config subpath --assets-dir /opt/mattermost/client --path /mattermost
+
+<span class="c1"># the subpath can have multiple steps</span>
+mmctl config subpath --assets-dir /opt/mattermost/client --path /my/custom/subpath
+
+<span class="c1"># or you can fallback to the root path passing /</span>
+mmctl config subpath --assets-dir /opt/mattermost/client --path /
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-a, --assets-dir string   directory of the Mattermost assets in the <span class="nb">local</span> filesystem
+-h, --help                <span class="nb">help</span> <span class="k">for</span> subpath
+-p, --path string         path to update the assets with
 </pre></div>
 </div>
 <p><strong>Options inherited from parent commands</strong></p>
@@ -1890,6 +1929,32 @@ To configure your zsh shell to load completions <span class="k">for</span> each 
 </div>
 </div>
 </div>
+<div class="section" id="mmctl-integrity">
+<h2>mmctl integrity<a class="headerlink" href="#mmctl-integrity" title="Permalink to this headline">¶</a></h2>
+<p><strong>Description</strong></p>
+<blockquote>
+<div><p>Perform a relational integrity check which returns information about any orphaned record found.</p>
+<p><strong>Note:</strong></p>
+<p>This command can only be run using local mode.</p>
+</div></blockquote>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl integrity <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--confirm       Confirm you really want to run a <span class="nb">complete</span> integrity check that may temporarily harm system performance
+-h, --help      <span class="nb">help</span> <span class="k">for</span> integrity
+-v, --verbose   Show detailed information on integrity check results
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
+--local                       allows communicating with the server through a unix socket
+--strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
 <div class="section" id="mmctl-ldap">
 <h2>mmctl ldap<a class="headerlink" href="#mmctl-ldap" title="Permalink to this headline">¶</a></h2>
 <p>LDAP-related utilities.</p>
@@ -2121,7 +2186,11 @@ To configure your zsh shell to load completions <span class="k">for</span> each 
 <li><a class="reference internal" href="#mmctl-plugin-delete">mmctl plugin delete</a> - Remove plugins</li>
 <li><a class="reference internal" href="#mmctl-plugin-disable">mmctl plugin disable</a> - Disable plugins</li>
 <li><a class="reference internal" href="#mmctl-plugin-enable">mmctl plugin enable</a> - Enable plugins</li>
+<li><a class="reference internal" href="#mmctl-plugin-install-url">mmctl plugin install-url</a> - Install plugin from URL</li>
 <li><a class="reference internal" href="#mmctl-plugin-list">mmctl plugin list</a> - List plugins</li>
+<li><a class="reference internal" href="#mmctl-plugin-marketplace">mmctl plugin marketplace</a> - Management of Plugin Marketplace plugins</li>
+<li><a class="reference internal" href="#mmctl-plugin-marketplace-install">mmctl plugin marketplace install</a> - Install a plugin from the Plugin Marketplace</li>
+<li><a class="reference internal" href="#mmctl-plugin-marketplace-list">mmctl plugin marketplace list</a> - List Plugin Marketplace plugins</li>
 </ul>
 </dd>
 </dl>
@@ -2229,6 +2298,36 @@ To configure your zsh shell to load completions <span class="k">for</span> each 
 </pre></div>
 </div>
 </div>
+<div class="section" id="mmctl-plugin-install-url">
+<h3>mmctl plugin install-url<a class="headerlink" href="#mmctl-plugin-install-url" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<blockquote>
+<div>Supply one or multiple URLs to plugins compressed in a <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code> file. Plugins must be enabled in the server’s config settings.</div></blockquote>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl plugin install-url &lt;url&gt;... <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># You can install one plugin</span>
+$ mmctl plugin install-url https://example.com/mattermost-plugin.tar.gz
+
+<span class="c1"># Or install multiple in one go</span>
+$ mmctl plugin install-url https://example.com/mattermost-plugin-one.tar.gz https://example.com/mattermost-plugin-two.tar.gz
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-f, --force   overwrite a previously installed plugin with the same ID, <span class="k">if</span> any
+-h, --help    <span class="nb">help</span> <span class="k">for</span> install-url
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
+--local                       allows communicating with the server through a unix socket
+--strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
 <div class="section" id="mmctl-plugin-list">
 <h3>mmctl plugin list<a class="headerlink" href="#mmctl-plugin-list" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
@@ -2244,6 +2343,98 @@ To configure your zsh shell to load completions <span class="k">for</span> each 
 </div>
 <p><strong>Options</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help   <span class="nb">help</span> <span class="k">for</span> list
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
+--local                       allows communicating with the server through a unix socket
+--strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="mmctl-plugin-marketplace">
+<h2>mmctl plugin marketplace<a class="headerlink" href="#mmctl-plugin-marketplace" title="Permalink to this headline">¶</a></h2>
+<p>Management of Plugin Marketplace plugins.</p>
+<dl class="docutils">
+<dt>Child Commands</dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="#mmctl-plugin-marketplace-install">mmctl plugin marketplace install</a> - Install a plugin from the Plugin Marketplace</li>
+<li><a class="reference internal" href="#mmctl-plugin-marketplace-list">mmctl plugin marketplace list</a> - List plugins on the Plugin Marketplace</li>
+</ul>
+</dd>
+</dl>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help   <span class="nb">help</span> <span class="k">for</span> marketplace
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string                the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate   allows to use insecure TLS protocols, such as SHA-1
+--local                        allows communicating with the server through a unix socket
+--strict                       will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+<div class="section" id="mmctl-plugin-marketplace-install">
+<h3>mmctl plugin marketplace install<a class="headerlink" href="#mmctl-plugin-marketplace-install" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<blockquote>
+<div>Installs a plugin listed on the Plugin Marketplace server.</div></blockquote>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl plugin marketplace install &lt;id&gt; <span class="o">[</span>version<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># you can specify with both the plugin id and its version</span>
+$ mmctl plugin marketplace install jitsi <span class="m">2</span>.0.0
+
+<span class="c1"># if you don&#39;t specify the version, the latest one will be installed</span>
+$ mmctl plugin marketplace install jitsi
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help   <span class="nb">help</span> <span class="k">for</span> install
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
+--local                       allows communicating with the server through a unix socket
+--strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
+<div class="section" id="mmctl-plugin-marketplace-list">
+<h3>mmctl plugin marketplace list<a class="headerlink" href="#mmctl-plugin-marketplace-list" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<blockquote>
+<div>Gets all plugins from the Plugin Marketplace server, merging data from locally installed plugins as well as prepackaged plugins shipped with the server.</div></blockquote>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl plugin marketplace list <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># You can list all the plugins</span>
+$ mmctl plugin marketplace list --all
+
+<span class="c1"># Pagination options can be used too</span>
+$ mmctl plugin marketplace list --page <span class="m">2</span> --per-page <span class="m">10</span>
+
+<span class="c1"># Filtering will narrow down the search</span>
+$ mmctl plugin marketplace list --filter jit
+
+<span class="c1"># You can only retrieve local plugins</span>
+$ mmctl plugin marketplace list --local-only
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--all             Fetch all plugins. --page flag will be ignore <span class="k">if</span> provided
+--filter string   Filter plugins by ID, name or description
+-h, --help        <span class="nb">help</span> <span class="k">for</span> list
+--local-only      Only retrieve <span class="nb">local</span> plugins
+--page int        Page number to fetch <span class="k">for</span> the list of users
+--per-page int    Number of users to be fetched <span class="o">(</span>default <span class="m">200</span><span class="o">)</span>
 </pre></div>
 </div>
 <p><strong>Options inherited from parent commands</strong></p>
@@ -2831,11 +3022,13 @@ team create --name private --display_name <span class="s2">&quot;My New Private 
 <li><a class="reference internal" href="#mmctl-user-activate">mmctl user activate</a> - Activate a user</li>
 <li><a class="reference internal" href="#mmctl-user-create">mmctl user create</a> - Create user</li>
 <li><a class="reference internal" href="#mmctl-user-deactivate">mmctl user deactivate</a> - Deactivate user</li>
+<li><a class="reference internal" href="#mmctl-user-delete">mmctl user delete</a> - Delete users</li>
+<li><a class="reference internal" href="#mmctl-user-deleteall">mmctl user deleteall</a> - Delete all users and all posts (local command only)</li>
 <li><a class="reference internal" href="#mmctl-user-email">mmctl user email</a> - Set user email</li>
 <li><a class="reference internal" href="#mmctl-user-invite">mmctl user invite</a> - Invite user</li>
 <li><a class="reference internal" href="#mmctl-user-list">mmctl user list</a> - List users</li>
 <li><a class="reference internal" href="#mmctl-user-reset-password">mmctl user reset_password</a> - Reset user password</li>
-<li><a class="reference internal" href="#mmctl-user-resetmfa">mmctl user resetmfa</a> - Reset user’s MFA token</li>
+<li><a class="reference internal" href="#mmctl-user-resetmfa">mmctl user resetmfa</a> - Reset a user’s MFA token</li>
 <li><a class="reference internal" href="#mmctl-user-search">mmctl user search</a> - Search for a user</li>
 </ul>
 </dd>
@@ -2919,6 +3112,61 @@ user deactivate username
 </div>
 <p><strong>Options</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help       <span class="nb">help</span> <span class="k">for</span> deactivate
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
+--local                       allows communicating with the server through a unix socket
+--strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
+<div class="section" id="mmctl-user-delete">
+<h3>mmctl user delete<a class="headerlink" href="#mmctl-user-delete" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<blockquote>
+<div>Permanently delete some users. Permanently deletes one or multiple users along with all related information including posts from the database.</div></blockquote>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl user delete <span class="o">[</span>users<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>user delete user@example.com
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--confirm   Confirm you really want to delete the user and a DB backup has been performed
+-h, --help  <span class="nb">help</span> <span class="k">for</span> delete
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
+--local                       allows communicating with the server through a unix socket
+--strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
+<div class="section" id="mmctl-user-deleteall">
+<h3>mmctl user deleteall<a class="headerlink" href="#mmctl-user-deleteall" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<blockquote>
+<div><p>Permanently delete all users and all related information including posts.</p>
+<p><strong>Note:</strong></p>
+<p>This command can only be run using local mode.</p>
+</div></blockquote>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl user deleteall <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>user deleteall
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--confirm   Confirm you really want to delete the user and a DB backup has been performed
+-h, --help  <span class="nb">help</span> <span class="k">for</span> delete
 </pre></div>
 </div>
 <p><strong>Options inherited from parent commands</strong></p>

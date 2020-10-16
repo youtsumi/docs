@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installing PostgreSQL Database Server &mdash; Mattermost 5.26 documentation</title>
+  <title>Installing PostgreSQL Database Server &mdash; Mattermost 5.28 documentation</title>
   
 
   
@@ -131,7 +131,7 @@
             
             
               <div class="version">
-                5.26
+                5.28
               </div>
             
           
@@ -230,7 +230,7 @@
 <li>Start the PostgreSQL interactive terminal.</li>
 </ol>
 <blockquote>
-<div>`` sudo -u postgres psql``</div></blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">-u</span> <span class="pre">postgres</span> <span class="pre">psql</span></code></div></blockquote>
 <ol class="arabic simple" start="4">
 <li>Create the Mattermost database.</li>
 </ol>
@@ -240,12 +240,11 @@
 <li>Create the Mattermost user ‘mmuser’.</li>
 </ol>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">postgres=#</span> <span class="pre">CREATE</span> <span class="pre">USER</span> <span class="pre">mmuser</span> <span class="pre">WITH</span> <span class="pre">PASSWORD</span> <span class="pre">'mmuser-password';</span></code></p>
+<div><code class="docutils literal notranslate"><span class="pre">postgres=#</span> <span class="pre">CREATE</span> <span class="pre">USER</span> <span class="pre">mmuser</span> <span class="pre">WITH</span> <span class="pre">PASSWORD</span> <span class="pre">'mmuser-password';</span></code></div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Use a password that is more secure than ‘mmuser-password’.</p>
 </div>
-</div></blockquote>
 <ol class="arabic simple" start="6">
 <li>Grant the user access to the Mattermost database.</li>
 </ol>
@@ -288,16 +287,20 @@
 <div><p><strong>If the Mattermost server and the database are on the same machine</strong>:</p>
 <blockquote>
 <div><ol class="loweralpha simple">
-<li>Open <code class="docutils literal notranslate"><span class="pre">/etc/postgresql/10/main/pg_hba.conf</span></code> in a text editor as <em>root</em> user.</li>
-<li>Find the following line:</li>
+<li>Open <code class="docutils literal notranslate"><span class="pre">/etc/postgresql/10/main/pg_hba.conf</span></code> as <em>root</em> in a text editor.</li>
+<li>Find the following lines:</li>
 </ol>
 <blockquote>
-<div><code class="docutils literal notranslate"><span class="pre">local</span>&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">peer</span></code></div></blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">local</span>&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">peer</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">host</span>&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">::1/128</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">ident</span></code></p>
+</div></blockquote>
 <ol class="loweralpha simple" start="3">
-<li>Change <code class="docutils literal notranslate"><span class="pre">peer</span></code> to <code class="docutils literal notranslate"><span class="pre">trust</span></code>:</li>
+<li>Change <code class="docutils literal notranslate"><span class="pre">peer</span></code> and <code class="docutils literal notranslate"><span class="pre">ident</span></code> to <code class="docutils literal notranslate"><span class="pre">trust</span></code>:</li>
 </ol>
 <blockquote>
-<div><code class="docutils literal notranslate"><span class="pre">local</span>&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">trust</span></code></div></blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">local</span>&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">trust</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">host</span>&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">::1/128</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">trust</span></code></p>
+</div></blockquote>
 </div></blockquote>
 <p><strong>If the Mattermost server and the database are on different machines:</strong></p>
 <blockquote>

@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ReStructuredText Markup &mdash; Mattermost 5.26 documentation</title>
+  <title>ReStructuredText Markup &mdash; Mattermost 5.28 documentation</title>
   
 
   
@@ -131,7 +131,7 @@
             
             
               <div class="version">
-                5.26
+                5.28
               </div>
             
           
@@ -211,187 +211,7 @@
             
   <div class="section" id="restructuredtext-markup">
 <h1>ReStructuredText Markup<a class="headerlink" href="#restructuredtext-markup" title="Permalink to this headline">¶</a></h1>
-<p>The reStructuredText specification allows for a certain degree of flexibility in markup to achieve your goals. For example, you can use any one of more than a dozen characters for section title underlines, and you have the option of using an overline in addition to an underline.</p>
-<p>However, for consistency and ease of use, the Mattermost documentation should use a single convention, despite the existence of allowable alternatives.</p>
-<p>For more information about reStructuredText markup, see the <a class="reference external" href="http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html">reStructuredText Markup Specification</a>. Additional markup constructs are implemented by Sphinx, the documentation generator used by Mattermost. For information about the additional constructs, see <a class="reference external" href="https://www.sphinx-doc.org/en/1.7/markup/index.html">Sphinx Markup Constructs</a>.</p>
-<p>Use the following markup conventions in Mattermost documentation:</p>
-<div class="section" id="page-titles">
-<h2>Page Titles<a class="headerlink" href="#page-titles" title="Permalink to this headline">¶</a></h2>
-<p>Underline page titles using <cite>=</cite>, with no overline. Underlines should be as long as the title text. For example:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Document Title
-==============
-</pre></div>
-</div>
-</div>
-<div class="section" id="section-titles">
-<h2>Section Titles<a class="headerlink" href="#section-titles" title="Permalink to this headline">¶</a></h2>
-<p>Underline using <cite>-</cite> for section titles. For example:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Section Title
--------------
-</pre></div>
-</div>
-<p>Underline subsections using <cite>~</cite> for the first subsection level, and <cite>^</cite> for the second subsection level. For example:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Subsection One
-~~~~~~~~~~~~~~
-
-Subsection Two
-^^^^^^^^^^^^^^
-</pre></div>
-</div>
-</div>
-<div class="section" id="table-of-contents">
-<span id="id1"></span><h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
-<p>Insert a table of contents into a document using the following format:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>.. contents::
-    :backlinks: top
-</pre></div>
-</div>
-</div>
-<div class="section" id="inline-markup">
-<h2>Inline Markup<a class="headerlink" href="#inline-markup" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>Bold</dt>
-<dd>Use double asterisks. For example: <code class="docutils literal notranslate"><span class="pre">**bold</span> <span class="pre">text**</span></code>.</dd>
-<dt>Italic</dt>
-<dd>Use single asterisk. For example: <code class="docutils literal notranslate"><span class="pre">*italic</span> <span class="pre">text*</span></code>.</dd>
-<dt>Monospace</dt>
-<dd>Use double backquotes. For example: <code class="docutils literal notranslate"><span class="pre">``monospace</span> <span class="pre">text``</span></code></dd>
-</dl>
-</div>
-<div class="section" id="bullet-lists">
-<span id="arbitrary-text-label"></span><h2>Bullet Lists<a class="headerlink" href="#bullet-lists" title="Permalink to this headline">¶</a></h2>
-<p>For bullet lists and sublists, use <code class="docutils literal notranslate"><span class="pre">-</span></code> before the list item. For example:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- list item one
-- list item two
-  - sublist item one
-  - sublist item two
-- list item three
-</pre></div>
-</div>
-</div>
-<div class="section" id="numbered-lists-and-procedure-steps">
-<h2>Numbered Lists and Procedure Steps<a class="headerlink" href="#numbered-lists-and-procedure-steps" title="Permalink to this headline">¶</a></h2>
-<p>Create numbered lists and procedure steps using numbers for the top-level list and lower case alpha characters for the first nested list. For example:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>1. This is item one.
-2. This is item two.
-
-  a. This is nested item one.
-  b. This is nested item two.
-
-3. This is item three.
-</pre></div>
-</div>
-</div>
-<div class="section" id="name-value-groups">
-<h2>Name-value Groups<a class="headerlink" href="#name-value-groups" title="Permalink to this headline">¶</a></h2>
-<p>To create a name-value group such as a definition list, type the term on a line by itself. On the next line, indent the definition. For example:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Total Users
-  The total number of active accounts created on your system. Excludes inactive accounts.
-Total Teams
-  The total number of teams created on your system.
-</pre></div>
-</div>
-</div>
-<div class="section" id="external-links">
-<h2>External Links<a class="headerlink" href="#external-links" title="Permalink to this headline">¶</a></h2>
-<p>URLs are automatically rendered as links in Sphinx; however, where possible, it is preferred that hyperlinks are created within the text of a sentence. Hyperlinks within a sentence can be created using the following formatting:</p>
-<p><code class="docutils literal notranslate"><span class="pre">Link</span> <span class="pre">display</span> <span class="pre">text</span> <span class="pre">&lt;URL-of-website&gt;`__</span></code>, for example:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>`Mattermost Manifesto &lt;https://www.mattermost.org/manifesto/&gt;`__
-</pre></div>
-</div>
-<p>The link renders as: <a class="reference external" href="https://www.mattermost.org/manifesto/">Mattermost Manifesto</a></p>
-</div>
-<div class="section" id="internal-links-to-mattermost-docs">
-<span id="relative-links-in-rst"></span><h2>Internal Links to Mattermost Docs<a class="headerlink" href="#internal-links-to-mattermost-docs" title="Permalink to this headline">¶</a></h2>
-<p>The Sphinx processor extends reStructuredText to implement references, called roles, to locations within a documentation set. The two roles that are relevant in Mattermost documentation are the <code class="docutils literal notranslate"><span class="pre">:doc:</span></code> role and the <code class="docutils literal notranslate"><span class="pre">:ref:</span></code> role.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">:doc:</span></code> role is used for creating relative links to other documents. The <code class="docutils literal notranslate"><span class="pre">:ref:</span></code> role is used for creating relative links to arbitrary locations within the documentation set, including within the same document. In both cases, the HTML output is a relative URL for the target location.</p>
-<p>The following example uses the <code class="docutils literal notranslate"><span class="pre">:doc:</span></code> role to link to the <cite>Integrations Overview</cite> page. The source file is called <code class="docutils literal notranslate"><span class="pre">integrations.rst</span></code> and is in the <code class="docutils literal notranslate"><span class="pre">overview</span></code> directory.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>For more information about integrating with Mattermost, see :doc:`../overview/integrations`.
-</pre></div>
-</div>
-<p>Note that the filename extension is not part of the construct. On output, the link looks like this: “For more information about integrating with Mattermost, see <a class="reference internal" href="../overview/integrations.html"><span class="doc">Integrations Overview</span></a>.” The Sphinx processor pulls in the title of the document to use as the link text.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">:ref:</span></code> role is a two-part construct. One part is the link itself, and the other part is the target. The target has the following form, and should preceed a section title:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>.. _arbitrary-text-label:
-
-Bullet Lists
-------------
-</pre></div>
-</div>
-<p>To generate a link to the section, use the <code class="docutils literal notranslate"><span class="pre">:ref:</span></code> role as follows:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>For more information about bullet lists, see :ref:`arbitrary-text-label`.
-</pre></div>
-</div>
-<p>The Sphinx processor creates a relative link to the section, and uses the section title as the link text. On output, the link looks like this: “For more information about bullet lists, see <a class="reference internal" href="#arbitrary-text-label"><span class="std std-ref">Bullet Lists</span></a>.”</p>
-</div>
-<div class="section" id="images">
-<h2>Images<a class="headerlink" href="#images" title="Permalink to this headline">¶</a></h2>
-<p>Use the following construct to insert an image:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>.. image:: ../images/choices.png
-</pre></div>
-</div>
-<p>You should use <cite>alt</cite> tag for all images.</p>
-<p>You can also add the following image options: <cite>height</cite>, <cite>width</cite>, <cite>scale</cite>, <cite>align</cite>, and <cite>target</cite>. For example:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>.. image:: ../images/choices.png
-  :alt: The choices that you can make.
-  :height: 100px //number refers to pixels
-  :width: 200px //number refers to pixels
-  :align: left //left, right or middle
-  :scale: 50 //number is a percentage
-</pre></div>
-</div>
-<p>Inserting an inline image is a bit more complicated. It’s a two-part construct that consists of a label and the image directive. Surround the label text with vertical bars, the <code class="docutils literal notranslate"><span class="pre">|</span></code> character. For example:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Some of the emoji that you can use are |emoji|.
-</pre></div>
-</div>
-<p>Then insert the following image directive at the bottom of the document:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>.. |emoji| image:: ../images/emoji.png
-  :alt: Some of the emoji that you can use.
-  :align: middle
-</pre></div>
-</div>
-</div>
-<div class="section" id="literal-blocks">
-<span id="id2"></span><h2>Literal Blocks<a class="headerlink" href="#literal-blocks" title="Permalink to this headline">¶</a></h2>
-<p>To use a literal block with no syntax highlighting, use the Sphinx code-block directive with the language set to <code class="docutils literal notranslate"><span class="pre">none</span></code>. For example:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>.. code-block:: none
-</pre></div>
-</div>
-</div>
-<div class="section" id="code-blocks-with-syntax-highlighting">
-<span id="syntax-highlight"></span><h2>Code Blocks with Syntax Highlighting<a class="headerlink" href="#code-blocks-with-syntax-highlighting" title="Permalink to this headline">¶</a></h2>
-<p>To create a code block with syntax highlighting, use the Sphinx code-block directive with the language set to the language that you want highlighted. <a class="reference external" href="http://pygments.org/docs/lexers/">Many languages are available</a>, but in Mattermost documentation the most likely ones are as follows:</p>
-<ul class="simple">
-<li>go</li>
-<li>rest</li>
-<li>html</li>
-<li>javascript</li>
-<li>coffee</li>
-<li>bash</li>
-</ul>
-<p>The following example is a block of Go code using the :linenos: option, which causes line numbers to be displayed.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>.. code-block:: go
-  :linenos:
-
-  newPassword := props[&quot;new_password&quot;]
-      if err := utils.IsPasswordValid(newPassword); err != nil {
-              c.Err = err
-              return
-      }
-</pre></div>
-</div>
-<p>The example produces the following output:</p>
-<div class="highlight-go notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nx">newPassword</span> <span class="o">:=</span> <span class="nx">props</span><span class="p">[</span><span class="s">&quot;new_password&quot;</span><span class="p">]</span>
-      <span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">utils</span><span class="p">.</span><span class="nx">IsPasswordValid</span><span class="p">(</span><span class="nx">newPassword</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-              <span class="nx">c</span><span class="p">.</span><span class="nx">Err</span> <span class="p">=</span> <span class="nx">err</span>
-              <span class="k">return</span>
-      <span class="p">}</span>
-</pre></div>
-</td></tr></table></div>
-</div>
+<p>This page has moved to the <a class="reference external" href="https://handbook.mattermost.com/operations/operations/company-processes/publishing/publishing-guidelines/voice-tone-and-writing-style-guidelines/documentation-style-guide#document-structure">Mattermost Handbook</a>.</p>
 </div>
 
 
