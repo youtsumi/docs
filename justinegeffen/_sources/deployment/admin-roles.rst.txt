@@ -45,7 +45,7 @@ Each role has a set of default permissions, and when a user is assigned a role, 
 Assigning Admin Roles
 ---------------------
 
-System Admins can assign roles using the mmctl tool, either locally or remotely.
+System Admins can assign roles and modify privileges using the mmctl tool. This can be done either locally or remotely.
 
 The format of the mmctl command is:
 
@@ -78,7 +78,7 @@ The format of the mmctl command is:
 
 ``mmctl permissions add [role_name] [permission...]``
 
-**To grant write access to the authentication section for all users with the User Manager role:**
+**To grant write access to the Authentication section of the System Console for all users with the User Manager role:**
 
 ``mmctl permissions add system_user_manager sysconsole_write_authentication``
 
@@ -117,6 +117,11 @@ Can any of the new roles view API keys/passwords or other sensitive information 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 No, password information is only visible to System Admins and is obfuscated for other roles.
+
+If download links for compliance exports are enabled in the System Console, can a Read Only Admin download the reports? 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Only roles that are explicitly granted access to **System Console > Compliance** have access to download compliance reports. 
 
 Can any of the new roles force-join Private channels?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

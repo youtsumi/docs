@@ -182,12 +182,6 @@
 <li class="toctree-l3"><a class="reference internal" href="auth.html">Multi-factor Authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ldap-group-sync.html">AD/LDAP Groups (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html">Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html#managing-membership-of-a-team-or-channel-with-synchronized-groups">Managing Membership of a Team or Channel with Synchronized Groups</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html#add-or-remove-groups-from-teams">Add or Remove Groups from Teams</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html#add-or-remove-groups-from-private-channels">Add or Remove Groups from Private Channels</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html#managing-members">Managing Members</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html#disabling-group-synchronized-management-of-teams-and-private-channels">Disabling Group Synchronized Management of Teams and Private Channels</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html#faqs">FAQs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-saml.html">SAML Single Sign-On (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-saml-technical.html">SAML Single-Sign-On (E20): Technical Documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-gitlab.html">GitLab Single Sign-On</a></li>
@@ -346,7 +340,7 @@
 </div></blockquote>
 <div class="section" id="assigning-admin-roles">
 <h2>Assigning Admin Roles<a class="headerlink" href="#assigning-admin-roles" title="Permalink to this headline">¶</a></h2>
-<p>System Admins can assign roles using the mmctl tool, either locally or remotely.</p>
+<p>System Admins can assign roles and modify privileges using the mmctl tool. This can be done either locally or remotely.</p>
 <p>The format of the mmctl command is:</p>
 <p><code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">permissions</span> <span class="pre">role</span> <span class="pre">assign</span> <span class="pre">[role_name]</span> <span class="pre">[username...]</span></code></p>
 <p><strong>To grant the System Manager role to a single user called Bob Smith:</strong></p>
@@ -364,7 +358,7 @@
 <p>System Admins can grant read and write access to other areas of the System Console, as well as remove read write access (including default access), for each role. This is completed using the mmctl tool, either locally or remotely.</p>
 <p>The format of the mmctl command is:</p>
 <p><code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">permissions</span> <span class="pre">add</span> <span class="pre">[role_name]</span> <span class="pre">[permission...]</span></code></p>
-<p><strong>To grant write access to the authentication section for all users with the User Manager role:</strong></p>
+<p><strong>To grant write access to the Authentication section of the System Console for all users with the User Manager role:</strong></p>
 <p><code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">permissions</span> <span class="pre">add</span> <span class="pre">system_user_manager</span> <span class="pre">sysconsole_write_authentication</span></code></p>
 <p><strong>To grant read only access to the Authentication section of the System Console for all users with the User Manager role:</strong></p>
 <p><code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">permissions</span> <span class="pre">remove</span> <span class="pre">system_user_manager</span> <span class="pre">sysconsole_read_authentication</span></code></p>
@@ -392,6 +386,10 @@
 <div class="section" id="can-any-of-the-new-roles-view-api-keys-passwords-or-other-sensitive-information-within-the-system-console-such-as-smtp-aws-elastic-search">
 <h3>Can any of the new roles view API keys/passwords or other sensitive information within the System Console (such as SMTP, AWS, Elastic Search)?<a class="headerlink" href="#can-any-of-the-new-roles-view-api-keys-passwords-or-other-sensitive-information-within-the-system-console-such-as-smtp-aws-elastic-search" title="Permalink to this headline">¶</a></h3>
 <p>No, password information is only visible to System Admins and is obfuscated for other roles.</p>
+</div>
+<div class="section" id="if-download-links-for-compliance-exports-are-enabled-in-the-system-console-can-a-read-only-admin-download-the-reports">
+<h3>If download links for compliance exports are enabled in the System Console, can a Read Only Admin download the reports?<a class="headerlink" href="#if-download-links-for-compliance-exports-are-enabled-in-the-system-console-can-a-read-only-admin-download-the-reports" title="Permalink to this headline">¶</a></h3>
+<p>Only roles that are explicitly granted access to <strong>System Console &gt; Compliance</strong> have access to download compliance reports.</p>
 </div>
 <div class="section" id="can-any-of-the-new-roles-force-join-private-channels">
 <h3>Can any of the new roles force-join Private channels?<a class="headerlink" href="#can-any-of-the-new-roles-force-join-private-channels" title="Permalink to this headline">¶</a></h3>
