@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Mentioning Teammates &mdash; Mattermost 5.25 documentation</title>
+  <title>Mentioning Teammates &mdash; Mattermost 5.28 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.25
+                5.28
               </div>
             
           
@@ -239,17 +239,17 @@
 <span id="id1"></span><h1>Mentioning Teammates<a class="headerlink" href="#mentioning-teammates" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="mentions">
 <h2>&#64;Mentions<a class="headerlink" href="#mentions" title="Permalink to this headline">¶</a></h2>
-<p>Use &#64;mentions to get the attention of specific team members.</p>
-<p>Note that editing a message does not trigger new &#64;mention notifications, desktop notifications, or notification sounds.</p>
+<p>Use <em>&#64;</em> mentions to get the attention of specific team members.</p>
+<p>Note that editing a message does not trigger new <em>&#64;</em> mention notifications, desktop notifications, or notification sounds.</p>
 <div class="section" id="username">
 <h3>&#64;username<a class="headerlink" href="#username" title="Permalink to this headline">¶</a></h3>
 <p>You can mention a teammate by using the <em>&#64;</em> symbol plus their username to send them a mention notification.</p>
 <p>Type <em>&#64;</em> to bring up a list of team members who can be mentioned. To filter the list, type the first few letters of any username, first name, last name, or nickname. Use the UP and DOWN arrow keys to scroll through entries in the list, and then press ENTER to select the person to mention. When selected, the username replaces the full name or nickname.</p>
-<p>The following example sends a special mention notification to Alice, whose username is <strong>alice</strong>. The notification alerts her of the channel and message where she was mentioned. If Alice is away from Mattermost and has email notifications turned on, then she receives an email alert of her mention along with the message text.</p>
+<p>The following example sends a special mention notification to Alice, whose username is <strong>alice</strong>. The notification alerts her of the channel and message where she was mentioned. If Alice is away from Mattermost and has email notifications turned on, she’ll receive an email alert of her mention along with the message text.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@alice how did your interview go with the new candidate?
 </pre></div>
 </div>
-<p>If the person you mentioned does not belong to the channel, a System Message is posted to let you know. This is a temporary message, and you are the only one who can see it. To add the mentioned person to the channel, go to the dropdown menu beside the channel name and select <strong>Add Members</strong>.</p>
+<p>If the person you mentioned does not belong to the channel, a System Message is posted to let you know. This is a temporary message, and you are the only one who can see it. To add the mentioned person to the channel, open the dropdown menu next to the channel name and select <strong>Add Members</strong>.</p>
 </div>
 <div class="section" id="channel-and-all">
 <h3>&#64;channel and &#64;all<a class="headerlink" href="#channel-and-all" title="Permalink to this headline">¶</a></h3>
@@ -258,11 +258,11 @@
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@channel great work on interviews this week. I think we found some excellent potential candidates!
 </pre></div>
 </div>
-<p>If a channel has five or more members, you are prompted to confirm that you want notifications sent to everyone in the channel.</p>
+<p>If a channel has five or more members, you’re prompted to confirm that you want notifications sent to everyone in the channel.</p>
 </div>
 <div class="section" id="here">
 <h3>&#64;here<a class="headerlink" href="#here" title="Permalink to this headline">¶</a></h3>
-<p>You can mention everyone who is online in a channel by typing <code class="docutils literal notranslate"><span class="pre">&#64;here</span></code>. This sends a desktop notification and push notification to members of the channel who are online. It’s counted as a mention in the sidebar. Members who are offline do not receive a notification, and when they come back to the site they will not see a mention counted in the channel sidebar. Members who are away receive a desktop notification only if they have notifications set to “all activity”, and they will not see a mention counted in the sidebar.</p>
+<p>You can mention everyone who is online in a channel by typing <code class="docutils literal notranslate"><span class="pre">&#64;here</span></code>. This sends a desktop notification and push notification to members of the channel who are online. It’s counted as a mention in the sidebar. Members who are offline don’t receive a notification. When they return to Mattermost they won’t see a mention counted in the channel sidebar. Members who are away receive a desktop notification only if they have notifications set to <strong>For all activity</strong>, and they won’t see a mention counted in the sidebar.</p>
 <p>You can ignore channel-wide mentions in specific channels in the <strong>Channel Menu &gt; Notification Preferences &gt; Ignore mentions for &#64;channel, &#64;here and &#64;all</strong>.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@here can someone do a quick review of this?
 </pre></div>
@@ -270,9 +270,8 @@
 </div>
 <div class="section" id="groupname-beta-e20">
 <h3>&#64;groupname (Beta) (E20)<a class="headerlink" href="#groupname-beta-e20" title="Permalink to this headline">¶</a></h3>
-<p>System Admins can enable mentions for <a class="reference external" href="https://docs.mattermost.com/deployment/ldap-group-sync.html">LDAP synced groups</a> via the Group Configuration page.</p>
-<p><strong>Note</strong>: This functionality is not yet supported on mobile.</p>
-<p>Once enabled for a specific group, users can mention and notify the entire group in a channel (similar to &#64;channel or &#64;all). Members of the group in that channel will receive a notification. If members of the group mentioned are not members of the channel, the user who posted the mention is prompted to invite them.</p>
+<p>System Admins can enable mentions for <a class="reference external" href="https://docs.mattermost.com/deployment/ldap-group-sync.html">LDAP synced groups</a> via the Group Configuration page. This is supported on the mobile app (from v1.34) if the AD/LDAP Groups feature is enabled. The mobile app supports auto-suggesting groups, highlights group member mentions, and also provides a warning dialog when a mention will notify more than five users.</p>
+<p>Once enabled for a specific group, users can mention and notify the entire group in a channel (similar to <code class="docutils literal notranslate"><span class="pre">&#64;channel</span></code> or <code class="docutils literal notranslate"><span class="pre">&#64;all</span></code>). Members of the group in that channel will receive a notification. If members of the group mentioned are not members of the channel, the user who posted the mention is prompted to invite them.</p>
 <p>Group mention identifiers (slugs) use the LDAP group name by default. To customize/rename the slug:</p>
 <ol class="arabic simple">
 <li>Open <strong>System Console &gt; Groups (Beta)</strong>.</li>
@@ -280,7 +279,7 @@
 <li>In <strong>Group Profile &gt; Group Mention</strong> enter the new slug.</li>
 <li>Select <strong>Save</strong>.</li>
 </ol>
-<p>As with &#64;username mentions, use <em>&#64;</em> to bring up a list of groups that can be mentioned. To filter the list, type the first few letters of any group. Use the UP and DOWN arrow keys to scroll through entries in the list, and then press ENTER to select the group you want to mention.</p>
+<p>As with <code class="docutils literal notranslate"><span class="pre">&#64;username</span></code> mentions, use <em>&#64;</em> to bring up a list of groups that can be mentioned. To filter the list, type the first few letters of any group. Use the UP and DOWN arrow keys to scroll through entries in the list, and then press ENTER to select the group you want to mention.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@dev-managers great work hitting all of our code coverage goals this quarter!
 </pre></div>
 </div>
@@ -288,7 +287,7 @@
 </div>
 <div class="section" id="words-that-trigger-mentions">
 <h2>Words That Trigger Mentions<a class="headerlink" href="#words-that-trigger-mentions" title="Permalink to this headline">¶</a></h2>
-<p>You can customize words that trigger mention notifications in <strong>Account Settings &gt; Notifications &gt; Words that trigger mentions</strong>. By default, you receive mention notifications for your username and for <em>&#64;channel</em>, <em>&#64;all</em> and <em>&#64;here</em>. You can choose to have your first name be a word that triggers mentions.</p>
+<p>You can customize words that trigger mention notifications in <strong>Account Settings &gt; Notifications &gt; Words That Trigger Mentions</strong>. By default, you receive mention notifications for your username and for <code class="docutils literal notranslate"><span class="pre">&#64;channel</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;all</span></code> and <code class="docutils literal notranslate"><span class="pre">&#64;here</span></code>. You can choose to have your first name be a word that triggers mentions.</p>
 <p>You can add a list of customized words to get mention notifications for by typing them into the input box, separated by commas. This is useful if you want to be notified of all posts on certain topics, such as “interviewing” or “marketing”.</p>
 </div>
 <div class="section" id="recent-mentions">
@@ -298,7 +297,7 @@
 <div class="section" id="confirmation-dialog-warnings">
 <h2>Confirmation Dialog Warnings<a class="headerlink" href="#confirmation-dialog-warnings" title="Permalink to this headline">¶</a></h2>
 <p>For any mention that will trigger notifications for more than five users, the user posting the mention must confirm the action before sending the notifications.</p>
-<p>This confirmation dialog only appears when <code class="docutils literal notranslate"><span class="pre">TeamSettings.EnableConfirmNotificationsToChannel</span></code> in <code class="docutils literal notranslate"><span class="pre">config.json</span></code> is enabled and is not displayed for group mentions on mobile.</p>
+<p>This confirmation dialog only appears when <code class="docutils literal notranslate"><span class="pre">TeamSettings.EnableConfirmNotificationsToChannel</span></code> in <code class="docutils literal notranslate"><span class="pre">config.json</span></code> is enabled. This is supported on the mobile app (from v1.34) if the AD/LDAP Groups feature is enabled.</p>
 </div>
 <div class="section" id="highlighting">
 <h2>Highlighting<a class="headerlink" href="#highlighting" title="Permalink to this headline">¶</a></h2>

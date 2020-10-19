@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Corporate Directory Integration &mdash; Mattermost 5.25 documentation</title>
+  <title>Corporate Directory Integration &mdash; Mattermost 5.28 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.25
+                5.28
               </div>
             
           
@@ -160,6 +160,7 @@
               <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Overview</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="product.html">Product Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mattermost-cloud-overview.html">Mattermost Cloud Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="security.html">Security Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="architecture.html">Architecture Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
@@ -168,7 +169,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Corporate Directory Integration</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#basic-authentication">Basic authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#security-features-for-authentication">Security features for authentication</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#active-directory-ldap-authentication">Active Directory / LDAP authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#active-directory-ldap-authentication">Active Directory/LDAP authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#authentication-options-outside-of-a-private-network">Authentication options outside of a private network</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#future-authentication-methods">Future authentication methods</a></li>
 </ul>
@@ -238,10 +239,10 @@
 <h2>Basic authentication<a class="headerlink" href="#basic-authentication" title="Permalink to this headline">¶</a></h2>
 <p>By default Mattermost offers authentication via email and password, which offers basic features including:</p>
 <ul class="simple">
-<li>Account sign-up using email and password</li>
-<li>Password reset via email</li>
-<li>Ability to use same credentials to sign-in to web, desktop app and mobile app experiences</li>
-<li>Ability to use username and password in place of email and password</li>
+<li>Account sign up using email and password.</li>
+<li>Password reset via email.</li>
+<li>Ability to use the same credentials to sign in to web, desktop, and mobile app experiences.</li>
+<li>Ability to use a username and password in place of email and password.</li>
 </ul>
 </div>
 <div class="section" id="security-features-for-authentication">
@@ -249,30 +250,32 @@
 <p>A core set of features is available with all authentication options to help increase security:</p>
 <ul class="simple">
 <li>Ability to <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#id33">set session length</a> to define how long a user can use Mattermost before needing to re-enter credentials.</li>
-<li>Ability for users to remotely sign-out of devices.</li>
-<li>Ability for IT admin to force sign-out of a user from devices.</li>
+<li>Ability for users to remotely sign out of devices.</li>
+<li>Ability for IT admin to force sign out of a user from devices.</li>
 <li>Ability to set rate limits on authentication API calls to deter password-guessing attacks.</li>
-<li>Ability to require multi-factor authentication on sign-in.</li>
+<li>Ability to require multi-factor authentication on sign in.</li>
 <li>For advanced deployments, password requirements for length and special characters can be added.</li>
 </ul>
 </div>
 <div class="section" id="active-directory-ldap-authentication">
-<h2>Active Directory / LDAP authentication<a class="headerlink" href="#active-directory-ldap-authentication" title="Permalink to this headline">¶</a></h2>
+<h2>Active Directory/LDAP authentication<a class="headerlink" href="#active-directory-ldap-authentication" title="Permalink to this headline">¶</a></h2>
 <p>AD/LDAP is the most popular corporate directory integration option for deploying Mattermost behind a corporate firewall. Features include:</p>
 <ul class="simple">
-<li>Account creation using AD/LDAP credentials</li>
-<li>AD/LDAP user filters to define which users get access to Mattermost in the form of a query</li>
-<li>Ability to use a low-privileged AD/LDAP account to run queries over a secure TLS or STARTTLS connection</li>
-<li>Attribute mapping to place First Name, Last Name, Nickname and other attributes from AD/LDAP into Mattermost</li>
-<li>Customization of login screen to specify whether users are logging in with email, username or other attribute</li>
-<li>Synchronization with AD/LDAP to disable, enable and update Mattermost users based on AD/LDAP</li>
+<li>Account creation using AD/LDAP credentials.</li>
+<li>AD/LDAP user filters to define which users get access to Mattermost in the form of a query.</li>
+<li>Ability to use a low-privileged AD/LDAP account to run queries over a secure TLS or STARTTLS connection.</li>
+<li>Attribute mapping to place First Name, Last Name, Nickname, and other attributes from AD/LDAP into Mattermost.</li>
+<li>Customization of login screen to specify whether users are logging in with email, username, or other attribute.</li>
+<li>Synchronization with AD/LDAP to disable, enable, and update Mattermost users based on AD/LDAP.</li>
 </ul>
-<p>Note:</p>
-<ul class="simple">
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
 <li>New user accounts are created when new users sign-in with their AD/LDAP credentials. You can optionally pre-create user accounts using the <a class="reference external" href="https://docs.mattermost.com/deployment/bulk-loading.html">bulk loading</a> tool.</li>
 <li>If you’re using email or username and password authentication <a class="reference external" href="https://docs.mattermost.com/deployment/sso-ldap.html#configure-ad-ldap-using-the-system-console-user-interface">users can switch to AD/LDAP manually</a>, and the <a class="reference external" href="https://docs.mattermost.com/administration/command-line-tools.html#mattermost-user-migrate-auth">conversion to AD/LDAP can also be done using the command line interface</a> by an IT admin.</li>
 </ul>
-<p>For very large AD/LDAP instances you can also configure max page size to divide a Mattermost AD/LDAP query into several pieces to not over-tax the authentication server when synchronizing.</p>
+</div>
+<p>For very large AD/LDAP instances you can also configure max page size to divide a Mattermost AD/LDAP query into several pieces to not overtax the authentication server when synchronizing.</p>
 </div>
 <div class="section" id="authentication-options-outside-of-a-private-network">
 <h2>Authentication options outside of a private network<a class="headerlink" href="#authentication-options-outside-of-a-private-network" title="Permalink to this headline">¶</a></h2>
@@ -289,12 +292,7 @@
 </div>
 <div class="section" id="future-authentication-methods">
 <h2>Future authentication methods<a class="headerlink" href="#future-authentication-methods" title="Permalink to this headline">¶</a></h2>
-<p>Mattermost Enterprise Edition releases new improvements monthly. Several additional authentication methods are planned, but not yet scheduled. If you’re an enterprise interested in deploying with one of the following options, or another option not yet listed, please contact <a class="reference external" href="mailto:sales&#37;&#52;&#48;mattermost&#46;com">sales<span>&#64;</span>mattermost<span>&#46;</span>com</a> to start a discussion.</p>
-<ul class="simple">
-<li>Certificate-based authentication</li>
-<li>Authentication via reverse proxy</li>
-<li>Kerberos-based authentication</li>
-</ul>
+<p>Mattermost Enterprise Edition releases new improvements monthly. Several additional authentication methods are planned, but not yet scheduled. If you’re an enterprise interested in deploying with an option not yet provided in our documenation, please contact <a class="reference external" href="mailto:sales&#37;&#52;&#48;mattermost&#46;com">sales<span>&#64;</span>mattermost<span>&#46;</span>com</a> to start a discussion.</p>
 </div>
 </div>
 
