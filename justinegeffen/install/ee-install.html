@@ -405,13 +405,18 @@ chmod -w &lt;PathToBinaryFile&gt;
 <p class="first admonition-title">Note</p>
 <p class="last">If you upload the license via the CLI using  <code class="docutils literal notranslate"><span class="pre">mattermost</span> <span class="pre">license</span> <span class="pre">upload</span></code>, you need to restart the Mattermost server after uploading. Additionally, if you’re running a cluster, the license file needs to be uploaded to every node. See <a class="reference external" href="https://docs.mattermost.com/administration/command-line-tools.html#mattermost-license-upload">our documentation for more information on the command line tools</a>.</p>
 </div>
+<div class="section" id="license-key-storage">
+<h4>License key storage<a class="headerlink" href="#license-key-storage" title="Permalink to this headline">¶</a></h4>
+<p>Once you have uploaded your license key to your Mattermost server it will be stored in your SQL database at <cite>mattermost.Licenses</cite>. You can check what keys are on your server by running <cite>select * from mattermost.Licenses;</cite>.</p>
 <p><strong>Using the System Console</strong></p>
 <ol class="arabic simple">
 <li>Open <strong>System Console &gt; About &gt; Edition and License</strong> (or <strong>System Console &gt; OTHER &gt; Edition and License</strong> in versions prior to 5.12).</li>
 <li>Click <strong>Remove Enterprise License and Downgrade Server</strong>. This clears the license from the server and refreshes the System Console.</li>
 <li>Upload the new license key file.</li>
 </ol>
+<p>Removing the license key to upgrade will not remove settings that you have configured with an Enterprise license so long as your new license key is the same or higher level license.</p>
 <p>Once the key is uploaded and installed, the details of your license are displayed.</p>
+</div>
 </div>
 </div>
 </div>
