@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Office 365 Single Sign-On (E20) &mdash; Mattermost 5.27 documentation</title>
+  <title>Office 365 Single Sign-On (E20) &mdash; Mattermost 5.28 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.27
+                5.28
               </div>
             
           
@@ -172,16 +172,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../administration/hipchat-migration-guidelines.html">Migrating from HipChat to Mattermost</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../administration/migration-announcement-email-template.html">Migration Announcement Email</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../administration/user-provisioning.html">Provisioning Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="admin-roles.html">Additional System Admin Roles (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-ldap.html">Active Directory/LDAP Setup (E10/E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auth.html">Multi-factor Authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ldap-group-sync.html">AD/LDAP Groups (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html">Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html#managing-membership-of-a-team-or-channel-with-synchronized-groups">Managing Membership of a Team or Channel with Synchronized Groups</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html#add-or-remove-groups-from-teams">Add or Remove Groups from Teams</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html#add-or-remove-groups-from-private-channels">Add or Remove Groups from Private Channels</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html#managing-members">Managing Members</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html#disabling-group-synchronized-management-of-teams-and-private-channels">Disabling Group Synchronized Management of Teams and Private Channels</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html#faqs">FAQs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-saml.html">SAML Single Sign-On (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-saml-technical.html">SAML Single-Sign-On (E20): Technical Documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-gitlab.html">GitLab Single Sign-On</a></li>
@@ -276,12 +271,12 @@
 <p>5 - Select <strong>Overview</strong> from the menu and copy the <em>Application (client) ID</em> and the <em>Directory (tenant) ID</em>, for use in the Mattermost configuration as the <strong>Application ID</strong> and as part of the <strong>Auth Endpoint</strong> and <strong>Token Endpoint</strong> URL.</p>
 <p><img alt="../_images/AzureApp_App_Directory_IDsv2.png" src="../_images/AzureApp_App_Directory_IDsv2.png" />AzureApp_App_Directory_IDsv2.png</p>
 <p>6 - Login to Mattermost and then go to the <strong>System Console &gt; OAuth 2.0 &gt; Select OAuth 2.0 service provider</strong>, choose <strong>Office 365</strong> as the service provider. Enter the <em>client secret value</em> you copied in Step 4 as the <strong>Application Secret Password</strong>. Paste the <em>Application (client) ID</em> you saved in Step 5 into the <strong>Application ID</strong> field.</p>
-<p>7 - Open your config.json file and copy the <em>Directory (tenant) ID</em> value from Step 5. In the <code class="docutils literal notranslate"><span class="pre">Office365Settings</span></code> section of <code class="docutils literal notranslate"><span class="pre">config/config.json</span></code> you will be updating the default values from</p>
+<p>7 - Open your config.json file and copy the <em>Directory (tenant) ID</em> value from Step 5. In the <code class="docutils literal notranslate"><span class="pre">Office365Settings</span></code> section of <code class="docutils literal notranslate"><span class="pre">config/config.json</span></code> you will be updating the default values from:</p>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">AuthEndpoint</span></code>: <code class="docutils literal notranslate"><span class="pre">https://login.microsoftonline.com/common/oauth2/v2.0/authorize</span></code></li>
 <li><code class="docutils literal notranslate"><span class="pre">TokenEndpoint</span></code>: <code class="docutils literal notranslate"><span class="pre">https://login.microsoftonline.com/common/oauth2/v2.0/token</span></code></li>
 </ul>
-<p>to include <em>Directory (tenant) ID</em> value, for example</p>
+<p>to include <em>Directory (tenant) ID</em> value, for example:</p>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">AuthEndpoint</span></code>: <code class="docutils literal notranslate"><span class="pre">https://login.microsoftonline.com/3dfccc41-d360-488a-a6ff-e9e565b3xbf1/oauth2/v2.0/authorize</span></code></li>
 <li><code class="docutils literal notranslate"><span class="pre">TokenEndpoint</span></code>: <code class="docutils literal notranslate"><span class="pre">https://login.microsoftonline.com/3dfcc41-d360-488a-a6ff-e9e565b3xbf1/oauth2/v2.0/token</span></code></li>
