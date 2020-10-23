@@ -294,13 +294,14 @@
 </li>
 <li><a class="reference internal" href="#frequently-asked-questions-faq" id="id29">Frequently Asked Questions (FAQ)</a><ul>
 <li><a class="reference internal" href="#does-mattermost-support-multi-region-high-availability-deployment" id="id30">Does Mattermost support multi-region High Availability deployment?</a></li>
+<li><a class="reference internal" href="#what-does-mattermost-recommend-for-diaster-recovery-of-the-databases" id="id31">What does Mattermost recommend for diaster recovery of the databases?</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#troubleshooting" id="id31">Troubleshooting</a><ul>
-<li><a class="reference internal" href="#red-server-status" id="id32">Red Server Status</a></li>
-<li><a class="reference internal" href="#websocket-disconnect" id="id33">WebSocket Disconnect</a></li>
-<li><a class="reference internal" href="#app-refreshes-continuously" id="id34">App Refreshes Continuously</a></li>
-<li><a class="reference internal" href="#messages-do-not-post-until-after-reloading" id="id35">Messages Do Not Post Until After Reloading</a></li>
+<li><a class="reference internal" href="#troubleshooting" id="id32">Troubleshooting</a><ul>
+<li><a class="reference internal" href="#red-server-status" id="id33">Red Server Status</a></li>
+<li><a class="reference internal" href="#websocket-disconnect" id="id34">WebSocket Disconnect</a></li>
+<li><a class="reference internal" href="#app-refreshes-continuously" id="id35">App Refreshes Continuously</a></li>
+<li><a class="reference internal" href="#messages-do-not-post-until-after-reloading" id="id36">Messages Do Not Post Until After Reloading</a></li>
 </ul>
 </li>
 </ul>
@@ -319,7 +320,7 @@
 </div>
 <div class="section" id="deployment-guide">
 <h2><a class="toc-backref" href="#contents">Deployment Guide</a><a class="headerlink" href="#deployment-guide" title="Permalink to this headline">¶</a></h2>
-<p>Deployment guide to set up and maintain High Availability on your Mattermost servers.</p>
+<p>Deployment guide to set up and maintain High Availability on your Mattermost servers. This document does not cover the configuration of databases in terms of disaster recovery, however, you can refer to the <a class="reference internal" href="#frequently-asked-questions-faq">Frequently Asked Questions (FAQ)</a> section for our recommendations.</p>
 <div class="section" id="initial-setup-guide-for-high-availability">
 <h3><a class="toc-backref" href="#contents">Initial Setup Guide for High Availability</a><a class="headerlink" href="#initial-setup-guide-for-high-availability" title="Permalink to this headline">¶</a></h3>
 <p>To ensure your instance and configuration are compatible with High Availability, please review the <a class="reference internal" href="#configuration-and-compatibility">Configuration and Compatibility</a> section.</p>
@@ -689,6 +690,12 @@ net.ipv4.tcp_max_syn_backlog = 8192
 <div class="section" id="does-mattermost-support-multi-region-high-availability-deployment">
 <h3><a class="toc-backref" href="#contents">Does Mattermost support multi-region High Availability deployment?</a><a class="headerlink" href="#does-mattermost-support-multi-region-high-availability-deployment" title="Permalink to this headline">¶</a></h3>
 <p>Yes. Although not officially tested, you can set up a cluster across AWS regions, for example, and it should work without issues.</p>
+</div>
+<div class="section" id="what-does-mattermost-recommend-for-diaster-recovery-of-the-databases">
+<h3><a class="toc-backref" href="#contents">What does Mattermost recommend for diaster recovery of the databases?</a><a class="headerlink" href="#what-does-mattermost-recommend-for-diaster-recovery-of-the-databases" title="Permalink to this headline">¶</a></h3>
+<p>When deploying Mattermost in a High Availability configuration, we recommend using a database load balancer between Mattermost and your database. Depending on your deployment this needs more or less consideration.</p>
+<p>For example, if deploying Mattermost on AWS with Amazon Aurora we recommend utilizing multiple availability zones.</p>
+<p>When deploying Mattermost on your own cluster please refer to your IT team for a solution best suited for your existing architecture.</p>
 </div>
 </div>
 <div class="section" id="troubleshooting">
