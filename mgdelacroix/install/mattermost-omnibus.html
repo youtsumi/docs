@@ -181,6 +181,7 @@
 <li class="toctree-l3"><a class="reference internal" href="install-kubernetes.html">Installing on Kubernetes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="install-debian.html">Installing on Debian Buster</a></li>
 <li class="toctree-l3"><a class="reference internal" href="install-rhel-7.html">Installing on RHEL 7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-rhel-8.html">Installing on RHEL 8</a></li>
 <li class="toctree-l3"><a class="reference internal" href="install-centos-oracle-scientific.html">Installing on CentOS, Oracle Linux, and Scientific Linux</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sockets-db.html">Instructions On Setting Up a Socket-based Mattermost Database</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ee-install.html">Enterprise Install and Upgrade</a></li>
@@ -264,7 +265,7 @@
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>Mattermost Omnibus is a Debian package that packages the individual components of a Mattermost deployment into a single installation process. The package leverages the <code class="docutils literal notranslate"><span class="pre">apt</span></code> package manager to install and keep the components of the platform updated, using a custom CLI and ansible recipes to link those components together and configure them.</p>
-<p>Mattermost Omnibus currently supports Ubuntu’s <code class="docutils literal notranslate"><span class="pre">bionic</span></code> and <code class="docutils literal notranslate"><span class="pre">focal</span></code> distributions. Support for RedHat/CentOS distributions will be available in future versions.</p>
+<p>Mattermost Omnibus currently supports Ubuntu’s <code class="docutils literal notranslate"><span class="pre">bionic</span></code> and <code class="docutils literal notranslate"><span class="pre">focal</span></code> distributions. Support for RedHat/CentOS distributions will be available in future versions. The package installs the E0 Mattermost version.</p>
 </div>
 <div class="section" id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
@@ -277,7 +278,7 @@
 <div class="section" id="configuring-mattermost-omnibus-repositories">
 <h2>Configuring Mattermost Omnibus Repositories<a class="headerlink" href="#configuring-mattermost-omnibus-repositories" title="Permalink to this headline">¶</a></h2>
 <p>The Omnibus repositories are configured using a cURL command:</p>
-<p><code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">-o-</span> <span class="pre">deb.packages.mattermost.com/repo-setup.sh</span> <span class="pre">|</span> <span class="pre">sudo</span> <span class="pre">bash</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">-o-</span> <span class="pre">https://deb.packages.mattermost.com/repo-setup.sh</span> <span class="pre">|</span> <span class="pre">sudo</span> <span class="pre">bash</span></code></p>
 <p>This command configures the repositories needed for a <code class="docutils literal notranslate"><span class="pre">PostgreSQL</span></code> database, an <code class="docutils literal notranslate"><span class="pre">nginx</span></code> web server to act as a proxy, and <code class="docutils literal notranslate"><span class="pre">certbot</span></code> to issue and renew the SSL certificate. It also configures the Mattermost Omnibus repository so that you can run the install command.</p>
 </div>
 <div class="section" id="installing-mattermost-omnibus">
@@ -361,6 +362,18 @@
 <div class="section" id="can-i-use-mysql-instead-of-postgresql">
 <h3>Can I use MySQL instead of PostgreSQL?<a class="headerlink" href="#can-i-use-mysql-instead-of-postgresql" title="Permalink to this headline">¶</a></h3>
 <p>MySQL is not supported. Omnibus is architected to run with PostgreSQL.</p>
+</div>
+<div class="section" id="can-i-use-a-license-with-omnibus">
+<h3>Can I use a license with Omnibus?<a class="headerlink" href="#can-i-use-a-license-with-omnibus" title="Permalink to this headline">¶</a></h3>
+<p>Yes! Mattermost Omnibus bundles the E0 Mattermost version, so the enterprise features can be unlocked uploading a license.</p>
+</div>
+<div class="section" id="can-i-use-an-omnibus-server-as-part-of-a-cluster">
+<h3>Can I use an Omnibus server as part of a cluster?<a class="headerlink" href="#can-i-use-an-omnibus-server-as-part-of-a-cluster" title="Permalink to this headline">¶</a></h3>
+<p>No, Omnibus has been designed to be a self contained Mattermost platform, so it contains and expects all the necessary components to be in the same server.</p>
+</div>
+<div class="section" id="where-can-i-get-help">
+<h3>Where can I get help?<a class="headerlink" href="#where-can-i-get-help" title="Permalink to this headline">¶</a></h3>
+<p>If you have any problems installing Mattermost Omnibus, see the <a class="reference external" href="https://docs.mattermost.com/install/troubleshooting.html">troubleshooting guide</a> for common error messages, or <a class="reference external" href="https://mattermost.com/pl/default-ask-mattermost-community/">join the Mattermost user community for troubleshooting help</a>.</p>
 </div>
 </div>
 </div>

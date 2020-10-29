@@ -1083,15 +1083,13 @@ Advanced Logging
 Output logs to multiple targets
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Send log records to multiple targets:
+Allow any combination of local file, syslog, and TCP socket targets and send log records to multiple targets:
 
-- Multiple local file targets
-- Multiple syslogs
-- Multiple TCP sockets
+- Multiple local file targets: Supports rotation and compression triggered by size and/or duration.
+- Multiple syslogs: Supports local and remote syslog servers, with or without TLS transport.
+- Multiple TCP sockets: TCP socket target can be configured with an IP address or domain name, port, and optional TLS certificate.
 
-Allow any combination of local file, syslog, and TCP socket targets. These three targets have been chosen to support the vast majority of log aggregators and other log analysis tools without having to install additional software.
-
-File target supports rotation and compression triggered by size and/or duration. Syslog target supports local and remote syslog servers, with or without TLS transport. TCP socket target can be configured with an IP address or domain name, port, and optional TLS certificate.
+These three targets have been chosen to support the vast majority of log aggregators and other log analysis tools without having to install additional software. 
 
 Beyond the standard log levels (trace, debug, info, panic), discrete log levels can also be specified.
 
@@ -1133,7 +1131,7 @@ Level of detail at which log events are written to the console when ``EnableCons
 **INFO**: Outputs error messages and information around startup and initialization.
 
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| This feature's ``config.json`` setting is ``"ConsoleLevel": "DEBUG"`` with options ``"DEBUG"``, ``"ERROR"``, and ``"INFO"``.                                          |
+| This feature's ``config.json`` setting is ``"ConsoleLevel": "DEBUG"`` with options ``"DEBUG"``, ``"ERROR"``, and ``"INFO"``.                                         |
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Output console logs as JSON
@@ -1527,7 +1525,7 @@ Configurable link to a download page for Mattermost Apps. When a link is present
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Android App Download Link
-^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Configurable link to download the Android app. When a link is present, users who access the site on a mobile web browser will be prompted with a page giving them the option to download the app. Leave this field blank to prevent the page from appearing. If you are using an `Enterprise App Store <https://docs.mattermost.com/deployment/push.html#enterprise-app-store-eas>`__ for your mobile apps, change this link to point to the correct app.
 
@@ -2338,10 +2336,27 @@ If the "No encryption" option is selected it is highly recommended that the AD/L
 | This feature's ``config.json`` setting is ``"ConnectionSecurity": ""`` with options ``""``, ``"TLS"``, and ``"STARTTLS"``.                                           |
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
+Private Key
+^^^^^^^^^^^^
+
+(Optional) The private key file provided by your LDAP Authentication Provider and uploaded if TLS client certificates are being used as the primary authentication mechanism.
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| This feature's ``config.json`` setting is ``"PrivateKeyFile": ""`` with string input.                                                                                |
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+Public Certificate
+^^^^^^^^^^^^^^^^^^
+
+(Optional) The public TLS certificate file provided by your LDAP Authentication Provider and uploaded if TLS client certificates are being used as the primary authentication mechanism.
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| This feature's ``config.json`` setting is ``"PublicCertificateFile": ""`` with with string input.                                                                    |
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
 Skip Certificate Verification
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-(Optional) The attribute in the AD/LDAP server that will be used to populate the nickname of users in Mattermost.
 
 **True**: Skips the certificate verification step for TLS or STARTTLS connections. Not recommended for production environments where TLS is required. For testing only.
 
@@ -2585,6 +2600,9 @@ When accounts are disabled in AD/LDAP users are made inactive in Mattermost, and
 | This feature's ``config.json`` setting is ``"SyncIntervalMinutes": 60`` with numerical input.                                                                        |
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
+.. note::
+  LDAP syncs cause a large number of database read queries. Ensure that you monitor database load during a sync to determine how often these syncs should happen in your environment in order to minimize performance degradation.
+
 Maximum Page Size
 ^^^^^^^^^^^^^^^^^^
 
@@ -2656,7 +2674,7 @@ Enable Login With SAML
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Enable Synchronizing SAML Accounts With AD/LDAP
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 **True**: Mattermost periodically synchronizes SAML user attributes, including user deactivation and removal, with AD/LDAP. Enable and configure synchronization settings at **Authentication > AD/LDAP**. See `documentation <https://about.mattermost.com/default-saml-ldap-sync>`__ to learn more.
 
@@ -2756,6 +2774,7 @@ The signature algorithm used to sign the request. Supported options are `RSAwith
 
 CanonicalAlgorithm
 ^^^^^^^^^^^^^^^^^^^
+
 The canonicalization algorithm. Supported options are `Exclusive XML Canonicalization 1.0 <http://www.w3.org/2001/10/xml-exc-c14n#>`_ and `Canonical XML 1.1 <http://www.w3.org/2006/12/xml-c14n11>`_.
 
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -2801,6 +2820,7 @@ When ``true``, Mattermost signs the SAML request using your Service Provider Pri
 
 Email Attribute
 ^^^^^^^^^^^^^^^^^
+
 The attribute in the SAML Assertion that will be used to populate the email addresses of users in Mattermost.
 
 Email notifications will be sent to this email address, and this email address may be viewable by other Mattermost users depending on privacy settings choosen by the System Admin.
@@ -3354,7 +3374,7 @@ Slash commands send events to external integrations that send a response back to
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Enable OAuth 2.0 Service Provider
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 **True**: Mattermost acts as an OAuth 2.0 service provider allowing Mattermost to authorize API requests from external applications.
 
@@ -3414,7 +3434,6 @@ To manage who can create personal access tokens or to search users by token ID, 
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | This feature's ``config.json`` setting is ``"EnableUserAccessTokens": false`` with options ``true`` and ``false``.                                                   |
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
 
 Bot Accounts
 ~~~~~~~~~~~~
@@ -4065,7 +4084,7 @@ If the team URL of the primary team is https://example.mattermost.com/myteam/, t
 +-----------------------------------------------------------------------------------------------------------------+
 
 SAML Settings
-^^^^^^^^^^^^
+^^^^^^^^^^^^^
 
 SAML Login Button Color
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -4279,7 +4298,7 @@ Set a threshold on the number of goroutines when the Mattermost system is consid
 To turn off checking for the threshold, set this value to ``-1``.
 
 +----------------------------------------------------------------------------------------------------------+
-| This feature's ``config.json`` setting is ``"GoroutineHealthThreshold": -1`` with numerical input.     |
+| This feature's ``config.json`` setting is ``"GoroutineHealthThreshold": -1`` with numerical input.       |
 +----------------------------------------------------------------------------------------------------------+
 
 Allow Cookies for Subdomains
@@ -4377,17 +4396,30 @@ mmctl local mode ignores this setting and behaves as though ``EnableAPITeamDelet
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Enable API User Deletion
-^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**True**: The ``api/v4/user/{userid}?permanent=true`` API endpoint can be called by Team and System Admins to permanently delete a user.
+**True**: The ``api/v4/users/{userid}?permanent=true`` API endpoint can be called by System Admins, or users with appropriate permissions, to permanently delete a user.
 
-**False**: The API endpoint cannot be called. Note that ``api/v4/user/{userid}`` can still be used to soft delete a user.
-
-mmctl local mode ignores this setting and behaves as though ``EnableAPITeamDeletion`` is set to ``true``.
+**False**: The API endpoint cannot be called. Note that ``api/v4/users/{userid}`` can still be used to soft delete a user.
 
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | This feature's ``config.json`` setting is ``"EnableAPIUserDeletion": false`` with options ``true`` and ``false``.                                                    |
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+mmctl local mode ignores this setting and behaves as though ``EnableAPIUserDeletion`` is set to ``true``.
+
+Enable API Channel Deletion
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**True**: The ``api/v4/channels/{channelid}?permanent=true`` API endpoint can be called by System Admins, or users with appropriate permissions, to permanently delete a channel.
+
+**False**: The API endpoint cannot be called. Note that ``api/v4/channels/{channelid}`` can still be used to soft delete a channel.
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| This feature's ``config.json`` setting is ``"EnableAPIChannelDeletion": false`` with options ``true`` and ``false``.                                                 |
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+mmctl local mode ignores this setting and behaves as though ``EnableAPIChannelDeletion`` is set to ``true``.
 
 Enable OpenTracing
 ^^^^^^^^^^^^^^^^^^^
@@ -4615,7 +4647,7 @@ Changes to this setting require a server restart before taking effect.
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Experimental Settings only in ``config.json``
---------------------------------------------
+---------------------------------------------
 
 Audit settings
 ~~~~~~~~~~~~~~~
@@ -4725,7 +4757,7 @@ This is the maximum size (measured in megabytes) that the file can grow before t
 +---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 File max age days
-^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^
 
 This is the maximum age in days a file can reach before triggering rotation. The default value is 0, indicating no limit on the age.
 
@@ -4761,6 +4793,26 @@ This setting can be left as default unless you are seeing audit write failures i
 +--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | This feature's ``config.json`` setting is ``"FileMaxQueueSize": 1000`` with numerical input.                                                                       |
 +--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+Advanced Audit Logging Configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Available in Enterprise Edition E20*
+
+Output logs to multiple targets
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Send log records to multiple targets:
+
+- Multiple local file targets
+- Multiple syslogs
+- Multiple TCP sockets
+
+Allow any combination of local file, syslog, and TCP socket targets. 
+
+File target supports rotation and compression triggered by size and/or duration. Syslog target supports local and remote syslog servers, with or without TLS transport. TCP socket target can be configured with an IP address or domain name, port, and optional TLS certificate.
+
+This feature's ``config.json`` setting is ``ExperimentalAuditSettings.AdvancedLoggingConfig`` which can contain a filespec to another config file, a database DSN, or JSON. Options are outlined in this txt file: `Log Settings Options <https://github.com/mattermost/docs/files/5066579/Log.Settings.Options.txt>`_. Sample config: `Advanced Logging Options Sample.json.zip <https://github.com/mattermost/docs/files/5066597/Advanced.Logging.Options.Sample.json.zip>`_.
 
 Service Settings
 ~~~~~~~~~~~~~~~~
@@ -4823,7 +4875,7 @@ Restrict System Admin (Experimental)
 **False**: No restrictions are applied to the System Admin role.
 
 +-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| This feature's ``config.json`` setting is ``"RestrictSystemAdmin": "false"`` with options ``true`` and ``false``.                                                  |
+| This feature's ``config.json`` setting is ``"RestrictSystemAdmin": "false"`` with options ``true`` and ``false``.                                                 |
 +-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Team Settings
@@ -5041,6 +5093,9 @@ Prefix on the Elasticsearch index name. Enables the use of Mattermost Elasticsea
 | This feature's ``config.json`` setting is ``"IndexPrefix": ""`` with string input.     |
 +----------------------------------------------------------------------------------------+
 
+.. note::
+  When this setting is used, all Elasticsearch indexes created by Mattermost are given this prefix. You can set different prefixes so that multiple Mattermost deployments can share an Elasticsearch cluster without the index names colliding.
+  
 Live Indexing Batch Size
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -5123,7 +5178,7 @@ Enable Autocomplete
 +-----------------------------------------------------------------------------------------------------------------+
 
 Bulk Indexing Time Window Seconds
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Determines the maximum time window for a batch of posts being indexed by the Bulk Indexer. This setting serves as a performance optimization for installs with over ~10 million posts in the database. Approximate this value based on the average number of seconds for 2,000 posts to be added to the database on a typical day in production. Setting this value too low will cause Bulk Indexing jobs to run slowly.
 
@@ -5268,12 +5323,18 @@ Policy
 
 *Removed in June 16, 2018 release*
 
-Permission policy settings are available in Enterprise Edition E10 and E20. In v5.0 and later, these settings are found in the `Advanced Permissions <https://docs.mattermost.com/deployment/advanced-permissions.html>`__ page instead of configuration settings.
+.. note:: 
+  
+   Permission policy settings are available in Enterprise Edition E10 and E20. From v5.0, these settings are found in the `Advanced Permissions <https://docs.mattermost.com/deployment/advanced-permissions.html>`__ page instead of configuration settings.
 
 Enable sending team invites from
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 *Removed in June 16, 2018 release*
+
+.. note:: 
+
+   From v5.0 this has been replaced by advanced permissions which offers Admins a way to restrict actions in Mattermost to authorized users only. See the `Advanced Permissions documentation <https://docs.mattermost.com/deployment/advanced-permissions.html>`_ for more details.
 
 Set policy on who can invite others to a team using the **Send Email Invite**, **Get Team Invite Link**, and **Add Members to Team** options on the Main Menu. If **Get Team Invite Link** is used to share a link, you can expire the invite code from **Team Settings > Invite Code** after the desired users have joined the team. Options include:
 
@@ -5292,6 +5353,10 @@ Enable public channel creation for
 
 *Removed in June 16, 2018 release*
 
+.. note:: 
+
+   From v5.0 this has been replaced by advanced permissions which offers Admins a way to restrict actions in Mattermost to authorized users only. See the `Advanced Permissions documentation <https://docs.mattermost.com/deployment/advanced-permissions.html>`_ for more details.
+
 Restrict the permission level required to create public channels.
 
 **All team members**: Allow all team members to create public channels.
@@ -5308,6 +5373,10 @@ Enable public channel renaming for
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 *Removed in June 16, 2018 release*
+
+.. note:: 
+
+   From v5.0 this has been replaced by advanced permissions which offers Admins a way to restrict actions in Mattermost to authorized users only. See the `Advanced Permissions documentation <https://docs.mattermost.com/deployment/advanced-permissions.html>`_ for more details.
 
 Restrict the permission level required to rename and set the header or purpose for Public channels.
 
@@ -5328,6 +5397,10 @@ Enable public channel deletion for
 
 *Removed in June 16, 2018 release*
 
+.. note:: 
+
+   From v5.0 this has been replaced by advanced permissions which offers Admins a way to restrict actions in Mattermost to authorized users only. See the `Advanced Permissions documentation <https://docs.mattermost.com/deployment/advanced-permissions.html>`_ for more details.
+
 Restrict the permission level required to delete Public channels. Deleted channels can be recovered from the database using a `command line tool <https://docs.mattermost.com/administration/command-line-tools.html>`__.
 
 **All channel members**: Allow all channel members to delete Public channels.
@@ -5347,6 +5420,10 @@ Enable private channel creation for
 
 *Removed in June 16, 2018 release*
 
+.. note:: 
+
+   From v5.0 this has been replaced by advanced permissions which offers Admins a way to restrict actions in Mattermost to authorized users only. See the `Advanced Permissions documentation <https://docs.mattermost.com/deployment/advanced-permissions.html>`_ for more details.
+
 Restrict the permission level required to create Private channels.
 
 **All team members**: Allow all team members to create Private channels.
@@ -5363,6 +5440,10 @@ Enable private channel renaming for
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 *Removed in June 16, 2018 release*
+
+.. note:: 
+
+   From v5.0 this has been replaced by advanced permissions which offers Admins a way to restrict actions in Mattermost to authorized users only. See the `Advanced Permissions documentation <https://docs.mattermost.com/deployment/advanced-permissions.html>`_ for more details.
 
 Restrict the permission level required to rename and set the header or purpose for Private channels.
 
@@ -5383,6 +5464,10 @@ Enable managing of private channel members for
 
 *Removed in June 16, 2018 release*
 
+.. note:: 
+
+   From v5.0 this has been replaced by advanced permissions which offers Admins a way to restrict actions in Mattermost to authorized users only. See the `Advanced Permissions documentation <https://docs.mattermost.com/deployment/advanced-permissions.html>`_ for more details.
+
 Set policy on who can add and remove members from Private channels.
 
 **All team members**: Allow all team members to add and remove members.
@@ -5401,6 +5486,10 @@ Enable private channel deletion for
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 *Removed in June 16, 2018 release*
+
+.. note:: 
+
+   From v5.0 this has been replaced by advanced permissions which offers Admins a way to restrict actions in Mattermost to authorized users only. See the `Advanced Permissions documentation <https://docs.mattermost.com/deployment/advanced-permissions.html>`_ for more details.
 
 Restrict the permission level required to delete Private channels. Deleted channels can be recovered from the database using a `command line tool <https://docs.mattermost.com/administration/command-line-tools.html>`__.
 
@@ -5421,6 +5510,10 @@ Allow which users to delete messages
 
 *Removed in June 16, 2018 release*
 
+.. note:: 
+
+   From v5.0 this has been replaced by advanced permissions which offers Admins a way to restrict actions in Mattermost to authorized users only. See the `Advanced Permissions documentation <https://docs.mattermost.com/deployment/advanced-permissions.html>`_ for more details.
+
 Restrict the permission level required to delete messages. Team Admins, Channel Admins, and System Admins can delete messages only in channels where they are members. Messages can be deleted any time.
 
 **Message authors can delete their own messages, and Administrators can delete any message**: Allow authors to delete their own messages, and allow Team Admins, Channel Admins, and System Admins to delete any message.
@@ -5437,6 +5530,10 @@ Allow users to edit their messages
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 *Removed in June 16, 2018 release*
+
+.. note:: 
+
+   From v5.0 this has been replaced by advanced permissions which offers Admins a way to restrict actions in Mattermost to authorized users only. See the `Advanced Permissions documentation <https://docs.mattermost.com/deployment/advanced-permissions.html>`_ for more details.
 
 Set the time limit that users have to edit their messages after posting.
 

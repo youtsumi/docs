@@ -1933,7 +1933,10 @@ mmctl config subpath --assets-dir /opt/mattermost/client --path /
 <h2>mmctl integrity<a class="headerlink" href="#mmctl-integrity" title="Permalink to this headline">¶</a></h2>
 <p><strong>Description</strong></p>
 <blockquote>
-<div>Perform a relational integrity check which returns information about any orphaned record found.</div></blockquote>
+<div><p>Perform a relational integrity check which returns information about any orphaned record found.</p>
+<p><strong>Note:</strong></p>
+<p>This command can only be run using local mode.</p>
+</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl integrity <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -3019,11 +3022,13 @@ team create --name private --display_name <span class="s2">&quot;My New Private 
 <li><a class="reference internal" href="#mmctl-user-activate">mmctl user activate</a> - Activate a user</li>
 <li><a class="reference internal" href="#mmctl-user-create">mmctl user create</a> - Create user</li>
 <li><a class="reference internal" href="#mmctl-user-deactivate">mmctl user deactivate</a> - Deactivate user</li>
+<li><a class="reference internal" href="#mmctl-user-delete">mmctl user delete</a> - Delete users</li>
+<li><a class="reference internal" href="#mmctl-user-deleteall">mmctl user deleteall</a> - Delete all users and all posts (local command only)</li>
 <li><a class="reference internal" href="#mmctl-user-email">mmctl user email</a> - Set user email</li>
 <li><a class="reference internal" href="#mmctl-user-invite">mmctl user invite</a> - Invite user</li>
 <li><a class="reference internal" href="#mmctl-user-list">mmctl user list</a> - List users</li>
 <li><a class="reference internal" href="#mmctl-user-reset-password">mmctl user reset_password</a> - Reset user password</li>
-<li><a class="reference internal" href="#mmctl-user-resetmfa">mmctl user resetmfa</a> - Reset user’s MFA token</li>
+<li><a class="reference internal" href="#mmctl-user-resetmfa">mmctl user resetmfa</a> - Reset a user’s MFA token</li>
 <li><a class="reference internal" href="#mmctl-user-search">mmctl user search</a> - Search for a user</li>
 </ul>
 </dd>
@@ -3107,6 +3112,61 @@ user deactivate username
 </div>
 <p><strong>Options</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help       <span class="nb">help</span> <span class="k">for</span> deactivate
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
+--local                       allows communicating with the server through a unix socket
+--strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
+<div class="section" id="mmctl-user-delete">
+<h3>mmctl user delete<a class="headerlink" href="#mmctl-user-delete" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<blockquote>
+<div>Permanently delete some users. Permanently deletes one or multiple users along with all related information including posts from the database.</div></blockquote>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl user delete <span class="o">[</span>users<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>user delete user@example.com
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--confirm   Confirm you really want to delete the user and a DB backup has been performed
+-h, --help  <span class="nb">help</span> <span class="k">for</span> delete
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
+--local                       allows communicating with the server through a unix socket
+--strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
+<div class="section" id="mmctl-user-deleteall">
+<h3>mmctl user deleteall<a class="headerlink" href="#mmctl-user-deleteall" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<blockquote>
+<div><p>Permanently delete all users and all related information including posts.</p>
+<p><strong>Note:</strong></p>
+<p>This command can only be run using local mode.</p>
+</div></blockquote>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl user deleteall <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>user deleteall
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--confirm   Confirm you really want to delete the user and a DB backup has been performed
+-h, --help  <span class="nb">help</span> <span class="k">for</span> delete
 </pre></div>
 </div>
 <p><strong>Options inherited from parent commands</strong></p>
