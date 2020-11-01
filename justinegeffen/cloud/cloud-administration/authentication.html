@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Authentication &mdash; Mattermost 5.28 documentation</title>
+  <title>Multi-Factor Authentication &mdash; Mattermost 5.28 documentation</title>
   
 
   
@@ -195,7 +195,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../../index.html">Docs</a> &raquo;</li>
     
-    <li>Authentication</li>
+    <li>Multi-Factor Authentication</li>
     <li class="wy-breadcrumbs-aside">
       
         
@@ -209,31 +209,30 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="authentication">
-<h1>Authentication<a class="headerlink" href="#authentication" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="signup">
-<h2>Signup<a class="headerlink" href="#signup" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="multi-factor-authentication">
+<h1>Multi-Factor Authentication<a class="headerlink" href="#multi-factor-authentication" title="Permalink to this headline">¶</a></h1>
+<p>Multi-factor authentication (MFA) is a secondary layer of user authentication applied to your Mattermost server.</p>
+<p>With MFA enabled, users need to provide a secure one-time code in addition to their username and password in order to log in to Mattermost. MFA is useful in organizations that have specific security and compliance policies. It can also be used in organizations where Mattermost is not behind a firewall and doesn’t have access to existing MFA infrastructure.</p>
+<p>Mattermost offers a smartphone-based MFA check in addition to email-password or Active Directory/LDAP authentication to sign in to the Mattermost server.</p>
+<p>Supported smartphones include iOS, Android, Blackberry, and Windows Phone devices that are able to install <a class="reference external" href="https://support.google.com/accounts/answer/1066447?hl=en">Google Authenticator</a>. Other than requiring internet access to download and install Google Authenticator, the phone used for Mattermost MFA does not require internet access.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">As the MFA implementation relies on Time-based One-time passwords (TOTP) ensure that your server system time is accurate. If there is a discrepancy, users may not be able to log in successfully.</p>
 </div>
-<div class="section" id="email">
-<h2>Email<a class="headerlink" href="#email" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="password">
-<h2>Password<a class="headerlink" href="#password" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="enabling-mfa">
+<h1>Enabling MFA<a class="headerlink" href="#enabling-mfa" title="Permalink to this headline">¶</a></h1>
+<p>This option is enabled by the System Admin in the <a class="reference external" href="http://docs.mattermost.com/administration/config-settings.html#mfa">System Console</a> under <strong>Authentication &gt; MFA &gt; Enable Multi-factor Authentication</strong>.</p>
+<p>Once enabled, users can opt to use MFA on their account in the <a class="reference external" href="https://docs.mattermost.com/help/settings/account-settings.html#multi-factor-authentication">Account Settings</a> menu under <strong>Security &gt; Multi-factor Authentication</strong>.</p>
 </div>
-<div class="section" id="mfa">
-<h2>MFA<a class="headerlink" href="#mfa" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="ad-ldap">
-<h2>AD/LDAP<a class="headerlink" href="#ad-ldap" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="saml-2-0">
-<h2>SAML 2.0<a class="headerlink" href="#saml-2-0" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="oauth-2-0">
-<h2>OAuth 2.0<a class="headerlink" href="#oauth-2-0" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="guest-access">
-<h2>Guest Access<a class="headerlink" href="#guest-access" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="enforcing-mfa-e10">
+<h1>Enforcing MFA (E10)<a class="headerlink" href="#enforcing-mfa-e10" title="Permalink to this headline">¶</a></h1>
+<p>This option can be enabled by the System Admin in the <a class="reference external" href="http://docs.mattermost.com/administration/config-settings.html#mfa">System Console</a> under <strong>Authentication &gt; MFA &gt; Enforce Multi-factor Authentication</strong>.</p>
+<p>When MFA enforcement is set to <strong>true</strong>, users with email or LDAP authentication who don’t have MFA set up will be directed to the MFA setup page when they log in to Mattermost. They will not be able to access the site until MFA setup is complete. Any new users will be required to set up MFA during the sign up process.</p>
+<p>Users will not be able to remove MFA from their account while enforcement is on.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Turning on MFA enforcement prevents users from accessing the site until set up is complete. It is recommended that you turn on enforcement during non-peak hours when people are less likely to be using Mattermost.</p>
 </div>
 </div>
 
