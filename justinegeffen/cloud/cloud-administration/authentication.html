@@ -164,9 +164,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#user-management">User Management</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#configuration">Configuration</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../guides/cloud-admin-guide.html#authentication">Authentication</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Multi-Factor Authentication</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#enabling-mfa">Enabling MFA</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#enforcing-mfa-e10">Enforcing MFA (E10)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Multi-Factor Authentication</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#enabling-mfa">Enabling MFA</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enforcing-mfa-e10">Enforcing MFA (E10)</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="sso-saml.html">SAML Single Sign-On (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-ldap.html">Active Directory/LDAP Setup (E10/E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-gitlab.html">GitLab Single Sign-On</a></li>
@@ -242,20 +244,20 @@
 <p class="first admonition-title">Note</p>
 <p class="last">As the MFA implementation relies on Time-based One-time passwords (TOTP) ensure that your server system time is accurate. If there is a discrepancy, users may not be able to log in successfully.</p>
 </div>
-</div>
 <div class="section" id="enabling-mfa">
-<h1>Enabling MFA<a class="headerlink" href="#enabling-mfa" title="Permalink to this headline">¶</a></h1>
+<h2>Enabling MFA<a class="headerlink" href="#enabling-mfa" title="Permalink to this headline">¶</a></h2>
 <p>This option is enabled by the System Admin in the <a class="reference external" href="http://docs.mattermost.com/administration/config-settings.html#mfa">System Console</a> under <strong>Authentication &gt; MFA &gt; Enable Multi-factor Authentication</strong>.</p>
 <p>Once enabled, users can opt to use MFA on their account in the <a class="reference external" href="https://docs.mattermost.com/help/settings/account-settings.html#multi-factor-authentication">Account Settings</a> menu under <strong>Security &gt; Multi-factor Authentication</strong>.</p>
 </div>
 <div class="section" id="enforcing-mfa-e10">
-<h1>Enforcing MFA (E10)<a class="headerlink" href="#enforcing-mfa-e10" title="Permalink to this headline">¶</a></h1>
+<h2>Enforcing MFA (E10)<a class="headerlink" href="#enforcing-mfa-e10" title="Permalink to this headline">¶</a></h2>
 <p>This option can be enabled by the System Admin in the <a class="reference external" href="http://docs.mattermost.com/administration/config-settings.html#mfa">System Console</a> under <strong>Authentication &gt; MFA &gt; Enforce Multi-factor Authentication</strong>.</p>
 <p>When MFA enforcement is set to <strong>true</strong>, users with email or LDAP authentication who don’t have MFA set up will be directed to the MFA setup page when they log in to Mattermost. They will not be able to access the site until MFA setup is complete. Any new users will be required to set up MFA during the sign up process.</p>
 <p>Users will not be able to remove MFA from their account while enforcement is on.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Turning on MFA enforcement prevents users from accessing the site until set up is complete. It is recommended that you turn on enforcement during non-peak hours when people are less likely to be using Mattermost.</p>
+</div>
 </div>
 </div>
 
