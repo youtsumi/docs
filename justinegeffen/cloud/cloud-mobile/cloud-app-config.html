@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Google Single Sign-On (E20) &mdash; Mattermost 5.28 documentation</title>
+  <title>ppConfig for EMM Solutions with Mattermost Mobile Apps &mdash; Mattermost 5.28 documentation</title>
   
 
   
@@ -31,8 +31,8 @@
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Office 365 Single Sign-On (E20)" href="sso-office.html" />
-    <link rel="prev" title="GitLab Single Sign-On" href="sso-gitlab.html" />
+    <link rel="next" title="Mobile Apps FAQ" href="mobile-apps-faq.html" />
+    <link rel="prev" title="Mobile Applications Guide" href="cloud-mobile-apps.html" />
 	<!-- Bizible Script -->
 	<script src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
 
@@ -163,18 +163,21 @@
 <li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#system-administration">System Administration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#user-management">User Management</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#configuration">Configuration</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../../guides/cloud-admin-guide.html#authentication">Authentication</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="authentication.html">Multi-Factor Authentication</a></li>
-<li class="toctree-l3"><a class="reference internal" href="sso-saml.html">SAML Single Sign-On (E20)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="sso-ldap.html">Active Directory/LDAP Setup (E10/E20)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="sso-gitlab.html">GitLab Single Sign-On</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Google Single Sign-On (E20)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="sso-office.html">Office 365 Single Sign-On (E20)</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#authentication">Authentication</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#integrations">Integrations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#compliance">Compliance</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#mobile">Mobile</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../guides/cloud-admin-guide.html#mobile">Mobile</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cloud-mobile-apps.html">Mobile Applications Guide</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ppConfig for EMM Solutions with Mattermost Mobile Apps</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#what-is-appconfig">What is AppConfig?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mattermost-appconfig-values">Mattermost AppConfig Values</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#other-appconfig-settings">Other AppConfig Settings</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mobile-apps-faq.html">Mobile Apps FAQ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting-mobile.html">Troubleshooting Mobile Applications</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../guides/administrator.html">Self-Managed Administrator's Guide</a></li>
@@ -216,11 +219,11 @@
     
       <li><a href="../../guides/cloud-admin-guide.html">Cloud Administrator’s Guide</a> &raquo;</li>
     
-    <li>Google Single Sign-On (E20)</li>
+    <li>ppConfig for EMM Solutions with Mattermost Mobile Apps</li>
     <li class="wy-breadcrumbs-aside">
       
         
-          <a href="https://github.com/mattermost/docs/blob/master/source/cloud/cloud-administration/sso-google.md" class="fa fa-github"> Edit</a>
+          <a href="https://github.com/mattermost/docs/blob/master/source/cloud/cloud-mobile/cloud-app-config.rst" class="fa fa-github"> Edit</a>
         
       
     </li>
@@ -230,57 +233,133 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="google-single-sign-on-e20">
-<h1>Google Single Sign-On (E20)<a class="headerlink" href="#google-single-sign-on-e20" title="Permalink to this headline">¶</a></h1>
-<p>Follow these steps to configure Mattermost to use Google as a Single Sign-on (SSO) service for team creation, account creation, and sign-in.</p>
-<p><strong>Note:</strong></p>
-<ul class="simple">
-<li>Google SSO is not yet supported in the Mattermost Mobile app. If you want to use Google SSO on mobile, you’ll have to <a class="reference external" href="https://developers.mattermost.com/contribute/mobile/build-your-own/">build your own app</a>.</li>
-<li>The Google People API has replaced the Google+ API, which was deprecated by Google as of March 7th, 2019 per their notice at https://developers.google.com/+/api-shutdown.</li>
-</ul>
-<ol class="simple">
-<li>Go to <a class="reference external" href="https://console.developers.google.com">Google API Manager</a>, click <strong>Credentials</strong> in the left hand sidebar, click <strong>Create a project</strong> and enter “Mattermost - your-company-name” as the <strong>Project Name</strong>, then click <strong>Create</strong>.</li>
+  <div class="section" id="ppconfig-for-emm-solutions-with-mattermost-mobile-apps">
+<h1>ppConfig for EMM Solutions with Mattermost Mobile Apps<a class="headerlink" href="#ppconfig-for-emm-solutions-with-mattermost-mobile-apps" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-appconfig">
+<h2>What is AppConfig?<a class="headerlink" href="#what-is-appconfig" title="Permalink to this headline">¶</a></h2>
+<p>AppConfig is a standard approach for app configuration and management introduced by the AppConfig Community, a group of leading EMM providers and app developers who have come together to make it easier for developers and customers to drive mobility in business. The community’s mission is to streamline the adoption and deployment of mobile enterprise applications by providing a standard approach to app configuration and management, building upon the extensive app security and configuration frameworks available in the OS.</p>
+<p>AppConfig provides an easy way to configure enterprise mobile applications with any of the EMM providers listed on the <a class="reference external" href="https://www.appconfig.org/members/">AppConfig website</a>.</p>
+<p>Mattermost mobile apps can be configured in your EMM solution using AppConfig with the apps on the public app stores (Google Play and Apple App Store), or as an “in-house app” you compile yourself.</p>
+<p>For example set up instructions, see our documentation on <span class="xref std std-doc">MobileIron</span> and <span class="xref std std-doc">Blackberry UEM</span>.</p>
+</div>
+<div class="section" id="mattermost-appconfig-values">
+<span id="appconfig-table"></span><h2>Mattermost AppConfig Values<a class="headerlink" href="#mattermost-appconfig-values" title="Permalink to this headline">¶</a></h2>
+<p>The following table shows all the configuration options that can be sent from the EMM provider of your choice to the Mattermost mobile apps. You can also <code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">an</span> <span class="pre">XML</span> <span class="pre">template</span></code> of the configuration file for use with your EMM provider.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="67%" />
+<col width="3%" />
+<col width="5%" />
+<col width="6%" />
+<col width="4%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">Description</th>
+<th class="head">Type</th>
+<th class="head">Default Value</th>
+<th class="head">Valid Values</th>
+<th class="head">iOS Support</th>
+<th class="head">Android for Work Support</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>inAppPinCode</td>
+<td>Require users to authenticate as the owner of the phone before using the app. Prompts for fingerprint or passcode when the app first opens and when the app has been in the background for more than 5 minutes.</td>
+<td>String</td>
+<td><code class="docutils literal notranslate"><span class="pre">false</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">true</span> <span class="pre">|</span> <span class="pre">false</span></code></td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>blurApplicationScreen</td>
+<td>Blur the app when it’s set to background to protect any confidential on-screen information. On Android, it also prevents taking screenshots of the app.</td>
+<td>String</td>
+<td><code class="docutils literal notranslate"><span class="pre">false</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">true</span> <span class="pre">|</span> <span class="pre">false</span></code></td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>jailbreakDetection</td>
+<td>Disable app launch on jailbroken or rooted devices.</td>
+<td>String</td>
+<td><code class="docutils literal notranslate"><span class="pre">false</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">true</span> <span class="pre">|</span> <span class="pre">false</span></code></td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>copyAndPasteProtection</td>
+<td>Disable the ability to copy from or paste into any text inputs in the app.</td>
+<td>String</td>
+<td><code class="docutils literal notranslate"><span class="pre">false</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">true</span> <span class="pre">|</span> <span class="pre">false</span></code></td>
+<td>Yes</td>
+<td>Yes (since v1.24.0)</td>
+</tr>
+<tr class="row-even"><td>serverUrl</td>
+<td>Set a default Mattermost server URL.</td>
+<td>String</td>
+<td>&#160;</td>
+<td>URL</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>allowOtherServers</td>
+<td>Allow the user to change the above server URL.</td>
+<td>String</td>
+<td><code class="docutils literal notranslate"><span class="pre">true</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">true</span> <span class="pre">|</span> <span class="pre">false</span></code></td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>username</td>
+<td>Set the username or email address to use to authenticate against the Mattermost Server.</td>
+<td>String</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>useVPN</td>
+<td>Enable connection to the Mattermost Server to use a per-app VPN or VPN on-demand.</td>
+<td>String</td>
+<td><code class="docutils literal notranslate"><span class="pre">false</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">true</span> <span class="pre">|</span> <span class="pre">false</span></code></td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td>timeoutVPN</td>
+<td>Set how long the request waits (in seconds) for an initial VPN connection to establish before timeout.</td>
+<td>String</td>
+<td>30</td>
+<td>&#160;</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>vendor</td>
+<td>Name of the EMM vendor or company deploying the app. Used in help text when prompting for passcodes so users are aware why the app is being protected.</td>
+<td>String</td>
+<td>Mattermost</td>
+<td>&#160;</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="other-appconfig-settings">
+<h2>Other AppConfig Settings<a class="headerlink" href="#other-appconfig-settings" title="Permalink to this headline">¶</a></h2>
+<p>As part of AppConfig, EMM administrators can set the following additional configuration options for the Mattermost mobile apps:</p>
+<ol class="arabic simple">
+<li><strong>App Tunnel:</strong> Leverage the “Per-app VPN” capabilities in most commercial VPN solutions.</li>
+<li><strong>Prevent App Backup:</strong> Prevent users from backing up app data.</li>
+<li><strong>Enforce App Encryption:</strong> Set security policies such as requiring encryption.</li>
+<li><strong>Remotely Wipe App:</strong> Use the EMM tool to distribute the app to devices as a managed application so it can be remotely wiped. If the app was previously installed, mark it so the EMM converts the app to a managed app.</li>
 </ol>
-<p><img alt="cloud/cloud-administration/../../source/images/google_1_credentials.png" src="cloud/cloud-administration/../../source/images/google_1_credentials.png" />google_1_credentials</p>
-<ol class="simple">
-<li>In the <strong>Dashboard</strong> click the option to <strong>ENABLE APIS AND SERVICES</strong>.</li>
-</ol>
-<p><img alt="cloud/cloud-administration/../../source/images/google_enable_api.png" src="cloud/cloud-administration/../../source/images/google_enable_api.png" />google_enable_api</p>
-<p>Once in the API Library, scroll down to <a class="reference external" href="https://console.developers.google.com/apis/api/plus/overview">Google People API</a> and click <strong>Enable</strong> in the header. This might take a few minutes to propagate through Google’s systems.</p>
-<ol class="simple">
-<li>Leave the Google+ API menu to return to the <strong>APIs &amp; Services menu</strong>. In the left hand sidebar select <strong>Credentials</strong>, click the <strong>OAuth consent screen</strong> header and enter “Mattermost” as the <strong>Application Name</strong>, then click <strong>Save</strong>.</li>
-</ol>
-<p><img alt="cloud/cloud-administration/../../source/images/google_3_oauth_consent_screen.png" src="cloud/cloud-administration/../../source/images/google_3_oauth_consent_screen.png" />google_3_oauth_consent_screen</p>
-<p>Scroll further down to add your Mattermost instance to a list of authorized domains that can access the API. For example, if it is hosted on <code class="docutils literal notranslate"><span class="pre">mattermost.yourdomain.com</span></code> add <code class="docutils literal notranslate"><span class="pre">yourdomain.com</span></code>.</p>
-<p><img alt="cloud/cloud-administration/../../source/images/google_authorised_domains.png" src="cloud/cloud-administration/../../source/images/google_authorised_domains.png" />google_authorised_domains</p>
-<ol class="simple">
-<li>Select <strong>Credentials</strong> and click <strong>Create credentials</strong>, then choose <strong>OAuth client ID</strong> from the drop-down list.</li>
-</ol>
-<p><img alt="cloud/cloud-administration/../../source/images/google_3_oauth_client_id.png" src="cloud/cloud-administration/../../source/images/google_3_oauth_client_id.png" />google_3_oauth_client_id</p>
-<ol class="simple">
-<li>Select <strong>Web Application</strong> as the <strong>Application type</strong>, and choose a descriptive <strong>Name</strong> for the OAuth connection.</li>
-</ol>
-<p>Under <strong>Restrictions &gt; Authorized redirect URIs</strong>, enter <code class="docutils literal notranslate"><span class="pre">your-mattermost-url/signup/google/complete</span></code> (example: <code class="docutils literal notranslate"><span class="pre">http://localhost:8065/signup/google/complete</span></code>). Click <strong>Create</strong>.</p>
-<p><img alt="cloud/cloud-administration/../../source/images/google_4_web_app.png" src="cloud/cloud-administration/../../source/images/google_4_web_app.png" />google_4_web_app</p>
-<ol class="simple">
-<li>Copy the <strong>Client ID</strong> and <strong>Client Secret</strong>, which will be used to configure Google SSO for Mattermost.</li>
-</ol>
-<p><img alt="cloud/cloud-administration/../../source/images/google_5_client_id_secret.PNG" src="cloud/cloud-administration/../../source/images/google_5_client_id_secret.PNG" />google_5_client_id_secret</p>
-<ol class="simple">
-<li>In <strong>System Console &gt; OAuth 2.0 &gt; Select OAuth 2.0 service provider</strong>, choose <strong>Google Apps</strong> as the service provider and enter <strong>Client ID</strong> and <strong>Client Secret</strong> from step 6 in their respective fields.</li>
-<li>Restart your Mattermost server to see the changes take effect.</li>
-</ol>
-<p><strong>Note:</strong></p>
-<ul class="simple">
-<li>You may also enter <strong>Client ID</strong> and <strong>Client Secret</strong> fields from step 6 directly in <code class="docutils literal notranslate"><span class="pre">GoogleSettings</span></code> section of <code class="docutils literal notranslate"><span class="pre">config/config.json</span></code>.</li>
-<li>The following default values in <code class="docutils literal notranslate"><span class="pre">GoogleSettings</span></code> section of <code class="docutils literal notranslate"><span class="pre">config/config.json</span></code> are recommended:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">Scope</span></code>: <code class="docutils literal notranslate"><span class="pre">profile</span> <span class="pre">email</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">AuthEndpoint</span></code>: <code class="docutils literal notranslate"><span class="pre">https://accounts.google.com/o/oauth2/v2/auth</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">TokenEndpoint</span></code>: <code class="docutils literal notranslate"><span class="pre">https://www.googleapis.com/oauth2/v4/token</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">UserApiEndpoint</span></code>: <code class="docutils literal notranslate"><span class="pre">https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses,nicknames,metadata</span></code></li>
-</ul>
-</li>
-</ul>
+<p>Other configurations may be available depending on your EMM provider.</p>
+</div>
 </div>
 
 
@@ -291,10 +370,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="sso-office.html" class="btn btn-neutral float-right" title="Office 365 Single Sign-On (E20)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="mobile-apps-faq.html" class="btn btn-neutral float-right" title="Mobile Apps FAQ" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="sso-gitlab.html" class="btn btn-neutral" title="GitLab Single Sign-On" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="cloud-mobile-apps.html" class="btn btn-neutral" title="Mobile Applications Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -336,7 +415,7 @@
             </dd>
             
             <dd>
-                <a href="https://github.com/mattermost/docs/blob/master/source/cloud/cloud-administration/sso-google.md"> Edit on GitHub</a>
+                <a href="https://github.com/mattermost/docs/blob/master/source/cloud/cloud-mobile/cloud-app-config.rst"> Edit on GitHub</a>
             </dd>
             
         </dl>
