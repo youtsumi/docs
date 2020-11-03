@@ -159,15 +159,12 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Administrator's Guide</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#devops-command-center">DevOps Command Center</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="bulk-loading.html">Bulk Loading Data</a></li>
@@ -202,9 +199,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/education.html">Training and Education</a></li>
 </ul>
 
             
@@ -238,7 +235,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
     
-      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
+      <li><a href="../guides/administrator.html">Administrator’s Guide</a> &raquo;</li>
     
     <li>Google Single Sign-On (E20)</li>
     <li class="wy-breadcrumbs-aside">
@@ -265,31 +262,31 @@
 <ol class="simple">
 <li>Go to <a class="reference external" href="https://console.developers.google.com">Google API Manager</a>, click <strong>Credentials</strong> in the left hand sidebar, click <strong>Create a project</strong> and enter “Mattermost - your-company-name” as the <strong>Project Name</strong>, then click <strong>Create</strong>.</li>
 </ol>
-<p><img alt="../_images/google_1_credentials1.png" src="../_images/google_1_credentials1.png" /> </p>
+<p><img alt="../_images/google_1_credentials.png" src="../_images/google_1_credentials.png" /> </p>
 <ol class="simple">
 <li>In the <strong>Dashboard</strong> click the option to <strong>ENABLE APIS AND SERVICES</strong>.</li>
 </ol>
-<p><img alt="../_images/google_enable_api1.png" src="../_images/google_enable_api1.png" /> </p>
+<p><img alt="../_images/google_enable_api.png" src="../_images/google_enable_api.png" /> </p>
 <p>Once in the API Library, scroll down to <a class="reference external" href="https://console.developers.google.com/apis/api/plus/overview">Google People API</a> and click <strong>Enable</strong> in the header. This might take a few minutes to propagate through Google’s systems.</p>
 <ol class="simple">
 <li>Leave the Google+ API menu to return to the <strong>APIs &amp; Services menu</strong>. In the left hand sidebar select <strong>Credentials</strong>, click the <strong>OAuth consent screen</strong> header and enter “Mattermost” as the <strong>Application Name</strong>, then click <strong>Save</strong>.</li>
 </ol>
-<p><img alt="../_images/google_3_oauth_consent_screen1.png" src="../_images/google_3_oauth_consent_screen1.png" /> </p>
+<p><img alt="../_images/google_3_oauth_consent_screen.png" src="../_images/google_3_oauth_consent_screen.png" /> </p>
 <p>Scroll further down to add your Mattermost instance to a list of authorized domains that can access the API. For example, if it is hosted on <code class="docutils literal notranslate"><span class="pre">mattermost.yourdomain.com</span></code> add <code class="docutils literal notranslate"><span class="pre">yourdomain.com</span></code>.</p>
-<p><img alt="../_images/google_authorised_domains1.png" src="../_images/google_authorised_domains1.png" /> </p>
+<p><img alt="../_images/google_authorised_domains.png" src="../_images/google_authorised_domains.png" /> </p>
 <ol class="simple">
 <li>Select <strong>Credentials</strong> and click <strong>Create credentials</strong>, then choose <strong>OAuth client ID</strong> from the drop-down list.</li>
 </ol>
-<p><img alt="../_images/google_3_oauth_client_id1.png" src="../_images/google_3_oauth_client_id1.png" /> </p>
+<p><img alt="../_images/google_3_oauth_client_id.png" src="../_images/google_3_oauth_client_id.png" /> </p>
 <ol class="simple">
 <li>Select <strong>Web Application</strong> as the <strong>Application type</strong>, and choose a descriptive <strong>Name</strong> for the OAuth connection.</li>
 </ol>
 <p>Under <strong>Restrictions &gt; Authorized redirect URIs</strong>, enter <code class="docutils literal notranslate"><span class="pre">your-mattermost-url/signup/google/complete</span></code> (example: <code class="docutils literal notranslate"><span class="pre">http://localhost:8065/signup/google/complete</span></code>). Click <strong>Create</strong>.</p>
-<p><img alt="../_images/google_4_web_app1.png" src="../_images/google_4_web_app1.png" /> </p>
+<p><img alt="../_images/google_4_web_app.png" src="../_images/google_4_web_app.png" /> </p>
 <ol class="simple">
 <li>Copy the <strong>Client ID</strong> and <strong>Client Secret</strong>, which will be used to configure Google SSO for Mattermost.</li>
 </ol>
-<p><img alt="../_images/google_5_client_id_secret1.PNG" src="../_images/google_5_client_id_secret1.PNG" /> </p>
+<p><img alt="../_images/google_5_client_id_secret.PNG" src="../_images/google_5_client_id_secret.PNG" /> </p>
 <ol class="simple">
 <li>In <strong>System Console &gt; OAuth 2.0 &gt; Select OAuth 2.0 service provider</strong>, choose <strong>Google Apps</strong> as the service provider and enter <strong>Client ID</strong> and <strong>Client Secret</strong> from step 6 in their respective fields.</li>
 <li>Restart your Mattermost server to see the changes take effect.</li>
