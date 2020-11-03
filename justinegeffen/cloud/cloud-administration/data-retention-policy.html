@@ -248,13 +248,13 @@
 <h2>Configuring a Data Retention Policy<a class="headerlink" href="#configuring-a-data-retention-policy" title="Permalink to this headline">¶</a></h2>
 <p>To set a custom data retention policy:</p>
 <ol class="arabic simple">
-<li>Go to <strong>System Console &gt; Compliance &gt; Data Retention Policy</strong> (or <strong>System Console &gt; Advanced &gt; Data Retention Policy</strong> in versions prior to 5.12).</li>
+<li>Go to <strong>System Console &gt; Compliance &gt; Data Retention Policy</strong>.</li>
 <li>Select a <strong>Message Retention</strong> option. When a time is specified, messages, including file attachments, older than the duration you set will be deleted at the specified time. The minimum retention period is one day.</li>
-<li>Select a <strong>File Retention</strong> option. When a time is specified uploaded files which are older than the duration you set will be deleted from your file storage system (either from your local disk or your Amazon S3 service as specified in <strong>System Console &gt; Environment &gt; File Storage</strong> (or <strong>System Console &gt; Files &gt; Storage</strong> in versions prior to 5.12)) at the specified time. The minimum retention period is one day.</li>
+<li>Select a <strong>File Retention</strong> option. When a time is specified uploaded files which are older than the duration you set will be deleted from your file storage system (either from your local disk or your Amazon S3 service as specified in <strong>System Console &gt; Environment &gt; File Storage</strong>) at the specified time. The minimum retention period is one day.</li>
 <li>Set the start time of the daily scheduled data retention job. Choose a time when fewer people are using your system. Must be a 24-hour time stamp in the form HH:MM.</li>
 </ol>
 <p>Save the settings and restart your server. Messages and files older than the duration you set will be deleted at the specified server time, if applicable.</p>
-<p>You can also run the deletion job manually at any time by clicking <strong>Run Deletion Job Now</strong> in <strong>System Console &gt; Compliance &gt; Data Retention Policy</strong> (or <strong>System Console &gt; Advanced &gt; Data Retention Policy</strong> in versions prior to 5.12).</p>
+<p>You can also run the deletion job manually at any time by clicking <strong>Run Deletion Job Now</strong> in <strong>System Console &gt; Compliance &gt; Data Retention Policy</strong>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">If using data retention and <a class="reference external" href="https://docs.mattermost.com/deployment/elasticsearch.html">ElasticSearch</a>, ensure the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#aggregate-search-indexes">ElasticSearch aggregate search indexes</a> setting is set to a value that is greater than your data retention policy in days.</p>
@@ -269,11 +269,11 @@
 </div>
 <div class="section" id="what-happens-when-a-file-is-deleted">
 <h3>What happens when a file is deleted?<a class="headerlink" href="#what-happens-when-a-file-is-deleted" title="Permalink to this headline">¶</a></h3>
-<p>The file attachment is removed from the Mattermost user interface, deleted from the <code class="docutils literal notranslate"><span class="pre">FileInfo</span></code> table, and from your local disk or Amazon S3 service as specified in <strong>System Console &gt; Environment &gt; File Storage</strong> (or <strong>System Console &gt; Files &gt; Storage</strong> in versions prior to 5.12).</p>
+<p>The file attachment is removed from the Mattermost user interface, deleted from the <code class="docutils literal notranslate"><span class="pre">FileInfo</span></code> table, and from your local disk or Amazon S3 service as specified in <strong>System Console &gt; Environment &gt; File Storage</strong>.</p>
 </div>
 <div class="section" id="why-didn-t-an-old-file-get-deleted-after-running-the-deletion-job">
 <h3>Why didn’t an old file get deleted after running the deletion job?<a class="headerlink" href="#why-didn-t-an-old-file-get-deleted-after-running-the-deletion-job" title="Permalink to this headline">¶</a></h3>
-<p>First, check the data deletion was successful in the deletion job table in <strong>System Console &gt; Compliance &gt; Data Retention Policy</strong> (or <strong>System Console &gt; Advanced &gt; Data Retention Policy</strong> in versions prior to 5.12).</p>
+<p>First, check the data deletion was successful in the deletion job table in <strong>System Console &gt; Compliance &gt; Data Retention Policy</strong>.</p>
 <p>If the files were uploaded prior to Mattermost v4.2, you will need to delete the files manually from your local file storage or Amazon S3 storage:</p>
 <ol class="arabic simple">
 <li>Wait until all files uploaded prior to Mattermost v4.2 are past the file retention policy duration.</li>
@@ -283,7 +283,7 @@
 </div>
 <div class="section" id="why-do-i-see-pending-in-the-deletion-job-table-with-no-details">
 <h3>Why do I see <code class="docutils literal notranslate"><span class="pre">Pending</span></code> in the deletion job table with no details?<a class="headerlink" href="#why-do-i-see-pending-in-the-deletion-job-table-with-no-details" title="Permalink to this headline">¶</a></h3>
-<p>This usually means another data retention job is in progress. You can verify this in the deletion job table in  <strong>System Console &gt; Compliance &gt; Data Retention Policy</strong> (or <strong>System Console &gt; Advanced &gt; Data Retention Policy</strong> in versions prior to 5.12).</p>
+<p>This usually means another data retention job is in progress. You can verify this in the deletion job table in  <strong>System Console &gt; Compliance &gt; Data Retention Policy</strong>.</p>
 <p>If no jobs are in progress and the job has stayed <code class="docutils literal notranslate"><span class="pre">Pending</span></code> for more than 2 minutes, then you may not have restarted your server after enabling the data retention policy. Restart your server and try again.</p>
 </div>
 <div class="section" id="how-do-i-set-a-custom-policy-per-team-or-channel">
@@ -303,7 +303,7 @@
 </div>
 <div class="section" id="how-do-i-know-if-a-data-retention-job-fails">
 <h3>How do I know if a data retention job fails?<a class="headerlink" href="#how-do-i-know-if-a-data-retention-job-fails" title="Permalink to this headline">¶</a></h3>
-<p>Mattermost provides the status of each data retention job in <strong>System Console</strong> &gt; <strong>Compliance</strong> &gt; <strong>Data Retention Policy</strong> (or <strong>System Console &gt; Advanced &gt; Data Retention Policy</strong> in versions prior to 5.12). Here, you can see if the job succeeded or failed, including the details of the error.</p>
+<p>Mattermost provides the status of each data retention job in <strong>System Console</strong> &gt; <strong>Compliance</strong> &gt; <strong>Data Retention Policy</strong>. Here, you can see if the job succeeded or failed, including the details of the error.</p>
 <p>Additionally, any failures are returned in the server logs. The error log begins with the string <code class="docutils literal notranslate"><span class="pre">Failed</span> <span class="pre">job</span></code> and includes a job_id key/value pair. Data retention job failures are identified with worker name <code class="docutils literal notranslate"><span class="pre">EnterpriseDataRetention</span></code>. You can optionally create a script that programmatically queries for such failures and notifies the appropriate system.</p>
 </div>
 <div class="section" id="what-happens-when-the-data-retention-period-is-changed">
