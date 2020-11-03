@@ -159,12 +159,15 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Administrator's Guide</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#devops-command-center">DevOps Command Center</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="bulk-loading.html">Bulk Loading Data</a></li>
@@ -202,9 +205,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/education.html">Training and Education</a></li>
 </ul>
 
             
@@ -238,7 +241,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
     
-      <li><a href="../guides/administrator.html">Administrator’s Guide</a> &raquo;</li>
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
     
     <li>Office 365 Single Sign-On (E20)</li>
     <li class="wy-breadcrumbs-aside">
@@ -263,22 +266,22 @@
 <li>Log in to your <a class="reference external" href="https://portal.azure.com/">Azure Portal</a> with the account that relates to the Azure AD tenant you want to register the application in. You can check the tenant in the top right corner of the portal.</li>
 <li>In the left-hand navigation pane, select the <strong>Azure Active Directory service</strong>, and then select <strong>App registrations &gt; New registration</strong>.</li>
 </ol>
-<p><img alt="../_images/AzureApp_New_Registration.png" src="../_images/AzureApp_New_Registration.png" />AzureApp_NewRegistration.png</p>
+<p><img alt="../_images/AzureApp_New_Registration1.png" src="../_images/AzureApp_New_Registration1.png" />AzureApp_NewRegistration.png</p>
 <ol>
 <li><p class="first">Give your new registration a <strong>Name</strong>, and then define which <strong>Supported account types</strong> can access the application. For example, if this is to be only accessed from your enterprise’s Azure AD accounts, then select <em>Accounts in this organizational directory only</em>. The <strong>Redirect URI</strong> should be defined as Web client. Also input the URL with the host name that will be specific to your Mattermost service followed by <code class="docutils literal notranslate"><span class="pre">/signup/office365/complete</span></code>. An example below is: https://your.mattermost.com/signup/office365/complete</p>
-<p><img alt="../_images/AzureApp_SetupMenuv2.png" src="../_images/AzureApp_SetupMenuv2.png" />AzureApp_SetupMenuv2.png</p>
+<p><img alt="../_images/AzureApp_SetupMenuv21.png" src="../_images/AzureApp_SetupMenuv21.png" />AzureApp_SetupMenuv2.png</p>
 </li>
 </ol>
 <p>Now the App Registration has been created and you can configure it further. The standard Azure AD documentation is <a class="reference external" href="https://docs.microsoft.com/en-gb/azure/active-directory/develop/quickstart-register-app">here</a> for reference.</p>
 <ol>
 <li><p class="first">Select <strong>Certificates and Secrets</strong> from the menu, and click the button to generate a <strong>New Client secret</strong>. Provide a description and define the expiry for the token.</p>
-<p><img alt="../_images/AzureApp_Client_Secret_Expiry.png" src="../_images/AzureApp_Client_Secret_Expiry.png" />AzureApp_Client_Secret_Expiry.png</p>
+<p><img alt="../_images/AzureApp_Client_Secret_Expiry1.png" src="../_images/AzureApp_Client_Secret_Expiry1.png" />AzureApp_Client_Secret_Expiry.png</p>
 </li>
 </ol>
 <p>Click <em>Add</em> and you will be provided with the <em>client secret value</em>, copy this and save it for use in the Mattermost configuration as the <strong>Application Secret Password</strong>.</p>
 <ol>
 <li><p class="first">Select <strong>Overview</strong> from the menu and copy the <em>Application (client) ID</em> and the <em>Directory (tenant) ID</em>, for use in the Mattermost configuration as the <strong>Application ID</strong> and as part of the <strong>Auth Endpoint</strong> and <strong>Token Endpoint</strong> URL.</p>
-<p><img alt="../_images/AzureApp_App_Directory_IDsv2.png" src="../_images/AzureApp_App_Directory_IDsv2.png" />AzureApp_App_Directory_IDsv2.png</p>
+<p><img alt="../_images/AzureApp_App_Directory_IDsv21.png" src="../_images/AzureApp_App_Directory_IDsv21.png" />AzureApp_App_Directory_IDsv2.png</p>
 </li>
 <li><p class="first">Log in to Mattermost and then go to the <strong>System Console &gt; OAuth 2.0 &gt; Select OAuth 2.0 service provider</strong>, choose <strong>Office 365</strong> as the service provider. Enter the <em>client secret value</em> you copied in Step 4 as the <strong>Application Secret Password</strong>. Paste the <em>Application (client) ID</em> you saved in Step 5 into the <strong>Application ID</strong> field.</p>
 </li>
