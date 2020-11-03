@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Mattermost Changelog &mdash; Mattermost 5.29 documentation</title>
+  <title>Mattermost Changelog &mdash; Mattermost 5.28 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.29
+                5.28
               </div>
             
           
@@ -314,8 +314,9 @@
 <div class="section" id="release-v5-28-feature-release">
 <h2>Release v5.28 - <a class="reference external" href="https://docs.mattermost.com/process/release-faq.html#release-overview">Feature Release</a><a class="headerlink" href="#release-v5-28-feature-release" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><strong>v5.28.1, release day TBD</strong><ul>
-<li>Fixing an issue where mmctl Command Line Tool (Beta) is currently broken on Mattermost server v5.28.0. <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-29740">MM-29740</a></li>
+<li><strong>v5.28.1, released 2020-10-19</strong><ul>
+<li>Fixed an issue where mmctl Command Line Tool (Beta) was broken on Mattermost server v5.28.0. <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-29740">MM-29740</a></li>
+<li>Fixed an issue where the Compliance Exports were taking too long on large deployments. This was fixed with a performance optimization of the message export query.</li>
 </ul>
 </li>
 <li><strong>v5.28.0, released 2020-10-16</strong><ul>
@@ -326,7 +327,7 @@
 <div class="section" id="compatibility">
 <h3>Compatibility<a class="headerlink" href="#compatibility" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>PostgreSQL ended long-term support for <a class="reference external" href="https://www.postgresql.org/support/versioning">version 9.4 in February 2020</a>. Mattermost is officially supporting PostgreSQL version 10 with v5.26 release as PostgreSQL 9.4 is no longer supported. New installs will require PostgreSQL 10+. Previous Mattermost versions, including our current ESR, will continue to be compatible with PostgreSQL 9.4. We plan on fully deprecating PostgreSQL 9.4 In our v5.30 release (December 16, 2020). Please follow the instructions under the Upgrading Section within <a class="reference external" href="https://www.postgresql.org/support/versioning/">the PostgreSQL documentation</a>.</li>
+<li>PostgreSQL ended long-term support for <a class="reference external" href="https://www.postgresql.org/support/versioning">version 9.4 in February 2020</a>. Mattermost is officially supporting PostgreSQL version 10 with v5.26 release as PostgreSQL 9.4 is no longer supported. New installs will require PostgreSQL 10+. Previous Mattermost versions, including our current ESR, will continue to be compatible with PostgreSQL 9.4. We plan on fully deprecating PostgreSQL 9.4 and all 9.x versions in our v5.30 release (December 16, 2020). Please follow the instructions under the Upgrading Section within <a class="reference external" href="https://www.postgresql.org/support/versioning/">the PostgreSQL documentation</a>.</li>
 <li>Support for Mattermost Server <a class="reference external" href="https://docs.mattermost.com/administration/extended-support-release.html">Extended Support Release</a> (ESR) 5.19 has come to the end of its lifecycle. Upgrading to Mattermost Server v5.25 or later is required.</li>
 <li>TLS versions 1.0 and 1.1 have been deprecated by browser vendors. Starting in v5.31 (January 16, 2021) mmctl will return an error when connected to Mattermost servers deployed with these TLS versions and System Admins will need to explicitly add a flag in their commands to continue to use them. We recommend upgrading to TLS version 1.2 or higher.</li>
 </ul>
@@ -388,7 +389,7 @@
 <div class="section" id="notifications">
 <h4>Notifications<a class="headerlink" href="#notifications" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li>Added an option in the <strong>Account Settings</strong> to select different desktop notification sounds.</li>
+<li>Added an option in the <strong>Account Settings</strong> to select different desktop notification sounds. This setting is available in supported browsers and in the Desktop app v4.6 and later.</li>
 </ul>
 </div>
 <div class="section" id="command-line-interface-cli">
@@ -408,7 +409,7 @@
 <div class="section" id="administration">
 <h4>Administration<a class="headerlink" href="#administration" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li>Added the ability to upload and remove private and public certicates for LDAP authentication.</li>
+<li>Added the ability to upload and remove private and public certificates for LDAP authentication.</li>
 <li>Added support for resumable file uploads.</li>
 <li>Added the ability to convert a public channel to private and vice versa via Advanced Permissions.</li>
 <li>Added filters to search teams in Teams page.</li>
@@ -531,7 +532,16 @@
 </div>
 <div class="section" id="release-v5-27-quality-release">
 <h2>Release v5.27 - <a class="reference external" href="https://docs.mattermost.com/process/release-faq.html#release-overview">Quality Release</a><a class="headerlink" href="#release-v5-27-quality-release" title="Permalink to this headline">¶</a></h2>
-<p><strong>Released Day: 2020-09-16</strong></p>
+<ul class="simple">
+<li><strong>v5.27.1, released 2020-10-19</strong><ul>
+<li>Fixed an issue where the Compliance Exports were taking too long on large deployments. This was fixed with a performance optimization of the message export query.</li>
+</ul>
+</li>
+<li><strong>v5.27.0, released 2020-09-16</strong><ul>
+<li>Original 5.27.0 release</li>
+</ul>
+</li>
+</ul>
 <p>Mattermost v5.27.0 contains a low level security fix. <a class="reference external" href="http://docs.mattermost.com/administration/upgrade.html">Upgrading</a> is recommended. Details will be posted on our <a class="reference external" href="https://about.mattermost.com/security-updates/">security updates page</a> 30 days after release as per the <a class="reference external" href="https://www.mattermost.org/responsible-disclosure-policy/">Mattermost Responsible Disclosure Policy</a>.</p>
 <div class="section" id="id1">
 <h3>Improvements<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
@@ -885,10 +895,6 @@
 <div class="section" id="release-v5-25-esr">
 <h2>Release v5.25 - <a class="reference external" href="https://docs.mattermost.com/administration/release-definitions.html#extended-support-release-esr">ESR</a><a class="headerlink" href="#release-v5-25-esr" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><strong>v5.25.6, release day TBD</strong><ul>
-<li>Fixing an issue where the Compliance Exports are taking too long on large deployments. This will be fixed with a performance optimization of the message export query.</li>
-</ul>
-</li>
 <li><strong>v5.25.5, released 2020-09-03</strong><ul>
 <li>Forcefully disabled the SAML Setting “Use Improved SAML Library (Beta)”, as we have identified some issues in this feature. Please follow instructions at https://docs.mattermost.com/deployment/sso-saml-before-you-begin.html for enabling SAML using the feature-equivalent <code class="docutils literal notranslate"><span class="pre">xmlsec1</span></code> utility.</li>
 </ul>

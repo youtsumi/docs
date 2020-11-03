@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>DevOps Command Center &mdash; Mattermost 5.29 documentation</title>
+  <title>DevOps Command Center &mdash; Mattermost 5.28 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.29
+                5.28
               </div>
             
           
@@ -172,14 +172,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../developer/toolkit.html">Mattermost Developer Toolkit</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">DevOps Command Center</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#user-s-guide">User’s Guide</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#exporting-channels">Exporting channels</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#telemetry">Telemetry</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#glossary">Glossary</a></li>
-</ul>
-</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">DevOps Command Center</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/atlassian-integrations.html">Atlassian Tools</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/microsoft-integrations.html">Microsoft Tools</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/ci-cd-tools.html">CI/CD Tools</a></li>
@@ -248,282 +241,9 @@
             
   <div class="section" id="devops-command-center">
 <h1>DevOps Command Center<a class="headerlink" href="#devops-command-center" title="Permalink to this headline">¶</a></h1>
-<div class="contents local topic" id="contents">
-<p class="topic-title first">Contents</p>
-<ul class="simple">
-<li><a class="reference internal" href="#overview" id="id1">Overview</a></li>
-<li><a class="reference internal" href="#user-s-guide" id="id2">User’s Guide</a><ul>
-<li><a class="reference internal" href="#creating-a-playbook" id="id3">Creating a playbook</a></li>
-<li><a class="reference internal" href="#starting-an-incident" id="id4">Starting an incident</a></li>
-<li><a class="reference internal" href="#interacting-with-an-incident" id="id5">Interacting with an incident</a></li>
-<li><a class="reference internal" href="#ending-incidents" id="id6">Ending incidents</a></li>
-<li><a class="reference internal" href="#browsing-incidents" id="id7">Browsing incidents</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#exporting-channels" id="id8">Exporting channels</a><ul>
-<li><a class="reference internal" href="#permissions" id="id9">Permissions</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#telemetry" id="id10">Telemetry</a></li>
-<li><a class="reference internal" href="#glossary" id="id11">Glossary</a></li>
-</ul>
-</div>
-<div class="section" id="overview">
-<h2><a class="toc-backref" href="#contents">Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
-<p>Incident Response is a Mattermost plugin designed to help organizations monitor, coordinate, and measure their incident response processes, increasing transparency, maximizing effectiveness, and ultimately saving costs by cutting down time taken to respond and resolve incidents.</p>
-</div>
-<div class="section" id="user-s-guide">
-<h2><a class="toc-backref" href="#contents">User’s Guide</a><a class="headerlink" href="#user-s-guide" title="Permalink to this headline">¶</a></h2>
-<p>Incidents are situations which require an immediate response and benefit from a clearly defined process guiding towards resolution. A playbook defines this process, initializing a dedicated channel for the incident with steps grouped into stages for members of the incident to follow. When the situation is resolved, the incident is ended, and the playbook can be updated to improve the response to similar incidents in the future.</p>
-<p>Playbooks and incidents are scoped by teams, and cannot be shared between teams.</p>
-<div class="section" id="creating-a-playbook">
-<h3><a class="toc-backref" href="#contents">Creating a playbook</a><a class="headerlink" href="#creating-a-playbook" title="Permalink to this headline">¶</a></h3>
-<p>A playbook must be defined before starting an incident.</p>
-<ol class="arabic simple">
-<li>Navigate to <strong>Main Menu &gt; Incidents &amp; Playbooks</strong>.</li>
-<li>Click <strong>Playbooks</strong> in the top menu.</li>
-<li>Select a template, or click <strong>+ New Playbook</strong> to start a new playbook from scratch.</li>
-<li>Name your playbook.</li>
-<li>Rename the <strong>Default Stage</strong>, defining one or more steps to be taken by members of the incident.</li>
-<li>Optionally use descriptions on steps to add additional context for members of the incident. Descriptions support a limited form of markdown, including text styling and hyperlinks.</li>
-<li>Optionally define a slash command with the step, simplifying the completion of steps in the incident.</li>
-<li>Configure whether the incident channel should be public or private within the team.</li>
-<li>Optionally share this playbook with other members of the team to allow them to use the playbook to start an incident, as well as edit the stages, steps and configuration.</li>
-</ol>
-</div>
-<div class="section" id="starting-an-incident">
-<h3><a class="toc-backref" href="#contents">Starting an incident</a><a class="headerlink" href="#starting-an-incident" title="Permalink to this headline">¶</a></h3>
-<p>To start an incident, use one of the following steps:</p>
-<ul class="simple">
-<li>Use the slash command <em>/incident start</em> from any channel.</li>
-<li>Select the shield icon in the channel header, and click <strong>+ Start Incident</strong></li>
-<li>Use the context menu of a post and select <strong>Start incident</strong>.</li>
-</ul>
-<p>An interactive dialog appears prompting the selection of a playbook and channel name. Click <strong>Start Incident</strong> to create an incident with the selected playbook. Only playbook members can use the playbook to start an incident.</p>
-<p>The newly-created incident channel is the central place for discussion related to the incident. The incident bot announces the creator of the incident with a post in the channel. If an incident is started from the context menu of a post, the text of that post is included in the announcement message.</p>
-<p>The creator of a playbook is automatically added as the first member and becomes the commander. The commander is responsible for adding other members to the incident as needed, and may assign a new commander once a member is added to the channel. To change commanders, click the current commander’s name in the RHS and select the new commander. Only members of the channel may be selected as commanders. To change commander to a user who is not in the channel, first add the user to the channel.</p>
-</div>
-<div class="section" id="interacting-with-an-incident">
-<h3><a class="toc-backref" href="#contents">Interacting with an incident</a><a class="headerlink" href="#interacting-with-an-incident" title="Permalink to this headline">¶</a></h3>
-<p>Browsing to an incident channel automatically opens the RHS showing the current commander, duration, active stage and corresponding steps. Any member of the incident is free to change the commander, view other stages, mark a new stage as active, or mark a step as completed. You can also use slash commands to expedite the completion of a step, such as inviting a user to the channel or triggering some third-party integration.</p>
-<ul class="simple">
-<li>Assign slash commands to steps and use the <strong>(Run)</strong> button to run them at any time. Steps can have slash commands ssigned slash commands which can be run at any time by clicking <strong>(Run)</strong> next to the slash command.</li>
-<li>Each step can be optionally assigned to a member of the incident. Select the <strong>No assignee</strong> label below the step title to select an assignee.</li>
-</ul>
-</div>
-<div class="section" id="ending-incidents">
-<h3><a class="toc-backref" href="#contents">Ending incidents</a><a class="headerlink" href="#ending-incidents" title="Permalink to this headline">¶</a></h3>
-<p>To end an active incident, browse to the incident channel and use one of the following steps:</p>
-<ul class="simple">
-<li>The slash command <em>/incident end</em>.</li>
-<li>The <strong>End Incident</strong> button in the RHS.</li>
-</ul>
-</div>
-<div class="section" id="browsing-incidents">
-<h3><a class="toc-backref" href="#contents">Browsing incidents</a><a class="headerlink" href="#browsing-incidents" title="Permalink to this headline">¶</a></h3>
-<ol class="arabic simple">
-<li>Navigate to <strong>Main Menu &gt; Incidents &amp; Playbooks</strong>.</li>
-<li>Select <strong>Incidents</strong> in the top menu to view the incidents in the current team.</li>
-</ol>
-<p>Only public incidents and incidents in which the active user is a member are displayed. System administrators have access to all incidents, whether or not they are members.</p>
-<p>Click on an incident to view additional metadata such as duration, number of involved members, number of messages posted to the channel, and a timeline of when steps were resolved. Optionally filter the list of incidents to include only ongoing incidents or the incident’s commander.</p>
-</div>
-</div>
-<div class="section" id="exporting-channels">
-<h2><a class="toc-backref" href="#contents">Exporting channels</a><a class="headerlink" href="#exporting-channels" title="Permalink to this headline">¶</a></h2>
-<p>If your server is licensed for E20, and the channel export plugin is installed and active, navigate to <strong>Main Menu &gt; Incidents &amp; Playbooks</strong> to select an incident you want to export. Choose <strong>Export Incident Channel</strong> in the top-right corner to download the contents as a CSV.</p>
-<p>The file excludes attachments, but includes system messages.</p>
-<p>If you have an E20 license but the channel export plugin is not installed, or the plugin is installed but not enabled, it’s not possible to select <strong>Export Incident Channel</strong>.</p>
-<div class="section" id="permissions">
-<h3><a class="toc-backref" href="#contents">Permissions</a><a class="headerlink" href="#permissions" title="Permalink to this headline">¶</a></h3>
-<p>Incidents and playbooks are associated with teams in Mattermost. Incident channels are created based on playbooks, which define whether an incident channel is public or private. Read more about <a class="reference external" href="https://docs.mattermost.com/help/getting-started/organizing-conversations.html">public and private channels</a>.</p>
-<p>Only members of the team in which the playbook or incident is defined have access. Additionally, membership of playbook is independent of membership in incidents:</p>
-<ul class="simple">
-<li>Members of a playbook may start an incident using that playbook, or edit the playbook’s stages and steps. Non-members do not have access to the playbook at all.</li>
-<li>Members of an incident may modify the current state of the incident, and invite new members to the incident channel.</li>
-</ul>
-</div>
-</div>
-<div class="section" id="telemetry">
-<h2><a class="toc-backref" href="#contents">Telemetry</a><a class="headerlink" href="#telemetry" title="Permalink to this headline">¶</a></h2>
-<p>We only track the events that create, delete, or update items. We never track the specific content of the items. In particular, we do not collect the name of the incidents or the contents of the stages and steps.</p>
-<p>Every event we track is accompanied with metadata that help us identify each event and isolate it from the rest of the servers. We can group all events that are coming from a single server, and if that server is licensed, we are able to identify the buyer of the license. The following list details the metadata that accompanies every event:</p>
-<ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">diagnosticID</span></code>: Unique identifier of the server the plugin is running on.</li>
-<li><code class="docutils literal notranslate"><span class="pre">serverVersion</span></code>: Version of the server the plugin is running on.</li>
-<li><code class="docutils literal notranslate"><span class="pre">pluginVersion</span></code>: Version of the plugin.</li>
-<li>Fields automatically generated by Rudder:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">eventTimeStamp</span></code>: Timestamp indicating when the event was queued to send to the server.</li>
-<li><code class="docutils literal notranslate"><span class="pre">createdAt</span></code>: Timestamp indicating when the event was sent to the server.</li>
-<li><code class="docutils literal notranslate"><span class="pre">id</span></code>: Unique identifier of the event.</li>
-<li><code class="docutils literal notranslate"><span class="pre">event</span> <span class="pre">integrations</span></code>: Unused field. It always contains the value null.</li>
-<li><code class="docutils literal notranslate"><span class="pre">event</span> <span class="pre">originalTimestamp</span></code>: Timestamp indicating when the event actually happened. It always equals <code class="docutils literal notranslate"><span class="pre">eventTimeStamp</span></code>.</li>
-<li><code class="docutils literal notranslate"><span class="pre">type</span></code>: Type of the event. It always contains the string <code class="docutils literal notranslate"><span class="pre">track</span></code>.</li>
-</ul>
-</li>
-</ul>
-<p><strong>Events data</strong></p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="33%" />
-<col width="33%" />
-<col width="33%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Event</th>
-<th class="head">Triggers</th>
-<th class="head">Information collected</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>Incident created</td>
-<td><ul class="first last simple">
-<li>Any user sends the <code class="docutils literal notranslate"><span class="pre">/incident</span> <span class="pre">start</span></code> command and creates an incident.</li>
-<li>Any user clicks on the <code class="docutils literal notranslate"><span class="pre">+</span></code> button on the <strong>Incident List</strong> view, in the RHS and creates an incident.</li>
-<li>Any user clicks on the drop-down menu of any post, clicks on the <strong>Start incident</strong> option, and creates an incident.</li>
-</ul>
-</td>
-<td><ul class="first last simple">
-<li><code class="docutils literal notranslate"><span class="pre">ID</span></code>: Unique identifier of the incident.</li>
-<li><code class="docutils literal notranslate"><span class="pre">IsActive</span></code>: Boolean  value indicating if the incident is active. It always equals <code class="docutils literal notranslate"><span class="pre">true</span></code>.</li>
-<li><code class="docutils literal notranslate"><span class="pre">CommanderUserID</span></code>: Unique identifier of the commander of the incident. It equals the identifier of the user that created the incident.</li>
-<li><code class="docutils literal notranslate"><span class="pre">TeamID</span></code>: Unique identifier of the team where the incident channel is created.</li>
-<li><code class="docutils literal notranslate"><span class="pre">CreatedAt</span></code>: Timestamp of the incident creation.</li>
-<li><code class="docutils literal notranslate"><span class="pre">ChannelIDs</span></code>: A list containing a single element, the channel created along with the incident.</li>
-<li><code class="docutils literal notranslate"><span class="pre">PostID</span></code>: Unique identifier of the post.</li>
-<li><code class="docutils literal notranslate"><span class="pre">NumChecklists</span></code>: Number of checklists. It always equals 1.</li>
-<li><code class="docutils literal notranslate"><span class="pre">TotalChecklistItems</span></code>: Number of checklist items this incident starts with. It always equals 0.</li>
-</ul>
-</td>
-</tr>
-<tr class="row-odd"><td>Incident finished</td>
-<td><ul class="first last simple">
-<li>Any user sends the <code class="docutils literal notranslate"><span class="pre">/incident</span> <span class="pre">end</span></code> command.</li>
-<li>Any user clicks on the <strong>End Incident</strong> button through the incident details view, in the RHS.</li>
-</ul>
-</td>
-<td><ul class="first last simple">
-<li><code class="docutils literal notranslate"><span class="pre">ID</span></code>: Unique identifier of the incident.</li>
-<li><code class="docutils literal notranslate"><span class="pre">IsActive</span></code>: Boolean  value indicating if the incident is active. It always equals <code class="docutils literal notranslate"><span class="pre">false</span></code>.</li>
-<li><code class="docutils literal notranslate"><span class="pre">CommanderUserID</span></code>: Unique identifier of the commander of the incident. It equals the identifier of the user that created the incident.</li>
-<li><code class="docutils literal notranslate"><span class="pre">UserID</span></code>: Unique identifier of user that ended the incident.</li>
-<li><code class="docutils literal notranslate"><span class="pre">TeamID</span></code>: Unique identifier of the team where the incident channel is created.</li>
-<li><code class="docutils literal notranslate"><span class="pre">CreatedAt</span></code>: Timestamp of the incident creation.</li>
-<li><code class="docutils literal notranslate"><span class="pre">ChannelIDs</span></code>: A list containing a single element, the channel created along with the incident.</li>
-<li><code class="docutils literal notranslate"><span class="pre">PostID</span></code>: Unique identifier of the post.</li>
-<li><code class="docutils literal notranslate"><span class="pre">NumChecklists</span></code>: Number of checklists. It always equals 1.</li>
-<li><code class="docutils literal notranslate"><span class="pre">TotalChecklistItems</span></code>: Number of checklist items this incident starts with. It always equals 0.</li>
-</ul>
-</td>
-</tr>
-<tr class="row-even"><td>Checklist item created</td>
-<td><ul class="first last simple">
-<li>Any user creates a new checklist item through the incident details view, in the RHS.</li>
-</ul>
-</td>
-<td><ul class="first last simple">
-<li><code class="docutils literal notranslate"><span class="pre">IncidentID</span></code>: Unique identifier of the incident where the item was created.</li>
-<li><code class="docutils literal notranslate"><span class="pre">UserID</span></code>: Unique identifier of the user that created the item.</li>
-</ul>
-</td>
-</tr>
-<tr class="row-odd"><td>Checklist item removed</td>
-<td><ul class="first last simple">
-<li>Any user deletes a checklist item through the incident details view, in the RHS.</li>
-</ul>
-</td>
-<td><ul class="first last simple">
-<li><code class="docutils literal notranslate"><span class="pre">IncidentID</span></code>: Unique identifier of the incident where the item was.</li>
-<li><code class="docutils literal notranslate"><span class="pre">UserID</span></code>: Unique identifier of the user that removed the item.</li>
-</ul>
-</td>
-</tr>
-<tr class="row-even"><td>Checklist item renamed.</td>
-<td><ul class="first last simple">
-<li>Any user edit the contents of a checklist item through the incident details view, in the RHS.</li>
-</ul>
-</td>
-<td><ul class="first last simple">
-<li><code class="docutils literal notranslate"><span class="pre">IncidentID</span></code>: Unique identifier of the incident where the item was.</li>
-<li><code class="docutils literal notranslate"><span class="pre">UserID</span></code>: Unique identifier of the user that removed the item.</li>
-</ul>
-</td>
-</tr>
-<tr class="row-odd"><td>Checklist item moved</td>
-<td><ul class="first last simple">
-<li>Any user moves the position of a checklist item in the list through the incident details view, in the RHS.</li>
-</ul>
-</td>
-<td><ul class="first last simple">
-<li><code class="docutils literal notranslate"><span class="pre">IncidentID</span></code>: Unique identifier of the incident where the item is.</li>
-<li><code class="docutils literal notranslate"><span class="pre">UserID</span></code>: Unique identifier of the user that edited the item.</li>
-</ul>
-</td>
-</tr>
-<tr class="row-even"><td>Unchecked checklist item checked</td>
-<td><ul class="first last simple">
-<li>Any user checks an unchecked checklist item through the incident details view, in the RHS.</li>
-</ul>
-</td>
-<td><ul class="first last simple">
-<li><code class="docutils literal notranslate"><span class="pre">IncidentID</span></code>: Unique identifier of the incident where the item is.</li>
-<li><code class="docutils literal notranslate"><span class="pre">UserID</span></code>: Unique identifier of the user that checked the item.</li>
-</ul>
-</td>
-</tr>
-<tr class="row-odd"><td>Checked checklist item unchecked</td>
-<td><ul class="first last simple">
-<li>Any user unchecks a checked checklist item through the incident details view, in the RHS.</li>
-</ul>
-</td>
-<td><ul class="first last simple">
-<li><code class="docutils literal notranslate"><span class="pre">IncidentID</span></code>: Unique identifier of the incident where the item is.</li>
-<li><code class="docutils literal notranslate"><span class="pre">UserID</span></code>: Unique identifier of the user that unchecked the item.</li>
-</ul>
-</td>
-</tr>
-<tr class="row-even"><td>Playbook created</td>
-<td><ul class="first last simple">
-<li>Any user clicks on the <strong>+ New Playbook</strong> button on the backstage and saves it.</li>
-</ul>
-</td>
-<td><ul class="first last simple">
-<li><code class="docutils literal notranslate"><span class="pre">PlaybookID</span></code>: Unique identifier of the playbook.</li>
-<li><code class="docutils literal notranslate"><span class="pre">TeamID</span></code>: Unique identifier of the team where the playbook is created.</li>
-<li><code class="docutils literal notranslate"><span class="pre">NumChecklists</span></code>: Number of checklists this playbook has after the update.</li>
-<li><code class="docutils literal notranslate"><span class="pre">TotalChecklistItems</span></code>: Number of checklist items, among all checklists, this playbook has after the update.</li>
-</ul>
-</td>
-</tr>
-<tr class="row-odd"><td>Playbook deleted</td>
-<td><ul class="first last simple">
-<li>Any user clicks on the <strong>Delete</strong> button next to a playbook on the backstage and confirms.</li>
-</ul>
-</td>
-<td><ul class="first last simple">
-<li><code class="docutils literal notranslate"><span class="pre">PlaybookID</span></code>: Unique identifier of the playbook.</li>
-<li><code class="docutils literal notranslate"><span class="pre">TeamID</span></code>: Unique identifier of the team where the playbook was located.</li>
-<li><code class="docutils literal notranslate"><span class="pre">NumChecklists</span></code>: Number of checklists this playbook had immediately prior to deletion.</li>
-<li><code class="docutils literal notranslate"><span class="pre">TotalChecklistItems</span></code>: Number of checklist items, among all checklists, this playbook had immediately prior to deletion.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section" id="glossary">
-<h2><a class="toc-backref" href="#contents">Glossary</a><a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><strong>Incident:</strong> An event requiring the coordinated actions of one or more Mattermost users. An incident is either ongoing or closed.</li>
-<li><strong>Playbook:</strong> A set of steps to execute as part of resolving an incident. It consists of one or more checklists, with each checklist item representing a single step.</li>
-<li><strong>Commander:</strong> The Mattermost user currently responsible for transitioning an incident from ongoing to closed.</li>
-<li><strong>Incident channel:</strong> A Mattermost channel dedicated to real-time conversation about the incident.</li>
-<li><strong>Incident participant:</strong> A Mattermost user with access to the corresponding incident channel.</li>
-<li><strong>The RHS:</strong> The incident list and incident details displayed on the right hand side of the webapp. Clicking an incident from the list in the RHS surfaces details of the selected incident. It is not available on mobile.</li>
-<li><strong>Incident backstage:</strong> The full-screen analytics and configuration screens accessible from the webapp. It is not available on mobile.</li>
-<li><strong>Active incident:</strong> An incident that has not been ended.</li>
-</ul>
-</div>
+<p>Mattermost Incident Management is the first workflow that we officially support as part of DevOps Command Center.</p>
+<p>Better response to an incident is one of three ways that Mattermost Incident Management helps you provide more reliable services, in addition to gaining insights with incident reports and incorporating learnings with playbooks.</p>
+<p>The Mattermost Incident Management documentation can be found <a class="reference external" href="https://mattermost.gitbook.io/mattermost-incident-management">here</a>.</p>
 </div>
 
 
