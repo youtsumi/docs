@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Reporting &mdash; Mattermost 5.28 documentation</title>
+  <title>Statistics &mdash; Mattermost 5.28 documentation</title>
   
 
   
@@ -162,7 +162,12 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/cloud-admin-guide.html#system-administration">System Administration</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="cloud-billing/cloud-billing.html">Billing</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Reporting</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Statistics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#site-statistics">Site Statistics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#team-statistics">Team Statistics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/cloud-admin-guide.html#user-management">User Management</a></li>
@@ -213,7 +218,7 @@
     
       <li><a href="../guides/cloud-admin-guide.html">Cloud Administrator’s Guide</a> &raquo;</li>
     
-    <li>Reporting</li>
+    <li>Statistics</li>
     <li class="wy-breadcrumbs-aside">
       
         
@@ -227,8 +232,88 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="reporting">
-<h1>Reporting<a class="headerlink" href="#reporting" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="statistics">
+<h1>Statistics<a class="headerlink" href="#statistics" title="Permalink to this headline">¶</a></h1>
+<p>Statistics on users, posts, and channels are tracked for each system and team. Enterprise Editions have access to advanced system statistics.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">To maximize performance for large Enterprise deployments, statistics for total posts, total hashtag posts, total file posts, posts per day, and active users with posts per day are disabled. You can re-enable them by changing the <code class="docutils literal notranslate"><span class="pre">MaxUsersForStatistics</span></code> value <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#maximum-users-for-statistics">in config.json</a>.</p>
+</div>
+<p>For advanced metrics for Enterprise deployments, <a class="reference external" href="http://docs.mattermost.com/deployment/metrics.html">see performance monitoring documentation to learn more</a>.</p>
+<div class="section" id="site-statistics">
+<h2>Site Statistics<a class="headerlink" href="#site-statistics" title="Permalink to this headline">¶</a></h2>
+<p>System statistics are viewable under <strong>System Console &gt; Reporting</strong>. The data shown here is a cumulative sum across all teams on the system.</p>
+<dl class="docutils">
+<dt>Total Users</dt>
+<dd>The total number of active accounts created on your system. Excludes deactivated accounts.</dd>
+<dt>Total Teams</dt>
+<dd>The total number of teams created on your system.</dd>
+<dt>Total Channels</dt>
+<dd>The total number of public channels and private channels created in all the teams on your system, including deleted channels. Doesn’t include direct message channels.</dd>
+<dt>Total Posts</dt>
+<dd>The total number of posts made in all the teams on your system, including deleted posts and posts made using automation.</dd>
+<dt>Daily Active Users</dt>
+<dd>The total number of users who viewed the Mattermost site in the last 24 hours. Excludes bot users.</dd>
+<dt>Monthly Active Users</dt>
+<dd>The total number of users who viewed the Mattermost site in the last 30 days. Excludes bot users.</dd>
+<dt>Total Posts (graph)</dt>
+<dd>The total number of posts made on a certain day in all the teams on your system, including deleted posts and posts made using automation.</dd>
+<dt>Total Posts from Bots (graph)</dt>
+<dd>The total number of posts made by a <a class="reference external" href="https://docs.mattermost.com/developer/bot-accounts.html">bot account</a> on a certain day in all the teams on your system, including deleted posts and posts made using automation.</dd>
+<dt>Active Users with Posts (graph)</dt>
+<dd>Users who made a post on a certain day in all the teams on your system, including system messages posted from the user’s account.</dd>
+</dl>
+<div class="section" id="advanced-system-statistics-enterprise">
+<h3>Advanced system statistics (Enterprise)<a class="headerlink" href="#advanced-system-statistics-enterprise" title="Permalink to this headline">¶</a></h3>
+<p>Enterprise Edition includes additional system statistics.</p>
+<dl class="docutils">
+<dt>Total Sessions</dt>
+<dd>The number of active user sessions connected to your system. Expired sessions are not counted.</dd>
+<dt>Total Commands</dt>
+<dd>The number of active slash commands currently setup on your system. Slash commands that are created and then removed in the Integrations menu are not counted.</dd>
+<dt>Incoming Webhooks</dt>
+<dd>The number of active Incoming Webhooks currently setup on your system. Incoming webhooks that are created and then removed in the Integrations menu are not counted.</dd>
+<dt>Outgoing Webhooks</dt>
+<dd>The number of active Outgoing Webhooks currently setup on your system. Outgoing webhooks that are created and then removed in the Integrations menu are not counted.</dd>
+<dt>WebSocket Conns</dt>
+<dd>The number of active WebSocket connections currently on your server.</dd>
+<dt>Master DB Conns</dt>
+<dd>The number of active connections currently on your master database.</dd>
+<dt>Replica DB Conns</dt>
+<dd>The number of active connections currently on one or more of <a class="reference external" href="https://docs.mattermost.com/deployment/cluster.html#database-configuration">your read replica databases</a>.</dd>
+<dt>Channel Types</dt>
+<dd>This chart displays the number of public channels and private channels in a visual format, including channels that might have been deleted.</dd>
+<dt>Posts, Files and Hashtags</dt>
+<dd>This chart displays the number of posts containing files, hashtags, or only text. Posts containing both files and hashtags are counted in both categories, and deleted posts are included.</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="team-statistics">
+<h2>Team Statistics<a class="headerlink" href="#team-statistics" title="Permalink to this headline">¶</a></h2>
+<p>Team Statistics are viewable under <strong>System Console &gt; Team Statistics</strong>. The data shown here is a cumulative sum across this team only, and excludes posts made in direct message channels, which are not tied to a team.</p>
+<dl class="docutils">
+<dt>Total Users</dt>
+<dd>The total number of active accounts on this team. Excludes deactivated accounts.</dd>
+<dt>Public Channels</dt>
+<dd>The number of public channels created in this team. Excludes deleted channels.</dd>
+<dt>Private Channels</dt>
+<dd>The number of private channels created in this team. Excludes deleted channels.</dd>
+<dt>Total Posts</dt>
+<dd>The total number of posts made in this team, including deleted posts and posts made using automation. Excludes posts made in direct message channels, which are not tied to a team.</dd>
+<dt>Total Posts (graph)</dt>
+<dd>The total number of posts made on a certain day in this team, including deleted posts and posts made using automation.</dd>
+<dt>Active Users with Posts (graph)</dt>
+<dd>Users who made a post on a certain day in this team, including system messages posted from the user’s account.</dd>
+<dt>Recent Active Users</dt>
+<dd>Twenty most recent users who have logged in and had recent browser activity in Mattermost.</dd>
+<dt>Newly Created Users</dt>
+<dd>Most recent users who have joined the team.</dd>
+</dl>
+</div>
+<div class="section" id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<p>If the statistics page is loading endlessly and you get an error message saying “Not enough data for a meaningful representation”, check whether you’re using an ad blocker. An ad blocker can prevent this page from loading data. To test this, temporarily disable your ad blocker, or view the page in a browser without an ad blocker installed.</p>
+</div>
 </div>
 
 
