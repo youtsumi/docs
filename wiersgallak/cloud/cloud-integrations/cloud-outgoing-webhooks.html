@@ -246,7 +246,7 @@
 <p class="first admonition-title">Note</p>
 <p class="last">This is the admin documentation for outgoing webhooks. If you’re a developer looking to build an integration, see <a class="reference external" href="https://developers.mattermost.com/integrate">our developer documentation</a>.</p>
 </div>
-<p>Mattermost supports webhooks to easily integrate external applications into the server.</p>
+<p>Mattermost supports webhooks to easily integrate external applications into Mattermost.</p>
 <p>Use outgoing webhooks to post automated responses to posts made by your users. Outgoing webhooks will send an HTTP POST request to a web service and process a response back to Mattermost when a message matches one or both of the following conditions:</p>
 <blockquote>
 <div><ul class="simple">
@@ -265,7 +265,7 @@
 <h2>Create an Outgoing Webhook<a class="headerlink" href="#create-an-outgoing-webhook" title="Permalink to this headline">¶</a></h2>
 <p>Suppose you want to write an external application, which executes software tests after someone posts a message starting with the word <code class="docutils literal notranslate"><span class="pre">#build</span></code> in the <code class="docutils literal notranslate"><span class="pre">town-square</span></code> channel.</p>
 <p>You can follow these general guidelines to set up a Mattermost outgoing webhook for your application.</p>
-<p>1 - First, go to <strong>Main Menu &gt; Integrations &gt; Outgoing Webhook</strong>. If you don’t have the <strong>Integrations</strong> option in your Main Menu, outgoing webhooks may not be enabled on your Mattermost server or may be disabled for non-admins. Enable them from <strong>System Console &gt; Integrations &gt; Custom Integrations</strong> in prior versions or <strong>System Console &gt; Integrations &gt; Integration Management</strong> in versions after 5.12 or ask your System Administrator to do so.</p>
+<p>1 - First, go to <strong>Main Menu &gt; Integrations &gt; Outgoing Webhook</strong>. If you don’t have the <strong>Integrations</strong> option in your Main Menu, outgoing webhooks may not be enabled on your Mattermost server or may be disabled for non-admins. Enable them from <strong>System Console &gt; Integrations &gt; Integration Management</strong>.</p>
 <p>2 - Click <strong>Add Outgoing Webhook</strong> and add name and description for the webhook. The description can be up to 500 characters.</p>
 <p>3 - Choose the content type by which the request will be sent.</p>
 <blockquote>
@@ -334,8 +334,8 @@ user_name=somename
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <blockquote>
-<div><a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-integrations-to-override-usernames">Enable integrations to override usernames</a> must be set to <cite>true</cite> in <cite>config.json</cite> to override usernames. Enable them from <strong>System Console &gt; Integrations &gt; Custom Integrations</strong> in prior versions or <strong>System Console &gt; Integrations &gt; Integration Management</strong> in versions after 5.12 or ask your System Administrator. If not enabled, the username is set to <cite>webhook</cite>.</div></blockquote>
-<p class="last">Similarly, <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-integrations-to-override-profile-picture-icons">Enable integrations to override profile picture icons</a> must be set to <cite>true</cite> in <cite>config.json</cite> to override usernames. Enable them from <strong>System Console &gt; Integrations &gt; Custom Integrations</strong> in prior versions or <strong>System Console &gt; Integrations &gt; Integration Management</strong> in versions after 5.12 or ask your System Administrator. If not enabled, the icon of the creator of the webhook URL is used to post messages.</p>
+<div><a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-integrations-to-override-usernames">Enable integrations to override usernames</a> must be set to <cite>true</cite> in <cite>config.json</cite> to override usernames. Enable them from <strong>System Console &gt; Integrations &gt; Integration Management</strong> or ask your System Administrator. If not enabled, the username is set to <cite>webhook</cite>.</div></blockquote>
+<p class="last">Similarly, <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-integrations-to-override-profile-picture-icons">Enable integrations to override profile picture icons</a> must be set to <cite>true</cite> in <cite>config.json</cite> to override usernames. Enable them from <strong>System Console &gt; Integrations &gt; Integration Management</strong> or ask your System Administrator. If not enabled, the icon of the creator of the webhook URL is used to post messages.</p>
 </div>
 </div>
 <div class="section" id="tips-and-best-practices">
@@ -386,9 +386,7 @@ user_name=somename
 </div>
 <div class="section" id="troubleshooting">
 <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
-<p>To debug outgoing webhooks in <strong>System Console &gt; Logs</strong>, set <strong>System Console &gt; Logging &gt; Enable Webhook Debugging</strong> to <code class="docutils literal notranslate"><span class="pre">true</span></code> and set <strong>System Console &gt; Logging &gt; Console Log Level</strong> to <code class="docutils literal notranslate"><span class="pre">DEBUG</span></code>.</p>
-<p>When <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>, as of v5.14 all outgoing webhooks are logged and include a <code class="docutils literal notranslate"><span class="pre">request_id</span></code> value in the log file.</p>
-<p>For further assistance, review the <a class="reference external" href="https://forum.mattermost.org/c/trouble-shoot">Troubleshooting forum</a> for previously reported errors, or <a class="reference external" href="https://mattermost.com/pl/default-ask-mattermost-community/">join the Mattermost user community for troubleshooting help</a>.</p>
+<p>For  assistance, review the <a class="reference external" href="https://forum.mattermost.org/c/trouble-shoot">Troubleshooting forum</a> for previously reported errors, or <a class="reference external" href="https://mattermost.com/pl/default-ask-mattermost-community/">join the Mattermost user community for troubleshooting help</a>.</p>
 <div class="section" id="my-integration-prints-the-json-data-in-a-mattermost-channel">
 <h3>My integration prints the JSON data in a Mattermost channel<a class="headerlink" href="#my-integration-prints-the-json-data-in-a-mattermost-channel" title="Permalink to this headline">¶</a></h3>
 <p>Mattermost handles multiple content types for integrations, including plain text content type.</p>

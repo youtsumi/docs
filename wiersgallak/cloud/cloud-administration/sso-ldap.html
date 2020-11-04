@@ -396,6 +396,10 @@
 <li><strong>Login ID Attribute</strong>: The attribute in the AD/LDAP server used to log in to Mattermost. Normally this attribute is the same as the <strong>Username Attribute</strong> field above, or another field that users can easily remember.</li>
 </ol>
 </div>
+<div class="section" id="if-i-want-to-add-people-to-channels-can-i-pre-create-users">
+<h3>If I want to add people to channels, can I pre-create users?<a class="headerlink" href="#if-i-want-to-add-people-to-channels-can-i-pre-create-users" title="Permalink to this headline">¶</a></h3>
+<p>Yes, using the <a class="reference external" href="https://docs.mattermost.com/deployment/bulk-loading.html#bulk-loading-data">bulk import tool</a>.</p>
+</div>
 <div class="section" id="how-do-i-deactivate-users">
 <h3>How do I deactivate users?<a class="headerlink" href="#how-do-i-deactivate-users" title="Permalink to this headline">¶</a></h3>
 <p>When AD/LDAP authentication is used in Mattermost, user deactivation must be done via the AD/LDAP server.</p>
@@ -453,6 +457,10 @@
 <p>To address this issue you can set the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#maximum-page-size">max page size</a> in your Mattermost configuration to match the limit on your AD/LDAP server. This will return a sequence of result sets that do not exceed the max page size, rather than returning all results in a single query. A max page size setting of 1500 is recommended.</p>
 <p>If the error is still occurring, it is likely that no AD/LDAP users have logged into Mattermost yet. Ensure that at least one AD/LDAP user has logged into Mattermost and re-run the sync. The error should disappear at that point.</p>
 </div>
+<div class="section" id="where-can-i-find-help-on-ad-ldap-configuration-settings-in-config-json">
+<h3>Where can I find help on AD/LDAP configuration settings in <code class="docutils literal notranslate"><span class="pre">config.json</span></code>?<a class="headerlink" href="#where-can-i-find-help-on-ad-ldap-configuration-settings-in-config-json" title="Permalink to this headline">¶</a></h3>
+<p>You can find an explanation of each of the configuration settings <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#ad-ldap">here</a>.</p>
+</div>
 <div class="section" id="can-the-ad-ldap-user-filter-read-security-groups">
 <h3>Can the AD/LDAP User Filter read security groups?<a class="headerlink" href="#can-the-ad-ldap-user-filter-read-security-groups" title="Permalink to this headline">¶</a></h3>
 <p>Yes it can, but make sure that:</p>
@@ -464,6 +472,7 @@
 <div class="section" id="how-do-i-know-if-an-ad-ldap-sync-job-fails">
 <h3>How do I know if an AD/LDAP sync job fails?<a class="headerlink" href="#how-do-i-know-if-an-ad-ldap-sync-job-fails" title="Permalink to this headline">¶</a></h3>
 <p>Mattermost provides the status of each AD/LDAP sync job in <strong>System Console &gt; Authentication &gt; AD/LDAP</strong>. Here you can see the number of users updated and if the job succeeded or failed.</p>
+<p>Moreover, any failures are returned in the server logs. The error log begins with the string <code class="docutils literal notranslate"><span class="pre">Failed</span> <span class="pre">job</span></code> and includes a <code class="docutils literal notranslate"><span class="pre">job_id</span> <span class="pre">key/value</span></code> pair. AD/LDAP sync job failures are identified with worker name <code class="docutils literal notranslate"><span class="pre">EnterpriseLdapSync</span></code>. You can optionally create a script that programmatically queries for such failures and notifies the appropriate system.</p>
 </div>
 </div>
 </div>
