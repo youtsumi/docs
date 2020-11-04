@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Incoming Webhooks &mdash; Mattermost 5.29 documentation</title>
+  <title>Incoming Webhooks &mdash; Mattermost 5.28 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.29
+                5.28
               </div>
             
           
@@ -159,8 +159,9 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/administrator.html">Administrator's Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../guides/integration.html">Integration Guide</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../integrations/jira.html">Jira Plugin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../integrations/zoom.html">Zoom Plugin</a></li>
@@ -198,7 +199,6 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/education.html">Training and Education</a></li>
 </ul>
 
             
@@ -256,7 +256,7 @@
 </div>
 <p>Mattermost supports webhooks to easily integrate external applications into the server.</p>
 <p>Use incoming webhooks to post messages to Mattermost public channels, private channels and direct messages. Messages are sent via an HTTP POST request to a Mattermost URL generated for each application and contain a specifically formatted JSON payload in the request body.</p>
-<a class="reference internal image-reference" href="../_images/incoming_webhooks_sample.png"><img alt="../_images/incoming_webhooks_sample.png" src="../_images/incoming_webhooks_sample.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="../_images/incoming_webhooks_sample2.png"><img alt="../_images/incoming_webhooks_sample2.png" src="../_images/incoming_webhooks_sample2.png" style="width: 500px;" /></a>
 <p><em>An example of a GitHub integration that posts updates to a Developers channel</em></p>
 <p>Use <a class="reference external" href="https://curl.haxx.se/">curl</a>, a simple command line tool for sending HTTP requests in the examples that follow.</p>
 <div class="admonition note">
@@ -268,7 +268,7 @@
 <div class="section" id="simple-incoming-webhook">
 <h2>Simple Incoming Webhook<a class="headerlink" href="#simple-incoming-webhook" title="Permalink to this headline">¶</a></h2>
 <p>Let’s learn how to create a simple incoming webhook that posts the following message to Mattermost.</p>
-<a class="reference internal image-reference" href="../_images/incoming_webhooks_create_simple.png"><img alt="../_images/incoming_webhooks_create_simple.png" src="../_images/incoming_webhooks_create_simple.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="../_images/incoming_webhooks_create_simple2.png"><img alt="../_images/incoming_webhooks_create_simple2.png" src="../_images/incoming_webhooks_create_simple2.png" style="width: 400px;" /></a>
 <ol class="arabic simple">
 <li>First, go to <strong>Main Menu &gt; Integrations &gt; Incoming Webhook</strong>. If you don’t have the <strong>Integrations</strong> option in your Main Menu, incoming webhooks may not be enabled on your Mattermost server or may be disabled for non-admins. Enable them from <strong>System Console &gt; Integrations &gt; Custom Integrations</strong> in prior versions or <strong>System Console &gt; Integrations &gt; Integration Management</strong> in versions after 5.12 or ask your System Administrator to do so.</li>
 <li>Click <strong>Add Incoming Webhook</strong> and add name and description for the webhook. The description can be up to 500 characters.</li>
@@ -300,7 +300,7 @@ curl -i -X POST --data-urlencode &#39;payload={&quot;text&quot;: &quot;Hello, th
 </pre></div>
 </div>
 <p>This content will be displayed in the Town Square channel.</p>
-<a class="reference internal image-reference" href="../_images/incoming_webhooks_full_example.png"><img alt="../_images/incoming_webhooks_full_example.png" src="../_images/incoming_webhooks_full_example.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="../_images/incoming_webhooks_full_example2.png"><img alt="../_images/incoming_webhooks_full_example2.png" src="../_images/incoming_webhooks_full_example2.png" style="width: 500px;" /></a>
 <p>Messages with advanced formatting can be created by including an <a class="reference internal" href="message-attachments.html"><span class="doc">attachment array</span></a> and <a class="reference internal" href="interactive-messages.html"><span class="doc">interactive message buttons</span></a> in the JSON payload.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
