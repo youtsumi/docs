@@ -180,6 +180,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#where-should-i-install-my-integrations">Where should I install my integrations?</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#how-do-i-create-a-bot-account-with-personal-access-tokens">How do I create a bot account with personal access tokens?</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#how-do-i-create-a-bot-account-without-personal-access-tokens-or-webhooks">How do I create a bot account without personal access tokens or webhooks?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-should-i-automate-the-install-and-upgrade-of-mattermost-when-included-in-another-application">How should I automate the install and upgrade of Mattermost when included in another application?</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="embedding.html">Embedding Mattermost in Other Applications</a></li>
@@ -285,6 +286,27 @@
 <div class="section" id="how-do-i-create-a-bot-account-with-personal-access-tokens">
 <h2>How do I create a bot account with personal access tokens?<a class="headerlink" href="#how-do-i-create-a-bot-account-with-personal-access-tokens" title="Permalink to this headline">¶</a></h2>
 <p>See <a class="reference external" href="https://docs.mattermost.com/developer/bot-accounts.html">bot accounts documentation</a> to learn more about how to create and manage bot accounts in Mattermost.</p>
+<p>In version 5.11 and earlier, follow these steps to create a bot account with personal access tokens:</p>
+<ol>
+<li><p class="first">Create a bot account using any authentication method, including email and password, AD/LDAP, or SAML.</p>
+</li>
+<li><p class="first">Create a personal access token for the account <a class="reference external" href="https://docs.mattermost.com/developer/personal-access-tokens.html#creating-a-personal-access-token">using the steps here</a>.</p>
+<ul class="simple">
+<li>The steps also outline how to give the account permissions to post to any channel in your Mattermost server, including direct messages, or to any public channel.</li>
+</ul>
+</li>
+<li><p class="first">Include the personal access token from step 2 as part of the <code class="docutils literal notranslate"><span class="pre">Authorization</span></code> header on API requests from your integration.</p>
+<ul>
+<li><p class="first">To confirm the token works, you can have your bot make a simple <code class="docutils literal notranslate"><span class="pre">GET</span></code> request to <code class="docutils literal notranslate"><span class="pre">/api/v4/users/me</span></code> with the <code class="docutils literal notranslate"><span class="pre">Authorization:</span> <span class="pre">bearer</span> <span class="pre">&lt;yourtokenhere&gt;</span></code> in the header. If it returns a <code class="docutils literal notranslate"><span class="pre">200</span></code> with the bot’s user object in the response, the API request was made successfully.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">GET</span> <span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v4</span><span class="o">/</span><span class="n">users</span><span class="o">/</span><span class="n">me</span> <span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span>
+<span class="n">Authorization</span><span class="p">:</span> <span class="n">bearer</span> <span class="o">&lt;</span><span class="n">yourtokenhere</span><span class="o">&gt;</span>
+<span class="n">Host</span><span class="p">:</span> <span class="n">your</span><span class="o">-</span><span class="n">mattermost</span><span class="o">-</span><span class="n">url</span><span class="o">.</span><span class="n">com</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ol>
 </div>
 <div class="section" id="how-do-i-create-a-bot-account-without-personal-access-tokens-or-webhooks">
 <h2>How do I create a bot account without personal access tokens or webhooks?<a class="headerlink" href="#how-do-i-create-a-bot-account-without-personal-access-tokens-or-webhooks" title="Permalink to this headline">¶</a></h2>
@@ -346,6 +368,35 @@
 </li>
 </ol>
 <p><strong>Note:</strong> The Mattermost development team is also working on an <a class="reference external" href="https://docs.google.com/document/d/1ey4eNQmwK410pNTvlnmMWTa1fqtj8MV4d9XkCumI384">API developer token</a>, which allows you to authenticate the bot account via the API token rather than retrieving a session token from a user account.</p>
+</div>
+<div class="section" id="how-should-i-automate-the-install-and-upgrade-of-mattermost-when-included-in-another-application">
+<h2>How should I automate the install and upgrade of Mattermost when included in another application?<a class="headerlink" href="#how-should-i-automate-the-install-and-upgrade-of-mattermost-when-included-in-another-application" title="Permalink to this headline">¶</a></h2>
+<p>Automating Mattermost installation within another application:</p>
+<ol class="simple">
+<li>Review the <a class="reference external" href="https://docs.mattermost.com/guides/administrator.html#installing-mattermost">Mattermost installation guides</a> to understand configuration steps of the production deployment.</li>
+<li>Install Mattermost files to a dedicated <code class="docutils literal notranslate"><span class="pre">/opt/mattermost</span></code> directory by decompressing the <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file of the latest release for your target platform (for example <code class="docutils literal notranslate"><span class="pre">linux-amd64</span></code>).</li>
+<li>Review <a class="reference external" href="http://docs.mattermost.com/administration/config-settings.html">Configuration Settings</a> in <code class="docutils literal notranslate"><span class="pre">config.json</span></code> and set your automation to customize your Mattermost deployment based on your requirements.</li>
+<li>For directory locations defined in <code class="docutils literal notranslate"><span class="pre">config.json</span></code>, such as the location of the local file storage directory (<code class="docutils literal notranslate"><span class="pre">./data/</span></code>) or logs directory (<code class="docutils literal notranslate"><span class="pre">./logs</span></code>), you can redefine those locations in your <code class="docutils literal notranslate"><span class="pre">config.json</span></code> settings and move the directories.<ul>
+<li>All other directories should remain as they are in <code class="docutils literal notranslate"><span class="pre">/mattermost</span></code>.</li>
+</ul>
+</li>
+<li>Test that your Mattermost server is running with your new configuration.</li>
+<li>Also, from the command line run <code class="docutils literal notranslate"><span class="pre">./bin/mattermost</span> <span class="pre">-version</span></code> to test that the command line interface is functioning properly.</li>
+</ol>
+<p>Automating Mattermost upgrade within another application:</p>
+<ol class="simple">
+<li>Review the <a class="reference external" href="http://docs.mattermost.com/administration/upgrade.html">upgrade guide</a> for an overview of the upgrade procedure.</li>
+<li>Create automation to upgrade to the next Mattermost versions:<ul>
+<li>Back up the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file to preserve any settings a user may have made.</li>
+<li>Back up the <code class="docutils literal notranslate"><span class="pre">./data</span></code> directory if local storage is used for files.</li>
+<li>Replace the contents of <code class="docutils literal notranslate"><span class="pre">/mattermost</span></code> directory with the decompressed contents of the latest release.</li>
+<li>Restore <code class="docutils literal notranslate"><span class="pre">config.json</span></code> and <code class="docutils literal notranslate"><span class="pre">./data</span></code> to their previous locations (which may have been overwritten).</li>
+<li>If you need to overwrite any <code class="docutils literal notranslate"><span class="pre">config.json</span></code> parameters use a <a class="reference external" href="http://stackoverflow.com/questions/20568515/how-to-use-sed-to-replace-a-config-files-variable"><code class="docutils literal notranslate"><span class="pre">sed</span></code> command</a> or similar tool to update <code class="docutils literal notranslate"><span class="pre">config.json</span></code></li>
+<li>Starting the Mattermost server to upgrade the database, <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file, and <code class="docutils literal notranslate"><span class="pre">./data</span></code> as necessary.</li>
+</ul>
+</li>
+<li>Optionally the upgrade procedure can be chained so users can upgrade across an arbitrary number of Mattermost versions rather than to just the latest release.</li>
+</ol>
 </div>
 </div>
 
