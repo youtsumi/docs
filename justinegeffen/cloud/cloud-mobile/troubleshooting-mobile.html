@@ -255,7 +255,25 @@
 </div>
 <div class="section" id="im-not-receiving-push-notifications-on-my-device">
 <h2>I’m not receiving push notifications on my device<a class="headerlink" href="#im-not-receiving-push-notifications-on-my-device" title="Permalink to this headline">¶</a></h2>
-<p>Please see our documentation on <a class="reference external" href="https://docs.mattermost.com/cloud/cloud-mobile/troubleshooting-mobile.html">troubleshooting push notifications</a>.</p>
+<p>If you did not receive a push notification when testing push notifications, use the following procedure to troubleshoot:</p>
+<ol class="arabic simple">
+<li>In <strong>System Console &gt; Environment &gt; Logging &gt; File Log Level</strong> select <strong>DEBUG</strong> in order to watch for push notifications in the server log.</li>
+<li>Delete your mobile application, and reinstall it.</li>
+<li>Sign in with “Account A” and <strong>confirm you want to receive push notifications</strong> when prompted by the mobile app.</li>
+<li>In Mattermost go to <strong>Account Settings</strong> &gt; <strong>Security</strong> &gt; <strong>View and Logout of Active Sessions</strong> and check that there is a session for the native mobile app matching your login time.</li>
+<li>Repeat the procedure testing push notifications.</li>
+<li>If no push notification appears go to <strong>System Console</strong> &gt; <strong>Server Logs</strong> and click <strong>Reload</strong>. Look at the bottom of the logs for a message similar to:</li>
+</ol>
+<p><code class="docutils literal notranslate"><span class="pre">[2016/04/21</span> <span class="pre">03:16:44</span> <span class="pre">UTC]</span> <span class="pre">[DEBG]</span> <span class="pre">Sending</span> <span class="pre">push</span> <span class="pre">notification</span> <span class="pre">to</span> <span class="pre">608xyz0...</span> <span class="pre">wi</span> <span class="pre">msg</span> <span class="pre">of</span> <span class="pre">'&#64;accountb:</span> <span class="pre">Hello'</span></code></p>
+<blockquote>
+<div><ul class="simple">
+<li>If the log message appears, it means a message was sent to the HPNS server and was not received by your mobile application. Please contact <a class="reference external" href="mailto:support&#37;&#52;&#48;mattermost&#46;com">support<span>&#64;</span>mattermost<span>&#46;</span>com</a> with the subject “HPNS issue on Step 8” for help from the commercial support team.</li>
+<li>If the log message does not appear, it means no mobile push notification was sent to “Account A”. Please repeat the process starting at step 2 and double-check each step.</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="7">
+<li><strong>IMPORTANT:</strong> In order to conserve disk space, once the issue is resolved, go to  <strong>System Console &gt; Environment &gt; Logging &gt; File Log Level</strong> and select <strong>ERROR</strong> to switch your logging detail level from DEBUG to Errors Only.</li>
+</ol>
 </div>
 <div class="section" id="build-gets-stuck-at-bundlereleasejsandassets">
 <h2>Build gets stuck at <code class="docutils literal notranslate"><span class="pre">bundleReleaseJsAndAssets</span></code><a class="headerlink" href="#build-gets-stuck-at-bundlereleasejsandassets" title="Permalink to this headline">¶</a></h2>
