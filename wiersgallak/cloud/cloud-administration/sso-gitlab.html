@@ -31,8 +31,8 @@
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Google Single Sign-On (E20)" href="sso-google.html" />
-    <link rel="prev" title="Active Directory/LDAP Setup (E10/E20)" href="sso-ldap.html" />
+    <link rel="next" title="Google Single Sign-On" href="sso-google.html" />
+    <link rel="prev" title="Active Directory/LDAP Setup" href="sso-ldap.html" />
 	<!-- Bizible Script -->
 	<script src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
 
@@ -165,20 +165,21 @@
 <li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#configuration">Configuration</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../guides/cloud-admin-guide.html#authentication">Authentication</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="authentication.html">Multi-Factor Authentication</a></li>
-<li class="toctree-l3"><a class="reference internal" href="sso-saml.html">SAML Single Sign-On (E20)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="sso-ldap.html">Active Directory/LDAP Setup (E10/E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-saml.html">SAML Single Sign-On</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-ldap.html">Active Directory/LDAP Setup</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">GitLab Single Sign-On</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#step-1-add-an-oauth-application-to-your-gitlab-account">Step 1: Add an OAuth application to your GitLab account</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#step-2-configure-mattermost-for-gitlab-sso">Step 2: Configure Mattermost for GitLab SSO</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="sso-google.html">Google Single Sign-On (E20)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="sso-office.html">Office 365 Single Sign-On (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-google.html">Google Single Sign-On</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-office.html">Office 365 Single Sign-On</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#integrations">Integrations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#compliance">Compliance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#mobile">Mobile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#incident-management">Incident Management</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../guides/administrator.html">Self-Managed Administrator's Guide</a></li>
@@ -239,7 +240,7 @@
 <p>Configure Mattermost to use GitLab as a Single Sign-on (SSO) service for team creation, account creation, and user sign-in.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Only the default GitLab SSO is officially supported. “Double SSO”, where GitLab SSO is chained to other SSO solutions, is not supported. It may be possible to connect GitLab SSO with AD, LDAP, SAML, or MFA add-ons in some cases, but because of the special logic required they’re not officially supported and are known not to work on some experiences. If having official AD, LDAP, SAML, or MFA support is critical to your enterprise, please consider <a class="reference external" href="https://mattermost.com/pricing/">Mattermost Enterprise Edition</a> as an option.</p>
+<p class="last">Only the default GitLab SSO is officially supported. “Double SSO”, where GitLab SSO is chained to other SSO solutions, is not supported. It may be possible to connect GitLab SSO with AD, LDAP, SAML, or MFA add-ons in some cases, but because of the special logic required they’re not officially supported and are known not to work on some experiences.</p>
 </div>
 <div class="section" id="step-1-add-an-oauth-application-to-your-gitlab-account">
 <h2>Step 1: Add an OAuth application to your GitLab account<a class="headerlink" href="#step-1-add-an-oauth-application-to-your-gitlab-account" title="Permalink to this headline">¶</a></h2>
@@ -272,36 +273,14 @@ If your GitLab instance is not set up to use SSL, your URIs must begin with ``ht
 <div class="section" id="step-2-configure-mattermost-for-gitlab-sso">
 <h2>Step 2: Configure Mattermost for GitLab SSO<a class="headerlink" href="#step-2-configure-mattermost-for-gitlab-sso" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>In Team Edition, navigate to <strong>System Console &gt; Authentication &gt; Gitlab</strong> or in Enterprise Edition navigate to <strong>System Console &gt; Authentication &gt; OAuth 2.0</strong>. Select <code class="docutils literal notranslate"><span class="pre">Gitlab</span></code> in the <em>Select OAuth 2.0 service provider</em> dropdown and add other required fields.  Alternatively, on your Mattermost server, add the <em>Application Id</em> and the <em>Secret</em> to the <em>GitLab</em> settings section in the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file:</li>
+<li>Navigate to <strong>System Console &gt; Authentication &gt; OAuth 2.0</strong>. Select <code class="docutils literal notranslate"><span class="pre">Gitlab</span></code> in the <em>Select OAuth 2.0 service provider</em> dropdown and add other required fields.</li>
+<li>Add the Application ID.</li>
+<li>Add the Application Secret Key.</li>
+<li>Add the Gitlab Sire URL. If your GitLab instance is not set up to use SSL, the endpoints must begin with <code class="docutils literal notranslate"><span class="pre">http://</span></code> instead of <code class="docutils literal notranslate"><span class="pre">https://</span></code>. If you are using GitLab itself as your OAuth provider, use <em>gitlab.com</em>.</li>
+<li>Add the UserApiEndpoint. Use <code class="docutils literal notranslate"><span class="pre">https://{gitlab-site-name}/api/v3/user</span></code> if you’re running GitLab v8.17.8 or earlier.</li>
+<li>[Optional] To force all users to sign-up with SSO only, set <strong>System Console &gt; Authentication &gt; Email &gt; Enable sign-in with email</strong> to <code class="docutils literal notranslate"><span class="pre">false</span></code></li>
 </ol>
-<blockquote>
-<div><ol class="loweralpha simple">
-<li>Open <code class="docutils literal notranslate"><span class="pre">config.json</span></code> as root in a text editor. It’s usually in <code class="docutils literal notranslate"><span class="pre">/opt/mattermost/config</span></code> but might be elsewhere on your system.</li>
-<li>Locate the <em>GitLabSettings</em> section and add or update the following information:</li>
-</ol>
-<blockquote>
-<div><div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;GitLabSettings&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;Enable&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">&quot;Secret&quot;</span><span class="o">:</span> <span class="s2">&quot;{mattermost-app-secret-from-gitlab}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Id&quot;</span><span class="o">:</span> <span class="s2">&quot;{mattermost-app-application-id-from-gitlab}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Scope&quot;</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;AuthEndpoint&quot;</span><span class="o">:</span> <span class="s2">&quot;https://{gitlab-site-name}/oauth/authorize&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;TokenEndpoint&quot;</span><span class="o">:</span> <span class="s2">&quot;https://{gitlab-site-name}/oauth/token&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;UserApiEndpoint&quot;</span><span class="o">:</span> <span class="s2">&quot;https://{gitlab-site-name}/api/v4/user&quot;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>For <code class="docutils literal notranslate"><span class="pre">{gitlab-site-name}</span></code> use the name of your GitLab instance. If your GitLab instance is not set up to use SSL, the endpoints must begin with <code class="docutils literal notranslate"><span class="pre">http://</span></code> instead of <code class="docutils literal notranslate"><span class="pre">https://</span></code>. If you are using GitLab itself as your OAuth provider, use <em>gitlab.com</em>.</p>
-<p>For <code class="docutils literal notranslate"><span class="pre">UserApiEndpoint</span></code>, use <code class="docutils literal notranslate"><span class="pre">https://{gitlab-site-name}/api/v3/user</span></code> if you’re running GitLab v8.17.8 or earlier.</p>
-</div></blockquote>
-</div></blockquote>
-<ol class="arabic simple" start="2">
-<li>[Optional] To force all users to sign-up with SSO only, set <strong>System Console &gt; Authentication &gt; Email &gt; Enable sign-in with email</strong> to <code class="docutils literal notranslate"><span class="pre">false</span></code> or in the <em>EmailSettings</em> section of <code class="docutils literal notranslate"><span class="pre">config.json</span></code> set <em>EnableSignUpWithEmail</em> to <code class="docutils literal notranslate"><span class="pre">false</span></code>.</li>
-<li>Restart your Mattermost server.</li>
-</ol>
-<blockquote>
-<div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">restart</span> <span class="pre">mattermost</span></code></div></blockquote>
-<p>After the server restarts, users must change their sign-in method before they can sign in with GitLab.</p>
+<p>Users must change their sign-in method before they can sign in with GitLab.</p>
 </div>
 </div>
 
@@ -313,10 +292,10 @@ If your GitLab instance is not set up to use SSL, your URIs must begin with ``ht
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="sso-google.html" class="btn btn-neutral float-right" title="Google Single Sign-On (E20)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="sso-google.html" class="btn btn-neutral float-right" title="Google Single Sign-On" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="sso-ldap.html" class="btn btn-neutral" title="Active Directory/LDAP Setup (E10/E20)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="sso-ldap.html" class="btn btn-neutral" title="Active Directory/LDAP Setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

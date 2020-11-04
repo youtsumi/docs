@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>SAML Single Sign-On (E20) &mdash; Mattermost 5.28 documentation</title>
+  <title>SAML Single Sign-On &mdash; Mattermost 5.28 documentation</title>
   
 
   
@@ -31,7 +31,7 @@
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Active Directory/LDAP Setup (E10/E20)" href="sso-ldap.html" />
+    <link rel="next" title="Active Directory/LDAP Setup" href="sso-ldap.html" />
     <link rel="prev" title="Multi-Factor Authentication" href="authentication.html" />
 	<!-- Bizible Script -->
 	<script src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
@@ -165,21 +165,21 @@
 <li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#configuration">Configuration</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../guides/cloud-admin-guide.html#authentication">Authentication</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="authentication.html">Multi-Factor Authentication</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">SAML Single Sign-On (E20)</a><ul>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">SAML Single Sign-On</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#using-saml-attributes-to-apply-roles">Using SAML Attributes to Apply Roles</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#roadmap">Roadmap</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#configuration-assistance">Configuration Assistance</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="sso-ldap.html">Active Directory/LDAP Setup (E10/E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-ldap.html">Active Directory/LDAP Setup</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-gitlab.html">GitLab Single Sign-On</a></li>
-<li class="toctree-l3"><a class="reference internal" href="sso-google.html">Google Single Sign-On (E20)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="sso-office.html">Office 365 Single Sign-On (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-google.html">Google Single Sign-On</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-office.html">Office 365 Single Sign-On</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#integrations">Integrations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#compliance">Compliance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#mobile">Mobile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#incident-management">Incident Management</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../guides/administrator.html">Self-Managed Administrator's Guide</a></li>
@@ -221,7 +221,7 @@
     
       <li><a href="../../guides/cloud-admin-guide.html">Cloud Administrator’s Guide</a> &raquo;</li>
     
-    <li>SAML Single Sign-On (E20)</li>
+    <li>SAML Single Sign-On</li>
     <li class="wy-breadcrumbs-aside">
       
         
@@ -235,8 +235,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="saml-single-sign-on-e20">
-<h1>SAML Single Sign-On (E20)<a class="headerlink" href="#saml-single-sign-on-e20" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="saml-single-sign-on">
+<h1>SAML Single Sign-On<a class="headerlink" href="#saml-single-sign-on" title="Permalink to this headline">¶</a></h1>
 <p>Single sign-on (SSO) is a way for users to log into multiple applications with a single user ID and password without having to re-enter their credentials. The SAML standard allows identity providers to pass credentials to service providers. Mattermost can be configured to act as a SAML 2.0 Service Provider.</p>
 <p>Mattermost can be configured to act as a SAML 2.0 Service Provider. The SAML Single sign-on integration offers the following benefits:</p>
 <ul class="simple">
@@ -288,15 +288,8 @@
 <li>Complete the <strong>Admin Attribute</strong> field.</li>
 <li>Choose <strong>Save</strong>.</li>
 </ol>
-<p><strong>Note:</strong> If the Admin Attribute is set to <code class="docutils literal notranslate"><span class="pre">false</span></code> the member’s role as System Admin is retained. However if the attribute is removed/changed, System Admins that were promoted via the attribute will be demoted to members and will not retain access to the System Console. When this attribute is not in use, System Admins can be manually promoted/demoted in <strong>System Console &gt; User Management</strong>.</p>
+<p><strong>Note:</strong> If the Admin Attribute is set to <code class="docutils literal notranslate"><span class="pre">false</span></code> the member’s role as System Admin is retained. However, if the attribute is removed/changed, System Admins that were promoted via the attribute will be demoted to members and will not retain access to the System Console. When this attribute is not in use, System Admins can be manually promoted/demoted in <strong>System Console &gt; User Management</strong>.</p>
 </div>
-</div>
-<div class="section" id="roadmap">
-<h2>Roadmap<a class="headerlink" href="#roadmap" title="Permalink to this headline">¶</a></h2>
-<p>From Mattermost v5.14, you can optionally configure Mattermost to sign the SAML request using a private key to meet InfoSec requirements at your organization.</p>
-<p>In the future roadmap, the main consideration is an integration with SCIM, via plugin. Such an integration allows system administrators to create SAML-provisioned users before their first login, and sync them against Mattermost permissions.</p>
-<p>Currently user provisioning and deprovisioning can be handled with SAML sync, but relies on AD/LDAP. SCIM enables admins to control user provisioning and deprovisioning within the IdP itself.</p>
-<p>For examples, see <a class="reference external" href="https://docs.microsoft.com/en-us/azure/active-directory/manage-apps/use-scim-to-provision-users-and-groups">Microsoft Azure AD integration with SCIM</a> and <a class="reference external" href="https://www.okta.com/integrate/documentation/scim/">Okta user provisioning with SCIM</a>.</p>
 </div>
 <div class="section" id="configuration-assistance">
 <h2>Configuration Assistance<a class="headerlink" href="#configuration-assistance" title="Permalink to this headline">¶</a></h2>
@@ -315,7 +308,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="sso-ldap.html" class="btn btn-neutral float-right" title="Active Directory/LDAP Setup (E10/E20)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="sso-ldap.html" class="btn btn-neutral float-right" title="Active Directory/LDAP Setup" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="authentication.html" class="btn btn-neutral" title="Multi-Factor Authentication" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
