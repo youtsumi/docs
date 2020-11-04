@@ -171,6 +171,7 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Bot Accounts</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#configuration-settings">Configuration Settings</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#bot-account-creation">Bot Account Creation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#technical-notes">Technical Notes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#frequently-asked-questions">Frequently Asked Questions</a></li>
 </ul>
 </li>
@@ -240,13 +241,13 @@
             
   <div class="section" id="bot-accounts">
 <h1>Bot Accounts<a class="headerlink" href="#bot-accounts" title="Permalink to this headline">¶</a></h1>
-<p>Use Bot Accounts to integrate with Mattermost through <a class="reference external" href="https://developers.mattermost.com/extend/plugins/">plugins</a> or the <a class="reference external" href="https://api.mattermost.com">Mattermost RESTful API</a>. Bot accounts access the RESTful API on behalf of a bot through the use of the <a class="reference external" href="https://docs.mattermost.com/cloud/cloud-integrations/cloud-personal-access-tokens.html">personal access tokens feature</a>.</p>
+<p>Use Bot Accounts to integrate with Mattermost through <a class="reference external" href="https://developers.mattermost.com/extend/plugins/">plugins</a> or the <a class="reference external" href="https://api.mattermost.com">Mattermost RESTful API</a>. Bot accounts access the RESTful API on behalf of a bot through the use of the <span class="xref std std-doc">personal access tokens feature</span>.</p>
 <p>Bot accounts are just like user accounts, except they:</p>
 <blockquote>
 <div><ul class="simple">
 <li>Cannot be logged into.</li>
 <li>Cannot be used to create other bot accounts.</li>
-<li>Do not count as a registered user and therefore do not count towards your subscription.</li>
+<li>Do not count as a registered user and therefore do not count towards the total users for an Enterprise Edition license.</li>
 </ul>
 </div></blockquote>
 <p>Additional benefits include:</p>
@@ -255,7 +256,7 @@
 <li>Bot accounts can be enabled to post to any channel in the system by System Administrators, including a private team, private channel or a Direct Message channel.</li>
 <li>Integrations created by a user and tied to a bot account no longer break if the user leaves the company.</li>
 <li>Once created, bot accounts behave just like regular user accounts and can be added to teams and channels similar to users.</li>
-<li>Bot accounts are a safe way to integrate with Mattermost through the RESTful API and Plugin API because there is no need to manage shared logins with these accounts.</li>
+<li>Bot accounts are a safer way to integrate with Mattermost through the RESTful API and Plugin API because there is no need to manage shared logins with these accounts.</li>
 <li><code class="docutils literal notranslate"><span class="pre">BOT</span></code> tag is used everywhere in the UI where bot accounts are referenced, including messages and user lists.</li>
 </ul>
 </div></blockquote>
@@ -264,7 +265,7 @@
 <div><ul class="simple">
 <li>Bot accounts can only be created or managed by plugins or System Administrators.</li>
 <li>Bot accounts cannot be assigned to webhooks or slash commands. These must still be created by a user account.</li>
-<li>Service accounts without an email address pulled from LDAP or SAML systems is not yet supported.</li>
+<li>Service accounts without an email address pulled from LDAP or SAML systems in Enterprise Edition is not yet supported.</li>
 </ul>
 </div></blockquote>
 <p>If you would like to see improvements to bot accounts, <a class="reference external" href="https://mattermost.uservoice.com">let us know in the Feature Proposal Forum</a>.</p>
@@ -272,7 +273,8 @@
 <ul class="simple">
 <li><a class="reference internal" href="#configuration-settings" id="id2">Configuration Settings</a></li>
 <li><a class="reference internal" href="#bot-account-creation" id="id3">Bot Account Creation</a></li>
-<li><a class="reference internal" href="#frequently-asked-questions" id="id4">Frequently Asked Questions</a></li>
+<li><a class="reference internal" href="#technical-notes" id="id4">Technical Notes</a></li>
+<li><a class="reference internal" href="#frequently-asked-questions" id="id5">Frequently Asked Questions</a></li>
 </ul>
 </div>
 <div class="section" id="configuration-settings">
@@ -309,10 +311,84 @@
 <p>See our <a class="reference external" href="https://api.mattermost.com/#tag/bots">API documentation</a> to learn more about creating and managing bots through the API.</p>
 <p>To authorize your bot via RESTful API use <code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">-i</span> <span class="pre">-H</span> <span class="pre">'authorization:</span> <span class="pre">Bearer</span> <span class="pre">&lt;Access</span> <span class="pre">Token&gt;'</span> <span class="pre">http://localhost:8065/api/v4/users/me</span></code>. <strong>Access Token</strong> is not the <code class="docutils literal notranslate"><span class="pre">Token</span> <span class="pre">ID</span></code> and won’t be visible again once created.</p>
 </div>
+<div class="section" id="command-line-interface-cli">
+<h3>Command Line Interface (CLI)<a class="headerlink" href="#command-line-interface-cli" title="Permalink to this headline">¶</a></h3>
+<p>You can use the following CLI command to convert an existing user account to a bot:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>user convert user@example.com --bot
+</pre></div>
+</div>
+<p>In addition to email, you may identify the user by its username or user ID.</p>
+<p>Bot accounts which were converted from user accounts will have their authentication data cleared if they were email/password accounts. Those synced from LDAP/SAML will not have their authentication data cleared so that LDAP/SAML sync performs correctly.</p>
+</div>
 <div class="section" id="id1">
 <h3>Plugins<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>Plugins can create bot accounts through an <code class="docutils literal notranslate"><span class="pre">EnsureBot</span></code> helper function. For an example, see <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-demo/blob/master/server/configuration.go#L210-L217">the Demo Plugin</a>.</p>
 <p>Bots created by a plugin use the plugin’s ID as the creator, unless otherwise specified by the plugin.</p>
+</div>
+</div>
+<div class="section" id="technical-notes">
+<h2><a class="toc-backref" href="#contents">Technical Notes</a><a class="headerlink" href="#technical-notes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="data-model">
+<h3>Data Model<a class="headerlink" href="#data-model" title="Permalink to this headline">¶</a></h3>
+<p>Each bot account has a row in the <strong>Users</strong> table and the <strong>Bots</strong> table. The entries are tied together by <code class="docutils literal notranslate"><span class="pre">User.Id</span> <span class="pre">=</span> <span class="pre">Bot.UserId</span></code>.</p>
+<p>The Bots table schema is described as follows:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field</th>
+<th class="head">Description</th>
+<th class="head">Type</th>
+<th class="head">Required</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>UserId</td>
+<td>User ID of the bot user</td>
+<td>string</td>
+<td>Y</td>
+</tr>
+<tr class="row-odd"><td>Username</td>
+<td>Username of the bot account</td>
+<td>string</td>
+<td>Y</td>
+</tr>
+<tr class="row-even"><td>DisplayName</td>
+<td>Display name of the bot account</td>
+<td>string</td>
+<td>N</td>
+</tr>
+<tr class="row-odd"><td>Description</td>
+<td>Description of the bot account</td>
+<td>string</td>
+<td>N</td>
+</tr>
+<tr class="row-even"><td>OwnerId</td>
+<td>User ID of the owner of the bot</td>
+<td>string</td>
+<td>Y</td>
+</tr>
+<tr class="row-odd"><td>CreateAt</td>
+<td>Unix timestamp of creation time</td>
+<td>int64</td>
+<td>Y</td>
+</tr>
+<tr class="row-even"><td>UpdateAt</td>
+<td>Unix timestamp of update time</td>
+<td>int64</td>
+<td>Y</td>
+</tr>
+<tr class="row-odd"><td>DeleteAt</td>
+<td>Unix timestamp of deletion time</td>
+<td>int64</td>
+<td>Y</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="section" id="frequently-asked-questions">
@@ -328,6 +404,15 @@
 <p>For a concrete example, suppose you enable the <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-github">Mattermost GitHub plugin</a>, which uses a <code class="docutils literal notranslate"><span class="pre">github</span></code> bot account, while an existing <code class="docutils literal notranslate"><span class="pre">github</span></code> user account was created for webhook integrations.</p>
 <p>Once the plugin is enabled, the plugin posts as the <code class="docutils literal notranslate"><span class="pre">github</span></code> account but without a <cite>BOT</cite> tag. An error message is logged to the server logs recommending the System Admin to convert the <code class="docutils literal notranslate"><span class="pre">github</span></code> user to a bot account by running <code class="docutils literal notranslate"><span class="pre">mattermost</span> <span class="pre">user</span> <span class="pre">convert</span> <span class="pre">&lt;username&gt;</span> <span class="pre">--bot</span></code> in the CLI.</p>
 <p>If the user is an existing user account you want to preserve, change its username and restart the Mattermost server, after which the plugin will create a bot account with the name <code class="docutils literal notranslate"><span class="pre">github</span></code>.</p>
+</div>
+<div class="section" id="how-do-i-convert-an-existing-account-to-a-bot-account">
+<h3>How do I convert an existing account to a bot account?<a class="headerlink" href="#how-do-i-convert-an-existing-account-to-a-bot-account" title="Permalink to this headline">¶</a></h3>
+<p>Use the following CLI command to convert an existing user account to a bot:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>user convert user@example.com --bot
+</pre></div>
+</div>
+<p>In addition to email, you may identify the user by its username or user ID.</p>
+<p>Bot accounts which were converted from user accounts will have their authentication data cleared if they were email/password accounts. Those synced from LDAP/SAML will not have their authentication data cleared so that LDAP/SAML sync performs correctly.</p>
 </div>
 <div class="section" id="how-can-i-quickly-test-if-my-bot-account-is-working">
 <h3>How can I quickly test if my bot account is working?<a class="headerlink" href="#how-can-i-quickly-test-if-my-bot-account-is-working" title="Permalink to this headline">¶</a></h3>
@@ -377,7 +462,7 @@
 </div>
 <div class="section" id="how-are-bot-accounts-identified-in-compliance-exports">
 <h3>How are bot accounts identified in compliance exports?<a class="headerlink" href="#how-are-bot-accounts-identified-in-compliance-exports" title="Permalink to this headline">¶</a></h3>
-<p>A field named <code class="docutils literal notranslate"><span class="pre">UserType</span></code> is added to Compliance Exports, including Global Relay, Actiance, and CSV. The field identifies whether a message was posted by a <code class="docutils literal notranslate"><span class="pre">user</span></code> or by a <code class="docutils literal notranslate"><span class="pre">bot</span></code> account.</p>
+<p>As of v5.14, a field named <code class="docutils literal notranslate"><span class="pre">UserType</span></code> is added to Compliance Exports, including Global Relay, Actiance, and CSV. The field identifies whether a message was posted by a <code class="docutils literal notranslate"><span class="pre">user</span></code> or by a <code class="docutils literal notranslate"><span class="pre">bot</span></code> account.</p>
 </div>
 </div>
 </div>
