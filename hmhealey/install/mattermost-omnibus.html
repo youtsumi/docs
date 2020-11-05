@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installing Mattermost Omnibus (Beta) &mdash; Mattermost 5.27 documentation</title>
+  <title>Installing Mattermost Omnibus &mdash; Mattermost 5.28 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.27
+                5.28
               </div>
             
           
@@ -159,8 +159,10 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Administrator's Guide</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="requirements.html">Software and Hardware Requirements</a></li>
@@ -170,7 +172,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#configuring-mattermost-omnibus-repositories">Configuring Mattermost Omnibus Repositories</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#installing-mattermost-omnibus">Installing Mattermost Omnibus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Installing Mattermost Omnibus</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#updating-mattermost-omnibus">Updating Mattermost Omnibus</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#configuring-mattermost-omnibus">Configuring Mattermost Omnibus</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#removing-mattermost-omnibus">Removing Mattermost Omnibus</a></li>
@@ -181,6 +183,7 @@
 <li class="toctree-l3"><a class="reference internal" href="install-kubernetes.html">Installing on Kubernetes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="install-debian.html">Installing on Debian Buster</a></li>
 <li class="toctree-l3"><a class="reference internal" href="install-rhel-7.html">Installing on RHEL 7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-rhel-8.html">Installing on RHEL 8</a></li>
 <li class="toctree-l3"><a class="reference internal" href="install-centos-oracle-scientific.html">Installing on CentOS, Oracle Linux, and Scientific Linux</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sockets-db.html">Instructions On Setting Up a Socket-based Mattermost Database</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ee-install.html">Enterprise Install and Upgrade</a></li>
@@ -196,6 +199,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
@@ -207,9 +211,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/education.html">Training and Education</a></li>
 </ul>
 
             
@@ -243,9 +247,9 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
     
-      <li><a href="../guides/administrator.html">Administrator’s Guide</a> &raquo;</li>
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
     
-    <li>Installing Mattermost Omnibus (Beta)</li>
+    <li>Installing Mattermost Omnibus</li>
     <li class="wy-breadcrumbs-aside">
       
         
@@ -259,8 +263,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="installing-mattermost-omnibus-beta">
-<h1>Installing Mattermost Omnibus (Beta)<a class="headerlink" href="#installing-mattermost-omnibus-beta" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="installing-mattermost-omnibus">
+<h1>Installing Mattermost Omnibus<a class="headerlink" href="#installing-mattermost-omnibus" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>Mattermost Omnibus is a Debian package that packages the individual components of a Mattermost deployment into a single installation process. The package leverages the <code class="docutils literal notranslate"><span class="pre">apt</span></code> package manager to install and keep the components of the platform updated, using a custom CLI and ansible recipes to link those components together and configure them.</p>
@@ -277,13 +281,13 @@
 <div class="section" id="configuring-mattermost-omnibus-repositories">
 <h2>Configuring Mattermost Omnibus Repositories<a class="headerlink" href="#configuring-mattermost-omnibus-repositories" title="Permalink to this headline">¶</a></h2>
 <p>The Omnibus repositories are configured using a cURL command:</p>
-<p><code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">-o-</span> <span class="pre">deb.packages.mattermost.com/repo-setup.sh</span> <span class="pre">|</span> <span class="pre">sudo</span> <span class="pre">bash</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">-o-</span> <span class="pre">https://deb.packages.mattermost.com/repo-setup.sh</span> <span class="pre">|</span> <span class="pre">sudo</span> <span class="pre">bash</span></code></p>
 <p>This command configures the repositories needed for a <code class="docutils literal notranslate"><span class="pre">PostgreSQL</span></code> database, an <code class="docutils literal notranslate"><span class="pre">nginx</span></code> web server to act as a proxy, and <code class="docutils literal notranslate"><span class="pre">certbot</span></code> to issue and renew the SSL certificate. It also configures the Mattermost Omnibus repository so that you can run the install command.</p>
 </div>
-<div class="section" id="installing-mattermost-omnibus">
-<h2>Installing Mattermost Omnibus<a class="headerlink" href="#installing-mattermost-omnibus" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h2>Installing Mattermost Omnibus<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>If you’re installing Omnibus, and have a domain and SSL use:</p>
-<p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">mattermost-omnibus</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">mattermost-omnibus</span> <span class="pre">-y</span></code></p>
 <p>In order to issue that certificate, the installer requests a domain name and an email address from us. These are used to generate the certificate and deliver any related communications respectively.</p>
 <p>After all the packages are installed, Omnibus runs the ansible scripts that configure all the platform components and starts the server. To access Mattermost, open a browser, navigate to your domain, and create the System Admin user to start using the platform.</p>
 </div>
@@ -361,6 +365,10 @@
 <div class="section" id="can-i-use-mysql-instead-of-postgresql">
 <h3>Can I use MySQL instead of PostgreSQL?<a class="headerlink" href="#can-i-use-mysql-instead-of-postgresql" title="Permalink to this headline">¶</a></h3>
 <p>MySQL is not supported. Omnibus is architected to run with PostgreSQL.</p>
+</div>
+<div class="section" id="where-can-i-get-help">
+<h3>Where can I get help?<a class="headerlink" href="#where-can-i-get-help" title="Permalink to this headline">¶</a></h3>
+<p>If you have any problems installing Mattermost Omnibus, see the <a class="reference external" href="https://docs.mattermost.com/install/troubleshooting.html">troubleshooting guide</a> for common error messages, or <a class="reference external" href="https://mattermost.com/pl/default-ask-mattermost-community/">join the Mattermost user community for troubleshooting help</a>.</p>
 </div>
 </div>
 </div>
