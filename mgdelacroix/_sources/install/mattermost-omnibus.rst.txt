@@ -1,12 +1,12 @@
-Installing Mattermost Omnibus (Beta)
-===================================
+Installing Mattermost Omnibus
+=============================
 
 Overview
 ---------
 
 Mattermost Omnibus is a Debian package that packages the individual components of a Mattermost deployment into a single installation process. The package leverages the ``apt`` package manager to install and keep the components of the platform updated, using a custom CLI and ansible recipes to link those components together and configure them.
 
-Mattermost Omnibus currently supports Ubuntu's ``bionic`` and ``focal`` distributions. Support for RedHat/CentOS distributions will be available in future versions. The package bundles the E0 Mattermost platform version.
+Mattermost Omnibus currently supports Ubuntu's ``bionic`` and ``focal`` distributions. Support for RedHat/CentOS distributions will be available in future versions. The package bundles Mattermost Enterprise Edition.
 
 Prerequisites
 -------------
@@ -29,7 +29,7 @@ Installing Mattermost Omnibus
 
 If you're installing Omnibus, and have a domain and SSL use:
 
-``sudo apt install mattermost-omnibus``
+``sudo apt install mattermost-omnibus -y``
 
 In order to issue that certificate, the installer requests a domain name and an email address from us. These are used to generate the certificate and deliver any related communications respectively.
 
@@ -52,7 +52,7 @@ Configuring Mattermost Omnibus
 
 With Mattermost Omnibus, the ``config.json`` file is no longer used as `Omnibus stores the Mattermost configuration in the database <https://docs.mattermost.com/administration/config-in-database.html>`__. The Omnibus platform itself requires of a configuration of its own, that is stored in ``/etc/mattermost/mmomni.yml``. This file contains the data that Omnibus needs to configure the platform and connect all the services together. So you’ll need to use mmctl to make changes to your Mattermost server configuration using ``mmctl --local config edit``.
 
-For Omnibus to work properly, there are some configuration parameters that are fixed and cannot be changed through the web interface - for example, the port that Mattermost uses to run. Other parameters need to be configured directly in the ``mmomni.yml`` file instead of in the Mattermost web interface or the configuration.
+For Omnibus to work properly, there are some configuration parameters that are fixed and cannot be changed through the web interface - for example, the port that Mattermost uses to run. Other parameters need to be configured directly in the ``mmomni.yml`` file instead of in the Mattermost web interface or the ``config.json`` file.
 
 The properties that you can configure in this file are:
 
@@ -137,7 +137,7 @@ Yes! Mattermost Omnibus bundles the E0 Mattermost version, so the enterprise fea
 Can I use an Omnibus server as part of a cluster?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-No, Omnibus has been designed to be a self contained Mattermost platform, so it contains and expects all the necessary components to be in the same server.
+No, Omnibus is designed to be a self-contained Mattermost platform, so it expects all the necessary components to be in the same server.
 
 Where can I get help?
 ^^^^^^^^^^^^^^^^^^^^^
