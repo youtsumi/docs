@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Statistics &mdash; Mattermost 5.25 documentation</title>
+  <title>Statistics &mdash; Mattermost 5.28 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.25
+                5.28
               </div>
             
           
@@ -159,12 +159,15 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Administrator's Guide</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a><ul class="current">
@@ -178,6 +181,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../integrations/net-promoter-score.html">User Satisfaction Surveys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notices.html">In-Product Notices</a></li>
 <li class="toctree-l3"><a class="reference internal" href="health-check.html">Health Check</a></li>
 <li class="toctree-l3"><a class="reference internal" href="announcement-banner.html">Announcement Banner (E10)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="bulk-export.html">Bulk Export Tool</a></li>
@@ -188,12 +192,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#unofficial-enhancements">Unofficial Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/education.html">Training and Education</a></li>
 </ul>
 
             
@@ -227,7 +231,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
     
-      <li><a href="../guides/administrator.html">Administrator’s Guide</a> &raquo;</li>
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
     
     <li>Statistics</li>
     <li class="wy-breadcrumbs-aside">
@@ -245,7 +249,7 @@
             
   <div class="section" id="statistics">
 <h1>Statistics<a class="headerlink" href="#statistics" title="Permalink to this headline">¶</a></h1>
-<p>Statistics on users, posts and channels are tracked for each system and team. Enterprise Editions have access to advanced system statistics.</p>
+<p>Statistics on users, posts, and channels are tracked for each system and team. Enterprise Editions have access to advanced system statistics.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">To maximize performance for large Enterprise deployments, statistics for total posts, total hashtag posts, total file posts, posts per day, and active users with posts per day are disabled. You can re-enable them by changing the <code class="docutils literal notranslate"><span class="pre">MaxUsersForStatistics</span></code> value <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#maximum-users-for-statistics">in config.json</a>.</p>
@@ -253,7 +257,7 @@
 <p>For advanced metrics for Enterprise deployments, <a class="reference external" href="http://docs.mattermost.com/deployment/metrics.html">see performance monitoring documentation to learn more</a>.</p>
 <div class="section" id="site-statistics">
 <h2>Site Statistics<a class="headerlink" href="#site-statistics" title="Permalink to this headline">¶</a></h2>
-<p>System statistics are viewable under <strong>System Console &gt; Site Statistics</strong> in prior versions or <strong>System Console &gt; Reporting</strong> in versions after 5.12. The data shown here is a cumulative sum across all teams on the system.</p>
+<p>System statistics are viewable under <strong>System Console &gt; Reporting</strong> (or <strong>System Console &gt; Site Statistics</strong> in versions prior to 5.12). The data shown here is a cumulative sum across all teams on the system.</p>
 <dl class="docutils">
 <dt>Total Users</dt>
 <dd>The total number of active accounts created on your system. Excludes deactivated accounts.</dd>
@@ -295,7 +299,7 @@
 <dt>Channel Types</dt>
 <dd>This chart displays the number of public channels and private channels in a visual format, including channels that might have been deleted.</dd>
 <dt>Posts, Files and Hashtags</dt>
-<dd>This chart displays the number of posts containing files, hashtags or only text. Posts containing both files and hashtags are counted in both categories, and deleted posts are included.</dd>
+<dd>This chart displays the number of posts containing files, hashtags, or only text. Posts containing both files and hashtags are counted in both categories, and deleted posts are included.</dd>
 </dl>
 </div>
 </div>
@@ -323,7 +327,7 @@
 </div>
 <div class="section" id="troubleshooting">
 <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
-<p>If the statistics page is loading endlessly and you get an error message saying “Not enough data for a meaningful representation”, check whether you are using an ad blocker. An ad blocker can prevent this page from loading data. To test this, temporarily disable your ad blocker, or view the page in a browser without an ad blocker installed.</p>
+<p>If the statistics page is loading endlessly and you get an error message saying “Not enough data for a meaningful representation”, check whether you’re using an ad blocker. An ad blocker can prevent this page from loading data. To test this, temporarily disable your ad blocker, or view the page in a browser without an ad blocker installed.</p>
 </div>
 </div>
 
