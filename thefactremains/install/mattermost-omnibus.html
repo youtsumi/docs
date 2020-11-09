@@ -159,8 +159,10 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Administrator's Guide</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="requirements.html">Software and Hardware Requirements</a></li>
@@ -197,6 +199,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
@@ -208,9 +211,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/education.html">Training and Education</a></li>
 </ul>
 
             
@@ -244,7 +247,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
     
-      <li><a href="../guides/administrator.html">Administrator’s Guide</a> &raquo;</li>
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
     
     <li>Installing Mattermost Omnibus</li>
     <li class="wy-breadcrumbs-aside">
@@ -265,7 +268,7 @@
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>Mattermost Omnibus is a Debian package that packages the individual components of a Mattermost deployment into a single installation process. The package leverages the <code class="docutils literal notranslate"><span class="pre">apt</span></code> package manager to install and keep the components of the platform updated, using a custom CLI and ansible recipes to link those components together and configure them.</p>
-<p>Mattermost Omnibus currently supports Ubuntu’s <code class="docutils literal notranslate"><span class="pre">bionic</span></code> and <code class="docutils literal notranslate"><span class="pre">focal</span></code> distributions. Support for RedHat/CentOS distributions will be available in future versions.</p>
+<p>Mattermost Omnibus currently supports Ubuntu’s <code class="docutils literal notranslate"><span class="pre">bionic</span></code> and <code class="docutils literal notranslate"><span class="pre">focal</span></code> distributions. Support for RedHat/CentOS distributions will be available in future versions. The package bundles the free, unlicensed Mattermost Enterprise Edition.</p>
 </div>
 <div class="section" id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
@@ -301,7 +304,7 @@
 <p class="last">Plugin uploads, local mode, and HTTPS are enabled by default. These settings are modified in the <code class="docutils literal notranslate"><span class="pre">yaml</span></code> file as described below.</p>
 </div>
 <p>With Mattermost Omnibus, the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file is no longer used as <a class="reference external" href="https://docs.mattermost.com/administration/config-in-database.html">Omnibus stores the Mattermost configuration in the database</a>. The Omnibus platform itself requires of a configuration of its own, that is stored in <code class="docutils literal notranslate"><span class="pre">/etc/mattermost/mmomni.yml</span></code>. This file contains the data that Omnibus needs to configure the platform and connect all the services together. So you’ll need to use mmctl to make changes to your Mattermost server configuration using <code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">--local</span> <span class="pre">config</span> <span class="pre">edit</span></code>.</p>
-<p>For Omnibus to work properly, there are some configuration parameters that are fixed and cannot be changed through the web interface - for example, the port that Mattermost uses to run. Other parameters need to be configured directly in the <code class="docutils literal notranslate"><span class="pre">mmomni.yml</span></code> file instead of in the Mattermost web interface or the configuration.</p>
+<p>For Omnibus to work properly, there are some configuration parameters that are fixed and cannot be changed through the web interface - for example, the port that Mattermost uses to run. Other parameters need to be configured directly in the <code class="docutils literal notranslate"><span class="pre">mmomni.yml</span></code> file instead of in the Mattermost web interface or the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file.</p>
 <p>The properties that you can configure in this file are:</p>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">db_user</span></code>: The PostgreSQL database user. This value is generated during the Omnibus installation and should not be changed.</li>
@@ -344,12 +347,12 @@
 </div>
 <div class="section" id="can-i-install-without-a-domain">
 <h3>Can I install without a domain?<a class="headerlink" href="#can-i-install-without-a-domain" title="Permalink to this headline">¶</a></h3>
-<p>Although the recommended way to install and configure Omnibus is with SSL enabled, if you want to use or test without it, you can run:
-<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">MMO_HTTPS=false</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">mattermost-omnibus</span></code>.</p>
+<p>Although the recommended way to install and configure Omnibus is with SSL enabled, if you want to use or test without it, you can run:</p>
+<p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">MMO_HTTPS=false</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">mattermost-omnibus</span></code></p>
 </div>
 <div class="section" id="what-happened-to-config-json">
 <h3>What happened to <code class="docutils literal notranslate"><span class="pre">config.json</span></code>?<a class="headerlink" href="#what-happened-to-config-json" title="Permalink to this headline">¶</a></h3>
-<p>Mattermost Omnibus <a class="reference external" href="https://docs.mattermost.com/administration/config-in-database.html">stores the configuration of the Mattermost server into the database</a>. You can edit your config by running the following mmctl command after connecting mmctl to the instance: <code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">config</span> <span class="pre">edit</span></code>. If you are logged into the machine as the <code class="docutils literal notranslate"><span class="pre">mattermost</span></code> user, you can use <code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">--local</span> <span class="pre">config</span> <span class="pre">edit</span></code> as well.</p>
+<p>Mattermost Omnibus <a class="reference external" href="https://docs.mattermost.com/administration/config-in-database.html">stores the configuration of the Mattermost server into the database</a>. You can edit your config by running the following mmctl command after connecting mmctl to the instance: <code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">config</span> <span class="pre">edit</span></code>. If you’re logged into the machine as the <code class="docutils literal notranslate"><span class="pre">mattermost</span></code> user, you can use <code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">--local</span> <span class="pre">config</span> <span class="pre">edit</span></code> as well.</p>
 </div>
 <div class="section" id="are-there-plans-to-add-other-packages-to-the-omnibus">
 <h3>Are there plans to add other packages to the Omnibus?<a class="headerlink" href="#are-there-plans-to-add-other-packages-to-the-omnibus" title="Permalink to this headline">¶</a></h3>
@@ -362,6 +365,14 @@
 <div class="section" id="can-i-use-mysql-instead-of-postgresql">
 <h3>Can I use MySQL instead of PostgreSQL?<a class="headerlink" href="#can-i-use-mysql-instead-of-postgresql" title="Permalink to this headline">¶</a></h3>
 <p>MySQL is not supported. Omnibus is architected to run with PostgreSQL.</p>
+</div>
+<div class="section" id="can-i-use-a-license-with-omnibus">
+<h3>Can I use a license with Omnibus?<a class="headerlink" href="#can-i-use-a-license-with-omnibus" title="Permalink to this headline">¶</a></h3>
+<p>Yes. Mattermost Omnibus bundles the free, unlicensed Mattermost Enterprise Edition, and Enterprise features are unlocked when you purchase and upload a license.</p>
+</div>
+<div class="section" id="can-i-use-an-omnibus-server-as-part-of-a-cluster">
+<h3>Can I use an Omnibus server as part of a cluster?<a class="headerlink" href="#can-i-use-an-omnibus-server-as-part-of-a-cluster" title="Permalink to this headline">¶</a></h3>
+<p>No, Omnibus is designed to be a self-contained Mattermost platform, so it expects all the necessary components to be in the same server.</p>
 </div>
 <div class="section" id="where-can-i-get-help">
 <h3>Where can I get help?<a class="headerlink" href="#where-can-i-get-help" title="Permalink to this headline">¶</a></h3>
