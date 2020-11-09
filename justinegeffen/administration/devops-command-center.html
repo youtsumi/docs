@@ -168,12 +168,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../guides/cloud-admin-guide.html#compliance">Compliance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/cloud-admin-guide.html#mobile">Mobile</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/cloud-admin-guide.html#incident-management">Incident Management</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Mattermost Incident Management</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#installing-mattermost-incident-management-for-self-managed-deployments">Installing Mattermost Incident Management for Self-Managed Deployments</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#activating-mattermost-incident-management-for-cloud-deployments">Activating Mattermost Incident Management for Cloud Deployments</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#using-slash-commands">Using slash commands</a></li>
-</ul>
-</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Mattermost Incident Management</a></li>
 </ul>
 </li>
 </ul>
@@ -233,73 +228,8 @@
             
   <div class="section" id="mattermost-incident-management">
 <h1>Mattermost Incident Management<a class="headerlink" href="#mattermost-incident-management" title="Permalink to this headline">¶</a></h1>
-<p><em>Available in Mattermost Enterprise Edition E20, Mattermost Cloud Professional, and Mattermost Cloud Enterprise.</em></p>
 <p>Better response to an incident is one of three ways that Mattermost Incident Management helps you provide more reliable services, in addition to gaining insights with incident reports and incorporating learnings with playbooks.</p>
-<p>Mattermost Incident Management allows your team to coordinate, manage, and resolve incidents from within Mattermost.</p>
-<p>Incidents are situations which require an immediate response and benefit from a clearly defined process guiding towards resolution. Incident Management allows your team to coordinate, manage, and resolve incidents from within Mattermost. You can:</p>
-<ul class="simple">
-<li>Automatically create a new channel that can be organized in the left-hand sidebar using custom categories.</li>
-<li>Use [playbooks](/playbooks/creating-and-managing-playbooks.md) to perform automated actions such as create a Jira ticket, start a Zoom call, or find out who is on-call in Opsgenie.</li>
-<li>Iterate on and refine processes after each incident.</li>
-</ul>
-<p>When incidents are monitored, coordinated, and measured effectively, you can add transparency, maximize effectiveness, and save costs by cutting down time taken to respond to and resolve incidents.</p>
-<p>![Mattermost Incident Management screenshot](../docs/assets/incident_response_landing.png)</p>
-<div class="contents local topic" id="contents">
-<ul class="simple">
-<li><a class="reference internal" href="#installing-mattermost-incident-management-for-self-managed-deployments" id="id1">Installing Mattermost Incident Management for Self-Managed Deployments</a></li>
-<li><a class="reference internal" href="#activating-mattermost-incident-management-for-cloud-deployments" id="id2">Activating Mattermost Incident Management for Cloud Deployments</a></li>
-<li><a class="reference internal" href="#using-slash-commands" id="id3">Using slash commands</a><ul>
-<li><a class="reference internal" href="#adding-slash-commands-to-tasks" id="id4">Adding slash commands to tasks</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="section" id="installing-mattermost-incident-management-for-self-managed-deployments">
-<h2><a class="toc-backref" href="#id1">Installing Mattermost Incident Management for Self-Managed Deployments</a><a class="headerlink" href="#installing-mattermost-incident-management-for-self-managed-deployments" title="Permalink to this headline">¶</a></h2>
-<p>Mattermost Incident Management is available in the Plugin Marketplace. You can download and install the plugin from Mattermost.</p>
-<ol class="arabic simple">
-<li>Open <strong>System Console &gt; Plugin Management</strong>.</li>
-<li>Search for <strong>Incident Response</strong> using the search bar or scroll through the list manually.</li>
-<li>Select <strong>Install</strong>.</li>
-<li>Next, select <strong>Configure</strong>.</li>
-<li>Select <strong>true</strong> to enable the plugin.</li>
-<li>Select <strong>Save</strong>.</li>
-</ol>
-<p>When you open the Main Menu, <strong>Playbooks &amp; Incidents</strong> is available as a menu item.</p>
-</div>
-<div class="section" id="activating-mattermost-incident-management-for-cloud-deployments">
-<h2><a class="toc-backref" href="#id2">Activating Mattermost Incident Management for Cloud Deployments</a><a class="headerlink" href="#activating-mattermost-incident-management-for-cloud-deployments" title="Permalink to this headline">¶</a></h2>
-<p>Mattermost Incident Management is included in the Mattermost Cloud workspace and is enabled by default.</p>
-</div>
-<div class="section" id="using-slash-commands">
-<h2><a class="toc-backref" href="#id3">Using slash commands</a><a class="headerlink" href="#using-slash-commands" title="Permalink to this headline">¶</a></h2>
-<p>Slash commands are shortcuts used to perform actions in Mattermost. To view the available slash commands in Mattermost begin by typing <cite>/</cite> and a list of slash command options appears above the text input box. The autocomplete suggestions help by providing a format example in black text and a short description of the slash command in grey text.</p>
-<p>Mattermost Incident Management includes built-in slash commands:</p>
-<ul class="simple">
-<li><cite>/incident start</cite> - Start a new incident.</li>
-<li><cite>/incident end</cite> - Close the incident of that channel.</li>
-<li><cite>/incident restart</cite> - Restart a closed incident.</li>
-<li><cite>/incident check [checklist #] [item #]</cite> - Check/uncheck the checklist item.</li>
-<li><cite>/incident announce ~[channels]</cite> - Announce the current incident in other channels.</li>
-<li><cite>/incident list</cite> - List all your incidents.</li>
-<li><cite>/incident commander [&#64;username]</cite> - Show or change the current commander.</li>
-<li><cite>/incident info</cite> - Show a summary of the current incident.</li>
-<li><cite>/incident stage [next/prev]</cite> - Move to the next or previous stage.</li>
-</ul>
-<div class="section" id="adding-slash-commands-to-tasks">
-<h3><a class="toc-backref" href="#id4">Adding slash commands to tasks</a><a class="headerlink" href="#adding-slash-commands-to-tasks" title="Permalink to this headline">¶</a></h3>
-<p>Slash commands can be added to tasks to initiate actions as part of your incident response playbook.</p>
-<p>Here are some examples:</p>
-<ul class="simple">
-<li>Add a task called <strong>Sync up</strong> with the slash command <cite>/zoom hello</cite>. Running that slash command initiates a Zoom call in the incident channel. If you’ve installed Jitsi, you could use <cite>/jitsi hello</cite>.</li>
-</ul>
-<p>![Tasks and slash commands](../assets/stage_task_slashcommand.png)</p>
-<ul class="simple">
-<li>One of your tasks may require the header to be changed to reflect a new status. Create a task called <strong>Change header</strong> with the slash command <cite>/header new header</cite>.</li>
-</ul>
-<p>![Tasks and slash commands](../assets/stage_task_header.png)</p>
-</div>
-</div>
+<p>The Mattermost Incident Management documentation can be found <a class="reference external" href="https://mattermost.gitbook.io/mattermost-incident-management">here</a>.</p>
 </div>
 
 
