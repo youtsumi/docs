@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Configuration Settings &mdash; Mattermost 5.28 documentation</title>
+  <title>Configuration Settings &mdash; Mattermost 5.29 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.28
+                5.29
               </div>
             
           
@@ -5585,6 +5585,21 @@
 <p>There are a number of settings customizable in <code class="docutils literal notranslate"><span class="pre">config.json</span></code> unavailable in the System Console and require updating from the file itself.</p>
 <div class="section" id="service-settings">
 <h3><a class="toc-backref" href="#id133">Service Settings</a><a class="headerlink" href="#service-settings" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="automatically-follow-threads">
+<h4>Automatically Follow Threads<a class="headerlink" href="#automatically-follow-threads" title="Permalink to this headline">¶</a></h4>
+<p>This setting has been added as a requirement to support [Collapsed Reply Threads](<a class="reference external" href="https://docs.google.com/presentation/d/1QSrPws3N8AMSjVyOKp15FKT7O0fGMSx8YidjSDS4Wng/edit#slide=id.g2f0aecc189_0_245">https://docs.google.com/presentation/d/1QSrPws3N8AMSjVyOKp15FKT7O0fGMSx8YidjSDS4Wng/edit#slide=id.g2f0aecc189_0_245</a>) (releasing in beta in Q1 2021) and may affect server performance. It is recommended to review our [documentation on hardware requirements](<a class="reference external" href="https://docs.mattermost.com/install/requirements.html#hardware-requirements">https://docs.mattermost.com/install/requirements.html#hardware-requirements</a>) to ensure your servers are appropriately scaled for the size of your user base.</p>
+<p><strong>True</strong>: Threads a user starts, participates in or is mentioned in are automatically followed. A new <code class="docutils literal notranslate"><span class="pre">threads</span></code> table is added in the database that tracks followed threads for each user, in addition to read or unread state of each followed thread.</p>
+<p><strong>False</strong>: Threads are not automatically followed and Collapsed Reply Threads cannot be enabled (releasing in beta in Q1 2021).</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>This feature’s <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is <code class="docutils literal notranslate"><span class="pre">&quot;ThreadAutoFollow&quot;:</span> <span class="pre">true</span></code> with options <code class="docutils literal notranslate"><span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">false</span></code>.</td>
+</tr>
+</tbody>
+</table>
+</div>
 <div class="section" id="data-prefetch">
 <h4>Data Prefetch<a class="headerlink" href="#data-prefetch" title="Permalink to this headline">¶</a></h4>
 <p><strong>True</strong>: Messages in all unread channels are pre-loaded from the server whenever the client reconnects to the network to eliminate loading time when users switch to unread channels.</p>

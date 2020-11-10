@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Advanced Permissions (E10/E20) &mdash; Mattermost 5.28 documentation</title>
+  <title>Advanced Permissions (E10/E20) &mdash; Mattermost 5.29 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.28
+                5.29
               </div>
             
           
@@ -261,13 +261,7 @@
             
   <div class="section" id="advanced-permissions-e10-e20">
 <h1>Advanced Permissions (E10/E20)<a class="headerlink" href="#advanced-permissions-e10-e20" title="Permalink to this headline">¶</a></h1>
-<p>Mattermost Admins can use Advanced Permissions to customize which users can perform specific actions, such as creating teams, managing channels, and configuring webhooks. The Mattermost permission system is based on a modified RBAC (role-based access control) architecture, using roles to determine which users have the ability to perform various actions.</p>
-<p>Two permission schemes are provided in Mattermost:</p>
-<ul class="simple">
-<li>System Scheme: Applies permissions universally across all teams and channels.</li>
-<li>Team Override Schemes: Allow admins to customize permissions for each team.</li>
-</ul>
-<p>This document describes the types of permissions that can be given to users of Mattermost using schemes as well as channel settings and roles. The <a class="reference external" href="https://docs.mattermost.com/deployment/permissions-backend.html">permissions backend documentation</a> provides additional technical details around permissions.</p>
+<p>Advanced permissions offer Admins a way to restrict actions in Mattermost to authorized users only. The Mattermost permission system is based on a modified RBAC (role-based access control) architecture and will be rolled out over a number of server releases, starting with Mattermost server v5.0. The permissions interfaces can be accessed in <strong>System Console &gt; User Management &gt; Permissions</strong> (or <strong>System Console &gt; Advanced Permissions</strong> in versions prior to 5.12). The channel permissions interface is accessed in <strong>System Console &gt; User Management &gt; Channels</strong>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This document applies to Mattermost Server version 5.0 and later. For previous versions, see <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#policy">permission settings available in the System Console &gt; Policy page</a>.</p>
@@ -280,7 +274,7 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#channel-permissions" id="id4">Channel Permissions</a><ul>
-<li><a class="reference internal" href="#channel-moderation-beta-e20" id="id5">Channel Moderation (Beta) (E20)</a></li>
+<li><a class="reference internal" href="#channel-moderation-e20" id="id5">Channel Moderation (E20)</a></li>
 <li><a class="reference internal" href="#supplementary-roles-e20" id="id6">Supplementary Roles (E20)</a></li>
 </ul>
 </li>
@@ -312,28 +306,28 @@
 <li><strong>Team Administrators:</strong> Permissions apply to all Team Admins, in all teams.</li>
 </ul>
 <p>To override the System Scheme default permissions in a specific team, you must set up a Team Override Scheme.</p>
-<p>You can access the System Scheme interface in <strong>System Console &gt; User Management &gt; Permissions &gt; System Scheme</strong> (or <strong>System Console &gt; Advanced Permissions &gt; System Scheme</strong> in versions prior to 5.12).</p>
+<p><strong>System Scheme Interface</strong></p>
+<p>The interface for editing permissions in the System Scheme, with panels for Guests (if enabled), All Members, Channel Administrators, Team Administrators, and System Administrators is available in <strong>System Console &gt; User Management &gt; Permissions &gt; System Scheme</strong> (or <strong>System Console &gt; Advanced Permissions &gt; System Scheme</strong> in versions prior to 5.12).</p>
 <img alt="../_images/system-scheme.png" src="../_images/system-scheme.png" />
 </div>
 <div class="section" id="team-override-schemes-e20">
 <h3><a class="toc-backref" href="#contents">Team Override Schemes (E20)</a><a class="headerlink" href="#team-override-schemes-e20" title="Permalink to this headline">¶</a></h3>
 <p><em>Available in Enterprise Edition E20</em></p>
-<p>On systems with multiple <a class="reference external" href="https://docs.mattermost.com/help/getting-started/creating-teams.html">Mattermost teams</a>, each team may operate and collaborate in a unique way. Team Override Schemes give Admins the flexibility to tailor permissions to the needs of each team.</p>
-<p>When you use this permission scheme:</p>
+<p>Using these permissions overrides the default System Scheme permissions in specific teams for All Members, Channel Adminstrators, and Team Administrators.</p>
 <ul class="simple">
 <li>The permissions granted in a Team Override Scheme apply only in the teams which are assigned to the scheme.</li>
 <li>The System Scheme does not apply to teams that are added to a Team Override Scheme.</li>
 <li>Teams can only belong to one Team Override Scheme.</li>
 </ul>
-<p>You can access the Team Override Scheme interface in <strong>System Console &gt; User Management &gt; Permissions &gt; Team Override Schemes</strong> (or <strong>System Console &gt; Advanced Permissions &gt; Permissions Schemes &gt; Team Override Scheme</strong> in versions prior to 5.12).</p>
+<p><strong>Team Override Schemes Interface</strong></p>
+<p>The interface for naming, assigning teams, and editing permissions in a Team Override Scheme, with panels for All Members, Channel Administrators, and Team Administrators is available in <strong>System Console &gt; User Management &gt; Permissions &gt; Team Override Schemes</strong> (or <strong>System Console &gt; Advanced Permissions &gt; Permissions Schemes &gt; Team Override Scheme</strong> in versions prior to 5.12).</p>
 <img alt="../_images/team-scheme.png" src="../_images/team-scheme.png" />
 </div>
 </div>
 <div class="section" id="channel-permissions">
 <h2><a class="toc-backref" href="#contents">Channel Permissions</a><a class="headerlink" href="#channel-permissions" title="Permalink to this headline">¶</a></h2>
-<p>The channel permissions interface is accessed in <strong>System Console &gt; User Management &gt; Channels</strong>.</p>
-<div class="section" id="channel-moderation-beta-e20">
-<h3><a class="toc-backref" href="#contents">Channel Moderation (Beta) (E20)</a><a class="headerlink" href="#channel-moderation-beta-e20" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="channel-moderation-e20">
+<h3><a class="toc-backref" href="#contents">Channel Moderation (E20)</a><a class="headerlink" href="#channel-moderation-e20" title="Permalink to this headline">¶</a></h3>
 <p>This content has moved to <a class="reference external" href="https://docs.mattermost.com/deployment/team-channel-management.html">Team and Channel Management</a>.</p>
 </div>
 <div class="section" id="supplementary-roles-e20">
@@ -493,7 +487,7 @@
 <li><strong>Permission:</strong> The ability to execute certain actions. Permissions are granted to roles.</li>
 <li><strong>Roles:</strong> A set of permissions. Users or groups are assigned to roles.</li>
 <li><strong>Group:</strong> A set of users, usually synced from AD/LDAP. Groups are assigned to roles in the context of teams, channels, or system-wide.</li>
-<li><strong>Default Roles:</strong> All Members, Guests (if enabled), Channel Admins, Team Admins, System Admins.</li>
+<li><strong>Default Roles:</strong> All Members, Guests (if enabled), Channel Administrators, Team Administrators, System Administrators.</li>
 <li><strong>System Scheme:</strong> A set of default roles that apply system-wide.</li>
 <li><strong>Team Override Scheme:</strong> A set of default roles that apply only in the team specified. Permissions granted to roles in a team scheme override roles in the system scheme.</li>
 <li><strong>System-wide:</strong> Applies across the entire system, including all teams of which the user is a member.</li>
