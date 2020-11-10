@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Additional System Admin Roles (E20) &mdash; Mattermost 5.29 documentation</title>
+  <title>Additional System Admin Roles (E20) &mdash; Mattermost 5.28 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.29
+                5.28
               </div>
             
           
@@ -159,12 +159,15 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Administrator's Guide</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="bulk-loading.html">Bulk Loading Data</a></li>
@@ -175,6 +178,7 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Additional System Admin Roles (E20)</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#assigning-admin-roles">Assigning Admin Roles</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#editing-privileges-of-admin-roles-advanced">Editing Privileges of Admin Roles (Advanced)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#admin-roles-and-privileges">Admin Roles and Privileges</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#frequently-asked-questions">Frequently Asked Questions</a></li>
 </ul>
 </li>
@@ -204,9 +208,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/education.html">Training and Education</a></li>
 </ul>
 
             
@@ -240,7 +244,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
     
-      <li><a href="../guides/administrator.html">Administrator’s Guide</a> &raquo;</li>
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
     
     <li>Additional System Admin Roles (E20)</li>
     <li class="wy-breadcrumbs-aside">
@@ -364,6 +368,46 @@
 <p><code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">permissions</span> <span class="pre">remove</span> <span class="pre">system_user_manager</span> <span class="pre">sysconsole_read_authentication</span></code></p>
 <p><strong>To remove write access to the Authentication section of the System Console for all users with the User Manager role:</strong></p>
 <p><code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">permissions</span> <span class="pre">remove</span> <span class="pre">system_user_manager</span> <span class="pre">sysconsole_write_authentication</span></code></p>
+</div>
+<div class="section" id="admin-roles-and-privileges">
+<h2>Admin Roles and Privileges<a class="headerlink" href="#admin-roles-and-privileges" title="Permalink to this headline">¶</a></h2>
+<p><strong>Roles</strong></p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">system_manager</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">system_user_manager</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">system_read_only_admin</span></code></li>
+</ul>
+<p><strong>Privileges</strong></p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_READ_ABOUT</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_WRITE_ABOUT</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_READ_REPORTING</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_WRITE_REPORTING</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_READ_USERMANAGEMENT_USERS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_WRITE_USERMANAGEMENT_USERS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_READ_USERMANAGEMENT_GROUPS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_WRITE_USERMANAGEMENT_GROUPS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_READ_USERMANAGEMENT_TEAMS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_WRITE_USERMANAGEMENT_TEAMS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_READ_USERMANAGEMENT_CHANNELS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_WRITE_USERMANAGEMENT_CHANNELS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_READ_USERMANAGEMENT_PERMISSIONS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_WRITE_USERMANAGEMENT_PERMISSIONS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_READ_ENVIRONMENT</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_WRITE_ENVIRONMENT</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_READ_SITE</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_WRITE_SITE</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_READ_AUTHENTICATION</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_WRITE_AUTHENTICATION</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_READ_PLUGINS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_WRITE_PLUGINS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_READ_INTEGRATIONS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_WRITE_INTEGRATIONS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_READ_COMPLIANCE</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_WRITE_COMPLIANCE</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_READ_EXPERIMENTAL</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_WRITE_EXPERIMENTAL</span></code></li>
+</ul>
 </div>
 <div class="section" id="frequently-asked-questions">
 <h2>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h2>
