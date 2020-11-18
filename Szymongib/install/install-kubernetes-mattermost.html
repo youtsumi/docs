@@ -342,7 +342,8 @@ pointing to the address you just copied. For example, on AWS you would do this w
 <div class="section" id="configuring-external-database-and-filestore-recommended">
 <h2>Configuring external database and filestore (Recommended)<a class="headerlink" href="#configuring-external-database-and-filestore-recommended" title="Permalink to this headline">¶</a></h2>
 <p>When installing Mattermost using the Mattermost Operator in a production scenario, it’s recommended that you use an external database and filestore.</p>
-<p><strong>1. Create database secret</strong></p>
+<div class="section" id="create-database-secret">
+<h3>1. Create database secret<a class="headerlink" href="#create-database-secret" title="Permalink to this headline">¶</a></h3>
 <p>The database secret needs to be created in the namespace that will hold the Mattermost installation.
 The secret should contain the following data:</p>
 <table border="1" class="docutils">
@@ -389,7 +390,9 @@ The secret should contain the following data:</p>
 <p class="last">For PostgreSQL the connection is checked with <a class="reference external" href="https://www.postgresql.org/docs/9.3/app-pg-isready.html">pg_isready</a> so the <code class="docutils literal notranslate"><span class="pre">DB_CONNECTION_CHECK_URL</span></code> is the same as connection string.
 For MySQL the check is performed via HTTP call therefore <code class="docutils literal notranslate"><span class="pre">DB_CONNECTION_CHECK_URL</span></code> should be an HTTP URL.</p>
 </div>
-<p><strong>2. Create filestore secret</strong></p>
+</div>
+<div class="section" id="create-filestore-secret">
+<h3>2. Create filestore secret<a class="headerlink" href="#create-filestore-secret" title="Permalink to this headline">¶</a></h3>
 <p>The filestore secret needs to be created in the namespace that will hold the Mattermost installation.
 The secret should contain the following data:</p>
 <table border="1" class="docutils">
@@ -426,7 +429,9 @@ The secret should contain the following data:</p>
 <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Opaque</span>
 </pre></div>
 </div>
-<p><strong>3. Adjust cluster installation</strong></p>
+</div>
+<div class="section" id="adjust-cluster-installation">
+<h3>3. Adjust cluster installation<a class="headerlink" href="#adjust-cluster-installation" title="Permalink to this headline">¶</a></h3>
 <p>To instruct Mattermost Operator to use the external database, modify the following fields:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">spec</span><span class="p">:</span>
 <span class="nn">...</span>
@@ -479,6 +484,7 @@ The secret should contain the following data:</p>
     <span class="nt">username</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
     <span class="nt">password</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="restoring-an-existing-mattermost-mysql-database">
