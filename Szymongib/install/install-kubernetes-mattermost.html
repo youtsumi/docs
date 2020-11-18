@@ -341,10 +341,10 @@ pointing to the address you just copied. For example, on AWS you would do this w
 <p>Navigate to the <code class="docutils literal notranslate"><span class="pre">ingressName</span></code> URL in your browser and use Mattermost.</p>
 <div class="section" id="configuring-external-database-and-filestore-recommended">
 <h2>Configuring external database and filestore (Recommended)<a class="headerlink" href="#configuring-external-database-and-filestore-recommended" title="Permalink to this headline">¶</a></h2>
-<p>When installing Mattermost with Mattermost Operator for production scenario it is recommended to use an external database and filestore.</p>
+<p>When installing Mattermost using the Mattermost Operator in a production scenario, it’s recommended that you use an external database and filestore.</p>
 <p><strong>1. Create database Secret</strong></p>
-<p>The database Secret needs to be created in the namespace that will hold the Mattermost Installation.
-The Secret should contain the following data:</p>
+<p>The database secret needs to be created in the namespace that will hold the Mattermost installation.
+The secret should contain the following data:</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="33%" />
@@ -372,7 +372,7 @@ The Secret should contain the following data:</p>
 </tr>
 </tbody>
 </table>
-<p>Example Secret for AWS Aurora compatible with PostgreSQL:</p>
+<p>Example secret for AWS Aurora compatible with PostgreSQL:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
 <span class="nt">data</span><span class="p">:</span>
   <span class="nt">DB_CONNECTION_CHECK_URL</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">cG9zdGdyZXM6Ly91c2VyOnN1cGVyX3NlY3JldF9wYXNzd29yZEBteS1kYXRhYmFzZS5jbHVzdGVyLWFiY2QudXMtZWFzdC0xLnJkcy5hbWF6b25hd3MuY29tOjU0MzIvbWF0dGVybW9zdD9jb25uZWN0X3RpbWVvdXQ9MTAK</span>
@@ -387,11 +387,11 @@ The Secret should contain the following data:</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">For PostgreSQL the connection is checked with <a class="reference external" href="https://www.postgresql.org/docs/9.3/app-pg-isready.html">pg_isready</a> so the <code class="docutils literal notranslate"><span class="pre">DB_CONNECTION_CHECK_URL</span></code> is the same as connection string.
-For MySQL the check is performed via HTTP call therefore <code class="docutils literal notranslate"><span class="pre">DB_CONNECTION_CHECK_URL</span></code> should be an HTTP url.</p>
+For MySQL the check is performed via HTTP call therefore <code class="docutils literal notranslate"><span class="pre">DB_CONNECTION_CHECK_URL</span></code> should be an HTTP URL.</p>
 </div>
 <p><strong>2. Create filestore Secret</strong></p>
-<p>The filestore Secret needs to be created in the namespace that will hold the Mattermost Installation.
-The Secret should contain the following data:</p>
+<p>The filestore secret needs to be created in the namespace that will hold the Mattermost installation.
+The secret should contain the following data:</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="33%" />
@@ -415,7 +415,7 @@ The Secret should contain the following data:</p>
 </tr>
 </tbody>
 </table>
-<p>Example Secret for AWS S3:</p>
+<p>Example secret for AWS S3:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
 <span class="nt">data</span><span class="p">:</span>
   <span class="nt">accesskey</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QUNDRVNTX0tFWQo=</span>
@@ -452,7 +452,7 @@ The Secret should contain the following data:</p>
       <span class="nt">value</span><span class="p">:</span> <span class="s">&quot;true&quot;</span>
 </pre></div>
 </div>
-<p>Example Cluster Installation configured with both external databases and filestore:</p>
+<p>Example cluster installation configured with both external databases and filestore:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mattermost.com/v1alpha1</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterInstallation</span>
 <span class="nt">metadata</span><span class="p">:</span>
