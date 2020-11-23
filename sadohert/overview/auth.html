@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Corporate Directory Integration &mdash; Mattermost 5.27 documentation</title>
+  <title>Corporate Directory Integration &mdash; Mattermost 5.29 documentation</title>
   
 
   
@@ -32,7 +32,7 @@
   <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Certifications and Compliance Overview" href="compliance.html" />
-    <link rel="prev" title="Licensing and Subscription" href="license-and-subscription.html" />
+    <link rel="prev" title="Mattermost Cloud Overview" href="mattermost-cloud-overview.html" />
 	<!-- Bizible Script -->
 	<script src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
 
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.27
+                5.29
               </div>
             
           
@@ -161,14 +161,13 @@
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Overview</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="product.html">Product Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="security.html">Security Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="architecture.html">Architecture Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="integrations.html">Integrations Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="license-and-subscription.html">Licensing and Subscription</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mattermost-cloud-overview.html">Mattermost Cloud Overview</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Corporate Directory Integration</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#basic-authentication">Basic authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#security-features-for-authentication">Security features for authentication</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#active-directory-ldap-authentication">Active Directory / LDAP authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#active-directory-ldap-authentication">Active Directory/LDAP authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#authentication-options-outside-of-a-private-network">Authentication options outside of a private network</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#future-authentication-methods">Future authentication methods</a></li>
 </ul>
@@ -177,11 +176,11 @@
 <li class="toctree-l2"><a class="reference internal" href="faq.html">Frequently Asked Questions (FAQ)</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/administrator.html">Administrator's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/education.html">Training and Education</a></li>
 </ul>
 
             
@@ -238,10 +237,10 @@
 <h2>Basic authentication<a class="headerlink" href="#basic-authentication" title="Permalink to this headline">¶</a></h2>
 <p>By default Mattermost offers authentication via email and password, which offers basic features including:</p>
 <ul class="simple">
-<li>Account sign-up using email and password</li>
-<li>Password reset via email</li>
-<li>Ability to use same credentials to sign-in to web, desktop app and mobile app experiences</li>
-<li>Ability to use username and password in place of email and password</li>
+<li>Account sign up using email and password.</li>
+<li>Password reset via email.</li>
+<li>Ability to use the same credentials to sign in to web, desktop, and mobile app experiences.</li>
+<li>Ability to use a username and password in place of email and password.</li>
 </ul>
 </div>
 <div class="section" id="security-features-for-authentication">
@@ -249,30 +248,32 @@
 <p>A core set of features is available with all authentication options to help increase security:</p>
 <ul class="simple">
 <li>Ability to <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#id33">set session length</a> to define how long a user can use Mattermost before needing to re-enter credentials.</li>
-<li>Ability for users to remotely sign-out of devices.</li>
-<li>Ability for IT admin to force sign-out of a user from devices.</li>
+<li>Ability for users to remotely sign out of devices.</li>
+<li>Ability for IT admin to force sign out of a user from devices.</li>
 <li>Ability to set rate limits on authentication API calls to deter password-guessing attacks.</li>
-<li>Ability to require multi-factor authentication on sign-in.</li>
+<li>Ability to require multi-factor authentication on sign in.</li>
 <li>For advanced deployments, password requirements for length and special characters can be added.</li>
 </ul>
 </div>
 <div class="section" id="active-directory-ldap-authentication">
-<h2>Active Directory / LDAP authentication<a class="headerlink" href="#active-directory-ldap-authentication" title="Permalink to this headline">¶</a></h2>
+<h2>Active Directory/LDAP authentication<a class="headerlink" href="#active-directory-ldap-authentication" title="Permalink to this headline">¶</a></h2>
 <p>AD/LDAP is the most popular corporate directory integration option for deploying Mattermost behind a corporate firewall. Features include:</p>
 <ul class="simple">
-<li>Account creation using AD/LDAP credentials</li>
-<li>AD/LDAP user filters to define which users get access to Mattermost in the form of a query</li>
-<li>Ability to use a low-privileged AD/LDAP account to run queries over a secure TLS or STARTTLS connection</li>
-<li>Attribute mapping to place First Name, Last Name, Nickname and other attributes from AD/LDAP into Mattermost</li>
-<li>Customization of login screen to specify whether users are logging in with email, username or other attribute</li>
-<li>Synchronization with AD/LDAP to disable, enable and update Mattermost users based on AD/LDAP</li>
+<li>Account creation using AD/LDAP credentials.</li>
+<li>AD/LDAP user filters to define which users get access to Mattermost in the form of a query.</li>
+<li>Ability to use a low-privileged AD/LDAP account to run queries over a secure TLS or STARTTLS connection.</li>
+<li>Attribute mapping to place First Name, Last Name, Nickname, and other attributes from AD/LDAP into Mattermost.</li>
+<li>Customization of login screen to specify whether users are logging in with email, username, or other attribute.</li>
+<li>Synchronization with AD/LDAP to disable, enable, and update Mattermost users based on AD/LDAP.</li>
 </ul>
-<p>Note:</p>
-<ul class="simple">
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
 <li>New user accounts are created when new users sign-in with their AD/LDAP credentials. You can optionally pre-create user accounts using the <a class="reference external" href="https://docs.mattermost.com/deployment/bulk-loading.html">bulk loading</a> tool.</li>
 <li>If you’re using email or username and password authentication <a class="reference external" href="https://docs.mattermost.com/deployment/sso-ldap.html#configure-ad-ldap-using-the-system-console-user-interface">users can switch to AD/LDAP manually</a>, and the <a class="reference external" href="https://docs.mattermost.com/administration/command-line-tools.html#mattermost-user-migrate-auth">conversion to AD/LDAP can also be done using the command line interface</a> by an IT admin.</li>
 </ul>
-<p>For very large AD/LDAP instances you can also configure max page size to divide a Mattermost AD/LDAP query into several pieces to not over-tax the authentication server when synchronizing.</p>
+</div>
+<p>For very large AD/LDAP instances you can also configure max page size to divide a Mattermost AD/LDAP query into several pieces to not overtax the authentication server when synchronizing.</p>
 </div>
 <div class="section" id="authentication-options-outside-of-a-private-network">
 <h2>Authentication options outside of a private network<a class="headerlink" href="#authentication-options-outside-of-a-private-network" title="Permalink to this headline">¶</a></h2>
@@ -304,7 +305,7 @@
         <a href="compliance.html" class="btn btn-neutral float-right" title="Certifications and Compliance Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="license-and-subscription.html" class="btn btn-neutral" title="Licensing and Subscription" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="mattermost-cloud-overview.html" class="btn btn-neutral" title="Mattermost Cloud Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
