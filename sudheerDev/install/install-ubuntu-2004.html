@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installing Mattermost on Ubuntu 20.04 LTS &mdash; Mattermost 5.28 documentation</title>
+  <title>Installing Mattermost on Ubuntu 20.04 LTS &mdash; Mattermost 5.29 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.28
+                5.29
               </div>
             
           
@@ -775,15 +775,13 @@ WantedBy=postgresql.service
 <ol class="arabic simple" start="3">
 <li>Install the security certificate. You can use <a class="reference external" href="https://letsencrypt.org/">Let’s Encrypt</a> to automatically install and setup the certificate, or you can specify your own certificate.</li>
 </ol>
+<p><strong>To use a Let’s Encrypt certificate</strong>:</p>
+<p>The certificate is retrieved the first time that a client tries to connect to the Mattermost server. Certificates are retrieved for any hostname a client tries to reach the server at.</p>
 <blockquote>
-<div><p><strong>To use a Let’s Encrypt certificate</strong>:</p>
-<blockquote>
-<div><p>The certificate is retrieved the first time that a client tries to connect to the Mattermost server. Certificates are retrieved for any hostname a client tries to reach the server at.</p>
-<ol class="loweralpha simple">
+<div><ol class="loweralpha simple">
 <li>Change the <strong>Use Let’s Encrypt</strong> setting to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</li>
 <li>Restart the Mattermost server for these changes to take effect.</li>
 </ol>
-</div></blockquote>
 </div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -802,6 +800,21 @@ WantedBy=postgresql.service
 <p class="first admonition-title">Note</p>
 <p class="last">Password-protected certificates are not supported.</p>
 </div>
+<p><strong>Using TLS on NGINX (as a proxy)</strong></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Do not set up TLS on Mattermost before before doing so for NGINX. It breaks the connection as the TLS prevents it from successfully communicating with the Mattermost server.</p>
+</div>
+<ul class="simple">
+<li>NGINX will act as a forward proxy to encrypt the traffic between the client and Mattermost server. After installing the SSL certificate, the incoming traffic will be handled via NGINX on port 443 exposed to the internet, proxy to the Mattermost server running on port 80.</li>
+<li>(Optional) Upstream encryption between NGINX to Mattermost server is allowed.</li>
+<li>Follow <a class="reference external" href="https://docs.nginx.com/nginx/admin-guide/security-controls/terminating-ssl-tcp/">NGINX’s guide on setting up SSL Termination for TCP Upstream Servers</a>.</li>
+</ul>
+<p>Other helpful resources:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://www.nginx.com/blog/nginx-ssl/">NGINX’s SSL blog</a></li>
+<li><a class="reference external" href="https://docs.nginx.com/nginx/admin-guide/security-controls/terminating-ssl-http/">NGINX’s SSLguide</a></li>
+</ul>
 </div>
 <div class="section" id="installing-nginx-server">
 <span id="install-nginx"></span><h2><a class="toc-backref" href="#install-and-configure-the-components-in-the-following-order-note-that-you-need-only-one-database-either-mysql-or-postgresql">Installing NGINX Server</a><a class="headerlink" href="#installing-nginx-server" title="Permalink to this headline">¶</a></h2>
