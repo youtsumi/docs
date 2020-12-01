@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installing the Operators &mdash; Mattermost 5.28 documentation</title>
+  <title>Installing the Operators &mdash; Mattermost 5.29 documentation</title>
   
 
   
@@ -131,7 +131,7 @@
             
             
               <div class="version">
-                5.28
+                5.29
               </div>
             
           
@@ -211,20 +211,19 @@
             
   <div class="section" id="installing-the-operators">
 <span id="install-kubernetes-operator"></span><h1>Installing the Operators<a class="headerlink" href="#installing-the-operators" title="Permalink to this headline">¶</a></h1>
-<p>The required operators are installed using kubectl and each operator is created in its own namespace. Shorter namespace names
-are recommended. You can install and run multiple Mattermost installations in the same cluster using different namespaces.</p>
+<p>The required operators are installed using kubectl and each operator is created in its own namespace. Shorter namespace names are recommended. You can install and run multiple Mattermost installations in the same cluster using different namespaces.</p>
 <p>The steps provided below include database and storage operators.</p>
-<p><strong>1. Install the MySQL Operator</strong></p>
+<p><strong>1. Install the MySQL operator</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ kubectl create ns mysql-operator
 $ kubectl apply -n mysql-operator -f https://raw.githubusercontent.com/mattermost/mattermost-operator/master/docs/mysql-operator/mysql-operator.yaml
 </pre></div>
 </div>
-<p><strong>2. Install the MinIO Operator</strong></p>
+<p><strong>2. Install the MinIO operator</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ kubectl create ns minio-operator
 $ kubectl apply -n minio-operator -f https://raw.githubusercontent.com/mattermost/mattermost-operator/master/docs/minio-operator/minio-operator.yaml
 </pre></div>
 </div>
-<p><strong>3. Install NGINX Ingress Controller</strong></p>
+<p><strong>3. Install NGINX ingress controller</strong></p>
 <p>Follow the instructions <a class="reference external" href="https://kubernetes.github.io/ingress-nginx/deploy/">here</a>.</p>
 <p><strong>4. Install the Mattermost Operator</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ kubectl create ns mattermost-operator
