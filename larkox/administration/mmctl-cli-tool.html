@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mmctl Command Line Tool (Beta) &mdash; Mattermost 5.25 documentation</title>
+  <title>mmctl Command Line Tool (Beta) &mdash; Mattermost 5.29 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.25
+                5.29
               </div>
             
           
@@ -159,12 +159,15 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Administrator's Guide</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a><ul class="current">
@@ -173,6 +176,8 @@
 <li class="toctree-l4"><a class="reference internal" href="#installing-mmctl">Installing mmctl</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#building-mmctl">Building mmctl</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#local-mode">Local mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#activate-local-mode">Activate local mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-local-mode">Using local mode</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#running-the-tests">Running the tests</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#authenticating-and-logging-in">Authenticating and logging in</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mmctl-bot">mmctl bot</a></li>
@@ -184,11 +189,13 @@
 <li class="toctree-l4"><a class="reference internal" href="#mmctl-group">mmctl group</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mmctl-group-channel">mmctl group channel</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mmctl-group-team">mmctl group team</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mmctl-integrity">mmctl integrity</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mmctl-ldap">mmctl ldap</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mmctl-license">mmctl license</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mmctl-logs">mmctl logs</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mmctl-permissions">mmctl permissions</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mmctl-plugin">mmctl plugin</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mmctl-plugin-marketplace">mmctl plugin marketplace</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mmctl-post">mmctl post</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mmctl-roles">mmctl roles</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mmctl-system">mmctl system</a></li>
@@ -202,6 +209,7 @@
 <li class="toctree-l3"><a class="reference internal" href="scripts.html">Scripts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="statistics.html">Statistics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../integrations/net-promoter-score.html">User Satisfaction Surveys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notices.html">In-Product Notices</a></li>
 <li class="toctree-l3"><a class="reference internal" href="health-check.html">Health Check</a></li>
 <li class="toctree-l3"><a class="reference internal" href="announcement-banner.html">Announcement Banner (E10)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="bulk-export.html">Bulk Export Tool</a></li>
@@ -212,12 +220,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#unofficial-enhancements">Unofficial Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/education.html">Training and Education</a></li>
 </ul>
 
             
@@ -251,7 +259,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
     
-      <li><a href="../guides/administrator.html">Administrator’s Guide</a> &raquo;</li>
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
     
     <li>mmctl Command Line Tool (Beta)</li>
     <li class="wy-breadcrumbs-aside">
@@ -269,14 +277,9 @@
             
   <div class="section" id="mmctl-command-line-tool-beta">
 <h1>mmctl Command Line Tool (Beta)<a class="headerlink" href="#mmctl-command-line-tool-beta" title="Permalink to this headline">¶</a></h1>
-<p>The mmctl tool is a remote CLI tool for Mattermost which is installed locally and uses the Mattermost API. Authentication
-is done with either login credentials or an authentication token.</p>
-<p>Being installed locally allows a System Admin to run CLI commands even in instances where there is no access to the
-server (e.g., via SSH). This tool is currently in beta and can be used alongside the Mattermost CLI tool.
-In the future, the Mattermost CLI tool will be deprecated.</p>
-<p>This feature was developed to a large extent by community contributions and we’d like to extend our gratitude to the contributors who have worked on this project. We are currently accepting pull requests for Help Wanted issues
-in the <a class="reference external" href="https://github.com/mattermost/mattermost-server/issues?q=is%3Aissue+is%3Aopen+label%3A%22Help+Wanted%22+label%3AArea%2Fmmctl">mattermost-server</a> repo. You can learn more about
-the unit test coverage campaign for mmctl in the <a class="reference external" href="https://mattermost.com/blog/unit-testing-mmctl-commands/">Unit testing mmctl commands</a> blog post.</p>
+<p>The mmctl tool is a remote CLI tool for Mattermost which is installed locally and uses the Mattermost API. Authentication is done with either login credentials or an authentication token.</p>
+<p>Being installed locally allows a System Admin to run CLI commands even in instances where there is no access to the server (e.g., via SSH). This tool is currently in beta and can be used alongside the Mattermost CLI tool. In the future, the Mattermost CLI tool will be deprecated.</p>
+<p>This feature was developed to a large extent by community contributions and we’d like to extend our gratitude to the contributors who have worked on this project. We are currently accepting pull requests for Help Wanted issues in the <a class="reference external" href="https://github.com/mattermost/mattermost-server/issues?q=is%3Aissue+is%3Aopen+label%3A%22Help+Wanted%22+label%3AArea%2Fmmctl">mattermost-server</a> repo. You can learn more about the unit test coverage campaign for mmctl in the <a class="reference external" href="https://mattermost.com/blog/unit-testing-mmctl-commands/">Unit testing mmctl commands</a> blog post.</p>
 <p><strong>Notes</strong></p>
 <ul class="simple">
 <li>Parameters in CLI commands are order-specific.</li>
@@ -294,6 +297,7 @@ the unit test coverage campaign for mmctl in the <a class="reference external" h
 <li><a class="reference internal" href="#mmctl-config">mmctl config</a> - Configuration Management</li>
 <li><a class="reference internal" href="#mmctl-docs">mmctl docs</a> - Generates mmctl documentation</li>
 <li><a class="reference internal" href="#mmctl-group">mmctl group</a> - Group Management</li>
+<li><a class="reference internal" href="#mmctl-integrity">mmctl integrity</a> - Database record integrity</li>
 <li><a class="reference internal" href="#mmctl-ldap">mmctl ldap</a> - LDAP Management</li>
 <li><a class="reference internal" href="#mmctl-license">mmctl license</a> - License Management</li>
 <li><a class="reference internal" href="#mmctl-logs">mmctl logs</a> - Log Management</li>
@@ -347,7 +351,15 @@ the unit test coverage campaign for mmctl in the <a class="reference external" h
 <h2>Local mode<a class="headerlink" href="#local-mode" title="Permalink to this headline">¶</a></h2>
 <p>Local mode allows platform administrators with access to the Mattermost server to run mmctl commands against the API without needing to have a user registered. To ensure secure usage of this API, the server exposes a local socket that only a user with access to the server’s file system can access. The requests coming from the socket are treated as authorized, so they can reach the handlers without requiring a user session.</p>
 <p>The API that the socket exposes follows the same specification that can be found <a class="reference external" href="https://api.mattermost.com">in the API documentation</a>, so mmctl is able to interact with it without needing any modifications. When a request comes in through the socket, it is flagged as local by the server, and this flag is taken into account when checking for session permissions to correctly authorize the sessions.</p>
+</div>
+<div class="section" id="activate-local-mode">
+<h2>Activate local mode<a class="headerlink" href="#activate-local-mode" title="Permalink to this headline">¶</a></h2>
 <p>To use local mode, the Mattermost server first needs to <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-local-mode">have local mode enabled</a>. When local mode is enabled, a socket is created at <code class="docutils literal notranslate"><span class="pre">/var/tmp/mattermost_local.socket</span></code> by default.</p>
+</div>
+<div class="section" id="using-local-mode">
+<h2>Using local mode<a class="headerlink" href="#using-local-mode" title="Permalink to this headline">¶</a></h2>
+<p>You need to append <code class="docutils literal notranslate"><span class="pre">--local</span></code> to the command you want to use or set the environment variable as <code class="docutils literal notranslate"><span class="pre">MMCTL_LOCAL=true</span></code>.</p>
+<p>In versions prior to 5.26, only the commands <code class="docutils literal notranslate"><span class="pre">config</span></code>, <code class="docutils literal notranslate"><span class="pre">plugin</span></code>, and <code class="docutils literal notranslate"><span class="pre">license</span></code> are available.</p>
 </div>
 <div class="section" id="running-the-tests">
 <h2>Running the tests<a class="headerlink" href="#running-the-tests" title="Permalink to this headline">¶</a></h2>
@@ -574,8 +586,7 @@ auth login https://mattermost.example.com --name local-server --access-token mya
 --strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
 </pre></div>
 </div>
-<p>Authenticate to a server (e.g. &gt;mmctl auth login <a class="reference external" href="https://test.mattermost.com">https://test.mattermost.com</a>), then enter your username and password
-(and MFA token if MFA is enabled on the account).</p>
+<p>Authenticate to a server (e.g. &gt;mmctl auth login <a class="reference external" href="https://test.mattermost.com">https://test.mattermost.com</a>), then enter your username and password (and MFA token if MFA is enabled on the account).</p>
 <p>Password</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ mmctl auth login https://community.mattermost.com --name community --username my-username --password mysupersecret
 </pre></div>
@@ -646,7 +657,7 @@ auth_service:
 <dd><ul class="first last simple">
 <li><a class="reference internal" href="#mmctl-bot-assign">mmctl bot assign</a> - Assign bot ownership</li>
 <li><a class="reference internal" href="#mmctl-bot-create">mmctl bot create</a> - Create a new bot</li>
-<li><a class="reference internal" href="#mmctl-bot-disable">mmctl bot disable</a> - Disble a bot</li>
+<li><a class="reference internal" href="#mmctl-bot-disable">mmctl bot disable</a> - Disable a bot</li>
 <li><a class="reference internal" href="#mmctl-bot-enable">mmctl bot enable</a> - Enable a bot</li>
 <li><a class="reference internal" href="#mmctl-bot-list">mmctl bot list</a> - List all bots</li>
 <li><a class="reference internal" href="#mmctl-bot-update">mmctl bot update</a> - Update bot configuration</li>
@@ -841,6 +852,7 @@ auth_service:
 <li><a class="reference internal" href="#mmctl-channel-list">mmctl channel list</a> - List all channels on specified teams</li>
 <li><a class="reference internal" href="#mmctl-channel-make-private">mmctl channel make_private</a> - Set a channel’s type to “private”</li>
 <li><a class="reference internal" href="#mmctl-channel-modify">mmctl channel modify</a> - Modify a channel’s type (private/public)</li>
+<li><a class="reference internal" href="#mmctl-channel-move">mmctl channel move</a> - Moves channels to the specified team</li>
 <li><a class="reference internal" href="#mmctl-channel-remove">mmctl channel remove</a> - Remove users from a channel</li>
 <li><a class="reference internal" href="#mmctl-channel-rename">mmctl channel rename</a> - Rename a channel</li>
 <li><a class="reference internal" href="#mmctl-channel-restore">mmctl channel restore</a> - Restore a channel from the archive</li>
@@ -884,8 +896,7 @@ auth_service:
 <h3>mmctl channel archive<a class="headerlink" href="#mmctl-channel-archive" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div>Archive one or multiple channels along with all related information including posts from the database. Channels can be
-specified by <code class="docutils literal notranslate"><span class="pre">[team]:[channel]</span></code> (i.e., myteam:mychannel) or by channel ID).</div></blockquote>
+<div>Archive one or multiple channels along with all related information including posts from the database. Channels can be specified by <code class="docutils literal notranslate"><span class="pre">[team]:[channel]</span></code> (i.e., myteam:mychannel) or by channel ID).</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl channel archive <span class="o">[</span>channels<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -967,8 +978,7 @@ channel create --team myteam --name mynewprivatechannel --display_name <span cla
 <h3>mmctl channel make_private<a class="headerlink" href="#mmctl-channel-make-private" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div>Set the type of a channel from public to private. Channel can be specified by <code class="docutils literal notranslate"><span class="pre">[team]:[channel]</span></code> (i.e., myteam:mychannel)
-or by channel ID.</div></blockquote>
+<div>Set the type of a channel from public to private. Channel can be specified by <code class="docutils literal notranslate"><span class="pre">[team]:[channel]</span></code> (i.e., myteam:mychannel) or by channel ID.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl channel make_private <span class="o">[</span>channel<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -993,7 +1003,7 @@ or by channel ID.</div></blockquote>
 <h3>mmctl channel modify<a class="headerlink" href="#mmctl-channel-modify" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div>Change the public/private type of a channel. Channel can be specified by [team]:[channel]. ie. myteam:mychannel or by channel ID.</div></blockquote>
+<div>Change the public/private type of a channel. Channel can be specified by <code class="docutils literal notranslate"><span class="pre">[team]:[channel]</span></code> (i.e., myteam:mychannel) or by channel ID.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl channel modify <span class="o">[</span>channel<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -1004,9 +1014,35 @@ channel modify channelId --public
 </pre></div>
 </div>
 <p><strong>Options</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help    <span class="nb">help</span> <span class="k">for</span> modify
-  --private   Convert the channel to a private channel
-  --public    Convert the channel to a public channel
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help  <span class="nb">help</span> <span class="k">for</span> modify
+--private   Convert the channel to a private channel
+--public    Convert the channel to a public channel
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
+--local                       allows communicating with the server through a unix socket
+--strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
+<div class="section" id="mmctl-channel-move">
+<h3>mmctl channel move<a class="headerlink" href="#mmctl-channel-move" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<blockquote>
+<div>Moves the provided channels to the specified team. Validates that all users in the channel belong to the target team. Incoming/Outgoing webhooks are moved     along with the channel. Channels can be specified by [team]:[channel]. ie. myteam:mychannel or by channel ID.</div></blockquote>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl channel move <span class="o">[</span>team<span class="o">]</span> <span class="o">[</span>channels<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>channel move newteam oldteam:mychannel
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help    <span class="nb">help</span> <span class="k">for</span> move
+--force       Remove users that are not members of target team before moving the channel.
 </pre></div>
 </div>
 <p><strong>Options inherited from parent commands</strong></p>
@@ -1322,7 +1358,7 @@ channel search --team myTeam myChannel
 <h3>mmctl command show<a class="headerlink" href="#mmctl-command-show" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div>Show a custom slash command. Commands can be specified by command ID. Returns command ID, team ID, trigger word, display name and creator username.</div></blockquote>
+<div>Show a custom slash command. Commands can be specified by command ID. Returns command ID, team ID, trigger word, display name, and creator username.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl <span class="nb">command</span> <span class="o">[</span>commandID<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -1430,6 +1466,7 @@ To configure your zsh shell to load completions <span class="k">for</span> each 
 <li><a class="reference internal" href="#mmctl-config-reset">mmctl config reset</a> - Reset the configuration</li>
 <li><a class="reference internal" href="#mmctl-config-set">mmctl config set</a> - Set the value of a configuration</li>
 <li><a class="reference internal" href="#mmctl-config-show">mmctl config show</a> - Writes the server configuration to STDOUT</li>
+<li><a class="reference internal" href="#mmctl-config-subpath">mmctl config subpath</a> - Update client asset loading to use the configured subpath</li>
 </ul>
 </dd>
 </dl>
@@ -1564,12 +1601,46 @@ To configure your zsh shell to load completions <span class="k">for</span> each 
 </pre></div>
 </div>
 </div>
+<div class="section" id="mmctl-config-subpath">
+<h3>mmctl config subpath<a class="headerlink" href="#mmctl-config-subpath" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<blockquote>
+<div>Update the hard-coded production client asset paths to take into account Mattermost running on a subpath. This command needs access to the Mattermost assets directory to be able to rewrite the paths.</div></blockquote>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl config subpath <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># you can rewrite the assets to use a subpath</span>
+mmctl config subpath --assets-dir /opt/mattermost/client --path /mattermost
+
+<span class="c1"># the subpath can have multiple steps</span>
+mmctl config subpath --assets-dir /opt/mattermost/client --path /my/custom/subpath
+
+<span class="c1"># or you can fallback to the root path passing /</span>
+mmctl config subpath --assets-dir /opt/mattermost/client --path /
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-a, --assets-dir string   directory of the Mattermost assets in the <span class="nb">local</span> filesystem
+-h, --help                <span class="nb">help</span> <span class="k">for</span> subpath
+-p, --path string         path to update the assets with
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
+--local                       allows communicating with the server through a unix socket
+--strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="mmctl-docs">
 <h2>mmctl docs<a class="headerlink" href="#mmctl-docs" title="Permalink to this headline">¶</a></h2>
 <p><strong>Description</strong></p>
 <blockquote>
-<div>Generates mmctl documentation</div></blockquote>
+<div>Generates mmctl documentation.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl docs <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -1861,6 +1932,32 @@ To configure your zsh shell to load completions <span class="k">for</span> each 
 </div>
 </div>
 </div>
+<div class="section" id="mmctl-integrity">
+<h2>mmctl integrity<a class="headerlink" href="#mmctl-integrity" title="Permalink to this headline">¶</a></h2>
+<p><strong>Description</strong></p>
+<blockquote>
+<div><p>Perform a relational integrity check which returns information about any orphaned record found.</p>
+<p><strong>Note:</strong></p>
+<p>This command can only be run using local mode.</p>
+</div></blockquote>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl integrity <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--confirm       Confirm you really want to run a <span class="nb">complete</span> integrity check that may temporarily harm system performance
+-h, --help      <span class="nb">help</span> <span class="k">for</span> integrity
+-v, --verbose   Show detailed information on integrity check results
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
+--local                       allows communicating with the server through a unix socket
+--strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
 <div class="section" id="mmctl-ldap">
 <h2>mmctl ldap<a class="headerlink" href="#mmctl-ldap" title="Permalink to this headline">¶</a></h2>
 <p>LDAP-related utilities.</p>
@@ -2092,7 +2189,11 @@ To configure your zsh shell to load completions <span class="k">for</span> each 
 <li><a class="reference internal" href="#mmctl-plugin-delete">mmctl plugin delete</a> - Remove plugins</li>
 <li><a class="reference internal" href="#mmctl-plugin-disable">mmctl plugin disable</a> - Disable plugins</li>
 <li><a class="reference internal" href="#mmctl-plugin-enable">mmctl plugin enable</a> - Enable plugins</li>
+<li><a class="reference internal" href="#mmctl-plugin-install-url">mmctl plugin install-url</a> - Install plugin from URL</li>
 <li><a class="reference internal" href="#mmctl-plugin-list">mmctl plugin list</a> - List plugins</li>
+<li><a class="reference internal" href="#mmctl-plugin-marketplace">mmctl plugin marketplace</a> - Management of Plugin Marketplace plugins</li>
+<li><a class="reference internal" href="#mmctl-plugin-marketplace-install">mmctl plugin marketplace install</a> - Install a plugin from the Plugin Marketplace</li>
+<li><a class="reference internal" href="#mmctl-plugin-marketplace-list">mmctl plugin marketplace list</a> - List Plugin Marketplace plugins</li>
 </ul>
 </dd>
 </dl>
@@ -2200,6 +2301,36 @@ To configure your zsh shell to load completions <span class="k">for</span> each 
 </pre></div>
 </div>
 </div>
+<div class="section" id="mmctl-plugin-install-url">
+<h3>mmctl plugin install-url<a class="headerlink" href="#mmctl-plugin-install-url" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<blockquote>
+<div>Supply one or multiple URLs to plugins compressed in a <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code> file. Plugins must be enabled in the server’s config settings.</div></blockquote>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl plugin install-url &lt;url&gt;... <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># You can install one plugin</span>
+$ mmctl plugin install-url https://example.com/mattermost-plugin.tar.gz
+
+<span class="c1"># Or install multiple in one go</span>
+$ mmctl plugin install-url https://example.com/mattermost-plugin-one.tar.gz https://example.com/mattermost-plugin-two.tar.gz
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-f, --force   overwrite a previously installed plugin with the same ID, <span class="k">if</span> any
+-h, --help    <span class="nb">help</span> <span class="k">for</span> install-url
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
+--local                       allows communicating with the server through a unix socket
+--strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
 <div class="section" id="mmctl-plugin-list">
 <h3>mmctl plugin list<a class="headerlink" href="#mmctl-plugin-list" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
@@ -2215,6 +2346,98 @@ To configure your zsh shell to load completions <span class="k">for</span> each 
 </div>
 <p><strong>Options</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help   <span class="nb">help</span> <span class="k">for</span> list
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
+--local                       allows communicating with the server through a unix socket
+--strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="mmctl-plugin-marketplace">
+<h2>mmctl plugin marketplace<a class="headerlink" href="#mmctl-plugin-marketplace" title="Permalink to this headline">¶</a></h2>
+<p>Management of Plugin Marketplace plugins.</p>
+<dl class="docutils">
+<dt>Child Commands</dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="#mmctl-plugin-marketplace-install">mmctl plugin marketplace install</a> - Install a plugin from the Plugin Marketplace</li>
+<li><a class="reference internal" href="#mmctl-plugin-marketplace-list">mmctl plugin marketplace list</a> - List plugins on the Plugin Marketplace</li>
+</ul>
+</dd>
+</dl>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help   <span class="nb">help</span> <span class="k">for</span> marketplace
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string                the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate   allows to use insecure TLS protocols, such as SHA-1
+--local                        allows communicating with the server through a unix socket
+--strict                       will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+<div class="section" id="mmctl-plugin-marketplace-install">
+<h3>mmctl plugin marketplace install<a class="headerlink" href="#mmctl-plugin-marketplace-install" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<blockquote>
+<div>Installs a plugin listed on the Plugin Marketplace server.</div></blockquote>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl plugin marketplace install &lt;id&gt; <span class="o">[</span>version<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># you can specify with both the plugin id and its version</span>
+$ mmctl plugin marketplace install jitsi <span class="m">2</span>.0.0
+
+<span class="c1"># if you don&#39;t specify the version, the latest one will be installed</span>
+$ mmctl plugin marketplace install jitsi
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help   <span class="nb">help</span> <span class="k">for</span> install
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
+--local                       allows communicating with the server through a unix socket
+--strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
+<div class="section" id="mmctl-plugin-marketplace-list">
+<h3>mmctl plugin marketplace list<a class="headerlink" href="#mmctl-plugin-marketplace-list" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<blockquote>
+<div>Gets all plugins from the Plugin Marketplace server, merging data from locally installed plugins as well as prepackaged plugins shipped with the server.</div></blockquote>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl plugin marketplace list <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># You can list all the plugins</span>
+$ mmctl plugin marketplace list --all
+
+<span class="c1"># Pagination options can be used too</span>
+$ mmctl plugin marketplace list --page <span class="m">2</span> --per-page <span class="m">10</span>
+
+<span class="c1"># Filtering will narrow down the search</span>
+$ mmctl plugin marketplace list --filter jit
+
+<span class="c1"># You can only retrieve local plugins</span>
+$ mmctl plugin marketplace list --local-only
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--all             Fetch all plugins. --page flag will be ignore <span class="k">if</span> provided
+--filter string   Filter plugins by ID, name or description
+-h, --help        <span class="nb">help</span> <span class="k">for</span> list
+--local-only      Only retrieve <span class="nb">local</span> plugins
+--page int        Page number to fetch <span class="k">for</span> the list of users
+--per-page int    Number of users to be fetched <span class="o">(</span>default <span class="m">200</span><span class="o">)</span>
 </pre></div>
 </div>
 <p><strong>Options inherited from parent commands</strong></p>
@@ -2318,7 +2541,7 @@ post list myteam:mychannel --number <span class="m">20</span>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help   <span class="nb">help</span> <span class="k">for</span> system
 </pre></div>
 </div>
-<p><strong>Options Inherited from Parent Commands</strong></p>
+<p><strong>Options inherited from parent commands</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string                the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
 --insecure-sha1-intermediate   allows to use insecure TLS protocols, such as SHA-1
 --local                        allows communicating with the server through a unix socket
@@ -2342,7 +2565,7 @@ post list myteam:mychannel --number <span class="m">20</span>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help   <span class="nb">help</span> <span class="k">for</span> clearbusy
 </pre></div>
 </div>
-<p><strong>Options Inherited from Parent Commands</strong></p>
+<p><strong>Options inherited from parent commands</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string                the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
 --insecure-sha1-intermediate   allows to use insecure TLS protocols, such as SHA-1
 --local                        allows communicating with the server through a unix socket
@@ -2367,7 +2590,7 @@ post list myteam:mychannel --number <span class="m">20</span>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help   <span class="nb">help</span> <span class="k">for</span> getbusy
 </pre></div>
 </div>
-<p><strong>Options Inherited from Parent Commands</strong></p>
+<p><strong>Options inherited from parent commands</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string                the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
 --insecure-sha1-intermediate   allows to use insecure TLS protocols, such as SHA-1
 --local                        allows communicating with the server through a unix socket
@@ -2389,11 +2612,11 @@ post list myteam:mychannel --number <span class="m">20</span>
 </pre></div>
 </div>
 <p><strong>Options</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help   <span class="nb">help</span> <span class="k">for</span> setbusy
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help           <span class="nb">help</span> <span class="k">for</span> setbusy
 -s, --seconds uint   Number of seconds <span class="k">until</span> server is automatically marked as not busy <span class="o">(</span>default <span class="m">3600</span><span class="o">)</span>
 </pre></div>
 </div>
-<p><strong>Options Inherited from Parent Commands</strong></p>
+<p><strong>Options inherited from parent commands</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string                the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
 --insecure-sha1-intermediate   allows to use insecure TLS protocols, such as SHA-1
 --local                        allows communicating with the server through a unix socket
@@ -2802,11 +3025,13 @@ team create --name private --display_name <span class="s2">&quot;My New Private 
 <li><a class="reference internal" href="#mmctl-user-activate">mmctl user activate</a> - Activate a user</li>
 <li><a class="reference internal" href="#mmctl-user-create">mmctl user create</a> - Create user</li>
 <li><a class="reference internal" href="#mmctl-user-deactivate">mmctl user deactivate</a> - Deactivate user</li>
+<li><a class="reference internal" href="#mmctl-user-delete">mmctl user delete</a> - Delete users</li>
+<li><a class="reference internal" href="#mmctl-user-deleteall">mmctl user deleteall</a> - Delete all users and all posts (local command only)</li>
 <li><a class="reference internal" href="#mmctl-user-email">mmctl user email</a> - Set user email</li>
 <li><a class="reference internal" href="#mmctl-user-invite">mmctl user invite</a> - Invite user</li>
 <li><a class="reference internal" href="#mmctl-user-list">mmctl user list</a> - List users</li>
 <li><a class="reference internal" href="#mmctl-user-reset-password">mmctl user reset_password</a> - Reset user password</li>
-<li><a class="reference internal" href="#mmctl-user-resetmfa">mmctl user resetmfa</a> - Reset user’s MFA token</li>
+<li><a class="reference internal" href="#mmctl-user-resetmfa">mmctl user resetmfa</a> - Reset a user’s MFA token</li>
 <li><a class="reference internal" href="#mmctl-user-search">mmctl user search</a> - Search for a user</li>
 </ul>
 </dd>
@@ -2900,6 +3125,61 @@ user deactivate username
 </pre></div>
 </div>
 </div>
+<div class="section" id="mmctl-user-delete">
+<h3>mmctl user delete<a class="headerlink" href="#mmctl-user-delete" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<blockquote>
+<div>Permanently delete some users. Permanently deletes one or multiple users along with all related information including posts from the database.</div></blockquote>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl user delete <span class="o">[</span>users<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>user delete user@example.com
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--confirm   Confirm you really want to delete the user and a DB backup has been performed
+-h, --help  <span class="nb">help</span> <span class="k">for</span> delete
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
+--local                       allows communicating with the server through a unix socket
+--strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
+<div class="section" id="mmctl-user-deleteall">
+<h3>mmctl user deleteall<a class="headerlink" href="#mmctl-user-deleteall" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<blockquote>
+<div><p>Permanently delete all users and all related information including posts.</p>
+<p><strong>Note:</strong></p>
+<p>This command can only be run using local mode.</p>
+</div></blockquote>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl user deleteall <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>user deleteall
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--confirm   Confirm you really want to delete the user and a DB backup has been performed
+-h, --help  <span class="nb">help</span> <span class="k">for</span> delete
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
+--local                       allows communicating with the server through a unix socket
+--strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
 <div class="section" id="mmctl-user-email">
 <h3>mmctl user email<a class="headerlink" href="#mmctl-user-email" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
@@ -2930,8 +3210,7 @@ user activate username
 <h3>mmctl user invite<a class="headerlink" href="#mmctl-user-invite" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div>Send an email invite to a user, to join a team. You can invite a user to multiple teams by listing
-them. You can specify teams by name or ID.</div></blockquote>
+<div>Send an email invite to a user, to join a team. You can invite a user to multiple teams by listing them. You can specify teams by name or ID.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl user invite <span class="o">[</span>email<span class="o">]</span> <span class="o">[</span>teams<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -3010,8 +3289,7 @@ user invite user@example.com myteam1 myteam2
 <h3>mmctl user resetmfa<a class="headerlink" href="#mmctl-user-resetmfa" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div>Turn off multi-factor authentication for a user. If MFA enforcement is enabled, the
-user will be forced to re-enable MFA as soon as they login.</div></blockquote>
+<div>Turn off multi-factor authentication for a user. If MFA enforcement is enabled, the user will be forced to re-enable MFA as soon as they login.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl user resetmfa <span class="o">[</span>users<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>

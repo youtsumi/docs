@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Certificate-Based Authentication (Experimental) &mdash; Mattermost 5.25 documentation</title>
+  <title>Certificate-Based Authentication (Experimental) &mdash; Mattermost 5.29 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.25
+                5.29
               </div>
             
           
@@ -159,12 +159,15 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Administrator's Guide</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="bulk-loading.html">Bulk Loading Data</a></li>
@@ -172,9 +175,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../administration/hipchat-migration-guidelines.html">Migrating from HipChat to Mattermost</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../administration/migration-announcement-email-template.html">Migration Announcement Email</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../administration/user-provisioning.html">Provisioning Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="admin-roles.html">Additional System Admin Roles (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-ldap.html">Active Directory/LDAP Setup (E10/E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auth.html">Multi-factor Authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ldap-group-sync.html">AD/LDAP Groups (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html">Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-saml.html">SAML Single Sign-On (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-saml-technical.html">SAML Single-Sign-On (E20): Technical Documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-gitlab.html">GitLab Single Sign-On</a></li>
@@ -198,12 +203,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#unofficial-enhancements">Unofficial Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/education.html">Training and Education</a></li>
 </ul>
 
             
@@ -237,7 +242,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
     
-      <li><a href="../guides/administrator.html">Administrator’s Guide</a> &raquo;</li>
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
     
     <li>Certificate-Based Authentication (Experimental)</li>
     <li class="wy-breadcrumbs-aside">
@@ -257,7 +262,7 @@
 <h1>Certificate-Based Authentication (Experimental)<a class="headerlink" href="#certificate-based-authentication-experimental" title="Permalink to this headline">¶</a></h1>
 <p><em>Available as an experimental feature in Enterprise Edition E20.</em></p>
 <p>Certificate-based authentication (CBA) can be used to identify a user or a device before granting access to Mattermost, providing an additional layer of security to access the system.</p>
-<p>Follow these steps to configure user CBA for your browser, Mattermost Desktop Apps and the Mattermost iOS App. Support for the Mattermost Android App is planned. It is expected that you can manage certificate distribution for each personal device (BYOD) and their lifecycle management with a service like <a class="reference external" href="https://www.openssl.org/">OpenSSL</a>.</p>
+<p>Follow these steps to configure user CBA for your browser and Mattermost Desktop Apps. Support for the Mattermost iOS and Android Apps is planned. It is expected that you can manage certificate distribution for each personal device (BYOD) and their lifecycle management with a service like <a class="reference external" href="https://www.openssl.org/">OpenSSL</a>.</p>
 <p>Before you begin, follow the <a class="reference external" href="https://docs.mattermost.com/guides/administrator.html#installing-mattermost">official guides to install Mattermost</a> on your system, including NGINX configuration as a proxy with SSL and HTTP/2, and a valid SSL certificate such as Let’s Encrypt.</p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
@@ -299,7 +304,6 @@
 </div>
 <ol class="arabic simple" start="4">
 <li>Go to <a class="reference external" href="https://example.mattermost.com">https://example.mattermost.com</a> and try to log in. The server should require the x.509 cert to have an <code class="docutils literal notranslate"><span class="pre">emailAddress</span></code> equal to the Mattermost user’s email.</li>
-<li>Import the certificate into the Mattermost iOS App and use it for mutual TLS authentication. You can <a class="reference external" href="https://drive.google.com/file/d/1zzk9XQ6RBvsWbCTrIfgE0484pD7w9Ux1/view">watch a demonstration video of this step here</a>.</li>
 </ol>
 </div>
 </div>

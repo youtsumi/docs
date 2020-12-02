@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>SAML Single Sign-On (E20) &mdash; Mattermost 5.25 documentation</title>
+  <title>SAML Single Sign-On (E20) &mdash; Mattermost 5.29 documentation</title>
   
 
   
@@ -32,7 +32,7 @@
   <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Configure SAML with Okta" href="sso-saml-okta.html" />
-    <link rel="prev" title="AD/LDAP Groups (E20)" href="ldap-group-sync.html" />
+    <link rel="prev" title="Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership" href="ldap-group-constrained-team-channel.html" />
 	<!-- Bizible Script -->
 	<script src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
 
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.25
+                5.29
               </div>
             
           
@@ -159,12 +159,15 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Administrator's Guide</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="bulk-loading.html">Bulk Loading Data</a></li>
@@ -172,9 +175,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../administration/hipchat-migration-guidelines.html">Migrating from HipChat to Mattermost</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../administration/migration-announcement-email-template.html">Migration Announcement Email</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../administration/user-provisioning.html">Provisioning Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="admin-roles.html">Additional System Admin Roles (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-ldap.html">Active Directory/LDAP Setup (E10/E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auth.html">Multi-factor Authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ldap-group-sync.html">AD/LDAP Groups (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html">Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">SAML Single Sign-On (E20)</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="sso-saml-okta.html">Okta SAML Configuration</a></li>
 <li class="toctree-l4"><a class="reference internal" href="sso-saml-onelogin.html">OneLogin SAML Configuration</a></li>
@@ -203,12 +208,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#unofficial-enhancements">Unofficial Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/education.html">Training and Education</a></li>
 </ul>
 
             
@@ -242,7 +247,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
     
-      <li><a href="../guides/administrator.html">Administrator’s Guide</a> &raquo;</li>
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
     
     <li>SAML Single Sign-On (E20)</li>
     <li class="wy-breadcrumbs-aside">
@@ -260,11 +265,12 @@
             
   <div class="section" id="saml-single-sign-on-e20">
 <h1>SAML Single Sign-On (E20)<a class="headerlink" href="#saml-single-sign-on-e20" title="Permalink to this headline">¶</a></h1>
+<p>Single sign-on (SSO) is a way for users to log into multiple applications with a single user ID and password without having to re-enter their credentials. The SAML standard allows identity providers to pass credentials to service providers. Mattermost can be configured to act as a SAML 2.0 Service Provider.</p>
 <p>Mattermost can be configured to act as a SAML 2.0 Service Provider. The SAML Single sign-on integration offers the following benefits:</p>
 <ul class="simple">
 <li><strong>Single sign-on.</strong> Users can sign-in to Mattermost with their SAML credentials.</li>
-<li><strong>Centralized identity management.</strong> Mattermost accounts automatically pull user attributes from SAML upon login, such as full name, email and username.</li>
-<li><strong>Automatic account provisioning.</strong> New Mattermost user accounts are automatically created the first time a user signs in with their SAML credentials on the Mattermost server.</li>
+<li><strong>Centralized identity management.</strong> Mattermost accounts automatically pull user attributes from SAML upon login, such as full name, email, and username.</li>
+<li><strong>Automatic account provisioning.</strong> Mattermost user accounts are automatically created the first time a user signs in with their SAML credentials on the Mattermost server.</li>
 <li><strong>Sync groups to predefined roles in Mattermost.</strong> Assign team and channel roles to groups via LDAP Group Sync.</li>
 <li><strong>Compliance alignment with administrator management.</strong> Manage Administrator access to Mattermost in the System Console using SAML attributes.</li>
 </ul>
@@ -321,7 +327,7 @@
 </div>
 <div class="section" id="roadmap">
 <h2>Roadmap<a class="headerlink" href="#roadmap" title="Permalink to this headline">¶</a></h2>
-<p>In Mattermost v5.14, you can optionally configure Mattermost to sign the SAML request using a private key to meet InfoSec requirements at your organization.</p>
+<p>From Mattermost v5.14, you can optionally configure Mattermost to sign the SAML request using a private key to meet InfoSec requirements at your organization.</p>
 <p>In the future roadmap, the main consideration is an integration with SCIM, via plugin. Such an integration allows system administrators to create SAML-provisioned users before their first login, and sync them against Mattermost permissions.</p>
 <p>Currently user provisioning and deprovisioning can be handled with SAML sync, but relies on AD/LDAP. SCIM enables admins to control user provisioning and deprovisioning within the IdP itself.</p>
 <p>For examples, see <a class="reference external" href="https://docs.microsoft.com/en-us/azure/active-directory/manage-apps/use-scim-to-provision-users-and-groups">Microsoft Azure AD integration with SCIM</a> and <a class="reference external" href="https://www.okta.com/integrate/documentation/scim/">Okta user provisioning with SCIM</a>.</p>
@@ -330,7 +336,7 @@
 <h2>Configuration Assistance<a class="headerlink" href="#configuration-assistance" title="Permalink to this headline">¶</a></h2>
 <p>We are open to providing assistance when configuring your custom IdP by answering Mattermost technical configuration questions and working with your IdP provider in support of resolving issues as they relate to Mattermost SAML configuration settings. However, we cannot guarantee your connection will work with Mattermost.</p>
 <p>For technical documentation on SAML, see <a class="reference internal" href="sso-saml-technical.html"><span class="doc">SAML Single-Sign-On (E20): Technical Documentation</span></a>.</p>
-<p>To assist with the process of getting a user file for your custom IDP, see this <a class="reference external" href="https://github.com/icelander/mattermost_generate_user_file">documentation</a>.</p>
+<p>To assist with the process of getting a user file for your custom IdP, see this <a class="reference external" href="https://github.com/icelander/mattermost_generate_user_file">documentation</a>.</p>
 <p>Please note that we may not be able to guarantee that your connection will work with Mattermost, however we will consider improvements to our feature as we are able. You can see more information on getting support <a class="reference external" href="https://mattermost.com/support/">here</a> and submit requests for official support of a particular provider on our <a class="reference external" href="https://mattermost.uservoice.com">feature idea forum</a>.</p>
 </div>
 </div>
@@ -346,7 +352,7 @@
         <a href="sso-saml-okta.html" class="btn btn-neutral float-right" title="Configure SAML with Okta" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="ldap-group-sync.html" class="btn btn-neutral" title="AD/LDAP Groups (E20)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="ldap-group-constrained-team-channel.html" class="btn btn-neutral" title="Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

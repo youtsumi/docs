@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Elasticsearch (E20) &mdash; Mattermost 5.25 documentation</title>
+  <title>Elasticsearch (E20) &mdash; Mattermost 5.29 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.25
+                5.29
               </div>
             
           
@@ -159,12 +159,15 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Administrator's Guide</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
@@ -186,12 +189,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../administration/performance-alerting-guide.html">Mattermost Performance Alerting Guide</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#unofficial-enhancements">Unofficial Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/education.html">Training and Education</a></li>
 </ul>
 
             
@@ -225,7 +228,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
     
-      <li><a href="../guides/administrator.html">Administrator’s Guide</a> &raquo;</li>
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
     
     <li>Elasticsearch (E20)</li>
     <li class="wy-breadcrumbs-aside">
@@ -244,7 +247,8 @@
   <div class="section" id="elasticsearch-e20">
 <h1>Elasticsearch (E20)<a class="headerlink" href="#elasticsearch-e20" title="Permalink to this headline">¶</a></h1>
 <p><em>Available in Enterprise Edition E20.</em></p>
-<p><a class="reference external" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Elasticsearch</a> is a distributed, RESTful search engine supporting highly efficient database searches in a <a class="reference external" href="https://docs.mattermost.com/deployment/cluster.html">cluster environment</a>.</p>
+<p>Elasticsearch provides enterprise-scale deployments with optimized search performance and prevents performance degradation and timeouts.</p>
+<p>The implementation uses <a class="reference external" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Elasticsearch</a> as a distributed, RESTful search engine supporting highly efficient database searches in a <a class="reference external" href="https://docs.mattermost.com/deployment/cluster.html">cluster environment</a>.</p>
 <div class="toctree-wrapper compound">
 </div>
 <div class="section" id="deployment-guide">
@@ -252,11 +256,15 @@
 <div class="section" id="overview">
 <h3>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h3>
 <p>Elasticsearch allows you to search large volumes of data quickly, in near real time, by creating and managing an index of post data. The indexing process can be managed from the System Console after setting up and connecting an Elasticsearch server. The post index is stored on the Elasticsearch server and is updated constantly after new posts are made. In order to index existing posts, a bulk index of the entire post database must be generated.</p>
-<p>Elasticsearch v5.x, v6.x, and v7.x are supported.</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">The default Mattermost database search starts to show performance degradation at around 2.5 million posts, depending on the specifications for the database server. If you expect your Mattermost server to have more than 2.5 million posts, we recommend using Elasticsearch for optimum search performance. For deployments with over 5 million posts, Elasticsearch is required to avoid significant performance issues (such as timeouts) with search and at-mentions.</p>
 </div>
-<div class="section" id="when-to-use-elasticsearch">
-<h3>When to Use Elasticsearch<a class="headerlink" href="#when-to-use-elasticsearch" title="Permalink to this headline">¶</a></h3>
-<p>The default Mattermost database search starts to show performance degradation at around 2.5 million posts, depending on the specifications for the database server. If you expect your Mattermost server to have more than 2.5 million posts, we recommend using Elasticsearch for optimum search performance.</p>
+<p>Elasticsearch v5.x, v6.x, and v7.x are supported.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">From Mattermost v5.26, you can filter inactive users, search by user role, and also search for terms inside links. This update introduces a breaking change which affects the “from” part of the search. To avoid this, reindex your Elasticsearch instance/cluster prior to upgrading.</p>
+</div>
 </div>
 <div class="section" id="setting-up-an-elasticsearch-server">
 <h3>Setting Up an Elasticsearch Server<a class="headerlink" href="#setting-up-an-elasticsearch-server" title="Permalink to this headline">¶</a></h3>
@@ -328,12 +336,14 @@
 <ol class="arabic simple" start="7">
 <li>Restart the Mattermost server.</li>
 </ol>
-<blockquote>
-<div><div class="admonition note">
+<div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Additional advanced Elasticsearch settings for large deployments can be configured outside the System Console in the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file. Please see <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#elasticsearch">documentation to learn more</a>.</p>
+<p class="last">Additional advanced Elasticsearch settings for large deployments can be configured outside the System Console in the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file. Read the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#elasticsearch">documentation to learn more</a>.</p>
 </div>
-</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If your deployment has a large number of posts (typically in excess of 1 million but not strictly defined) the reindexing progress percentage may stay at 99% for a long time.</p>
+</div>
 </div>
 </div>
 <div class="section" id="limitations">
@@ -356,7 +366,7 @@
 <h2>Frequently Asked Questions (FAQ)<a class="headerlink" href="#frequently-asked-questions-faq" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="do-i-need-to-use-elasticsearch">
 <h3>Do I need to use Elasticsearch?<a class="headerlink" href="#do-i-need-to-use-elasticsearch" title="Permalink to this headline">¶</a></h3>
-<p>The Elasticsearch engine is designed for large Enterprise deployments wanting to run highly efficient database searches in a cluster environment.</p>
+<p>The Elasticsearch engine is designed for large Enterprise deployments wanting to run highly efficient database searches in a cluster environment. The default Mattermost database search starts to show performance degradation at around 2.5 million posts, depending on the specifications for the database server. If you expect your Mattermost server to have more than 2.5 million posts, we recommend using Elasticsearch for optimum search performance.</p>
 </div>
 <div class="section" id="what-types-of-indexes-are-created">
 <h3>What types of indexes are created?<a class="headerlink" href="#what-types-of-indexes-are-created" title="Permalink to this headline">¶</a></h3>
@@ -368,7 +378,7 @@
 </div>
 <div class="section" id="are-there-any-new-search-features-offered-with-elasticsearch">
 <h3>Are there any new search features offered with Elasticsearch?<a class="headerlink" href="#are-there-any-new-search-features-offered-with-elasticsearch" title="Permalink to this headline">¶</a></h3>
-<p>The current implementation of Elasticsearch matches the search features currently available with database search. The Mattermost team is working on extending the Elasticsearch feature set with file name and content search, date filters, and operators, and modifiers.</p>
+<p>The current implementation of Elasticsearch matches the search features currently available with database search. The Mattermost team is working on extending the Elasticsearch feature set with file name and content search, date filters, and operators and modifiers.</p>
 </div>
 <div class="section" id="are-my-files-stored-in-elasticsearch">
 <h3>Are my files stored in Elasticsearch?<a class="headerlink" href="#are-my-files-stored-in-elasticsearch" title="Permalink to this headline">¶</a></h3>
@@ -376,8 +386,8 @@
 </div>
 <div class="section" id="how-do-i-monitor-system-health-of-an-elasticsearch-server">
 <h3>How do I monitor system health of an Elasticsearch server?<a class="headerlink" href="#how-do-i-monitor-system-health-of-an-elasticsearch-server" title="Permalink to this headline">¶</a></h3>
-<p>You can use this Prometheus exporter to monitor <a class="reference external" href="https://github.com/justwatchcom/elasticsearch_exporter#metrics">various metrics</a> about Elasticsearch: <a class="reference external" href="https://github.com/justwatchcom/elasticsearch_exporter">justwatchcom/elasticsearch_exporter</a></p>
-<p>You may also refer to this <a class="reference external" href="https://www.datadoghq.com/blog/monitor-elasticsearch-performance-metrics/#key-elasticsearch-performance-metrics-to-monitor">article about Elasticsearch performance monitoring</a>. It is not written specifically for Prometheus, which <a class="reference external" href="https://docs.mattermost.com/deployment/metrics.html">Mattermost’s performance monitoring</a> system uses, but has several tips and best practices.</p>
+<p>You can use this Prometheus exporter to monitor <a class="reference external" href="https://github.com/justwatchcom/elasticsearch_exporter#metrics">various metrics</a> about Elasticsearch: <a class="reference external" href="https://github.com/justwatchcom/elasticsearch_exporter">justwatchcom/elasticsearch_exporter</a>.</p>
+<p>You can also refer to this <a class="reference external" href="https://www.datadoghq.com/blog/monitor-elasticsearch-performance-metrics/#key-elasticsearch-performance-metrics-to-monitor">article about Elasticsearch performance monitoring</a>. It’s not written specifically for Prometheus, which <a class="reference external" href="https://docs.mattermost.com/deployment/metrics.html">Mattermost’s performance monitoring</a> system uses, but has several tips and best practices.</p>
 </div>
 <div class="section" id="why-does-a-25-000-post-database-take-a-long-time-to-index-in-elasticsearch">
 <h3>Why does a 25,000 post database take a long time to index in Elasticsearch?<a class="headerlink" href="#why-does-a-25-000-post-database-take-a-long-time-to-index-in-elasticsearch" title="Permalink to this headline">¶</a></h3>

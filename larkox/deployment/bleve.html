@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Bleve Search (Experimental) &mdash; Mattermost 5.25 documentation</title>
+  <title>Bleve Search (Experimental) &mdash; Mattermost 5.29 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.25
+                5.29
               </div>
             
           
@@ -159,8 +159,10 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Administrator's Guide</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a><ul class="current">
@@ -173,11 +175,13 @@
 <li class="toctree-l3"><a class="reference internal" href="../administration/backup.html">Backup and Disaster Recovery</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Bleve Search (Experimental)</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#configuring-bleve-in-mattermost">Configuring Bleve in Mattermost</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-bleve-search">Using Bleve Search</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
@@ -186,12 +190,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#unofficial-enhancements">Unofficial Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/education.html">Training and Education</a></li>
 </ul>
 
             
@@ -225,7 +229,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
     
-      <li><a href="../guides/administrator.html">Administrator’s Guide</a> &raquo;</li>
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
     
     <li>Bleve Search (Experimental)</li>
     <li class="wy-breadcrumbs-aside">
@@ -258,6 +262,14 @@
 <li>Set <strong>Enable Bleve for search queries</strong> to <strong>true</strong>.</li>
 <li>Set <strong>Enable Bleve for autocomplete queries</strong> to <strong>true</strong>.</li>
 </ol>
+</div>
+<div class="section" id="using-bleve-search">
+<h2>Using Bleve Search<a class="headerlink" href="#using-bleve-search" title="Permalink to this headline">¶</a></h2>
+<p>The following conditions are applied when using Bleve search:</p>
+<ul class="simple">
+<li><strong>Unquoted terms:</strong> Search terms that contain non-alphanumeric characters/special characters outside of quotation marks are removed. For example, using <code class="docutils literal notranslate"><span class="pre">abcd</span> <span class="pre">&quot;**&quot;</span> <span class="pre">&amp;&amp;</span> <span class="pre">abc</span></code> as a search term will return results for a search for <code class="docutils literal notranslate"><span class="pre">abcd</span> <span class="pre">&quot;**&quot;</span> <span class="pre">abc</span></code> as the <code class="docutils literal notranslate"><span class="pre">&amp;&amp;</span></code> characters weren’t within the quotation marks.</li>
+<li><strong>Wildcard search:</strong> Wildcard search (e.g., <code class="docutils literal notranslate"><span class="pre">abc*</span></code>) is supported.</li>
+</ul>
 </div>
 </div>
 

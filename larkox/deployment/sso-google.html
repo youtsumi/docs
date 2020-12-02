@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Google Single Sign-On (E20) &mdash; Mattermost 5.25 documentation</title>
+  <title>Google Single Sign-On (E20) &mdash; Mattermost 5.29 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.25
+                5.29
               </div>
             
           
@@ -159,12 +159,15 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Administrator's Guide</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="bulk-loading.html">Bulk Loading Data</a></li>
@@ -172,9 +175,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../administration/hipchat-migration-guidelines.html">Migrating from HipChat to Mattermost</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../administration/migration-announcement-email-template.html">Migration Announcement Email</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../administration/user-provisioning.html">Provisioning Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="admin-roles.html">Additional System Admin Roles (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-ldap.html">Active Directory/LDAP Setup (E10/E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auth.html">Multi-factor Authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ldap-group-sync.html">AD/LDAP Groups (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html">Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-saml.html">SAML Single Sign-On (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-saml-technical.html">SAML Single-Sign-On (E20): Technical Documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-gitlab.html">GitLab Single Sign-On</a></li>
@@ -194,12 +199,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#unofficial-enhancements">Unofficial Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/education.html">Training and Education</a></li>
 </ul>
 
             
@@ -233,7 +238,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
     
-      <li><a href="../guides/administrator.html">Administrator’s Guide</a> &raquo;</li>
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
     
     <li>Google Single Sign-On (E20)</li>
     <li class="wy-breadcrumbs-aside">
@@ -251,29 +256,45 @@
             
   <div class="section" id="google-single-sign-on-e20">
 <h1>Google Single Sign-On (E20)<a class="headerlink" href="#google-single-sign-on-e20" title="Permalink to this headline">¶</a></h1>
-<hr class="docutils" />
-<p>Follow these steps to configure Mattermost to use Google as a single sign-on (SSO) service for team creation, account creation and sign-in.</p>
-<p><strong>Note: Google SSO is not yet supported in the mobile app. If you want to use Google SSO on mobile, you’ll have to <a class="reference external" href="https://developers.mattermost.com/contribute/mobile/build-your-own/">build your own app</a>.</strong></p>
-<p><strong>Note: The Google People API has replaced the Google+ API, which was deprecated by Google as of March 7th, 2019 per their notice at https://developers.google.com/+/api-shutdown.</strong></p>
-<p>1 - Go to <a class="reference external" href="https://console.developers.google.com">Google API Manager</a>, click <strong>Credentials</strong> in the left hand sidebar, click <strong>Create a project</strong> and enter “Mattermost - your-company-name” as the <strong>Project Name</strong>, then click <strong>Create</strong>.</p>
-<p><img alt="../_images/google_1_credentials.png" src="../_images/google_1_credentials.png" />google_1_credentials</p>
-<p>2 - In the <strong>Dashboard</strong> click the option to <strong>ENABLE APIS AND SERVICES</strong>.</p>
-<p><img alt="../_images/google_enable_api.png" src="../_images/google_enable_api.png" />google_enable_api</p>
+<p>Follow these steps to configure Mattermost to use Google as a Single Sign-on (SSO) service for team creation, account creation, and sign-in.</p>
+<p><strong>Note:</strong></p>
+<ul class="simple">
+<li>Google SSO is not yet supported in the Mattermost Mobile app. If you want to use Google SSO on mobile, you’ll have to <a class="reference external" href="https://developers.mattermost.com/contribute/mobile/build-your-own/">build your own app</a>.</li>
+<li>The Google People API has replaced the Google+ API, which was deprecated by Google as of March 7th, 2019 per their notice at https://developers.google.com/+/api-shutdown.</li>
+</ul>
+<ol class="simple">
+<li>Go to <a class="reference external" href="https://console.developers.google.com">Google API Manager</a>, click <strong>Credentials</strong> in the left hand sidebar, click <strong>Create a project</strong> and enter “Mattermost - your-company-name” as the <strong>Project Name</strong>, then click <strong>Create</strong>.</li>
+</ol>
+<p><img alt="../_images/google_1_credentials1.png" src="../_images/google_1_credentials1.png" /> </p>
+<ol class="simple">
+<li>In the <strong>Dashboard</strong> click the option to <strong>ENABLE APIS AND SERVICES</strong>.</li>
+</ol>
+<p><img alt="../_images/google_enable_api1.png" src="../_images/google_enable_api1.png" /> </p>
 <p>Once in the API Library, scroll down to <a class="reference external" href="https://console.developers.google.com/apis/api/plus/overview">Google People API</a> and click <strong>Enable</strong> in the header. This might take a few minutes to propagate through Google’s systems.</p>
-<p>3 - Leave the Google+ API menu to return to the <strong>APIs &amp; Services menu</strong>. In the left hand sidebar select <strong>Credentials</strong>, click the <strong>OAuth consent screen</strong> header and enter “Mattermost” as the <strong>Application Name</strong>, then click <strong>Save</strong>.</p>
-<p><img alt="../_images/google_3_oauth_consent_screen.png" src="../_images/google_3_oauth_consent_screen.png" />google_3_oauth_consent_screen</p>
+<ol class="simple">
+<li>Leave the Google+ API menu to return to the <strong>APIs &amp; Services menu</strong>. In the left hand sidebar select <strong>Credentials</strong>, click the <strong>OAuth consent screen</strong> header and enter “Mattermost” as the <strong>Application Name</strong>, then click <strong>Save</strong>.</li>
+</ol>
+<p><img alt="../_images/google_3_oauth_consent_screen1.png" src="../_images/google_3_oauth_consent_screen1.png" /> </p>
 <p>Scroll further down to add your Mattermost instance to a list of authorized domains that can access the API. For example, if it is hosted on <code class="docutils literal notranslate"><span class="pre">mattermost.yourdomain.com</span></code> add <code class="docutils literal notranslate"><span class="pre">yourdomain.com</span></code>.</p>
-<p><img alt="../_images/google_authorised_domains.png" src="../_images/google_authorised_domains.png" />google_authorised_domains</p>
-<p>4 - Select <strong>Credentials</strong> and click <strong>Create credentials</strong>, then choose <strong>OAuth client ID</strong> from the drop-down list.</p>
-<p><img alt="../_images/google_3_oauth_client_id.png" src="../_images/google_3_oauth_client_id.png" />google_3_oauth_client_id</p>
-<p>5 - Select <strong>Web Application</strong> as the <strong>Application type</strong>, and choose a descriptive <strong>Name</strong> for the OAuth connection.</p>
-<p>Under <strong>Restrictions</strong> &gt; <strong>Authorized redirect URIs</strong>, enter <code class="docutils literal notranslate"><span class="pre">your-mattermost-url/signup/google/complete</span></code> (example: <code class="docutils literal notranslate"><span class="pre">http://localhost:8065/signup/google/complete</span></code>). Click <strong>Create</strong>.</p>
-<p><img alt="../_images/google_4_web_app.png" src="../_images/google_4_web_app.png" />google_4_web_app</p>
-<p>6 - Copy the <strong>Client ID</strong> and <strong>Client Secret</strong>, which will be used to configure Google SSO for Mattermost.</p>
-<p><img alt="../_images/google_5_client_id_secret.PNG" src="../_images/google_5_client_id_secret.PNG" />google_5_client_id_secret</p>
-<p>7 - In <strong>System Console &gt; OAuth 2.0 &gt; Select OAuth 2.0 service provider</strong>, choose <strong>Google Apps</strong> as the service provider and enter <strong>Client ID</strong> and <strong>Client Secret</strong> from step 6 in their respective fields.</p>
-<p>8 - Restart your Mattermost server to see the changes take effect.</p>
-<p>Notes:</p>
+<p><img alt="../_images/google_authorised_domains1.png" src="../_images/google_authorised_domains1.png" /> </p>
+<ol class="simple">
+<li>Select <strong>Credentials</strong> and click <strong>Create credentials</strong>, then choose <strong>OAuth client ID</strong> from the drop-down list.</li>
+</ol>
+<p><img alt="../_images/google_3_oauth_client_id1.png" src="../_images/google_3_oauth_client_id1.png" /> </p>
+<ol class="simple">
+<li>Select <strong>Web Application</strong> as the <strong>Application type</strong>, and choose a descriptive <strong>Name</strong> for the OAuth connection.</li>
+</ol>
+<p>Under <strong>Restrictions &gt; Authorized redirect URIs</strong>, enter <code class="docutils literal notranslate"><span class="pre">your-mattermost-url/signup/google/complete</span></code> (example: <code class="docutils literal notranslate"><span class="pre">http://localhost:8065/signup/google/complete</span></code>). Click <strong>Create</strong>.</p>
+<p><img alt="../_images/google_4_web_app1.png" src="../_images/google_4_web_app1.png" /> </p>
+<ol class="simple">
+<li>Copy the <strong>Client ID</strong> and <strong>Client Secret</strong>, which will be used to configure Google SSO for Mattermost.</li>
+</ol>
+<p><img alt="../_images/google_5_client_id_secret1.PNG" src="../_images/google_5_client_id_secret1.PNG" /> </p>
+<ol class="simple">
+<li>In <strong>System Console &gt; OAuth 2.0 &gt; Select OAuth 2.0 service provider</strong>, choose <strong>Google Apps</strong> as the service provider and enter <strong>Client ID</strong> and <strong>Client Secret</strong> from step 6 in their respective fields.</li>
+<li>Restart your Mattermost server to see the changes take effect.</li>
+</ol>
+<p><strong>Note:</strong></p>
 <ul class="simple">
 <li>You may also enter <strong>Client ID</strong> and <strong>Client Secret</strong> fields from step 6 directly in <code class="docutils literal notranslate"><span class="pre">GoogleSettings</span></code> section of <code class="docutils literal notranslate"><span class="pre">config/config.json</span></code>.</li>
 <li>The following default values in <code class="docutils literal notranslate"><span class="pre">GoogleSettings</span></code> section of <code class="docutils literal notranslate"><span class="pre">config/config.json</span></code> are recommended:<ul>

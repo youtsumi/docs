@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Office 365 Single Sign-On (E20) &mdash; Mattermost 5.25 documentation</title>
+  <title>Office 365 Single Sign-On (E20) &mdash; Mattermost 5.29 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.25
+                5.29
               </div>
             
           
@@ -159,12 +159,15 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Administrator's Guide</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="bulk-loading.html">Bulk Loading Data</a></li>
@@ -172,9 +175,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../administration/hipchat-migration-guidelines.html">Migrating from HipChat to Mattermost</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../administration/migration-announcement-email-template.html">Migration Announcement Email</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../administration/user-provisioning.html">Provisioning Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="admin-roles.html">Additional System Admin Roles (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-ldap.html">Active Directory/LDAP Setup (E10/E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auth.html">Multi-factor Authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ldap-group-sync.html">AD/LDAP Groups (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html">Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-saml.html">SAML Single Sign-On (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-saml-technical.html">SAML Single-Sign-On (E20): Technical Documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-gitlab.html">GitLab Single Sign-On</a></li>
@@ -197,12 +202,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#unofficial-enhancements">Unofficial Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/education.html">Training and Education</a></li>
 </ul>
 
             
@@ -236,7 +241,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
     
-      <li><a href="../guides/administrator.html">Administrator’s Guide</a> &raquo;</li>
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
     
     <li>Office 365 Single Sign-On (E20)</li>
     <li class="wy-breadcrumbs-aside">
@@ -255,31 +260,46 @@
   <div class="section" id="office-365-single-sign-on-e20">
 <h1>Office 365 Single Sign-On (E20)<a class="headerlink" href="#office-365-single-sign-on-e20" title="Permalink to this headline">¶</a></h1>
 <hr class="docutils" />
-<p>Follow these steps to configure Mattermost to use your Office 365 logon credentials and Azure Active Directory account as a single sign-on (SSO) service for team creation, account creation and sign-in.</p>
+<p>Follow these steps to configure Mattermost to use your Office 365 logon credentials and Azure Active Directory account as a Single Sign-on (SSO) service for team creation, account creation, and sign-in.</p>
 <p><strong>The system must be using SSL for use with Office365 as Microsoft only allows OAuth redirect URIs that are SSL enabled.</strong></p>
-<p>1 - Login to your <a class="reference external" href="https://portal.azure.com/">Azure Portal</a> with the account that relates to the Azure AD tenant you want to register the application in. (You can check the tenant in the top right corner of the portal).</p>
-<p>2 - In the left-hand navigation pane, select the <strong>Azure Active Directory service</strong>, and then select <strong>App registrations &gt; New registration</strong>.</p>
-<p><img alt="../_images/AzureApp_New_Registration.png" src="../_images/AzureApp_New_Registration.png" />AzureApp_NewRegistration.png</p>
-<p>3 - Give your new registration a <strong>Name</strong>, and then define which <strong>Supported account types</strong> can access the application. For example, if this is to be only accessed from your enterprise’s Azure AD accounts, then select <em>Accounts in this organizational directory only</em>. The <strong>Redirect URI</strong> should be defined as Web client. Also input the URL with the host name that will be specific to your Mattermost service followed by /signup/office365/complete. An example below is: https://your.mattermost.com/signup/office365/complete</p>
-<p><img alt="../_images/AzureApp_SetupMenuv2.png" src="../_images/AzureApp_SetupMenuv2.png" />AzureApp_SetupMenuv2.png</p>
+<ol class="simple">
+<li>Log in to your <a class="reference external" href="https://portal.azure.com/">Azure Portal</a> with the account that relates to the Azure AD tenant you want to register the application in. You can check the tenant in the top right corner of the portal.</li>
+<li>In the left-hand navigation pane, select the <strong>Azure Active Directory service</strong>, and then select <strong>App registrations &gt; New registration</strong>.</li>
+</ol>
+<p><img alt="../_images/AzureApp_New_Registration1.png" src="../_images/AzureApp_New_Registration1.png" /> </p>
+<ol>
+<li><p class="first">Give your new registration a <strong>Name</strong>, and then define which <strong>Supported account types</strong> can access the application. For example, if this is to be only accessed from your enterprise’s Azure AD accounts, then select <em>Accounts in this organizational directory only</em>. The <strong>Redirect URI</strong> should be defined as Web client. Also input the URL with the host name that will be specific to your Mattermost service followed by <code class="docutils literal notranslate"><span class="pre">/signup/office365/complete</span></code>. An example below is: https://your.mattermost.com/signup/office365/complete</p>
+<p><img alt="../_images/AzureApp_SetupMenuv21.png" src="../_images/AzureApp_SetupMenuv21.png" /> </p>
+</li>
+</ol>
 <p>Now the App Registration has been created and you can configure it further. The standard Azure AD documentation is <a class="reference external" href="https://docs.microsoft.com/en-gb/azure/active-directory/develop/quickstart-register-app">here</a> for reference.</p>
-<p>4 - Select <strong>Certificates and Secrets</strong> from the menu, and click the button to generate a <strong>New Client secret</strong>. Provide a description and define the expiry for the token.</p>
-<p><img alt="../_images/AzureApp_Client_Secret_Expiry.png" src="../_images/AzureApp_Client_Secret_Expiry.png" />AzureApp_Client_Secret_Expiry.png</p>
+<ol>
+<li><p class="first">Select <strong>Certificates and Secrets</strong> from the menu, and click the button to generate a <strong>New Client secret</strong>. Provide a description and define the expiry for the token.</p>
+<p><img alt="../_images/AzureApp_Client_Secret_Expiry1.png" src="../_images/AzureApp_Client_Secret_Expiry1.png" /> </p>
+</li>
+</ol>
 <p>Click <em>Add</em> and you will be provided with the <em>client secret value</em>, copy this and save it for use in the Mattermost configuration as the <strong>Application Secret Password</strong>.</p>
-<p>5 - Select <strong>Overview</strong> from the menu and copy the <em>Application (client) ID</em> and the <em>Directory (tenant) ID</em>, for use in the Mattermost configuration as the <strong>Application ID</strong> and as part of the <strong>Auth Endpoint</strong> and <strong>Token Endpoint</strong> URL.</p>
-<p><img alt="../_images/AzureApp_App_Directory_IDsv2.png" src="../_images/AzureApp_App_Directory_IDsv2.png" />AzureApp_App_Directory_IDsv2.png</p>
-<p>6 - Login to Mattermost and then go to the <strong>System Console &gt; OAuth 2.0 &gt; Select OAuth 2.0 service provider</strong>, choose <strong>Office 365</strong> as the service provider. Enter the <em>client secret value</em> you copied in Step 4 as the <strong>Application Secret Password</strong>. Paste the <em>Application (client) ID</em> you saved in Step 5 into the <strong>Application ID</strong> field.</p>
-<p>7 - Open your config.json file and copy the <em>Directory (tenant) ID</em> value from Step 5. In the <code class="docutils literal notranslate"><span class="pre">Office365Settings</span></code> section of <code class="docutils literal notranslate"><span class="pre">config/config.json</span></code> you will be updating the default values from</p>
+<ol>
+<li><p class="first">Select <strong>Overview</strong> from the menu and copy the <em>Application (client) ID</em> and the <em>Directory (tenant) ID</em>, for use in the Mattermost configuration as the <strong>Application ID</strong> and as part of the <strong>Auth Endpoint</strong> and <strong>Token Endpoint</strong> URL.</p>
+<p><img alt="../_images/AzureApp_App_Directory_IDsv21.png" src="../_images/AzureApp_App_Directory_IDsv21.png" /> </p>
+</li>
+<li><p class="first">Log in to Mattermost and then go to the <strong>System Console &gt; OAuth 2.0 &gt; Select OAuth 2.0 service provider</strong>, choose <strong>Office 365</strong> as the service provider. Enter the <em>client secret value</em> you copied in Step 4 as the <strong>Application Secret Password</strong>. Paste the <em>Application (client) ID</em> you saved in Step 5 into the <strong>Application ID</strong> field.</p>
+</li>
+<li><p class="first">Open the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file and copy the <em>Directory (tenant) ID</em> value from Step 5. In the <code class="docutils literal notranslate"><span class="pre">Office365Settings</span></code> section of <code class="docutils literal notranslate"><span class="pre">config.json</span></code> you will be updating the default values from:</p>
+</li>
+</ol>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">AuthEndpoint</span></code>: <code class="docutils literal notranslate"><span class="pre">https://login.microsoftonline.com/common/oauth2/v2.0/authorize</span></code></li>
 <li><code class="docutils literal notranslate"><span class="pre">TokenEndpoint</span></code>: <code class="docutils literal notranslate"><span class="pre">https://login.microsoftonline.com/common/oauth2/v2.0/token</span></code></li>
 </ul>
-<p>to include <em>Directory (tenant) ID</em> value, for example</p>
+<p>to include <em>Directory (tenant) ID</em> value, for example:</p>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">AuthEndpoint</span></code>: <code class="docutils literal notranslate"><span class="pre">https://login.microsoftonline.com/3dfccc41-d360-488a-a6ff-e9e565b3xbf1/oauth2/v2.0/authorize</span></code></li>
 <li><code class="docutils literal notranslate"><span class="pre">TokenEndpoint</span></code>: <code class="docutils literal notranslate"><span class="pre">https://login.microsoftonline.com/3dfcc41-d360-488a-a6ff-e9e565b3xbf1/oauth2/v2.0/token</span></code></li>
 </ul>
-<p>8 - Restart your Mattermost server to see the changes take effect.</p>
+<ol class="simple">
+<li>Restart your Mattermost server to see the changes take effect.</li>
+</ol>
 <div class="section" id="note-about-microsoft-active-directory-tenants">
 <h2>Note about Microsoft Active Directory Tenants<a class="headerlink" href="#note-about-microsoft-active-directory-tenants" title="Permalink to this headline">¶</a></h2>
 <p>A Microsoft Active Directory (AD) tenant is a dedicated instance of Azure Active Directory (Azure AD) that you own and would have received when signing up for a Microsoft cloud service such as Azure or Office 365. Tenants are commonly used by organizations who want to store information about their users such as passwords, user profile data and permissions. You can learn more about <a class="reference external" href="https://docs.microsoft.com/en-us/azure/active-directory/active-directory-howto-tenant">getting an Azure AD tenant here</a>.</p>
