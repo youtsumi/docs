@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Configuration in the Mattermost Database &mdash; Mattermost 5.29 documentation</title>
+  <title>Configuration in the Mattermost Database &mdash; Mattermost 5.30 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.29
+                5.30
               </div>
             
           
@@ -250,7 +250,7 @@
             
   <div class="section" id="configuration-in-the-mattermost-database">
 <h1>Configuration in the Mattermost Database<a class="headerlink" href="#configuration-in-the-mattermost-database" title="Permalink to this headline">¶</a></h1>
-<p>A new configuration option was added in the <a class="reference external" href="https://docs.mattermost.com/administration/changelog.html#configuration-in-database">5.10 release</a> to use the database as the single source of truth for the active configuration of your Mattermost installation. This changes the Mattermost binary from reading the default <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file to reading the configuration settings stored within a configuration table in the database.</p>
+<p>A new configuration option was added in <a class="reference external" href="https://docs.mattermost.com/administration/changelog.html#configuration-in-database">5.10 release</a> to use the database as the single source of truth for the active configuration of your Mattermost installation. This changes the Mattermost binary from reading the default <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file to reading the configuration settings stored within a configuration table in the database.</p>
 <p>Mattermost has been running our <a class="reference external" href="https://community.mattermost.com">community server</a> on this option since the feature was released, and recommends its use for those on <span class="xref std std-doc">High Availability deployments</span>.</p>
 <p>Benefits to using this option:</p>
 <ul class="simple">
@@ -331,7 +331,7 @@ bin/mattermost config get SqlSettings.DataSource
 </pre></div>
 </div>
 <p>Edit this file as <em>root</em> to add the below text just above the line that begins with <code class="docutils literal notranslate"><span class="pre">ExecStart</span></code>:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>EnvironmentFile=/opt/mattermost/config/mattermost.environment
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>EnvironmentFile=/opt/mattermost/config/mm.environment
 </pre></div>
 </div>
 <p>Here’s a complete <code class="docutils literal notranslate"><span class="pre">mattermost.service</span></code> file with the <code class="docutils literal notranslate"><span class="pre">EnvironmentFile</span></code> line added:</p>
@@ -343,7 +343,7 @@ Requires=mysql.service
 
 [Service]
 Type=notify
-EnvironmentFile=/opt/mattermost/config/mattermost.environment
+EnvironmentFile=/opt/mattermost/config/mm.environment
 ExecStart=/opt/mattermost/bin/mattermost
 TimeoutStartSec=3600
 Restart=always
@@ -376,7 +376,7 @@ bin/mattermost config migrate ./config/config.json <span class="s1">&#39;mysql:/
 </div>
 <p>As with the environment file you’ll have to escape any single quotes in the database connection string. Also, any existing SAML certificates will be migrated into the database as well so they are available for all servers in the cluster.</p>
 <p>With configuration in the database enabled, any changes to the configuration are recorded to the <code class="docutils literal notranslate"><span class="pre">Configurations</span></code> and <code class="docutils literal notranslate"><span class="pre">ConfigurationFiles</span></code> tables. Furthermore, <code class="docutils literal notranslate"><span class="pre">ClusterSettings.ReadOnlyConfig</span></code> is ignored, enabling full use of the System Console.</p>
-<p>If you have configuration settings that must be set on a per-server basis you should add them as environment variables to the <code class="docutils literal notranslate"><span class="pre">mattermost.environment</span></code> file. These must be on their own line, and you must escape them properly.</p>
+<p>If you have configuration settings that must be set on a per-server basis you should add them as environment variables to the <code class="docutils literal notranslate"><span class="pre">mm.environment</span></code> file. These must be on their own line, and you must escape them properly.</p>
 </div>
 <div class="section" id="verify-that-the-configuration-was-migrated-correctly">
 <h3>Verify that the configuration was migrated correctly<a class="headerlink" href="#verify-that-the-configuration-was-migrated-correctly" title="Permalink to this headline">¶</a></h3>
@@ -400,7 +400,7 @@ sudo systemctl restart mattermost
 </div>
 <div class="section" id="rolling-back">
 <h3>Rolling back<a class="headerlink" href="#rolling-back" title="Permalink to this headline">¶</a></h3>
-<p>If you run into issues with your configuration in the database you can roll back to the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file by commenting out the <code class="docutils literal notranslate"><span class="pre">MM_CONFIG</span></code> line in <code class="docutils literal notranslate"><span class="pre">/opt/mattermost/config/mattermost.environment</span></code> and restarting Mattermost with <code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">restart</span> <span class="pre">mattermost</span></code>.</p>
+<p>If you run into issues with your configuration in the database you can roll back to the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file by commenting out the <code class="docutils literal notranslate"><span class="pre">MM_CONFIG</span></code> line in <code class="docutils literal notranslate"><span class="pre">/opt/mattermost/config/mm.environment</span></code> and restarting Mattermost with <code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">restart</span> <span class="pre">mattermost</span></code>.</p>
 </div>
 </div>
 <div class="section" id="troubleshooting">
