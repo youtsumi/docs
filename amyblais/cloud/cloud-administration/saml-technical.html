@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>SAML Single-Sign-On: Technical Documentation &mdash; Mattermost 5.29 documentation</title>
+  <title>SAML Single-Sign-On: Technical Documentation &mdash; Mattermost 5.30 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.29
+                5.30
               </div>
             
           
@@ -271,17 +271,17 @@
 </pre></div>
 </div>
 <p>AuthNRequests can also be signed by Mattermost in which case the XML payload is similar to:</p>
-<div class="highlight-XML notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;samlp:AuthnRequest</span> <span class="na">xmlns:samlp=</span><span class="s">&quot;urn:oasis:names:tc:SAML:2.0:protocol&quot;</span> <span class="na">xmlns:saml=</span><span class="s">&quot;urn:oasis:names:tc:SAML:2.0:assertion&quot;</span> <span class="na">xmlns:samlsig=</span><span class="s">&quot;https://www.w3.org/2000/09/xmldsig#&quot;</span> <span class="na">ID=</span><span class="s">&quot;_u5mpjadp1fdozfih4cj8ap4brh&quot;</span> <span class="na">Version=</span><span class="s">&quot;2.0&quot;</span> <span class="na">ProtocolBinding=</span><span class="s">&quot;urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST&quot;</span> <span class="na">AssertionConsumerServiceURL=</span><span class="s">&quot;http://localhost:8065/login/sso/saml&quot;</span> <span class="na">IssueInstant=</span><span class="s">&quot;2019-06-08T16:00:31Z&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;saml:Issuer</span> <span class="na">xmlns:saml=</span><span class="s">&quot;urn:oasis:names:tc:SAML:2.0:assertion&quot;</span><span class="nt">&gt;</span>https://www.okta.com/exkoxukx1D8OIfY03356<span class="nt">&lt;/saml:Issuer&gt;</span>
+<div class="highlight-XML notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;samlp:AuthnRequest</span> <span class="na">xmlns:samlp=</span><span class="s">&quot;urn:oasis:names:tc:SAML:2.0:protocol&quot;</span> <span class="na">xmlns:saml=</span><span class="s">&quot;urn:oasis:names:tc:SAML:2.0:assertion&quot;</span> <span class="na">xmlns:samlsig=</span><span class="s">&quot;http://www.w3.org/2000/09/xmldsig#&quot;</span> <span class="na">ID=</span><span class="s">&quot;_u5mpjadp1fdozfih4cj8ap4brh&quot;</span> <span class="na">Version=</span><span class="s">&quot;2.0&quot;</span> <span class="na">ProtocolBinding=</span><span class="s">&quot;urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST&quot;</span> <span class="na">AssertionConsumerServiceURL=</span><span class="s">&quot;http://localhost:8065/login/sso/saml&quot;</span> <span class="na">IssueInstant=</span><span class="s">&quot;2019-06-08T16:00:31Z&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;saml:Issuer</span> <span class="na">xmlns:saml=</span><span class="s">&quot;urn:oasis:names:tc:SAML:2.0:assertion&quot;</span><span class="nt">&gt;</span>http://www.okta.com/exkoxukx1D8OIfY03356<span class="nt">&lt;/saml:Issuer&gt;</span>
     <span class="nt">&lt;samlsig:Signature</span> <span class="na">Id=</span><span class="s">&quot;Signature1&quot;</span><span class="nt">&gt;</span>
         <span class="nt">&lt;samlsig:SignedInfo&gt;</span>
-            <span class="nt">&lt;samlsig:CanonicalizationMethod</span> <span class="na">Algorithm=</span><span class="s">&quot;https://www.w3.org/2001/10/xml-exc-c14n#&quot;</span><span class="nt">&gt;&lt;/samlsig:CanonicalizationMethod&gt;</span>
-            <span class="nt">&lt;samlsig:SignatureMethod</span> <span class="na">Algorithm=</span><span class="s">&quot;https://www.w3.org/2000/09/xmldsig#rsa-sha1&quot;</span><span class="nt">&gt;&lt;/samlsig:SignatureMethod&gt;</span>
+            <span class="nt">&lt;samlsig:CanonicalizationMethod</span> <span class="na">Algorithm=</span><span class="s">&quot;http://www.w3.org/2001/10/xml-exc-c14n#&quot;</span><span class="nt">&gt;&lt;/samlsig:CanonicalizationMethod&gt;</span>
+            <span class="nt">&lt;samlsig:SignatureMethod</span> <span class="na">Algorithm=</span><span class="s">&quot;http://www.w3.org/2000/09/xmldsig#rsa-sha1&quot;</span><span class="nt">&gt;&lt;/samlsig:SignatureMethod&gt;</span>
             <span class="nt">&lt;samlsig:Reference</span> <span class="na">URI=</span><span class="s">&quot;#_u5mpjadp1fdozfih4cj8ap4brh&quot;</span><span class="nt">&gt;</span>
                 <span class="nt">&lt;samlsig:Transforms&gt;</span>
-                    <span class="nt">&lt;samlsig:Transform</span> <span class="na">Algorithm=</span><span class="s">&quot;https://www.w3.org/2000/09/xmldsig#enveloped-signature&quot;</span><span class="nt">&gt;&lt;/samlsig:Transform&gt;</span>
+                    <span class="nt">&lt;samlsig:Transform</span> <span class="na">Algorithm=</span><span class="s">&quot;http://www.w3.org/2000/09/xmldsig#enveloped-signature&quot;</span><span class="nt">&gt;&lt;/samlsig:Transform&gt;</span>
                 <span class="nt">&lt;/samlsig:Transforms&gt;</span>
-                <span class="nt">&lt;samlsig:DigestMethod</span> <span class="na">Algorithm=</span><span class="s">&quot;https://www.w3.org/2000/09/xmldsig#sha1&quot;</span><span class="nt">&gt;&lt;/samlsig:DigestMethod&gt;</span>
+                <span class="nt">&lt;samlsig:DigestMethod</span> <span class="na">Algorithm=</span><span class="s">&quot;http://www.w3.org/2000/09/xmldsig#sha1&quot;</span><span class="nt">&gt;&lt;/samlsig:DigestMethod&gt;</span>
                 <span class="nt">&lt;samlsig:DigestValue&gt;&lt;/samlsig:DigestValue&gt;</span>
             <span class="nt">&lt;/samlsig:Reference&gt;</span>
         <span class="nt">&lt;/samlsig:SignedInfo&gt;</span>
@@ -479,7 +479,7 @@
 		<div class="search__icon">
 			<i class="fa fa-search"></i>
 		</div>
-		<a href="https://docs.mattermost.com/" class="header__logo">
+		<a href="http://docs.mattermost.com/" class="header__logo">
 			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
 		</a>
 		<div class="links__icon">
