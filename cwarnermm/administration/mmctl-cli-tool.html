@@ -2093,12 +2093,9 @@ mmctl config subpath --assets-dir /opt/mattermost/client --path /
 <dl class="docutils">
 <dt>Child Commands</dt>
 <dd><ul class="first last simple">
-<li><a class="reference internal" href="#mmctl-permissions-add">mmctl permissions add</a> - Add permissions to a role</li>
-<li><a class="reference internal" href="#mmctl-permissions-role-assign">mmctl permissions role assign</a> - Assign users to role</li>
-<li><a class="reference internal" href="#mmctl-permissions-remove">mmctl permissions remove</a> - Remove permissions from a role</li>
-<li><a class="reference internal" href="#mmctl-permissions-reset">mmctl permissions reset</a> - Reset default permissions for role</li>
-<li><a href="#id1"><span class="problematic" id="id2">`mmctl permissions role show`_</span></a> - Show the role information</li>
-<li><a class="reference internal" href="#mmctl-permissions-role-unassign">mmctl permissions role unassign</a> - Unassign users from role</li>
+<li><a class="reference internal" href="#mmctl-permissions-add">mmctl permissions add</a> - Add permissions</li>
+<li><a class="reference internal" href="#mmctl-permissions-remove">mmctl permissions remove</a> - Remove permissions</li>
+<li><a class="reference internal" href="#mmctl-permissions-show">mmctl permissions show</a> - Show permissions</li>
 </ul>
 </dd>
 </dl>
@@ -2112,7 +2109,7 @@ mmctl config subpath --assets-dir /opt/mattermost/client --path /
 <blockquote>
 <div>Add one or more permissions to an existing role (only available in E10 and E20).</div></blockquote>
 <p><strong>Format</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl permissions add <span class="o">[</span>role_name<span class="o">]</span> <span class="o">[</span>permission...<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl permissions add <span class="o">[</span>role<span class="o">]</span> <span class="o">[</span>permission...<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
 </div>
 <p><strong>Examples</strong></p>
@@ -2131,44 +2128,13 @@ mmctl config subpath --assets-dir /opt/mattermost/client --path /
 </pre></div>
 </div>
 </div>
-<div class="section" id="mmctl-permissions-role-assign">
-<h3>mmctl permissions role assign<a class="headerlink" href="#mmctl-permissions-role-assign" title="Permalink to this headline">¶</a></h3>
-<p><strong>Description</strong></p>
-<p>Assign users to a role by username (only available in Enterprise Edition E10 and E20).</p>
-<p><strong>Format</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl permissions role assign <span class="o">[</span>role_name<span class="o">]</span> <span class="o">[</span>username...<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
-</pre></div>
-</div>
-<p><strong>Examples</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Assign users with usernames &#39;john.doe&#39; and &#39;jane.doe&#39; to the role named &#39;system_admin&#39;.</span>
-permissions assign system_admin john.doe jane.doe
-
-<span class="c1"># Examples using other system roles</span>
-permissions assign system_manager john.doe jane.doe
-permissions assign system_user_manager john.doe jane.doe
-permissions assign system_read_only_admin john.doe jane.doe
-</pre></div>
-</div>
-<p><strong>Options</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help   <span class="nb">help</span> <span class="k">for</span> assign
-</pre></div>
-</div>
-<p><strong>Options inherited from parent commands</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string           path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
---format string                the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
---insecure-sha1-intermediate   allows to use insecure TLS protocols, such as SHA-1
---local                        allows communicating with the server through a unix socket
---strict                       will only run commands <span class="k">if</span> the mmctl version matches the server one
-</pre></div>
-</div>
-</div>
 <div class="section" id="mmctl-permissions-remove">
 <h3>mmctl permissions remove<a class="headerlink" href="#mmctl-permissions-remove" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
 <div>Remove one or more permissions from an existing role (only available in E10 and E20).</div></blockquote>
 <p><strong>Format</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl permissions remove <span class="o">[</span>role_name<span class="o">]</span> <span class="o">[</span>permission...<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl permissions remove <span class="o">[</span>role<span class="o">]</span> <span class="o">[</span>permission...<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
 </div>
 <p><strong>Examples</strong></p>
@@ -2184,32 +2150,6 @@ permissions assign system_read_only_admin john.doe jane.doe
 --insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
 --local                       allows communicating with the server through a unix socket
 --strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
-</pre></div>
-</div>
-</div>
-<div class="section" id="mmctl-permissions-reset">
-<h3>mmctl permissions reset<a class="headerlink" href="#mmctl-permissions-reset" title="Permalink to this headline">¶</a></h3>
-<p><strong>Description</strong></p>
-<p>Reset the given role’s permissions to the set that was originally released with (only available in E10 and E20).</p>
-<p><strong>Format</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl permissions reset <span class="o">[</span>role_name<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
-</pre></div>
-</div>
-<p><strong>Examples</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reset the permissions of the &#39;system_read_only_admin&#39; role.</span>
-$ mmctl permissions reset system_read_only_admin
-</pre></div>
-</div>
-<p><strong>Options</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help   <span class="nb">help</span> <span class="k">for</span> reset
-</pre></div>
-</div>
-<p><strong>Options inherited from parent commands</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string           path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
---format string                the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
---insecure-sha1-intermediate   allows to use insecure TLS protocols, such as SHA-1
---local                        allows communicating with the server through a unix socket
---strict                       will only run commands <span class="k">if</span> the mmctl version matches the server one
 </pre></div>
 </div>
 </div>
@@ -2235,37 +2175,6 @@ $ mmctl permissions reset system_read_only_admin
 --insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
 --local                       allows communicating with the server through a unix socket
 --strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
-</pre></div>
-</div>
-</div>
-<div class="section" id="mmctl-permissions-role-unassign">
-<h3>mmctl permissions role unassign<a class="headerlink" href="#mmctl-permissions-role-unassign" title="Permalink to this headline">¶</a></h3>
-<p><strong>Description</strong></p>
-<p>Unassign users from a role by username (only available in E10 and E20).</p>
-<p><strong>Format</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl permissions role unassign <span class="o">[</span>role_name<span class="o">]</span> <span class="o">[</span>username...<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
-</pre></div>
-</div>
-<p><strong>Examples</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Unassign users with usernames &#39;john.doe&#39; and &#39;jane.doe&#39; from the role named &#39;system_admin&#39;.</span>
-permissions unassign system_admin john.doe jane.doe
-
-<span class="c1"># Examples using other system roles</span>
-permissions unassign system_manager john.doe jane.doe
-permissions unassign system_user_manager john.doe jane.doe
-permissions unassign system_read_only_admin john.doe jane.doe
-</pre></div>
-</div>
-<p><strong>Options</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help   <span class="nb">help</span> <span class="k">for</span> unassign
-</pre></div>
-</div>
-<p><strong>Options inherited from parent commands</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string           path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
---format string                the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
---insecure-sha1-intermediate   allows to use insecure TLS protocols, such as SHA-1
---local                        allows communicating with the server through a unix socket
---strict                       will only run commands <span class="k">if</span> the mmctl version matches the server one
 </pre></div>
 </div>
 </div>
