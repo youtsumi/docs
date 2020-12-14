@@ -240,14 +240,6 @@
 <h2>Release 2020-12-09<a class="headerlink" href="#release-2020-12-09" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="improvements">
 <h3>Improvements<a class="headerlink" href="#improvements" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="cloud-services">
-<h4>Cloud Services<a class="headerlink" href="#cloud-services" title="Permalink to this headline">¶</a></h4>
-<ul class="simple">
-<li>The Customer Web Server can now make HTTP requests to an installation by passing the X-Cloud-Token header, with the value being that installation’s Customer API Key.</li>
-<li>System Admins can receive an email notifying them of a failed payment in Mattermost cloud.</li>
-<li>In the event a subscription has a payment and there is no card on the account when that payment is processed, an email will be sent to attempt to get the user to pay up.</li>
-</ul>
-</div>
 <div class="section" id="user-interface-ui">
 <h4>User Interface (UI)<a class="headerlink" href="#user-interface-ui" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
@@ -273,18 +265,6 @@
 <li>Fixed an issue where the site configuration ‘’Read only’’ permission did not make the “Notice” section as read-only for the System Manager.</li>
 <li>Fixed an issue where importing Client4 in a node server caused an exception due to rudder modules.</li>
 <li>Fixed an issue where LDAP ‘’FirstLoginSync’’ didn’t close LDAP Session.</li>
-</ul>
-</div>
-<div class="section" id="database-changes">
-<h3>Database Changes<a class="headerlink" href="#database-changes" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>Added <code class="docutils literal notranslate"><span class="pre">UnreadMentions</span></code> column to <code class="docutils literal notranslate"><span class="pre">ThreadMembership</span></code> table.</li>
-</ul>
-</div>
-<div class="section" id="websocket-event-changes">
-<h3>Websocket Event Changes<a class="headerlink" href="#websocket-event-changes" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>New websocket events added: <code class="docutils literal notranslate"><span class="pre">thread_updated</span></code>, <code class="docutils literal notranslate"><span class="pre">thread_follow_changed</span></code>, <code class="docutils literal notranslate"><span class="pre">thread_read_changed</span></code>.</li>
 </ul>
 </div>
 <div class="section" id="known-issues">
@@ -321,20 +301,6 @@
 </div>
 <div class="section" id="id2">
 <h3>Improvements<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="id3">
-<h4>Cloud Services<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
-<ul class="simple">
-<li>Slack imports are no longer allowed in Cloud installations.</li>
-<li>Mattermost cloud instances with delinquent subscriptions will be sent emails on a certain cadence, in certain cases:<ul>
-<li>A check happens twice per day to see if an installation is over the user limit</li>
-<li>If that installation is over the user limit, they are marked for notification during the next billing cycle</li>
-<li>If that installation is still over the limit 7, 14, 30, and 90 days into the next billing cycle, they will be sent emails with various wording to get them to add a payment method and upgrade their cloud billing</li>
-<li>If that installation is no longer over the limit 7, 14, and 30 days into the next billing cycle, we will “forgive” them, and not send any emails for that cycle.</li>
-<li>After the installation has gone over the limit, each time the job runs, it checks Stripe to check the state of the subscription. If it’s flipped from “past_due” to active, it will cancel any emails for that cycle. Otherwise, it will continue on.</li>
-</ul>
-</li>
-</ul>
-</div>
 <div class="section" id="user-interface">
 <h4>User Interface<a class="headerlink" href="#user-interface" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
@@ -360,8 +326,8 @@
 <li>Added plugin hooks for ReationHasBeenAdded and ReactionHasBeenRemoved.</li>
 </ul>
 </div>
-<div class="section" id="id4">
-<h4>Administration<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id3">
+<h4>Administration<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li>Added the ability to load a set of configuration custom defaults from a MM_CUSTOM_DEFAULTS_PATH environment variable.</li>
 <li>Added AWS metering service support.</li>
@@ -369,8 +335,8 @@
 </ul>
 </div>
 </div>
-<div class="section" id="id5">
-<h3>Bug Fixes<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id4">
+<h3>Bug Fixes<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Fixed an issue with broken link previews for twitter links.</li>
 <li>Fixed an issue where editing a post did not submit with CMD+ENTER.</li>
@@ -382,12 +348,6 @@
 <li>Fixed an issue where s3 file backend TestFileConnection failed due to permissions if S3PathPrefix was in use.</li>
 <li>Fixed an issue where an id was missing for Tooltip in PostInfo.</li>
 </ul>
-<div class="section" id="id6">
-<h4>Websocket Event Changes<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h4>
-<ul class="simple">
-<li>In post_deleted websocket event, System Admins are now notified when a user initiates a post deletion.</li>
-</ul>
-</div>
 <div class="section" id="api-changes">
 <h4>API Changes<a class="headerlink" href="#api-changes" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
@@ -396,8 +356,8 @@
 </ul>
 </div>
 </div>
-<div class="section" id="id7">
-<h3>Known Issues<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id5">
+<h3>Known Issues<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>System Manager does not have access to Billing section and sees blank screen.</li>
 <li>Cloud &gt; “Tips &amp; Next Steps” should not show “Explore channels” section for guest users.</li>
