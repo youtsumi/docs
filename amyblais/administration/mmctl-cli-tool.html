@@ -203,6 +203,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#mmctl-token">mmctl token</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mmctl-user">mmctl user</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mmctl-version">mmctl version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mmctl-webhook">mmctl webhook</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mmctl-websocket">mmctl websocket</a></li>
 </ul>
 </li>
@@ -310,6 +311,7 @@
 <li><a class="reference internal" href="#mmctl-token">mmctl token</a> - Token Management</li>
 <li><a class="reference internal" href="#mmctl-user">mmctl user</a> - User Management</li>
 <li><a class="reference internal" href="#mmctl-version">mmctl version</a> - Version Management</li>
+<li><a class="reference internal" href="#mmctl-webhook">mmctl webhook</a> - Webhook Management</li>
 <li><a class="reference internal" href="#mmctl-websocket">mmctl websocket</a> - Websocket Management</li>
 </ul>
 </dd>
@@ -2096,7 +2098,6 @@ mmctl config subpath --assets-dir /opt/mattermost/client --path /
 <li><a class="reference internal" href="#mmctl-permissions-add">mmctl permissions add</a> - Add permissions to a role</li>
 <li><a class="reference internal" href="#mmctl-permissions-role-assign">mmctl permissions role assign</a> - Assign users to role</li>
 <li><a class="reference internal" href="#mmctl-permissions-remove">mmctl permissions remove</a> - Remove permissions from a role</li>
-<li><a class="reference internal" href="#mmctl-permissions-reset">mmctl permissions reset</a> - Reset default permissions for a role</li>
 <li><a class="reference internal" href="#mmctl-permissions-show">mmctl permissions show</a> - Show the role information</li>
 <li><a class="reference internal" href="#mmctl-permissions-role-unassign">mmctl permissions role unassign</a> - Unassign users from a role</li>
 </ul>
@@ -2184,32 +2185,6 @@ permissions assign system_read_only_admin john.doe jane.doe
 --insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
 --local                       allows communicating with the server through a unix socket
 --strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
-</pre></div>
-</div>
-</div>
-<div class="section" id="mmctl-permissions-reset">
-<h3>mmctl permissions reset<a class="headerlink" href="#mmctl-permissions-reset" title="Permalink to this headline">¶</a></h3>
-<p><strong>Description</strong></p>
-<p>Reset the given role’s permissions to the default settings and overwrite custom settings (only available in Enterprise Edition E10 and E20).</p>
-<p><strong>Format</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl permissions reset <span class="o">[</span>role_name<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
-</pre></div>
-</div>
-<p><strong>Examples</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reset the permissions of the &#39;system_read_only_admin&#39; role.</span>
-$ mmctl permissions reset system_read_only_admin
-</pre></div>
-</div>
-<p><strong>Options</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help   <span class="nb">help</span> <span class="k">for</span> reset
-</pre></div>
-</div>
-<p><strong>Options inherited from parent commands</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string           path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
---format string                the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
---insecure-sha1-intermediate   allows to use insecure TLS protocols, such as SHA-1
---local                        allows communicating with the server through a unix socket
---strict                       will only run commands <span class="k">if</span> the mmctl version matches the server one
 </pre></div>
 </div>
 </div>
@@ -3499,6 +3474,245 @@ user invite user@example.com myteam1 myteam2
 </pre></div>
 </div>
 </div>
+<div class="section" id="mmctl-webhook">
+<h2>mmctl webhook<a class="headerlink" href="#mmctl-webhook" title="Permalink to this headline">¶</a></h2>
+<p><strong>Description</strong></p>
+<p>Management of webhooks.</p>
+<dl class="docutils">
+<dt>Child Commands</dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="#mmctl-webhook-create-incoming">mmctl webhook create-incoming</a> - Create an incoming webhook</li>
+<li><a class="reference internal" href="#mmctl-webhook-create-outgoing">mmctl webhook create-outgoing</a> - Create an outgoing webhook</li>
+<li><a class="reference internal" href="#mmctl-webhook-delete">mmctl webhook delete</a> - Delete webhooks</li>
+<li><a class="reference internal" href="#mmctl-webhook-list">mmctl webhook list</a> - List webhooks</li>
+<li><a class="reference internal" href="#mmctl-webhook-modify-incoming">mmctl webhook modify-incoming</a> - Modify an incoming webhook</li>
+<li><a class="reference internal" href="#mmctl-webhook-modify-outgoing">mmctl webhook modify-outgoing</a> - Modify an outgoing webhook</li>
+<li><a class="reference internal" href="#mmctl-webhook-show">mmctl webhook show</a> - Show a webhook</li>
+</ul>
+</dd>
+</dl>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl websocket <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help       <span class="nb">help</span> <span class="k">for</span> webhook
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string           path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
+--format string                the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate   allows to use insecure TLS protocols, such as SHA-1
+--local                        allows communicating with the server through a unix socket
+--strict                       will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+<div class="section" id="mmctl-webhook-create-incoming">
+<h3>mmctl webhook create-incoming<a class="headerlink" href="#mmctl-webhook-create-incoming" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<p>Create an incoming webhook to allow external posting of messages to a specific channel.</p>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl webhook create-incoming <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>webhook create-incoming --channel <span class="o">[</span>channelID<span class="o">]</span> --user <span class="o">[</span>userID<span class="o">]</span> --display-name <span class="o">[</span>displayName<span class="o">]</span> --description <span class="o">[</span>webhookDescription<span class="o">]</span> --lock-to-channel --icon <span class="o">[</span>iconURL<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--channel string        Channel ID <span class="o">(</span>required<span class="o">)</span>
+--description string    Incoming webhook description
+--display-name string   Incoming webhook display name
+-h, --help              <span class="nb">help</span> <span class="k">for</span> create-incoming
+--icon string           Icon URL
+--lock-to-channel       Lock to channel
+--user string           User ID <span class="o">(</span>required<span class="o">)</span>
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string           path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
+--format string                the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate   allows to use insecure TLS protocols, such as SHA-1
+--local                        allows communicating with the server through a unix socket
+--strict                       will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
+<div class="section" id="mmctl-webhook-create-outgoing">
+<h3>mmctl webhook create-outgoing<a class="headerlink" href="#mmctl-webhook-create-outgoing" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<p>Create an outgoing webhook to allow external posting of messages from a specific channel.</p>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl webhook create-outgoing <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>webhook create-outgoing --team myteam --user myusername --display-name mywebhook --trigger-word <span class="s2">&quot;build&quot;</span> --trigger-word <span class="s2">&quot;test&quot;</span> --url http://localhost:8000/my-webhook-handler
+     webhook create-outgoing --team myteam --channel mychannel --user myusername --display-name mywebhook --description <span class="s2">&quot;My cool webhook&quot;</span> --trigger-when start --trigger-word build --trigger-word <span class="nb">test</span> --icon http://localhost:8000/my-slash-handler-bot-icon.png --url http://localhost:8000/my-webhook-handler --content-type <span class="s2">&quot;application/json&quot;</span>
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--channel string             Channel name or ID
+--content-type string        Content-type
+--description string         Outgoing webhook description
+--display-name string        Outgoing webhook display name <span class="o">(</span>required<span class="o">)</span>
+-h, --help                   <span class="nb">help</span> <span class="k">for</span> create-outgoing
+--icon string                Icon URL
+--team string                Team name or ID <span class="o">(</span>required<span class="o">)</span>
+--trigger-when string        When to trigger webhook <span class="o">(</span>exact: <span class="k">for</span> first word matches a trigger word exactly, start: <span class="k">for</span> first word starts with a trigger word<span class="o">)</span> <span class="o">(</span>default <span class="s2">&quot;exact&quot;</span><span class="o">)</span>
+--trigger-word stringArray   Word to trigger webhook <span class="o">(</span>required<span class="o">)</span>
+--url stringArray            Callback URL <span class="o">(</span>required<span class="o">)</span>
+--user string                User username, email, or ID <span class="o">(</span>required<span class="o">)</span>
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string           path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
+--format string                the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate   allows to use insecure TLS protocols, such as SHA-1
+--local                        allows communicating with the server through a unix socket
+--strict                       will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
+<div class="section" id="mmctl-webhook-delete">
+<h3>mmctl webhook delete<a class="headerlink" href="#mmctl-webhook-delete" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<p>Delete a webhook with a given ID.</p>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl webhook delete <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>webhook delete <span class="o">[</span>webhookID<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help   <span class="nb">help</span> <span class="k">for</span> delete
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string           path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
+--format string                the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate   allows to use insecure TLS protocols, such as SHA-1
+--local                        allows communicating with the server through a unix socket
+--strict                       will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
+<div class="section" id="mmctl-webhook-list">
+<h3>mmctl webhook list<a class="headerlink" href="#mmctl-webhook-list" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<p>Print a list of all webhooks.</p>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl webhook list <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>webhook list myteam
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help   <span class="nb">help</span> <span class="k">for</span> list
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string           path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
+--format string                the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate   allows to use insecure TLS protocols, such as SHA-1
+--local                        allows communicating with the server through a unix socket
+--strict                       will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
+<div class="section" id="mmctl-webhook-modify-incoming">
+<h3>mmctl webhook modify-incoming<a class="headerlink" href="#mmctl-webhook-modify-incoming" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<p>Modify an existing incoming webhook by changing its title, description, channel, or icon URL.</p>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl webhook modify-incoming <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>webhook modify-incoming <span class="o">[</span>webhookID<span class="o">]</span> --channel <span class="o">[</span>channelID<span class="o">]</span> --display-name <span class="o">[</span>displayName<span class="o">]</span> --description <span class="o">[</span>webhookDescription<span class="o">]</span> --lock-to-channel --icon <span class="o">[</span>iconURL<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--channel string        Channel ID
+--description string    Incoming webhook description
+--display-name string   Incoming webhook display name
+-h, --help              <span class="nb">help</span> <span class="k">for</span> modify-incoming
+--icon string           Icon URL
+--lock-to-channel       Lock to channel
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string           path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
+--format string                the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate   allows to use insecure TLS protocols, such as SHA-1
+--local                        allows communicating with the server through a unix socket
+--strict                       will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
+<div class="section" id="mmctl-webhook-modify-outgoing">
+<h3>mmctl webhook modify-outgoing<a class="headerlink" href="#mmctl-webhook-modify-outgoing" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<p>Modify an existing outgoing webhook by changing its title, description, channel, icon, url, content-type, or triggers.</p>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl webhook modify-outgoing <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>webhook modify-outgoing <span class="o">[</span>webhookId<span class="o">]</span> --channel <span class="o">[</span>channelId<span class="o">]</span> --display-name <span class="o">[</span>displayName<span class="o">]</span> --description <span class="s2">&quot;New webhook description&quot;</span> --icon http://localhost:8000/my-slash-handler-bot-icon.png --url http://localhost:8000/my-webhook-handler --content-type <span class="s2">&quot;application/json&quot;</span> --trigger-word <span class="nb">test</span> --trigger-when start
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--channel string             Channel name or ID
+--content-type string        Content-type
+--description string         Outgoing webhook description
+--display-name string        Outgoing webhook display name
+-h, --help                   <span class="nb">help</span> <span class="k">for</span> modify-outgoing
+--icon string                Icon URL
+--trigger-when string        When to trigger webhook <span class="o">(</span>exact: <span class="k">for</span> first word matches a trigger word exactly, start: <span class="k">for</span> first word starts with a trigger word<span class="o">)</span>
+--trigger-word stringArray   Word to trigger webhook
+--url stringArray            Callback URL
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string           path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
+--format string                the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate   allows to use insecure TLS protocols, such as SHA-1
+--local                        allows communicating with the server through a unix socket
+--strict                       will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
+<div class="section" id="mmctl-webhook-show">
+<h3>mmctl webhook show<a class="headerlink" href="#mmctl-webhook-show" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<p>Show the webhook specified by <cite>[webhookId]</cite>.</p>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl webhook show <span class="o">[</span>webhookId<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>webhook show w16zb5tu3n1zkqo18goqry1je
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help   <span class="nb">help</span> <span class="k">for</span> show
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string           path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
+--format string                the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate   allows to use insecure TLS protocols, such as SHA-1
+--local                        allows communicating with the server through a unix socket
+--strict                       will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
+</div>
 <div class="section" id="mmctl-websocket">
 <h2>mmctl websocket<a class="headerlink" href="#mmctl-websocket" title="Permalink to this headline">¶</a></h2>
 <p><strong>Description</strong></p>
@@ -3609,7 +3823,7 @@ user invite user@example.com myteam1 myteam2
 		<div class="search__icon">
 			<i class="fa fa-search"></i>
 		</div>
-		<a href="http://docs.mattermost.com/" class="header__logo">
+		<a href="https://docs.mattermost.com/" class="header__logo">
 			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
 		</a>
 		<div class="links__icon">
