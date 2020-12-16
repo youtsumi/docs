@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Active Directory/LDAP Setup (E10/E20) &mdash; Mattermost 5.27 documentation</title>
+  <title>Active Directory/LDAP Setup (E10/E20) &mdash; Mattermost 5.29 documentation</title>
   
 
   
@@ -32,7 +32,7 @@
   <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Multi-factor Authentication" href="auth.html" />
-    <link rel="prev" title="Provisioning Workflows" href="../administration/user-provisioning.html" />
+    <link rel="prev" title="Additional System Admin Roles (E20)" href="admin-roles.html" />
 	<!-- Bizible Script -->
 	<script src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
 
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.27
+                5.29
               </div>
             
           
@@ -159,12 +159,15 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Administrator's Guide</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="bulk-loading.html">Bulk Loading Data</a></li>
@@ -172,6 +175,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../administration/hipchat-migration-guidelines.html">Migrating from HipChat to Mattermost</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../administration/migration-announcement-email-template.html">Migration Announcement Email</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../administration/user-provisioning.html">Provisioning Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="admin-roles.html">Additional System Admin Roles (E20)</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Active Directory/LDAP Setup (E10/E20)</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pre-installation-notes">Pre-installation Notes</a></li>
@@ -182,12 +186,6 @@
 <li class="toctree-l3"><a class="reference internal" href="auth.html">Multi-factor Authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ldap-group-sync.html">AD/LDAP Groups (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html">Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html#managing-membership-of-a-team-or-channel-with-synchronized-groups">Managing Membership of a Team or Channel with Synchronized Groups</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html#add-or-remove-groups-from-teams">Add or Remove Groups from Teams</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html#add-or-remove-groups-from-private-channels">Add or Remove Groups from Private Channels</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html#managing-members">Managing Members</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html#disabling-group-synchronized-management-of-teams-and-private-channels">Disabling Group Synchronized Management of Teams and Private Channels</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html#faqs">FAQs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-saml.html">SAML Single Sign-On (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-saml-technical.html">SAML Single-Sign-On (E20): Technical Documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-gitlab.html">GitLab Single Sign-On</a></li>
@@ -210,9 +208,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/education.html">Training and Education</a></li>
 </ul>
 
             
@@ -246,7 +244,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
     
-      <li><a href="../guides/administrator.html">Administrator’s Guide</a> &raquo;</li>
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
     
     <li>Active Directory/LDAP Setup (E10/E20)</li>
     <li class="wy-breadcrumbs-aside">
@@ -267,11 +265,12 @@
 <p><em>Available in Enterprise Edition E10 and E20</em></p>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
-<p>Active Directory/LDAP integration offers the following benefits:</p>
+<p>Active Directory (AD) is a service that stores authentication and authorization details of users on your organization’s network. When you integrate your AD/LDAP system with Mattermost, users can log into Mattermost without having to create new credentials. User accounts are managed in AD/LDAP, and changes are synced with the Mattermost server.</p>
+<p>Benefits of integrating AD/LDAP with Mattermost include:</p>
 <ul class="simple">
 <li><strong>Single sign-on.</strong> Users can sign in to Mattermost with their AD/LDAP credentials.</li>
 <li><strong>Centralized identity management.</strong> Mattermost accounts can display user information from AD/LDAP, such as first and last name, email, and username.</li>
-<li><strong>Automatic account provisioning.</strong> New Mattermost user accounts are automatically created the first time a user signs in with their AD/LDAP credentials on the Mattermost server.</li>
+<li><strong>Automatic account provisioning.</strong> A Mattermost user account is automatically created the first time a user signs in with their AD/LDAP credentials on the Mattermost server.</li>
 <li><strong>Sync groups to predefined roles in Mattermost.</strong> Assign team and channel roles to groups via LDAP Group Sync.</li>
 <li><strong>Compliance alignment with administrator management.</strong> Manage Administrator access to Mattermost in the System Console using LDAP filters.</li>
 </ul>
@@ -291,7 +290,7 @@
 </ul>
 </li>
 <li><strong>Configure AD/LDAP by editing <code class="docutils literal notranslate"><span class="pre">config.json</span></code></strong><ul>
-<li>Before starting the Mattermost server, edit <code class="docutils literal notranslate"><span class="pre">config.json</span></code> to enable AD/LDAP based on the <a class="reference external" href="http://docs.mattermost.com/administration/config-settings.html#ad-ldap">AD/LDAP settings documentation</a>. When you start the Mattermost server the first user to log in with valid AD/LDAP credentials will be assigned the System Administrator role.</li>
+<li>Before starting the Mattermost server, edit <code class="docutils literal notranslate"><span class="pre">config.json</span></code> to enable AD/LDAP based on the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#ad-ldap">AD/LDAP settings documentation</a>. When you start the Mattermost server the first user to log in with valid AD/LDAP credentials will be assigned the System Administrator role.</li>
 </ul>
 </li>
 </ol>
@@ -305,7 +304,7 @@
 <ol class="simple">
 <li><strong>Configure AD/LDAP.</strong></li>
 </ol>
-<p>Go to <strong>System Console &gt; Authentication &gt; AD/LDAP</strong> and fill in AD/LDAP settings based on the <a class="reference external" href="http://docs.mattermost.com/administration/config-settings.html#ad-ldap">configuration settings documentation</a>.</p>
+<p>Go to <strong>System Console &gt; Authentication &gt; AD/LDAP</strong> and fill in AD/LDAP settings based on the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#ad-ldap">configuration settings documentation</a>.</p>
 <ol class="simple">
 <li><strong>Confirm that AD/LDAP sign-on is enabled.</strong></li>
 </ol>
@@ -322,7 +321,7 @@
 <li><strong>(Optional) If you configured <code class="docutils literal notranslate"><span class="pre">First</span> <span class="pre">Name</span> <span class="pre">Attribute</span></code> and <code class="docutils literal notranslate"><span class="pre">Last</span> <span class="pre">Name</span> <span class="pre">Attribute</span></code> in the System Console.</strong></li>
 </ol>
 <p>Navigate to <strong>System Console &gt; Site Configuration &gt; Users and Teams</strong> (or <strong>System Console &gt; General &gt; Users and Teams</strong> in versions prior to 5.12) and set <strong>Teammate Name Display</strong> to <strong>Show first and last name</strong>. This is recommended for a better user experience.</p>
-<p>If you’ve made a mistake and lock yourself out of the system somehow, you can <a class="reference external" href="http://docs.mattermost.com/deployment/on-boarding.html#common-tasks">set an existing account to System Administrator using the command line tool</a>.</p>
+<p>If you’ve made a mistake and lock yourself out of the system somehow, you can <a class="reference external" href="https://docs.mattermost.com/deployment/on-boarding.html#common-tasks">set an existing account to System Administrator using the command line tool</a>.</p>
 </div>
 <div class="section" id="configure-ad-ldap-synchronization">
 <h3>Configure AD/LDAP Synchronization<a class="headerlink" href="#configure-ad-ldap-synchronization" title="Permalink to this headline">¶</a></h3>
@@ -453,7 +452,7 @@
 <li>Check your license to confirm it’s uploaded and not expired.</li>
 <li>Check your Mattermost configuration settings to ensure that AD/LDAP is enabled, and the settings are correct.</li>
 </ol>
-<p>If you’re still having issues, you can <a class="reference external" href="https://about.mattermost.com/support/">contact support</a> for additional troubleshooting.</p>
+<p>If you’re still having issues, you can <a class="reference external" href="https://mattermost.com/support/">contact support</a> for additional troubleshooting.</p>
 </div>
 <div class="section" id="i-see-the-error-user-not-registered-on-ad-ldap-server">
 <h3>I see the error <code class="docutils literal notranslate"><span class="pre">User</span> <span class="pre">not</span> <span class="pre">registered</span> <span class="pre">on</span> <span class="pre">AD/LDAP</span> <span class="pre">server</span></code>.<a class="headerlink" href="#i-see-the-error-user-not-registered-on-ad-ldap-server" title="Permalink to this headline">¶</a></h3>
@@ -463,7 +462,7 @@
 <li>Check that the user account exists in the AD/LDAP server.</li>
 <li>Check the AD/LDAP configuration settings are correct.</li>
 </ol>
-<p>If you’re still having issues, you can <a class="reference external" href="https://about.mattermost.com/support/">contact support</a> for additional troubleshooting.</p>
+<p>If you’re still having issues, you can <a class="reference external" href="https://mattermost.com/support/">contact support</a> for additional troubleshooting.</p>
 </div>
 <div class="section" id="i-updated-a-user-account-in-ad-ldap-and-they-can-no-longer-log-in-to-mattermost">
 <h3>I updated a user account in AD/LDAP, and they can no longer log in to Mattermost.<a class="headerlink" href="#i-updated-a-user-account-in-ad-ldap-and-they-can-no-longer-log-in-to-mattermost" title="Permalink to this headline">¶</a></h3>
@@ -513,7 +512,7 @@
         <a href="auth.html" class="btn btn-neutral float-right" title="Multi-factor Authentication" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../administration/user-provisioning.html" class="btn btn-neutral" title="Provisioning Workflows" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="admin-roles.html" class="btn btn-neutral" title="Additional System Admin Roles (E20)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -589,7 +588,7 @@
 		<div class="search__icon">
 			<i class="fa fa-search"></i>
 		</div>
-		<a href="http://docs.mattermost.com/" class="header__logo">
+		<a href="https://docs.mattermost.com/" class="header__logo">
 			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
 		</a>
 		<div class="links__icon">

@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installing PostgreSQL Database Server &mdash; Mattermost 5.27 documentation</title>
+  <title>Installing PostgreSQL Database Server &mdash; Mattermost 5.29 documentation</title>
   
 
   
@@ -131,7 +131,7 @@
             
             
               <div class="version">
-                5.27
+                5.29
               </div>
             
           
@@ -157,11 +157,11 @@
             
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/administrator.html">Administrator's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/education.html">Training and Education</a></li>
 </ul>
 
             
@@ -289,15 +289,19 @@
 <blockquote>
 <div><ol class="loweralpha simple">
 <li>Open <code class="docutils literal notranslate"><span class="pre">/etc/postgresql/9.4/main/pg_hba.conf</span></code> as root in a text editor.</li>
-<li>Find the following line:</li>
+<li>Find the following lines:</li>
 </ol>
 <blockquote>
-<div><code class="docutils literal notranslate"><span class="pre">local</span>&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">peer</span></code></div></blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">local</span>&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">peer</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">host</span>&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">::1/128</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">ident</span></code></p>
+</div></blockquote>
 <ol class="loweralpha simple" start="3">
-<li>Change <code class="docutils literal notranslate"><span class="pre">peer</span></code> to <code class="docutils literal notranslate"><span class="pre">trust</span></code>:</li>
+<li>Change <code class="docutils literal notranslate"><span class="pre">peer</span></code> and <code class="docutils literal notranslate"><span class="pre">ident</span></code> to <code class="docutils literal notranslate"><span class="pre">trust</span></code>:</li>
 </ol>
 <blockquote>
-<div><code class="docutils literal notranslate"><span class="pre">local</span>&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">trust</span></code></div></blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">local</span>&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">trust</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">host</span>&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">::1/128</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">trust</span></code></p>
+</div></blockquote>
 </div></blockquote>
 <p><strong>If the Mattermost server and the database are on different machines</strong>:</p>
 <blockquote>
@@ -416,7 +420,7 @@
 		<div class="search__icon">
 			<i class="fa fa-search"></i>
 		</div>
-		<a href="http://docs.mattermost.com/" class="header__logo">
+		<a href="https://docs.mattermost.com/" class="header__logo">
 			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
 		</a>
 		<div class="links__icon">
