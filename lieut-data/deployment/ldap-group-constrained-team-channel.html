@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership &mdash; Mattermost 5.26 documentation</title>
+  <title>Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership &mdash; Mattermost 5.29 documentation</title>
   
 
   
@@ -31,77 +31,15 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../search.html" />
-	<!-- Bizible Script -->
-	<script src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
-
-	
-		<!-- Google Analytics -->
-		<script>
-			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-			ga('create', 'UA-67846571-2', 'auto');
-			ga('send', 'pageview');
-		</script>
-		<!-- End Google Analytics -->
-	
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-67846571-1"></script>
-	<script>
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-
-	gtag('config', 'UA-67846571-1');
-	</script>
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<!-- Second Google Analytics tag to assist mapping with mattermost.com visits --> 
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120238482-1"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-
-	  gtag('config', 'UA-120238482-1');
-	</script>
-
-	<!-- LeadLander -->
-	<script type="text/javascript" language="javascript">
-		var sf14gv = 31865;
-		(function() {
-			var sf14g = document.createElement('script');
-			sf14g.src = 'https://tracking.leadlander.com/lt.min.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sf14g, s);
-		})();
-	</script>
-
-	<!-- Munchkin code -->
-	<script type="text/javascript">
-		(function() {
-			var didInit = false;
-			function initMunchkin() {
-			if(didInit === false) {
-				didInit = true;
-				Munchkin.init('161-FBE-733');
-			}
-			}
-			var s = document.createElement('script');
-			s.type = 'text/javascript';
-			s.async = true;
-			s.src = '//munchkin.marketo.net/munchkin.js';
-			s.onreadystatechange = function() {
-			if (this.readyState == 'complete' || this.readyState == 'loaded') {
-				initMunchkin();
-			}
-			};
-			s.onload = initMunchkin;
-			document.getElementsByTagName('head')[0].appendChild(s);
-		})();
-	</script>
+    <link rel="next" title="SAML Single Sign-On (E20)" href="sso-saml.html" />
+    <link rel="prev" title="AD/LDAP Groups (E20)" href="ldap-group-sync.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
 
 
   
@@ -131,7 +69,7 @@
             
             
               <div class="version">
-                5.26
+                5.29
               </div>
             
           
@@ -155,13 +93,62 @@
               
             
             
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="bulk-loading.html">Bulk Loading Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/migrating.html">Migration Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/hipchat-migration-guidelines.html">Migrating from HipChat to Mattermost</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/migration-announcement-email-template.html">Migration Announcement Email</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/user-provisioning.html">Provisioning Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="admin-roles.html">Additional System Admin Roles (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-ldap.html">Active Directory/LDAP Setup (E10/E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auth.html">Multi-factor Authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ldap-group-sync.html">AD/LDAP Groups (E20)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#managing-membership-of-a-team-or-channel-with-synchronized-groups">Managing Membership of a Team or Channel with Synchronized Groups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#add-or-remove-groups-from-teams">Add or Remove Groups from Teams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#add-or-remove-groups-from-private-channels">Add or Remove Groups from Private Channels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#managing-members">Managing Members</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#disabling-group-synchronized-management-of-teams-and-private-channels">Disabling Group Synchronized Management of Teams and Private Channels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faqs">FAQs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sso-saml.html">SAML Single Sign-On (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-saml-technical.html">SAML Single-Sign-On (E20): Technical Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-gitlab.html">GitLab Single Sign-On</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-google.html">Google Single Sign-On (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-office.html">Office 365 Single Sign-On (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ssl-client-certificate.html">SSL Client Certificate Setup (Beta)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="certificate-based-authentication.html">Certificate-Based Authentication (Experimental)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="team-channel-management.html">Managing Team and Channel Members (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced-permissions.html">Advanced Permissions (E10/E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="permissions-backend.html">Advanced Permissions: Backend Infrastructure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guest-accounts.html">Guest Accounts (Beta) (E10/E20)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/administrator.html">Administrator's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/education.html">Training and Education</a></li>
 </ul>
 
             
@@ -194,6 +181,8 @@
 <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
     
     <li>Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership</li>
     <li class="wy-breadcrumbs-aside">
@@ -230,9 +219,8 @@
 </ul>
 </div></blockquote>
 <p>Users can remove themselves from teams and private channels managed by synchronized groups.</p>
-</div>
 <div class="section" id="managing-membership-of-a-team-or-channel-with-synchronized-groups">
-<h1>Managing Membership of a Team or Channel with Synchronized Groups<a class="headerlink" href="#managing-membership-of-a-team-or-channel-with-synchronized-groups" title="Permalink to this headline">¶</a></h1>
+<h2>Managing Membership of a Team or Channel with Synchronized Groups<a class="headerlink" href="#managing-membership-of-a-team-or-channel-with-synchronized-groups" title="Permalink to this headline">¶</a></h2>
 <p>To manage membership of a private team with synchronized groups:</p>
 <ol class="arabic simple">
 <li>Navigate to <strong>System Console &gt; User Management &gt; Teams</strong>.</li>
@@ -264,21 +252,21 @@
 </ol>
 </div>
 <div class="section" id="add-or-remove-groups-from-teams">
-<h1>Add or Remove Groups from Teams<a class="headerlink" href="#add-or-remove-groups-from-teams" title="Permalink to this headline">¶</a></h1>
+<h2>Add or Remove Groups from Teams<a class="headerlink" href="#add-or-remove-groups-from-teams" title="Permalink to this headline">¶</a></h2>
 <p>Once the management of the team is converted to be managed by synchronized groups, a Team or System Admin can add additional groups from <strong>Main Menu &gt; Add Groups to Team</strong>.  This will add users on the next AD/LDAP synchronization and any new users to the group will be added to the team on subsequent synchronizations. Team Admins will be prevented from changing the team to public by enabling <strong>Team Settings &gt; Allow any user with an account on this server to join this team</strong>.</p>
 <p>Team or System Admins can also remove groups from a team from <strong>Main Menu &gt; Manage Groups</strong>. This will disassociate the group from the team. Users are removed on the next AD/LDAP synchronization.</p>
 <p>The System Admin can also remove groups from  <strong>System Console &gt; User Management &gt; Teams &gt; Team Configuration &gt; Synced Groups</strong>.</p>
 </div>
 <div class="section" id="add-or-remove-groups-from-private-channels">
-<h1>Add or Remove Groups from Private Channels<a class="headerlink" href="#add-or-remove-groups-from-private-channels" title="Permalink to this headline">¶</a></h1>
-<p>Once the management of the channel is converted to be managed by synchronized groups, a Team or System Admin can add additional groups from <strong>Channel Menu &gt; Add Groups to Channel</strong>.  This will add users on the next AD/LDAP synchronization and any new users to the group will be added to the channel on subsequent synchronizations.</p>
+<h2>Add or Remove Groups from Private Channels<a class="headerlink" href="#add-or-remove-groups-from-private-channels" title="Permalink to this headline">¶</a></h2>
+<p>Once the management of the channel is converted to be managed by synchronized groups, a Team or System Admin can add additional groups from <strong>Channel Menu &gt; Add Groups to Channel</strong>. This will add users on the next AD/LDAP synchronization and any new users to the group will be added to the channel on subsequent synchronizations.</p>
 <p>Team or System Admins can also remove groups from a team from <strong>Main Menu &gt; Manage Groups</strong>. This will disassociate the group from the team. Users are removed on the next AD/LDAP synchronization.</p>
 <p>The System Admin can also remove groups from  <strong>System Console &gt; User Management &gt; Channels &gt; Channel Configuration &gt; Synced Groups</strong>.</p>
 </div>
 <div class="section" id="managing-members">
-<h1>Managing Members<a class="headerlink" href="#managing-members" title="Permalink to this headline">¶</a></h1>
-<p>Users are automatically removed from the team or private channel when removed from a synchronized AD/LDAP group that is managing the membership of that team or channel.  Additionally, users who are not in the synchronized groups are prevented from being added through the <code class="docutils literal notranslate"><span class="pre">/invite</span></code> and mention flows within a channel.</p>
-<p>A user can remove themselves from the team or from the private channel when it is managed by synchronized groups.  They can be added back by users who have permission to manage members for a team or private channel by using the <code class="docutils literal notranslate"><span class="pre">/invite</span></code> slash command or by mentioning the user in a channel.</p>
+<h2>Managing Members<a class="headerlink" href="#managing-members" title="Permalink to this headline">¶</a></h2>
+<p>Users are automatically removed from the team or private channel when removed from a synchronized AD/LDAP group that is managing the membership of that team or channel. Additionally, users who are not in the synchronized groups are prevented from being added through the <code class="docutils literal notranslate"><span class="pre">/invite</span></code> and mention flows within a channel.</p>
+<p>A user can remove themselves from the team or from the private channel when it is managed by synchronized groups. They can be added back by users who have permission to manage members for a team or private channel by using the <code class="docutils literal notranslate"><span class="pre">/invite</span></code> slash command or by mentioning the user in a channel.</p>
 <p>If the user is removed from a synchronized group and later readded to the group, they can be manually added back to the team or private channel as noted above.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -286,19 +274,20 @@
 </div>
 </div>
 <div class="section" id="disabling-group-synchronized-management-of-teams-and-private-channels">
-<h1>Disabling Group Synchronized Management of Teams and Private Channels<a class="headerlink" href="#disabling-group-synchronized-management-of-teams-and-private-channels" title="Permalink to this headline">¶</a></h1>
+<h2>Disabling Group Synchronized Management of Teams and Private Channels<a class="headerlink" href="#disabling-group-synchronized-management-of-teams-and-private-channels" title="Permalink to this headline">¶</a></h2>
 <p>To remove the management of members by synchronized groups in a team, disable <strong>Sync Group Members</strong> under <strong>System Console &gt; User Management &gt; Teams &gt; Team Management</strong>, or run the <a class="reference external" href="https://docs.mattermost.com/administration/command-line-tools.html#mattermost-group-team-disable">group team disable CLI command</a>.</p>
 <p>To remove the management of members by synchronized groups in a channel, disable <strong>Sync Group Members</strong> under <strong>System Console &gt; User Management &gt; Channels &gt; Channel Management</strong>, or run the <a class="reference external" href="https://docs.mattermost.com/administration/command-line-tools.html#mattermost-group-channel-disable">group channel disable CLI command</a>.</p>
 </div>
 <div class="section" id="faqs">
-<h1>FAQs<a class="headerlink" href="#faqs" title="Permalink to this headline">¶</a></h1>
-<p><strong>Why aren’t public channels supported with this feature?</strong></p>
-<p>Public channels are available to all members to discover and join. Managing membership with synchronized groups removes the ability for public channels to be accessible to users on the team. Private channels typically require a more controlled membership management, which is why this feature applies to private channels. Groups can be assigned to public teams and public channels as described in <a class="reference external" href="https://docs.mattermost.com/deployment/ldap-group-sync.html#add-default-teams-or-channels-for-the-group">this documentation</a>.</p>
-<p><strong>Does a team with its membership managed by groups have any effect on public channel access?</strong></p>
-<p>Only users that are members of groups synchronized to team are able to discover and join public channels. Private channels can also be managed by synchronized groups when a team is managed by synchronized groups.</p>
+<h2>FAQs<a class="headerlink" href="#faqs" title="Permalink to this headline">¶</a></h2>
+<p><strong>Why aren’t Public channels supported with this feature?</strong></p>
+<p>Public channels are available to all members to discover and join. Managing membership with synchronized groups removes the ability for public channels to be accessible to users on the team. Private channels typically require a more controlled membership management, which is why this feature applies to Private channels. Groups can be assigned to public teams and Public channels as described in <a class="reference external" href="https://docs.mattermost.com/deployment/ldap-group-sync.html#add-default-teams-or-channels-for-the-group">this documentation</a>.</p>
+<p><strong>Does a team with its membership managed by groups have any effect on Public channel access?</strong></p>
+<p>Only users that are members of groups synchronized to team are able to discover and join Public channels. Private channels can also be managed by synchronized groups when a team is managed by synchronized groups.</p>
 <p><strong>Why don’t users get readded to teams or channels once they have been removed from and then later re-added to the LDAP group?</strong></p>
 <p>The implementation of group removals does not currently differentiate between users who have removed themselves or have been removed by the LDAP synchronization process. Our design optimizes for users who have removed themselves from a team or channel. In the future, we may add the ability for admins to re-add users who have been removed, and even prevent users from leaving a team or channel.</p>
 <p>Additionally, LDAP users who are not accessible to Mattermost based on filters will be removed from the groups and from group-synced teams and channels. If they were removed from teams and channels then they will not be re-added to those teams and channels upon becoming subsequently re-accessible to Mattermost.</p>
+</div>
 </div>
 
 
@@ -306,6 +295,15 @@
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sso-saml.html" class="btn btn-neutral float-right" title="SAML Single Sign-On (E20)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ldap-group-sync.html" class="btn btn-neutral" title="AD/LDAP Groups (E20)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
@@ -379,7 +377,7 @@
 		<div class="search__icon">
 			<i class="fa fa-search"></i>
 		</div>
-		<a href="http://docs.mattermost.com/" class="header__logo">
+		<a href="https://docs.mattermost.com/" class="header__logo">
 			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
 		</a>
 		<div class="links__icon">

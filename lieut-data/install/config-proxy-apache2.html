@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Configuring Apache2 as a proxy for Mattermost Server (Unofficial) &mdash; Mattermost 5.26 documentation</title>
+  <title>Configuring Apache2 as a proxy for Mattermost Server (Unofficial) &mdash; Mattermost 5.29 documentation</title>
   
 
   
@@ -31,77 +31,13 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../search.html" />
-	<!-- Bizible Script -->
-	<script src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
-
-	
-		<!-- Google Analytics -->
-		<script>
-			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-			ga('create', 'UA-67846571-2', 'auto');
-			ga('send', 'pageview');
-		</script>
-		<!-- End Google Analytics -->
-	
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-67846571-1"></script>
-	<script>
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-
-	gtag('config', 'UA-67846571-1');
-	</script>
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<!-- Second Google Analytics tag to assist mapping with mattermost.com visits --> 
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120238482-1"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-
-	  gtag('config', 'UA-120238482-1');
-	</script>
-
-	<!-- LeadLander -->
-	<script type="text/javascript" language="javascript">
-		var sf14gv = 31865;
-		(function() {
-			var sf14g = document.createElement('script');
-			sf14g.src = 'https://tracking.leadlander.com/lt.min.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sf14g, s);
-		})();
-	</script>
-
-	<!-- Munchkin code -->
-	<script type="text/javascript">
-		(function() {
-			var didInit = false;
-			function initMunchkin() {
-			if(didInit === false) {
-				didInit = true;
-				Munchkin.init('161-FBE-733');
-			}
-			}
-			var s = document.createElement('script');
-			s.type = 'text/javascript';
-			s.async = true;
-			s.src = '//munchkin.marketo.net/munchkin.js';
-			s.onreadystatechange = function() {
-			if (this.readyState == 'complete' || this.readyState == 'loaded') {
-				initMunchkin();
-			}
-			};
-			s.onload = initMunchkin;
-			document.getElementsByTagName('head')[0].appendChild(s);
-		})();
-	</script>
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
 
 
   
@@ -131,7 +67,7 @@
             
             
               <div class="version">
-                5.26
+                5.29
               </div>
             
           
@@ -157,11 +93,11 @@
             
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/administrator.html">Administrator's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/education.html">Training and Education</a></li>
 </ul>
 
             
@@ -215,25 +151,23 @@
 <p class="first admonition-title">Important</p>
 <p class="last">This unofficial guide is maintained by the Mattermost community and this deployment configuration is not yet officially supported by Mattermost, Inc. <a class="reference external" href="https://github.com/mattermost/docs/issues/1295">Community testing, feedback and improvements are welcome and greatly appreciated</a>. You can <a class="reference external" href="https://github.com/mattermost/docs/blob/master/source/install/config-proxy-apache2.rst">edit this page on GitHub</a>.</p>
 </div>
-<p>In order to use Apache as a reverse proxy for the mattermost server, you need to install and enable the following apache modules: <code class="docutils literal notranslate"><span class="pre">mod_rewrite</span></code> , <code class="docutils literal notranslate"><span class="pre">mod_proxy</span></code>, <code class="docutils literal notranslate"><span class="pre">mod_proxy_http</span></code> and <code class="docutils literal notranslate"><span class="pre">mod_proxy_wstunnel</span></code>. Follow the instructions from your linux distribution to do so.</p>
-<p>The Apache2 proxy configuration is done through the <code class="docutils literal notranslate"><span class="pre">/etc/apache2/sites-available</span></code> directory. If you’re setting up Mattermost on a subdomain you’ll want to create a new configuration along the lines of <code class="docutils literal notranslate"><span class="pre">mysubdomain.mydomain.com.conf</span></code>.</p>
-<p>Copy the <cite>default</cite> configuration file found in the same directory.</p>
+<p>On a Debian-based operating system such as Ubuntu, Apache2 proxy configuration is done in the <code class="docutils literal notranslate"><span class="pre">/etc/apache2/sites-available</span></code> directory. Red Hat-based systems organize Apache configuration files <a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system_administrators_guide/ch-web_servers">differently</a>. If you’re setting up Mattermost on a subdomain, you’ll want to create a new configuration file along the lines of <code class="docutils literal notranslate"><span class="pre">mysubdomain.mydomain.com.conf</span></code>.</p>
 <p><strong>To configure Apache2 as a proxy</strong></p>
 <ol class="arabic">
 <li><p class="first">SSH into your server.</p>
 </li>
-<li><p class="first">Make sure the apache modules <code class="docutils literal notranslate"><span class="pre">mod_rewrite</span></code> , <code class="docutils literal notranslate"><span class="pre">mod_proxy</span></code>, <code class="docutils literal notranslate"><span class="pre">mod_proxy_http</span></code> and <code class="docutils literal notranslate"><span class="pre">mod_proxy_wstunnel</span></code> are installed and enabled. If not, follow the instructions from your linux distribution to do so.</p>
+<li><p class="first">Make sure the Apache modules <code class="docutils literal notranslate"><span class="pre">mod_rewrite</span></code> , <code class="docutils literal notranslate"><span class="pre">mod_proxy</span></code>, <code class="docutils literal notranslate"><span class="pre">mod_proxy_http</span></code>, and <code class="docutils literal notranslate"><span class="pre">mod_proxy_wstunnel</span></code> are installed and enabled. If not, follow the instructions from your Linux distribution to do so.</p>
 </li>
-<li><p class="first">Create/open the above mentioned file (000-default or a new subdomain configuration).</p>
+<li><p class="first">Create the above mentioned configuration file. It is often helpful to start with a copy of <code class="docutils literal notranslate"><span class="pre">000-default.conf</span></code> or <code class="docutils literal notranslate"><span class="pre">default-ssl.conf</span></code> (on Ubuntu).</p>
 </li>
 <li><p class="first">Edit your configuration using the guide below:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li>If you’re not setting up a subdomain your <code class="docutils literal notranslate"><span class="pre">ServerName</span></code> will simply be set to <code class="docutils literal notranslate"><span class="pre">mydomain.com</span></code>.</li>
+<li>If you’re not setting up a subdomain, your <code class="docutils literal notranslate"><span class="pre">ServerName</span></code> will simply be set to <code class="docutils literal notranslate"><span class="pre">mydomain.com</span></code>.</li>
 <li><code class="docutils literal notranslate"><span class="pre">ServerAlias</span></code> can been added too if you want to capture <code class="docutils literal notranslate"><span class="pre">www.mydomain.com</span></code>.</li>
 <li>Remember to change the values to match your server’s name, etc.</li>
 <li>If you have enabled TLS in the Mattermost settings, you must use the protocol <code class="docutils literal notranslate"><span class="pre">wss://</span></code> instead of <code class="docutils literal notranslate"><span class="pre">ws://</span></code> in the <code class="docutils literal notranslate"><span class="pre">RewriteRule</span></code>.</li>
-<li>Save once finished.</li>
+<li>To serve requests on a different port (such as 8443), in addition to setting the port in the VirtualHost element, add <code class="docutils literal notranslate"><span class="pre">Listen</span> <span class="pre">8443</span></code> on a separate line before the VirtualHost line.</li>
 </ol>
 </div></blockquote>
 </li>
@@ -263,18 +197,18 @@
 </pre></div>
 </div>
 <ol class="arabic" start="5">
-<li><p class="first">Because you’ll likely have not set up the subdomain before now on Apache2, run <code class="docutils literal notranslate"><span class="pre">a2ensite</span> <span class="pre">mysubdomain.mydomain.com</span></code> to enable the site (do not run <code class="docutils literal notranslate"><span class="pre">a2ensite</span> <span class="pre">mysubdomain.mydomain.com.conf</span></code>).</p>
+<li><p class="first">(Debian/Ubuntu only) Because you’ll likely have not set up the subdomain before now on Apache2, run <code class="docutils literal notranslate"><span class="pre">a2ensite</span> <span class="pre">mysubdomain.mydomain.com</span></code> to enable the site (do not run <code class="docutils literal notranslate"><span class="pre">a2ensite</span> <span class="pre">mysubdomain.mydomain.com.conf</span></code>).</p>
 </li>
-<li><p class="first">Restart Apache2</p>
+<li><p class="first">Restart Apache2.</p>
 <blockquote>
 <div><ul class="simple">
 <li>On Ubuntu 14.04 and RHEL 6: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">service</span> <span class="pre">apache2</span> <span class="pre">restart</span></code></li>
-<li>On Ubuntu 16.04 and RHEL 7: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">restart</span> <span class="pre">apache2</span></code></li>
+<li>On Ubuntu 16.04+ and RHEL 7+: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">restart</span> <span class="pre">apache2</span></code></li>
 </ul>
 </div></blockquote>
 </li>
 </ol>
-<p>You should be all set! Ensure that your Mattermost config file is pointing to the correct URL and then ensure that once deployed your socket connection is not dropping.</p>
+<p>You should be all set! Ensure that your Mattermost config file is pointing to the correct URL (which may include a port), and then ensure that your socket connection is not dropping once deployed. To prevent external access to Mattermost on port 8065, in the config file, set <code class="docutils literal notranslate"><span class="pre">ListenAddress</span></code> to <code class="docutils literal notranslate"><span class="pre">localhost:8065</span></code> instead of <code class="docutils literal notranslate"><span class="pre">:8065</span></code>.</p>
 </div>
 
 
@@ -355,7 +289,7 @@
 		<div class="search__icon">
 			<i class="fa fa-search"></i>
 		</div>
-		<a href="http://docs.mattermost.com/" class="header__logo">
+		<a href="https://docs.mattermost.com/" class="header__logo">
 			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
 		</a>
 		<div class="links__icon">
