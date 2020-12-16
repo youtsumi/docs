@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Configuration Settings &mdash; Mattermost 5.30 documentation</title>
+  <title>Configuration Settings &mdash; Mattermost 5.29 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.30
+                5.29
               </div>
             
           
@@ -279,7 +279,7 @@
 <li>The setting becomes <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">MM_SERVICESETTINGS_SITEURL=&quot;http://example.com&quot;</span></code>.</li>
 </ol>
 <p>Finally, if a setting is configured through an environment variable, modifying it in the System Console is disabled.</p>
-<p>For any setting that is not set in <code class="docutils literal notranslate"><span class="pre">config.json</span></code> or in environment variables, the Mattermost server uses the default value as documented in the sections below.</p>
+<p>For any setting that is not set in <code class="docutils literal notranslate"><span class="pre">config.json</span></code> or in environment variables, the Mattermost server uses the default value as documented here.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">If a setting is set through an environment variable and any other changes are made in the System Console, the value stored of the environment variable will be written back to the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> as that setting’s value.</p>
@@ -292,12 +292,6 @@
 <p class="first admonition-title">Warning</p>
 <p class="last">Database connection strings for the database read and search replicas need to be formatted using <a class="reference external" href="https://www.w3schools.com/tags/ref_urlencode.asp">URL encoding</a>. Incorrectly formatted strings may cause some characters to terminate the string early, resulting in issues when the connection string is parsed.</p>
 </div>
-<p><strong>Load Custom Configuration Defaults</strong></p>
-<p>Starting from Mattermost v5.30, you can load a set of custom configuration defaults using an environment variable. This custom configuration applies only if the values are not already present in the current server configuration.</p>
-<ol class="arabic simple">
-<li>Create a JSON file that contains the custom configuration defaults. For example, <code class="docutils literal notranslate"><span class="pre">custom.json</span></code>.</li>
-<li>When starting the server, point the custom defaults environment variable to the defaults file: <code class="docutils literal notranslate"><span class="pre">MM_CUSTOM_DEFAULTS_PATH=custom.json</span></code>.</li>
-</ol>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><a class="reference internal" href="#about" id="id59">About</a><ul>
@@ -391,43 +385,41 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#experimental" id="id131">Experimental</a><ul>
-<li><a class="reference internal" href="#ad-ldap-settings" id="id132">AD/LDAP Settings</a></li>
-<li><a class="reference internal" href="#email-settings" id="id133">Email Settings</a></li>
-<li><a class="reference internal" href="#saml-settings" id="id134">SAML Settings</a></li>
+<li><a class="reference internal" href="#features" id="id132">Features</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#settings-configurable-only-in-config-json" id="id135">Settings configurable only in <code class="docutils literal notranslate"><span class="pre">config.json</span></code></a><ul>
-<li><a class="reference internal" href="#service-settings" id="id136">Service Settings</a></li>
-<li><a class="reference internal" href="#sql-settings" id="id137">SQL Settings</a></li>
-<li><a class="reference internal" href="#file-settings" id="id138">File Settings</a></li>
-<li><a class="reference internal" href="#gitlab-settings" id="id139">GitLab Settings</a></li>
-<li><a class="reference internal" href="#google-settings" id="id140">Google Settings</a></li>
-<li><a class="reference internal" href="#office-365-settings" id="id141">Office 365 Settings</a></li>
-<li><a class="reference internal" href="#cluster-settings" id="id142">Cluster Settings</a></li>
-<li><a class="reference internal" href="#metrics-settings" id="id143">Metrics Settings</a></li>
+<li><a class="reference internal" href="#settings-configurable-only-in-config-json" id="id133">Settings configurable only in <code class="docutils literal notranslate"><span class="pre">config.json</span></code></a><ul>
+<li><a class="reference internal" href="#service-settings" id="id134">Service Settings</a></li>
+<li><a class="reference internal" href="#sql-settings" id="id135">SQL Settings</a></li>
+<li><a class="reference internal" href="#file-settings" id="id136">File Settings</a></li>
+<li><a class="reference internal" href="#gitlab-settings" id="id137">GitLab Settings</a></li>
+<li><a class="reference internal" href="#google-settings" id="id138">Google Settings</a></li>
+<li><a class="reference internal" href="#office-365-settings" id="id139">Office 365 Settings</a></li>
+<li><a class="reference internal" href="#cluster-settings" id="id140">Cluster Settings</a></li>
+<li><a class="reference internal" href="#metrics-settings" id="id141">Metrics Settings</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#experimental-settings-only-in-config-json" id="id144">Experimental Settings only in <code class="docutils literal notranslate"><span class="pre">config.json</span></code></a><ul>
-<li><a class="reference internal" href="#audit-settings" id="id145">Audit settings</a></li>
-<li><a class="reference internal" href="#advanced-audit-logging-configuration" id="id146">Advanced Audit Logging Configuration</a></li>
-<li><a class="reference internal" href="#id45" id="id147">Service Settings</a></li>
-<li><a class="reference internal" href="#team-settings" id="id148">Team Settings</a></li>
-<li><a class="reference internal" href="#id47" id="id149">Email Settings</a></li>
-<li><a class="reference internal" href="#client-requirement-settings-experimental" id="id150">Client Requirement Settings (Experimental)</a></li>
-<li><a class="reference internal" href="#theme-settings-experimental" id="id151">Theme Settings (Experimental)</a></li>
-<li><a class="reference internal" href="#display-settings-experimental" id="id152">Display Settings (Experimental)</a></li>
-<li><a class="reference internal" href="#experimental-settings" id="id153">Experimental Settings</a></li>
-<li><a class="reference internal" href="#analytics-settings" id="id154">Analytics Settings</a></li>
-<li><a class="reference internal" href="#elasticsearch-settings" id="id155">Elasticsearch Settings</a></li>
-<li><a class="reference internal" href="#bleve-settings-experimental" id="id156">Bleve Settings (Experimental)</a></li>
-<li><a class="reference internal" href="#message-export-settings" id="id157">Message Export Settings</a></li>
-<li><a class="reference internal" href="#plugin-settings-beta" id="id158">Plugin Settings (Beta)</a></li>
-<li><a class="reference internal" href="#jobs" id="id159">Jobs</a></li>
+<li><a class="reference internal" href="#experimental-settings-only-in-config-json" id="id142">Experimental Settings only in <code class="docutils literal notranslate"><span class="pre">config.json</span></code></a><ul>
+<li><a class="reference internal" href="#audit-settings" id="id143">Audit settings</a></li>
+<li><a class="reference internal" href="#advanced-audit-logging-configuration" id="id144">Advanced Audit Logging Configuration</a></li>
+<li><a class="reference internal" href="#id45" id="id145">Service Settings</a></li>
+<li><a class="reference internal" href="#team-settings" id="id146">Team Settings</a></li>
+<li><a class="reference internal" href="#id47" id="id147">Email Settings</a></li>
+<li><a class="reference internal" href="#client-requirement-settings-experimental" id="id148">Client Requirement Settings (Experimental)</a></li>
+<li><a class="reference internal" href="#theme-settings-experimental" id="id149">Theme Settings (Experimental)</a></li>
+<li><a class="reference internal" href="#display-settings-experimental" id="id150">Display Settings (Experimental)</a></li>
+<li><a class="reference internal" href="#experimental-settings" id="id151">Experimental Settings</a></li>
+<li><a class="reference internal" href="#analytics-settings" id="id152">Analytics Settings</a></li>
+<li><a class="reference internal" href="#elasticsearch-settings" id="id153">Elasticsearch Settings</a></li>
+<li><a class="reference internal" href="#bleve-settings-experimental" id="id154">Bleve Settings (Experimental)</a></li>
+<li><a class="reference internal" href="#message-export-settings" id="id155">Message Export Settings</a></li>
+<li><a class="reference internal" href="#plugin-settings-beta" id="id156">Plugin Settings (Beta)</a></li>
+<li><a class="reference internal" href="#jobs" id="id157">Jobs</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#deprecated-configuration-settings" id="id160">Deprecated Configuration Settings</a><ul>
-<li><a class="reference internal" href="#policy" id="id161">Policy</a></li>
-<li><a class="reference internal" href="#images" id="id162">Images</a></li>
+<li><a class="reference internal" href="#deprecated-configuration-settings" id="id158">Deprecated Configuration Settings</a><ul>
+<li><a class="reference internal" href="#policy" id="id159">Policy</a></li>
+<li><a class="reference internal" href="#images" id="id160">Images</a></li>
 </ul>
 </li>
 </ul>
@@ -1298,9 +1290,9 @@
 </div>
 <div class="section" id="smtp">
 <h3><a class="toc-backref" href="#id77">SMTP</a><a class="headerlink" href="#smtp" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="smtp-email-server">
-<h4>SMTP Email Server<a class="headerlink" href="#smtp-email-server" title="Permalink to this headline">¶</a></h4>
-<p>Location of SMTP email server used for email notifications.</p>
+<div class="section" id="smtp-server">
+<h4>SMTP Server<a class="headerlink" href="#smtp-server" title="Permalink to this headline">¶</a></h4>
+<p>Location of SMTP email server.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="100%" />
@@ -2528,10 +2520,7 @@
 <p><strong>True</strong>: Users can select how often to receive email notifications, and multiple notifications within that timeframe will be combined into a single email. Batching will occur at a default interval of 15 minutes, configurable in <strong>Account Settings &gt; Notifications</strong>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<ul class="last simple">
-<li>Email batching cannot be enabled unless the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#site-url">SiteURL</a> is configured and the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#smtp-email-server">SMTP Email Server</a> is configured.</li>
-<li>Email batching in <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-high-availability-mode">High Availability mode</a> is planned but not yet supported.</li>
-</ul>
+<p class="last">Email batching cannot be enabled unless the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#site-url">SiteURL</a> is configured. Email batching in <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-high-availability-mode">High Availability mode</a> is planned but not yet supported.</p>
 </div>
 <p><strong>False</strong>: If email notifications are enabled in Account Settings, emails will be sent individually for every mention or direct message received.</p>
 <table border="1" class="docutils">
@@ -3701,21 +3690,6 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td>This feature’s <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is <code class="docutils literal notranslate"><span class="pre">&quot;EnableSyncWithLdap&quot;:</span> <span class="pre">false</span></code> with options <code class="docutils literal notranslate"><span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">false</span></code>.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section" id="ignore-guest-users-when-synchronizing-with-ad-ldap">
-<h4>Ignore Guest Users When Synchronizing with AD/LDAP<a class="headerlink" href="#ignore-guest-users-when-synchronizing-with-ad-ldap" title="Permalink to this headline">¶</a></h4>
-<p>Available when <code class="docutils literal notranslate"><span class="pre">Enable</span> <span class="pre">Synchronizing</span> <span class="pre">SAML</span> <span class="pre">Accounts</span> <span class="pre">With</span> <span class="pre">AD/LDAP</span></code> is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
-<p><strong>True</strong>: Mattermost ignores Guest Users identified by the Guest Attribute when synchronizing with AD/LDAP on user deactivation and removal. Manage guest deactivation manually via <strong>System Console &gt; Users</strong>. See <a class="reference external" href="https://about.mattermost.com/default-saml-ldap-sync">documentation</a> to learn more.</p>
-<p><strong>False</strong>: Synchronization of SAML deactivates and removes Guest Users when synchronizing with AD/LDAP.</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="100%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>This feature’s <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is <code class="docutils literal notranslate"><span class="pre">&quot;IgnoreGuestsLdapSync&quot;:</span> <span class="pre">false</span></code> with options <code class="docutils literal notranslate"><span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">false</span></code>.</td>
 </tr>
 </tbody>
 </table>
@@ -5095,8 +5069,11 @@
 <div class="section" id="experimental">
 <h2><a class="toc-backref" href="#id131">Experimental</a><a class="headerlink" href="#experimental" title="Permalink to this headline">¶</a></h2>
 <p>There are a number of settings considered “experimental” that are configurable from the System Console. These may be replaced or removed in a future release.</p>
+<div class="section" id="features">
+<h3><a class="toc-backref" href="#id132">Features</a><a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="ad-ldap-settings">
-<h3><a class="toc-backref" href="#id132">AD/LDAP Settings</a><a class="headerlink" href="#ad-ldap-settings" title="Permalink to this headline">¶</a></h3>
+<h4>AD/LDAP Settings<a class="headerlink" href="#ad-ldap-settings" title="Permalink to this headline">¶</a></h4>
+</div>
 <div class="section" id="ad-ldap-login-button-color">
 <h4>AD/LDAP Login Button Color<a class="headerlink" href="#ad-ldap-login-button-color" title="Permalink to this headline">¶</a></h4>
 <p>Specify the color of the AD/LDAP login button for white labeling purposes. Use a hex code with a #-sign before the code. This setting only applies to the mobile apps.</p>
@@ -5178,9 +5155,9 @@
 </tbody>
 </table>
 </div>
-</div>
 <div class="section" id="email-settings">
-<h3><a class="toc-backref" href="#id133">Email Settings</a><a class="headerlink" href="#email-settings" title="Permalink to this headline">¶</a></h3>
+<h4>Email Settings<a class="headerlink" href="#email-settings" title="Permalink to this headline">¶</a></h4>
+</div>
 <div class="section" id="email-batching-buffer-size">
 <h4>Email Batching Buffer Size<a class="headerlink" href="#email-batching-buffer-size" title="Permalink to this headline">¶</a></h4>
 <p>Specify the maximum number of notifications batched into a single email.</p>
@@ -5498,9 +5475,9 @@
 </tbody>
 </table>
 </div>
-</div>
 <div class="section" id="saml-settings">
-<h3><a class="toc-backref" href="#id134">SAML Settings</a><a class="headerlink" href="#saml-settings" title="Permalink to this headline">¶</a></h3>
+<h4>SAML Settings<a class="headerlink" href="#saml-settings" title="Permalink to this headline">¶</a></h4>
+</div>
 <div class="section" id="saml-login-button-color">
 <h4>SAML Login Button Color<a class="headerlink" href="#saml-login-button-color" title="Permalink to this headline">¶</a></h4>
 <p>Specify the color of the SAML login button for white labeling purposes. Use a hex code with a #-sign before the code. This setting only applies to the mobile apps.</p>
@@ -5644,10 +5621,10 @@
 </div>
 </div>
 <div class="section" id="settings-configurable-only-in-config-json">
-<h2><a class="toc-backref" href="#id135">Settings configurable only in <code class="docutils literal notranslate"><span class="pre">config.json</span></code></a><a class="headerlink" href="#settings-configurable-only-in-config-json" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id133">Settings configurable only in <code class="docutils literal notranslate"><span class="pre">config.json</span></code></a><a class="headerlink" href="#settings-configurable-only-in-config-json" title="Permalink to this headline">¶</a></h2>
 <p>There are a number of settings customizable in <code class="docutils literal notranslate"><span class="pre">config.json</span></code> unavailable in the System Console and require updating from the file itself.</p>
 <div class="section" id="service-settings">
-<h3><a class="toc-backref" href="#id136">Service Settings</a><a class="headerlink" href="#service-settings" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id134">Service Settings</a><a class="headerlink" href="#service-settings" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="automatically-follow-threads">
 <h4>Automatically Follow Threads<a class="headerlink" href="#automatically-follow-threads" title="Permalink to this headline">¶</a></h4>
 <p>This setting has been added as a requirement to support <a class="reference external" href="https://docs.google.com/presentation/d/1QSrPws3N8AMSjVyOKp15FKT7O0fGMSx8YidjSDS4Wng/edit#slide=id.g2f0aecc189_0_245">Collapsed Reply Threads</a> (releasing in beta in Q1 2021) and may affect server performance. It is recommended to review our <a class="reference external" href="https://docs.mattermost.com/install/requirements.html#hardware-requirements">documentation on hardware requirements</a> to ensure your servers are appropriately scaled for the size of your user base.</p>
@@ -5959,7 +5936,7 @@
 </div>
 </div>
 <div class="section" id="sql-settings">
-<h3><a class="toc-backref" href="#id137">SQL Settings</a><a class="headerlink" href="#sql-settings" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id135">SQL Settings</a><a class="headerlink" href="#sql-settings" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="read-replicas">
 <h4>Read Replicas<a class="headerlink" href="#read-replicas" title="Permalink to this headline">¶</a></h4>
 <p><em>Available in Enterprise Edition E10 and higher</em></p>
@@ -5992,7 +5969,7 @@
 </div>
 </div>
 <div class="section" id="file-settings">
-<h3><a class="toc-backref" href="#id138">File Settings</a><a class="headerlink" href="#file-settings" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id136">File Settings</a><a class="headerlink" href="#file-settings" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="initial-font">
 <h4>Initial Font<a class="headerlink" href="#initial-font" title="Permalink to this headline">¶</a></h4>
 <p>Font used in auto-generated profile pics with colored backgrounds.</p>
@@ -6080,7 +6057,7 @@
 </div>
 </div>
 <div class="section" id="gitlab-settings">
-<h3><a class="toc-backref" href="#id139">GitLab Settings</a><a class="headerlink" href="#gitlab-settings" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id137">GitLab Settings</a><a class="headerlink" href="#gitlab-settings" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="scope">
 <h4>Scope<a class="headerlink" href="#scope" title="Permalink to this headline">¶</a></h4>
 <p>Standard setting for OAuth to determine the scope of information shared with OAuth client. Not currently supported by GitLab OAuth.</p>
@@ -6096,7 +6073,7 @@
 </div>
 </div>
 <div class="section" id="google-settings">
-<h3><a class="toc-backref" href="#id140">Google Settings</a><a class="headerlink" href="#google-settings" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id138">Google Settings</a><a class="headerlink" href="#google-settings" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="id39">
 <h4>Scope<a class="headerlink" href="#id39" title="Permalink to this headline">¶</a></h4>
 <p>Standard setting for OAuth to determine the scope of information shared with OAuth client. Recommended setting is <code class="docutils literal notranslate"><span class="pre">profile</span> <span class="pre">email</span></code>.</p>
@@ -6112,7 +6089,7 @@
 </div>
 </div>
 <div class="section" id="office-365-settings">
-<h3><a class="toc-backref" href="#id141">Office 365 Settings</a><a class="headerlink" href="#office-365-settings" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id139">Office 365 Settings</a><a class="headerlink" href="#office-365-settings" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="id40">
 <h4>Scope<a class="headerlink" href="#id40" title="Permalink to this headline">¶</a></h4>
 <p>Standard setting for OAuth to determine the scope of information shared with OAuth client. Recommended setting is <code class="docutils literal notranslate"><span class="pre">User.Read</span></code>.</p>
@@ -6128,7 +6105,7 @@
 </div>
 </div>
 <div class="section" id="cluster-settings">
-<h3><a class="toc-backref" href="#id142">Cluster Settings</a><a class="headerlink" href="#cluster-settings" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id140">Cluster Settings</a><a class="headerlink" href="#cluster-settings" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="id41">
 <h4>Maximum Idle Connections<a class="headerlink" href="#id41" title="Permalink to this headline">¶</a></h4>
 <p>The maximum number of idle connections held open from one server to all others in the cluster.</p>
@@ -6209,7 +6186,7 @@
 </div>
 </div>
 <div class="section" id="metrics-settings">
-<h3><a class="toc-backref" href="#id143">Metrics Settings</a><a class="headerlink" href="#metrics-settings" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id141">Metrics Settings</a><a class="headerlink" href="#metrics-settings" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="block-profile-rate">
 <h4>Block Profile Rate<a class="headerlink" href="#block-profile-rate" title="Permalink to this headline">¶</a></h4>
 <p>Value that controls the <a class="reference external" href="https://golang.org/pkg/runtime/#SetBlockProfileRate">fraction of goroutine blocking events reported in the blocking profile</a>.</p>
@@ -6229,9 +6206,9 @@
 </div>
 </div>
 <div class="section" id="experimental-settings-only-in-config-json">
-<h2><a class="toc-backref" href="#id144">Experimental Settings only in <code class="docutils literal notranslate"><span class="pre">config.json</span></code></a><a class="headerlink" href="#experimental-settings-only-in-config-json" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id142">Experimental Settings only in <code class="docutils literal notranslate"><span class="pre">config.json</span></code></a><a class="headerlink" href="#experimental-settings-only-in-config-json" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="audit-settings">
-<h3><a class="toc-backref" href="#id145">Audit settings</a><a class="headerlink" href="#audit-settings" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id143">Audit settings</a><a class="headerlink" href="#audit-settings" title="Permalink to this headline">¶</a></h3>
 <p>The audit settings output audit records to syslog (local or remote server via TLS) and/or to a local file. Both are disabled by default. They can be enabled simultaneously.</p>
 <div class="section" id="syslog-configuration-options">
 <h4>Syslog configuration options<a class="headerlink" href="#syslog-configuration-options" title="Permalink to this headline">¶</a></h4>
@@ -6424,7 +6401,7 @@
 </div>
 </div>
 <div class="section" id="advanced-audit-logging-configuration">
-<h3><a class="toc-backref" href="#id146">Advanced Audit Logging Configuration</a><a class="headerlink" href="#advanced-audit-logging-configuration" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id144">Advanced Audit Logging Configuration</a><a class="headerlink" href="#advanced-audit-logging-configuration" title="Permalink to this headline">¶</a></h3>
 <p><em>Available in Enterprise Edition E20</em></p>
 <div class="section" id="id42">
 <h4>Output logs to multiple targets<a class="headerlink" href="#id42" title="Permalink to this headline">¶</a></h4>
@@ -6440,7 +6417,7 @@
 </div>
 </div>
 <div class="section" id="id45">
-<h3><a class="toc-backref" href="#id147">Service Settings</a><a class="headerlink" href="#id45" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id145">Service Settings</a><a class="headerlink" href="#id45" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="group-unread-channels-experimental">
 <h4>Group Unread Channels (Experimental)<a class="headerlink" href="#group-unread-channels-experimental" title="Permalink to this headline">¶</a></h4>
 <p><em>Removed in December 16, 2018 release and replaced by a new ``ExperimentalChannelOrganization`` setting</em></p>
@@ -6516,7 +6493,7 @@
 </div>
 </div>
 <div class="section" id="team-settings">
-<h3><a class="toc-backref" href="#id148">Team Settings</a><a class="headerlink" href="#team-settings" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id146">Team Settings</a><a class="headerlink" href="#team-settings" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="id46">
 <h4>Teammate Name Display<a class="headerlink" href="#id46" title="Permalink to this headline">¶</a></h4>
 <p><em>Available in Enterprise Edition E20</em></p>
@@ -6550,10 +6527,10 @@
 </div>
 </div>
 <div class="section" id="id47">
-<h3><a class="toc-backref" href="#id149">Email Settings</a><a class="headerlink" href="#id47" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id147">Email Settings</a><a class="headerlink" href="#id47" title="Permalink to this headline">¶</a></h3>
 </div>
 <div class="section" id="client-requirement-settings-experimental">
-<h3><a class="toc-backref" href="#id150">Client Requirement Settings (Experimental)</a><a class="headerlink" href="#client-requirement-settings-experimental" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id148">Client Requirement Settings (Experimental)</a><a class="headerlink" href="#client-requirement-settings-experimental" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="latest-android-version">
 <h4>Latest Android Version<a class="headerlink" href="#latest-android-version" title="Permalink to this headline">¶</a></h4>
 <p>The latest version of the Android React Native app that is recommended for use.</p>
@@ -6647,7 +6624,7 @@
 </div>
 </div>
 <div class="section" id="theme-settings-experimental">
-<h3><a class="toc-backref" href="#id151">Theme Settings (Experimental)</a><a class="headerlink" href="#theme-settings-experimental" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id149">Theme Settings (Experimental)</a><a class="headerlink" href="#theme-settings-experimental" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="allowed-themes">
 <h4>Allowed Themes<a class="headerlink" href="#allowed-themes" title="Permalink to this headline">¶</a></h4>
 <p><em>Available in Enterprise Edition E10 and higher</em></p>
@@ -6664,7 +6641,7 @@
 </div>
 </div>
 <div class="section" id="display-settings-experimental">
-<h3><a class="toc-backref" href="#id152">Display Settings (Experimental)</a><a class="headerlink" href="#display-settings-experimental" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id150">Display Settings (Experimental)</a><a class="headerlink" href="#display-settings-experimental" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="supported-timezones-path">
 <h4>Supported Timezones Path<a class="headerlink" href="#supported-timezones-path" title="Permalink to this headline">¶</a></h4>
 <p><em>Removed in April 16, 2019 release</em></p>
@@ -6682,7 +6659,7 @@
 </div>
 </div>
 <div class="section" id="experimental-settings">
-<h3><a class="toc-backref" href="#id153">Experimental Settings</a><a class="headerlink" href="#experimental-settings" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id151">Experimental Settings</a><a class="headerlink" href="#experimental-settings" title="Permalink to this headline">¶</a></h3>
 <p><em>Available in Enterprise Edition E20</em></p>
 <div class="section" id="disable-post-metadata">
 <h4>Disable Post Metadata<a class="headerlink" href="#disable-post-metadata" title="Permalink to this headline">¶</a></h4>
@@ -6700,7 +6677,7 @@
 </div>
 </div>
 <div class="section" id="analytics-settings">
-<h3><a class="toc-backref" href="#id154">Analytics Settings</a><a class="headerlink" href="#analytics-settings" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id152">Analytics Settings</a><a class="headerlink" href="#analytics-settings" title="Permalink to this headline">¶</a></h3>
 <p><em>Available in Enterprise Edition E10 and higher</em></p>
 <div class="section" id="maximum-users-for-statistics">
 <h4>Maximum Users for Statistics<a class="headerlink" href="#maximum-users-for-statistics" title="Permalink to this headline">¶</a></h4>
@@ -6718,7 +6695,7 @@
 </div>
 </div>
 <div class="section" id="elasticsearch-settings">
-<h3><a class="toc-backref" href="#id155">Elasticsearch Settings</a><a class="headerlink" href="#elasticsearch-settings" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id153">Elasticsearch Settings</a><a class="headerlink" href="#elasticsearch-settings" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="post-index-replicas">
 <h4>Post Index Replicas<a class="headerlink" href="#post-index-replicas" title="Permalink to this headline">¶</a></h4>
 <p>The number of replicas to use for each post index. If this setting is changed, it only applies to newly-created indexes. To apply the change to existing indexes, purge and rebuild the index after changing this setting.</p>
@@ -6847,7 +6824,7 @@
 </div>
 </div>
 <div class="section" id="bleve-settings-experimental">
-<h3><a class="toc-backref" href="#id156">Bleve Settings (Experimental)</a><a class="headerlink" href="#bleve-settings-experimental" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id154">Bleve Settings (Experimental)</a><a class="headerlink" href="#bleve-settings-experimental" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="index-dir">
 <h4>Index Dir<a class="headerlink" href="#index-dir" title="Permalink to this headline">¶</a></h4>
 <p>Directory path to use for storing bleve indexes.</p>
@@ -6918,7 +6895,7 @@
 </div>
 </div>
 <div class="section" id="message-export-settings">
-<h3><a class="toc-backref" href="#id157">Message Export Settings</a><a class="headerlink" href="#message-export-settings" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id155">Message Export Settings</a><a class="headerlink" href="#message-export-settings" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="export-from-timestamp">
 <h4>Export From Timestamp<a class="headerlink" href="#export-from-timestamp" title="Permalink to this headline">¶</a></h4>
 <p>Set the Unix timestamp (seconds since epoch, UTC) to export data from.</p>
@@ -6961,7 +6938,7 @@
 </div>
 </div>
 <div class="section" id="plugin-settings-beta">
-<h3><a class="toc-backref" href="#id158">Plugin Settings (Beta)</a><a class="headerlink" href="#plugin-settings-beta" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id156">Plugin Settings (Beta)</a><a class="headerlink" href="#plugin-settings-beta" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="enable-plugin-uploads">
 <h4>Enable Plugin Uploads<a class="headerlink" href="#enable-plugin-uploads" title="Permalink to this headline">¶</a></h4>
 <p><strong>True</strong>: Enables plugin uploads by System Admins at <strong>Plugins &gt; Management</strong>. If you do not plan to upload a plugin, set to <code class="docutils literal notranslate"><span class="pre">false</span></code> to control which plugins are installed on your server. See <a class="reference external" href="https://about.mattermost.com/default-plugin-uploads">documentation</a> to learn more.</p>
@@ -7033,7 +7010,7 @@
 </div>
 </div>
 <div class="section" id="jobs">
-<h3><a class="toc-backref" href="#id159">Jobs</a><a class="headerlink" href="#jobs" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id157">Jobs</a><a class="headerlink" href="#jobs" title="Permalink to this headline">¶</a></h3>
 <p>Settings to configure how Mattermost schedules and completes periodic tasks such as the deletion of old posts with Data Retention enabled or indexing posts with Elasticsearch. These settings control which Mattermost servers are designated as a Scheduler, a server that queues the tasks at the correct times, and as a Worker, a server that completes the given tasks.</p>
 <p>When running Mattermost on a single machine, both <code class="docutils literal notranslate"><span class="pre">RunJobs</span></code> and <code class="docutils literal notranslate"><span class="pre">RunScheduler</span></code> should be enabled. Without both of these enabled, Mattermost will not function properly.</p>
 <p>When running Mattermost in High Availability mode, <code class="docutils literal notranslate"><span class="pre">RunJobs</span></code> should be enabled on one or more servers while <code class="docutils literal notranslate"><span class="pre">RunScheduler</span></code> should be enabled on all servers under normal circumstances. A High Availability cluster will have one Scheduler and one or more Workers. See the below sections for more information.</p>
@@ -7075,9 +7052,9 @@
 </div>
 </div>
 <div class="section" id="deprecated-configuration-settings">
-<h2><a class="toc-backref" href="#id160">Deprecated Configuration Settings</a><a class="headerlink" href="#deprecated-configuration-settings" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id158">Deprecated Configuration Settings</a><a class="headerlink" href="#deprecated-configuration-settings" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="policy">
-<h3><a class="toc-backref" href="#id161">Policy</a><a class="headerlink" href="#policy" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id159">Policy</a><a class="headerlink" href="#policy" title="Permalink to this headline">¶</a></h3>
 <p><em>Removed in June 16, 2018 release</em></p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -7313,7 +7290,7 @@
 </div>
 </div>
 <div class="section" id="images">
-<h3><a class="toc-backref" href="#id162">Images</a><a class="headerlink" href="#images" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id160">Images</a><a class="headerlink" href="#images" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="attachment-thumbnail-width">
 <h4>Attachment Thumbnail Width<a class="headerlink" href="#attachment-thumbnail-width" title="Permalink to this headline">¶</a></h4>
 <p><em>Removed in July 16th, 2017 release</em></p>

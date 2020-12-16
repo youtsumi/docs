@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Advanced Permissions: Backend Infrastructure &mdash; Mattermost 5.30 documentation</title>
+  <title>Advanced Permissions: Backend Infrastructure &mdash; Mattermost 5.29 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.30
+                5.29
               </div>
             
           
@@ -324,6 +324,309 @@
 <h3><a class="toc-backref" href="#contents">Permissions</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>Permissions in Mattermost are a property of the server code base and are not created or modified dynamically. The current set of permissions are as described in the table below.</p>
 <p><strong>Mattermost Permissions</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="4%" />
+<col width="82%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name (i18n)</th>
+<th class="head">Scope</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>invite_user</td>
+<td>team</td>
+<td>Invite users to the team using Send Email Invite or Get Team Invite Link.</td>
+</tr>
+<tr class="row-odd"><td>add_user_to_team</td>
+<td>team</td>
+<td>Add existing server users to the current team.</td>
+</tr>
+<tr class="row-even"><td>use_slash_commands</td>
+<td>channel</td>
+<td>Use slash commands.</td>
+</tr>
+<tr class="row-odd"><td>manage_slash_commands</td>
+<td>system</td>
+<td>Create, edit and delete your own slash commands.</td>
+</tr>
+<tr class="row-even"><td>manage_others_slash_commands</td>
+<td>system</td>
+<td>Edit or delete other users slash commands.</td>
+</tr>
+<tr class="row-odd"><td>create_public_channel</td>
+<td>team</td>
+<td>Create public channels.</td>
+</tr>
+<tr class="row-even"><td>create_private_channel</td>
+<td>team</td>
+<td>Create private channels.</td>
+</tr>
+<tr class="row-odd"><td>manage_public_channel_members</td>
+<td>channel</td>
+<td>Manage public channel members.</td>
+</tr>
+<tr class="row-even"><td>manage_private_channel_members</td>
+<td>channel</td>
+<td>Manage private channel members.</td>
+</tr>
+<tr class="row-odd"><td>assign_system_admin_role</td>
+<td>system</td>
+<td>Grant other users System Admin role.</td>
+</tr>
+<tr class="row-even"><td>manage_roles</td>
+<td>system</td>
+<td>Manage other users system-wide roles.</td>
+</tr>
+<tr class="row-odd"><td>manage_team_roles</td>
+<td>team</td>
+<td>Add and remove team members.</td>
+</tr>
+<tr class="row-even"><td>manage_channel_roles</td>
+<td>channel</td>
+<td>Add and remove channel members.</td>
+</tr>
+<tr class="row-odd"><td>manage_system</td>
+<td>system</td>
+<td>Access to System Console.</td>
+</tr>
+<tr class="row-even"><td>create_direct_channel</td>
+<td>system</td>
+<td>Open direct message channels.</td>
+</tr>
+<tr class="row-odd"><td>create_group_channel</td>
+<td>system</td>
+<td>Open group message channels.</td>
+</tr>
+<tr class="row-even"><td>manage_public_channel_properties</td>
+<td>channel</td>
+<td>Edit public channel name, header and purpose.</td>
+</tr>
+<tr class="row-odd"><td>manage_private_channel_properties</td>
+<td>channel</td>
+<td>Edit private channel name, header and purpose.</td>
+</tr>
+<tr class="row-even"><td>list_public_teams</td>
+<td>system</td>
+<td>View public teams listed from “Join Another Team” accessed from the main menu.</td>
+</tr>
+<tr class="row-odd"><td>join_public_teams</td>
+<td>system</td>
+<td>Join public teams from the “Join Another Team” menu.</td>
+</tr>
+<tr class="row-even"><td>list_private_teams</td>
+<td>system</td>
+<td>View private teams listed from “Join Another Team” accessed from the main menu.</td>
+</tr>
+<tr class="row-odd"><td>join_private_teams</td>
+<td>system</td>
+<td>Join private teams listed from “Join Another Team” main.</td>
+</tr>
+<tr class="row-even"><td>list_team_channels</td>
+<td>team</td>
+<td>List public channels in a team.</td>
+</tr>
+<tr class="row-odd"><td>join_public_channels</td>
+<td>team</td>
+<td>Join public channels.</td>
+</tr>
+<tr class="row-even"><td>delete_public_channel</td>
+<td>channel</td>
+<td>Archive public channels.</td>
+</tr>
+<tr class="row-odd"><td>delete_private_channel</td>
+<td>channel</td>
+<td>Archive private channels.</td>
+</tr>
+<tr class="row-even"><td>edit_other_users</td>
+<td>system</td>
+<td>Edit values on the <cite>user</cite> object of other users.</td>
+</tr>
+<tr class="row-odd"><td>read_channel</td>
+<td>channel</td>
+<td>View posts in a channel.</td>
+</tr>
+<tr class="row-even"><td>read_public_channel</td>
+<td>team</td>
+<td>View and access public channels on a team.</td>
+</tr>
+<tr class="row-odd"><td>add_reaction</td>
+<td>channel</td>
+<td>Add emoji reactions to posts.</td>
+</tr>
+<tr class="row-even"><td>remove_reaction</td>
+<td>channel</td>
+<td>Remove emoji reactions from posts.</td>
+</tr>
+<tr class="row-odd"><td>remove_others_reactions</td>
+<td>channel</td>
+<td>Remove other users emoji reactions from posts.</td>
+</tr>
+<tr class="row-even"><td>permanent_delete_user (deprecated)</td>
+<td>system</td>
+<td>Permanently delete other users.</td>
+</tr>
+<tr class="row-odd"><td>upload_file</td>
+<td>channel</td>
+<td>Upload file attachements to posts.</td>
+</tr>
+<tr class="row-even"><td>get_public_link</td>
+<td>system</td>
+<td>Get permalink for posts.</td>
+</tr>
+<tr class="row-odd"><td>manage_incoming_webhooks</td>
+<td>team</td>
+<td>Create, edit and delete your own incoming webhooks.</td>
+</tr>
+<tr class="row-even"><td>manage_outgoing_webhooks</td>
+<td>team</td>
+<td>Create, edit and delete your own outgoing webhooks.</td>
+</tr>
+<tr class="row-odd"><td>manage_others_webhooks(deprecated)</td>
+<td>team</td>
+<td>Edit and delete other users’ incoming or outgoing webhooks.</td>
+</tr>
+<tr class="row-even"><td>manage_others_incoming_webhooks</td>
+<td>team</td>
+<td>Edit and delete others’ incoming webhooks.</td>
+</tr>
+<tr class="row-odd"><td>manage_others_outgoing_webhooks</td>
+<td>team</td>
+<td>Edit and delete others’ outgoing webhooks.</td>
+</tr>
+<tr class="row-even"><td>manage_oauth</td>
+<td>system</td>
+<td>Create, edit and delete your own OAuth 2.0 apps.</td>
+</tr>
+<tr class="row-odd"><td>manage_system_wide_oauth</td>
+<td>system</td>
+<td>Edit or delete other users’ OAuth 2.0 apps.</td>
+</tr>
+<tr class="row-even"><td>create_post</td>
+<td>channel</td>
+<td>Post in channels.</td>
+</tr>
+<tr class="row-odd"><td>create_post_public</td>
+<td>channel</td>
+<td>Create a system message within a channel.</td>
+</tr>
+<tr class="row-even"><td>create_post_ephermal</td>
+<td>channel</td>
+<td>Create an ephemeral message within a channel.</td>
+</tr>
+<tr class="row-odd"><td>edit_post</td>
+<td>channel</td>
+<td>Authors edit their own posts. Edit post time limit is controlled by the <code class="docutils literal notranslate"><span class="pre">&quot;PostEditTimeLimit&quot;</span></code> <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#post-edit-time-limit">config</a>.</td>
+</tr>
+<tr class="row-even"><td>edit_others_posts</td>
+<td>channel</td>
+<td>Edit other users posts.</td>
+</tr>
+<tr class="row-odd"><td>delete_post</td>
+<td>channel</td>
+<td>Authors delete their own posts.</td>
+</tr>
+<tr class="row-even"><td>delete_others_posts</td>
+<td>channel</td>
+<td>Delete other users’ posts.</td>
+</tr>
+<tr class="row-odd"><td>remove_user_from_team</td>
+<td>team</td>
+<td>Remove users from team.</td>
+</tr>
+<tr class="row-even"><td>create_team</td>
+<td>system</td>
+<td>Create teams.</td>
+</tr>
+<tr class="row-odd"><td>manage_team</td>
+<td>team</td>
+<td>Access Team Settings.</td>
+</tr>
+<tr class="row-even"><td>import_team</td>
+<td>system</td>
+<td>Import teams in Team Settings.</td>
+</tr>
+<tr class="row-odd"><td>view_team</td>
+<td>team</td>
+<td>Read the Team object.</td>
+</tr>
+<tr class="row-even"><td>create_bot</td>
+<td>team</td>
+<td>Create bot accounts.</td>
+</tr>
+<tr class="row-odd"><td>assign_bot</td>
+<td>team</td>
+<td>Assign bots to users other than who created the bot.</td>
+</tr>
+<tr class="row-even"><td>read_bot</td>
+<td>team</td>
+<td>View own bots created.</td>
+</tr>
+<tr class="row-odd"><td>read_others_bots</td>
+<td>team</td>
+<td>View bots created by others.</td>
+</tr>
+<tr class="row-even"><td>manage_bots</td>
+<td>team</td>
+<td>Edit and delete own bots.</td>
+</tr>
+<tr class="row-odd"><td>manage_others_bots</td>
+<td>team</td>
+<td>Edit and delete bots created by others.</td>
+</tr>
+<tr class="row-even"><td>view_members</td>
+<td>team</td>
+<td>List all members on the team.</td>
+</tr>
+<tr class="row-odd"><td>list_users_without_team</td>
+<td>system</td>
+<td>List users without a team.</td>
+</tr>
+<tr class="row-even"><td>create_user_access_token</td>
+<td>system</td>
+<td>Create user access tokens.</td>
+</tr>
+<tr class="row-odd"><td>read_user_access_token</td>
+<td>system</td>
+<td>Read user access tokens by ID.</td>
+</tr>
+<tr class="row-even"><td>revoke_user_access_token</td>
+<td>system</td>
+<td>Revoke user access tokens.</td>
+</tr>
+<tr class="row-odd"><td>manage_jobs</td>
+<td>system</td>
+<td>Create and cancel jobs.</td>
+</tr>
+<tr class="row-even"><td>create_emojis</td>
+<td>team</td>
+<td>Create custom emoji.</td>
+</tr>
+<tr class="row-odd"><td>delete_emojis</td>
+<td>team</td>
+<td>Delete own custom emoji.</td>
+</tr>
+<tr class="row-even"><td>delete_others_emojis</td>
+<td>team</td>
+<td>Delete custom emoji created by others.</td>
+</tr>
+<tr class="row-odd"><td>invite_guest</td>
+<td>system</td>
+<td>Invite guest users via email invite or add existing guests to teams.</td>
+</tr>
+<tr class="row-even"><td>promote_guest</td>
+<td>system</td>
+<td>Promote guests to member users.</td>
+</tr>
+<tr class="row-odd"><td>demote_to_guest</td>
+<td>system</td>
+<td>Demote member users to guests.</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="roles-field">
 <h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">Roles</span></code> Field</a><a class="headerlink" href="#roles-field" title="Permalink to this headline">¶</a></h3>

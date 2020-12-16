@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Active Directory/LDAP Setup &mdash; Mattermost 5.30 documentation</title>
+  <title>Active Directory/LDAP Setup &mdash; Mattermost 5.29 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.30
+                5.29
               </div>
             
           
@@ -263,8 +263,7 @@
 <p>There are two ways to set up AD/LDAP:</p>
 <ol class="simple">
 <li><strong>Configure AD/LDAP using the System Console user interface</strong><ul>
-<li>Log in to your workspace and create a new account using email and password. This is assigned the System Admin role as the first user created.</li>
-<li>Next, configure AD/LDAP and then convert your System Admin account to use the AD/LDAP sign in method.</li>
+<li>Log in to your workspace and create a new account using email and password. This is assigned the System Admin role as the first user created. Next, configure AD/LDAP and then convert your System Admin account to use the AD/LDAP sign in method.</li>
 </ul>
 </li>
 <li><strong>Configure AD/LDAP by editing <code class="docutils literal notranslate"><span class="pre">config.json</span></code></strong><ul>
@@ -275,48 +274,43 @@
 <div class="section" id="configure-ad-ldap-sign-in">
 <h3>Configure AD/LDAP Sign In<a class="headerlink" href="#configure-ad-ldap-sign-in" title="Permalink to this headline">¶</a></h3>
 <ol class="simple">
-<li><strong>Create a System Admin account using email authentication.</strong><ul>
-<li>Create a new workspace and create an account using email and password, which is automatically assigned the <strong>System Administrator</strong> role since it is the first account created. You may also assign the role to another account.</li>
-</ul>
-</li>
-<li><strong>Configure AD/LDAP.</strong><ul>
-<li>Go to <strong>System Console &gt; Authentication &gt; AD/LDAP</strong> and fill in AD/LDAP settings based on the <a class="reference external" href="http://docs.mattermost.com/administration/config-settings.html#ad-ldap">configuration settings documentation</a>.</li>
-</ul>
-</li>
-<li><strong>Confirm that AD/LDAP sign-on is enabled.</strong>&lt;<ul>
-<li>After AD/LDAP has been enabled, confirm that users can sign in using AD/LDAP credentials.</li>
-</ul>
-</li>
-<li><strong>Switch your System Admin account from email to AD/LDAP authentication.</strong><ul>
-<li>Navigate to <strong>Account Settings &gt; Security &gt; Sign-in Method &gt; Switch to AD/LDAP</strong> and sign in with your AD/LDAP credentials to complete the switch.</li>
-</ul>
-</li>
-<li><strong>(Optional) Restrict authentication to AD/LDAP.</strong><ul>
-<li>Go to <strong>System Console &gt; Authentication &gt; Email</strong> and set <strong>Enable sign-in with email</strong> to <strong>false</strong> and <strong>Enable sign-in with username</strong> to <strong>false</strong>.</li>
-<li>Then choose <strong>Save</strong> to save the changes. This should leave Active Directory/LDAP as the only sign in option.</li>
-</ul>
-</li>
-<li><strong>(Optional) If you configured <code class="docutils literal notranslate"><span class="pre">First</span> <span class="pre">Name</span> <span class="pre">Attribute</span></code> and <code class="docutils literal notranslate"><span class="pre">Last</span> <span class="pre">Name</span> <span class="pre">Attribute</span></code> in the System Console.</strong><ul>
-<li>Navigate to <strong>System Console &gt; Site Configuration &gt; Users and Teams</strong> and set <strong>Teammate Name Display</strong> to <strong>Show first and last name</strong>. This is recommended for a better user experience.</li>
-</ul>
-</li>
+<li><strong>Create a System Admin account using email authentication.</strong></li>
 </ol>
-<p><strong>Note:</strong> If you’ve made a mistake and lock yourself out of the system somehow, you can <a class="reference external" href="http://docs.mattermost.com/deployment/on-boarding.html#common-tasks">set an existing account to System Administrator using the command line tool</a>.</p>
+<p>Create a new workspace and create an account using email and password, which is automatically assigned the <strong>System Administrator</strong> role since it is the first account created. You may also assign the role to another account.</p>
+<ol class="simple">
+<li><strong>Configure AD/LDAP.</strong></li>
+</ol>
+<p>Go to <strong>System Console &gt; Authentication &gt; AD/LDAP</strong> and fill in AD/LDAP settings based on the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#ad-ldap">configuration settings documentation</a>.</p>
+<ol class="simple">
+<li><strong>Confirm that AD/LDAP sign-on is enabled.</strong></li>
+</ol>
+<p>After AD/LDAP has been enabled, confirm that users can sign in using AD/LDAP credentials.</p>
+<ol class="simple">
+<li><strong>Switch your System Admin account from email to AD/LDAP authentication.</strong></li>
+</ol>
+<p>Navigate to <strong>Account Settings &gt; Security &gt; Sign-in Method &gt; Switch to AD/LDAP</strong> and sign in with your AD/LDAP credentials to complete the switch.</p>
+<ol class="simple">
+<li><strong>(Optional) Restrict authentication to AD/LDAP.</strong></li>
+</ol>
+<p>Go to <strong>System Console &gt; Authentication &gt; Email</strong> and set <strong>Enable sign-in with email</strong> to <strong>false</strong> and <strong>Enable sign-in with username</strong> to <strong>false</strong>. Then choose <strong>Save</strong> to save the changes. This should leave Active Directory/LDAP as the only sign in option.</p>
+<ol class="simple">
+<li><strong>(Optional) If you configured <code class="docutils literal notranslate"><span class="pre">First</span> <span class="pre">Name</span> <span class="pre">Attribute</span></code> and <code class="docutils literal notranslate"><span class="pre">Last</span> <span class="pre">Name</span> <span class="pre">Attribute</span></code> in the System Console.</strong></li>
+</ol>
+<p>Navigate to <strong>System Console &gt; Site Configuration &gt; Users and Teams</strong> and set <strong>Teammate Name Display</strong> to <strong>Show first and last name</strong>. This is recommended for a better user experience.</p>
+<p>If you’ve made a mistake and lock yourself out of the system somehow, you can <a class="reference external" href="https://docs.mattermost.com/deployment/on-boarding.html#common-tasks">set an existing account to System Administrator using the command line tool</a>.</p>
 </div>
 <div class="section" id="configure-ad-ldap-synchronization">
 <h3>Configure AD/LDAP Synchronization<a class="headerlink" href="#configure-ad-ldap-synchronization" title="Permalink to this headline">¶</a></h3>
 <p>In addition to configuring AD/LDAP sign-in, you can also configure AD/LDAP synchronization. When synchronizing, Mattermost queries AD/LDAP for relevant account information and updates Mattermost accounts based on changes to attributes (first name, last name, and nickname). When accounts are disabled in AD/LDAP users are made inactive in Mattermost, and their active sessions are revoked once Mattermost synchronizes the updated attributes.</p>
-<p><strong>Note:</strong> The AD/LDAP sync depends on email. Make sure all users on your AD/LDAP server have an email address or that their account is deactivated in Mattermost.</p>
+<p>Note that the AD/LDAP sync depends on email. Make sure all users on your AD/LDAP server have an email address or that their account is deactivated in Mattermost.</p>
 <p>To configure AD/LDAP synchronization with AD/LDAP sign-in:</p>
 <ol class="simple">
 <li>Go to <strong>System Console &gt; Authentication &gt; AD/LDAP</strong> and set <strong>Enable Synchronization with AD/LDAP</strong> to <strong>true</strong>.</li>
-<li>Scroll down to <strong>Synchronization Interval (minutes)</strong> to specify how often Mattermost accounts synchronize attributes with AD/LDAP. The default setting is 60 minutes. The profile picture attribute is only synchronized when the user logs in.<ul>
-<li>If you want to synchronize immediately after disabling an account, use the <strong>AD/LDAP Synchronize Now</strong> button in <strong>System Console &gt; AD/LDAP</strong>.</li>
-<li>To configure AD/LDAP synchronization with SAML sign-in, see the <a class="reference external" href="https://about.mattermost.com/default-saml-ldap-sync">SAML documentation</a>.</li>
-</ul>
-</li>
+<li>Scroll down to <strong>Synchronization Interval (minutes)</strong> to specify how often Mattermost accounts synchronize attributes with AD/LDAP. The default setting is 60 minutes. The profile picture attribute is only synchronized when the user logs in.</li>
 </ol>
+<p>If you want to synchronize immediately after disabling an account, use the <strong>AD/LDAP Synchronize Now</strong> button in <strong>System Console &gt; AD/LDAP</strong>.</p>
 <p><strong>Note:</strong> Make sure that at least one LDAP user is in Mattermost or the sync will not complete.</p>
+<p>To configure AD/LDAP synchronization with SAML sign-in, see the <a class="reference external" href="https://about.mattermost.com/default-saml-ldap-sync">SAML documentation</a>.</p>
 </div>
 <div class="section" id="configure-ad-ldap-sign-in-using-filters">
 <h3>Configure AD/LDAP Sign-in Using Filters<a class="headerlink" href="#configure-ad-ldap-sign-in-using-filters" title="Permalink to this headline">¶</a></h3>

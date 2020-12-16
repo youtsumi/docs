@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>High Availability Cluster (E20) &mdash; Mattermost 5.30 documentation</title>
+  <title>High Availability Cluster (E20) &mdash; Mattermost 5.29 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
             
             
               <div class="version">
-                5.30
+                5.29
               </div>
             
           
@@ -301,11 +301,10 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#troubleshooting" id="id32">Troubleshooting</a><ul>
-<li><a class="reference internal" href="#capturing-high-availability-troubleshooting-data" id="id33">Capturing High Availability Troubleshooting Data</a></li>
-<li><a class="reference internal" href="#red-server-status" id="id34">Red Server Status</a></li>
-<li><a class="reference internal" href="#websocket-disconnect" id="id35">WebSocket Disconnect</a></li>
-<li><a class="reference internal" href="#app-refreshes-continuously" id="id36">App Refreshes Continuously</a></li>
-<li><a class="reference internal" href="#messages-do-not-post-until-after-reloading" id="id37">Messages Do Not Post Until After Reloading</a></li>
+<li><a class="reference internal" href="#red-server-status" id="id33">Red Server Status</a></li>
+<li><a class="reference internal" href="#websocket-disconnect" id="id34">WebSocket Disconnect</a></li>
+<li><a class="reference internal" href="#app-refreshes-continuously" id="id35">App Refreshes Continuously</a></li>
+<li><a class="reference internal" href="#messages-do-not-post-until-after-reloading" id="id36">Messages Do Not Post Until After Reloading</a></li>
 </ul>
 </li>
 </ul>
@@ -702,19 +701,6 @@ net.ipv4.tcp_max_syn_backlog = 8192
 </div>
 <div class="section" id="troubleshooting">
 <h2><a class="toc-backref" href="#contents">Troubleshooting</a><a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="capturing-high-availability-troubleshooting-data">
-<h3><a class="toc-backref" href="#contents">Capturing High Availability Troubleshooting Data</a><a class="headerlink" href="#capturing-high-availability-troubleshooting-data" title="Permalink to this headline">¶</a></h3>
-<p>When deploying Mattermost in a&nbsp;High&nbsp;Availability&nbsp;configuration, we recommend&nbsp;that you keep Prometheus and Grafana metrics as well as cluster server logs for as long as possible - and at minimum two weeks.</p>
-<p>You may be asked to provide this data to Mattermost for analysis and troubleshooting purposes.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<ul class="last simple">
-<li>Ensure that server log files are being created. You can find more on working with Mattermost logs <a class="reference external" href="https://docs.mattermost.com/install/troubleshooting.html#review-mattermost-logs">here</a>.</li>
-<li>When investigating and replicating issues, we recommend opening&nbsp;<strong>System Console &gt; Environment &gt; Logging</strong>&nbsp;and setting&nbsp;<strong>File Log Level</strong>&nbsp;to&nbsp;<strong>DEBUG</strong> for more complete logs. Make sure to revert to&nbsp;<strong>INFO</strong>&nbsp;after troubleshooting to save disk space.</li>
-<li>Each server has its own server log file, so make sure to provide server logs for all servers in your High Availability cluster.</li>
-</ul>
-</div>
-</div>
 <div class="section" id="red-server-status">
 <h3><a class="toc-backref" href="#contents">Red Server Status</a><a class="headerlink" href="#red-server-status" title="Permalink to this headline">¶</a></h3>
 <p>When High Availability is enabled, the System Console displays the server status as red or green, indicating if the servers are communicating correctly with the cluster. The servers use inter-node communication to ping the other machines in the cluster, and once a ping is established the servers exchange information, such as server version and configuration files.</p>
