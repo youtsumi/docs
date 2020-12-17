@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installing Mattermost Omnibus &mdash; Mattermost 5.28 documentation</title>
+  <title>Installing Mattermost Omnibus &mdash; Mattermost 5.29 documentation</title>
   
 
   
@@ -33,77 +33,13 @@
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Installing Mattermost on Kubernetes" href="install-kubernetes.html" />
     <link rel="prev" title="Installing Mattermost on Ubuntu 18.04 LTS" href="install-ubuntu-1804.html" />
-	<!-- Bizible Script -->
-	<script src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
-
-	
-		<!-- Google Analytics -->
-		<script>
-			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-			ga('create', 'UA-67846571-2', 'auto');
-			ga('send', 'pageview');
-		</script>
-		<!-- End Google Analytics -->
-	
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-67846571-1"></script>
-	<script>
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-
-	gtag('config', 'UA-67846571-1');
-	</script>
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<!-- Second Google Analytics tag to assist mapping with mattermost.com visits --> 
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120238482-1"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-
-	  gtag('config', 'UA-120238482-1');
-	</script>
-
-	<!-- LeadLander -->
-	<script type="text/javascript" language="javascript">
-		var sf14gv = 31865;
-		(function() {
-			var sf14g = document.createElement('script');
-			sf14g.src = 'https://tracking.leadlander.com/lt.min.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sf14g, s);
-		})();
-	</script>
-
-	<!-- Munchkin code -->
-	<script type="text/javascript">
-		(function() {
-			var didInit = false;
-			function initMunchkin() {
-			if(didInit === false) {
-				didInit = true;
-				Munchkin.init('161-FBE-733');
-			}
-			}
-			var s = document.createElement('script');
-			s.type = 'text/javascript';
-			s.async = true;
-			s.src = '//munchkin.marketo.net/munchkin.js';
-			s.onreadystatechange = function() {
-			if (this.readyState == 'complete' || this.readyState == 'loaded') {
-				initMunchkin();
-			}
-			};
-			s.onload = initMunchkin;
-			document.getElementsByTagName('head')[0].appendChild(s);
-		})();
-	</script>
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
 
 
   
@@ -133,7 +69,7 @@
             
             
               <div class="version">
-                5.28
+                5.29
               </div>
             
           
@@ -268,7 +204,7 @@
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>Mattermost Omnibus is a Debian package that packages the individual components of a Mattermost deployment into a single installation process. The package leverages the <code class="docutils literal notranslate"><span class="pre">apt</span></code> package manager to install and keep the components of the platform updated, using a custom CLI and ansible recipes to link those components together and configure them.</p>
-<p>Mattermost Omnibus currently supports Ubuntu’s <code class="docutils literal notranslate"><span class="pre">bionic</span></code> and <code class="docutils literal notranslate"><span class="pre">focal</span></code> distributions. Support for RedHat/CentOS distributions will be available in future versions. The package bundles Mattermost Enterprise Edition.</p>
+<p>Mattermost Omnibus currently supports Ubuntu’s <code class="docutils literal notranslate"><span class="pre">bionic</span></code> and <code class="docutils literal notranslate"><span class="pre">focal</span></code> distributions. Support for RedHat/CentOS distributions will be available in future versions. The package bundles the free, unlicensed Mattermost Enterprise Edition.</p>
 </div>
 <div class="section" id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
@@ -288,7 +224,7 @@
 <h2>Installing Mattermost Omnibus<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>If you’re installing Omnibus, and have a domain and SSL use:</p>
 <p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">mattermost-omnibus</span> <span class="pre">-y</span></code></p>
-<p>In order to issue that certificate, the installer requests a domain name and an email address from us. These are used to generate the certificate and deliver any related communications respectively.</p>
+<p>In order to issue that certificate, the installer requests a domain name and an email address from you. These are used to generate the certificate and deliver any related communications respectively.</p>
 <p>After all the packages are installed, Omnibus runs the ansible scripts that configure all the platform components and starts the server. To access Mattermost, open a browser, navigate to your domain, and create the System Admin user to start using the platform.</p>
 </div>
 <div class="section" id="updating-mattermost-omnibus">
@@ -347,12 +283,12 @@
 </div>
 <div class="section" id="can-i-install-without-a-domain">
 <h3>Can I install without a domain?<a class="headerlink" href="#can-i-install-without-a-domain" title="Permalink to this headline">¶</a></h3>
-<p>Although the recommended way to install and configure Omnibus is with SSL enabled, if you want to use or test without it, you can run:
-<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">MMO_HTTPS=false</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">mattermost-omnibus</span></code>.</p>
+<p>Although the recommended way to install and configure Omnibus is with SSL enabled, if you want to use or test without it, you can run:</p>
+<p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">MMO_HTTPS=false</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">mattermost-omnibus</span></code></p>
 </div>
 <div class="section" id="what-happened-to-config-json">
 <h3>What happened to <code class="docutils literal notranslate"><span class="pre">config.json</span></code>?<a class="headerlink" href="#what-happened-to-config-json" title="Permalink to this headline">¶</a></h3>
-<p>Mattermost Omnibus <a class="reference external" href="https://docs.mattermost.com/administration/config-in-database.html">stores the configuration of the Mattermost server into the database</a>. You can edit your config by running the following mmctl command after connecting mmctl to the instance: <code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">config</span> <span class="pre">edit</span></code>. If you are logged into the machine as the <code class="docutils literal notranslate"><span class="pre">mattermost</span></code> user, you can use <code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">--local</span> <span class="pre">config</span> <span class="pre">edit</span></code> as well.</p>
+<p>Mattermost Omnibus <a class="reference external" href="https://docs.mattermost.com/administration/config-in-database.html">stores the configuration of the Mattermost server into the database</a>. You can edit your config by running the following mmctl command after connecting mmctl to the instance: <code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">config</span> <span class="pre">edit</span></code>. If you’re logged into the machine as the <code class="docutils literal notranslate"><span class="pre">mattermost</span></code> user, you can use <code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">--local</span> <span class="pre">config</span> <span class="pre">edit</span></code> as well.</p>
 </div>
 <div class="section" id="are-there-plans-to-add-other-packages-to-the-omnibus">
 <h3>Are there plans to add other packages to the Omnibus?<a class="headerlink" href="#are-there-plans-to-add-other-packages-to-the-omnibus" title="Permalink to this headline">¶</a></h3>
@@ -368,7 +304,7 @@
 </div>
 <div class="section" id="can-i-use-a-license-with-omnibus">
 <h3>Can I use a license with Omnibus?<a class="headerlink" href="#can-i-use-a-license-with-omnibus" title="Permalink to this headline">¶</a></h3>
-<p>Yes. Mattermost Omnibus bundles Mattermost Enterprise Edition, and Enterprise features are unlocked when you purchase and upload a license.</p>
+<p>Yes. Mattermost Omnibus bundles the free, unlicensed Mattermost Enterprise Edition, and Enterprise features are unlocked when you purchase and upload a license.</p>
 </div>
 <div class="section" id="can-i-use-an-omnibus-server-as-part-of-a-cluster">
 <h3>Can I use an Omnibus server as part of a cluster?<a class="headerlink" href="#can-i-use-an-omnibus-server-as-part-of-a-cluster" title="Permalink to this headline">¶</a></h3>
@@ -468,7 +404,7 @@
 		<div class="search__icon">
 			<i class="fa fa-search"></i>
 		</div>
-		<a href="http://docs.mattermost.com/" class="header__logo">
+		<a href="https://docs.mattermost.com/" class="header__logo">
 			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
 		</a>
 		<div class="links__icon">

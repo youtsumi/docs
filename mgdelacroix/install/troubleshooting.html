@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Important Notes &mdash; Mattermost 5.28 documentation</title>
+  <title>Important Notes &mdash; Mattermost 5.29 documentation</title>
   
 
   
@@ -33,77 +33,13 @@
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="MySQL Installation Troubleshooting" href="trouble_mysql.html" />
     <link rel="prev" title="Bulk Export Tool" href="../administration/bulk-export.html" />
-	<!-- Bizible Script -->
-	<script src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
-
-	
-		<!-- Google Analytics -->
-		<script>
-			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-			ga('create', 'UA-67846571-2', 'auto');
-			ga('send', 'pageview');
-		</script>
-		<!-- End Google Analytics -->
-	
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-67846571-1"></script>
-	<script>
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-
-	gtag('config', 'UA-67846571-1');
-	</script>
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<!-- Second Google Analytics tag to assist mapping with mattermost.com visits --> 
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120238482-1"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-
-	  gtag('config', 'UA-120238482-1');
-	</script>
-
-	<!-- LeadLander -->
-	<script type="text/javascript" language="javascript">
-		var sf14gv = 31865;
-		(function() {
-			var sf14g = document.createElement('script');
-			sf14g.src = 'https://tracking.leadlander.com/lt.min.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sf14g, s);
-		})();
-	</script>
-
-	<!-- Munchkin code -->
-	<script type="text/javascript">
-		(function() {
-			var didInit = false;
-			function initMunchkin() {
-			if(didInit === false) {
-				didInit = true;
-				Munchkin.init('161-FBE-733');
-			}
-			}
-			var s = document.createElement('script');
-			s.type = 'text/javascript';
-			s.async = true;
-			s.src = '//munchkin.marketo.net/munchkin.js';
-			s.onreadystatechange = function() {
-			if (this.readyState == 'complete' || this.readyState == 'loaded') {
-				initMunchkin();
-			}
-			};
-			s.onload = initMunchkin;
-			document.getElementsByTagName('head')[0].appendChild(s);
-		})();
-	</script>
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
 
 
   
@@ -133,7 +69,7 @@
             
             
               <div class="version">
-                5.28
+                5.29
               </div>
             
           
@@ -576,7 +512,7 @@
 <p>A server status of red can occur for the following reasons:</p>
 <ul class="simple">
 <li><strong>Configuration file mismatch:</strong> Mattermost will still attempt the inter-node communication, but the System Console will show a red status for the server since the high availability feature assumes the same configuration file to function properly.</li>
-<li><strong>Server version mismatch:</strong> Mattermost will still attempt the inter-node communication, but the System Console will show a red status for the server since the High Availability feature assumes the same version of Mattermost is installed on each server in the cluster. It’s recommended to use the <a class="reference external" href="https://www.mattermost.org/download/">latest version of Mattermost</a> on all servers. Follow the upgrade procedure in <a class="reference internal" href="../administration/upgrade.html"><span class="doc">Upgrading Mattermost Server</span></a> for any server that needs to be upgraded.</li>
+<li><strong>Server version mismatch:</strong> Mattermost will still attempt the inter-node communication, but the System Console will show a red status for the server since the High Availability feature assumes the same version of Mattermost is installed on each server in the cluster. It’s recommended to use the <a class="reference external" href="https://mattermost.org/download/">latest version of Mattermost</a> on all servers. Follow the upgrade procedure in <a class="reference internal" href="../administration/upgrade.html"><span class="doc">Upgrading Mattermost Server</span></a> for any server that needs to be upgraded.</li>
 <li><strong>Server is down:</strong> If an inter-node communication fails to send a message it makes another attempt in 15 seconds. If the second attempt fails, the server is assumed to be down. An error message is written to the logs and the System Console shows a status of red for that server. The inter-node communication continues to ping down the server in 15-second intervals. When the server comes back up, any new messages are sent to it.</li>
 </ul>
 </div>
@@ -718,7 +654,7 @@
 <h2>User Statuses get Stuck on “Away” or “Offline” Status<a class="headerlink" href="#user-statuses-get-stuck-on-away-or-offline-status" title="Permalink to this headline">¶</a></h2>
 <p>If you notice more than one user being stuck at an “Away” or “Offline” status, try one of the following steps:</p>
 <ol class="arabic simple">
-<li>If you’re using an NGINX proxy, configure IP Hash load balancing to determine what server should be selected for the next request (based on the client’s IP address) <a class="reference external" href="http://nginx.org/en/docs/http/load_balancing.html">as described here</a>.</li>
+<li>If you’re using an NGINX proxy, configure IP Hash load balancing to determine what server should be selected for the next request (based on the client’s IP address) <a class="reference external" href="https://nginx.org/en/docs/http/load_balancing.html">as described here</a>.</li>
 <li>If you’re using an AWS Application Load Balancer (ALB), enable Sticky Sessions feature in Amazon EC2’s Elastic Load Balancing <a class="reference external" href="https://aws.amazon.com/blogs/aws/new-elastic-load-balancing-feature-sticky-sessions/">as described here</a>.</li>
 </ol>
 <p>If neither of the above steps help resolve the issue, please open a new topic <a class="reference external" href="https://forum.mattermost.org/">in the Mattermost forums</a> for further troubleshooting.</p>
@@ -942,7 +878,7 @@
 		<div class="search__icon">
 			<i class="fa fa-search"></i>
 		</div>
-		<a href="http://docs.mattermost.com/" class="header__logo">
+		<a href="https://docs.mattermost.com/" class="header__logo">
 			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
 		</a>
 		<div class="links__icon">
