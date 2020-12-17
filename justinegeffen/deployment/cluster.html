@@ -215,32 +215,33 @@
 <li><a class="reference internal" href="#loading-a-multi-database-configuration-onto-an-active-server" id="id18">Loading a Multi-database Configuration onto an Active Server</a></li>
 <li><a class="reference internal" href="#manual-failover-for-master-database" id="id19">Manual Failover for Master Database</a></li>
 <li><a class="reference internal" href="#transparent-failover" id="id20">Transparent Failover</a></li>
+<li><a class="reference internal" href="#recommended-configuration-settings" id="id21">Recommended Configuration Settings</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#leader-election" id="id21">Leader Election</a></li>
-<li><a class="reference internal" href="#job-server" id="id22">Job Server</a></li>
-<li><a class="reference internal" href="#plugins-and-high-availability" id="id23">Plugins and High Availability</a></li>
+<li><a class="reference internal" href="#leader-election" id="id22">Leader Election</a></li>
+<li><a class="reference internal" href="#job-server" id="id23">Job Server</a></li>
+<li><a class="reference internal" href="#plugins-and-high-availability" id="id24">Plugins and High Availability</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#upgrade-guide" id="id24">Upgrade Guide</a><ul>
-<li><a class="reference internal" href="#updating-configuration-changes-while-operating-continuously" id="id25">Updating Configuration Changes While Operating Continuously</a></li>
-<li><a class="reference internal" href="#updating-server-version-while-operating-continuously" id="id26">Updating Server Version While Operating Continuously</a></li>
-<li><a class="reference internal" href="#server-upgrades-requiring-service-interruption" id="id27">Server Upgrades Requiring Service Interruption</a></li>
-<li><a class="reference internal" href="#upgrading-to-version-4-0-and-later" id="id28">Upgrading to Version 4.0 and Later</a></li>
+<li><a class="reference internal" href="#upgrade-guide" id="id25">Upgrade Guide</a><ul>
+<li><a class="reference internal" href="#updating-configuration-changes-while-operating-continuously" id="id26">Updating Configuration Changes While Operating Continuously</a></li>
+<li><a class="reference internal" href="#updating-server-version-while-operating-continuously" id="id27">Updating Server Version While Operating Continuously</a></li>
+<li><a class="reference internal" href="#server-upgrades-requiring-service-interruption" id="id28">Server Upgrades Requiring Service Interruption</a></li>
+<li><a class="reference internal" href="#upgrading-to-version-4-0-and-later" id="id29">Upgrading to Version 4.0 and Later</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#frequently-asked-questions-faq" id="id29">Frequently Asked Questions (FAQ)</a><ul>
-<li><a class="reference internal" href="#does-mattermost-support-multi-region-high-availability-deployment" id="id30">Does Mattermost support multi-region High Availability deployment?</a></li>
-<li><a class="reference internal" href="#what-does-mattermost-recommend-for-diaster-recovery-of-the-databases" id="id31">What does Mattermost recommend for diaster recovery of the databases?</a></li>
+<li><a class="reference internal" href="#frequently-asked-questions-faq" id="id30">Frequently Asked Questions (FAQ)</a><ul>
+<li><a class="reference internal" href="#does-mattermost-support-multi-region-high-availability-deployment" id="id31">Does Mattermost support multi-region High Availability deployment?</a></li>
+<li><a class="reference internal" href="#what-does-mattermost-recommend-for-diaster-recovery-of-the-databases" id="id32">What does Mattermost recommend for diaster recovery of the databases?</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#troubleshooting" id="id32">Troubleshooting</a><ul>
-<li><a class="reference internal" href="#red-server-status" id="id33">Red Server Status</a></li>
-<li><a class="reference internal" href="#websocket-disconnect" id="id34">WebSocket Disconnect</a></li>
-<li><a class="reference internal" href="#app-refreshes-continuously" id="id35">App Refreshes Continuously</a></li>
-<li><a class="reference internal" href="#messages-do-not-post-until-after-reloading" id="id36">Messages Do Not Post Until After Reloading</a></li>
+<li><a class="reference internal" href="#troubleshooting" id="id33">Troubleshooting</a><ul>
+<li><a class="reference internal" href="#red-server-status" id="id34">Red Server Status</a></li>
+<li><a class="reference internal" href="#websocket-disconnect" id="id35">WebSocket Disconnect</a></li>
+<li><a class="reference internal" href="#app-refreshes-continuously" id="id36">App Refreshes Continuously</a></li>
+<li><a class="reference internal" href="#messages-do-not-post-until-after-reloading" id="id37">Messages Do Not Post Until After Reloading</a></li>
 </ul>
 </li>
 </ul>
@@ -492,6 +493,22 @@ net.ipv4.tcp_max_syn_backlog = 8192
 <div class="section" id="transparent-failover">
 <h5><a class="toc-backref" href="#contents">Transparent Failover</a><a class="headerlink" href="#transparent-failover" title="Permalink to this headline">¶</a></h5>
 <p>The database can be configured for High Availability and transparent failover use the existing database technologies. We recommend MySQL Clustering, Postgres Clustering, or Amazon Aurora. Database transparent failover is beyond the scope of this documentation.</p>
+</div>
+<div class="section" id="recommended-configuration-settings">
+<h5><a class="toc-backref" href="#contents">Recommended Configuration Settings</a><a class="headerlink" href="#recommended-configuration-settings" title="Permalink to this headline">¶</a></h5>
+<p>If you’re using Postgres as the choice of database, we recommend the following configuration optimizations on your Mattermost server.</p>
+<p>The following configuration was tested on an AWS Aurora r5.xlarge instance of Postgres 11.7.</p>
+<ol class="arabic simple">
+<li><strong>max_connections</strong>: If you are using read-replicas set reader connections to 1024, and writer connections to 256. If you are using a single instance, then only setting it to 1024 should be sufficient. If the instance of lower capacity than r5.xlarge, then set it to a lower number. Also tune the <cite>MaxOpenConns</cite> setting under the <cite>SqlSettings</cite> of Mattermost app accordingly.</li>
+<li><strong>random_page_cost</strong>: Set it to 1.1, unless the DB is using spinning disks.</li>
+<li><strong>work_mem</strong>: Set it to 16 MB for readers, and 32 MB for writers. If it’s a single instance, 16 MB should be sufficient. If the instance is of a lower capacity than r5.xlarge, then set it to a lower number.</li>
+<li><strong>effective_cache_size</strong>: Set it to 65% of total memory. For a 32 GB instance, it should be 21 GB.</li>
+<li><strong>shared_buffers</strong>: Set it to 65% of total memory. For a 32 GB instance, it should be 21 GB.</li>
+<li><strong>tcp_keepalives_count</strong>: 5</li>
+<li><strong>tcp_keepalives_idle</strong>: 5</li>
+<li><strong>tcp_keepalives_interval</strong>: 1</li>
+</ol>
+<p>Note that if you are using pgbouncer or any similar connection pooling proxy in front of your DB, then the keepalive settings should be applied to the proxy instead and revert the keepalive settings for the DB back to defaults.</p>
 </div>
 </div>
 <div class="section" id="leader-election">
