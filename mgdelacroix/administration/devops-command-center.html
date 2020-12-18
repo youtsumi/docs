@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Mattermost Incident Management &mdash; Mattermost 5.29 documentation</title>
+  <title>Mattermost Incident Management &mdash; Mattermost 5.30 documentation</title>
   
 
   
@@ -69,7 +69,7 @@
             
             
               <div class="version">
-                5.29
+                5.30
               </div>
             
           
@@ -105,13 +105,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../guides/cloud-admin-guide.html#mobile">Mobile</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/cloud-admin-guide.html#incident-management">Incident Management</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Mattermost Incident Management</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#api-documentation">API Documentation</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#installing-mattermost-incident-management">Installing Mattermost Incident Management</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#using-slash-commands">Using slash commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getting-started-with-incident-management">Getting Started with Incident Management</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#playbooks-and-incidents">Playbooks and Incidents</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#incident-status-and-information">Incident status and information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#built-in-slash-commands">Built-in slash commands</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#channel-export">Channel Export</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#glossary">Glossary</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-documentation">API Documentation</a></li>
 </ul>
 </li>
 </ul>
@@ -174,205 +173,335 @@
   <div class="section" id="mattermost-incident-management">
 <h1>Mattermost Incident Management<a class="headerlink" href="#mattermost-incident-management" title="Permalink to this headline">¶</a></h1>
 <p><em>Available in Mattermost Enterprise Edition E20, Mattermost Cloud Professional, and Mattermost Cloud Enterprise.</em></p>
-<p>Incidents are situations which require an immediate response and benefit from a clearly defined process guiding towards resolution. Mattermost Incident Management allows your team to coordinate, manage, and resolve incidents from within Mattermost.</p>
-<p>Better response to an incident helps you provide more reliable services, in addition to gaining insights with incident reports and incorporating learnings with playbooks.</p>
+<p>Incidents are situations which require an immediate response, and incidents benefit from a clearly defined process that guides toward resolution. Mattermost Incident Management equips your team to coordinate, manage, and resolve incidents from within Mattermost:</p>
 <ul class="simple">
-<li>Automatically create a new channel that can be organized in the left-hand sidebar using custom categories.</li>
-<li>Use playbooks to perform automated actions such as create a Jira ticket, start a Zoom call, or find out who is on-call in Opsgenie.</li>
-<li>Iterate on and refine processes after each incident.</li>
+<li>Starting an incident automatically creates a dedicated incident channel to coordinate discussion.
+- Use custom categories in the left-hand sidebar to streamline access to ongoing incidents.</li>
+<li>Playbooks define the tasks toward resolution as your team manages the incident.
+- Define your playbooks in advance with automated actions such as creating a Jira ticket, starting a Zoom call, or finding out who is on-call in Opsgenie.</li>
+<li>Reviewing the timeline and conversation helps refine the process for future such incidents.
+- Export the incident channel conversation to conduct a post-mortem review.</li>
 </ul>
-<p>When incidents are monitored, coordinated, and measured effectively, you can add transparency, maximize effectiveness, and save costs by cutting down time taken to respond to and resolve incidents.</p>
+<p>Delivering more reliable services requires an efficient resolution process. Use Mattermost Incident Management not only to resolve incidents more efficiently, but also to learn from past incidents and refine the process your team relies upon for success.</p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#api-documentation" id="id1">API Documentation</a></li>
-<li><a class="reference internal" href="#installing-mattermost-incident-management" id="id2">Installing Mattermost Incident Management</a></li>
-<li><a class="reference internal" href="#using-slash-commands" id="id3">Using slash commands</a><ul>
-<li><a class="reference internal" href="#adding-slash-commands-to-tasks" id="id4">Adding slash commands to tasks</a></li>
-<li><a class="reference internal" href="#generating-test-data" id="id5">Generating test data</a></li>
+<li><a class="reference internal" href="#installing-mattermost-incident-management" id="id3">Installing Mattermost Incident Management</a></li>
+<li><a class="reference internal" href="#getting-started-with-incident-management" id="id4">Getting Started with Incident Management</a></li>
+<li><a class="reference internal" href="#playbooks-and-incidents" id="id5">Playbooks and Incidents</a></li>
+<li><a class="reference internal" href="#built-in-slash-commands" id="id6">Built-in slash commands</a></li>
+<li><a class="reference internal" href="#channel-export" id="id7">Channel Export</a></li>
+<li><a class="reference internal" href="#api-documentation" id="id8">API Documentation</a></li>
 </ul>
-</li>
-<li><a class="reference internal" href="#playbooks-and-incidents" id="id6">Playbooks and Incidents</a><ul>
-<li><a class="reference internal" href="#creating-a-playbook" id="id7">Creating a playbook</a></li>
-<li><a class="reference internal" href="#editing-a-playbook" id="id8">Editing a playbook</a></li>
-<li><a class="reference internal" href="#deleting-a-playbook" id="id9">Deleting a playbook</a></li>
-<li><a class="reference internal" href="#starting-an-incident" id="id10">Starting an incident</a></li>
-<li><a class="reference internal" href="#ending-an-incident" id="id11">Ending an incident</a></li>
-<li><a class="reference internal" href="#restarting-an-incident" id="id12">Restarting an incident</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#incident-status-and-information" id="id13">Incident status and information</a></li>
-<li><a class="reference internal" href="#channel-export" id="id14">Channel Export</a></li>
-<li><a class="reference internal" href="#glossary" id="id15">Glossary</a></li>
-</ul>
-</div>
-<div class="section" id="api-documentation">
-<h2><a class="toc-backref" href="#id1">API Documentation</a><a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
-<p>The Mattermost Incident Management API specification is available <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-incident-management/blob/master/server/api/api.yaml">here</a>.</p>
 </div>
 <div class="section" id="installing-mattermost-incident-management">
-<h2><a class="toc-backref" href="#id2">Installing Mattermost Incident Management</a><a class="headerlink" href="#installing-mattermost-incident-management" title="Permalink to this headline">¶</a></h2>
-<p><em>For self-managed deployments</em></p>
-<p>Mattermost Incident Management is available in the Plugin Marketplace. You can download and install the plugin from Mattermost.</p>
-<ol class="arabic simple">
-<li>Open <strong>System Console &gt; Plugin Management</strong>.</li>
-<li>Search for <strong>Incident Response</strong> using the search bar or scroll through the list manually.</li>
-<li>Select <strong>Install</strong>.</li>
-<li>Next, select <strong>Configure</strong>.</li>
-<li>Select <strong>true</strong> to enable the plugin.</li>
-<li>Select <strong>Save</strong>.</li>
-</ol>
-<p>When you open the Main Menu, <strong>Playbooks &amp; Incidents</strong> is available as a menu item.</p>
+<h2><a class="toc-backref" href="#id3">Installing Mattermost Incident Management</a><a class="headerlink" href="#installing-mattermost-incident-management" title="Permalink to this headline">¶</a></h2>
 <p><em>For Cloud deployments</em></p>
-<p>Mattermost Incident Management is included in the Mattermost Cloud workspace and is enabled by default.</p>
+<p>Mattermost Incident Management is included in the Mattermost Cloud workspace, enabled by default, and upgraded automatically.</p>
+<p><em>For self-managed deployments</em></p>
+<p>Mattermost Incident Management is available in the Plugin Marketplace:</p>
+<ol class="arabic simple">
+<li>As a System Admin, go to <strong>Main Menu &gt; Plugin Marketplace</strong>.</li>
+<li>Search for <strong>Incident Management</strong>.</li>
+<li>Select <strong>Install</strong> if not yet installed, then select <strong>Configure</strong> to enable.</li>
+<li>From the plugin configuration page, set <strong>Enable Plugin</strong> to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</li>
+<li>Select <strong>Save</strong> to enable the plugin.</li>
+</ol>
 </div>
-<div class="section" id="using-slash-commands">
-<h2><a class="toc-backref" href="#id3">Using slash commands</a><a class="headerlink" href="#using-slash-commands" title="Permalink to this headline">¶</a></h2>
-<p>Slash commands are shortcuts used to perform actions in Mattermost. To view the available slash commands in Mattermost begin by typing <code class="docutils literal notranslate"><span class="pre">/</span></code> and a list of slash command options appears above the text input box. The autocomplete suggestions help by providing a format example in black text and a short description of the slash command in grey text.</p>
-<p>Mattermost Incident Management includes built-in slash commands:</p>
+<div class="section" id="getting-started-with-incident-management">
+<h2><a class="toc-backref" href="#id4">Getting Started with Incident Management</a><a class="headerlink" href="#getting-started-with-incident-management" title="Permalink to this headline">¶</a></h2>
+<p>Mattermost Incident Management has the following components:</p>
+<ul class="simple">
+<li><strong>Incidents</strong> are situations that require an immediate response. Every reported incident results in a newly-created, public or private incident channel exposing a custom user interface for collaboration and resolution.</li>
+<li><strong>Playbooks</strong> define the process to guide an incident toward resolution. Playbooks are created in advance by defining the tasks, stages, and other configuration used during an incident.</li>
+<li><strong>Tasks</strong> are the discrete actions to be taken when resolving an incident. As the necessary work is completed, the team should mark the tasks as complete. During an incident, tasks may be assigned to a member of the incident channel to communicate ownership.</li>
+<li><strong>Stages</strong> are groups of tasks that help focus efforts on the current stage of the incident. While tasks can be completed in any order, stages are worked through sequentially.</li>
+<li>The <strong>Commander</strong> is a defined role during the incident. This person is responsible for ensuring forward momentum on resolving the incident. By default, the reporter of the incident starts as the commander, but the commander may be changed at any time to another member of the incident channel.</li>
+<li><strong>Slash commands</strong> may be assigned to tasks defined in the playbook to help to streamline common actions.</li>
+</ul>
+<p>To access Mattermost Incident Management:</p>
+<ul class="simple">
+<li>From the Main Menu, select <strong>Playbooks &amp; Incidents</strong> to configure playbooks and review incidents of which you are a member. System administrators have unrestricted access.</li>
+<li>From the channel header, select the <strong>Incidents</strong> icon to open the right-hand sidebar. From there, create a new incident or collaborate on active incidents of which you are a member.</li>
+</ul>
+</div>
+<div class="section" id="playbooks-and-incidents">
+<h2><a class="toc-backref" href="#id5">Playbooks and Incidents</a><a class="headerlink" href="#playbooks-and-incidents" title="Permalink to this headline">¶</a></h2>
+<p>Playbooks and incidents are associated with teams in Mattermost. Starting an incident prompts for a name, description, and playbook. The name and description are used as the initial channel name and channel description, but may be modified later. The selected playbook defines the stages and tasks, how incident statuses are communicated, and whether or not the incident channel is public or private. Read more about <a class="reference external" href="https://docs.mattermost.com/help/getting-started/organizing-conversations.html">public and private channels</a>.</p>
+<p>Playbooks are always private by default. Membership in the playbook is required to configure the playbook or start an incident using that playbook. Once an incident is started, any member of the team may be added to the incident channel. Users who are not members of the team are unable to access playbooks or incidents belonging to that team.</p>
+<p>While the commander of an incident has a dedicated, named role, all members of an incident channel have unrestricted access to modify the current state of the incident. This permissive access model ensures the incident is never blocked on any one individual. Use private channels and channel membership to restrict access, or configure the playbook as public if everyone on the team is trusted with access to the incident.</p>
+<p>During an ongoing incident, use the channel to communicate status updates to stakeholders without requiring their membership in the incident channel. Providing regular status updates increases visibility and helps ensure continued momentum toward resolution. Any member of the channel can write a status update, post that update to the channel, and optionally start a reminder timer to prompt for a subsequent update.  Also, if configured in the playbook, status updates may also be broadcast to another channel.</p>
+<p>Once an incident is ended, be sure to schedule a post-mortem meeting to iterate on the design of your playbook. Automatic posts can help expose a timeline of events for review, such as when a task is marked as complete or when the commander changes. You can export the messages from the incident channel and use them to build a post-mortem document. Identify bottlenecks by explaining gaps between task completion, and suggest changes to the playbook for the next incident.</p>
+<div class="section" id="playbooks">
+<h3>Playbooks<a class="headerlink" href="#playbooks" title="Permalink to this headline">¶</a></h3>
+<div class="contents local topic" id="id1">
+<ul class="simple">
+<li><a class="reference internal" href="#creating-a-playbook" id="id9">Creating a playbook</a></li>
+<li><a class="reference internal" href="#configuring-a-playbook" id="id10">Configuring a playbook</a></li>
+<li><a class="reference internal" href="#deleting-a-playbook" id="id11">Deleting a playbook</a></li>
+</ul>
+</div>
+<div class="section" id="creating-a-playbook">
+<h4><a class="toc-backref" href="#id1">Creating a playbook</a><a class="headerlink" href="#creating-a-playbook" title="Permalink to this headline">¶</a></h4>
+<p>A playbook must be defined before starting an incident.</p>
+<ol class="arabic simple">
+<li>Go to <strong>Main Menu &gt; Playbooks &amp; Incidents</strong>.</li>
+<li>Start a <strong>Blank Playbook</strong>, or use the built-in <strong>Incident Management Playbook</strong> as a template.</li>
+<li>Name your playbook and provide a description.</li>
+<li>Select the <strong>Tasks</strong> tab.</li>
+<li>Within the <strong>Tasks</strong> tab, customize the stages and tasks:</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>Create and name new tasks to capture actions your team should take to resolve the incident.</li>
+<li>Create new stages to group tasks meant to be completed together.</li>
+<li>Drag and drop to reorganize stages and tasks.</li>
+<li>Optionally add task descriptions to give additional context to members of the incident channel. Descriptions support a limited form of markdown, including text styling and hyperlinks.</li>
+<li>Optionally add a slash command to the task that can be executed by members of the incident channel as needed.</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="6">
+<li>Select the <strong>Preferences</strong> tab.</li>
+<li>Within the <strong>Preferences</strong> tab, customize how status updates are communicated:</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>Optionally configure a broadcast channel to which status updates will be copied. If you are not a member of the configured broadcast channel, <cite>Unknown Channel</cite> will be shown instead of the channel name.</li>
+<li>Optionally configure the default reminder timer used to prompt for regular updates. The reminder timer may be changed when a status update is written.</li>
+<li>Optionally configure a template to use for the first status update. Subsequent status updates will start with the text of the most recent update.</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="8">
+<li>On the right-hand side of the screen, configure the permissions:</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>Decide whether the automatically created incident channel should be public or private within the team.</li>
+<li>Share this playbook with other members of the team to allow them to use the playbook to start an incident, as well as edit the playbook.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="configuring-a-playbook">
+<h4><a class="toc-backref" href="#id1">Configuring a playbook</a><a class="headerlink" href="#configuring-a-playbook" title="Permalink to this headline">¶</a></h4>
+<p>You can change a playbook’s configuration at any time, but changes will only be applied to future incidents. Ongoing or ended incidents previously started from that playbook remain unchanged.</p>
+<ol class="arabic simple">
+<li>Go to <strong>Main Menu &gt; Playbooks &amp; Incidents</strong>.</li>
+<li>Find the playbook to be edited.</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>Only playbooks of which you are a member are listed. System administrators have unrestricted access to all playbooks on the team.</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li>Select the name of the playbook, or select the <strong>Action</strong> menu next to the playbook name, then select <strong>Edit</strong>.</li>
+<li>Configure the playbook the same way a playbook is created or edited.</li>
+</ol>
+</div>
+<div class="section" id="deleting-a-playbook">
+<h4><a class="toc-backref" href="#id1">Deleting a playbook</a><a class="headerlink" href="#deleting-a-playbook" title="Permalink to this headline">¶</a></h4>
+<p>You can delete a playbook at any time. Ongoing or ended incidents previously started from that playbook remain unchanged.</p>
+<ol class="arabic simple">
+<li>Go to <strong>Main Menu &gt; Playbooks &amp; Incidents</strong>.</li>
+<li>Find the playbook to be edited.</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>Only playbooks of which you are a member are listed. System administrators have unrestricted access to all playbooks on the team.</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li>Select the <strong>Action</strong> menu next to the playbook name, then select <strong>Edit</strong>.</li>
+<li>Confirm that you want to <strong>Delete Playbook</strong>.</li>
+</ol>
+</div>
+</div>
+<div class="section" id="incidents">
+<h3>Incidents<a class="headerlink" href="#incidents" title="Permalink to this headline">¶</a></h3>
+<div class="contents local topic" id="id2">
+<ul class="simple">
+<li><a class="reference internal" href="#starting-an-incident" id="id12">Starting an incident</a></li>
+<li><a class="reference internal" href="#joining-an-incident" id="id13">Joining an incident</a></li>
+<li><a class="reference internal" href="#working-with-stages-and-tasks" id="id14">Working with stages and tasks</a></li>
+<li><a class="reference internal" href="#changing-commanders" id="id15">Changing commanders</a></li>
+<li><a class="reference internal" href="#providing-a-status-update" id="id16">Providing a status update</a></li>
+<li><a class="reference internal" href="#ending-an-incident" id="id17">Ending an incident</a></li>
+<li><a class="reference internal" href="#restarting-an-incident" id="id18">Restarting an incident</a></li>
+<li><a class="reference internal" href="#reviewing-past-incidents" id="id19">Reviewing past incidents</a></li>
+</ul>
+</div>
+<div class="section" id="starting-an-incident">
+<h4><a class="toc-backref" href="#id2">Starting an incident</a><a class="headerlink" href="#starting-an-incident" title="Permalink to this headline">¶</a></h4>
+<p>To start an incident, use any one of the following:</p>
+<ul class="simple">
+<li>Run the <code class="docutils literal notranslate"><span class="pre">/incident</span> <span class="pre">start</span></code> slash command from any channel.</li>
+<li>From the desktop or browser:</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Select the <strong>Incidents</strong> icon in the channel header, and select <strong>Start Incident</strong> from the right-hand sidebar.</li>
+<li>Use the context menu of a post and select <strong>Start incident</strong>.</li>
+</ul>
+</div></blockquote>
+<p>Starting an incident opens an interactive dialog. Provide an incident name and select a playbook to be used with the incident. Optionally provide a description to offer immediate context into the newly started incident. Only playbooks of which you are a member are listed in the <strong>Playbook</strong> drop-down menu.</p>
+<p>The creator of an incident is automatically added as the first member and becomes the commander.</p>
+</div>
+<div class="section" id="joining-an-incident">
+<h4><a class="toc-backref" href="#id2">Joining an incident</a><a class="headerlink" href="#joining-an-incident" title="Permalink to this headline">¶</a></h4>
+<p>Join an incident by joining the incident channel. If the incident channel is public, you may join the channel without permission. Search for and join the channel via <strong>Browse Channels</strong>.</p>
+<p>If the incident channel is private, an existing member of the incident channel must invite you. System administrators may join private incident channels without permission.</p>
+</div>
+<div class="section" id="working-with-stages-and-tasks">
+<h4><a class="toc-backref" href="#id2">Working with stages and tasks</a><a class="headerlink" href="#working-with-stages-and-tasks" title="Permalink to this headline">¶</a></h4>
+<p>Any member of the incident channel may work with stages and tasks:</p>
+<ul class="simple">
+<li>To mark a task as completed, select the unchecked checkbox next to the task. To undo this, clear the checkbox.</li>
+<li>To advance to the next stage, select <strong>Next Stage</strong>. Advancing to the next stage without completing the tasks in the stage prompts you to confirm.</li>
+<li>To assign a task to a member of the incident channel, select <strong>No Assignee</strong> (or the existing assignee’s username), then select a user.</li>
+<li>To view any description associated with a task, select the information icon to the right of the task name.</li>
+<li>To execute a slash command associated with a task, select <strong>Run</strong> next to the listed slash command. Configured slash commands may be run as often as necessary.</li>
+</ul>
+</div>
+<div class="section" id="changing-commanders">
+<h4><a class="toc-backref" href="#id2">Changing commanders</a><a class="headerlink" href="#changing-commanders" title="Permalink to this headline">¶</a></h4>
+<p>To change commanders, use any one of the following:</p>
+<ul class="simple">
+<li>Run the <code class="docutils literal notranslate"><span class="pre">/incident</span> <span class="pre">commander</span> <span class="pre">&#64;username</span></code> slash command from the incident channel.</li>
+<li>From the desktop or browser:</li>
+</ul>
+<ol class="arabic simple">
+<li>Select the <strong>Incidents</strong> icon in the channel header to open the right-hand sidebar.</li>
+<li>Select the <strong>Summary</strong> tab.</li>
+<li>Within the <strong>Summary</strong> tab, select the current commander’s name in the right-hand sidebar, then select the new commander.</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>To change the commander to a user who is not in the channel, first add the user to the channel.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="providing-a-status-update">
+<h4><a class="toc-backref" href="#id2">Providing a status update</a><a class="headerlink" href="#providing-a-status-update" title="Permalink to this headline">¶</a></h4>
+<p>Incident status updates ensure that stakeholders remain informed about the progress toward incident resolution. To post a status update:</p>
+<ul class="simple">
+<li>From the desktop or browser:</li>
+</ul>
+<ol class="arabic simple">
+<li>Select the <strong>Incidents</strong> icon in the channel header to open the right-hand sidebar.</li>
+<li>Select the <strong>Summary</strong> tab.</li>
+<li>Within the <strong>Summary</strong> tab, select <strong>Update Status</strong>.</li>
+<li>Add a markdown-formatted message.</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>If this is the first status update and the playbook has a defined template, that template will be pre-populated here.</li>
+<li>If this is a subsequent status update, the message from the last status update will be pre-populated here.</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li>Optionally set a reminder to prompt for the next status update.</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>If this is the first status update and the playbook has a defined default reminder timer, that timer will be pre-selected here.</li>
+<li>If this is a subsequent status update, the last reminder timer will be pre-populated here.</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="6">
+<li>Select <strong>Update Status</strong> to post your status update.</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>Status updates are posted to the incident channel as a message from the user providing the status update.</li>
+<li>If the playbook has a defined broadcast channel, status updates are copied to the broadcast channel as a message from the incident bot.</li>
+</ul>
+</div></blockquote>
+<p>The most recent status post will also appear in the right-hand sidebar of the incident channel. To correct or remove a status post, edit or delete the post as needed. Status updates that are broadcast to another channel will not be edited or deleted.</p>
+</div>
+<div class="section" id="ending-an-incident">
+<h4><a class="toc-backref" href="#id2">Ending an incident</a><a class="headerlink" href="#ending-an-incident" title="Permalink to this headline">¶</a></h4>
+<p>Incident members can end an incident using any one of the following:</p>
+<ul class="simple">
+<li>Within the incident channel, run the <code class="docutils literal notranslate"><span class="pre">/incident</span> <span class="pre">end</span></code> slash command.</li>
+<li>From the desktop or browser:</li>
+</ul>
+<ol class="arabic simple">
+<li>Select the <strong>Incidents</strong> icon in the channel header to open the right-hand sidebar.</li>
+<li>Select the <strong>Tasks</strong> tab.</li>
+<li>Within the <strong>Tasks</strong> tab, if you are on the final stage, select <strong>End Incident</strong>.</li>
+<li>Otherwise, to end the incident from an earlier stage, select the <strong>…</strong> menu, then select <strong>End Incident</strong>.</li>
+</ol>
+<p>Ending an incident signals to all members of the channel that the incident is no longer ongoing. Members of the team can continue to post in the channel, mark tasks as complete, and change the commander if needed.</p>
+</div>
+<div class="section" id="restarting-an-incident">
+<h4><a class="toc-backref" href="#id2">Restarting an incident</a><a class="headerlink" href="#restarting-an-incident" title="Permalink to this headline">¶</a></h4>
+<p>If an incident was ended prematurely, it can be restarted using any one of the following:</p>
+<ul class="simple">
+<li>Within the incident channel, run the <code class="docutils literal notranslate"><span class="pre">/incident</span> <span class="pre">restart</span></code> slash command.</li>
+<li>From the desktop or browser:</li>
+</ul>
+<ol class="arabic simple">
+<li>Select the <strong>Incidents</strong> icon in the channel header to open the RHS.</li>
+<li>Select the <strong>Tasks</strong> tab.</li>
+<li>Within the <strong>Tasks</strong> tab select <strong>Restart Incident</strong>.</li>
+</ol>
+</div>
+<div class="section" id="reviewing-past-incidents">
+<h4><a class="toc-backref" href="#id2">Reviewing past incidents</a><a class="headerlink" href="#reviewing-past-incidents" title="Permalink to this headline">¶</a></h4>
+<p>To view past incidents of which you are a member, from the desktop or browser:</p>
+<ol class="arabic simple">
+<li>Navigate to <strong>Main Menu &gt; Playbooks &amp; Incidents</strong>.</li>
+<li>Select the <strong>Incidents</strong> tab.</li>
+<li>Within the <strong>Incidents</strong> tab, find the incident to be reviewed, then select the name of the incident.</li>
+<li>Review the incident details:</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>The duration, total number of members ever involved, and messages sent in the channel are listed.</li>
+<li>A graphical timeline shows how much time elapsed between completed tasks.</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li>Optionally export the contents of the incident channel to review during a post-mortem.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="section" id="built-in-slash-commands">
+<h2><a class="toc-backref" href="#id6">Built-in slash commands</a><a class="headerlink" href="#built-in-slash-commands" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">/incident</span></code> slash command allows interaction with incidents via the post textbox on desktop, browser, and mobile for:</p>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">/incident</span> <span class="pre">start</span></code> - Start a new incident.</li>
 <li><code class="docutils literal notranslate"><span class="pre">/incident</span> <span class="pre">end</span></code> - End an ongoing incident.</li>
 <li><code class="docutils literal notranslate"><span class="pre">/incident</span> <span class="pre">restart</span></code> - Restart an ended incident.</li>
-<li><code class="docutils literal notranslate"><span class="pre">/incident</span> <span class="pre">check</span> <span class="pre">[checklist</span> <span class="pre">#]</span> <span class="pre">[item</span> <span class="pre">#]</span></code> - Check/uncheck the checklist item.</li>
-<li><code class="docutils literal notranslate"><span class="pre">/incident</span> <span class="pre">announce</span> <span class="pre">~[channels]</span></code> - Announce the current incident in other channels.</li>
+<li><code class="docutils literal notranslate"><span class="pre">/incident</span> <span class="pre">check</span> <span class="pre">[stage</span> <span class="pre">#]</span> <span class="pre">[task</span> <span class="pre">#]</span></code> - Check/uncheck the specified stage’s task.</li>
+<li><code class="docutils literal notranslate"><span class="pre">/incident</span> <span class="pre">announce</span> <span class="pre">~channel</span></code> - Announce the current incident in other channels.</li>
 <li><code class="docutils literal notranslate"><span class="pre">/incident</span> <span class="pre">list</span></code> - List all your incidents.</li>
 <li><code class="docutils literal notranslate"><span class="pre">/incident</span> <span class="pre">commander</span> <span class="pre">[&#64;username]</span></code> - Show or change the current commander.</li>
 <li><code class="docutils literal notranslate"><span class="pre">/incident</span> <span class="pre">info</span></code> - Show a summary of the current incident.</li>
 <li><code class="docutils literal notranslate"><span class="pre">/incident</span> <span class="pre">stage</span> <span class="pre">[next/prev]</span></code> - Move to the next or previous stage.</li>
 </ul>
-<div class="section" id="adding-slash-commands-to-tasks">
-<h3><a class="toc-backref" href="#id4">Adding slash commands to tasks</a><a class="headerlink" href="#adding-slash-commands-to-tasks" title="Permalink to this headline">¶</a></h3>
-<p>Slash commands can be added to tasks to initiate actions as part of your playbook.</p>
-<p>Here are some examples:</p>
-<ul class="simple">
-<li>Add a communication task called <strong>Sync up</strong> with the slash command <code class="docutils literal notranslate"><span class="pre">/zoom</span> <span class="pre">hello</span></code>. Running that slash command initiates a Zoom call in the incident channel. If you’ve installed Jitsi, you could use <code class="docutils literal notranslate"><span class="pre">/jitsi</span> <span class="pre">hello</span></code>.</li>
-<li>One of your tasks may require the channel header to be changed to reflect a new status. Create a task called <strong>Change header</strong> with the slash command <code class="docutils literal notranslate"><span class="pre">/header</span> <span class="pre">new</span> <span class="pre">header</span></code>.</li>
-</ul>
-</div>
 <div class="section" id="generating-test-data">
-<h3><a class="toc-backref" href="#id5">Generating test data</a><a class="headerlink" href="#generating-test-data" title="Permalink to this headline">¶</a></h3>
-<p>You can use the test commands to create incidents that are populated with random data. These incidents are listed in the incident insight page.</p>
+<h3>Generating test data<a class="headerlink" href="#generating-test-data" title="Permalink to this headline">¶</a></h3>
+<p>To quickly test Mattermost Incident Management, use the following test commands to create incidents populated with random data:</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">/incident</span> <span class="pre">test</span> <span class="pre">create-incident</span></code>: This command accepts a playbook ID (that can be chosen from the playbooks the user is a member of, using the autocomplete system), a timestamp, and an incident name. It creates an ongoing incident with the creation date set to the specified timestamp. An example command looks like this: <code class="docutils literal notranslate"><span class="pre">/incident</span> <span class="pre">test</span> <span class="pre">create-incident</span> <span class="pre">6utgh6qg7p8ndeef9edc583cpc</span> <span class="pre">2020-11-23</span> <span class="pre">PR-Testing</span></code>.</li>
-<li><code class="docutils literal notranslate"><span class="pre">/incident</span> <span class="pre">test</span> <span class="pre">bulk-data</span></code>: This command accepts a number of ongoing incidents, a number of ended incidents, a beginning and an end date, and an optional seed. It creates as many ongoing and ended incidents as specified, all of them with their creation date randomly picked between the beginning and end dates. The seed, if available, is used to get reproducible results. The names of the incidents are randomly chosen from a list of incident names and a list of fake company names which are defined in the code. An example command is: <code class="docutils literal notranslate"><span class="pre">/incident</span> <span class="pre">test</span> <span class="pre">bulk-data</span> <span class="pre">10</span> <span class="pre">3</span> <span class="pre">2020-01-31</span> <span class="pre">2020-11-22</span> <span class="pre">2</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">/incident</span> <span class="pre">test</span> <span class="pre">create-incident</span> <span class="pre">[playbook</span> <span class="pre">ID]</span> <span class="pre">[timestamp]</span> <span class="pre">[incident</span> <span class="pre">name]</span></code> - Provide the ID of an existing playbook to which the current user has access, a timestamp, and an incident name. The command creates an ongoing incident with the creation date set to the specified timestamp.<ul>
+<li>An example command looks like: <code class="docutils literal notranslate"><span class="pre">/incident</span> <span class="pre">test</span> <span class="pre">create-incident</span> <span class="pre">6utgh6qg7p8ndeef9edc583cpc</span> <span class="pre">2020-11-23</span> <span class="pre">PR-Testing</span></code></li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">/incident</span> <span class="pre">test</span> <span class="pre">bulk-data</span> <span class="pre">[ongoing]</span> <span class="pre">[ended]</span> <span class="pre">[start</span> <span class="pre">date]</span> <span class="pre">[end</span> <span class="pre">date]</span> <span class="pre">[seed]</span></code> - Provide a number of ongoing and ended incidents, a start and end date, and an optional random seed. The command creates the given number of ongoing and ended incidents, with creation dates randomly between the start and end dates. The seed may be used to reproduce the same outcome on multiple invocations. Incident names are generated randomly.<ul>
+<li>An example command looks like: <code class="docutils literal notranslate"><span class="pre">/incident</span> <span class="pre">test</span> <span class="pre">bulk-data</span> <span class="pre">10</span> <span class="pre">3</span> <span class="pre">2020-01-31</span> <span class="pre">2020-11-22</span> <span class="pre">2</span></code></li>
+</ul>
+</li>
 </ul>
 </div>
-</div>
-<div class="section" id="playbooks-and-incidents">
-<h2><a class="toc-backref" href="#id6">Playbooks and Incidents</a><a class="headerlink" href="#playbooks-and-incidents" title="Permalink to this headline">¶</a></h2>
-<p>Incidents and playbooks are associated with teams in Mattermost. Incident channels are created based on playbooks, which define whether an incident channel is public or private. Read more about <a class="reference external" href="https://docs.mattermost.com/help/getting-started/organizing-conversations.html">public and private channels</a>.</p>
-<p>Only members of the team in which the playbook or incident is defined have access. Playbook membership is independent of incident membership.</p>
-<ul class="simple">
-<li>Members of a playbook may start an incident using that playbook, and edit the playbook’s stages and steps.</li>
-<li>Members of an incident may modify the current state of the incident, and invite new members to the incident channel.</li>
-</ul>
-<p>During an active incident, you want to focus on triaging and solving the problem as soon as possible. Planning your incident support strategy ahead of time with playbooks is the best way to ensure incidents run smoothly. A playbook is a recipe for dealing with and resolving an incident. In a playbook, you can plan ahead so that during an incident responders know exactly what to do. Make sure to schedule a retrospective analysis to iterate on the design of your playbooks after the incident finishes.</p>
-<p>Within each playbook, you can create stages and tasks to ensure that items are addressed and completed in sequential order. The tasks can optionally be associated with slash commands and assigned to individual team members.</p>
-<p>Once complete, incident channels can be exported using the channel export option for analysis. Teams can identify bottlenecks in the incident by seeing time gaps between when checklist items are completed and incorporating necessary changes into the playbook for next incident.</p>
-<div class="section" id="creating-a-playbook">
-<h3><a class="toc-backref" href="#id7">Creating a playbook</a><a class="headerlink" href="#creating-a-playbook" title="Permalink to this headline">¶</a></h3>
-<p>A playbook must be defined before starting an incident.</p>
-<ol class="arabic simple">
-<li>Navigate to <strong>Main Menu &gt; Playbooks &amp; Incidents</strong>.</li>
-</ol>
-<p>2. Select a template, or <strong>+ Create a Playbook</strong> to start a new playbook from scratch.
-4. Name your playbook.
-5. Edit the <strong>Default Stage</strong>, defining one or more steps to be taken by members of the incident.</p>
-<blockquote>
-<div><ul class="simple">
-<li>Optionally use descriptions on steps to add additional context for members of the incident. Descriptions support a limited form of markdown, including text styling and hyperlinks.</li>
-<li>Optionally define a slash command with the step, simplifying the completion of steps in the incident.</li>
-</ul>
-</div></blockquote>
-<ol class="arabic simple" start="6">
-<li>Configure whether the incident channel should be public or private within the team.</li>
-<li>Share this playbook with other members of the team to allow them to use the playbook to start an incident, as well as edit the contents.</li>
-</ol>
-</div>
-<div class="section" id="editing-a-playbook">
-<h3><a class="toc-backref" href="#id8">Editing a playbook</a><a class="headerlink" href="#editing-a-playbook" title="Permalink to this headline">¶</a></h3>
-<p>You can edit a playbook at any time. However, the changes will only be applied to future incidents - not the active incidents, or incidents that previously used that playbook.</p>
-<p>Navigate to <strong>Main Menu &gt; Playbooks &amp; Incidents</strong> and select the playbook you’d like to edit. You can:</p>
-<ul class="simple">
-<li>Change the channel type created with this playbook.</li>
-<li>Share the playbook.</li>
-<li>Delete a stage and its associated tasks.</li>
-<li>Add new tasks to an existing stage.</li>
-<li>Edit tasks in an existing stage.</li>
-<li>Edit the slash commands in existing tasks.</li>
-<li>Add new stages and tasks.</li>
-</ul>
-</div>
-<div class="section" id="deleting-a-playbook">
-<h3><a class="toc-backref" href="#id9">Deleting a playbook</a><a class="headerlink" href="#deleting-a-playbook" title="Permalink to this headline">¶</a></h3>
-<ol class="arabic simple">
-<li>Navigate to <strong>Main Menu &gt; Playbooks &amp; Incidents</strong>.</li>
-<li>Select the <strong>Action</strong> menu next to the playbook name.</li>
-<li>Select <strong>Delete</strong>.</li>
-<li>Confirm that you want to <strong>Delete Playbook</strong>.</li>
-</ol>
-</div>
-<div class="section" id="starting-an-incident">
-<h3><a class="toc-backref" href="#id10">Starting an incident</a><a class="headerlink" href="#starting-an-incident" title="Permalink to this headline">¶</a></h3>
-<p>To start an incident, use one of the following steps:</p>
-<ul class="simple">
-<li>Use the slash command <em>/incident start</em> from any channel.</li>
-<li>Select the shield icon in the channel header, and select <strong>+ Start Incident</strong>.</li>
-<li>Use the context menu of a post and select <strong>Start incident</strong>.</li>
-</ul>
-<p>You need to select a playbook and name your incident before you can select <strong>Start Incident</strong>. The incident description is optional. Only playbooks that you’re a member of are listed in the <strong>Playbook</strong> drop-down menu.</p>
-<p>The creator of an incident is automatically added as the first member and becomes the commander. To change commanders, click the current commander’s name in the RHS and select the new commander. Only members of the channel may be selected as commanders. To change commander to a user who is not in the channel, first add the user to the channel.</p>
-<div class="section" id="joining-an-incident">
-<h4>Joining an incident<a class="headerlink" href="#joining-an-incident" title="Permalink to this headline">¶</a></h4>
-<p>When an incident has been started, it’s added to the list of channels in the Mattermost team.</p>
-<p>If an incident channel is private new participants can only be added to an incident channel by a channel member. If the incident is public, no invitation is needed - search for, and join, the channel via <strong>Browse Channels</strong> in Mattermost.</p>
-</div>
-</div>
-<div class="section" id="ending-an-incident">
-<h3><a class="toc-backref" href="#id11">Ending an incident</a><a class="headerlink" href="#ending-an-incident" title="Permalink to this headline">¶</a></h3>
-<p>Incident members can end an incident using the slash command <code class="docutils literal notranslate"><span class="pre">/incident</span> <span class="pre">end</span></code> from within the incident channel. Ending an incident signals to all participants that the issue has been resolved.</p>
-</div>
-<div class="section" id="restarting-an-incident">
-<h3><a class="toc-backref" href="#id12">Restarting an incident</a><a class="headerlink" href="#restarting-an-incident" title="Permalink to this headline">¶</a></h3>
-<p>An ended incident can be restarted at any time using <code class="docutils literal notranslate"><span class="pre">/incident</span> <span class="pre">restart</span></code> from within the incident channel or via <strong>Restart Incident</strong> in the RHS. Some playbooks may define stages and tasks to complete after an incident has been resolved, such as scheduling and completing a post-mortem.</p>
-</div>
-</div>
-<div class="section" id="incident-status-and-information">
-<h2><a class="toc-backref" href="#id13">Incident status and information</a><a class="headerlink" href="#incident-status-and-information" title="Permalink to this headline">¶</a></h2>
-<p>To view the status of your active incident(s) select <strong>Main Menu &gt; Playbooks &amp; Incidents</strong>. Select the <strong>Incident</strong> tab to view a list of incidents in your team. Select the incident name to view a summary of the incident, jump to the channel, or export the channel.</p>
-<p>To view information about ongoing incidents, select the <strong>Incidents</strong> icon in the header of any channel to open the RHS where all ongoing incidents are listed. Select <strong>Go to Incident Channel</strong> to open the relevant channel and see:</p>
-<ul class="simple">
-<li>The incident commander</li>
-<li>The current stage</li>
-<li>The remaining tasks</li>
-<li>The finished tasks</li>
-</ul>
-<p>You can also:</p>
-<ul class="simple">
-<li>Assign a step to yourself or another incident member.</li>
-<li>Mark a step as <strong>Complete</strong> or <strong>Incomplete</strong>.</li>
-<li>Start an automated action.</li>
-<li>Invite new members to the channel.</li>
-</ul>
 </div>
 <div class="section" id="channel-export">
-<h2><a class="toc-backref" href="#id14">Channel Export</a><a class="headerlink" href="#channel-export" title="Permalink to this headline">¶</a></h2>
-<p>Please see the <a class="reference external" href="https://mattermost.gitbook.io/channel-export-plugin">Channel Export plugin documentation</a> for more information.</p>
+<h2><a class="toc-backref" href="#id7">Channel Export</a><a class="headerlink" href="#channel-export" title="Permalink to this headline">¶</a></h2>
+<p>Exporting the contents of an incident channel requires the channel export plugin. See the <a class="reference external" href="https://mattermost.gitbook.io/channel-export-plugin">Channel Export plugin documentation</a> for more information.</p>
 </div>
-<div class="section" id="glossary">
-<h2><a class="toc-backref" href="#id15">Glossary</a><a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><strong>Commander:</strong> The Mattermost user currently responsible for transitioning an incident from ongoing to ended.</li>
-<li><strong>Incident:</strong> An event requiring the coordinated actions of one or more Mattermost users. An incident is either ongoing or ended.</li>
-<li><strong>Incident channel:</strong> A Mattermost channel dedicated to real-time conversation about the incident.</li>
-<li><strong>Incident insight page:</strong> The incident details and analytics page, which also provides the channel export download link. It is not available on mobile.</li>
-<li><strong>Incident member:</strong> A Mattermost user with access to the corresponding incident channel.</li>
-<li><strong>Playbook:</strong> A task-based process that’s followed in order to resolve an incident.</li>
-<li><strong>Playbook configuration page:</strong> The playbook configuration and editing page. It is not available on mobile.</li>
-<li><strong>Stage:</strong> A set of tasks grouped together to achieve a specific goal of the workflow, which generally need to be completed before proceeding to the next stage of the incident resolution process.</li>
-<li><strong>Tasks:</strong> The individual steps required to complete the stages of an incident. Tasks can optionally be assigned to specific incident participants into stages.</li>
-<li><strong>The RHS:</strong> The incident list and incident details displayed on the right hand side (RHS) of the web app. It is not available on mobile.</li>
-</ul>
+<div class="section" id="api-documentation">
+<h2><a class="toc-backref" href="#id8">API Documentation</a><a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
+<p>To interact with the incidents data model programmatically, consult the <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-incident-management/blob/master/server/api/api.yaml">REST API specification</a>.</p>
 </div>
 </div>
 
