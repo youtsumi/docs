@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Administrator’s Guide &mdash; Mattermost 5.28 documentation</title>
+  <title>Self-Managed Administrator’s Guide &mdash; Mattermost 5.30 documentation</title>
   
 
   
@@ -31,79 +31,15 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Light Install Guide" href="../help/getting-started/light-install.html" />
-    <link rel="prev" title="Integrations" href="../help/settings/integration-settings.html" />
-	<!-- Bizible Script -->
-	<script src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
-
-	
-		<!-- Google Analytics -->
-		<script>
-			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-			ga('create', 'UA-67846571-2', 'auto');
-			ga('send', 'pageview');
-		</script>
-		<!-- End Google Analytics -->
-	
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-67846571-1"></script>
-	<script>
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-
-	gtag('config', 'UA-67846571-1');
-	</script>
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<!-- Second Google Analytics tag to assist mapping with mattermost.com visits --> 
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120238482-1"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-
-	  gtag('config', 'UA-120238482-1');
-	</script>
-
-	<!-- LeadLander -->
-	<script type="text/javascript" language="javascript">
-		var sf14gv = 31865;
-		(function() {
-			var sf14g = document.createElement('script');
-			sf14g.src = 'https://tracking.leadlander.com/lt.min.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sf14g, s);
-		})();
-	</script>
-
-	<!-- Munchkin code -->
-	<script type="text/javascript">
-		(function() {
-			var didInit = false;
-			function initMunchkin() {
-			if(didInit === false) {
-				didInit = true;
-				Munchkin.init('161-FBE-733');
-			}
-			}
-			var s = document.createElement('script');
-			s.type = 'text/javascript';
-			s.async = true;
-			s.src = '//munchkin.marketo.net/munchkin.js';
-			s.onreadystatechange = function() {
-			if (this.readyState == 'complete' || this.readyState == 'loaded') {
-				initMunchkin();
-			}
-			};
-			s.onload = initMunchkin;
-			document.getElementsByTagName('head')[0].appendChild(s);
-		})();
-	</script>
+    <link rel="next" title="Architecture Overview" href="../overview/architecture.html" />
+    <link rel="prev" title="Mattermost Incident Management" href="../administration/devops-command-center.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
 
 
   
@@ -133,7 +69,7 @@
             
             
               <div class="version">
-                5.28
+                5.30
               </div>
             
           
@@ -159,8 +95,10 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="user.html">User's Guide</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Administrator's Guide</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Self-Managed Administrator's Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../help/getting-started/light-install.html">Light Install Guide</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../getting-started/enterprise-roll-out-checklist.html">Enterprise Roll Out Checklist</a></li>
@@ -214,6 +152,10 @@
 <li class="toctree-l3"><a class="reference internal" href="../install/outbound-proxy.html">Using an Outbound Proxy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../install/i18n.html">Chinese, Japanese and Korean Search</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../install/config-apache2.html">Configuring Apache2 (Unofficial)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#incident-management">Incident Management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../administration/devops-command-center.html">Mattermost Incident Management</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#mobile-apps">Mobile Apps</a><ul>
@@ -290,7 +232,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#mattermost-integrations">Mattermost Integrations</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../developer/toolkit.html">Mattermost Developer Toolkit</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../administration/devops-command-center.html">DevOps Command Center</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/atlassian-integrations.html">Atlassian Tools</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/microsoft-integrations.html">Microsoft Tools</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/ci-cd-tools.html">CI/CD Tools</a></li>
@@ -323,13 +264,14 @@
 <li class="toctree-l3"><a class="reference internal" href="../install/prod-docker.html">Deploy Mattermost on Docker</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../install/deploy-cloudron.html">Deploy Mattermost on Cloudron (Unofficial)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../administration/upgrade-script.html">Upgrading Mattermost Server with a Script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/light-install-hindi.html">लाइट इनस्टॉल गाइड</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="user.html">User's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="integration.html">Integration Guide</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="education.html">Training and Education</a></li>
 </ul>
 
             
@@ -363,7 +305,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
     
-    <li>Administrator’s Guide</li>
+    <li>Self-Managed Administrator’s Guide</li>
     <li class="wy-breadcrumbs-aside">
       
         
@@ -377,9 +319,30 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="administrator-s-guide">
-<h1>Administrator’s Guide<a class="headerlink" href="#administrator-s-guide" title="Permalink to this headline">¶</a></h1>
-<p>In-depth documentation on installation, deployment and administration of Mattermost system.</p>
+  <div class="section" id="self-managed-administrator-s-guide">
+<h1>Self-Managed Administrator’s Guide<a class="headerlink" href="#self-managed-administrator-s-guide" title="Permalink to this headline">¶</a></h1>
+<p>In-depth documentation on installation, deployment, and administration of Mattermost.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html#basics">Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html#high-availability-and-scalability">High Availability and Scalability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html#reference-architectures">Reference Architectures</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html#requirements-and-installation-guides">Requirements and Installation Guides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html#user-experience">User Experience</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html#communication-protocols">Communication Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html#network-access-and-multi-factor-authentication">Network Access and Multi-Factor Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html#data-center-infrastructure">Data Center Infrastructure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html#mattermost-server">Mattermost Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html#data-stores">Data Stores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html#deployment-options">Deployment Options</a></li>
+</ul>
+</li>
+</ul>
+</div>
 <div class="section" id="getting-started">
 <h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
 <p>Use the following materials as a template to help you plan and document the implementation of Mattermost at your organization.</p>
@@ -400,6 +363,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../deployment/on-boarding.html#getting-started-tasks">Getting Started Tasks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../deployment/on-boarding.html#important-administration-notes">Important Administration Notes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../deployment/on-boarding.html#common-tasks">Common Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/on-boarding.html#user-experience-optimizations">User Experience Optimizations</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started/implementation_plan.html">Implementation Plan</a><ul>
@@ -586,6 +550,14 @@
 </ul>
 </div>
 </div>
+<div class="section" id="incident-management">
+<h2>Incident Management<a class="headerlink" href="#incident-management" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../administration/devops-command-center.html">Mattermost Incident Management</a></li>
+</ul>
+</div>
+</div>
 <div class="section" id="mobile-apps">
 <h2>Mobile Apps<a class="headerlink" href="#mobile-apps" title="Permalink to this headline">¶</a></h2>
 <p>Learn how to configure and administer Mattermost apps.</p>
@@ -680,6 +652,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../deployment/admin-roles.html">Additional System Admin Roles (E20)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../deployment/admin-roles.html#assigning-admin-roles">Assigning Admin Roles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../deployment/admin-roles.html#editing-privileges-of-admin-roles-advanced">Editing Privileges of Admin Roles (Advanced)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/admin-roles.html#admin-roles-and-privileges">Admin Roles and Privileges</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../deployment/admin-roles.html#frequently-asked-questions">Frequently Asked Questions</a></li>
 </ul>
 </li>
@@ -839,6 +812,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../administration/mmctl-cli-tool.html#mmctl-token">mmctl token</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../administration/mmctl-cli-tool.html#mmctl-user">mmctl user</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../administration/mmctl-cli-tool.html#mmctl-version">mmctl version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mmctl-cli-tool.html#mmctl-webhook">mmctl webhook</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../administration/mmctl-cli-tool.html#mmctl-websocket">mmctl websocket</a></li>
 </ul>
 </li>
@@ -855,9 +829,9 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../administration/notices.html">In-Product Notices</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../administration/notices.html#administrator-notices">Administrator Notices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/notices.html#end-user-notices">End User Notices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/notices.html#faq">FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/notices.html#administrator-notices">Administrator notices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/notices.html#end-user-notices">End user notices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/notices.html#admin-advisor-notices">Admin Advisor notices</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../administration/health-check.html">Health Check</a><ul>
@@ -906,6 +880,8 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../administration/important-upgrade-notes.html">Important Upgrade Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../administration/changelog.html">Mattermost Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../administration/changelog.html#release-v5-30-feature-release">Release v5.30 - Feature Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/changelog.html#release-v5-29-quality-release">Release v5.29 - Quality Release</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../administration/changelog.html#release-v5-28-feature-release">Release v5.28 - Feature Release</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../administration/changelog.html#release-v5-27-quality-release">Release v5.27 - Quality Release</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../administration/changelog.html#release-v5-26-feature-release">Release v5.26 - Feature Release</a></li>
@@ -997,59 +973,62 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../administration/mobile-changelog.html">Mattermost Mobile Apps Changelog</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#release">1.36.0 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id1">1.35.1 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id4">1.35.0 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id10">1.34.1 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id13">1.34.0 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id21">1.33.1 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id24">1.33.0 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id32">1.32.2 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id35">1.32.1 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id38">1.32.0 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id47">1.31.2 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id50">1.31.1 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id53">1.31.0 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id60">1.30.1 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id66">1.30.0 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id73">1.29.0 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id78">1.28.0 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id84">1.27.1 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id87">1.27.0 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id91">1.26.2 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id94">1.26.1 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id97">1.26.0 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id102">1.25.1 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id105">1.25.0 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id109">1.24.0 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id115">1.23.1 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id118">1.23.0 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id122">1.22.1 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id125">1.22.0 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id131">1.21.2 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id134">1.21.1 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id137">1.21.0 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id141">1.20.2 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id144">1.20.1 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id147">1.20.0 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id153">1.19.0 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id157">1.18.1 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id160">1.18.0 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id166">1.17.0 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id170">1.16.1 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id173">1.16.0 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id177">1.15.2 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id180">1.15.1 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id183">1.15.0 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id188">1.14.0 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id190">1.13.1 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#release">1.38.1 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id1">1.38.0 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id4">1.37.0 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id10">1.36.0 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id16">1.35.1 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id19">1.35.0 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id27">1.34.1 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id30">1.34.0 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id38">1.33.1 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id41">1.33.0 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id49">1.32.2 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id52">1.32.1 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id55">1.32.0 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id64">1.31.2 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id67">1.31.1 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id70">1.31.0 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id77">1.30.1 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id83">1.30.0 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id90">1.29.0 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id95">1.28.0 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id101">1.27.1 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id104">1.27.0 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id108">1.26.2 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id111">1.26.1 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id114">1.26.0 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id119">1.25.1 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id122">1.25.0 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id126">1.24.0 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id132">1.23.1 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id135">1.23.0 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id139">1.22.1 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id142">1.22.0 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id148">1.21.2 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id151">1.21.1 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id154">1.21.0 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id158">1.20.2 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id161">1.20.1 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id164">1.20.0 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id170">1.19.0 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id174">1.18.1 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id177">1.18.0 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id183">1.17.0 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id187">1.16.1 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id190">1.16.0 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id194">1.15.2 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id197">1.15.1 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id200">1.15.0 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id205">1.14.0 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id207">1.13.1 Release</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#v1-13-0-release">v1.13.0 Release</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#v1-12-0-release">v1.12.0 Release</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#v1-11-0-release">v1.11.0 Release</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#v1-10-0-release">v1.10.0 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id205">1.9.3 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id207">1.9.2 Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id209">1.9.1 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id222">1.9.3 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id224">1.9.2 Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#id226">1.9.1 Release</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#v1-9-0-release">v1.9.0 Release</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#v1-8-0-release">v1.8.0 Release</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../administration/mobile-changelog.html#v1-7-1-release">v1.7.1 Release</a></li>
@@ -1125,7 +1104,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../developer/toolkit.html#example-uses">Example Uses</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../administration/devops-command-center.html">DevOps Command Center</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment/atlassian-integrations.html">Atlassian Tools</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../deployment/atlassian-integrations.html#jira-plugin">Jira Plugin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../deployment/atlassian-integrations.html#jira-atlassian-app">Jira Atlassian App</a></li>
@@ -1170,6 +1148,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment/video-and-audio-calling.html">Voice, video, and screensharing</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../deployment/video-and-audio-calling.html#zoom">Zoom</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/video-and-audio-calling.html#microsoft-teams-meetings">Microsoft Teams Meetings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../deployment/video-and-audio-calling.html#cisco-webex-cloud">Cisco Webex Cloud</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../deployment/video-and-audio-calling.html#bigbluebutton">BigBlueButton</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../deployment/video-and-audio-calling.html#skype-for-business-beta">Skype for Business (Beta)</a></li>
@@ -1302,6 +1281,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../install/prod-docker.html">Deploy Mattermost on Docker</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../install/deploy-cloudron.html">Deploy Mattermost on Cloudron (Unofficial)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../administration/upgrade-script.html">Upgrading Mattermost Server with a Script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../administration/light-install-hindi.html">लाइट इनस्टॉल गाइड</a></li>
 </ul>
 </div>
 </div>
@@ -1315,10 +1295,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../help/getting-started/light-install.html" class="btn btn-neutral float-right" title="Light Install Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../overview/architecture.html" class="btn btn-neutral float-right" title="Architecture Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../help/settings/integration-settings.html" class="btn btn-neutral" title="Integrations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../administration/devops-command-center.html" class="btn btn-neutral" title="Mattermost Incident Management" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -1394,7 +1374,7 @@
 		<div class="search__icon">
 			<i class="fa fa-search"></i>
 		</div>
-		<a href="http://docs.mattermost.com/" class="header__logo">
+		<a href="https://docs.mattermost.com/" class="header__logo">
 			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
 		</a>
 		<div class="links__icon">

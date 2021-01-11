@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Incoming Webhooks &mdash; Mattermost 5.28 documentation</title>
+  <title>Incoming Webhooks &mdash; Mattermost 5.30 documentation</title>
   
 
   
@@ -33,77 +33,13 @@
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Outgoing Webhooks" href="webhooks-outgoing.html" />
     <link rel="prev" title="API" href="api.html" />
-	<!-- Bizible Script -->
-	<script src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
-
-	
-		<!-- Google Analytics -->
-		<script>
-			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-			ga('create', 'UA-67846571-2', 'auto');
-			ga('send', 'pageview');
-		</script>
-		<!-- End Google Analytics -->
-	
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-67846571-1"></script>
-	<script>
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-
-	gtag('config', 'UA-67846571-1');
-	</script>
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<!-- Second Google Analytics tag to assist mapping with mattermost.com visits --> 
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120238482-1"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-
-	  gtag('config', 'UA-120238482-1');
-	</script>
-
-	<!-- LeadLander -->
-	<script type="text/javascript" language="javascript">
-		var sf14gv = 31865;
-		(function() {
-			var sf14g = document.createElement('script');
-			sf14g.src = 'https://tracking.leadlander.com/lt.min.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sf14g, s);
-		})();
-	</script>
-
-	<!-- Munchkin code -->
-	<script type="text/javascript">
-		(function() {
-			var didInit = false;
-			function initMunchkin() {
-			if(didInit === false) {
-				didInit = true;
-				Munchkin.init('161-FBE-733');
-			}
-			}
-			var s = document.createElement('script');
-			s.type = 'text/javascript';
-			s.async = true;
-			s.src = '//munchkin.marketo.net/munchkin.js';
-			s.onreadystatechange = function() {
-			if (this.readyState == 'complete' || this.readyState == 'loaded') {
-				initMunchkin();
-			}
-			};
-			s.onload = initMunchkin;
-			document.getElementsByTagName('head')[0].appendChild(s);
-		})();
-	</script>
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
 
 
   
@@ -133,7 +69,7 @@
             
             
               <div class="version">
-                5.28
+                5.30
               </div>
             
           
@@ -159,8 +95,9 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/administrator.html">Administrator's Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../guides/integration.html">Integration Guide</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../integrations/jira.html">Jira Plugin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../integrations/zoom.html">Zoom Plugin</a></li>
@@ -198,7 +135,6 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/education.html">Training and Education</a></li>
 </ul>
 
             
@@ -256,7 +192,7 @@
 </div>
 <p>Mattermost supports webhooks to easily integrate external applications into the server.</p>
 <p>Use incoming webhooks to post messages to Mattermost public channels, private channels and direct messages. Messages are sent via an HTTP POST request to a Mattermost URL generated for each application and contain a specifically formatted JSON payload in the request body.</p>
-<a class="reference internal image-reference" href="../_images/incoming_webhooks_sample.png"><img alt="../_images/incoming_webhooks_sample.png" src="../_images/incoming_webhooks_sample.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="../_images/incoming_webhooks_sample2.png"><img alt="../_images/incoming_webhooks_sample2.png" src="../_images/incoming_webhooks_sample2.png" style="width: 500px;" /></a>
 <p><em>An example of a GitHub integration that posts updates to a Developers channel</em></p>
 <p>Use <a class="reference external" href="https://curl.haxx.se/">curl</a>, a simple command line tool for sending HTTP requests in the examples that follow.</p>
 <div class="admonition note">
@@ -268,7 +204,7 @@
 <div class="section" id="simple-incoming-webhook">
 <h2>Simple Incoming Webhook<a class="headerlink" href="#simple-incoming-webhook" title="Permalink to this headline">¶</a></h2>
 <p>Let’s learn how to create a simple incoming webhook that posts the following message to Mattermost.</p>
-<a class="reference internal image-reference" href="../_images/incoming_webhooks_create_simple.png"><img alt="../_images/incoming_webhooks_create_simple.png" src="../_images/incoming_webhooks_create_simple.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="../_images/incoming_webhooks_create_simple2.png"><img alt="../_images/incoming_webhooks_create_simple2.png" src="../_images/incoming_webhooks_create_simple2.png" style="width: 400px;" /></a>
 <ol class="arabic simple">
 <li>First, go to <strong>Main Menu &gt; Integrations &gt; Incoming Webhook</strong>. If you don’t have the <strong>Integrations</strong> option in your Main Menu, incoming webhooks may not be enabled on your Mattermost server or may be disabled for non-admins. Enable them from <strong>System Console &gt; Integrations &gt; Custom Integrations</strong> in prior versions or <strong>System Console &gt; Integrations &gt; Integration Management</strong> in versions after 5.12 or ask your System Administrator to do so.</li>
 <li>Click <strong>Add Incoming Webhook</strong> and add name and description for the webhook. The description can be up to 500 characters.</li>
@@ -288,7 +224,7 @@ curl -i -X POST --data-urlencode &#39;payload={&quot;text&quot;: &quot;Hello, th
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>payload={
   &quot;channel&quot;: &quot;town-square&quot;,
   &quot;username&quot;: &quot;test-automation&quot;,
-  &quot;icon_url&quot;: &quot;https://www.mattermost.org/wp-content/uploads/2016/04/icon.png&quot;,
+  &quot;icon_url&quot;: &quot;https://mattermost.org/wp-content/uploads/2016/04/icon.png&quot;,
   &quot;text&quot;: &quot;#### Test results for July 27th, 2017\n&lt;!channel&gt; please review failed tests.\n
   | Component  | Tests Run   | Tests Failed                                   |
   |:-----------|:-----------:|:-----------------------------------------------|
@@ -300,7 +236,7 @@ curl -i -X POST --data-urlencode &#39;payload={&quot;text&quot;: &quot;Hello, th
 </pre></div>
 </div>
 <p>This content will be displayed in the Town Square channel.</p>
-<a class="reference internal image-reference" href="../_images/incoming_webhooks_full_example.png"><img alt="../_images/incoming_webhooks_full_example.png" src="../_images/incoming_webhooks_full_example.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="../_images/incoming_webhooks_full_example2.png"><img alt="../_images/incoming_webhooks_full_example2.png" src="../_images/incoming_webhooks_full_example2.png" style="width: 500px;" /></a>
 <p>Messages with advanced formatting can be created by including an <a class="reference internal" href="message-attachments.html"><span class="doc">attachment array</span></a> and <a class="reference internal" href="interactive-messages.html"><span class="doc">interactive message buttons</span></a> in the JSON payload.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -327,7 +263,7 @@ curl -i -X POST --data-urlencode &#39;payload={&quot;text&quot;: &quot;Hello, th
 </div>
 <div class="section" id="share-your-integration">
 <h2>Share Your Integration<a class="headerlink" href="#share-your-integration" title="Permalink to this headline">¶</a></h2>
-<p>If you’ve built an integration for Mattermost, please consider <a class="reference external" href="https://www.mattermost.org/share-your-mattermost-projects/">sharing your work</a> in our <a class="reference external" href="https://about.mattermost.com/default-app-directory/">app directory</a>.</p>
+<p>If you’ve built an integration for Mattermost, please consider <a class="reference external" href="https://mattermost.org/share-your-mattermost-projects/">sharing your work</a> in our <a class="reference external" href="https://about.mattermost.com/default-app-directory/">app directory</a>.</p>
 <p>The <a class="reference external" href="https://about.mattermost.com/default-app-directory/">app directory</a> lists open source integrations developed by the Mattermost community and are available for download, customization and deployment to your private cloud or on-prem infrastructure.</p>
 </div>
 <div class="section" id="slack-compatibility">
@@ -339,8 +275,8 @@ curl -i -X POST --data-urlencode &#39;payload={&quot;text&quot;: &quot;Hello, th
 <p>Mattermost automatically translates the data coming from Slack:</p>
 <ol class="arabic simple">
 <li>JSON payloads written for Slack, that contain the following, are translated to Mattermost markdown and rendered equivalently to Slack:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">&lt;&gt;</span></code> to denote a URL link, such as <code class="docutils literal notranslate"><span class="pre">{&quot;text&quot;:</span> <span class="pre">&quot;&lt;http://www.mattermost.com/&gt;&quot;}</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">|</span></code> within a <code class="docutils literal notranslate"><span class="pre">&lt;&gt;</span></code> to define linked text, such as <code class="docutils literal notranslate"><span class="pre">{&quot;text&quot;:</span> <span class="pre">&quot;Click</span> <span class="pre">&lt;http://www.mattermost.com/|here&gt;</span> <span class="pre">for</span> <span class="pre">a</span> <span class="pre">link.&quot;}</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;&gt;</span></code> to denote a URL link, such as <code class="docutils literal notranslate"><span class="pre">{&quot;text&quot;:</span> <span class="pre">&quot;&lt;https://mattermost.com/&gt;&quot;}</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">|</span></code> within a <code class="docutils literal notranslate"><span class="pre">&lt;&gt;</span></code> to define linked text, such as <code class="docutils literal notranslate"><span class="pre">{&quot;text&quot;:</span> <span class="pre">&quot;Click</span> <span class="pre">&lt;https://mattermost.com/|here&gt;</span> <span class="pre">for</span> <span class="pre">a</span> <span class="pre">link.&quot;}</span></code></li>
 <li><code class="docutils literal notranslate"><span class="pre">&lt;userid&gt;</span></code>  to trigger a mention to a user, such as <code class="docutils literal notranslate"><span class="pre">{&quot;text&quot;:</span> <span class="pre">&quot;&lt;5fb5f7iw8tfrfcwssd1xmx3j7y&gt;</span> <span class="pre">this</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">notification.&quot;}</span></code></li>
 <li><code class="docutils literal notranslate"><span class="pre">&lt;!channel&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;!here&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;!all&gt;</span></code> to trigger a mention to a channel, such as <code class="docutils literal notranslate"><span class="pre">{&quot;text&quot;:</span> <span class="pre">&quot;&lt;!channel&gt;</span> <span class="pre">this</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">notification.&quot;}</span></code></li>
 </ul>
@@ -493,7 +429,7 @@ curl -i -X POST --data-urlencode &#39;payload={&quot;text&quot;: &quot;Hello, th
 		<div class="search__icon">
 			<i class="fa fa-search"></i>
 		</div>
-		<a href="http://docs.mattermost.com/" class="header__logo">
+		<a href="https://docs.mattermost.com/" class="header__logo">
 			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
 		</a>
 		<div class="links__icon">
