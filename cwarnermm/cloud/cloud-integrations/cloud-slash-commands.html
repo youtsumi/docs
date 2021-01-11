@@ -183,7 +183,7 @@
 <p class="first admonition-title">Note</p>
 <p class="last">This is the admin documentation for slash commands. If you’re a developer looking to build an integration, see <a class="reference external" href="https://developers.mattermost.com/integrate">our developer documentation</a>.</p>
 </div>
-<p>Mattermost supports slash commands to easily integrate external applications into the server. They function similarly to <a class="reference external" href="https://docs.mattermost.com/cloud/cloud-integrations/cloud-outgoing-webhooks.html">outgoing webhooks</a>, except they can be used in any channel - including Private channels and direct messages.</p>
+<p>Mattermost supports slash commands to easily integrate external applications into the workspace. They function similarly to <a class="reference external" href="https://docs.mattermost.com/cloud/cloud-integrations/cloud-outgoing-webhooks.html">outgoing webhooks</a>, except they can be used in any channel - including Private channels and direct messages.</p>
 <p>Messages that begin with <code class="docutils literal notranslate"><span class="pre">/</span></code> are interpreted as slash commands. The commands will send an HTTP POST request to a web service, and process a response back to Mattermost. Mattermost supports both <a class="reference external" href="https://docs.mattermost.com/cloud/cloud-integrations/cloud-slash-commands.html#built-in-commands">built-in</a> and <a class="reference external" href="https://docs.mattermost.com/cloud/cloud-integrations/cloud-slash-commands.html">custom slash commands</a>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -324,7 +324,7 @@
 <p>You can follow these general guidelines to set up a custom Mattermost slash command for your application.</p>
 <ol class="arabic simple">
 <li>Open <strong>Main Menu &gt; Integrations &gt; Slash Commands</strong>. If you don’t have the <strong>Integrations</strong> option in your Main Menu, slash commands may not be enabled or may be disabled for non-admins. Enable them from <strong>System Console &gt; Integrations &gt; Integration Management</strong> or ask your Mattermost System Admin to do so.</li>
-<li>Click <strong>Add Slash Command</strong> and add name and description for the command.</li>
+<li>Select <strong>Add Slash Command</strong> and add name and description for the command.</li>
 <li>Set the <strong>Command Trigger Word</strong>. The trigger word must be unique and cannot begin with a slash or contain any spaces. It also cannot be one of the <a class="reference external" href="https://docs.mattermost.com/cloud/cloud-integrations/cloud-slash-commands.html#built-in-commands">built-in commands</a>.</li>
 <li>Set the <strong>Request URL</strong> and <strong>Request Method</strong>. The request URL is the endpoint that Mattermost hits to reach your application, and the request method is either POST or GET and specifies the type of request sent to the request URL.</li>
 <li>(Optional) Set the response username and icon the command will post messages as in Mattermost. If not set, the command will use your username and profile picture.</li>
@@ -406,7 +406,7 @@ user_mentions_ids=[&quot;q5s3b7xzgprp5eid8h66j9epsy&quot;, &quot;czwmumrmw7dfxec
 <li>Slash commands are designed to easily allow you to post messages. For other actions such as channel creation, you must also use the <a class="reference external" href="https://api.mattermost.com">Mattermost APIs</a>.</li>
 <li>You can restrict who can create slash commands in <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#restrict-managing-integrations-to-admins">System Console &gt; Integrations &gt; Integration Management</a>.</li>
 <li>Mattermost outgoing webhooks are Slack-compatible. You can copy-and-paste code used for a Slack outgoing webhook to create Mattermost integrations. Mattermost <a class="reference external" href="https://docs.mattermost.com/cloud/cloud-integrations/cloud-slash-commands.html#translate-slack-s-data-format-to-mattermost">automatically translates Slack’s JSON format</a>.</li>
-<li>The external application may be written in any programming language. It needs to provide a URL which receives the request sent by your Mattermost server and responds with in the required JSON format.</li>
+<li>The external application may be written in any programming language. It needs to provide a URL which receives the request sent by your Mattermost workspace and responds with in the required JSON format.</li>
 </ol>
 </div>
 <div class="section" id="share-your-integration">
