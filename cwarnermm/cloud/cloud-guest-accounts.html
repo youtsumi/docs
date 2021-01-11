@@ -104,7 +104,7 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Guest Accounts (Beta)</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#enabling-guest-accounts">Enabling Guest Accounts</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#guest-authentication">Guest Authentication</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#inviting-guests-to-the-mattermost-server-via-email">Inviting Guests to the Mattermost Server via Email</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#inviting-guests-to-the-mattermost-workspace-via-email">Inviting Guests to the Mattermost Workspace via Email</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#configuring-ad-ldap-authentication">Configuring AD/LDAP Authentication</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#configuring-saml-2-0-authentication">Configuring SAML 2.0 Authentication</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#guest-permission-settings">Guest Permission Settings</a></li>
@@ -222,12 +222,12 @@
 </div>
 <div class="section" id="guest-authentication">
 <h2>Guest Authentication<a class="headerlink" href="#guest-authentication" title="Permalink to this headline">¶</a></h2>
-<p>Guests can access the Mattermost server via email invitation, and be authenticated using AD/LDAP or SAML 2.0.</p>
-<p>Before you proceed, ensure that the authentication method you wish to use is correctly configured on your server and enabled in Mattermost. For configuration steps and technical documentation, see <a class="reference external" href="https://docs.mattermost.com/deployment/sso-ldap.html">Active Directory/LDAP Setup</a> and <a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml.html">SAML Single-Sign-On</a>.</p>
+<p>Guests can access the Mattermost workspace via email invitation, and be authenticated using AD/LDAP or SAML 2.0.</p>
+<p>Before you proceed, ensure that the authentication method you wish to use is correctly configured on your workspace and enabled in Mattermost. For configuration steps and technical documentation, see <a class="reference external" href="https://docs.mattermost.com/deployment/sso-ldap.html">Active Directory/LDAP Setup</a> and <a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml.html">SAML Single-Sign-On</a>.</p>
 <p>Converting a member user to a guest will not change the channels they are in. However, they will be restricted from discovering additional channels and are unable to Direct Message/Group Message users outside of the channels they are in. They can be added to channels by System Admins and other roles that have the correct permissions to invite guests.</p>
 </div>
-<div class="section" id="inviting-guests-to-the-mattermost-server-via-email">
-<h2>Inviting Guests to the Mattermost Server via Email<a class="headerlink" href="#inviting-guests-to-the-mattermost-server-via-email" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="inviting-guests-to-the-mattermost-workspace-via-email">
+<h2>Inviting Guests to the Mattermost Workspace via Email<a class="headerlink" href="#inviting-guests-to-the-mattermost-workspace-via-email" title="Permalink to this headline">¶</a></h2>
 <p>Guests can be invited into one or more Mattermost channels within a team by System Admins and other roles that have the correct permission to invite guests. A guest can be invited into channels on multiple teams.</p>
 <p><strong>Note:</strong> Guest invitations are revoked after 48 hours per the member email invitation process. If your guest has not accepted the invitation within that period, please follow the steps below to resend an invitation to the guest.</p>
 <p>To invite guests into one or more Mattermost channels:</p>
@@ -243,25 +243,25 @@
 </div>
 <div class="section" id="configuring-ad-ldap-authentication">
 <h2>Configuring AD/LDAP Authentication<a class="headerlink" href="#configuring-ad-ldap-authentication" title="Permalink to this headline">¶</a></h2>
-<p>When enabled, the <strong>Guest Filter</strong> in Mattermost identifies external users whose AD/LDAP role is <code class="docutils literal notranslate"><span class="pre">guest</span></code> and who are invited to join your Mattermost server. These users will have the <code class="docutils literal notranslate"><span class="pre">guest</span></code> role applied immediately upon first sign-in instead of the default member user role. This eliminates having to manually assign the role in the System Console.</p>
+<p>When enabled, the <strong>Guest Filter</strong> in Mattermost identifies external users whose AD/LDAP role is <code class="docutils literal notranslate"><span class="pre">guest</span></code> and who are invited to join your Mattermost workspace. These users will have the <code class="docutils literal notranslate"><span class="pre">guest</span></code> role applied immediately upon first sign-in instead of the default member user role. This eliminates having to manually assign the role in the System Console.</p>
 <ol class="arabic simple">
 <li>Enable Guest Access via <strong>System Console &gt; Authentication &gt; Guest Access (Beta)</strong>.</li>
 <li>Navigate to <strong>System Console &gt; Authentication &gt; AD/LDAP</strong>.</li>
 <li>Complete the <strong>Guest Filter</strong> field.</li>
-<li>Choose <strong>Save</strong>.</li>
+<li>Select <strong>Save</strong>.</li>
 </ol>
 <p>If a Mattermost guest user has the <code class="docutils literal notranslate"><span class="pre">guest</span></code> role removed in the AD/LDAP system, the synchronization process will not automatically promote them to a member user role. This is done manually via <strong>System Console &gt; User Management</strong>. If a member user has the <strong>Guest Attribute</strong> added, the synchronization processes will automatically demote the member user to the guest role.</p>
 <p>When a guest logs in without having any channels assigned to their account, they’re advised to contact an administrator.</p>
 </div>
 <div class="section" id="configuring-saml-2-0-authentication">
 <h2>Configuring SAML 2.0 Authentication<a class="headerlink" href="#configuring-saml-2-0-authentication" title="Permalink to this headline">¶</a></h2>
-<p>When enabled, the <strong>Guest Attribute</strong> in Mattermost identifies external users whose SAML assertion is guest and who are invited to join your Mattermost server. These users will have the <code class="docutils literal notranslate"><span class="pre">guest</span></code> role applied immediately upon first sign-in instead of the default member user role. This eliminates having to manually assign the role in the System Console.</p>
+<p>When enabled, the <strong>Guest Attribute</strong> in Mattermost identifies external users whose SAML assertion is guest and who are invited to join your Mattermost workspace. These users will have the <code class="docutils literal notranslate"><span class="pre">guest</span></code> role applied immediately upon first sign-in instead of the default member user role. This eliminates having to manually assign the role in the System Console.</p>
 <p>If a Mattermost guest user has the guest role removed in the SAML system, the synchronization processes will not automatically promote them to a member user role. This is done manually via <strong>System Console &gt; User Management</strong>. If a member user has the <strong>Guest Attribute</strong> added, the synchronization processes will automatically demote the member user to the guest role.</p>
 <ol class="arabic simple">
 <li>Enable Guest Access via <strong>System Console &gt; Guest Access (Beta)</strong>.</li>
 <li>Navigate to <strong>System Console &gt; Authentication &gt; SAML 2.0</strong>.</li>
 <li>Complete the <strong>Guest Attribute</strong> field.</li>
-<li>Choose <strong>Save</strong>.</li>
+<li>Select <strong>Save</strong>.</li>
 </ol>
 <p>When a guest logs in without having any channels assigned to their account, they’re advised to contact an administrator.</p>
 </div>
@@ -349,7 +349,7 @@
 </div>
 <div class="section" id="can-i-restrict-guests-ability-to-upload-content">
 <h3>Can I restrict guests’ ability to upload content?<a class="headerlink" href="#can-i-restrict-guests-ability-to-upload-content" title="Permalink to this headline">¶</a></h3>
-<p>It is not currently possible to selectively disable upload/download functionality as it is a server-wide configuration.</p>
+<p>It is not currently possible to selectively disable upload/download functionality as it is a system-wide configuration.</p>
 </div>
 </div>
 </div>
