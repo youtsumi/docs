@@ -179,7 +179,7 @@
 <ul class="simple">
 <li><strong>Single sign-on.</strong> Users can sign-in to Mattermost with their SAML credentials.</li>
 <li><strong>Centralized identity management.</strong> Mattermost accounts automatically pull user attributes from SAML upon login, such as full name, email, and username.</li>
-<li><strong>Automatic account provisioning.</strong> Mattermost user accounts are automatically created the first time a user signs in with their SAML credentials on the Mattermost server.</li>
+<li><strong>Automatic account provisioning.</strong> Mattermost user accounts are automatically created the first time a user signs in with their SAML credentials on the Mattermost workspace.</li>
 <li><strong>Sync groups to predefined roles in Mattermost.</strong> Assign team and channel roles to groups via LDAP Group Sync.</li>
 <li><strong>Compliance alignment with administrator management.</strong> Manage Administrator access to Mattermost in the System Console using SAML attributes.</li>
 </ul>
@@ -197,39 +197,37 @@
 <p>In addition to the officially supported identity providers, you can also configure SAML for a custom IdP. For instance, customers have successfully set up Azure AD, DUO, PingFederate, Keycloak, and SimpleSAMLphp as a custom IdPs. Because we do not test against these identity providers, it is important that you test new versions of Mattermost in a staging environment to confirm it will work with your identity provider. You can also set up MFA on top of your SAML provider for additional security.</p>
 <div class="section" id="using-saml-attributes-to-apply-roles">
 <h2>Using SAML Attributes to Apply Roles<a class="headerlink" href="#using-saml-attributes-to-apply-roles" title="Permalink to this headline">¶</a></h2>
-<p>You can use attributes to assign roles to specified users on login. To access the SAML attribute settings navigate to <strong>System Console &gt; SAML 2.0</strong>.</p>
+<p>You can use attributes to assign roles to specified users on login. To access the SAML attribute settings navigate to <strong>System Console &gt; Authentication &gt; SAML 2.0</strong>.</p>
 <div class="section" id="username-attribute">
 <h3>Username Attribute<a class="headerlink" href="#username-attribute" title="Permalink to this headline">¶</a></h3>
 <p>(Optional) Enter a SAML assertion filter to use when searching for users.</p>
 <ol class="arabic simple">
 <li>Navigate to <strong>System Console &gt; Authentication &gt; SAML 2.0</strong>.</li>
 <li>Complete the <strong>Username Attribute</strong> field.</li>
-<li>Choose <strong>Save</strong>.</li>
+<li>Select <strong>Save</strong>.</li>
 </ol>
 <p>When the user accesses the Mattermost URL, they log in with same username and password that they use for organizational logins.</p>
 </div>
 <div class="section" id="guest-attribute">
 <h3>Guest Attribute<a class="headerlink" href="#guest-attribute" title="Permalink to this headline">¶</a></h3>
-<p>When enabled, the Guest Attribute in Mattermost identifies external users whose SAML assertion is guest and who are invited to join your Mattermost server. These users will have the Guest role applied immediately upon first sign-in instead of the default member user role. This eliminates having to manually assign the role in the System Console.</p>
+<p>When enabled, the Guest Attribute in Mattermost identifies external users whose SAML assertion is guest and who are invited to join your Mattermost workspace. These users will have the Guest role applied immediately upon first sign-in instead of the default member user role. This eliminates having to manually assign the role in the System Console.</p>
 <p>If a Mattermost Guest user has the guest role removed in the SAML system, the synchronization processes will not automatically promote them to a member user role. This is done manually via <strong>System Console &gt; User Management</strong>. If a member user has the Guest Attribute added, the synchronization processes will automatically demote the member user to the guest role.</p>
-<ol class="arabic simple">
-<li>Enable Guest Access via <strong>System Console &gt; SAML 2.0</strong>.</li>
-<li>Navigate to <strong>System Console &gt; Authentication &gt; SAML 2.0</strong>.</li>
-<li>Complete the Guest Attribute field.</li>
-<li>Choose <strong>Save</strong>.</li>
-</ol>
+<p><strong>Enable Guest Access</strong>
+1. Navigate to <strong>System Console &gt; Authentication &gt; SAML 2.0</strong>.
+2. Complete the Guest Attribute field.
+3. Select <strong>Save</strong>.</p>
 <p>When a guest logs in for the first time they are presented with a default landing page until they are added to channels.</p>
 <p>See the <a class="reference external" href="https://docs.mattermost.com/deployment/guest-accounts.html">Guest Accounts documentation</a> for more information about this feature.</p>
 </div>
 <div class="section" id="admin-attribute">
 <h3>Admin Attribute<a class="headerlink" href="#admin-attribute" title="Permalink to this headline">¶</a></h3>
-<p>(Optional) The attribute in the SAML Assertion for designating System Admins. The users selected by the query will have access to your Mattermost server as System Admins. By default, System Admins have complete access to the Mattermost System Console.</p>
+<p>(Optional) The attribute in the SAML Assertion for designating System Admins. The users selected by the query will have access to your Mattermost workspace as System Admins. By default, System Admins have complete access to the Mattermost System Console.</p>
 <p>Existing members that are identified by this attribute will be promoted from member to System Admin upon next login. The next login is based upon Session lengths set in <strong>System Console &gt; Session Lengths</strong>. It is recommended that users are manually demoted to members in <strong>System Console &gt; User Management</strong> to ensure access is restricted immediately.</p>
 <ol class="arabic simple">
 <li>Navigate to <strong>System Console &gt; Authentication &gt; SAML 2.0</strong>.</li>
 <li>Set <strong>Enable Admin Attribute</strong> to <strong>true</strong>.</li>
 <li>Complete the <strong>Admin Attribute</strong> field.</li>
-<li>Choose <strong>Save</strong>.</li>
+<li>Select <strong>Save</strong>.</li>
 </ol>
 <p><strong>Note:</strong> If the Admin Attribute is set to <code class="docutils literal notranslate"><span class="pre">false</span></code> the member’s role as System Admin is retained. However, if the attribute is removed/changed, System Admins that were promoted via the attribute will be demoted to members and will not retain access to the System Console. When this attribute is not in use, System Admins can be manually promoted/demoted in <strong>System Console &gt; User Management</strong>.</p>
 </div>
