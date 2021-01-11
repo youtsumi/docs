@@ -182,11 +182,11 @@
 <p>By default, users can dismiss the banner until they log in again or until you update the banner. You can update the banner by either changing the text of the banner or by re-enabling the banner after it has been disabled. You can also control the text color and the background color. A setting in the System Console allows you to prevent users from dismissing the banner.</p>
 <p><strong>To enable the banner</strong>:</p>
 <ol class="arabic simple">
-<li>Open <strong>System Console &gt; Site Configuration</strong>.</li>
-<li>For <strong>Enable Announcement Banner</strong>, select <strong>true</strong>.</li>
+<li>Open <strong>System Console &gt; Site Configuration &gt; Announcement Banner</strong>.</li>
+<li>Set <strong>Enable Announcement Banner</strong> to <strong>true</strong>.</li>
 <li>In the <strong>Banner Text</strong> field, enter the text of the announcement that you want to make.</li>
-<li>Set the background and text colors.</li>
-<li>To prevent users from dismissing the banner, in the <strong>Allow Banner Dismissal</strong> section, select <strong>false</strong>.</li>
+<li>Set banner background and text colors.</li>
+<li>To prevent users from dismissing the banner, set <strong>Allow Banner Dismissal</strong> section to <strong>false</strong>.</li>
 <li>Select <strong>Save</strong>.</li>
 </ol>
 </div>
@@ -196,22 +196,22 @@
 <img alt="../../_images/notices1.png" src="../../_images/notices1.png" />
 <div class="section" id="administrator-notices">
 <h3>Administrator Notices<a class="headerlink" href="#administrator-notices" title="Permalink to this headline">¶</a></h3>
-<p>Administrator notices are used to inform System Admins when a new server version is available, or if a server upgrade is recommended due to ending support life cycles. System Admins may also receive notices about recommended server configuration options to optimize the user experience of their deployment.</p>
-<p>Administrator notices can be disabled in the <strong>System Console &gt; Notices</strong> page.</p>
+<p>Administrator notices are used to inform System Admins of important updates or recommended configuration options to optimize the user experience of their deployment.</p>
+<p>Administrator notices can be disabled in the <strong>System Console &gt; Site Configuration &gt; Notices</strong> page.</p>
 </div>
 <div class="section" id="end-user-notices">
 <h3>End User Notices<a class="headerlink" href="#end-user-notices" title="Permalink to this headline">¶</a></h3>
-<p>End user notices are used to inform users and Admins of new feature enhancements and when new desktop versions are available. They can be disabled in <strong>System Console &gt; Notices</strong>.</p>
+<p>End user notices are used to inform users and Admins of new feature enhancements and when new desktop versions are available. They can be disabled in <strong>System Console &gt; Site Configuration &gt; Notices</strong>.</p>
 </div>
 <div class="section" id="faqs">
 <h3>FAQs<a class="headerlink" href="#faqs" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="are-notices-enabled-by-default">
 <h4>Are notices enabled by default?<a class="headerlink" href="#are-notices-enabled-by-default" title="Permalink to this headline">¶</a></h4>
-<p>Notices are enabled by default for all Mattermost users. System Admins may choose to disable administrator or end user notices in <strong>System Console &gt; Notices</strong>.</p>
+<p>Notices are enabled by default for all Mattermost users. System Admins may choose to disable administrator or end user notices in <strong>System Console &gt; Site Configuration &gt; Notices</strong>.</p>
 </div>
-<div class="section" id="will-i-still-receive-notices-if-my-server-is-air-gapped">
-<h4>Will I still receive notices if my server is air-gapped?<a class="headerlink" href="#will-i-still-receive-notices-if-my-server-is-air-gapped" title="Permalink to this headline">¶</a></h4>
-<p>No, the Mattermost server requires a connection to the internet to receive notices.</p>
+<div class="section" id="will-i-still-receive-notices-if-my-workstation-is-air-gapped">
+<h4>Will I still receive notices if my workstation is air-gapped?<a class="headerlink" href="#will-i-still-receive-notices-if-my-workstation-is-air-gapped" title="Permalink to this headline">¶</a></h4>
+<p>No, the Mattermost workstation requires a connection to the internet to receive notices.</p>
 </div>
 <div class="section" id="how-often-will-users-receive-notices">
 <h4>How often will users receive notices?<a class="headerlink" href="#how-often-will-users-receive-notices" title="Permalink to this headline">¶</a></h4>
@@ -267,7 +267,7 @@
 <li><strong>Generic description with only sender name</strong> will include only the name of the person who sent the message but no information about channel name or message text.</li>
 <li><strong>Generic description with sender and channel names</strong> will include names of users and channels but no specific details from the message text.</li>
 <li><strong>Full message content sent in the notification payload</strong> sends excerpts from messages triggering notifications with specifics and may include confidential information sent in messages.</li>
-<li><strong>Only Push Notifications</strong> means full message content is fetched from the server on receipt. The notification payload relayed through the Apple Push Notification service or Firebase Cloud Messaging service contains no message content. Instead it contains a unique message ID used to fetch message content from the server when a push notification is received by a device via a notification service app extention on iOS or an expandable notification pattern on Android. If the server cannot be reached, a generic push notification message is displayed without message content or sender name. For customers who choose to wrap the Mattermost mobile application in a secure container, such as BlackBerry Dymanics, MobileIron, AirWatch or other solutions, the container needs to execute the fetching of message contents from the unique message ID when push notification are received. If the container is unable to execute the fetch, the push notification contents cannot be received by the customer’s mobile application without passing the message contents through either the Apple Push Notification service or Firebase Cloud Messaging service.</li>
+<li><strong>Only Push Notifications</strong> means full message content is fetched from Mattermost on receipt. The notification payload relayed through the Apple Push Notification service or Firebase Cloud Messaging service contains no message content. Instead it contains a unique message ID used to fetch message content from Mattermost when a push notification is received by a device via a notification service app extention on iOS or an expandable notification pattern on Android. If Mattermost cannot be reached, a generic push notification message is displayed without message content or sender name. For customers who choose to wrap the Mattermost mobile application in a secure container, such as BlackBerry Dymanics, MobileIron, AirWatch or other solutions, the container needs to execute the fetching of message contents from the unique message ID when push notification are received. If the container is unable to execute the fetch, the push notification contents cannot be received by the customer’s mobile application without passing the message contents through either the Apple Push Notification service or Firebase Cloud Messaging service.</li>
 </ul>
 </div></blockquote>
 </div>
@@ -293,7 +293,7 @@
 <ol class="arabic simple">
 <li><strong>Max Users Per Team:</strong> The Max Users Per Team refers to the size of the <em>team site</em> which is a workspace a <em>team of people</em> inhabits. A team of people is considered a small organization where people work closely together towards a specific shared goal and share the same etiquette. In the physical world, a team of people could typically be seated around a single table to have a meal and discuss their project. The default maximum of 1000 people is at the extreme high end of a single team of people. At this point organizations are more often ‘multiple teams of people’ and investments in explicitly defining etiquette, such as channel organization or turning on policy features in Enterprise Edition, are often used to scale the high levels of productivity found in a team of people using Mattermost to multiple teams of people.</li>
 <li><strong>Max Channels Per Team:</strong> Set the maximum number of channels per team, including both active and deleted channels.</li>
-<li><strong>Enable users to open Direct Message channels with:</strong> You can configure whether users can message any user on the Mattermost workspace or only users in the same team as them. This setting adjusts the users returned in the Direct Messages <strong>More</strong> menu and CTRL/CMD+K channel switcher only lists users on the current team. This setting only affects the UI, not permissions on the server. For instance, a Direct Message channel can be created with anyone on the server regardless of this setting.</li>
+<li><strong>Enable users to open Direct Message channels with:</strong> You can configure whether users can message any user on the Mattermost workspace or only users in the same team as them. This setting adjusts the users returned in the Direct Messages <strong>More</strong> menu and CTRL/CMD+K channel switcher only lists users on the current team. This setting only affects the UI, not permissions on the workspace. For instance, a Direct Message channel can be created with anyone on the workspace regardless of this setting.</li>
 <li><strong>Teammate Name Display:</strong> Specifies how names are displayed in the user interface by default. Please note that users can override this setting in <strong>Account Settings &gt; Display &gt; Teammate Name Display</strong>.</li>
 </ol>
 <blockquote>
