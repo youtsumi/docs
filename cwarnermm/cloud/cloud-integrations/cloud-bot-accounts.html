@@ -188,11 +188,11 @@
 <p>Additional benefits include:</p>
 <blockquote>
 <div><ul class="simple">
-<li>Bot accounts can be enabled to post to any channel in the system by System Admins, including a private team, Pprivate channel, or Direct Messages.</li>
+<li>Bot accounts can be enabled to post to any channel in the system by System Admins, including private teams, Private Channels, or Direct Messages.</li>
 <li>Integrations created by a user and tied to a bot account no longer break if the user leaves the company.</li>
 <li>Once created, bot accounts behave just like regular user accounts and can be added to teams and channels similar to users.</li>
 <li>Bot accounts are a safe way to integrate with Mattermost through the RESTful API and Plugin API because there is no need to manage shared logins with these accounts.</li>
-<li><code class="docutils literal notranslate"><span class="pre">BOT</span></code> tag is used everywhere in the user interface where bot accounts are referenced, including messages and user lists.</li>
+<li>A <code class="docutils literal notranslate"><span class="pre">BOT</span></code> tag is used everywhere in the user interface where bot accounts are referenced, including messages and user lists.</li>
 </ul>
 </div></blockquote>
 <p>Note that currently:</p>
@@ -231,7 +231,7 @@
 <h3>User Interface (UI)<a class="headerlink" href="#user-interface-ui" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
 <li>Go to <strong>Main Menu &gt; Integrations &gt; Bot Accounts</strong>.</li>
-<li>Click <strong>Add Bot Account</strong>.</li>
+<li>Select <strong>Add Bot Account</strong>.</li>
 <li>Set the <strong>Username</strong> of the bot. The username must begin with a letter, and contain between 3 and 22 lowercase characters made up of numbers, letters, and the symbols “.”, “-“, and “_”.</li>
 <li>(Optional) Upload an image for the <strong>Bot Icon</strong>. This will be used as the profile image of the bot throughout the Mattermost user interface.</li>
 <li>(Optional) Set a <strong>Display Name</strong> and <strong>Description</strong>.</li>
@@ -262,8 +262,11 @@
 <div class="section" id="what-happens-if-a-plugin-is-using-a-bot-account-that-already-exists-as-a-user-account">
 <h3>What happens if a plugin is using a bot account that already exists as a user account?<a class="headerlink" href="#what-happens-if-a-plugin-is-using-a-bot-account-that-already-exists-as-a-user-account" title="Permalink to this headline">¶</a></h3>
 <p>For a concrete example, suppose you enable the <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-github">Mattermost GitHub plugin</a>, which uses a <code class="docutils literal notranslate"><span class="pre">github</span></code> bot account, while an existing <code class="docutils literal notranslate"><span class="pre">github</span></code> user account was created for webhook integrations.</p>
-<p>Once the plugin is enabled, the plugin posts as the <code class="docutils literal notranslate"><span class="pre">github</span></code> account but without a <cite>BOT</cite> tag. An error message is logged to the server logs recommending the System Admin to convert the <code class="docutils literal notranslate"><span class="pre">github</span></code> user to a bot account by running <code class="docutils literal notranslate"><span class="pre">mattermost</span> <span class="pre">user</span> <span class="pre">convert</span> <span class="pre">&lt;username&gt;</span> <span class="pre">--bot</span></code> in the CLI.</p>
-<p>If the user is an existing user account you want to preserve, change its username and restart the Mattermost server, after which the plugin will create a bot account with the name <code class="docutils literal notranslate"><span class="pre">github</span></code>.</p>
+<p>Once the plugin is enabled, the plugin posts as the <code class="docutils literal notranslate"><span class="pre">github</span></code> account but without a <cite>BOT</cite> tag. An error message is logged to the Mattermost logs recommending the System Admin to convert the <code class="docutils literal notranslate"><span class="pre">github</span></code> user to a bot account by using <code class="docutils literal notranslate"><span class="pre">mmctl</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>mmctl user convert (--bot [emails] [usernames] [userIds] | --user &lt;username&gt; --password PASSWORD [--email EMAIL]) [flags]
+</pre></div>
+</div>
+<p>If the user is an existing user account you want to preserve, change its username and restart the Mattermost workspace, after which the plugin will create a bot account with the name <code class="docutils literal notranslate"><span class="pre">github</span></code>.</p>
 </div>
 <div class="section" id="how-can-i-quickly-test-if-my-bot-account-is-working">
 <h3>How can I quickly test if my bot account is working?<a class="headerlink" href="#how-can-i-quickly-test-if-my-bot-account-is-working" title="Permalink to this headline">¶</a></h3>
