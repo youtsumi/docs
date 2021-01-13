@@ -188,7 +188,7 @@
 <p>Additional benefits include:</p>
 <blockquote>
 <div><ul class="simple">
-<li>Bot accounts can be enabled to post to any channel in the system by System Admins, including private teams, Private Channels, or Direct Messages.</li>
+<li>Bot accounts can be enabled to post to any channel in the system by System Administrators, including private teams, Private Channels, or Direct Messages.</li>
 <li>Integrations created by a user and tied to a bot account no longer break if the user leaves the company.</li>
 <li>Once created, bot accounts behave just like regular user accounts and can be added to teams and channels similar to users.</li>
 <li>Bot accounts are a safe way to integrate with Mattermost through the RESTful API and Plugin API because there is no need to manage shared logins with these accounts.</li>
@@ -198,7 +198,7 @@
 <p>Note that currently:</p>
 <blockquote>
 <div><ul class="simple">
-<li>Bot accounts can only be created or managed by plugins or System Admins.</li>
+<li>Bot accounts can only be created or managed by plugins or System Administrators.</li>
 <li>Bot accounts cannot be assigned to webhooks or slash commands. These must still be created by a user account.</li>
 <li>Service accounts without an email address pulled from LDAP or SAML systems is not yet supported.</li>
 </ul>
@@ -262,7 +262,7 @@
 <div class="section" id="what-happens-if-a-plugin-is-using-a-bot-account-that-already-exists-as-a-user-account">
 <h3>What happens if a plugin is using a bot account that already exists as a user account?<a class="headerlink" href="#what-happens-if-a-plugin-is-using-a-bot-account-that-already-exists-as-a-user-account" title="Permalink to this headline">¶</a></h3>
 <p>For a concrete example, suppose you enable the <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-github">Mattermost GitHub plugin</a>, which uses a <code class="docutils literal notranslate"><span class="pre">github</span></code> bot account, while an existing <code class="docutils literal notranslate"><span class="pre">github</span></code> user account was created for webhook integrations.</p>
-<p>Once the plugin is enabled, the plugin posts as the <code class="docutils literal notranslate"><span class="pre">github</span></code> account but without a <cite>BOT</cite> tag. An error message is logged to the Mattermost logs recommending the System Admin to convert the <code class="docutils literal notranslate"><span class="pre">github</span></code> user to a bot account by using <code class="docutils literal notranslate"><span class="pre">mmctl</span></code>:</p>
+<p>Once the plugin is enabled, the plugin posts as the <code class="docutils literal notranslate"><span class="pre">github</span></code> account but without a <cite>BOT</cite> tag. An error message is logged to the Mattermost logs recommending the System Administrator to convert the <code class="docutils literal notranslate"><span class="pre">github</span></code> user to a bot account by using <code class="docutils literal notranslate"><span class="pre">mmctl</span></code>:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>mmctl user convert (--bot [emails] [usernames] [userIds] | --user &lt;username&gt; --password PASSWORD [--email EMAIL]) [flags]
 </pre></div>
 </div>
@@ -288,7 +288,7 @@
 </div>
 <div class="section" id="do-bot-accounts-make-it-easier-to-impersonate-someone-else-such-as-the-ceo-or-an-hr-coordinator">
 <h3>Do bot accounts make it easier to impersonate someone else such as the CEO or an HR coordinator?<a class="headerlink" href="#do-bot-accounts-make-it-easier-to-impersonate-someone-else-such-as-the-ceo-or-an-hr-coordinator" title="Permalink to this headline">¶</a></h3>
-<p>Possibly yes. Currently a System Admin can disable overriding the profile picture and the username from integrations to help prevent impersonation, but this is not the case for bot accounts.</p>
+<p>Possibly yes. Currently a System Administrator can disable overriding the profile picture and the username from integrations to help prevent impersonation, but this is not the case for bot accounts.</p>
 <p>Mitigations:</p>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">BOT</span></code> tag is used everywhere in the UI where bot accounts are referenced, including messages and user lists.</li>
@@ -306,7 +306,7 @@
 <p>If you find yourself unable to edit posts as a bot, check the following:
 1. Instead of using a slash command to respond directly, use an an API call for the initial interaction with a user to enable message edits.
 2. If your system is using <a class="reference external" href="https://docs.mattermost.com/cloud/cloud-user-management/advanced-permissions.html">advanced permissions</a>, then post edits could be disabled for users.</p>
-<p>If neither of the above help resolve your concern, you also have the option to choose what role the bot account has. If System Admin is chosen, then they can update any posts in the system, along with other System Admin permissions. Note that giving the System Admin role to a bot account enables them with other System Admin privileges so this should be done with care.</p>
+<p>If neither of the above help resolve your concern, you also have the option to choose what role the bot account has. If the <strong>System Admin</strong> role is chosen, then they can update any posts in the system, along with other System Admin permissions. Note that giving the <strong>System Admin</strong> role to a bot account enables them with other System Admin privileges so this should be done with care.</p>
 </div>
 <div class="section" id="if-ad-ldap-or-saml-sync-is-enabled-do-bot-accounts-need-to-have-an-associated-email-address-in-ad-ldap-or-saml">
 <h3>If AD/LDAP or SAML sync is enabled, do bot accounts need to have an associated email address in AD/LDAP or SAML?<a class="headerlink" href="#if-ad-ldap-or-saml-sync-is-enabled-do-bot-accounts-need-to-have-an-associated-email-address-in-ad-ldap-or-saml" title="Permalink to this headline">¶</a></h3>
