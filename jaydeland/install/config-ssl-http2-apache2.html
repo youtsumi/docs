@@ -2,110 +2,54 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Configuring Apache2 with SSL and HTTP/2 (Unofficial) &mdash; Mattermost 5.28 documentation</title>
+  <title>Configuring Apache2 with SSL and HTTP/2 (Unofficial) &mdash; Mattermost 5.30 documentation</title>
   
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
+
   
   
 
   
+    <link rel="canonical" href="https://docs.mattermost.com/install/config-ssl-http2-apache2.html" />
 
   
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/myscript.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    
     <link rel="search" title="Search" href="../search.html" />
-	<!-- Bizible Script -->
-	<script src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
-
-	
-		<!-- Google Analytics -->
-		<script>
-			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-			ga('create', 'UA-67846571-2', 'auto');
-			ga('send', 'pageview');
-		</script>
-		<!-- End Google Analytics -->
-	
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-67846571-1"></script>
-	<script>
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-
-	gtag('config', 'UA-67846571-1');
-	</script>
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<!-- Second Google Analytics tag to assist mapping with mattermost.com visits --> 
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120238482-1"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-
-	  gtag('config', 'UA-120238482-1');
-	</script>
-
-	<!-- LeadLander -->
-	<script type="text/javascript" language="javascript">
-		var sf14gv = 31865;
-		(function() {
-			var sf14g = document.createElement('script');
-			sf14g.src = 'https://tracking.leadlander.com/lt.min.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sf14g, s);
-		})();
-	</script>
-
-	<!-- Munchkin code -->
-	<script type="text/javascript">
-		(function() {
-			var didInit = false;
-			function initMunchkin() {
-			if(didInit === false) {
-				didInit = true;
-				Munchkin.init('161-FBE-733');
-			}
-			}
-			var s = document.createElement('script');
-			s.type = 'text/javascript';
-			s.async = true;
-			s.src = '//munchkin.marketo.net/munchkin.js';
-			s.onreadystatechange = function() {
-			if (this.readyState == 'complete' || this.readyState == 'loaded') {
-				initMunchkin();
-			}
-			};
-			s.onload = initMunchkin;
-			document.getElementsByTagName('head')[0].appendChild(s);
-		})();
-	</script>
-
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
 
 </head>
 
@@ -113,11 +57,10 @@
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -131,7 +74,7 @@
             
             
               <div class="version">
-                5.28
+                5.30
               </div>
             
           
@@ -148,6 +91,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -157,16 +101,17 @@
             
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/administrator.html">Administrator's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/education.html">Training and Education</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -212,14 +157,14 @@
   <div class="section" id="configuring-apache2-with-ssl-and-http-2-unofficial">
 <span id="config-ssl-http2-apache2"></span><h1>Configuring Apache2 with SSL and HTTP/2 (Unofficial)<a class="headerlink" href="#configuring-apache2-with-ssl-and-http-2-unofficial" title="Permalink to this headline">¶</a></h1>
 <div class="admonition important">
-<p class="first admonition-title">Important</p>
-<p class="last">This unofficial guide is maintained by the Mattermost community and this deployment configuration is not yet officially supported by Mattermost, Inc. <a class="reference external" href="https://github.com/mattermost/docs/issues/1295">Community testing, feedback and improvements are welcome and greatly appreciated</a>. You can <a class="reference external" href="https://github.com/mattermost/docs/blob/master/source/install/config-ssl-http2-apache2.rst">edit this page on GitHub</a>.</p>
+<p class="admonition-title">Important</p>
+<p>This unofficial guide is maintained by the Mattermost community and this deployment configuration is not yet officially supported by Mattermost, Inc. <a class="reference external" href="https://github.com/mattermost/docs/issues/1295">Community testing, feedback and improvements are welcome and greatly appreciated</a>. You can <a class="reference external" href="https://github.com/mattermost/docs/blob/master/source/install/config-ssl-http2-apache2.rst">edit this page on GitHub</a>.</p>
 </div>
 <p>In order to use Apache as a reverse proxy for the Mattermost Server, you need to install and enable the following apache modules: <code class="docutils literal notranslate"><span class="pre">mod_rewrite</span></code> , <code class="docutils literal notranslate"><span class="pre">mod_proxy</span></code>, <code class="docutils literal notranslate"><span class="pre">mod_proxy_http</span></code>, <code class="docutils literal notranslate"><span class="pre">mod_headers</span></code>, and <code class="docutils literal notranslate"><span class="pre">mod_proxy_wstunnel</span></code>. Follow the installation instructions for your Linux distribution.</p>
 <p>Once you’ve configured Apache2 as a proxy for your Mattermost Server, the easiest way to enable SSL on Apache2 is via Let’s Encrypt and <a class="reference external" href="https://certbot.eff.org/#ubuntuxenial-apache">Certbot</a>.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If Let’s Encrypt is enabled, forward port 80 through a firewall, with <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#forward-port-80-to-443">Forward80To443</a> <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting set to <code class="docutils literal notranslate"><span class="pre">true</span></code> to complete the Let’s Encrypt certification.</p>
+<p class="admonition-title">Note</p>
+<p>If Let’s Encrypt is enabled, forward port 80 through a firewall, with <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#forward-port-80-to-443">Forward80To443</a> <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting set to <code class="docutils literal notranslate"><span class="pre">true</span></code> to complete the Let’s Encrypt certification.</p>
 </div>
 <p>Once installed, run <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">certbot</span> <span class="pre">--apache</span></code> and follow the guide. Afterwards you should find a new configuration file in <code class="docutils literal notranslate"><span class="pre">/etc/apache2/sites-available</span></code> which should follow the format <code class="docutils literal notranslate"><span class="pre">mysubdomain.mydomain.com-le-ssl.conf</span></code>.</p>
 <p>When opened, edit it to look something like the following:</p>
@@ -253,18 +198,16 @@
 </pre></div>
 </div>
 <ol class="arabic">
-<li><p class="first">Restart Apache2</p>
+<li><p>Restart Apache2</p>
 <blockquote>
 <div><ul class="simple">
-<li>On Ubuntu 14.04 and RHEL 6: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">service</span> <span class="pre">apache2</span> <span class="pre">restart</span></code></li>
-<li>On Ubuntu 16.04 and RHEL 7: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">restart</span> <span class="pre">apache2</span></code></li>
+<li><p>On Ubuntu 14.04 and RHEL 6: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">service</span> <span class="pre">apache2</span> <span class="pre">restart</span></code></p></li>
+<li><p>On Ubuntu 16.04 and RHEL 7: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">restart</span> <span class="pre">apache2</span></code></p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first">Test that the site is working, that WebSockets are working, and if you enabled HTTP redirect to HTTPS during Certbot installation that the redirect is working.</p>
-</li>
-<li><p class="first">Lastly, test your SSL configuration with <a class="reference external" href="https://www.ssllabs.com/ssltest/index.html">https://www.ssllabs.com/ssltest/index.html</a>.</p>
-</li>
+<li><p>Test that the site is working, that WebSockets are working, and if you enabled HTTP redirect to HTTPS during Certbot installation that the redirect is working.</p></li>
+<li><p>Lastly, test your SSL configuration with <a class="reference external" href="https://www.ssllabs.com/ssltest/index.html">https://www.ssllabs.com/ssltest/index.html</a>.</p></li>
 </ol>
 <p>Using Certbot means that you shouldn’t have to do anything in the configuration of Mattermost.</p>
 </div>
@@ -274,20 +217,25 @@
            
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2015-2020 Mattermost
+        &#169; Copyright 2015-2020 Mattermost.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -321,33 +269,22 @@
 </div>
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
-        <script type="text/javascript" src="../_static/myscript.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
+  
 	<header>
 	<div class="header__container">
 		<div class="search__icon">
 			<i class="fa fa-search"></i>
 		</div>
-		<a href="http://docs.mattermost.com/" class="header__logo">
+		<a href="https://docs.mattermost.com/" class="header__logo">
 			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
 		</a>
 		<div class="links__icon">

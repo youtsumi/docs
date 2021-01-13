@@ -2,112 +2,56 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Elasticsearch (E20) &mdash; Mattermost 5.28 documentation</title>
+  <title>Elasticsearch (E20) &mdash; Mattermost 5.30 documentation</title>
   
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
+
   
   
 
   
+    <link rel="canonical" href="https://docs.mattermost.com/deployment/elasticsearch.html" />
 
   
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/myscript.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Performance Monitoring (E20)" href="metrics.html" />
     <link rel="prev" title="High Availability Cluster (v3.10 and earlier)" href="cluster-310.html" />
-	<!-- Bizible Script -->
-	<script src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
-
-	
-		<!-- Google Analytics -->
-		<script>
-			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-			ga('create', 'UA-67846571-2', 'auto');
-			ga('send', 'pageview');
-		</script>
-		<!-- End Google Analytics -->
-	
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-67846571-1"></script>
-	<script>
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-
-	gtag('config', 'UA-67846571-1');
-	</script>
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<!-- Second Google Analytics tag to assist mapping with mattermost.com visits --> 
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120238482-1"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-
-	  gtag('config', 'UA-120238482-1');
-	</script>
-
-	<!-- LeadLander -->
-	<script type="text/javascript" language="javascript">
-		var sf14gv = 31865;
-		(function() {
-			var sf14g = document.createElement('script');
-			sf14g.src = 'https://tracking.leadlander.com/lt.min.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sf14g, s);
-		})();
-	</script>
-
-	<!-- Munchkin code -->
-	<script type="text/javascript">
-		(function() {
-			var didInit = false;
-			function initMunchkin() {
-			if(didInit === false) {
-				didInit = true;
-				Munchkin.init('161-FBE-733');
-			}
-			}
-			var s = document.createElement('script');
-			s.type = 'text/javascript';
-			s.async = true;
-			s.src = '//munchkin.marketo.net/munchkin.js';
-			s.onreadystatechange = function() {
-			if (this.readyState == 'complete' || this.readyState == 'loaded') {
-				initMunchkin();
-			}
-			};
-			s.onload = initMunchkin;
-			document.getElementsByTagName('head')[0].appendChild(s);
-		})();
-	</script>
-
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
 
 </head>
 
@@ -115,11 +59,10 @@
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -133,7 +76,7 @@
             
             
               <div class="version">
-                5.28
+                5.30
               </div>
             
           
@@ -150,6 +93,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -159,12 +103,14 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Administrator's Guide</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
@@ -189,14 +135,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/education.html">Training and Education</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -225,7 +172,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
     
-      <li><a href="../guides/administrator.html">Administrator’s Guide</a> &raquo;</li>
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
     
     <li>Elasticsearch (E20)</li>
     <li class="wy-breadcrumbs-aside">
@@ -254,105 +201,109 @@
 <h3>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h3>
 <p>Elasticsearch allows you to search large volumes of data quickly, in near real time, by creating and managing an index of post data. The indexing process can be managed from the System Console after setting up and connecting an Elasticsearch server. The post index is stored on the Elasticsearch server and is updated constantly after new posts are made. In order to index existing posts, a bulk index of the entire post database must be generated.</p>
 <div class="admonition important">
-<p class="first admonition-title">Important</p>
-<p class="last">The default Mattermost database search starts to show performance degradation at around 2.5 million posts, depending on the specifications for the database server. If you expect your Mattermost server to have more than 2.5 million posts, we recommend using Elasticsearch for optimum search performance. For deployments with over 5 million posts, Elasticsearch is required to avoid significant performance issues (such as timeouts) with search and at-mentions.</p>
+<p class="admonition-title">Important</p>
+<p>The default Mattermost database search starts to show performance degradation at around 2.5 million posts, depending on the specifications for the database server. If you expect your Mattermost server to have more than 2.5 million posts, we recommend using Elasticsearch for optimum search performance. For deployments with over 5 million posts, Elasticsearch is required to avoid significant performance issues (such as timeouts) with search and at-mentions.</p>
 </div>
 <p>Elasticsearch v5.x, v6.x, and v7.x are supported.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">From Mattermost v5.26, you can filter inactive users, search by user role, and also search for terms inside links. This update introduces a breaking change which affects the “from” part of the search. To avoid this, reindex your Elasticsearch instance/cluster prior to upgrading.</p>
+<p class="admonition-title">Note</p>
+<p>From Mattermost v5.26, you can filter inactive users, search by user role, and also search for terms inside links. This update introduces a breaking change which affects the “from” part of the search. To avoid this, reindex your Elasticsearch instance/cluster prior to upgrading.</p>
 </div>
 </div>
 <div class="section" id="setting-up-an-elasticsearch-server">
 <h3>Setting Up an Elasticsearch Server<a class="headerlink" href="#setting-up-an-elasticsearch-server" title="Permalink to this headline">¶</a></h3>
 <p>The set up process for the Elasticsearch server is documented in the <a class="reference external" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/setup.html">official Elasticsearch documentation</a>.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">You must install the <a class="reference external" href="https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-icu.html">ICU Analyzer Plugin</a> when setting up Elasticsearch for Mattermost.</p>
+<p class="admonition-title">Note</p>
+<p>You must install the <a class="reference external" href="https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-icu.html">ICU Analyzer Plugin</a> when setting up Elasticsearch for Mattermost.</p>
 </div>
 </div>
 <div class="section" id="configuring-elasticsearch-in-mattermost">
 <h3>Configuring Elasticsearch in Mattermost<a class="headerlink" href="#configuring-elasticsearch-in-mattermost" title="Permalink to this headline">¶</a></h3>
 <p>Follow these steps to connect your Elasticsearch server to Mattermost and generate the post index.</p>
 <ol class="arabic simple">
-<li>Open <strong>System Console &gt; Environment &gt; Elasticsearch</strong> (or <strong>System Console &gt; Advanced &gt; Elasticsearch</strong> in versions prior to 5.12).</li>
-<li>Set <strong>Enable Elasticsearch Indexing</strong> to <code class="docutils literal notranslate"><span class="pre">true</span></code> to enable the other the settings on the page. Once the configuration is saved, new posts made to the database will be automatically indexed on the Elasticsearch server.</li>
-<li>Set the Elasticsearch server connection details:</li>
+<li><p>Open <strong>System Console &gt; Environment &gt; Elasticsearch</strong> (or <strong>System Console &gt; Advanced &gt; Elasticsearch</strong> in versions prior to 5.12).</p></li>
+<li><p>Set <strong>Enable Elasticsearch Indexing</strong> to <code class="docutils literal notranslate"><span class="pre">true</span></code> to enable the other the settings on the page. Once the configuration is saved, new posts made to the database will be automatically indexed on the Elasticsearch server.</p></li>
+<li><p>Set the Elasticsearch server connection details:</p></li>
 </ol>
 <blockquote>
 <div><ol class="loweralpha simple">
-<li>Enter <strong>Server Connection Address</strong> for the Elasticsearch server you set up earlier.</li>
-<li>(Optional) Enter <strong>Server Username</strong> used to access the Elasticsearch server.</li>
+<li><p>Enter <strong>Server Connection Address</strong> for the Elasticsearch server you set up earlier.</p></li>
+<li><p>(Optional) Enter <strong>Server Username</strong> used to access the Elasticsearch server.</p></li>
 </ol>
 <blockquote>
 <div><ul class="simple">
-<li>Note: For AWS Elasticsearch leave this field blank.</li>
+<li><p>Note: For AWS Elasticsearch leave this field blank.</p></li>
 </ul>
 </div></blockquote>
 <ol class="loweralpha simple" start="3">
-<li>(Optional) Enter <strong>Server Password</strong> associated with the username.</li>
+<li><p>(Optional) Enter <strong>Server Password</strong> associated with the username.</p></li>
 </ol>
 <blockquote>
 <div><ul class="simple">
-<li>Note: For AWS Elasticsearch leave this field blank.</li>
+<li><p>Note: For AWS Elasticsearch leave this field blank.</p></li>
 </ul>
 </div></blockquote>
 <ol class="loweralpha simple" start="4">
-<li>Set <strong>Enable Cluster Sniffing</strong> (Optional). Sniffing finds and connects to all data nodes in your cluster automatically.</li>
+<li><p>Set <strong>Enable Cluster Sniffing</strong> (Optional). Sniffing finds and connects to all data nodes in your cluster automatically.</p></li>
 </ol>
 <blockquote>
 <div><ul class="simple">
-<li>Note: For AWS Elasticsearch this field should be set to <code class="docutils literal notranslate"><span class="pre">false</span></code>.</li>
+<li><p>Note: For AWS Elasticsearch this field should be set to <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
 </ul>
 </div></blockquote>
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li>Click <strong>Test Connection</strong> and <strong>Save</strong> the configuration.</li>
+<li><p>Click <strong>Test Connection</strong> and <strong>Save</strong> the configuration.</p></li>
 </ol>
 <blockquote>
 <div><ul class="simple">
-<li>If the server connection is unsuccessful you will not be able to save the configuration or enable searching with Elasticsearch.</li>
+<li><p>If the server connection is unsuccessful you will not be able to save the configuration or enable searching with Elasticsearch.</p></li>
 </ul>
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li>Build the post index of existing posts by clicking <strong>Build Index</strong>.</li>
+<li><p>Build the post index of existing posts by clicking <strong>Build Index</strong>.</p></li>
 </ol>
 <blockquote>
 <div><ul class="simple">
-<li>This process can take up to a few hours depending on the size of the post database and number of messages. The progress percentage can be seen as the index is created. To avoid downtime set <strong>Enable Elasticsearch for search queries</strong> to <code class="docutils literal notranslate"><span class="pre">false</span></code> so that database search is available during the indexing process.</li>
+<li><p>This process can take up to a few hours depending on the size of the post database and number of messages. The progress percentage can be seen as the index is created. To avoid downtime set <strong>Enable Elasticsearch for search queries</strong> to <code class="docutils literal notranslate"><span class="pre">false</span></code> so that database search is available during the indexing process.</p></li>
 </ul>
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li>Enable Elasticsearch by setting <strong>Enable Elasticsearch for search queries</strong> to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</li>
+<li><p>Enable Elasticsearch by setting <strong>Enable Elasticsearch for search queries</strong> to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
 </ol>
 <blockquote>
 <div><ul class="simple">
-<li>Note: It is recommended that bulk indexing be completed before enabling Elasticsearch, otherwise search results will be incomplete. When this setting is <code class="docutils literal notranslate"><span class="pre">false</span></code>, database search is used for all search queries.</li>
+<li><p>Note: It is recommended that bulk indexing be completed before enabling Elasticsearch, otherwise search results will be incomplete. When this setting is <code class="docutils literal notranslate"><span class="pre">false</span></code>, database search is used for all search queries.</p></li>
 </ul>
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li>Restart the Mattermost server.</li>
+<li><p>Restart the Mattermost server.</p></li>
 </ol>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Additional advanced Elasticsearch settings for large deployments can be configured outside the System Console in the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file. Read the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#elasticsearch">documentation to learn more</a>.</p>
+<p class="admonition-title">Note</p>
+<p>Additional advanced Elasticsearch settings for large deployments can be configured outside the System Console in the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file. Read the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#elasticsearch">documentation to learn more</a>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If your deployment has a large number of posts (typically in excess of 1 million but not strictly defined) the reindexing progress percentage may stay at 99% for a long time.</p>
 </div>
 </div>
 </div>
 <div class="section" id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>Elasticsearch uses a standard selection of “stop words” to keep search results relevant. Results for the following words will not be returned:</li>
+<li><p>Elasticsearch uses a standard selection of “stop words” to keep search results relevant. Results for the following words will not be returned:</p></li>
 </ol>
 <blockquote>
 <div><ul class="simple">
-<li>“a”, “an”, “and”, “are”, “as”, “at”, “be”, “but”, “by”, “for”, “if”, “in”, “into”, “is”, “it”, “no”, “not”, “of”, “on”, “or”, “such”, “that”, “the”, “their”, “then”, “there”, “these”, “they”, “this”, “to”, “was”, “will”, “with”</li>
+<li><p>“a”, “an”, “and”, “are”, “as”, “at”, “be”, “but”, “by”, “for”, “if”, “in”, “into”, “is”, “it”, “no”, “not”, “of”, “on”, “or”, “such”, “that”, “the”, “their”, “then”, “there”, “these”, “they”, “this”, “to”, “was”, “will”, “with”</p></li>
 </ul>
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li>Searching stop words in quotes returns more results than just the searched terms (<a class="reference external" href="https://mattermost.atlassian.net/browse/MM-7216">ticket</a>).</li>
-<li>AWS Elasticsearch implementations have a limit of 1000 days of post history that is searchable.</li>
-<li>Search results are limited to a user’s team and channel membership. This is enforced by the Mattermost server. The entities are indexed in Elasticsearch in a way that allows Mattermost to filter them when querying, so the Mattermost server narrows down the results on every Elasticsearch request applying those filters.</li>
+<li><p>Searching stop words in quotes returns more results than just the searched terms (<a class="reference external" href="https://mattermost.atlassian.net/browse/MM-7216">ticket</a>).</p></li>
+<li><p>AWS Elasticsearch implementations have a limit of 1000 days of post history that is searchable.</p></li>
+<li><p>Search results are limited to a user’s team and channel membership. This is enforced by the Mattermost server. The entities are indexed in Elasticsearch in a way that allows Mattermost to filter them when querying, so the Mattermost server narrows down the results on every Elasticsearch request applying those filters.</p></li>
 </ol>
 </div>
 <div class="section" id="frequently-asked-questions-faq">
@@ -387,9 +338,9 @@
 <p>There are a few possible reasons:</p>
 <blockquote>
 <div><ul class="simple">
-<li>Querying the posts out of the database is resource limited (i.e., the machine the database is on is not powerful enough).</li>
-<li>The Elasticsearch cluster is performance limited (i.e., the machines are not powerful enough).</li>
-<li>The 25,000 messages are spread out over a long time window, and the <code class="docutils literal notranslate"><span class="pre">BulkIndexingTimeWindowSeconds</span></code> configuration value is too low for efficient indexing of such a “sparse” database. The value of that config should ideally be set so that the median number of posts falling within any period of that time in the database is around 700 to 800. The default value is 1 hour, so if you are doing a lot less than 800 posts an hour on average, then the indexing will be much slower in terms of “posts per unit time”. This can be sped up by increasing that time window.</li>
+<li><p>Querying the posts out of the database is resource limited (i.e., the machine the database is on is not powerful enough).</p></li>
+<li><p>The Elasticsearch cluster is performance limited (i.e., the machines are not powerful enough).</p></li>
+<li><p>The 25,000 messages are spread out over a long time window, and the <code class="docutils literal notranslate"><span class="pre">BulkIndexingTimeWindowSeconds</span></code> configuration value is too low for efficient indexing of such a “sparse” database. The value of that config should ideally be set so that the median number of posts falling within any period of that time in the database is around 700 to 800. The default value is 1 hour, so if you are doing a lot less than 800 posts an hour on average, then the indexing will be much slower in terms of “posts per unit time”. This can be sped up by increasing that time window.</p></li>
 </ul>
 </div></blockquote>
 </div>
@@ -415,29 +366,29 @@
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="metrics.html" class="btn btn-neutral float-right" title="Performance Monitoring (E20)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="cluster-310.html" class="btn btn-neutral" title="High Availability Cluster (v3.10 and earlier)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="metrics.html" class="btn btn-neutral float-right" title="Performance Monitoring (E20)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="cluster-310.html" class="btn btn-neutral float-left" title="High Availability Cluster (v3.10 and earlier)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2015-2020 Mattermost
+        &#169; Copyright 2015-2020 Mattermost.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -471,33 +422,22 @@
 </div>
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
-        <script type="text/javascript" src="../_static/myscript.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
+  
 	<header>
 	<div class="header__container">
 		<div class="search__icon">
 			<i class="fa fa-search"></i>
 		</div>
-		<a href="http://docs.mattermost.com/" class="header__logo">
+		<a href="https://docs.mattermost.com/" class="header__logo">
 			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
 		</a>
 		<div class="links__icon">

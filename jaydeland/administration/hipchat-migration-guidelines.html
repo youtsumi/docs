@@ -2,112 +2,56 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Migrating from HipChat to Mattermost &mdash; Mattermost 5.28 documentation</title>
+  <title>Migrating from HipChat to Mattermost &mdash; Mattermost 5.30 documentation</title>
   
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
+
   
   
 
   
+    <link rel="canonical" href="https://docs.mattermost.com/administration/hipchat-migration-guidelines.html" />
 
   
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/myscript.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Migration Announcement Email" href="migration-announcement-email-template.html" />
     <link rel="prev" title="Migration Guide" href="migrating.html" />
-	<!-- Bizible Script -->
-	<script src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
-
-	
-		<!-- Google Analytics -->
-		<script>
-			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-			ga('create', 'UA-67846571-2', 'auto');
-			ga('send', 'pageview');
-		</script>
-		<!-- End Google Analytics -->
-	
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-67846571-1"></script>
-	<script>
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-
-	gtag('config', 'UA-67846571-1');
-	</script>
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<!-- Second Google Analytics tag to assist mapping with mattermost.com visits --> 
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120238482-1"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-
-	  gtag('config', 'UA-120238482-1');
-	</script>
-
-	<!-- LeadLander -->
-	<script type="text/javascript" language="javascript">
-		var sf14gv = 31865;
-		(function() {
-			var sf14g = document.createElement('script');
-			sf14g.src = 'https://tracking.leadlander.com/lt.min.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sf14g, s);
-		})();
-	</script>
-
-	<!-- Munchkin code -->
-	<script type="text/javascript">
-		(function() {
-			var didInit = false;
-			function initMunchkin() {
-			if(didInit === false) {
-				didInit = true;
-				Munchkin.init('161-FBE-733');
-			}
-			}
-			var s = document.createElement('script');
-			s.type = 'text/javascript';
-			s.async = true;
-			s.src = '//munchkin.marketo.net/munchkin.js';
-			s.onreadystatechange = function() {
-			if (this.readyState == 'complete' || this.readyState == 'loaded') {
-				initMunchkin();
-			}
-			};
-			s.onload = initMunchkin;
-			document.getElementsByTagName('head')[0].appendChild(s);
-		})();
-	</script>
-
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
 
 </head>
 
@@ -115,11 +59,10 @@
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -133,7 +76,7 @@
             
             
               <div class="version">
-                5.28
+                5.30
               </div>
             
           
@@ -150,6 +93,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -159,12 +103,14 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Administrator's Guide</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../deployment/bulk-loading.html">Bulk Loading Data</a></li>
@@ -179,15 +125,12 @@
 <li class="toctree-l3"><a class="reference internal" href="migration-announcement-email-template.html">Migration Announcement Email</a></li>
 <li class="toctree-l3"><a class="reference internal" href="user-provisioning.html">Provisioning Workflows</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/admin-roles.html">Additional System Admin Roles (E20)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../deployment/sso-ldap.html">Active Directory/LDAP Setup (E10/E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/auth.html">Multi-factor Authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/ldap-group-sync.html">AD/LDAP Groups (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/ldap-group-constrained-team-channel.html">Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/sso-saml.html">SAML Single Sign-On (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/sso-saml-technical.html">SAML Single-Sign-On (E20): Technical Documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/sso-gitlab.html">GitLab Single Sign-On</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../deployment/sso-google.html">Google Single Sign-On (E20)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../deployment/sso-office.html">Office 365 Single Sign-On (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/ssl-client-certificate.html">SSL Client Certificate Setup (Beta)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/certificate-based-authentication.html">Certificate-Based Authentication (Experimental)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/team-channel-management.html">Managing Team and Channel Members (E20)</a></li>
@@ -205,14 +148,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/education.html">Training and Education</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -241,7 +185,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
     
-      <li><a href="../guides/administrator.html">Administrator’s Guide</a> &raquo;</li>
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
     
     <li>Migrating from HipChat to Mattermost</li>
     <li class="wy-breadcrumbs-aside">
@@ -263,7 +207,7 @@
 <div class="section" id="step-1-set-up-your-mattermost-instance">
 <h2>Step 1:  Set up your Mattermost Instance<a class="headerlink" href="#step-1-set-up-your-mattermost-instance" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><a class="reference external" href="https://about.mattermost.com/download/">Go to Mattermost download page</a> to install Mattermost in your environment using one of the installation guides for Linux binary install, Docker install or various orchestrated installations.</li>
+<li><p><a class="reference external" href="https://mattermost.com/download/">Go to Mattermost download page</a> to install Mattermost in your environment using one of the installation guides for Linux binary install, Docker install or various orchestrated installations.</p></li>
 </ul>
 <p>Questions? Please visit our <a class="reference external" href="https://forum.mattermost.org/t/how-to-use-the-troubleshooting-forum/150">troubleshooting forum</a> for help.</p>
 </div>
@@ -274,17 +218,17 @@
 <p>If you’re able to upgrade HipChat Server or HipChat Data Center to the latest version, we recommend using Group Export Dashboard to export your data. If you’re unable to upgrade, see Command Line Interface procedure below.</p>
 <p><em>Using the Group Export Dashboard:</em></p>
 <ol class="arabic simple">
-<li>Log in to your Hipchat Server (e.g. hipchat.yourcompany.com).</li>
-<li>Click on <strong>Server Admin &gt; Export</strong>.</li>
-<li>Select the data to export.</li>
-<li>In the <strong>Password</strong> and <strong>Confirm Password</strong> fields, create a password to protect your archive files (Store this password as it is not saved anywhere else).</li>
-<li>Click <strong>Export</strong>. Once the export is done, you will receive an email with a link to download the file.</li>
+<li><p>Log in to your Hipchat Server (e.g. hipchat.yourcompany.com).</p></li>
+<li><p>Click on <strong>Server Admin &gt; Export</strong>.</p></li>
+<li><p>Select the data to export.</p></li>
+<li><p>In the <strong>Password</strong> and <strong>Confirm Password</strong> fields, create a password to protect your archive files (Store this password as it is not saved anywhere else).</p></li>
+<li><p>Click <strong>Export</strong>. Once the export is done, you will receive an email with a link to download the file.</p></li>
 </ol>
 <p><em>If you’re unable to use the Group Export Dashboard, use the Command Line Interface to export:</em></p>
 <ol class="arabic simple">
-<li>Go to <strong>CLI</strong>.</li>
-<li>Enter <code class="docutils literal notranslate"><span class="pre">hipchat</span> <span class="pre">export</span> <span class="pre">--export</span>&#160; <span class="pre">-p</span> <span class="pre">your_password</span></code>.</li>
-<li>Once the export is done, you will receive an email with a link to download the file.</li>
+<li><p>Go to <strong>CLI</strong>.</p></li>
+<li><p>Enter <code class="docutils literal notranslate"><span class="pre">hipchat</span> <span class="pre">export</span> <span class="pre">--export</span>&#160; <span class="pre">-p</span> <span class="pre">your_password</span></code>.</p></li>
+<li><p>Once the export is done, you will receive an email with a link to download the file.</p></li>
 </ol>
 <p>More detailed instructions can be found on Hipchat’s <a class="reference external" href="https://confluence.atlassian.com/hipchatdc3/export-data-from-hipchat-data-center-913476832.html">documentation</a> and <a class="reference external" href="https://confluence.atlassian.com/hipchatkb/exporting-from-hipchat-server-or-data-center-for-data-portability-950821555.html">knowledge base</a>.</p>
 </div>
@@ -292,12 +236,12 @@
 <div class="section" id="step-3-import-your-data-into-mattermost">
 <h2>Step 3: Import your data into Mattermost<a class="headerlink" href="#step-3-import-your-data-into-mattermost" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>Follow the <a class="reference external" href="https://docs.mattermost.com/deployment/bulk-loading.html">Mattermost Bulk Load Tool</a> guide to import your data into Mattermost. Files exported from HipChat will need to be converted to the format required by Mattermost. Please <a class="reference external" href="https://mattermost.zendesk.com/hc/en-us/requests/new">contact us</a> if you require assistance in the conversion.</li>
-<li>You are also encouraged to use the HipChat import tool created by Herzum: <a class="reference external" href="https://github.com/herzum/HC2MM">https://github.com/herzum/HC2MM</a>.</li>
+<li><p>Follow the <a class="reference external" href="https://docs.mattermost.com/deployment/bulk-loading.html">Mattermost Bulk Load Tool</a> guide to import your data into Mattermost. Files exported from HipChat will need to be converted to the format required by Mattermost. Please <a class="reference external" href="https://mattermost.zendesk.com/hc/en-us/requests/new">contact us</a> if you require assistance in the conversion.</p></li>
+<li><p>You are also encouraged to use the HipChat import tool created by Herzum: <a class="reference external" href="https://github.com/herzum/HC2MM">https://github.com/herzum/HC2MM</a>.</p></li>
 </ol>
 <p>If you’re interested in contributing or testing any community contributed solution, please let us know at <a class="reference external" href="mailto:info&#37;&#52;&#48;mattermost&#46;com">info<span>&#64;</span>mattermost<span>&#46;</span>com</a>, Twitter or Mattermost forums at <a class="reference external" href="https://forum.mattermost.org">https://forum.mattermost.org</a>.</p>
 <ol class="arabic simple" start="3">
-<li>Alternatively, <a class="reference external" href="https://mattermost.com/contact-us/">contact Mattermost</a> for partner recommendations for your region to assist in your import.</li>
+<li><p>Alternatively, <a class="reference external" href="https://mattermost.com/contact-us/">contact Mattermost</a> for partner recommendations for your region to assist in your import.</p></li>
 </ol>
 </div>
 <div class="section" id="step-4-onboard-your-users-into-mattermost">
@@ -310,15 +254,15 @@
 </div>
 <p><strong>Announcing Mattermost onboarding using email using username/password:</strong></p>
 <ol class="arabic simple">
-<li>Get a list of email addresses of people in the new system by running a database query on Mattermost. Run <code class="docutils literal notranslate"><span class="pre">SELECT</span> <span class="pre">Email</span> <span class="pre">FROM</span> <span class="pre">Users</span></code> from either MySQL or PostgreSQL databases.</li>
-<li>Adapt the <a class="reference external" href="https://docs.mattermost.com/administration/migration-announcement-email-template.html">migration announcement email template</a> to let users know how to reclaim their old accounts or start new ones.</li>
+<li><p>Get a list of email addresses of people in the new system by running a database query on Mattermost. Run <code class="docutils literal notranslate"><span class="pre">SELECT</span> <span class="pre">Email</span> <span class="pre">FROM</span> <span class="pre">Users</span></code> from either MySQL or PostgreSQL databases.</p></li>
+<li><p>Adapt the <a class="reference external" href="https://docs.mattermost.com/administration/migration-announcement-email-template.html">migration announcement email template</a> to let users know how to reclaim their old accounts or start new ones.</p></li>
 </ol>
 <div class="section" id="onboard-users-using-sso-in-mattermost">
 <h3>Onboard users using SSO in Mattermost<a class="headerlink" href="#onboard-users-using-sso-in-mattermost" title="Permalink to this headline">¶</a></h3>
 <p>Alternatively, you can choose to set up SSO (Single Sign-on) with Mattermost if you are using an Enterprise version.</p>
 <ol class="arabic simple">
-<li>Configure <a class="reference external" href="https://docs.mattermost.com/deployment/sso-ldap.html">Active Directory/LDAP</a> or <a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml.html">SAML Single Sign-on</a> from the <strong>System Console</strong>.</li>
-<li>Adjust the messaging templates above to remove “password reset” references and indicate which SSO system credentials Mattermost has configured.</li>
+<li><p>Configure <a class="reference external" href="https://docs.mattermost.com/deployment/sso-ldap.html">Active Directory/LDAP</a> or <a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml.html">SAML Single Sign-on</a> from the <strong>System Console</strong>.</p></li>
+<li><p>Adjust the messaging templates above to remove “password reset” references and indicate which SSO system credentials Mattermost has configured.</p></li>
 </ol>
 </div>
 </div>
@@ -329,29 +273,29 @@
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="migration-announcement-email-template.html" class="btn btn-neutral float-right" title="Migration Announcement Email" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="migrating.html" class="btn btn-neutral" title="Migration Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="migration-announcement-email-template.html" class="btn btn-neutral float-right" title="Migration Announcement Email" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="migrating.html" class="btn btn-neutral float-left" title="Migration Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2015-2020 Mattermost
+        &#169; Copyright 2015-2020 Mattermost.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -385,33 +329,22 @@
 </div>
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
-        <script type="text/javascript" src="../_static/myscript.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
+  
 	<header>
 	<div class="header__container">
 		<div class="search__icon">
 			<i class="fa fa-search"></i>
 		</div>
-		<a href="http://docs.mattermost.com/" class="header__logo">
+		<a href="https://docs.mattermost.com/" class="header__logo">
 			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
 		</a>
 		<div class="links__icon">

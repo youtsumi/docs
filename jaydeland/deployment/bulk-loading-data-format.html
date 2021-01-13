@@ -2,110 +2,54 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Data Format &mdash; Mattermost 5.28 documentation</title>
+  <title>Data Format &mdash; Mattermost 5.30 documentation</title>
   
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
+
   
   
 
   
+    <link rel="canonical" href="https://docs.mattermost.com/deployment/bulk-loading-data-format.html" />
 
   
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/myscript.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    
     <link rel="search" title="Search" href="../search.html" />
-	<!-- Bizible Script -->
-	<script src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
-
-	
-		<!-- Google Analytics -->
-		<script>
-			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-			ga('create', 'UA-67846571-2', 'auto');
-			ga('send', 'pageview');
-		</script>
-		<!-- End Google Analytics -->
-	
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-67846571-1"></script>
-	<script>
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-
-	gtag('config', 'UA-67846571-1');
-	</script>
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<!-- Second Google Analytics tag to assist mapping with mattermost.com visits --> 
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120238482-1"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-
-	  gtag('config', 'UA-120238482-1');
-	</script>
-
-	<!-- LeadLander -->
-	<script type="text/javascript" language="javascript">
-		var sf14gv = 31865;
-		(function() {
-			var sf14g = document.createElement('script');
-			sf14g.src = 'https://tracking.leadlander.com/lt.min.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sf14g, s);
-		})();
-	</script>
-
-	<!-- Munchkin code -->
-	<script type="text/javascript">
-		(function() {
-			var didInit = false;
-			function initMunchkin() {
-			if(didInit === false) {
-				didInit = true;
-				Munchkin.init('161-FBE-733');
-			}
-			}
-			var s = document.createElement('script');
-			s.type = 'text/javascript';
-			s.async = true;
-			s.src = '//munchkin.marketo.net/munchkin.js';
-			s.onreadystatechange = function() {
-			if (this.readyState == 'complete' || this.readyState == 'loaded') {
-				initMunchkin();
-			}
-			};
-			s.onload = initMunchkin;
-			document.getElementsByTagName('head')[0].appendChild(s);
-		})();
-	</script>
-
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
 
 </head>
 
@@ -113,11 +57,10 @@
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -131,7 +74,7 @@
             
             
               <div class="version">
-                5.28
+                5.30
               </div>
             
           
@@ -148,6 +91,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -157,16 +101,17 @@
             
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/administrator.html">Administrator's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/education.html">Training and Education</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -211,88 +156,88 @@
             
   <div class="section" id="data-format">
 <span id="id1"></span><h1>Data Format<a class="headerlink" href="#data-format" title="Permalink to this headline">¶</a></h1>
-<p>The input data file must be a valid <a class="reference external" href="http://jsonlines.org">JSONL</a> file with the following objects, each on its own line in the file. The objects must occur in the file in the order listed.</p>
-<dl class="docutils">
-<dt>Version</dt>
-<dd>Mandatory. The Version object must be the first line in the file, and must occur only once. The version is the version of the bulk importer tool, which is currently <code class="docutils literal notranslate"><span class="pre">1</span></code>.</dd>
-<dt>Scheme</dt>
-<dd>Optional. If present, Scheme objects must occur after the Version object but before any Team objects.</dd>
-<dt>Emoji</dt>
-<dd>Optional. If present, Emoji objects must occur after the Version objects but before any Team objects.</dd>
-<dt>Team</dt>
-<dd>Optional. If present, Team objects must occur after any Scheme objects and before any Channel objects.</dd>
-<dt>Channel</dt>
-<dd>Optional. If present, Channel objects must occur after all Team objects and before any User objects.</dd>
-<dt>User</dt>
-<dd>Optional. If present, User objects must occur after the Team and Channel objects in the file and before any Post objects. Each User object defines the teams and channels that the user is a member of. If the corresponding teams and channels are not in the data file, then they must exist in the Mattermost database.</dd>
-<dt>Post</dt>
-<dd>Optional. If present, Post objects must occur after the last User object but before any DirectChannel objects. Each Post object defines the team, the channel, and the username of the user who posted the message. If the corresponding team, channel, or user are not in the data file, then they must exist in the Mattermost database.</dd>
-<dt>DirectChannel</dt>
-<dd>Optional. If present, DirectChannel objects must occur after all Post objects in the file and before any DirectPost objects.</dd>
-<dt>DirectPost</dt>
-<dd>Optional. If present, DirectPost objects must occur after all other objects in the file. Each DirectPost object defines the usernames of the channel members and the username of the user who posted the message. If the corresponding usernames are not in the data file, then they must exist in the Mattermost database.</dd>
+<p>The input data file must be a valid <a class="reference external" href="https://jsonlines.org">JSONL</a> file with the following objects, each on its own line in the file. The objects must occur in the file in the order listed.</p>
+<dl class="simple">
+<dt>Version</dt><dd><p>Mandatory. The Version object must be the first line in the file, and must occur only once. The version is the version of the bulk importer tool, which is currently <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+</dd>
+<dt>Scheme</dt><dd><p>Optional. If present, Scheme objects must occur after the Version object but before any Team objects.</p>
+</dd>
+<dt>Emoji</dt><dd><p>Optional. If present, Emoji objects must occur after the Version objects but before any Team objects.</p>
+</dd>
+<dt>Team</dt><dd><p>Optional. If present, Team objects must occur after any Scheme objects and before any Channel objects.</p>
+</dd>
+<dt>Channel</dt><dd><p>Optional. If present, Channel objects must occur after all Team objects and before any User objects.</p>
+</dd>
+<dt>User</dt><dd><p>Optional. If present, User objects must occur after the Team and Channel objects in the file and before any Post objects. Each User object defines the teams and channels that the user is a member of. If the corresponding teams and channels are not in the data file, then they must exist in the Mattermost database.</p>
+</dd>
+<dt>Post</dt><dd><p>Optional. If present, Post objects must occur after the last User object but before any DirectChannel objects. Each Post object defines the team, the channel, and the username of the user who posted the message. If the corresponding team, channel, or user are not in the data file, then they must exist in the Mattermost database.</p>
+</dd>
+<dt>DirectChannel</dt><dd><p>Optional. If present, DirectChannel objects must occur after all Post objects in the file and before any DirectPost objects.</p>
+</dd>
+<dt>DirectPost</dt><dd><p>Optional. If present, DirectPost objects must occur after all other objects in the file. Each DirectPost object defines the usernames of the channel members and the username of the user who posted the message. If the corresponding usernames are not in the data file, then they must exist in the Mattermost database.</p>
+</dd>
 </dl>
 <p>With the exception of the Version object, each object has a field or a combination of fields that is used as the unique identifier of that object. The bulk loader uses the unique identifier to determine if the object being imported is a new object or an update to an existing object.</p>
 <p>The identifiers for each object are listed in the following table:</p>
-<table border="1" class="docutils" id="id2">
+<table class="docutils align-default" id="id2">
 <caption><span class="caption-text">Objects and their unique identifiers</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
 <colgroup>
-<col width="50%" />
-<col width="50%" />
+<col style="width: 50%" />
+<col style="width: 50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Object</th>
-<th class="head">Unique Identifier</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Object</p></th>
+<th class="head"><p>Unique Identifier</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>Version</td>
-<td>Not Applicable</td>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>Not Applicable</p></td>
 </tr>
-<tr class="row-odd"><td>Scheme</td>
-<td><em>name</em></td>
+<tr class="row-odd"><td><p>Scheme</p></td>
+<td><p><em>name</em></p></td>
 </tr>
-<tr class="row-even"><td>Role</td>
-<td><em>name</em></td>
+<tr class="row-even"><td><p>Role</p></td>
+<td><p><em>name</em></p></td>
 </tr>
-<tr class="row-odd"><td>Emoji</td>
-<td><em>name</em></td>
+<tr class="row-odd"><td><p>Emoji</p></td>
+<td><p><em>name</em></p></td>
 </tr>
-<tr class="row-even"><td>Team</td>
-<td><em>name</em></td>
+<tr class="row-even"><td><p>Team</p></td>
+<td><p><em>name</em></p></td>
 </tr>
-<tr class="row-odd"><td>Channel</td>
-<td><em>name</em>, <em>team</em></td>
+<tr class="row-odd"><td><p>Channel</p></td>
+<td><p><em>name</em>, <em>team</em></p></td>
 </tr>
-<tr class="row-even"><td>User</td>
-<td><em>username</em></td>
+<tr class="row-even"><td><p>User</p></td>
+<td><p><em>username</em></p></td>
 </tr>
-<tr class="row-odd"><td>UserNotifyProps</td>
-<td><em>username</em></td>
+<tr class="row-odd"><td><p>UserNotifyProps</p></td>
+<td><p><em>username</em></p></td>
 </tr>
-<tr class="row-even"><td>UserTeamMembership</td>
-<td><em>team</em>, <em>username</em></td>
+<tr class="row-even"><td><p>UserTeamMembership</p></td>
+<td><p><em>team</em>, <em>username</em></p></td>
 </tr>
-<tr class="row-odd"><td>UserChannelMembership</td>
-<td><em>team</em>, <em>channel</em>, <em>username</em></td>
+<tr class="row-odd"><td><p>UserChannelMembership</p></td>
+<td><p><em>team</em>, <em>channel</em>, <em>username</em></p></td>
 </tr>
-<tr class="row-even"><td>Post</td>
-<td><em>channel</em>, <em>message</em>, <em>create_at</em></td>
+<tr class="row-even"><td><p>Post</p></td>
+<td><p><em>channel</em>, <em>message</em>, <em>create_at</em></p></td>
 </tr>
-<tr class="row-odd"><td>Reply</td>
-<td><em>post</em>, <em>message</em>, <em>create_at</em></td>
+<tr class="row-odd"><td><p>Reply</p></td>
+<td><p><em>post</em>, <em>message</em>, <em>create_at</em></p></td>
 </tr>
-<tr class="row-even"><td>Reaction</td>
-<td><em>post</em>, <em>emoji_name</em>, <em>create_at</em></td>
+<tr class="row-even"><td><p>Reaction</p></td>
+<td><p><em>post</em>, <em>emoji_name</em>, <em>create_at</em></p></td>
 </tr>
-<tr class="row-odd"><td>Attachment</td>
-<td><em>path</em></td>
+<tr class="row-odd"><td><p>Attachment</p></td>
+<td><p><em>path</em></p></td>
 </tr>
-<tr class="row-even"><td>DirectChannel</td>
-<td><em>members</em></td>
+<tr class="row-even"><td><p>DirectChannel</p></td>
+<td><p><em>members</em></p></td>
 </tr>
-<tr class="row-odd"><td>DirectPost</td>
-<td><em>channel_members</em>, <em>user</em>, <em>message</em>, <em>create_at</em></td>
+<tr class="row-odd"><td><p>DirectPost</p></td>
+<td><p><em>channel_members</em>, <em>user</em>, <em>message</em>, <em>create_at</em></p></td>
 </tr>
 </tbody>
 </table>
@@ -350,7 +295,7 @@
 <p>For clarity, the object is shown using regular JSON formatting, but in the data file it cannot be spread across several lines. It must be all on one line.</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;version&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="o">:</span> <span class="mi">1</span>
+  <span class="s2">&quot;version&quot;</span><span class="o">:</span> <span class="mf">1</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1260,7 +1205,7 @@
         <span class="s2">&quot;text&quot;</span><span class="o">:</span> <span class="s2">&quot;This is the attachment text.&quot;</span>
       <span class="p">}]</span>
     <span class="p">},</span>
-    <span class="s2">&quot;create_at&quot;</span><span class="o">:</span> <span class="mi">140012340013</span><span class="p">,</span>
+    <span class="s2">&quot;create_at&quot;</span><span class="o">:</span> <span class="mf">140012340013</span><span class="p">,</span>
     <span class="s2">&quot;flagged_by&quot;</span><span class="o">:</span> <span class="p">[</span>
       <span class="s2">&quot;username1&quot;</span><span class="p">,</span>
       <span class="s2">&quot;username2&quot;</span><span class="p">,</span>
@@ -1269,23 +1214,23 @@
     <span class="s2">&quot;replies&quot;</span><span class="o">:</span> <span class="p">[{</span>
       <span class="s2">&quot;user&quot;</span><span class="o">:</span> <span class="s2">&quot;username4&quot;</span><span class="p">,</span>
       <span class="s2">&quot;message&quot;</span><span class="o">:</span> <span class="s2">&quot;The reply message&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;create_at&quot;</span><span class="o">:</span> <span class="mi">140012352049</span><span class="p">,</span>
+      <span class="s2">&quot;create_at&quot;</span><span class="o">:</span> <span class="mf">140012352049</span><span class="p">,</span>
       <span class="s2">&quot;attachments&quot;</span><span class="o">:</span> <span class="p">[{</span>
           <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/some/valid/file/path/1&quot;</span>
       <span class="p">}],</span>
     <span class="p">},</span> <span class="p">{</span>
       <span class="s2">&quot;user&quot;</span><span class="o">:</span> <span class="s2">&quot;username5&quot;</span><span class="p">,</span>
       <span class="s2">&quot;message&quot;</span><span class="o">:</span> <span class="s2">&quot;Other reply message&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;create_at&quot;</span><span class="o">:</span> <span class="mi">140012353057</span><span class="p">,</span>
+      <span class="s2">&quot;create_at&quot;</span><span class="o">:</span> <span class="mf">140012353057</span><span class="p">,</span>
     <span class="p">}],</span>
     <span class="s2">&quot;reactions&quot;</span><span class="o">:</span> <span class="p">[{</span>
       <span class="s2">&quot;user&quot;</span><span class="o">:</span> <span class="s2">&quot;username6&quot;</span><span class="p">,</span>
       <span class="s2">&quot;emoji_name&quot;</span><span class="o">:</span> <span class="s2">&quot;+1&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;create_at&quot;</span><span class="o">:</span> <span class="mi">140012356032</span><span class="p">,</span>
+      <span class="s2">&quot;create_at&quot;</span><span class="o">:</span> <span class="mf">140012356032</span><span class="p">,</span>
     <span class="p">},</span> <span class="p">{</span>
       <span class="s2">&quot;user&quot;</span><span class="o">:</span> <span class="s2">&quot;username7&quot;</span><span class="p">,</span>
       <span class="s2">&quot;emoji_name&quot;</span><span class="o">:</span> <span class="s2">&quot;heart&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;create_at&quot;</span><span class="o">:</span> <span class="mi">140012359034</span><span class="p">,</span>
+      <span class="s2">&quot;create_at&quot;</span><span class="o">:</span> <span class="mf">140012359034</span><span class="p">,</span>
     <span class="p">}],</span>
     <span class="s2">&quot;attachments&quot;</span><span class="o">:</span> <span class="p">[{</span>
       <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/some/valid/file/path/1&quot;</span>
@@ -1580,7 +1525,7 @@
     <span class="p">],</span>
     <span class="s2">&quot;user&quot;</span><span class="o">:</span> <span class="s2">&quot;username2&quot;</span><span class="p">,</span>
     <span class="s2">&quot;message&quot;</span><span class="o">:</span> <span class="s2">&quot;Hello Group Channel&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;create_at&quot;</span><span class="o">:</span> <span class="mi">140012340013</span><span class="p">,</span>
+    <span class="s2">&quot;create_at&quot;</span><span class="o">:</span> <span class="mf">140012340013</span><span class="p">,</span>
     <span class="s2">&quot;flagged_by&quot;</span><span class="o">:</span> <span class="p">[</span>
       <span class="s2">&quot;username1&quot;</span><span class="p">,</span>
       <span class="s2">&quot;username2&quot;</span><span class="p">,</span>
@@ -1589,20 +1534,20 @@
     <span class="s2">&quot;replies&quot;</span><span class="o">:</span> <span class="p">[{</span>
       <span class="s2">&quot;user&quot;</span><span class="o">:</span> <span class="s2">&quot;username4&quot;</span><span class="p">,</span>
       <span class="s2">&quot;message&quot;</span><span class="o">:</span> <span class="s2">&quot;The reply message&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;create_at&quot;</span><span class="o">:</span> <span class="mi">140012352049</span><span class="p">,</span>
+      <span class="s2">&quot;create_at&quot;</span><span class="o">:</span> <span class="mf">140012352049</span><span class="p">,</span>
     <span class="p">},</span> <span class="p">{</span>
       <span class="s2">&quot;user&quot;</span><span class="o">:</span> <span class="s2">&quot;username5&quot;</span><span class="p">,</span>
       <span class="s2">&quot;message&quot;</span><span class="o">:</span> <span class="s2">&quot;Other reply message&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;create_at&quot;</span><span class="o">:</span> <span class="mi">140012353057</span><span class="p">,</span>
+      <span class="s2">&quot;create_at&quot;</span><span class="o">:</span> <span class="mf">140012353057</span><span class="p">,</span>
     <span class="p">}],</span>
     <span class="s2">&quot;reactions&quot;</span><span class="o">:</span> <span class="p">[{</span>
       <span class="s2">&quot;user&quot;</span><span class="o">:</span> <span class="s2">&quot;username6&quot;</span><span class="p">,</span>
       <span class="s2">&quot;emoji_name&quot;</span><span class="o">:</span> <span class="s2">&quot;+1&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;create_at&quot;</span><span class="o">:</span> <span class="mi">140012356032</span><span class="p">,</span>
+      <span class="s2">&quot;create_at&quot;</span><span class="o">:</span> <span class="mf">140012356032</span><span class="p">,</span>
     <span class="p">},</span> <span class="p">{</span>
       <span class="s2">&quot;user&quot;</span><span class="o">:</span> <span class="s2">&quot;username7&quot;</span><span class="p">,</span>
       <span class="s2">&quot;emoji_name&quot;</span><span class="o">:</span> <span class="s2">&quot;heart&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;create_at&quot;</span><span class="o">:</span> <span class="mi">140012359034</span><span class="p">,</span>
+      <span class="s2">&quot;create_at&quot;</span><span class="o">:</span> <span class="mf">140012359034</span><span class="p">,</span>
     <span class="p">}]</span>
   <span class="p">}</span>
 <span class="p">}</span>
@@ -1690,20 +1635,25 @@
            
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2015-2020 Mattermost
+        &#169; Copyright 2015-2020 Mattermost.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -1737,33 +1687,22 @@
 </div>
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
-        <script type="text/javascript" src="../_static/myscript.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
+  
 	<header>
 	<div class="header__container">
 		<div class="search__icon">
 			<i class="fa fa-search"></i>
 		</div>
-		<a href="http://docs.mattermost.com/" class="header__logo">
+		<a href="https://docs.mattermost.com/" class="header__logo">
 			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
 		</a>
 		<div class="links__icon">

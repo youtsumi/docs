@@ -2,112 +2,56 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Configuration in the Mattermost Database &mdash; Mattermost 5.28 documentation</title>
+  <title>Configuration in the Mattermost Database &mdash; Mattermost 5.30 documentation</title>
   
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
+
   
   
 
   
+    <link rel="canonical" href="https://docs.mattermost.com/administration/config-in-database.html" />
 
   
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/myscript.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Configuration Settings Prior to v5.12" href="prev-config-settings.html" />
     <link rel="prev" title="Configuration Settings" href="config-settings.html" />
-	<!-- Bizible Script -->
-	<script src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
-
-	
-		<!-- Google Analytics -->
-		<script>
-			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-			ga('create', 'UA-67846571-2', 'auto');
-			ga('send', 'pageview');
-		</script>
-		<!-- End Google Analytics -->
-	
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-67846571-1"></script>
-	<script>
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-
-	gtag('config', 'UA-67846571-1');
-	</script>
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<!-- Second Google Analytics tag to assist mapping with mattermost.com visits --> 
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120238482-1"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-
-	  gtag('config', 'UA-120238482-1');
-	</script>
-
-	<!-- LeadLander -->
-	<script type="text/javascript" language="javascript">
-		var sf14gv = 31865;
-		(function() {
-			var sf14g = document.createElement('script');
-			sf14g.src = 'https://tracking.leadlander.com/lt.min.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sf14g, s);
-		})();
-	</script>
-
-	<!-- Munchkin code -->
-	<script type="text/javascript">
-		(function() {
-			var didInit = false;
-			function initMunchkin() {
-			if(didInit === false) {
-				didInit = true;
-				Munchkin.init('161-FBE-733');
-			}
-			}
-			var s = document.createElement('script');
-			s.type = 'text/javascript';
-			s.async = true;
-			s.src = '//munchkin.marketo.net/munchkin.js';
-			s.onreadystatechange = function() {
-			if (this.readyState == 'complete' || this.readyState == 'loaded') {
-				initMunchkin();
-			}
-			};
-			s.onload = initMunchkin;
-			document.getElementsByTagName('head')[0].appendChild(s);
-		})();
-	</script>
-
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
 
 </head>
 
@@ -115,11 +59,10 @@
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -133,7 +76,7 @@
             
             
               <div class="version">
-                5.28
+                5.30
               </div>
             
           
@@ -150,6 +93,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -159,8 +103,9 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Administrator's Guide</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
@@ -182,6 +127,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../install/config-apache2.html">Configuring Apache2 (Unofficial)</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
@@ -193,14 +139,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/education.html">Training and Education</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -229,7 +176,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
     
-      <li><a href="../guides/administrator.html">Administrator’s Guide</a> &raquo;</li>
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
     
     <li>Configuration in the Mattermost Database</li>
     <li class="wy-breadcrumbs-aside">
@@ -247,20 +194,20 @@
             
   <div class="section" id="configuration-in-the-mattermost-database">
 <h1>Configuration in the Mattermost Database<a class="headerlink" href="#configuration-in-the-mattermost-database" title="Permalink to this headline">¶</a></h1>
-<p>A new configuration option was added in <a class="reference external" href="https://docs.mattermost.com/administration/changelog.html#configuration-in-database">5.10 release</a> to use the database as the single source of truth for the active configuration of your Mattermost installation. This changes the Mattermost binary from reading the default <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file to reading the configuration settings stored within a configuration table in the database.</p>
+<p>A new configuration option was added in the <a class="reference external" href="https://docs.mattermost.com/administration/changelog.html#configuration-in-database">5.10 release</a> to use the database as the single source of truth for the active configuration of your Mattermost installation. This changes the Mattermost binary from reading the default <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file to reading the configuration settings stored within a configuration table in the database.</p>
 <p>Mattermost has been running our <a class="reference external" href="https://community.mattermost.com">community server</a> on this option since the feature was released, and recommends its use for those on <span class="xref std std-doc">High Availability deployments</span>.</p>
 <p>Benefits to using this option:</p>
 <ul class="simple">
-<li>Conveniently manage configuration changes directly from the System Console, even in High Availability deployments and read-only containerized environments.</li>
-<li>Ensure all servers in a High Availability deployment have the same configuration, even when new servers are added to the cluster.</li>
-<li>Automatically deploy SAML certificates and keys to all servers in the cluster.</li>
+<li><p>Conveniently manage configuration changes directly from the System Console, even in High Availability deployments and read-only containerized environments.</p></li>
+<li><p>Ensure all servers in a High Availability deployment have the same configuration, even when new servers are added to the cluster.</p></li>
+<li><p>Automatically deploy SAML certificates and keys to all servers in the cluster.</p></li>
 </ul>
 <div class="section" id="how-to-migrate-configuration-to-the-database">
 <h2>How to Migrate Configuration to the Database<a class="headerlink" href="#how-to-migrate-configuration-to-the-database" title="Permalink to this headline">¶</a></h2>
 <p>These instructions cover migrating the Mattermost configuration to the database and updating your <code class="docutils literal notranslate"><span class="pre">systemd</span></code> configuration to load it from the database.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">These instructions assume you have Mattermost server installed at <code class="docutils literal notranslate"><span class="pre">/opt/mattermost</span></code>. If you’re running Mattermost in a different directory you’ll have to modify the paths to match your environment.</p>
+<p class="admonition-title">Note</p>
+<p>These instructions assume you have Mattermost server installed at <code class="docutils literal notranslate"><span class="pre">/opt/mattermost</span></code>. If you’re running Mattermost in a different directory you’ll have to modify the paths to match your environment.</p>
 </div>
 <div class="section" id="get-your-database-connection-string">
 <h3>Get your database connection string<a class="headerlink" href="#get-your-database-connection-string" title="Permalink to this headline">¶</a></h3>
@@ -275,8 +222,8 @@ bin/mattermost config get SqlSettings.DataSource
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Be sure to run this command as the <em>mattermost</em> user and not <em>root</em>. Running the Mattermost binary as <em>root</em> will cause permissions errors.</p>
+<p class="admonition-title">Note</p>
+<p>Be sure to run this command as the <em>mattermost</em> user and not <em>root</em>. Running the Mattermost binary as <em>root</em> will cause permissions errors.</p>
 </div>
 <p>Another way is to view your <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file and get the value in <code class="docutils literal notranslate"><span class="pre">SqlSettings.DataSource</span></code>.</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">SqlSettings.DataSource</span></code> does not start with <code class="docutils literal notranslate"><span class="pre">postgres://</span></code> then you have to add <code class="docutils literal notranslate"><span class="pre">mysql://</span></code> to the beginning. Also, if you see <code class="docutils literal notranslate"><span class="pre">\u0026</span></code> replace it with <code class="docutils literal notranslate"><span class="pre">&amp;</span></code>.</p>
@@ -293,8 +240,8 @@ bin/mattermost config get SqlSettings.DataSource
 <div class="section" id="create-an-environment-file">
 <h3>Create an environment file<a class="headerlink" href="#create-an-environment-file" title="Permalink to this headline">¶</a></h3>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If you’re running Mattermost in a High Availability cluster this step must be done on all servers in the cluster.</p>
+<p class="admonition-title">Note</p>
+<p>If you’re running Mattermost in a High Availability cluster this step must be done on all servers in the cluster.</p>
 </div>
 <p>Create the file <code class="docutils literal notranslate"><span class="pre">/opt/mattermost/config/mattermost.environment</span></code> to set the <code class="docutils literal notranslate"><span class="pre">MM_CONFIG</span></code> environment variable to the database connection string. For example:</p>
 <p><strong>MySQL</strong></p>
@@ -306,8 +253,8 @@ bin/mattermost config get SqlSettings.DataSource
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Be sure to escape any single quotes in the database connection string by placing a <code class="docutils literal notranslate"><span class="pre">\</span></code> in front of them like this <code class="docutils literal notranslate"><span class="pre">\'</span></code>. For example: <code class="docutils literal notranslate"><span class="pre">MM_CONFIG='mysql://mmuser:it\'s-a-password!&#64;tcp(127.0.0.1:3306)/mattermost?charset=utf8mb4,utf8&amp;readTimeout=30s&amp;writeTimeout=30s'</span></code></p>
+<p class="admonition-title">Note</p>
+<p>Be sure to escape any single quotes in the database connection string by placing a <code class="docutils literal notranslate"><span class="pre">\</span></code> in front of them like this <code class="docutils literal notranslate"><span class="pre">\'</span></code>. For example: <code class="docutils literal notranslate"><span class="pre">MM_CONFIG='mysql://mmuser:it\'s-a-password!&#64;tcp(127.0.0.1:3306)/mattermost?charset=utf8mb4,utf8&amp;readTimeout=30s&amp;writeTimeout=30s'</span></code></p>
 </div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>MM_CONFIG=&#39;mysql://mmuser:it\&#39;s-a-password!@tcp(127.0.0.1:3306)/mattermost?charset=utf8mb4,utf8&amp;readTimeout=30s&amp;writeTimeout=30s&#39;
 </pre></div>
@@ -328,7 +275,7 @@ bin/mattermost config get SqlSettings.DataSource
 </pre></div>
 </div>
 <p>Edit this file as <em>root</em> to add the below text just above the line that begins with <code class="docutils literal notranslate"><span class="pre">ExecStart</span></code>:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>EnvironmentFile=/opt/mattermost/config/mm.environment
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>EnvironmentFile=/opt/mattermost/config/mattermost.environment
 </pre></div>
 </div>
 <p>Here’s a complete <code class="docutils literal notranslate"><span class="pre">mattermost.service</span></code> file with the <code class="docutils literal notranslate"><span class="pre">EnvironmentFile</span></code> line added:</p>
@@ -340,7 +287,7 @@ Requires=mysql.service
 
 [Service]
 Type=notify
-EnvironmentFile=/opt/mattermost/config/mm.environment
+EnvironmentFile=/opt/mattermost/config/mattermost.environment
 ExecStart=/opt/mattermost/bin/mattermost
 TimeoutStartSec=3600
 Restart=always
@@ -355,15 +302,15 @@ WantedBy=mysql.service
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If you’re using PostgreSQL as your database, the <code class="docutils literal notranslate"><span class="pre">mysql.service</span></code> must be replaced with <code class="docutils literal notranslate"><span class="pre">postgresql.service</span></code>. The easiest way to avoid making a mistake is to add only the <code class="docutils literal notranslate"><span class="pre">EnvironmentFile</span></code> line and not copy the entire example.</p>
+<p class="admonition-title">Note</p>
+<p>If you’re using PostgreSQL as your database, the <code class="docutils literal notranslate"><span class="pre">mysql.service</span></code> must be replaced with <code class="docutils literal notranslate"><span class="pre">postgresql.service</span></code>. The easiest way to avoid making a mistake is to add only the <code class="docutils literal notranslate"><span class="pre">EnvironmentFile</span></code> line and not copy the entire example.</p>
 </div>
 </div>
 <div class="section" id="migrate-configuration-from-config-json">
 <h3>Migrate configuration from <code class="docutils literal notranslate"><span class="pre">config.json</span></code><a class="headerlink" href="#migrate-configuration-from-config-json" title="Permalink to this headline">¶</a></h3>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If you’re using a High Availability cluster you only need to run this on a single server in the cluster.</p>
+<p class="admonition-title">Note</p>
+<p>If you’re using a High Availability cluster you only need to run this on a single server in the cluster.</p>
 </div>
 <p>The command to migrate the config to the database should always be run as the <em>mattermost</em> user.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo su mattermost
@@ -371,9 +318,13 @@ WantedBy=mysql.service
 bin/mattermost config migrate ./config/config.json <span class="s1">&#39;mysql://mmuser:mostest@tcp(127.0.0.1:3306)/mattermost?charset=utf8mb4,utf8&amp;readTimeout=30s&amp;writeTimeout=30s&#39;</span>
 </pre></div>
 </div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When migrating config, Mattermost will incorporate configuration from any existing <code class="docutils literal notranslate"><span class="pre">MM_*</span></code> environment variables set in the current shell.  See <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#configuration-settings">Environment Variables</a></p>
+</div>
 <p>As with the environment file you’ll have to escape any single quotes in the database connection string. Also, any existing SAML certificates will be migrated into the database as well so they are available for all servers in the cluster.</p>
 <p>With configuration in the database enabled, any changes to the configuration are recorded to the <code class="docutils literal notranslate"><span class="pre">Configurations</span></code> and <code class="docutils literal notranslate"><span class="pre">ConfigurationFiles</span></code> tables. Furthermore, <code class="docutils literal notranslate"><span class="pre">ClusterSettings.ReadOnlyConfig</span></code> is ignored, enabling full use of the System Console.</p>
-<p>If you have configuration settings that must be set on a per-server basis you should add them as environment variables to the <code class="docutils literal notranslate"><span class="pre">mm.environment</span></code> file. These must be on their own line, and you must escape them properly.</p>
+<p>If you have configuration settings that must be set on a per-server basis you should add them as environment variables to the <code class="docutils literal notranslate"><span class="pre">mattermost.environment</span></code> file. These must be on their own line, and you must escape them properly.</p>
 </div>
 <div class="section" id="verify-that-the-configuration-was-migrated-correctly">
 <h3>Verify that the configuration was migrated correctly<a class="headerlink" href="#verify-that-the-configuration-was-migrated-correctly" title="Permalink to this headline">¶</a></h3>
@@ -386,8 +337,8 @@ bin/mattermost config migrate ./config/config.json <span class="s1">&#39;mysql:/
 <div class="section" id="reload-systemd-files-and-restart-mattermost">
 <h3>Reload <code class="docutils literal notranslate"><span class="pre">systemd</span></code> files and restart Mattermost<a class="headerlink" href="#reload-systemd-files-and-restart-mattermost" title="Permalink to this headline">¶</a></h3>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If you’re running Mattermost in High Availability this step must be run on all servers in the cluster.</p>
+<p class="admonition-title">Note</p>
+<p>If you’re running Mattermost in High Availability this step must be run on all servers in the cluster.</p>
 </div>
 <p>Finally, run these commands to reload the daemon and restart Mattermost using the new <code class="docutils literal notranslate"><span class="pre">MM_CONFIG</span></code> environment variable.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sudo systemctl daemon-reload
@@ -397,7 +348,7 @@ sudo systemctl restart mattermost
 </div>
 <div class="section" id="rolling-back">
 <h3>Rolling back<a class="headerlink" href="#rolling-back" title="Permalink to this headline">¶</a></h3>
-<p>If you run into issues with your configuration in the database you can roll back to the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file by commenting out the <code class="docutils literal notranslate"><span class="pre">MM_CONFIG</span></code> line in <code class="docutils literal notranslate"><span class="pre">/opt/mattermost/config/mm.environment</span></code> and restarting Mattermost with <code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">restart</span> <span class="pre">mattermost</span></code>.</p>
+<p>If you run into issues with your configuration in the database you can roll back to the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file by commenting out the <code class="docutils literal notranslate"><span class="pre">MM_CONFIG</span></code> line in <code class="docutils literal notranslate"><span class="pre">/opt/mattermost/config/mattermost.environment</span></code> and restarting Mattermost with <code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">restart</span> <span class="pre">mattermost</span></code>.</p>
 </div>
 </div>
 <div class="section" id="troubleshooting">
@@ -411,29 +362,29 @@ sudo systemctl restart mattermost
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="prev-config-settings.html" class="btn btn-neutral float-right" title="Configuration Settings Prior to v5.12" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="config-settings.html" class="btn btn-neutral" title="Configuration Settings" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="prev-config-settings.html" class="btn btn-neutral float-right" title="Configuration Settings Prior to v5.12" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="config-settings.html" class="btn btn-neutral float-left" title="Configuration Settings" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2015-2020 Mattermost
+        &#169; Copyright 2015-2020 Mattermost.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -467,33 +418,22 @@ sudo systemctl restart mattermost
 </div>
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
-        <script type="text/javascript" src="../_static/myscript.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
+  
 	<header>
 	<div class="header__container">
 		<div class="search__icon">
 			<i class="fa fa-search"></i>
 		</div>
-		<a href="http://docs.mattermost.com/" class="header__logo">
+		<a href="https://docs.mattermost.com/" class="header__logo">
 			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
 		</a>
 		<div class="links__icon">

@@ -2,112 +2,56 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Implementation Plan &mdash; Mattermost 5.28 documentation</title>
+  <title>Implementation Plan &mdash; Mattermost 5.30 documentation</title>
   
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
+
   
   
 
   
+    <link rel="canonical" href="https://docs.mattermost.com/getting-started/implementation_plan.html" />
 
   
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/myscript.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Welcome Email to End Users" href="welcome_email.html" />
     <link rel="prev" title="Administrator Tasks" href="../deployment/on-boarding.html" />
-	<!-- Bizible Script -->
-	<script src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
-
-	
-		<!-- Google Analytics -->
-		<script>
-			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-			ga('create', 'UA-67846571-2', 'auto');
-			ga('send', 'pageview');
-		</script>
-		<!-- End Google Analytics -->
-	
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-67846571-1"></script>
-	<script>
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-
-	gtag('config', 'UA-67846571-1');
-	</script>
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<!-- Second Google Analytics tag to assist mapping with mattermost.com visits --> 
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120238482-1"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-
-	  gtag('config', 'UA-120238482-1');
-	</script>
-
-	<!-- LeadLander -->
-	<script type="text/javascript" language="javascript">
-		var sf14gv = 31865;
-		(function() {
-			var sf14g = document.createElement('script');
-			sf14g.src = 'https://tracking.leadlander.com/lt.min.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sf14g, s);
-		})();
-	</script>
-
-	<!-- Munchkin code -->
-	<script type="text/javascript">
-		(function() {
-			var didInit = false;
-			function initMunchkin() {
-			if(didInit === false) {
-				didInit = true;
-				Munchkin.init('161-FBE-733');
-			}
-			}
-			var s = document.createElement('script');
-			s.type = 'text/javascript';
-			s.async = true;
-			s.src = '//munchkin.marketo.net/munchkin.js';
-			s.onreadystatechange = function() {
-			if (this.readyState == 'complete' || this.readyState == 'loaded') {
-				initMunchkin();
-			}
-			};
-			s.onload = initMunchkin;
-			document.getElementsByTagName('head')[0].appendChild(s);
-		})();
-	</script>
-
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
 
 </head>
 
@@ -115,11 +59,10 @@
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -133,7 +76,7 @@
             
             
               <div class="version">
-                5.28
+                5.30
               </div>
             
           
@@ -150,6 +93,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -159,8 +103,9 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Administrator's Guide</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../help/getting-started/light-install.html">Light Install Guide</a></li>
 <li class="toctree-l3"><a class="reference internal" href="enterprise-roll-out-checklist.html">Enterprise Roll Out Checklist</a></li>
@@ -178,6 +123,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
@@ -189,14 +135,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/education.html">Training and Education</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -225,7 +172,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
     
-      <li><a href="../guides/administrator.html">Administrator’s Guide</a> &raquo;</li>
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
     
     <li>Implementation Plan</li>
     <li class="wy-breadcrumbs-aside">
@@ -247,20 +194,20 @@
 <h2>1   Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="purpose">
 <h3>1.1 Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h3>
-<p>Mattermost is an open source, private cloud alternative to proprietary SaaS messaging solutions designed to offer organizations superior control, data sovereignty, configurability, freedom from lock-in, and enhanced security by keeping vital communications behind your firewall. You have chosen to implement Mattermost in our supported <a class="reference external" href="https://about.mattermost.com/features/">editions:</a></p>
+<p>Mattermost is an open source, private cloud alternative to proprietary SaaS messaging solutions designed to offer organizations superior control, data sovereignty, configurability, freedom from lock-in, and enhanced security by keeping vital communications behind your firewall. You have chosen to implement Mattermost in our supported <a class="reference external" href="https://mattermost.com/product/">editions:</a></p>
 <blockquote>
 <div><ul class="simple">
-<li>Team Edition</li>
-<li>Enterprise Edition (E10) which adds additional features to the platform including <a class="reference external" href="https://docs.mattermost.com/deployment/sso-ldap.html">AD/LDAP Integration</a>, <a class="reference external" href="https://docs.mattermost.com/deployment/auth.html">Multi-Factor Authentication (“MFA”)</a>, <a class="reference external" href="https://docs.mattermost.com/mobile/mobile-hpns.html">Encrypted Push Notifications</a>, <a class="reference external" href="https://docs.mattermost.com/administration/branding.html">Branding</a>, <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#policy">Advanced Access Control Policy</a>, and next business day support.</li>
-<li>Enterprise Edition (E20) includes E10 features plus <a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml.html">SAML 2.0 Authentication</a>, <a class="reference external" href="https://docs.mattermost.com/administration/compliance.html">Compliance Reporting</a>, <a class="reference external" href="https://docs.mattermost.com/deployment/cluster.html">High Availability</a>, <a class="reference external" href="https://docs.mattermost.com/deployment/elasticsearch.html">Elasticsearch</a>, <a class="reference external" href="https://docs.mattermost.com/deployment/metrics.html">Performance Monitoring</a>, <a class="reference external" href="https://docs.mattermost.com/administration/data-retention.html">Data Retention Policy</a>, and enterprise class support.</li>
+<li><p>Team Edition</p></li>
+<li><p>Enterprise Edition (E10) which adds additional features to the platform including <a class="reference external" href="https://docs.mattermost.com/deployment/sso-ldap.html">AD/LDAP Integration</a>, <a class="reference external" href="https://docs.mattermost.com/deployment/auth.html">Multi-Factor Authentication (“MFA”)</a>, <a class="reference external" href="https://docs.mattermost.com/mobile/mobile-hpns.html">Encrypted Push Notifications</a>, <a class="reference external" href="https://docs.mattermost.com/administration/branding.html">Branding</a>, <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#policy">Advanced Access Control Policy</a>, and next business day support.</p></li>
+<li><p>Enterprise Edition (E20) includes E10 features plus <a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml.html">SAML 2.0 Authentication</a>, <a class="reference external" href="https://docs.mattermost.com/administration/compliance.html">Compliance Reporting</a>, <a class="reference external" href="https://docs.mattermost.com/deployment/cluster.html">High Availability</a>, <a class="reference external" href="https://docs.mattermost.com/deployment/elasticsearch.html">Elasticsearch</a>, <a class="reference external" href="https://docs.mattermost.com/deployment/metrics.html">Performance Monitoring</a>, <a class="reference external" href="https://docs.mattermost.com/administration/data-retention.html">Data Retention Policy</a>, and enterprise class support.</p></li>
 </ul>
 </div></blockquote>
 <p>The purpose of this Implementation Plan is to:</p>
 <blockquote>
 <div><ul class="simple">
-<li>Describe the solution to be deployed;</li>
-<li>Outline the process for implementing the solution (key personnel, tasks, schedule, etc.);</li>
-<li>Identify support required during the implementation process.</li>
+<li><p>Describe the solution to be deployed;</p></li>
+<li><p>Outline the process for implementing the solution (key personnel, tasks, schedule, etc.);</p></li>
+<li><p>Identify support required during the implementation process.</p></li>
 </ul>
 </div></blockquote>
 </div>
@@ -272,15 +219,15 @@
 <h3>2.1 System Description<a class="headerlink" href="#system-description" title="Permalink to this headline">¶</a></h3>
 <p>Mattermost is a messaging solution designed to remove friction for inter-organizational communications. You are implementing Mattermost in order to:</p>
 <ol class="arabic simple">
-<li><strong>[STATE REASON]</strong></li>
-<li><strong>[STATE REASON]</strong></li>
-<li><strong>[STATE REASON]</strong></li>
+<li><p><strong>[STATE REASON]</strong></p></li>
+<li><p><strong>[STATE REASON]</strong></p></li>
+<li><p><strong>[STATE REASON]</strong></p></li>
 </ol>
 <p>In this implementation, you are planning to deploy Mattermost to <strong>[NUMBER OF USERS]</strong> users on the following teams:</p>
 <ol class="arabic simple">
-<li><strong>[TEAM 1]</strong></li>
-<li><strong>[TEAM 2]</strong></li>
-<li><strong>[TEAM 3]</strong></li>
+<li><p><strong>[TEAM 1]</strong></p></li>
+<li><p><strong>[TEAM 2]</strong></p></li>
+<li><p><strong>[TEAM 3]</strong></p></li>
 </ol>
 </div>
 <div class="section" id="system-organization">
@@ -288,64 +235,64 @@
 <p>A Mattermost Enterprise E20 implementation consists of the following system components:</p>
 <blockquote>
 <div><ul class="simple">
-<li><strong>Mattermost Server</strong>
-- The Mattermost Server is a single binary that includes the RESTful JSON web service, authentication client, authentication provider, notification service, and data management service. The Mattermost Server can be deployed in stand-alone or high availability mode where two or more servers are clustered together using gossip protocol and a proxy server that routes traffic from client applications to healthy servers in the cluster.</li>
-<li><strong>Mattermost Database</strong>
-- A MySQL or PostgreSQL database in stand-alone or high-availability configurations (master with read replicas). When choosing the database, consider the <a class="reference external" href="https://docs.mattermost.com/install/requirements.html#database-software">inherent search limitations of the database type</a> and whether <a class="reference external" href="https://docs.mattermost.com/deployment/elasticsearch.html">Elasticsearch</a> is most appropriate for your deployment.</li>
-<li><strong>Mattermost Push Notification Service</strong>
-- Hosted or on-prem service that pushes notifications to Mattermost Android and Mattermost iOS mobile applications.</li>
-<li><strong>Mattermost Client Applications</strong>
-- Client applications are available for Mattermost for the following platforms: Android, iOS, Windows, OSX, and Linux (Beta).</li>
-<li><strong>Mattermost Web Client</strong>
-- Mattermost users can use their favorite Web browser to connect to their Mattermost server in place of the Mattermost mobile and desktop applications.</li>
-<li><strong>Proxy Server</strong>
-- The use of a proxy server (NGINX, Apache, HAProxy, ELB, etc.) is recommended with Mattermost to obtain the benefits of: SSL termination, HTTP to HTTPS redirection, port mapping :80 to :8065, and the creation of standard request logs.</li>
+<li><p><strong>Mattermost Server</strong>
+- The Mattermost Server is a single binary that includes the RESTful JSON web service, authentication client, authentication provider, notification service, and data management service. The Mattermost Server can be deployed in stand-alone or high availability mode where two or more servers are clustered together using gossip protocol and a proxy server that routes traffic from client applications to healthy servers in the cluster.</p></li>
+<li><p><strong>Mattermost Database</strong>
+- A MySQL or PostgreSQL database in stand-alone or high-availability configurations (master with read replicas). When choosing the database, consider the <a class="reference external" href="https://docs.mattermost.com/install/requirements.html#database-software">inherent search limitations of the database type</a> and whether <a class="reference external" href="https://docs.mattermost.com/deployment/elasticsearch.html">Elasticsearch</a> is most appropriate for your deployment.</p></li>
+<li><p><strong>Mattermost Push Notification Service</strong>
+- Hosted or on-prem service that pushes notifications to Mattermost Android and Mattermost iOS mobile applications.</p></li>
+<li><p><strong>Mattermost Client Applications</strong>
+- Client applications are available for Mattermost for the following platforms: Android, iOS, Windows, OSX, and Linux (Beta).</p></li>
+<li><p><strong>Mattermost Web Client</strong>
+- Mattermost users can use their favorite Web browser to connect to their Mattermost server in place of the Mattermost mobile and desktop applications.</p></li>
+<li><p><strong>Proxy Server</strong>
+- The use of a proxy server (NGINX, Apache, HAProxy, ELB, etc.) is recommended with Mattermost to obtain the benefits of: SSL termination, HTTP to HTTPS redirection, port mapping :80 to :8065, and the creation of standard request logs.</p></li>
 </ul>
 </div></blockquote>
 <p>The following diagram is a high-level illustration of the Mattermost platform and how its various components interact with each other within a network:</p>
-<img alt="../_images/network1.PNG" src="../_images/network1.PNG" />
+<img alt="../_images/network.PNG" src="../_images/network.PNG" />
 <p><strong>Reference</strong>: <a class="reference external" href="https://docs.mattermost.com/deployment/deployment.html">https://docs.mattermost.com/deployment/deployment.html</a></p>
 <p>A recommended installation of Mattermost Enterprise E20 configured with a redundant, highly available, highly scalable mode, with application (Mattermost Server) and database high availability features enabled, will require the following physical, or virtual, servers:</p>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="31%" />
-<col width="15%" />
-<col width="25%" />
-<col width="13%" />
-<col width="16%" />
+<col style="width: 31%" />
+<col style="width: 15%" />
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 16%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Task</th>
-<th class="head">Qty</th>
-<th class="head">CPU</th>
-<th class="head">Memory</th>
-<th class="head">Storage</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Task</p></th>
+<th class="head"><p>Qty</p></th>
+<th class="head"><p>CPU</p></th>
+<th class="head"><p>Memory</p></th>
+<th class="head"><p>Storage</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>Mattermost Server</td>
-<td>2</td>
-<td>2 vCPUs/cores</td>
-<td>4 GB</td>
-<td>45-90 GB</td>
+<tbody>
+<tr class="row-even"><td><p>Mattermost Server</p></td>
+<td><p>2</p></td>
+<td><p>2 vCPUs/cores</p></td>
+<td><p>4 GB</p></td>
+<td><p>45-90 GB</p></td>
 </tr>
-<tr class="row-odd"><td>Database Server</td>
-<td>2</td>
-<td>2 vCPUs/cores</td>
-<td>8 GB</td>
-<td>100 GB</td>
+<tr class="row-odd"><td><p>Database Server</p></td>
+<td><p>2</p></td>
+<td><p>2 vCPUs/cores</p></td>
+<td><p>8 GB</p></td>
+<td><p>100 GB</p></td>
 </tr>
-<tr class="row-even"><td>Proxy</td>
-<td>2</td>
-<td>1 vCPUs/cores</td>
-<td>4 GB</td>
-<td>10 GB</td>
+<tr class="row-even"><td><p>Proxy</p></td>
+<td><p>2</p></td>
+<td><p>1 vCPUs/cores</p></td>
+<td><p>4 GB</p></td>
+<td><p>10 GB</p></td>
 </tr>
 </tbody>
 </table>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Mattermost hardware sizing guidance can be found here: <a class="reference external" href="https://docs.mattermost.com/install/requirements.html#hardware-requirements">https://docs.mattermost.com/install/requirements.html#hardware-requirements</a></p>
+<p class="admonition-title">Note</p>
+<p>Mattermost hardware sizing guidance can be found here: <a class="reference external" href="https://docs.mattermost.com/install/requirements.html#hardware-requirements">https://docs.mattermost.com/install/requirements.html#hardware-requirements</a></p>
 </div>
 </div>
 <div class="section" id="project-references">
@@ -353,11 +300,11 @@
 <p>This section provides a bibliography of key project references and deliverables that have been produced before this point in the project development.</p>
 <blockquote>
 <div><ul class="simple">
-<li>Mattermost Product Overview: <a class="reference external" href="https://docs.mattermost.com/overview/index.html">https://docs.mattermost.com/overview/index.html</a></li>
-<li>Mattermost Software/Hardware Requirements: <a class="reference external" href="https://docs.mattermost.com/install/requirements.html">https://docs.mattermost.com/install/requirements.html</a></li>
-<li>Mattermost Security Features: <a class="reference external" href="https://docs.mattermost.com/overview/security.html">https://docs.mattermost.com/overview/security.html</a></li>
-<li>Mattermost Administrator Guide: <a class="reference external" href="https://docs.mattermost.com/guides/administrator.html">https://docs.mattermost.com/guides/administrator.html</a></li>
-<li>Mattermost User Guide: <a class="reference external" href="https://docs.mattermost.com/guides/user.html">https://docs.mattermost.com/guides/user.html</a></li>
+<li><p>Mattermost Product Overview: <a class="reference external" href="https://docs.mattermost.com/overview/index.html">https://docs.mattermost.com/overview/index.html</a></p></li>
+<li><p>Mattermost Software/Hardware Requirements: <a class="reference external" href="https://docs.mattermost.com/install/requirements.html">https://docs.mattermost.com/install/requirements.html</a></p></li>
+<li><p>Mattermost Security Features: <a class="reference external" href="https://docs.mattermost.com/overview/security.html">https://docs.mattermost.com/overview/security.html</a></p></li>
+<li><p>Mattermost Administrator Guide: <a class="reference external" href="https://docs.mattermost.com/guides/administrator.html">https://docs.mattermost.com/guides/administrator.html</a></p></li>
+<li><p>Mattermost User Guide: <a class="reference external" href="https://docs.mattermost.com/guides/user.html">https://docs.mattermost.com/guides/user.html</a></p></li>
 </ul>
 </div></blockquote>
 </div>
@@ -378,35 +325,35 @@
 <p>In this section, identify the System Proponent, the name of the responsible organization(s), and titles and telephone numbers of the staff who serve as points of contact for the system implementation.  These points of contact could include the Project Manager. Program Manager, Security Manager.  Database Administrator, Configuration Management Manager, or other managers with responsibilities relating to the system implementation.  The site implementation representative for each field installation or implementation site should also be included, if appropriate.  List all managers and staff with whom the implementation must be coordinated.</p>
 <div class="section" id="team-members">
 <h4>3.2.1 Team Members<a class="headerlink" href="#team-members" title="Permalink to this headline">¶</a></h4>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="16%" />
-<col width="27%" />
-<col width="35%" />
-<col width="22%" />
+<col style="width: 16%" />
+<col style="width: 27%" />
+<col style="width: 35%" />
+<col style="width: 22%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Name</th>
-<th class="head">Title</th>
-<th class="head">Email</th>
-<th class="head">Phone</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Title</p></th>
+<th class="head"><p>Email</p></th>
+<th class="head"><p>Phone</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>Jane Doe</td>
-<td>Project Manager</td>
-<td><a class="reference external" href="mailto:jane&#46;doe&#37;&#52;&#48;company&#46;com">jane<span>&#46;</span>doe<span>&#64;</span>company<span>&#46;</span>com</a></td>
-<td>111.111.1111</td>
+<tbody>
+<tr class="row-even"><td><p>Jane Doe</p></td>
+<td><p>Project Manager</p></td>
+<td><p><a class="reference external" href="mailto:jane&#46;doe&#37;&#52;&#48;company&#46;com">jane<span>&#46;</span>doe<span>&#64;</span>company<span>&#46;</span>com</a></p></td>
+<td><p>111.111.1111</p></td>
 </tr>
-<tr class="row-odd"><td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
+<tr class="row-odd"><td></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
-<tr class="row-even"><td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
+<tr class="row-even"><td></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -420,10 +367,10 @@
 <p>The System Architecture Document is used to document the environments that Mattermost will be deployed to including:</p>
 <blockquote>
 <div><ul class="simple">
-<li>The environment (development, staging, production, etc.)</li>
-<li>Server, or virtual machine, specifications</li>
-<li>IP addresses and DNS</li>
-<li>Network diagram</li>
+<li><p>The environment (development, staging, production, etc.)</p></li>
+<li><p>Server, or virtual machine, specifications</p></li>
+<li><p>IP addresses and DNS</p></li>
+<li><p>Network diagram</p></li>
 </ul>
 </div></blockquote>
 <p><strong>Reference</strong>: <a class="reference external" href="https://docs.mattermost.com/deployment/deployment.html">https://docs.mattermost.com/deployment/deployment.html</a></p>
@@ -454,15 +401,15 @@
 <p>You can import the following data types:</p>
 <blockquote>
 <div><ul class="simple">
-<li>Teams</li>
-<li>Channels (Public and Private)</li>
-<li>Users</li>
-<li>Users’ Team memberships</li>
-<li>Users’ Channel memberships</li>
-<li>Users’ notification preferences</li>
-<li>Posts (regular, non-reply posts)</li>
-<li>Direct Message and Group Message channels</li>
-<li>Direct Messages and Group Messages</li>
+<li><p>Teams</p></li>
+<li><p>Channels (Public and Private)</p></li>
+<li><p>Users</p></li>
+<li><p>Users’ Team memberships</p></li>
+<li><p>Users’ Channel memberships</p></li>
+<li><p>Users’ notification preferences</p></li>
+<li><p>Posts (regular, non-reply posts)</p></li>
+<li><p>Direct Message and Group Message channels</p></li>
+<li><p>Direct Messages and Group Messages</p></li>
 </ul>
 </div></blockquote>
 <p><strong>Reference</strong>: <a class="reference external" href="https://docs.mattermost.com/deployment/bulk-loading.html">https://docs.mattermost.com/deployment/bulk-loading.html</a></p>
@@ -505,11 +452,10 @@
 <div class="section" id="onboard-users">
 <h4>3.3.14 Onboard Users<a class="headerlink" href="#onboard-users" title="Permalink to this headline">¶</a></h4>
 <p>Send all users a welcome email with instructions on how to get started using Mattermost including links to the mobile applications and the User Guide.</p>
-<dl class="docutils">
-<dt><strong>References</strong>:</dt>
-<dd><ul class="first last simple">
-<li>Links to download Mattermost apps:  <a class="reference external" href="https://about.mattermost.com/download/#mattermostApps">https://about.mattermost.com/download/#mattermostApps</a></li>
-<li>User Guides: <a class="reference external" href="https://docs.mattermost.com/guides/user.html">https://docs.mattermost.com/guides/user.html</a></li>
+<dl class="simple">
+<dt><strong>References</strong>:</dt><dd><ul class="simple">
+<li><p>Links to download Mattermost apps:  <a class="reference external" href="https://mattermost.com/download/#mattermostApps">https://mattermost.com/download/#mattermostApps</a></p></li>
+<li><p>User Guides: <a class="reference external" href="https://docs.mattermost.com/guides/user.html">https://docs.mattermost.com/guides/user.html</a></p></li>
 </ul>
 </dd>
 </dl>
@@ -518,70 +464,70 @@
 <div class="section" id="implementation-schedule">
 <h3>3.4 Implementation Schedule<a class="headerlink" href="#implementation-schedule" title="Permalink to this headline">¶</a></h3>
 <p>In this section, provide a schedule of activities to be accomplished during implementation.  Show the required tasks (described in Section 3.3, Major Tasks) in chronological order, with the beginning and end dates of each task.</p>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="6%" />
-<col width="61%" />
-<col width="17%" />
-<col width="17%" />
+<col style="width: 6%" />
+<col style="width: 61%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">&#160;</th>
-<th class="head">Task</th>
-<th class="head">Start Date</th>
-<th class="head">End Date</th>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>Task</p></th>
+<th class="head"><p>Start Date</p></th>
+<th class="head"><p>End Date</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>1</td>
-<td>Create System Architecture Document</td>
-<td>xx/xx/xxxx</td>
-<td>xx/xx/xxxx</td>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Create System Architecture Document</p></td>
+<td><p>xx/xx/xxxx</p></td>
+<td><p>xx/xx/xxxx</p></td>
 </tr>
-<tr class="row-odd"><td>2</td>
-<td>Gather Required Software and Documentation</td>
-<td>&#160;</td>
-<td>&#160;</td>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Gather Required Software and Documentation</p></td>
+<td></td>
+<td></td>
 </tr>
-<tr class="row-even"><td>3</td>
-<td>Prepare Deployment Environments</td>
-<td>&#160;</td>
-<td>&#160;</td>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Prepare Deployment Environments</p></td>
+<td></td>
+<td></td>
 </tr>
-<tr class="row-odd"><td>4</td>
-<td>Install Software</td>
-<td>&#160;</td>
-<td>&#160;</td>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Install Software</p></td>
+<td></td>
+<td></td>
 </tr>
-<tr class="row-even"><td>5</td>
-<td>Test Deployment</td>
-<td>&#160;</td>
-<td>&#160;</td>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>Test Deployment</p></td>
+<td></td>
+<td></td>
 </tr>
-<tr class="row-odd"><td>6</td>
-<td>Bulk Load Data</td>
-<td>&#160;</td>
-<td>&#160;</td>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>Bulk Load Data</p></td>
+<td></td>
+<td></td>
 </tr>
-<tr class="row-even"><td>7</td>
-<td>Implement Backup</td>
-<td>&#160;</td>
-<td>&#160;</td>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>Implement Backup</p></td>
+<td></td>
+<td></td>
 </tr>
-<tr class="row-odd"><td>8</td>
-<td>Implement Monitoring</td>
-<td>&#160;</td>
-<td>&#160;</td>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>Implement Monitoring</p></td>
+<td></td>
+<td></td>
 </tr>
-<tr class="row-even"><td>9</td>
-<td>Train Administrators</td>
-<td>&#160;</td>
-<td>&#160;</td>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>Train Administrators</p></td>
+<td></td>
+<td></td>
 </tr>
-<tr class="row-odd"><td>10</td>
-<td>Onboard Users</td>
-<td>&#160;</td>
-<td>&#160;</td>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>Onboard Users</p></td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -594,13 +540,13 @@
 <p>The Mattermost platform will be secured in the following ways:</p>
 <blockquote>
 <div><ul class="simple">
-<li>Mattermost will be hosted entirely on-premises behind your company firewall with access restricted to VPN connections;</li>
-<li>Mobile access to Mattermost will be further restricted by the use of multi-factor authorization;</li>
-<li>Transmissions to and from Mattermost will be encrypted using TLS;</li>
-<li>Encryption-at-rest will be applied using your company’s standards;</li>
-<li>Mattermost’s integrity and audit controls store a complete history of messages, including edits and deletes, along with all files uploaded. User interface actions for “deleting” messages and channels remove the data only from the user interface; the data is retained within your database. If your compliance guidelines require it, you can turn off users’ ability to edit and delete their messages after they are posted.</li>
-<li>Mattermost will be protected against brute force attacks by its rate limiting API;</li>
-<li>Authentication to Mattermost will be controlled using your company’s Active Directory/LDAP/SAML directory server.</li>
+<li><p>Mattermost will be hosted entirely on-premises behind your company firewall with access restricted to VPN connections;</p></li>
+<li><p>Mobile access to Mattermost will be further restricted by the use of multi-factor authorization;</p></li>
+<li><p>Transmissions to and from Mattermost will be encrypted using TLS;</p></li>
+<li><p>Encryption-at-rest will be applied using your company’s standards;</p></li>
+<li><p>Mattermost’s integrity and audit controls store a complete history of messages, including edits and deletes, along with all files uploaded. User interface actions for “deleting” messages and channels remove the data only from the user interface; the data is retained within your database. If your compliance guidelines require it, you can turn off users’ ability to edit and delete their messages after they are posted.</p></li>
+<li><p>Mattermost will be protected against brute force attacks by its rate limiting API;</p></li>
+<li><p>Authentication to Mattermost will be controlled using your company’s Active Directory/LDAP/SAML directory server.</p></li>
 </ul>
 </div></blockquote>
 <p><strong>Reference</strong>: <a class="reference external" href="https://docs.mattermost.com/overview/security.html">https://docs.mattermost.com/overview/security.html</a></p>
@@ -647,9 +593,9 @@
 <p>This section addresses the training, if any, necessary to prepare staff for implementing and maintaining the system; it does not address user training, which is the subject of the Training Plan.  Describe the type and amount of training required for each of the following areas, if appropriate, for the system:</p>
 <blockquote>
 <div><ul class="simple">
-<li>System hardware/software installation</li>
-<li>System support</li>
-<li>System maintenance and modification</li>
+<li><p>System hardware/software installation</p></li>
+<li><p>System support</p></li>
+<li><p>System maintenance and modification</p></li>
 </ul>
 </div></blockquote>
 <p>Present a training curriculum listing the courses that will be provided, a course sequence. and a proposed schedule.  If appropriate, identify which courses particular types of staff should attend by job position description.</p>
@@ -673,29 +619,29 @@
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="welcome_email.html" class="btn btn-neutral float-right" title="Welcome Email to End Users" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="../deployment/on-boarding.html" class="btn btn-neutral" title="Administrator Tasks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="welcome_email.html" class="btn btn-neutral float-right" title="Welcome Email to End Users" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../deployment/on-boarding.html" class="btn btn-neutral float-left" title="Administrator Tasks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2015-2020 Mattermost
+        &#169; Copyright 2015-2020 Mattermost.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -729,33 +675,22 @@
 </div>
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
-        <script type="text/javascript" src="../_static/myscript.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
+  
 	<header>
 	<div class="header__container">
 		<div class="search__icon">
 			<i class="fa fa-search"></i>
 		</div>
-		<a href="http://docs.mattermost.com/" class="header__logo">
+		<a href="https://docs.mattermost.com/" class="header__logo">
 			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
 		</a>
 		<div class="links__icon">

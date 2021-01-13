@@ -2,110 +2,54 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Installing Mattermost Server &mdash; Mattermost 5.28 documentation</title>
+  <title>Installing Mattermost Server &mdash; Mattermost 5.30 documentation</title>
   
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
+
   
   
 
   
+    <link rel="canonical" href="https://docs.mattermost.com/install/install-rhel-7-mattermost.html" />
 
   
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/myscript.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    
     <link rel="search" title="Search" href="../search.html" />
-	<!-- Bizible Script -->
-	<script src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
-
-	
-		<!-- Google Analytics -->
-		<script>
-			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-			ga('create', 'UA-67846571-2', 'auto');
-			ga('send', 'pageview');
-		</script>
-		<!-- End Google Analytics -->
-	
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-67846571-1"></script>
-	<script>
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-
-	gtag('config', 'UA-67846571-1');
-	</script>
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<!-- Second Google Analytics tag to assist mapping with mattermost.com visits --> 
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120238482-1"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-
-	  gtag('config', 'UA-120238482-1');
-	</script>
-
-	<!-- LeadLander -->
-	<script type="text/javascript" language="javascript">
-		var sf14gv = 31865;
-		(function() {
-			var sf14g = document.createElement('script');
-			sf14g.src = 'https://tracking.leadlander.com/lt.min.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sf14g, s);
-		})();
-	</script>
-
-	<!-- Munchkin code -->
-	<script type="text/javascript">
-		(function() {
-			var didInit = false;
-			function initMunchkin() {
-			if(didInit === false) {
-				didInit = true;
-				Munchkin.init('161-FBE-733');
-			}
-			}
-			var s = document.createElement('script');
-			s.type = 'text/javascript';
-			s.async = true;
-			s.src = '//munchkin.marketo.net/munchkin.js';
-			s.onreadystatechange = function() {
-			if (this.readyState == 'complete' || this.readyState == 'loaded') {
-				initMunchkin();
-			}
-			};
-			s.onload = initMunchkin;
-			document.getElementsByTagName('head')[0].appendChild(s);
-		})();
-	</script>
-
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
 
 </head>
 
@@ -113,11 +57,10 @@
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -131,7 +74,7 @@
             
             
               <div class="version">
-                5.28
+                5.30
               </div>
             
           
@@ -148,6 +91,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -157,16 +101,17 @@
             
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/administrator.html">Administrator's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/education.html">Training and Education</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -215,81 +160,85 @@
 <p>Assume that the IP address of this server is 10.10.10.2</p>
 <p><strong>To install Mattermost Server on RHEL 7</strong></p>
 <ol class="arabic simple">
-<li>Log in to the server that will host Mattermost Server and open a terminal window.</li>
-<li>Download <a class="reference external" href="https://about.mattermost.com/download/">the latest version of the Mattermost Server</a>. In the following command, replace <code class="docutils literal notranslate"><span class="pre">X.X.X</span></code> with the version that you want to download:</li>
+<li><p>Log in to the server that will host Mattermost Server and open a terminal window.</p></li>
+<li><p>Download <a class="reference external" href="https://mattermost.com/download/">the latest version of the Mattermost Server</a>. In the following command, replace <code class="docutils literal notranslate"><span class="pre">X.X.X</span></code> with the version that you want to download:</p></li>
 </ol>
 <blockquote>
-<div><code class="docutils literal notranslate"><span class="pre">wget</span> <span class="pre">https://releases.mattermost.com/X.X.X/mattermost-X.X.X-linux-amd64.tar.gz</span></code></div></blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">wget</span> <span class="pre">https://releases.mattermost.com/X.X.X/mattermost-X.X.X-linux-amd64.tar.gz</span></code></p>
+</div></blockquote>
 <ol class="arabic simple" start="3">
-<li>Extract the Mattermost Server files.</li>
+<li><p>Extract the Mattermost Server files.</p></li>
 </ol>
 <blockquote>
-<div><code class="docutils literal notranslate"><span class="pre">tar</span> <span class="pre">-xvzf</span> <span class="pre">*.gz</span></code></div></blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">tar</span> <span class="pre">-xvzf</span> <span class="pre">*.gz</span></code></p>
+</div></blockquote>
 <ol class="arabic simple" start="4">
-<li>Move the extracted file to the <code class="docutils literal notranslate"><span class="pre">/opt</span></code> directory.</li>
+<li><p>Move the extracted file to the <code class="docutils literal notranslate"><span class="pre">/opt</span></code> directory.</p></li>
 </ol>
 <blockquote>
-<div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">mv</span> <span class="pre">mattermost</span> <span class="pre">/opt</span></code></div></blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">mv</span> <span class="pre">mattermost</span> <span class="pre">/opt</span></code></p>
+</div></blockquote>
 <ol class="arabic simple" start="5">
-<li>Create the storage directory for files.</li>
+<li><p>Create the storage directory for files.</p></li>
 </ol>
 <blockquote>
 <div><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">mkdir</span> <span class="pre">/opt/mattermost/data</span></code></p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The storage directory will contain all the files and images that your users post to Mattermost, so you need to make sure that the drive is large enough to hold the anticipated number of uploaded files and images.</p>
+<p class="admonition-title">Note</p>
+<p>The storage directory will contain all the files and images that your users post to Mattermost, so you need to make sure that the drive is large enough to hold the anticipated number of uploaded files and images.</p>
 </div>
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li>Set up a system user and group called <code class="docutils literal notranslate"><span class="pre">mattermost</span></code> that will run this service, and set the ownership and permissions.</li>
+<li><p>Set up a system user and group called <code class="docutils literal notranslate"><span class="pre">mattermost</span></code> that will run this service, and set the ownership and permissions.</p></li>
 </ol>
 <blockquote>
 <div><ol class="loweralpha simple">
-<li><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">useradd</span> <span class="pre">--system</span> <span class="pre">--user-group</span> <span class="pre">mattermost</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">chown</span> <span class="pre">-R</span> <span class="pre">mattermost:mattermost</span> <span class="pre">/opt/mattermost</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">chmod</span> <span class="pre">-R</span> <span class="pre">g+w</span> <span class="pre">/opt/mattermost</span></code></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">useradd</span> <span class="pre">--system</span> <span class="pre">--user-group</span> <span class="pre">mattermost</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">chown</span> <span class="pre">-R</span> <span class="pre">mattermost:mattermost</span> <span class="pre">/opt/mattermost</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">chmod</span> <span class="pre">-R</span> <span class="pre">g+w</span> <span class="pre">/opt/mattermost</span></code></p></li>
 </ol>
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li>Set up the database driver in the file <code class="docutils literal notranslate"><span class="pre">/opt/mattermost/config/config.json</span></code>. Open the file as root in a text editor and make the following changes:</li>
+<li><p>Set up the database driver in the file <code class="docutils literal notranslate"><span class="pre">/opt/mattermost/config/config.json</span></code>. Open the file as root in a text editor and make the following changes:</p></li>
 </ol>
 <blockquote>
 <div><ul class="simple">
-<li>If you are using PostgreSQL:</li>
+<li><p>If you are using PostgreSQL:</p></li>
 </ul>
 <blockquote>
 <div><ol class="arabic simple">
-<li>Set <code class="docutils literal notranslate"><span class="pre">&quot;DriverName&quot;</span></code> to <code class="docutils literal notranslate"><span class="pre">&quot;postgres&quot;</span></code></li>
-<li>Set <code class="docutils literal notranslate"><span class="pre">&quot;DataSource&quot;</span></code> to the following value, replacing <code class="docutils literal notranslate"><span class="pre">&lt;mmuser-password&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;host-name-or-IP&gt;</span></code> with the appropriate values:</li>
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">&quot;DriverName&quot;</span></code> to <code class="docutils literal notranslate"><span class="pre">&quot;postgres&quot;</span></code></p></li>
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">&quot;DataSource&quot;</span></code> to the following value, replacing <code class="docutils literal notranslate"><span class="pre">&lt;mmuser-password&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;host-name-or-IP&gt;</span></code> with the appropriate values:</p></li>
 </ol>
 <blockquote>
-<div><code class="docutils literal notranslate"><span class="pre">&quot;postgres://mmuser:&lt;mmuser-password&gt;&#64;&lt;host-name-or-IP&gt;:5432/mattermost?sslmode=disable&amp;connect_timeout=10&quot;</span></code>.</div></blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">&quot;postgres://mmuser:&lt;mmuser-password&gt;&#64;&lt;host-name-or-IP&gt;:5432/mattermost?sslmode=disable&amp;connect_timeout=10&quot;</span></code>.</p>
+</div></blockquote>
 </div></blockquote>
 <ul class="simple">
-<li>If you are using MySQL:</li>
+<li><p>If you are using MySQL:</p></li>
 </ul>
 <blockquote>
 <div><ol class="arabic simple">
-<li>Set <code class="docutils literal notranslate"><span class="pre">&quot;DriverName&quot;</span></code> to <code class="docutils literal notranslate"><span class="pre">&quot;mysql&quot;</span></code></li>
-<li>Set <code class="docutils literal notranslate"><span class="pre">&quot;DataSource&quot;</span></code> to the following value, replacing <code class="docutils literal notranslate"><span class="pre">&lt;mmuser-password&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;host-name-or-IP&gt;</span></code> with the appropriate values. Also make sure that the database name is <code class="docutils literal notranslate"><span class="pre">mattermost</span></code> instead of <code class="docutils literal notranslate"><span class="pre">mattermost_test</span></code>:</li>
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">&quot;DriverName&quot;</span></code> to <code class="docutils literal notranslate"><span class="pre">&quot;mysql&quot;</span></code></p></li>
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">&quot;DataSource&quot;</span></code> to the following value, replacing <code class="docutils literal notranslate"><span class="pre">&lt;mmuser-password&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;host-name-or-IP&gt;</span></code> with the appropriate values. Also make sure that the database name is <code class="docutils literal notranslate"><span class="pre">mattermost</span></code> instead of <code class="docutils literal notranslate"><span class="pre">mattermost_test</span></code>:</p></li>
 </ol>
 <blockquote>
-<div><code class="docutils literal notranslate"><span class="pre">&quot;mmuser:&lt;mmuser-password&gt;&#64;tcp(&lt;host-name-or-IP&gt;:3306)/mattermost?charset=utf8mb4,utf8&amp;readTimeout=30s&amp;writeTimeout=30s&quot;</span></code></div></blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">&quot;mmuser:&lt;mmuser-password&gt;&#64;tcp(&lt;host-name-or-IP&gt;:3306)/mattermost?charset=utf8mb4,utf8&amp;readTimeout=30s&amp;writeTimeout=30s&quot;</span></code></p>
+</div></blockquote>
 </div></blockquote>
 </div></blockquote>
 <ol class="arabic" start="8">
-<li><p class="first">Also set <code class="docutils literal notranslate"><span class="pre">&quot;SiteURL&quot;</span></code> to the full base URL of the site (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;https://mattermost.example.com&quot;</span></code>).</p>
-</li>
-<li><p class="first">Test the Mattermost server to make sure everything works.</p>
+<li><p>Also set <code class="docutils literal notranslate"><span class="pre">&quot;SiteURL&quot;</span></code> to the full base URL of the site (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;https://mattermost.example.com&quot;</span></code>).</p></li>
+<li><p>Test the Mattermost server to make sure everything works.</p>
 <blockquote>
 <div><ol class="loweralpha simple">
-<li>Change to the <code class="docutils literal notranslate"><span class="pre">mattermost</span></code> directory:</li>
+<li><p>Change to the <code class="docutils literal notranslate"><span class="pre">mattermost</span></code> directory:</p></li>
 </ol>
 <blockquote>
 <div><p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">/opt/mattermost</span></code></p>
 </div></blockquote>
 <ol class="loweralpha simple" start="2">
-<li>Start the Mattermost server as the user mattermost:</li>
+<li><p>Start the Mattermost server as the user mattermost:</p></li>
 </ol>
 <blockquote>
 <div><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">-u</span> <span class="pre">mattermost</span> <span class="pre">./bin/mattermost</span></code></p>
@@ -298,20 +247,23 @@
 </li>
 </ol>
 <blockquote>
-<div>When the server starts, it shows some log information and the text <code class="docutils literal notranslate"><span class="pre">Server</span> <span class="pre">is</span> <span class="pre">listening</span> <span class="pre">on</span> <span class="pre">:8065</span></code>. You can stop the server by pressing CTRL+C in the terminal window.</div></blockquote>
+<div><p>When the server starts, it shows some log information and the text <code class="docutils literal notranslate"><span class="pre">Server</span> <span class="pre">is</span> <span class="pre">listening</span> <span class="pre">on</span> <span class="pre">:8065</span></code>. You can stop the server by pressing CTRL+C in the terminal window.</p>
+</div></blockquote>
 <ol class="arabic simple" start="10">
-<li>Set up Mattermost to use the systemd init daemon which handles</li>
+<li><p>Set up Mattermost to use the systemd init daemon which handles</p></li>
 </ol>
 <blockquote>
 <div><blockquote>
-<div>supervision of the Mattermost process.</div></blockquote>
+<div><p>supervision of the Mattermost process.</p>
+</div></blockquote>
 <ol class="loweralpha simple">
-<li>Create the Mattermost configuration file:</li>
+<li><p>Create the Mattermost configuration file:</p></li>
 </ol>
 <blockquote>
-<div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">touch</span> <span class="pre">/etc/systemd/system/mattermost.service</span></code></div></blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">touch</span> <span class="pre">/etc/systemd/system/mattermost.service</span></code></p>
+</div></blockquote>
 <ol class="loweralpha simple" start="2">
-<li>Open the configuration file in your favorite text editor, and copy the following lines into the file:</li>
+<li><p>Open the configuration file in your favorite text editor, and copy the following lines into the file:</p></li>
 </ol>
 <blockquote>
 <div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[Unit]
@@ -332,33 +284,37 @@ WantedBy=multi-user.target
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If you are using MySQL, replace <code class="docutils literal notranslate"><span class="pre">postgresql-9.4.service</span></code> by <code class="docutils literal notranslate"><span class="pre">mysqld.service</span></code> in the <code class="docutils literal notranslate"><span class="pre">[unit]</span></code> section.</p>
+<p class="admonition-title">Note</p>
+<p>If you are using MySQL, replace <code class="docutils literal notranslate"><span class="pre">postgresql-9.4.service</span></code> by <code class="docutils literal notranslate"><span class="pre">mysqld.service</span></code> in the <code class="docutils literal notranslate"><span class="pre">[unit]</span></code> section.</p>
 </div>
 </div></blockquote>
 <ol class="loweralpha simple" start="3">
-<li>Make the service executable.</li>
+<li><p>Make the service executable.</p></li>
 </ol>
 <blockquote>
-<div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">chmod</span> <span class="pre">664</span> <span class="pre">/etc/systemd/system/mattermost.service</span></code></div></blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">chmod</span> <span class="pre">664</span> <span class="pre">/etc/systemd/system/mattermost.service</span></code></p>
+</div></blockquote>
 <ol class="loweralpha simple" start="4">
-<li>Reload the systemd services.</li>
+<li><p>Reload the systemd services.</p></li>
 </ol>
 <blockquote>
-<div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">daemon-reload</span></code></div></blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">daemon-reload</span></code></p>
+</div></blockquote>
 <ol class="loweralpha simple" start="5">
-<li>Set Mattermost to start on boot.</li>
+<li><p>Set Mattermost to start on boot.</p></li>
 </ol>
 <blockquote>
-<div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">enable</span> <span class="pre">mattermost</span></code></div></blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">enable</span> <span class="pre">mattermost</span></code></p>
+</div></blockquote>
 </div></blockquote>
 <ol class="arabic simple" start="10">
-<li>Start the Mattermost server.</li>
+<li><p>Start the Mattermost server.</p></li>
 </ol>
 <blockquote>
-<div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">start</span> <span class="pre">mattermost</span></code></div></blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">start</span> <span class="pre">mattermost</span></code></p>
+</div></blockquote>
 <ol class="arabic simple" start="11">
-<li>Verify that Mattermost is running.</li>
+<li><p>Verify that Mattermost is running.</p></li>
 </ol>
 <blockquote>
 <div><p><code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">http://localhost:8065</span></code></p>
@@ -372,20 +328,25 @@ WantedBy=multi-user.target
            
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2015-2020 Mattermost
+        &#169; Copyright 2015-2020 Mattermost.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -419,33 +380,22 @@ WantedBy=multi-user.target
 </div>
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
-        <script type="text/javascript" src="../_static/myscript.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
+  
 	<header>
 	<div class="header__container">
 		<div class="search__icon">
 			<i class="fa fa-search"></i>
 		</div>
-		<a href="http://docs.mattermost.com/" class="header__logo">
+		<a href="https://docs.mattermost.com/" class="header__logo">
 			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
 		</a>
 		<div class="links__icon">

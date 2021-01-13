@@ -2,112 +2,56 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Advanced Permissions: Backend Infrastructure &mdash; Mattermost 5.28 documentation</title>
+  <title>Advanced Permissions: Backend Infrastructure &mdash; Mattermost 5.30 documentation</title>
   
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
+
   
   
 
   
+    <link rel="canonical" href="https://docs.mattermost.com/deployment/permissions-backend.html" />
 
   
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/myscript.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Guest Accounts (Beta) (E10/E20)" href="guest-accounts.html" />
     <link rel="prev" title="Advanced Permissions (E10/E20)" href="advanced-permissions.html" />
-	<!-- Bizible Script -->
-	<script src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
-
-	
-		<!-- Google Analytics -->
-		<script>
-			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-			ga('create', 'UA-67846571-2', 'auto');
-			ga('send', 'pageview');
-		</script>
-		<!-- End Google Analytics -->
-	
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-67846571-1"></script>
-	<script>
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-
-	gtag('config', 'UA-67846571-1');
-	</script>
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<!-- Second Google Analytics tag to assist mapping with mattermost.com visits --> 
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120238482-1"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-
-	  gtag('config', 'UA-120238482-1');
-	</script>
-
-	<!-- LeadLander -->
-	<script type="text/javascript" language="javascript">
-		var sf14gv = 31865;
-		(function() {
-			var sf14g = document.createElement('script');
-			sf14g.src = 'https://tracking.leadlander.com/lt.min.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sf14g, s);
-		})();
-	</script>
-
-	<!-- Munchkin code -->
-	<script type="text/javascript">
-		(function() {
-			var didInit = false;
-			function initMunchkin() {
-			if(didInit === false) {
-				didInit = true;
-				Munchkin.init('161-FBE-733');
-			}
-			}
-			var s = document.createElement('script');
-			s.type = 'text/javascript';
-			s.async = true;
-			s.src = '//munchkin.marketo.net/munchkin.js';
-			s.onreadystatechange = function() {
-			if (this.readyState == 'complete' || this.readyState == 'loaded') {
-				initMunchkin();
-			}
-			};
-			s.onload = initMunchkin;
-			document.getElementsByTagName('head')[0].appendChild(s);
-		})();
-	</script>
-
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
 
 </head>
 
@@ -115,11 +59,10 @@
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -133,7 +76,7 @@
             
             
               <div class="version">
-                5.28
+                5.30
               </div>
             
           
@@ -150,6 +93,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -159,12 +103,14 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Administrator's Guide</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="bulk-loading.html">Bulk Loading Data</a></li>
@@ -173,15 +119,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../administration/migration-announcement-email-template.html">Migration Announcement Email</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../administration/user-provisioning.html">Provisioning Workflows</a></li>
 <li class="toctree-l3"><a class="reference internal" href="admin-roles.html">Additional System Admin Roles (E20)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="sso-ldap.html">Active Directory/LDAP Setup (E10/E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auth.html">Multi-factor Authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ldap-group-sync.html">AD/LDAP Groups (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html">Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-saml.html">SAML Single Sign-On (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-saml-technical.html">SAML Single-Sign-On (E20): Technical Documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-gitlab.html">GitLab Single Sign-On</a></li>
-<li class="toctree-l3"><a class="reference internal" href="sso-google.html">Google Single Sign-On (E20)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="sso-office.html">Office 365 Single Sign-On (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ssl-client-certificate.html">SSL Client Certificate Setup (Beta)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="certificate-based-authentication.html">Certificate-Based Authentication (Experimental)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="team-channel-management.html">Managing Team and Channel Members (E20)</a></li>
@@ -203,14 +146,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/education.html">Training and Education</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -239,7 +183,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
     
-      <li><a href="../guides/administrator.html">Administrator’s Guide</a> &raquo;</li>
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
     
     <li>Advanced Permissions: Backend Infrastructure</li>
     <li class="wy-breadcrumbs-aside">
@@ -259,24 +203,26 @@
 <h1>Advanced Permissions: Backend Infrastructure<a class="headerlink" href="#advanced-permissions-backend-infrastructure" title="Permalink to this headline">¶</a></h1>
 <p>This document outlines the backend server infrastructure for permissions in Mattermost and is recommended only for technical Admins or developers looking to make modifications to their installation.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The contents of this document apply to Mattermost Server version 5.0 and later.</p>
+<p class="admonition-title">Note</p>
+<p>The contents of this document apply to Mattermost Server version 5.0 and later.</p>
 </div>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#entity-definitions" id="id2">Entity Definitions</a><ul>
-<li><a class="reference internal" href="#permissions" id="id3">Permissions</a></li>
-<li><a class="reference internal" href="#roles" id="id4">Roles</a></li>
-<li><a class="reference internal" href="#scope" id="id5">Scope</a></li>
-<li><a class="reference internal" href="#context" id="id6">Context</a></li>
-<li><a class="reference internal" href="#schemes" id="id7">Schemes</a></li>
+<li><p><a class="reference internal" href="#entity-definitions" id="id2">Entity Definitions</a></p>
+<ul>
+<li><p><a class="reference internal" href="#permissions" id="id3">Permissions</a></p></li>
+<li><p><a class="reference internal" href="#roles" id="id4">Roles</a></p></li>
+<li><p><a class="reference internal" href="#scope" id="id5">Scope</a></p></li>
+<li><p><a class="reference internal" href="#context" id="id6">Context</a></p></li>
+<li><p><a class="reference internal" href="#schemes" id="id7">Schemes</a></p></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#data-structure" id="id8">Data Structure</a><ul>
-<li><a class="reference internal" href="#id1" id="id9">Permissions</a></li>
-<li><a class="reference internal" href="#roles-field" id="id10"><code class="docutils literal notranslate"><span class="pre">Roles</span></code> Field</a></li>
-<li><a class="reference internal" href="#roles-table" id="id11"><code class="docutils literal notranslate"><span class="pre">Roles</span></code> Table</a></li>
-<li><a class="reference internal" href="#schemes-table" id="id12"><code class="docutils literal notranslate"><span class="pre">Schemes</span></code> Table</a></li>
+<li><p><a class="reference internal" href="#data-structure" id="id8">Data Structure</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id1" id="id9">Permissions</a></p></li>
+<li><p><a class="reference internal" href="#roles-field" id="id10"><code class="docutils literal notranslate"><span class="pre">Roles</span></code> Field</a></p></li>
+<li><p><a class="reference internal" href="#roles-table" id="id11"><code class="docutils literal notranslate"><span class="pre">Roles</span></code> Table</a></p></li>
+<li><p><a class="reference internal" href="#schemes-table" id="id12"><code class="docutils literal notranslate"><span class="pre">Schemes</span></code> Table</a></p></li>
 </ul>
 </li>
 </ul>
@@ -295,17 +241,17 @@
 <h3><a class="toc-backref" href="#contents">Scope</a><a class="headerlink" href="#scope" title="Permalink to this headline">¶</a></h3>
 <p>Permissions live within a given scope. There are three scopes in the Mattermost system: System, Team and Channel. Permissions cascade down the scopes from the context in which they are applied. For example, if a “Channel” scoped permission is applied to a “Team” context, the permission applies to any channels within that team. A permission is considered,</p>
 <ul class="simple">
-<li><strong>System scope</strong> if it makes sense only on the system level. For example, <code class="docutils literal notranslate"><span class="pre">manage_oauth</span></code>.</li>
-<li><strong>Team scope</strong> if it makes sense at the team level and system level. For example, <code class="docutils literal notranslate"><span class="pre">create_public_channel</span></code>.</li>
-<li><strong>Channel scope</strong> if it makes sense at channel, team and system level. For example, <code class="docutils literal notranslate"><span class="pre">manage_public_channel_properties</span></code>.</li>
+<li><p><strong>System scope</strong> if it makes sense only on the system level. For example, <code class="docutils literal notranslate"><span class="pre">manage_oauth</span></code>.</p></li>
+<li><p><strong>Team scope</strong> if it makes sense at the team level and system level. For example, <code class="docutils literal notranslate"><span class="pre">create_public_channel</span></code>.</p></li>
+<li><p><strong>Channel scope</strong> if it makes sense at channel, team and system level. For example, <code class="docutils literal notranslate"><span class="pre">manage_public_channel_properties</span></code>.</p></li>
 </ul>
 </div>
 <div class="section" id="context">
 <h3><a class="toc-backref" href="#contents">Context</a><a class="headerlink" href="#context" title="Permalink to this headline">¶</a></h3>
 <p>A <strong>context</strong> is an instance of a scope. For example, a channel called “Developers Hangout” is an instance of channel scope. Contexts have hierarchical relationships between them that reflect the hierarchical ordering of scopes. Each context has one parent, and may have multiple children, with the ultimate parent context being the system context:</p>
 <ul class="simple">
-<li>A channel context has a parent team context, whose parent is the system context. For example, the “Developers Hangout” channel is the channel context, with parent team context “Contributors Team”, with parent system context.</li>
-<li>A team context has a parent system context and child channel contexts. For example, the “Contributors Team” is the team context, with parent system context, and with children channel contexts such as “Developers Hangout”, “Reception” and “Marketing”.</li>
+<li><p>A channel context has a parent team context, whose parent is the system context. For example, the “Developers Hangout” channel is the channel context, with parent team context “Contributors Team”, with parent system context.</p></li>
+<li><p>A team context has a parent system context and child channel contexts. For example, the “Contributors Team” is the team context, with parent system context, and with children channel contexts such as “Developers Hangout”, “Reception” and “Marketing”.</p></li>
 </ul>
 <p>When determining whether a user is allowed to carry out a given action in a given context, the union of the permissions of all roles that user has been assigned in the current context and its parent contexts is calculated. This enables permissions to cascade down the scope hierarchy. For example, if a users is granted the <code class="docutils literal notranslate"><span class="pre">manage_public_channel_properties</span></code> permission in a role in the system context, then the user has permissions to manage public channel properties in all channels, in all teams, of which they are a member.</p>
 </div>
@@ -321,306 +267,314 @@
 <h3><a class="toc-backref" href="#contents">Permissions</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>Permissions in Mattermost are a property of the server code base and are not created or modified dynamically. The current set of permissions are as described in the table below.</p>
 <p><strong>Mattermost Permissions</strong></p>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="15%" />
-<col width="4%" />
-<col width="82%" />
+<col style="width: 18%" />
+<col style="width: 4%" />
+<col style="width: 78%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Name (i18n)</th>
-<th class="head">Scope</th>
-<th class="head">Description</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name (i18n)</p></th>
+<th class="head"><p>Scope</p></th>
+<th class="head"><p>Description</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>invite_user</td>
-<td>team</td>
-<td>Invite users to the team using Send Email Invite or Get Team Invite Link.</td>
-</tr>
-<tr class="row-odd"><td>add_user_to_team</td>
-<td>team</td>
-<td>Add existing server users to the current team.</td>
-</tr>
-<tr class="row-even"><td>use_slash_commands</td>
-<td>channel</td>
-<td>Use slash commands.</td>
-</tr>
-<tr class="row-odd"><td>manage_slash_commands</td>
-<td>system</td>
-<td>Create, edit and delete your own slash commands.</td>
-</tr>
-<tr class="row-even"><td>manage_others_slash_commands</td>
-<td>system</td>
-<td>Edit or delete other users slash commands.</td>
-</tr>
-<tr class="row-odd"><td>create_public_channel</td>
-<td>team</td>
-<td>Create public channels.</td>
-</tr>
-<tr class="row-even"><td>create_private_channel</td>
-<td>team</td>
-<td>Create private channels.</td>
-</tr>
-<tr class="row-odd"><td>manage_public_channel_members</td>
-<td>channel</td>
-<td>Manage public channel members.</td>
-</tr>
-<tr class="row-even"><td>manage_private_channel_members</td>
-<td>channel</td>
-<td>Manage private channel members.</td>
-</tr>
-<tr class="row-odd"><td>assign_system_admin_role</td>
-<td>system</td>
-<td>Grant other users System Admin role.</td>
-</tr>
-<tr class="row-even"><td>manage_roles</td>
-<td>system</td>
-<td>Manage other users system-wide roles.</td>
-</tr>
-<tr class="row-odd"><td>manage_team_roles</td>
-<td>team</td>
-<td>Add and remove team members.</td>
-</tr>
-<tr class="row-even"><td>manage_channel_roles</td>
-<td>channel</td>
-<td>Add and remove channel members.</td>
-</tr>
-<tr class="row-odd"><td>manage_system</td>
-<td>system</td>
-<td>Access to System Console.</td>
-</tr>
-<tr class="row-even"><td>create_direct_channel</td>
-<td>system</td>
-<td>Open direct message channels.</td>
-</tr>
-<tr class="row-odd"><td>create_group_channel</td>
-<td>system</td>
-<td>Open group message channels.</td>
-</tr>
-<tr class="row-even"><td>manage_public_channel_properties</td>
-<td>channel</td>
-<td>Edit public channel name, header and purpose.</td>
-</tr>
-<tr class="row-odd"><td>manage_private_channel_properties</td>
-<td>channel</td>
-<td>Edit private channel name, header and purpose.</td>
-</tr>
-<tr class="row-even"><td>list_public_teams</td>
-<td>system</td>
-<td>View public teams listed from “Join Another Team” accessed from the main menu.</td>
-</tr>
-<tr class="row-odd"><td>join_public_teams</td>
-<td>system</td>
-<td>Join public teams from the “Join Another Team” menu.</td>
-</tr>
-<tr class="row-even"><td>list_private_teams</td>
-<td>system</td>
-<td>View private teams listed from “Join Another Team” accessed from the main menu.</td>
-</tr>
-<tr class="row-odd"><td>join_private_teams</td>
-<td>system</td>
-<td>Join private teams listed from “Join Another Team” main.</td>
-</tr>
-<tr class="row-even"><td>list_team_channels</td>
-<td>team</td>
-<td>List public channels in a team.</td>
-</tr>
-<tr class="row-odd"><td>join_public_channels</td>
-<td>team</td>
-<td>Join public channels.</td>
-</tr>
-<tr class="row-even"><td>delete_public_channel</td>
-<td>channel</td>
-<td>Archive public channels.</td>
-</tr>
-<tr class="row-odd"><td>delete_private_channel</td>
-<td>channel</td>
-<td>Archive private channels.</td>
+<tbody>
+<tr class="row-even"><td><p>invite_user</p></td>
+<td><p>team</p></td>
+<td><p>Invite users to the team using Send Email Invite or Get Team Invite Link.</p></td>
+</tr>
+<tr class="row-odd"><td><p>add_user_to_team</p></td>
+<td><p>team</p></td>
+<td><p>Add existing server users to the current team.</p></td>
+</tr>
+<tr class="row-even"><td><p>use_slash_commands</p></td>
+<td><p>channel</p></td>
+<td><p>Use slash commands.</p></td>
+</tr>
+<tr class="row-odd"><td><p>manage_slash_commands</p></td>
+<td><p>system</p></td>
+<td><p>Create, edit, and delete your own slash commands.</p></td>
+</tr>
+<tr class="row-even"><td><p>manage_others_slash_commands</p></td>
+<td><p>system</p></td>
+<td><p>Edit or delete other users’ slash commands.</p></td>
+</tr>
+<tr class="row-odd"><td><p>create_public_channel</p></td>
+<td><p>team</p></td>
+<td><p>Create public channels.</p></td>
+</tr>
+<tr class="row-even"><td><p>create_private_channel</p></td>
+<td><p>team</p></td>
+<td><p>Create private channels.</p></td>
+</tr>
+<tr class="row-odd"><td><p>manage_public_channel_members</p></td>
+<td><p>channel</p></td>
+<td><p>Manage public channel members.</p></td>
+</tr>
+<tr class="row-even"><td><p>manage_private_channel_members</p></td>
+<td><p>channel</p></td>
+<td><p>Manage private channel members.</p></td>
+</tr>
+<tr class="row-odd"><td><p>assign_system_admin_role</p></td>
+<td><p>system</p></td>
+<td><p>Grant other users the System Admin role.</p></td>
+</tr>
+<tr class="row-even"><td><p>manage_roles</p></td>
+<td><p>system</p></td>
+<td><p>Manage other users’ system-wide roles.</p></td>
+</tr>
+<tr class="row-odd"><td><p>manage_team_roles</p></td>
+<td><p>team</p></td>
+<td><p>Add and remove team members.</p></td>
+</tr>
+<tr class="row-even"><td><p>manage_channel_roles</p></td>
+<td><p>channel</p></td>
+<td><p>Add and remove channel members.</p></td>
+</tr>
+<tr class="row-odd"><td><p>manage_system</p></td>
+<td><p>system</p></td>
+<td><p>Access to System Console.</p></td>
+</tr>
+<tr class="row-even"><td><p>sysconsole_read_usermanagement_system_roles</p></td>
+<td><p>system</p></td>
+<td><p>View system roles.</p></td>
+</tr>
+<tr class="row-odd"><td><p>sysconsole_write_usermanagement_system_roles</p></td>
+<td><p>system</p></td>
+<td><p>Add, remove, and assign system roles.</p></td>
+</tr>
+<tr class="row-even"><td><p>create_direct_channel</p></td>
+<td><p>system</p></td>
+<td><p>Open Direct Message channels.</p></td>
+</tr>
+<tr class="row-odd"><td><p>create_group_channel</p></td>
+<td><p>system</p></td>
+<td><p>Open Group Message channels.</p></td>
+</tr>
+<tr class="row-even"><td><p>manage_public_channel_properties</p></td>
+<td><p>channel</p></td>
+<td><p>Edit public channel name, header, and purpose.</p></td>
+</tr>
+<tr class="row-odd"><td><p>manage_private_channel_properties</p></td>
+<td><p>channel</p></td>
+<td><p>Edit private channel name, header, and purpose.</p></td>
+</tr>
+<tr class="row-even"><td><p>list_public_teams</p></td>
+<td><p>system</p></td>
+<td><p>View public teams listed in the “Join Another Team” menu accessed from the main menu.</p></td>
+</tr>
+<tr class="row-odd"><td><p>join_public_teams</p></td>
+<td><p>system</p></td>
+<td><p>Join public teams listed in the “Join Another Team” menu accessed from the main menu.</p></td>
+</tr>
+<tr class="row-even"><td><p>list_private_teams</p></td>
+<td><p>system</p></td>
+<td><p>View private teams listed in the “Join Another Team” menu accessed from the main menu.</p></td>
+</tr>
+<tr class="row-odd"><td><p>join_private_teams</p></td>
+<td><p>system</p></td>
+<td><p>Join private teams listed in the “Join Another Team” menu accessed from the main menu.</p></td>
+</tr>
+<tr class="row-even"><td><p>list_team_channels</p></td>
+<td><p>team</p></td>
+<td><p>List public channels in a team.</p></td>
+</tr>
+<tr class="row-odd"><td><p>join_public_channels</p></td>
+<td><p>team</p></td>
+<td><p>Join public channels.</p></td>
 </tr>
-<tr class="row-even"><td>edit_other_users</td>
-<td>system</td>
-<td>Edit values on the <cite>user</cite> object of other users.</td>
+<tr class="row-even"><td><p>delete_public_channel</p></td>
+<td><p>channel</p></td>
+<td><p>Archive public channels.</p></td>
 </tr>
-<tr class="row-odd"><td>read_channel</td>
-<td>channel</td>
-<td>View posts in a channel.</td>
+<tr class="row-odd"><td><p>delete_private_channel</p></td>
+<td><p>channel</p></td>
+<td><p>Archive private channels.</p></td>
 </tr>
-<tr class="row-even"><td>read_public_channel</td>
-<td>team</td>
-<td>View and access public channels on a team.</td>
+<tr class="row-even"><td><p>edit_other_users</p></td>
+<td><p>system</p></td>
+<td><p>Edit values on the <cite>user</cite> object of other users.</p></td>
 </tr>
-<tr class="row-odd"><td>add_reaction</td>
-<td>channel</td>
-<td>Add emoji reactions to posts.</td>
+<tr class="row-odd"><td><p>read_channel</p></td>
+<td><p>channel</p></td>
+<td><p>View posts in a channel.</p></td>
 </tr>
-<tr class="row-even"><td>remove_reaction</td>
-<td>channel</td>
-<td>Remove emoji reactions from posts.</td>
+<tr class="row-even"><td><p>read_public_channel</p></td>
+<td><p>team</p></td>
+<td><p>View and access public channels on a team.</p></td>
 </tr>
-<tr class="row-odd"><td>remove_others_reactions</td>
-<td>channel</td>
-<td>Remove other users emoji reactions from posts.</td>
+<tr class="row-odd"><td><p>add_reaction</p></td>
+<td><p>channel</p></td>
+<td><p>Add emoji reactions to posts.</p></td>
 </tr>
-<tr class="row-even"><td>permanent_delete_user (deprecated)</td>
-<td>system</td>
-<td>Permanently delete other users.</td>
+<tr class="row-even"><td><p>remove_reaction</p></td>
+<td><p>channel</p></td>
+<td><p>Remove emoji reactions from posts.</p></td>
 </tr>
-<tr class="row-odd"><td>upload_file</td>
-<td>channel</td>
-<td>Upload file attachements to posts.</td>
+<tr class="row-odd"><td><p>remove_others_reactions</p></td>
+<td><p>channel</p></td>
+<td><p>Remove other users emoji reactions from posts.</p></td>
 </tr>
-<tr class="row-even"><td>get_public_link</td>
-<td>system</td>
-<td>Get permalink for posts.</td>
+<tr class="row-even"><td><p>permanent_delete_user (deprecated)</p></td>
+<td><p>system</p></td>
+<td><p>Permanently delete other users.</p></td>
 </tr>
-<tr class="row-odd"><td>manage_incoming_webhooks</td>
-<td>team</td>
-<td>Create, edit and delete your own incoming webhooks.</td>
+<tr class="row-odd"><td><p>upload_file</p></td>
+<td><p>channel</p></td>
+<td><p>Upload file attachments to posts.</p></td>
 </tr>
-<tr class="row-even"><td>manage_outgoing_webhooks</td>
-<td>team</td>
-<td>Create, edit and delete your own outgoing webhooks.</td>
+<tr class="row-even"><td><p>get_public_link</p></td>
+<td><p>system</p></td>
+<td><p>Get permalink for posts.</p></td>
 </tr>
-<tr class="row-odd"><td>manage_others_webhooks(deprecated)</td>
-<td>team</td>
-<td>Edit and delete other users’ incoming or outgoing webhooks.</td>
+<tr class="row-odd"><td><p>manage_incoming_webhooks</p></td>
+<td><p>team</p></td>
+<td><p>Create, edit, and delete your own incoming webhooks.</p></td>
 </tr>
-<tr class="row-even"><td>manage_others_incoming_webhooks</td>
-<td>team</td>
-<td>Edit and delete others’ incoming webhooks.</td>
+<tr class="row-even"><td><p>manage_outgoing_webhooks</p></td>
+<td><p>team</p></td>
+<td><p>Create, edit, and delete your own outgoing webhooks.</p></td>
 </tr>
-<tr class="row-odd"><td>manage_others_outgoing_webhooks</td>
-<td>team</td>
-<td>Edit and delete others’ outgoing webhooks.</td>
+<tr class="row-odd"><td><p>manage_others_webhooks(deprecated)</p></td>
+<td><p>team</p></td>
+<td><p>Edit and delete other users’ incoming or outgoing webhooks.</p></td>
 </tr>
-<tr class="row-even"><td>manage_oauth</td>
-<td>system</td>
-<td>Create, edit and delete your own OAuth 2.0 apps.</td>
+<tr class="row-even"><td><p>manage_others_incoming_webhooks</p></td>
+<td><p>team</p></td>
+<td><p>Edit and delete other users’ incoming webhooks.</p></td>
 </tr>
-<tr class="row-odd"><td>manage_system_wide_oauth</td>
-<td>system</td>
-<td>Edit or delete other users’ OAuth 2.0 apps.</td>
+<tr class="row-odd"><td><p>manage_others_outgoing_webhooks</p></td>
+<td><p>team</p></td>
+<td><p>Edit and delete other users’ outgoing webhooks.</p></td>
 </tr>
-<tr class="row-even"><td>create_post</td>
-<td>channel</td>
-<td>Post in channels.</td>
+<tr class="row-even"><td><p>manage_oauth</p></td>
+<td><p>system</p></td>
+<td><p>Create, edit, and delete your own OAuth 2.0 apps.</p></td>
 </tr>
-<tr class="row-odd"><td>create_post_public</td>
-<td>channel</td>
-<td>Create a system message within a channel.</td>
+<tr class="row-odd"><td><p>manage_system_wide_oauth</p></td>
+<td><p>system</p></td>
+<td><p>Edit or delete other users’ OAuth 2.0 apps.</p></td>
 </tr>
-<tr class="row-even"><td>create_post_ephermal</td>
-<td>channel</td>
-<td>Create an ephemeral message within a channel.</td>
+<tr class="row-even"><td><p>create_post</p></td>
+<td><p>channel</p></td>
+<td><p>Post in channels.</p></td>
 </tr>
-<tr class="row-odd"><td>edit_post</td>
-<td>channel</td>
-<td>Authors edit their own posts. Edit post time limit is controlled by the <code class="docutils literal notranslate"><span class="pre">&quot;PostEditTimeLimit&quot;</span></code> <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#post-edit-time-limit">config</a>.</td>
+<tr class="row-odd"><td><p>create_post_public</p></td>
+<td><p>channel</p></td>
+<td><p>Create a system message within a channel.</p></td>
 </tr>
-<tr class="row-even"><td>edit_others_posts</td>
-<td>channel</td>
-<td>Edit other users posts.</td>
+<tr class="row-even"><td><p>create_post_ephermal</p></td>
+<td><p>channel</p></td>
+<td><p>Create an ephemeral message within a channel.</p></td>
 </tr>
-<tr class="row-odd"><td>delete_post</td>
-<td>channel</td>
-<td>Authors delete their own posts.</td>
+<tr class="row-odd"><td><p>edit_post</p></td>
+<td><p>channel</p></td>
+<td><p>Authors edit their own posts. Edit post time limit is controlled by the <code class="docutils literal notranslate"><span class="pre">&quot;PostEditTimeLimit&quot;</span></code> <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#post-edit-time-limit">config</a>.</p></td>
 </tr>
-<tr class="row-even"><td>delete_others_posts</td>
-<td>channel</td>
-<td>Delete other users’ posts.</td>
+<tr class="row-even"><td><p>edit_others_posts</p></td>
+<td><p>channel</p></td>
+<td><p>Edit other users’ posts.</p></td>
 </tr>
-<tr class="row-odd"><td>remove_user_from_team</td>
-<td>team</td>
-<td>Remove users from team.</td>
+<tr class="row-odd"><td><p>delete_post</p></td>
+<td><p>channel</p></td>
+<td><p>Authors delete their own posts.</p></td>
 </tr>
-<tr class="row-even"><td>create_team</td>
-<td>system</td>
-<td>Create teams.</td>
+<tr class="row-even"><td><p>delete_others_posts</p></td>
+<td><p>channel</p></td>
+<td><p>Delete other users’ posts.</p></td>
 </tr>
-<tr class="row-odd"><td>manage_team</td>
-<td>team</td>
-<td>Access Team Settings.</td>
+<tr class="row-odd"><td><p>remove_user_from_team</p></td>
+<td><p>team</p></td>
+<td><p>Remove users from team.</p></td>
 </tr>
-<tr class="row-even"><td>import_team</td>
-<td>system</td>
-<td>Import teams in Team Settings.</td>
+<tr class="row-even"><td><p>create_team</p></td>
+<td><p>system</p></td>
+<td><p>Create teams.</p></td>
 </tr>
-<tr class="row-odd"><td>view_team</td>
-<td>team</td>
-<td>Read the Team object.</td>
+<tr class="row-odd"><td><p>manage_team</p></td>
+<td><p>team</p></td>
+<td><p>Access Team Settings.</p></td>
 </tr>
-<tr class="row-even"><td>create_bot</td>
-<td>team</td>
-<td>Create bot accounts.</td>
+<tr class="row-even"><td><p>import_team</p></td>
+<td><p>system</p></td>
+<td><p>Import teams in Team Settings.</p></td>
 </tr>
-<tr class="row-odd"><td>assign_bot</td>
-<td>team</td>
-<td>Assign bots to users other than who created the bot.</td>
+<tr class="row-odd"><td><p>view_team</p></td>
+<td><p>team</p></td>
+<td><p>Read the Team object.</p></td>
 </tr>
-<tr class="row-even"><td>read_bot</td>
-<td>team</td>
-<td>View own bots created.</td>
+<tr class="row-even"><td><p>create_bot</p></td>
+<td><p>team</p></td>
+<td><p>Create bot accounts.</p></td>
 </tr>
-<tr class="row-odd"><td>read_others_bots</td>
-<td>team</td>
-<td>View bots created by others.</td>
+<tr class="row-odd"><td><p>assign_bot</p></td>
+<td><p>team</p></td>
+<td><p>Assign bots to users other than who created the bot.</p></td>
 </tr>
-<tr class="row-even"><td>manage_bots</td>
-<td>team</td>
-<td>Edit and delete own bots.</td>
+<tr class="row-even"><td><p>read_bot</p></td>
+<td><p>team</p></td>
+<td><p>View own bots created.</p></td>
 </tr>
-<tr class="row-odd"><td>manage_others_bots</td>
-<td>team</td>
-<td>Edit and delete bots created by others.</td>
+<tr class="row-odd"><td><p>read_others_bots</p></td>
+<td><p>team</p></td>
+<td><p>View bots created by others.</p></td>
 </tr>
-<tr class="row-even"><td>view_members</td>
-<td>team</td>
-<td>List all members on the team.</td>
+<tr class="row-even"><td><p>manage_bots</p></td>
+<td><p>team</p></td>
+<td><p>Edit and delete own bots.</p></td>
 </tr>
-<tr class="row-odd"><td>list_users_without_team</td>
-<td>system</td>
-<td>List users without a team.</td>
+<tr class="row-odd"><td><p>manage_others_bots</p></td>
+<td><p>team</p></td>
+<td><p>Edit and delete bots created by others.</p></td>
 </tr>
-<tr class="row-even"><td>create_user_access_token</td>
-<td>system</td>
-<td>Create user access tokens.</td>
+<tr class="row-even"><td><p>view_members</p></td>
+<td><p>team</p></td>
+<td><p>List all members on the team.</p></td>
 </tr>
-<tr class="row-odd"><td>read_user_access_token</td>
-<td>system</td>
-<td>Read user access tokens by ID.</td>
+<tr class="row-odd"><td><p>list_users_without_team</p></td>
+<td><p>system</p></td>
+<td><p>List users without a team.</p></td>
 </tr>
-<tr class="row-even"><td>revoke_user_access_token</td>
-<td>system</td>
-<td>Revoke user access tokens.</td>
+<tr class="row-even"><td><p>create_user_access_token</p></td>
+<td><p>system</p></td>
+<td><p>Create user access tokens.</p></td>
 </tr>
-<tr class="row-odd"><td>manage_jobs</td>
-<td>system</td>
-<td>Create and cancel jobs.</td>
+<tr class="row-odd"><td><p>read_user_access_token</p></td>
+<td><p>system</p></td>
+<td><p>Read user access tokens by ID.</p></td>
 </tr>
-<tr class="row-even"><td>create_emojis</td>
-<td>team</td>
-<td>Create custom emoji.</td>
+<tr class="row-even"><td><p>revoke_user_access_token</p></td>
+<td><p>system</p></td>
+<td><p>Revoke user access tokens.</p></td>
 </tr>
-<tr class="row-odd"><td>delete_emojis</td>
-<td>team</td>
-<td>Delete own custom emoji.</td>
+<tr class="row-odd"><td><p>manage_jobs</p></td>
+<td><p>system</p></td>
+<td><p>Create and cancel jobs.</p></td>
 </tr>
-<tr class="row-even"><td>delete_others_emojis</td>
-<td>team</td>
-<td>Delete custom emoji created by others.</td>
+<tr class="row-even"><td><p>create_emojis</p></td>
+<td><p>team</p></td>
+<td><p>Create custom emoji.</p></td>
 </tr>
-<tr class="row-odd"><td>invite_guest</td>
-<td>system</td>
-<td>Invite guest users via email invite or add existing guests to teams.</td>
+<tr class="row-odd"><td><p>delete_emojis</p></td>
+<td><p>team</p></td>
+<td><p>Delete own custom emoji.</p></td>
 </tr>
-<tr class="row-even"><td>promote_guest</td>
-<td>system</td>
-<td>Promote guests to member users.</td>
+<tr class="row-even"><td><p>delete_others_emojis</p></td>
+<td><p>team</p></td>
+<td><p>Delete custom emoji created by others.</p></td>
 </tr>
-<tr class="row-odd"><td>demote_to_guest</td>
-<td>system</td>
-<td>Demote member users to guests.</td>
+<tr class="row-odd"><td><p>invite_guest</p></td>
+<td><p>system</p></td>
+<td><p>Invite guest users via email invite or add existing guests to teams.</p></td>
+</tr>
+<tr class="row-even"><td><p>promote_guest</p></td>
+<td><p>system</p></td>
+<td><p>Promote guests to member users.</p></td>
+</tr>
+<tr class="row-odd"><td><p>demote_to_guest</p></td>
+<td><p>system</p></td>
+<td><p>Demote member users to guests.</p></td>
 </tr>
 </tbody>
 </table>
@@ -634,13 +588,13 @@
 <h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">Roles</span></code> Table</a><a class="headerlink" href="#roles-table" title="Permalink to this headline">¶</a></h3>
 <p>Roles are dynamic and user configurable, necessitating a database table with the following fields:</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">Id</span></code> (Autoincrement, Primary Key)</li>
-<li><code class="docutils literal notranslate"><span class="pre">Name</span></code> (Unique String with Character Constraints, e.g. “team_user”).</li>
-<li><code class="docutils literal notranslate"><span class="pre">Display</span> <span class="pre">Name</span></code> (String)</li>
-<li><code class="docutils literal notranslate"><span class="pre">Description</span></code> (String)</li>
-<li><code class="docutils literal notranslate"><span class="pre">Permissions</span></code> (String): Space-separated permissions names</li>
-<li><code class="docutils literal notranslate"><span class="pre">Scheme</span> <span class="pre">Managed</span></code> (bool): Indicates whether this role is managed as part of a scheme.</li>
-<li><code class="docutils literal notranslate"><span class="pre">BuiltIn</span></code> (bool): Indicates if this role is built in to the Mattermost system and not removable by the user.</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Id</span></code> (Autoincrement, Primary Key)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Name</span></code> (Unique String with Character Constraints, e.g. “team_user”).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Display</span> <span class="pre">Name</span></code> (String)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Description</span></code> (String)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Permissions</span></code> (String): Space-separated permissions names</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Scheme</span> <span class="pre">Managed</span></code> (bool): Indicates whether this role is managed as part of a scheme.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BuiltIn</span></code> (bool): Indicates if this role is built in to the Mattermost system and not removable by the user.</p></li>
 </ul>
 <p>The System Scheme is built in to the product and it’s roles are defined as <code class="docutils literal notranslate"><span class="pre">BuiltIn:</span> <span class="pre">true</span></code> in the <code class="docutils literal notranslate"><span class="pre">Roles</span></code> table.</p>
 </div>
@@ -648,17 +602,17 @@
 <h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">Schemes</span></code> Table</a><a class="headerlink" href="#schemes-table" title="Permalink to this headline">¶</a></h3>
 <p>Schemes are dynamic and user configurable, necessitating a database table with the following fields:</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">Id</span></code> (Autoincrement, Primary Key)</li>
-<li><code class="docutils literal notranslate"><span class="pre">Name</span></code> (Unique String with Character Constraints, e.g. “corporate_scheme”)</li>
-<li><code class="docutils literal notranslate"><span class="pre">Display</span></code> Name</li>
-<li><code class="docutils literal notranslate"><span class="pre">Description</span></code> (String)</li>
-<li><code class="docutils literal notranslate"><span class="pre">Scope</span></code> (String): Team or Channel</li>
-<li><code class="docutils literal notranslate"><span class="pre">Team</span> <span class="pre">Admin</span> <span class="pre">Role</span></code> (String): Empty if Channel Scope</li>
-<li><code class="docutils literal notranslate"><span class="pre">Team</span> <span class="pre">User</span> <span class="pre">Role</span></code> (String): Empty if Channel Scope</li>
-<li><code class="docutils literal notranslate"><span class="pre">Team</span> <span class="pre">Guest</span> <span class="pre">Role</span></code> (String): Empty if Channel Scope</li>
-<li><code class="docutils literal notranslate"><span class="pre">Channel</span> <span class="pre">Admin</span> <span class="pre">Role</span></code> (String): Always provided</li>
-<li><code class="docutils literal notranslate"><span class="pre">Channel</span> <span class="pre">User</span> <span class="pre">Role</span></code> (String): Always provided</li>
-<li><code class="docutils literal notranslate"><span class="pre">Channel</span> <span class="pre">Guest</span> <span class="pre">Role</span></code> (String): Always provided</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Id</span></code> (Autoincrement, Primary Key)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Name</span></code> (Unique String with Character Constraints, e.g. “corporate_scheme”)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Display</span></code> Name</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Description</span></code> (String)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Scope</span></code> (String): Team or Channel</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Team</span> <span class="pre">Admin</span> <span class="pre">Role</span></code> (String): Empty if Channel Scope</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Team</span> <span class="pre">User</span> <span class="pre">Role</span></code> (String): Empty if Channel Scope</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Team</span> <span class="pre">Guest</span> <span class="pre">Role</span></code> (String): Empty if Channel Scope</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Channel</span> <span class="pre">Admin</span> <span class="pre">Role</span></code> (String): Always provided</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Channel</span> <span class="pre">User</span> <span class="pre">Role</span></code> (String): Always provided</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Channel</span> <span class="pre">Guest</span> <span class="pre">Role</span></code> (String): Always provided</p></li>
 </ul>
 </div>
 </div>
@@ -669,29 +623,29 @@
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="guest-accounts.html" class="btn btn-neutral float-right" title="Guest Accounts (Beta) (E10/E20)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="advanced-permissions.html" class="btn btn-neutral" title="Advanced Permissions (E10/E20)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="guest-accounts.html" class="btn btn-neutral float-right" title="Guest Accounts (Beta) (E10/E20)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="advanced-permissions.html" class="btn btn-neutral float-left" title="Advanced Permissions (E10/E20)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2015-2020 Mattermost
+        &#169; Copyright 2015-2020 Mattermost.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -725,33 +679,22 @@
 </div>
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
-        <script type="text/javascript" src="../_static/myscript.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
+  
 	<header>
 	<div class="header__container">
 		<div class="search__icon">
 			<i class="fa fa-search"></i>
 		</div>
-		<a href="http://docs.mattermost.com/" class="header__logo">
+		<a href="https://docs.mattermost.com/" class="header__logo">
 			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
 		</a>
 		<div class="links__icon">
