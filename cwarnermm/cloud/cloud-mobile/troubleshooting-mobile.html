@@ -107,12 +107,8 @@
 <li class="toctree-l3"><a class="reference internal" href="cloud-app-config.html">Config for EMM Solutions with Mattermost Mobile Apps</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mobile-apps-faq.html">Mobile Apps FAQ</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Troubleshooting Mobile Applications</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#i-keep-getting-a-message-cannot-connect-to-the-server-please-check-your-server-url-and-internet-connection">I keep getting a message “Cannot connect to the server. Please check your server URL and internet connection.”</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#login-with-adfs-office365-is-not-working">Login with ADFS/Office365 is not working</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#i-see-a-connecting-bar-that-does-not-go-away">I see a “Connecting…” bar that does not go away</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#build-gets-stuck-at-bundlereleasejsandassets">Build gets stuck at <code class="docutils literal notranslate"><span class="pre">bundleReleaseJsAndAssets</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#no-image-previews-available-in-the-mobile-app">No image previews available in the mobile app</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#none-of-these-solve-my-problem">None of these solve my problem!</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#i-have-a-different-problem">I have a different problem!</a></li>
 </ul>
 </li>
 </ul>
@@ -175,38 +171,13 @@
             
   <div class="section" id="troubleshooting-mobile-applications">
 <h1>Troubleshooting Mobile Applications<a class="headerlink" href="#troubleshooting-mobile-applications" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="i-keep-getting-a-message-cannot-connect-to-the-server-please-check-your-server-url-and-internet-connection">
-<h2>I keep getting a message “Cannot connect to the server. Please check your server URL and internet connection.”<a class="headerlink" href="#i-keep-getting-a-message-cannot-connect-to-the-server-please-check-your-server-url-and-internet-connection" title="Permalink to this headline">¶</a></h2>
-<p>Confirm that your server URL has no typos and that it includes <code class="docutils literal notranslate"><span class="pre">https://</span></code>.</p>
-</div>
 <div class="section" id="login-with-adfs-office365-is-not-working">
 <h2>Login with ADFS/Office365 is not working<a class="headerlink" href="#login-with-adfs-office365-is-not-working" title="Permalink to this headline">¶</a></h2>
 <p>In line with Microsoft guidance we recommend <a class="reference external" href="https://docs.microsoft.com/en-us/windows-server/identity/ad-fs/operations/configure-intranet-forms-based-authentication-for-devices-that-do-not-support-wia">configuring intranet forms-based authentication for devices that do not support WIA</a>.</p>
 </div>
-<div class="section" id="i-see-a-connecting-bar-that-does-not-go-away">
-<h2>I see a “Connecting…” bar that does not go away<a class="headerlink" href="#i-see-a-connecting-bar-that-does-not-go-away" title="Permalink to this headline">¶</a></h2>
-<p>If your app is working properly, you should see a grey “Connecting…” bar that clears or says “Connected” after the app reconnects.</p>
-<p>If you are seeing this message all the time, and your internet connection seems fine, ask your server administrator if the server uses NGINX or another webserver as a reverse proxy. If so, they should check that it is configured correctly for <a class="reference external" href="https://docs.mattermost.com/install/install-ubuntu-1804.html#configuring-nginx-as-a-proxy-for-mattermost-server">supporting the websocket connection for APIv4 endpoints</a>.</p>
-</div>
-<div class="section" id="build-gets-stuck-at-bundlereleasejsandassets">
-<h2>Build gets stuck at <code class="docutils literal notranslate"><span class="pre">bundleReleaseJsAndAssets</span></code><a class="headerlink" href="#build-gets-stuck-at-bundlereleasejsandassets" title="Permalink to this headline">¶</a></h2>
-<p>As a workaround, you can bundle the <code class="docutils literal notranslate"><span class="pre">js</span></code> manually first with</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/
-</pre></div>
-</div>
-<p>and then ignore the gradle task with</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./gradlew assembleRelease -x bundleReleaseJsAndAssets
-</pre></div>
-</div>
-</div>
-<div class="section" id="no-image-previews-available-in-the-mobile-app">
-<h2>No image previews available in the mobile app<a class="headerlink" href="#no-image-previews-available-in-the-mobile-app" title="Permalink to this headline">¶</a></h2>
-<p>This can happen if the server running Mattermost has its mime types not set up correctly. A server running Linux has this file located in <code class="docutils literal notranslate"><span class="pre">/etc/mime.types</span></code>. This might vary depending on your specific OS and distribution.</p>
-<p>Some distributions also ship without <code class="docutils literal notranslate"><span class="pre">mailcap</span></code> which can result in missing or incorrectly configured mime types.</p>
-</div>
-<div class="section" id="none-of-these-solve-my-problem">
-<h2>None of these solve my problem!<a class="headerlink" href="#none-of-these-solve-my-problem" title="Permalink to this headline">¶</a></h2>
-<p>For more troubleshooting help, <a class="reference external" href="https://forum.mattermost.org/c/trouble-shoot">open a new topic in our forums</a> with steps to reproduce your issue. If you’re an Enterprise Edition subscriber, you may open a support ticket in the <a class="reference external" href="https://mattermost.zendesk.com/hc/en-us/requests/new">Enterprise Edition Support portal</a>.</p>
+<div class="section" id="i-have-a-different-problem">
+<h2>I have a different problem!<a class="headerlink" href="#i-have-a-different-problem" title="Permalink to this headline">¶</a></h2>
+<p>For more troubleshooting help, <a class="reference external" href="https://forum.mattermost.org/c/trouble-shoot">open a new topic in our forums</a> with steps to reproduce your issue. If you’re a Cloud Enterprise subscriber, you may open a support ticket in the <a class="reference external" href="https://mattermost.zendesk.com/hc/en-us/requests/new">Mattermost Support portal</a>.</p>
 <p>To help us narrow down whether it’s a server configuration issue, device specific issue, or an issue with the app please try the following steps and include the results in your support request:</p>
 <p><strong>Connect to our community workspace</strong></p>
 <ol class="arabic simple">
