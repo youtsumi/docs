@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Important Notes &mdash; Mattermost 5.32 documentation</title>
+  <title>Important Notes &mdash; Mattermost 5.31 documentation</title>
   
 
   
@@ -69,7 +69,7 @@
             
             
               <div class="version">
-                5.32
+                5.31
               </div>
             
           
@@ -120,6 +120,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#locked-out-of-system-administrator-account">Locked Out of System Administrator Account</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#password-resets">Password Resets</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#multi-factor-authentication-mfa">Multi-Factor Authentication (MFA)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#config-json-resets-to-default-values">Config.json Resets to Default Values</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#saml-issues">SAML issues</a><ul>
@@ -356,6 +357,10 @@
 <div class="section" id="multi-factor-authentication-mfa">
 <h2>Multi-Factor Authentication (MFA)<a class="headerlink" href="#multi-factor-authentication-mfa" title="Permalink to this headline">¶</a></h2>
 <p>If MFA has stopped working, confirm that your server clock is not out of sync. On Unix systems you can view the hardware time of your system using <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">hwclock</span> <span class="pre">-r</span></code>. If you’re using systemd you can also use <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">timedatectl</span></code>.</p>
+</div>
+<div class="section" id="config-json-resets-to-default-values">
+<h2>Config.json Resets to Default Values<a class="headerlink" href="#config-json-resets-to-default-values" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">disableconfigwatch</span></code> flag can cause the config.json to rollback. Running the binary as root, which has a different home directory, will take the default config.json and reset the value. To fix this, run the version check as the same user which is running the Mattermost service. It is suggested to use <a class="reference external" href="https://docs.mattermost.com/administration/mmctl-cli-tool.html">mmctl Command Line Tool (Beta)</a> for any CLI purposes to interact with Mattermost.</p>
 </div>
 </div>
 <div class="section" id="saml-issues">
@@ -780,7 +785,7 @@
 <p>To help us narrow down whether it’s a server configuration issue, device specific issue, or an issue with the app, please try the following steps and include the results in your support request or <a class="reference external" href="https://forum.mattermost.org/c/trouble-shoot">Troubleshooting forum</a> post.</p>
 <p><strong>Connect to another server</strong></p>
 <ol class="arabic simple">
-<li>Create an account at <a class="reference external" href="https://community.mattermost.com">https://community.mattermost.com</a></li>
+<li>Create an account at <a class="reference external" href="https://community.mattermost.com">https://community.mattermost.com</a>.</li>
 <li>Erase your mobile application and reinstall it.</li>
 <li>In your mobile app, enter the server URL <a class="reference external" href="https://community.mattermost.com">https://community.mattermost.com</a> and then your login credentials to test whether the connection is working.</li>
 </ol>
