@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Mattermost Cloud Changelog &mdash; Mattermost 5.31 documentation</title>
+  <title>Mattermost Cloud Changelog &mdash; Mattermost 5.32 documentation</title>
   
 
   
@@ -69,7 +69,7 @@
             
             
               <div class="version">
-                5.31
+                5.32
               </div>
             
           
@@ -100,7 +100,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../cloud-billing/cloud-billing.html">Mattermost Cloud Billing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../cloud-reporting.html">Statistics</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Mattermost Cloud Changelog</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#release-2021-01-26">Release 2021-01-26</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#release-2021-01-12">Release 2021-01-12</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#release-2020-12-18">Release 2020-12-18</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#release-2020-12-09">Release 2020-12-09</a></li>
@@ -175,84 +174,25 @@
   <div class="section" id="mattermost-cloud-changelog">
 <h1>Mattermost Cloud Changelog<a class="headerlink" href="#mattermost-cloud-changelog" title="Permalink to this headline">¶</a></h1>
 <p>This changelog summarizes updates to <a class="reference external" href="https://mattermost.com/get-started/">Mattermost Cloud</a>, an enterprise-grade SaaS offering hosted by Mattermost.</p>
-<div class="section" id="release-2021-01-26">
-<h2>Release 2021-01-26<a class="headerlink" href="#release-2021-01-26" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="release-2021-01-12">
+<h2>Release 2021-01-12<a class="headerlink" href="#release-2021-01-12" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="highlights">
 <h3>Highlights<a class="headerlink" href="#highlights" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="channel-sidebar-general-availability">
-<h4>Channel Sidebar General Availability<a class="headerlink" href="#channel-sidebar-general-availability" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li>The new channel sidebar is enabled system-wide by default. Mattermost now gives users flexibility to organize channels and direct messages into custom, collapsible sidebar categories. Users now gain full personalization of their sidebar to improve productivity, reduce clutter and focus on what matters. Features include custom, collapsible sidebar categories, unread channel management, and new channel menus.</li>
+<li>Pre-packaged and pre-installed Mattermost Incident Management v1.2.0.</li>
 </ul>
-</div>
 </div>
 <div class="section" id="improvements">
 <h3>Improvements<a class="headerlink" href="#improvements" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="user-interface-ui">
 <h4>User Interface (UI)<a class="headerlink" href="#user-interface-ui" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li>Added new languages, Bulgarian and Swedish.</li>
-<li>Moved the header icons to the left of the header beside the channel description.</li>
-</ul>
-</div>
-<div class="section" id="plugins">
-<h4>Plugins<a class="headerlink" href="#plugins" title="Permalink to this headline">¶</a></h4>
-<ul class="simple">
-<li>Enabled experimental support for arm64 plugins by allowing any matching <code class="docutils literal notranslate"><span class="pre">GOOS-GOOARCH</span></code> combination in the plugin manifest.</li>
-</ul>
-</div>
-<div class="section" id="administration">
-<h4>Administration<a class="headerlink" href="#administration" title="Permalink to this headline">¶</a></h4>
-<ul class="simple">
-<li>The <code class="docutils literal notranslate"><span class="pre">UseExperimentalGossip</span></code> field under ClusterSettings is now <code class="docutils literal notranslate"><span class="pre">true</span></code> by default. This means that new installations will use the gossip protocol for cluster communication. There will be no changes to existing installations. The Gossip protocol is now considered to be in General Availability and is the recommended clustering mode.</li>
-<li><code class="docutils literal notranslate"><span class="pre">AnalyticsPostCount</span></code> now avoids unnecessary table scans during various background jobs.</li>
-<li>Added a <code class="docutils literal notranslate"><span class="pre">CollapsedThreads</span></code> feature flag.</li>
-<li>The Help text for Rate Limiting setting was updated to explain the purpose of rate limiting.</li>
-<li>Removed the word “experimental” from gossip setting in the System Console.</li>
-<li>The Database search using Postgresql now supports searching for terms with underscore.</li>
-<li>Removed the <code class="docutils literal notranslate"><span class="pre">ExperimentalChannelSidebarOrganization</span></code> setting and added an <code class="docutils literal notranslate"><span class="pre">EnableLegacySidebar</span></code> setting. The new channel sidebar will be enabled system-wide by default.</li>
-</ul>
-</div>
-<div class="section" id="bug-fixes">
-<h4>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">¶</a></h4>
-<ul class="simple">
-<li>Fixed an issue where the Admin Filter option was not disabled in the AD/LDAP page for Admin roles with a <code class="docutils literal notranslate"><span class="pre">sysconsole_write_authentication</span></code> permission.</li>
-<li>Fixed an issue where channels would sometimes be removed from custom categories when a user left a team.</li>
-<li>Fixed an issue where the error text was missing when the team name was left blank on the Team Create page.</li>
-<li>Fixed an issue where the System Manager was able to download the Compliance Export files.</li>
-<li>Fixed an issue where themed button colours in interactive message attachments in Mattermost’s default dark theme were mismatched.</li>
-<li>Fixed an issue where bold and italics shortcuts triggered with ctrl+b on Mac.</li>
-<li>Fixed an issue where a “Your license does not support cloud requests” log error appeared on self-hosted servers.</li>
-</ul>
-</div>
-<div class="section" id="known-issues">
-<h4>Known Issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h4>
-<ul class="simple">
-<li><strong>Cloud &gt; “Tips &amp; Next Steps”</strong> should not show an “Explore channels” section for guest users.</li>
-<li>System Roles shows License and Environment as possible permissions but they are always hidden in Cloud.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="section" id="release-2021-01-12">
-<h2>Release 2021-01-12<a class="headerlink" href="#release-2021-01-12" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id1">
-<h3>Highlights<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>Pre-packaged and pre-installed Mattermost Incident Management v1.2.0.</li>
-</ul>
-</div>
-<div class="section" id="id2">
-<h3>Improvements<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="id3">
-<h4>User Interface (UI)<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
-<ul class="simple">
 <li>Changed the number of file attachments allowed per post, from 5 to 10.</li>
 <li>Added support to move multi-selected groups of channels to another category via the <strong>More options</strong> menu.</li>
 </ul>
 </div>
-<div class="section" id="id4">
-<h4>Administration<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="administration">
+<h4>Administration<a class="headerlink" href="#administration" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li>Updated the Go version to v1.15.5.</li>
 <li>Added support for automatic installation and enablement of plugins using feature flags.</li>
@@ -266,8 +206,8 @@
 </ul>
 </div>
 </div>
-<div class="section" id="id5">
-<h3>Bug Fixes<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="bug-fixes">
+<h3>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Fixed an issue where the permissions of a System Admin role got deleted when changing the access level to any permission.</li>
 <li>Fixed an issue where editing a <code class="docutils literal notranslate"><span class="pre">/me</span></code> post behaved differently within the Mattermost Web App and the Mobile App.</li>
@@ -279,8 +219,8 @@
 <li>Fixed an issue where the tooltip text for copying an incoming webhook URL was unclear.</li>
 </ul>
 </div>
-<div class="section" id="id6">
-<h3>Known Issues<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="known-issues">
+<h3>Known Issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Cloud &gt; “Tips &amp; Next Steps” should not show an “Explore channels” section for guest users.</li>
 <li>System Roles shows License and Environment as possible permissions but they are always hidden in Cloud.</li>
@@ -289,8 +229,8 @@
 </div>
 <div class="section" id="release-2020-12-18">
 <h2>Release 2020-12-18<a class="headerlink" href="#release-2020-12-18" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id7">
-<h3>Bug Fixes<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id1">
+<h3>Bug Fixes<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Fixed a performance issue related to typing lag.</li>
 <li>Fixed an issue where YouTube previews did not display sometimes.</li>
@@ -299,10 +239,10 @@
 </div>
 <div class="section" id="release-2020-12-09">
 <h2>Release 2020-12-09<a class="headerlink" href="#release-2020-12-09" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id8">
-<h3>Improvements<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="id9">
-<h4>User Interface (UI)<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id2">
+<h3>Improvements<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h4>User Interface (UI)<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li>Added the ability to mute categories with the experimental sidebar feature.</li>
 <li>Added support for multi-selection of channels when dragging and dropping between channels in the experimental sidebar feature.</li>
@@ -310,16 +250,16 @@
 <li>Issuing /dnd consecutively no longer unexpectedly toggles the user status between “Do Not Disturb” and “Online” and will only set the user’s status to “Do Not Disturb”.</li>
 </ul>
 </div>
-<div class="section" id="id10">
-<h4>Administration<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id4">
+<h4>Administration<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li>Added a new <code class="docutils literal notranslate"><span class="pre">manage_remote_clusters</span></code> permission.</li>
 <li>Enabled goSAML2 library as the only supported SAML library.</li>
 </ul>
 </div>
 </div>
-<div class="section" id="id11">
-<h3>Bug Fixes<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id5">
+<h3>Bug Fixes<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Cleaned up the config store on server initialization errors.</li>
 <li>Fixed an issue where permissions did not grant read and/or write access to the Global Relay configuration settings.</li>
@@ -328,8 +268,8 @@
 <li>Fixed an issue where LDAP ‘’FirstLoginSync’’ didn’t close the LDAP session.</li>
 </ul>
 </div>
-<div class="section" id="id12">
-<h3>Known Issues<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id6">
+<h3>Known Issues<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>System Managers do not have access to the Billing section and see a blank screen.</li>
 <li>Cloud &gt; “Tips &amp; Next Steps” should not show an “Explore channels” section for guest users.</li>
@@ -339,8 +279,8 @@
 </div>
 <div class="section" id="release-2020-12-03">
 <h2>Release 2020-12-03<a class="headerlink" href="#release-2020-12-03" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id13">
-<h3>Bug Fixes<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id7">
+<h3>Bug Fixes<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Disabled the xmlsec1-based SAML library in favor of the re-enabled and improved SAML library.</li>
 </ul>
@@ -348,8 +288,8 @@
 </div>
 <div class="section" id="release-2020-11-24">
 <h2>Release 2020-11-24<a class="headerlink" href="#release-2020-11-24" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id14">
-<h3>Highlights<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id8">
+<h3>Highlights<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="modify-new-admin-roles-permissions-in-the-system-console-beta">
 <h4>Modify new Admin roles permissions in the System Console (Beta)<a class="headerlink" href="#modify-new-admin-roles-permissions-in-the-system-console-beta" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
@@ -360,8 +300,8 @@
 <h4>Pre-package and enable incident management v1.1.1<a class="headerlink" href="#pre-package-and-enable-incident-management-v1-1-1" title="Permalink to this headline">¶</a></h4>
 </div>
 </div>
-<div class="section" id="id15">
-<h3>Improvements<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id9">
+<h3>Improvements<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="user-interface">
 <h4>User Interface<a class="headerlink" href="#user-interface" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
@@ -387,8 +327,8 @@
 <li>Added plugin hooks for ReationHasBeenAdded and ReactionHasBeenRemoved.</li>
 </ul>
 </div>
-<div class="section" id="id16">
-<h4>Administration<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id10">
+<h4>Administration<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li>Added the ability to load a set of custom configuration defaults from a MM_CUSTOM_DEFAULTS_PATH environment variable.</li>
 <li>Added AWS metering service support.</li>
@@ -396,8 +336,8 @@
 </ul>
 </div>
 </div>
-<div class="section" id="id17">
-<h3>Bug Fixes<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id11">
+<h3>Bug Fixes<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Fixed an issue with broken link previews for Twitter links.</li>
 <li>Fixed an issue where editing a post did not submit with CMD+ENTER.</li>
@@ -417,8 +357,8 @@
 </ul>
 </div>
 </div>
-<div class="section" id="id18">
-<h3>Known Issues<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id12">
+<h3>Known Issues<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>System Managers do not have access to the Billing section and see a blank screen.</li>
 <li>Cloud &gt; “Tips &amp; Next Steps” should not show an “Explore channels” section for guest users.</li>
