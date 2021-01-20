@@ -261,12 +261,13 @@
 <h3>Compatibility<a class="headerlink" href="#compatibility" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>TLS versions 1.0 and 1.1 have been deprecated by browser vendors. In Mattermost Server v5.32 (February 16), mmctl returns an error when connected to Mattermost servers deployed with these TLS versions and System Admins will need to explicitly add a flag in their commands to continue to use them. We recommend upgrading to TLS version 1.2 or higher.</li>
+<li>PostgreSQL ended long-term support for [version 9.4 in February 2020](https://www.postgresql.org/support/versioning. From v5.26 Mattermost officially supports PostgreSQL version 10 as PostgreSQL 9.4 is no longer supported. New installs will require PostgreSQL 10+. Previous Mattermost versions will continue to be compatible with PostgreSQL 9.4. PostgreSQL 9.4 and all 9.x versions are now fully deprecated in our v5.30 release (December 16, 2020). Please follow the instructions under the Upgrading Section within <a class="reference external" href="https://www.postgresql.org/support/versioning/">the PostgreSQL documentation</a>. Mattermost will now fail to start if the Postgres version is below that.</li>
 </ul>
 </div>
 <div class="section" id="breaking-changes">
 <h3>Breaking Changes<a class="headerlink" href="#breaking-changes" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>The minimum required Postgres version is now 10.0. Mattermost will now fail to start if the Postgres version is below that.</li>
+<li></li>
 </ul>
 </div>
 <div class="section" id="highlights">
@@ -296,13 +297,11 @@
 <div class="section" id="administration">
 <h4>Administration<a class="headerlink" href="#administration" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li>Mattermost does not support Postgres 9.4 anymore. The minimum required version for Postgres is 10.</li>
 <li><code class="docutils literal notranslate"><span class="pre">AnalyticsPostCount</span></code> now avoids unnecessary table scans during various background jobs.</li>
 <li>The Help text for Rate Limiting setting was updated to explain the purpose of rate limiting.</li>
 <li>Removed the word “experimental” from gossip setting in the System Console.</li>
 <li>The Database search using Postgresql now supports searching for terms with underscore.</li>
 <li>Updated the Go version to v1.15.5.</li>
-<li>Added the ability to redirect to the mobile app after OAuth &amp; SAML auth completion.</li>
 <li>Added support for automatic installation and enablement of plugins using feature flags.</li>
 <li>Added <code class="docutils literal notranslate"><span class="pre">webhook</span> <span class="pre">create</span></code> endpoints to local mode and the ability to create webhooks for other users.</li>
 <li>Added a Mattermost CLI command to initialize the database.</li>
@@ -342,7 +341,10 @@
 <li>The <code class="docutils literal notranslate"><span class="pre">UseExperimentalGossip</span></code> field under ClusterSettings is now <code class="docutils literal notranslate"><span class="pre">true</span></code> by default. This means that new installations will use the gossip protocol for cluster communication. There will be no changes to existing installations. The Gossip protocol is now considered to be in General Availability and is the recommended clustering mode.</li>
 <li>Added a <code class="docutils literal notranslate"><span class="pre">CollapsedThreads</span></code> feature flag.</li>
 <li>Enabled <code class="docutils literal notranslate"><span class="pre">ExperimentalDataPrefetch</span></code> for all servers and removed the corresponding setting.</li>
-<li>Added a <code class="docutils literal notranslate"><span class="pre">AppCustomURLSchemes</span></code> setting under .</li>
+<li>Under <code class="docutils literal notranslate"><span class="pre">NativeAppSettings</span></code> in <code class="docutils literal notranslate"><span class="pre">config.json</span></code>:<ul>
+<li>Added a <code class="docutils literal notranslate"><span class="pre">AppCustomURLSchemes</span></code> setting to add the ability to redirect to the mobile app after OAuth &amp; SAML auth completion.</li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
