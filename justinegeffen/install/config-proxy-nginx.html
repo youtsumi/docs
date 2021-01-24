@@ -163,8 +163,13 @@
 <p>SSL and HTTP/2 with server push are enabled in the provided configuration example.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>You will need valid SSL certificates in order for NGINX to pin the certificates properly. Additionally, your browser must have permissions to accept the certificate as a valid CA signed certificate. If you need an example on full configuration with pinning Let’s Encrypt, please see the <a class="reference external" href="https://docs.mattermost.com/install/config-ssl-http2-nginx.html">Nginx HTTP/2 &amp; SSL full configuration guide</a>.</p>
-<div class="last highlight-none notranslate"><div class="highlight"><pre><span></span>upstream backend {
+<p class="last">If you’re going to use Let’s Encrypt to manage your SSL certificate stop at step 3 here and please see the <a class="reference external" href="https://docs.mattermost.com/install/config-ssl-http2-nginx.html">Nginx HTTP/2 &amp; SSL full configuration guide</a>.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You will need valid SSL certificates in order for NGINX to pin the certificates properly. Additionally, your browser must have permissions to accept the certificate as a valid CA-signed certificate.</p>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>upstream backend {
    server 10.10.10.2:8065;
    keepalive 32;
 }
@@ -259,7 +264,6 @@ map $ssl_early_data $tls1_3_early_data {
 }
 </pre></div>
 </div>
-</div>
 <ol class="arabic simple" start="4">
 <li>Remove the existing default sites-enabled file.</li>
 </ol>
@@ -310,24 +314,20 @@ map $ssl_early_data $tls1_3_early_data {
 <p>For other troubleshooting tips for WebSocket errors, see <a class="reference external" href="https://docs.mattermost.com/install/troubleshooting.html#please-check-connection-mattermost-unreachable-if-issue-persists-ask-administrator-to-check-websocket-port">potential solutions here</a>.</p>
 <p><strong>How do I setup an NGINX proxy with the Mattermost Docker installation?</strong></p>
 <ol class="arabic simple">
-<li>Find the name of the Mattermost network and connect it to the NGINX proxy:</li>
+<li>Find the name of the Mattermost network and connect it to the NGINX proxy.</li>
 </ol>
-<blockquote>
-<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>docker network ls
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>docker network ls
 # Grep the name of your Mattermost network like &quot;mymattermost_default&quot;.
 docker network connect mymattermost_default nginx-proxy
 </pre></div>
 </div>
-</div></blockquote>
 <ol class="arabic simple" start="2">
 <li>Restart the Mattermost Docker containers.</li>
 </ol>
-<blockquote>
-<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>docker-compose stop app
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>docker-compose stop app
 docker-compose start app
 </pre></div>
 </div>
-</div></blockquote>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
 <p class="last">You don’t need to run the ‘web’ container, since NGINX proxy accepts incoming requests.</p>
@@ -335,8 +335,7 @@ docker-compose start app
 <ol class="arabic simple" start="3">
 <li>Update your <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> file to include a new environment variable <code class="docutils literal notranslate"><span class="pre">VIRTUAL_HOST</span></code> and an <code class="docutils literal notranslate"><span class="pre">expose</span></code> directive.</li>
 </ol>
-<blockquote>
-<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>environment:
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>environment:
   # set same as db credentials and dbname
   - MM_USERNAME=mmuser
   - MM_PASSWORD=mmuser-password
@@ -347,9 +346,8 @@ expose:
   - &quot;443&quot;
 </pre></div>
 </div>
-</div></blockquote>
 <p><strong>Why does NGINX fail when installing Gitlab CE with Mattermost on Azure?</strong></p>
-<p>You may need to update the Callback URLs for the Application entry of Mattermost inside your GitLab instance.</p>
+<p>You may need to update the callback URLs for the Application entry of Mattermost inside your GitLab instance.</p>
 <ol class="arabic simple">
 <li>Log in to your GitLab instance as the admin.</li>
 <li>Go to <strong>Admin &gt; Applications</strong>.</li>
