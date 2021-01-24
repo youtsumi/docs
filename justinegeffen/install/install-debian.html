@@ -1042,11 +1042,11 @@ expose:
 <p class="first admonition-title">Note</p>
 <p class="last">If Let’s Encrypt is enabled, forward port 80 through a firewall, with <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#forward-port-80-to-443">Forward80To443</a> <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting set to <code class="docutils literal notranslate"><span class="pre">true</span></code> to complete the Let’s Encrypt certification.</p>
 </div>
-<p><strong>To configure NGINX as a proxy with SSL and HTTP/2:</strong></p>
+<p><strong>To configure NGINX as a proxy with SSL and HTTP/2</strong></p>
 <p>If you’re looking for additional Let’s Encrypt/Certbot assistance you can access their documentation <a class="reference external" href="https://certbot.eff.org">here</a> .</p>
 <ol class="arabic simple">
 <li>Log in to the server that hosts NGINX and open a terminal window.</li>
-<li>Open the your mattermost nginx conf file as root in a text editor and update the ip address in the <code class="docutils literal notranslate"><span class="pre">upstream</span> <span class="pre">backend</span></code> to point towards mattermost, and the <code class="docutils literal notranslate"><span class="pre">server_name</span></code> to be your domain for Mattermost.</li>
+<li>Open the your Mattermost <code class="docutils literal notranslate"><span class="pre">nginx.conf</span></code> file as <em>root</em> in a text editor and update the IP address in the <code class="docutils literal notranslate"><span class="pre">upstream</span> <span class="pre">backend</span></code> to point towards Mattermost, and the <code class="docutils literal notranslate"><span class="pre">server_name</span></code> to be your domain for Mattermost.</li>
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -1115,7 +1115,7 @@ server {
 <div>On RHEL 7+: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">rm</span> <span class="pre">/etc/nginx/conf.d/default</span></code></div></blockquote>
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li>Enable the mattermost configuration.</li>
+<li>Enable the Mattermost configuration.</li>
 </ol>
 <blockquote>
 <div><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">ln</span> <span class="pre">-s</span> <span class="pre">/etc/nginx/sites-available/mattermost</span> <span class="pre">/etc/nginx/sites-enabled/mattermost</span></code></p>
@@ -1123,7 +1123,7 @@ server {
 <div>On RHEL 7+: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">ln</span> <span class="pre">-s</span> <span class="pre">/etc/nginx/conf.d/mattermost</span> <span class="pre">/etc/nginx/conf.d/default.conf</span></code></div></blockquote>
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li>Run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">nginx</span> <span class="pre">-t</span></code> to ensure your configuration is done properly. If you get an error, look into the nginx config and make the needed changes to the file under <code class="docutils literal notranslate"><span class="pre">/etc/nginx/sites-available/mattermost</span></code></li>
+<li>Run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">nginx</span> <span class="pre">-t</span></code> to ensure your configuration is done properly. If you get an error, look into the NGINX config and make the needed changes to the file under <code class="docutils literal notranslate"><span class="pre">/etc/nginx/sites-available/mattermost</span></code>.</li>
 <li>Restart NGINX.</li>
 </ol>
 <blockquote>
@@ -1143,7 +1143,7 @@ server {
 <blockquote>
 <div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">snap</span> <span class="pre">install</span> <span class="pre">core;</span> <span class="pre">sudo</span> <span class="pre">snap</span> <span class="pre">refresh</span> <span class="pre">core</span></code></div></blockquote>
 <ol class="arabic simple" start="9">
-<li>Install the Certbot package</li>
+<li>Install the Certbot package.</li>
 </ol>
 <blockquote>
 <div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">snap</span> <span class="pre">install</span> <span class="pre">--classic</span> <span class="pre">certbot</span></code></div></blockquote>
@@ -1296,24 +1296,20 @@ server {
 <p>For other troubleshooting tips for WebSocket errors, see <a class="reference external" href="https://docs.mattermost.com/install/troubleshooting.html#please-check-connection-mattermost-unreachable-if-issue-persists-ask-administrator-to-check-websocket-port">potential solutions here</a>.</p>
 <p><strong>How do I setup an NGINX proxy with the Mattermost Docker installation?</strong></p>
 <ol class="arabic simple">
-<li>Find the name of the Mattermost network and connect it to the NGINX proxy:</li>
+<li>Find the name of the Mattermost network and connect it to the NGINX proxy.</li>
 </ol>
-<blockquote>
-<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>docker network ls
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>docker network ls
 # Grep the name of your Mattermost network like &quot;mymattermost_default&quot;.
 docker network connect mymattermost_default nginx-proxy
 </pre></div>
 </div>
-</div></blockquote>
 <ol class="arabic simple" start="2">
 <li>Restart the Mattermost Docker containers.</li>
 </ol>
-<blockquote>
-<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>docker-compose stop app
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>docker-compose stop app
 docker-compose start app
 </pre></div>
 </div>
-</div></blockquote>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
 <p class="last">You don’t need to run the ‘web’ container, since NGINX proxy accepts incoming requests.</p>
@@ -1321,8 +1317,7 @@ docker-compose start app
 <ol class="arabic simple" start="3">
 <li>Update your <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> file to include a new environment variable <code class="docutils literal notranslate"><span class="pre">VIRTUAL_HOST</span></code> and an <code class="docutils literal notranslate"><span class="pre">expose</span></code> directive.</li>
 </ol>
-<blockquote>
-<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>environment:
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>environment:
   # set same as db credentials and dbname
   - MM_USERNAME=mmuser
   - MM_PASSWORD=mmuser-password
@@ -1333,20 +1328,18 @@ expose:
   - &quot;443&quot;
 </pre></div>
 </div>
-</div></blockquote>
 <p><strong>Why does NGINX fail when installing Gitlab CE with Mattermost on Azure?</strong></p>
 <p>You may need to update the Callback URLs for the Application entry of Mattermost inside your GitLab instance.</p>
 <ol class="arabic simple">
 <li>Log in to your GitLab instance as the admin.</li>
 <li>Go to <strong>Admin &gt; Applications</strong>.</li>
-<li>Click <strong>Edit</strong> on GitLab-Mattermost.</li>
+<li>Select <strong>Edit</strong> on GitLab-Mattermost.</li>
 <li>Update the Callback URLs to your new domain/URL.</li>
 <li>Save the changes.</li>
 <li>Update the external URL for GitLab and Mattermost in the <code class="docutils literal notranslate"><span class="pre">/etc/gitlab/gitlab.rb</span></code> configuration file.</li>
 </ol>
 <p><strong>Why does Certbot fail the http-01 challenge?</strong></p>
-<blockquote>
-<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Requesting a certificate for yourdomain.com
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Requesting a certificate for yourdomain.com
 Performing the following challenges:
 http-01 challenge for yourdomain.com
 Waiting for verification...
@@ -1356,16 +1349,14 @@ Cleaning up challenges
 Some challenges have failed.
 </pre></div>
 </div>
-</div></blockquote>
 <p>If you see the above errors this is typically because certbot was not able to access port 80. This can be due to a firewall or other DNS configuration. Ensure that your A/AAAA records are pointing to this server and your <code class="docutils literal notranslate"><span class="pre">server_name</span></code> within the NGINX config does not have a redirect.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">If you’re using Cloudflare you’ll need to disable <code class="docutils literal notranslate"><span class="pre">force</span> <span class="pre">traffic</span> <span class="pre">to</span> <span class="pre">https</span></code>.</p>
 </div>
 <p><strong>Certbot Rate Limiting</strong></p>
-<p>If running certbot stand alone you will see the below error:</p>
-<blockquote>
-<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Error: Could not issue a Let&#39;s Encrypt SSL/TLS certificate for example.com.
+<p>If running certbot as stand-alone you’ll see the below error:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Error: Could not issue a Let&#39;s Encrypt SSL/TLS certificate for example.com.
 One of the Let&#39;s Encrypt rate limits has been exceeded for example.com.
 See the related Knowledge Base article for details.
 Details
@@ -1376,14 +1367,11 @@ Status: 429
 Detail: Error creating new order :: too many failed authorizations recently: see https://letsencrypt.org/docs/rate-limits/
 </pre></div>
 </div>
-</div></blockquote>
-<p>If running Let’s Encrypt within Mattermost you will see the below error:</p>
-<blockquote>
-<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>{&quot;level&quot;:&quot;error&quot;,&quot;ts&quot;:1609092001.752515,&quot;caller&quot;:&quot;http/server.go:3088&quot;,&quot;msg&quot;:&quot;http: TLS handshake error from ip:port: 429 urn:ietf:params:acme:error:rateLimited: Error creating new order :: too many failed authorizations recently: see https://letsencrypt.org/docs/rate-limits/&quot;,&quot;source&quot;:&quot;httpserver&quot;}
+<p>If running Let’s Encrypt within Mattermost you’ll see the below error:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>{&quot;level&quot;:&quot;error&quot;,&quot;ts&quot;:1609092001.752515,&quot;caller&quot;:&quot;http/server.go:3088&quot;,&quot;msg&quot;:&quot;http: TLS handshake error from ip:port: 429 urn:ietf:params:acme:error:rateLimited: Error creating new order :: too many failed authorizations recently: see https://letsencrypt.org/docs/rate-limits/&quot;,&quot;source&quot;:&quot;httpserver&quot;}
 </pre></div>
 </div>
-</div></blockquote>
-<p>This error means that you’ve attempted to generate a cert too many times. You can fund more information here - <a class="reference external" href="https://letsencrypt.org/docs/rate-limits/">https://letsencrypt.org/docs/rate-limits/</a>.</p>
+<p>This error means that you’ve attempted to generate a cert too many times. You can find more information here - <a class="reference external" href="https://letsencrypt.org/docs/rate-limits/">https://letsencrypt.org/docs/rate-limits/</a>.</p>
 </div>
 </div>
 </div>
