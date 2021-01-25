@@ -255,17 +255,7 @@
 <p>Also see <a class="reference external" href="https://bit.ly/2nK3cVf">changelog in progress</a> for the next release.</p>
 <div class="section" id="release-v5-31-esr">
 <h2>Release v5.31 - <a class="reference external" href="https://docs.mattermost.com/administration/extended-support-release.html">ESR</a><a class="headerlink" href="#release-v5-31-esr" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><strong>v5.31.1, release day TBD</strong><ul>
-<li>Fixed an issue where mattermost-redux was not including the built code for v5.31.0 and downstream projects were affected by this.</li>
-<li>Fixed an issue where the About Mattermost modal didn’t display the correct Database Schema version.</li>
-</ul>
-</li>
-<li><strong>v5.31.0, released 2021-01-16</strong><ul>
-<li>Original 5.30.0 release</li>
-</ul>
-</li>
-</ul>
+<p><strong>Release Day: 2021-01-16</strong></p>
 <p>Mattermost v5.31.0 contains a low level security fix. <a class="reference external" href="https://docs.mattermost.com/administration/upgrade.html">Upgrading</a> is recommended. Details will be posted on our <a class="reference external" href="https://mattermost.com/security-updates/">security updates page</a> 30 days after release as per the <a class="reference external" href="https://mattermost.org/responsible-disclosure-policy/">Mattermost Responsible Disclosure Policy</a>.</p>
 <div class="section" id="compatibility">
 <h3>Compatibility<a class="headerlink" href="#compatibility" title="Permalink to this headline">¶</a></h3>
@@ -348,20 +338,22 @@
 <div class="section" id="known-issues">
 <h3>Known Issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>The config.json may reset itself to default values if the binary is run with the root user.</li>
-<li>Reddit link previews no longer work in Mattermost.</li>
-<li><strong>Discard Changes</strong> confirmation is not displayed when a System Admin adds people on the <strong>System Roles</strong> System Console page and clicks elsewhere before saving the changes.</li>
-<li>Error text is missing when the team name is left blank on the team creation page.</li>
-<li>Posts created by bots containing attachments sometimes appear as repeated until the user refreshes the page.</li>
-<li>Emoji counter in the center channel doesn’t always update immediately when a reaction is added in the right-hand side.</li>
-<li>A JavaScript error may appear in some cases when dismissing the new messages toast while scrolled up in the right-hand side.</li>
-<li>The <strong>Admin Filter</strong> option is not disabled on the AD/LDAP page for admin roles with the <code class="docutils literal notranslate"><span class="pre">sysconsole_write_authentication</span></code> permission.</li>
-<li>On a server using a subpath, the URL opens a blank page if the System Admin changes the Site URL in the System Console. To fix this, the System Admin should restart the server.</li>
-<li>Login does not work when Custom Terms of Service is enabled and MFA is enforced.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">config.json</span></code> may reset itself to default values if the binary is run with the root user. <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-32234">MM-32234</a></li>
+<li>The Database Schema Version is displayed as 5.30.0 in the About Mattermost modal.</li>
+<li><code class="docutils literal notranslate"><span class="pre">PermanentDeleteChannel</span></code> fails with “failed to get a thread”. <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-31731">MM-31731</a></li>
+<li>Reddit link previews no longer work in Mattermost. <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-31899">MM-31899</a></li>
+<li><strong>Discard Changes</strong> confirmation is not displayed when a System Admin adds people on the <strong>System Roles</strong> System Console page and clicks elsewhere before saving the changes. <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-29927">MM-29927</a></li>
+<li>Error text is missing when the team name is left blank on the team creation page. <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-31361">MM-31361</a></li>
+<li>Posts created by bots containing attachments sometimes appear as repeated until the user refreshes the page. <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-30980">MM-30980</a></li>
+<li>Emoji counter in the center channel doesn’t always update immediately when a reaction is added in the right-hand side. <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-31994">MM-31994</a></li>
+<li>Slow typing has been experienced when the channel sidebar has many channels. <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-30407">MM-30407</a></li>
+<li>The new experimental sidebar occasionally loses custom categories. <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-30314">MM-30314</a></li>
+<li>Slack theme import fails due to an altered formatting of Slack export colour schemes. <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-30531">MM-30531</a></li>
+<li>A JavaScript error may appear in some cases when dismissing the new messages toast while scrolled up in the right-hand side. <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-30446">MM-30446</a></li>
+<li>The <strong>Admin Filter</strong> option is not disabled on the AD/LDAP page for admin roles with the <code class="docutils literal notranslate"><span class="pre">sysconsole_write_authentication</span></code> permission. <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-29089">MM-29089</a></li>
 <li>Google login fails on the Classic mobile apps.</li>
 <li>Status may sometimes get stuck as <strong>Away</strong> or <strong>Offline</strong> in High Availability mode with IP Hash turned off.</li>
 <li>Searching stop words in quotation marks with Elasticsearch enabled returns more than just the searched terms.</li>
-<li>Searching with Elasticsearch enabled may not always highlight the searched terms.</li>
 <li>The team sidebar on the desktop app does not update when channels have been read on mobile.</li>
 <li>Slack import through the CLI fails if email notifications are enabled.</li>
 <li>Push notifications don’t always clear on iOS when running Mattermost in High Availability mode.</li>
@@ -523,7 +515,7 @@
 <div class="section" id="id11">
 <h3>Known Issues<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>The config.json may reset itself to default values if the binary is run with the root user.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">config.json</span></code> may reset itself to default values if the binary is run with the root user.</li>
 <li><strong>Discard Changes</strong> confirmation is not displayed when an admin adds people in the <strong>System Roles</strong> System Console page and clicks elsewhere before saving the changes.</li>
 <li>Error text is missing when the team name is left blank on the team creation page.</li>
 <li>Line numbers do not line up with the text on code file previews.</li>
