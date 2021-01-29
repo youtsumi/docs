@@ -215,8 +215,9 @@
 functional if the Legacy Sidebar (<code class="docutils literal notranslate"><span class="pre">EnableLegacySidebar</span></code>) is enabled since they are not compatible with the new sidebar experience.
 <code class="docutils literal notranslate"><span class="pre">ExperimentalChannelSidebarOrganization</span></code> has been deprecated, since the new sidebar is now enabled for all users.</td>
 </tr>
-<tr class="row-odd"><td colspan="2">Breaking changes to the Golang client API were introduced. Any client built on top of this client that makes use of functions for signature change (e.g. for
-changing the number of parameters or their type) will fail to compile/execute as soon as its dependencies get updated.</td>
+<tr class="row-odd"><td colspan="2">Breaking changes to the Golang client API were introduced: <code class="docutils literal notranslate"><span class="pre">GetPostThread</span></code>, <code class="docutils literal notranslate"><span class="pre">GetPostsForChannel</span></code>, <code class="docutils literal notranslate"><span class="pre">GetPostsSince</span></code>, <code class="docutils literal notranslate"><span class="pre">GetPostsAfter</span></code>, <code class="docutils literal notranslate"><span class="pre">GetPostsBefore</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">GetPostsAroundLastUnread</span></code> now require an additional collapsedThreads parameter to be passed. Any client making use of these functions will need to update
+them when upgrading its dependencies.</td>
 </tr>
 <tr class="row-even"><td rowspan="2">v5.29.0</td>
 <td colspan="2">A new configuration setting <code class="docutils literal notranslate"><span class="pre">ThreadAutoFollow</span></code> has been added to support <a class="reference external" href="https://docs.google.com/presentation/d/1QSrPws3N8AMSjVyOKp15FKT7O0fGMSx8YidjSDS4Wng/edit#slide=id.g2f0aecc189_0_245">Collapsed Reply Threads</a> releasing in beta in Q1 2021. This
