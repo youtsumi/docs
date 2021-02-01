@@ -1,0 +1,515 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>SMTP Email Setup &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Configuring CloudFront to host Mattermost static assets" href="config-cloudfront.html" />
+    <link rel="prev" title="Custom Branding Tools" href="../administration/branding.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../administration/config-settings.html">Configuration Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/config-in-database.html">Configuration in the Mattermost Database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/prev-config-settings.html">Configuration Settings Prior to v5.12</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/customize-mattermost.html">Customizing Mattermost</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/customize-email.html">Email Templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/branding.html">Custom Branding Tools</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">SMTP Email Setup</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-enable-email">How to Enable Email</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sample-smtp-settings">Sample SMTP Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#troubleshooting-smtp">Troubleshooting SMTP</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="config-cloudfront.html">Configuring CloudFront to host Mattermost static assets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="outbound-proxy.html">Using an Outbound Proxy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i18n.html">Chinese, Japanese and Korean Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config-apache2.html">Configuring Apache2 (Unofficial)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
+    
+    <li>SMTP Email Setup</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/install/smtp-email-setup.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="smtp-email-setup">
+<span id="id1"></span><h1>SMTP Email Setup<a class="headerlink" href="#smtp-email-setup" title="Permalink to this headline">¶</a></h1>
+<p>To run in production, Mattermost requires SMTP email to be enabled for email notifications and password reset for systems using email-based authentication.</p>
+<div class="section" id="how-to-enable-email">
+<h2>How to Enable Email<a class="headerlink" href="#how-to-enable-email" title="Permalink to this headline">¶</a></h2>
+<p>To enable email, configure an SMTP email service as follows:</p>
+<ol class="arabic simple">
+<li><strong>Set up an SMTP email sending service</strong> (if you don’t yet have an
+SMTP service with credentials)<ul>
+<li><dl class="first docutils">
+<dt>Any SMTP email service can be used, you just need the following</dt>
+<dd>information: <code class="docutils literal notranslate"><span class="pre">Server</span> <span class="pre">Name</span></code>, <code class="docutils literal notranslate"><span class="pre">Port</span></code>, <code class="docutils literal notranslate"><span class="pre">SMTP</span> <span class="pre">Username</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">SMTP</span> <span class="pre">Password</span></code>.<ul class="last">
+<li><dl class="first docutils">
+<dt>If you don’t have an SMTP service, here are simple instructions</dt>
+<dd>to set one up with <a class="reference external" href="https://aws.amazon.com/ses/">Amazon Simple Email Service
+(SES)</a>:<ol class="last arabic">
+<li>Go to <a class="reference external" href="https://console.aws.amazon.com/ses">Amazon SES
+console</a> then
+<code class="docutils literal notranslate"><span class="pre">SMTP</span> <span class="pre">Settings</span> <span class="pre">&gt;</span> <span class="pre">Create</span> <span class="pre">My</span> <span class="pre">SMTP</span> <span class="pre">Credentials</span></code></li>
+<li>Copy the <code class="docutils literal notranslate"><span class="pre">Server</span> <span class="pre">Name</span></code>, <code class="docutils literal notranslate"><span class="pre">Port</span></code>, <code class="docutils literal notranslate"><span class="pre">SMTP</span> <span class="pre">Username</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">SMTP</span> <span class="pre">Password</span></code> for Step 2 below.</li>
+<li>From the <code class="docutils literal notranslate"><span class="pre">Domains</span></code> menu set up and verify a new domain,
+then enable <code class="docutils literal notranslate"><span class="pre">Generate</span> <span class="pre">DKIM</span> <span class="pre">Settings</span></code> for the domain.<ol class="arabic">
+<li>We recommend you set up <a class="reference external" href="https://en.wikipedia.org/wiki/Sender_Policy_Framework">Sender Policy
+Framework</a>
+(SPF) and/or <a class="reference external" href="https://en.wikipedia.org/wiki/DomainKeys_Identified_Mail">Domain Keys Identified
+Mail</a>
+(DKIM) for your email domain.</li>
+</ol>
+</li>
+<li>Choose a sender address like <code class="docutils literal notranslate"><span class="pre">mattermost&#64;example.com</span></code> and
+click <code class="docutils literal notranslate"><span class="pre">Send</span> <span class="pre">a</span> <span class="pre">Test</span> <span class="pre">Email</span></code> to verify setup is working
+correctly.</li>
+</ol>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</li>
+<li><strong>Configure SMTP settings</strong><ol class="arabic">
+<li>Open the <strong>System Console</strong> by logging into an existing team and
+accessing “System Console” from the main menu.<ul>
+<li><dl class="first docutils">
+<dt>Alternatively, if a team doesn’t yet exist, go to</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">http://dockerhost:8065/</span></code> in your browser, create a team,
+then from the main menu click <strong>System Console</strong></dd>
+</dl>
+</li>
+</ul>
+</li>
+<li>Go to the <strong>Authentication</strong> &gt; <strong>Email</strong> tab and configure the following:<ol class="arabic">
+<li><strong>Allow Sign Up With Email:</strong> <code class="docutils literal notranslate"><span class="pre">true</span></code></li>
+</ol>
+</li>
+<li>Go to the <strong>Notifications</strong> &gt; <strong>Email</strong> tab and configure the following:<ol class="arabic">
+<li><strong>Send Email Notifications:</strong> <code class="docutils literal notranslate"><span class="pre">true</span></code></li>
+<li><strong>Notification Display Name:</strong> Display name on email account
+sending notifications</li>
+<li><strong>Notification Email Address:</strong> Email address displayed on
+email account used to send notifications</li>
+<li><strong>SMTP Username</strong>: <code class="docutils literal notranslate"><span class="pre">SMTP</span> <span class="pre">Username</span></code> from Step 1</li>
+<li><strong>SMTP Password</strong>: <code class="docutils literal notranslate"><span class="pre">SMTP</span> <span class="pre">Password</span></code> from Step 1</li>
+<li><strong>SMTP Server</strong>: <code class="docutils literal notranslate"><span class="pre">SMTP</span> <span class="pre">Server</span></code> from Step 1</li>
+<li><strong>SMTP Port</strong>: <code class="docutils literal notranslate"><span class="pre">SMTP</span> <span class="pre">Port</span></code> from Step 1</li>
+<li><strong>Connection Security</strong>: <code class="docutils literal notranslate"><span class="pre">TLS</span> <span class="pre">(Recommended)</span></code></li>
+<li>Then click <strong>Save</strong></li>
+<li>Then click <strong>Test Connection</strong></li>
+<li>If the test failed please look in <strong>OTHER</strong> &gt; <strong>Logs</strong> for any
+errors that look like <code class="docutils literal notranslate"><span class="pre">[EROR]</span> <span class="pre">/api/v4/email/test</span> <span class="pre">...</span></code></li>
+</ol>
+</li>
+<li>(Optional) Go to the <strong>Security</strong> &gt; <strong>Sign Up</strong> tab and configure the following:<ol class="arabic">
+<li><strong>Enable Email Invitations:</strong> <code class="docutils literal notranslate"><span class="pre">true</span></code></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+<div class="section" id="sample-smtp-settings">
+<h2>Sample SMTP Settings<a class="headerlink" href="#sample-smtp-settings" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="amazon-ses">
+<h3>Amazon SES<a class="headerlink" href="#amazon-ses" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Set <strong>SMTP Username</strong> to <strong>[YOUR_SMTP_USERNAME]</strong></li>
+<li>Set <strong>SMTP Password</strong> to <strong>[YOUR_SMTP_PASSWORD]</strong></li>
+<li>Set <strong>SMTP Server</strong> to <strong>email-smtp.us-east-1.amazonaws.com</strong></li>
+<li>Set <strong>SMTP Port</strong> to <strong>465</strong></li>
+<li>Set <strong>Connection Security</strong> to <strong>TLS</strong></li>
+</ul>
+</div>
+<div class="section" id="postfix">
+<h3>Postfix<a class="headerlink" href="#postfix" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Make sure Postfix is installed on the machine where Mattermost is
+installed</li>
+<li>Set <strong>SMTP Username</strong> to <strong>(empty)</strong></li>
+<li>Set <strong>SMTP Password</strong> to <strong>(empty)</strong></li>
+<li>Set <strong>SMTP Server</strong> to <strong>localhost</strong></li>
+<li>Set <strong>SMTP Port</strong> to <strong>25</strong></li>
+<li>Set <strong>Connection Security</strong> to <strong>(empty)</strong></li>
+</ul>
+</div>
+<div class="section" id="gmail">
+<h3>Gmail<a class="headerlink" href="#gmail" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Set <strong>SMTP Username</strong> to <strong>your_email&#64;gmail.com</strong></li>
+<li>Set <strong>SMTP Password</strong> to <strong>your_password</strong></li>
+<li>Set <strong>SMTP Server</strong> to <strong>smtp.gmail.com</strong></li>
+<li>Set <strong>SMTP Port</strong> to <strong>587</strong></li>
+<li>Set <strong>Connection Security</strong> to <strong>STARTTLS</strong></li>
+</ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Additional configuration is required in Google to allow SMTP email to relay through their servers.
+See <a class="reference external" href="https://support.google.com/a/answer/2956491?hl=en">SMTP relay: Route outgoing non-Gmail messages through Google</a> for the required steps.</p>
+</div>
+</div>
+<div class="section" id="hotmail">
+<h3>Hotmail<a class="headerlink" href="#hotmail" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Set <strong>SMTP Username</strong> to <strong>your_email&#64;hotmail.com</strong></li>
+<li>Set <strong>SMTP Password</strong> to <strong>your_password</strong></li>
+<li>Set <strong>SMTP Server</strong> to <strong>smtp-mail.outlook.com</strong></li>
+<li>Set <strong>SMTP Port</strong> to <strong>587</strong></li>
+<li>Set <strong>Connection Security</strong> to <strong>STARTTLS</strong></li>
+</ul>
+</div>
+<div class="section" id="office365-outlook">
+<h3>Office365 / Outlook<a class="headerlink" href="#office365-outlook" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Set <strong>SMTP Username</strong> to <strong>your_email&#64;hotmail.com</strong></li>
+<li>Set <strong>SMTP Password</strong> to <strong>your_password</strong></li>
+<li>Set <strong>SMTP Server Name</strong> to <strong>smtp.office365.com</strong></li>
+<li>Set <strong>SMTP Port</strong> to <strong>587</strong></li>
+<li>Set <strong>Connection Security</strong> to <strong>STARTTLS</strong></li>
+</ul>
+</div>
+</div>
+<div class="section" id="troubleshooting-smtp">
+<h2>Troubleshooting SMTP<a class="headerlink" href="#troubleshooting-smtp" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="tls-starttls-requirements">
+<h3>TLS/STARTTLS Requirements<a class="headerlink" href="#tls-starttls-requirements" title="Permalink to this headline">¶</a></h3>
+<p>If you fill in <strong>SMTP Username</strong> and <strong>SMTP Password</strong> then you must set
+<strong>Connection Security</strong> to <strong>TLS</strong> or to <strong>STARTTLS</strong></p>
+</div>
+<div class="section" id="troubleshooting-using-logs">
+<h3>Troubleshooting using Logs<a class="headerlink" href="#troubleshooting-using-logs" title="Permalink to this headline">¶</a></h3>
+<p>If you have issues with your SMTP install, from your Mattermost team
+site go to the main menu and open <strong>System Console -&gt; Logs</strong> to look for
+error messages related to your setup. You can do a search for the error
+code to narrow down the issue. Sometimes ISPs require nuanced setups for
+SMTP and error codes can hint at how to make the proper adjustments.</p>
+<p>For example, if <strong>System Console -&gt; Logs</strong> has an error code reading:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Connection</span> <span class="n">unsuccessful</span><span class="p">:</span> <span class="n">Failed</span> <span class="n">to</span> <span class="n">add</span> <span class="n">to</span> <span class="n">email</span> <span class="n">address</span> <span class="o">-</span> <span class="mi">554</span> <span class="mf">5.7</span><span class="o">.</span><span class="mi">1</span> <span class="o">&lt;</span><span class="n">unknown</span><span class="p">[</span><span class="n">IP</span><span class="o">-</span><span class="n">ADDRESS</span><span class="p">]</span><span class="o">&gt;</span><span class="p">:</span> <span class="n">Client</span> <span class="n">host</span> <span class="n">rejected</span><span class="p">:</span> <span class="n">Access</span> <span class="n">denied</span>
+</pre></div>
+</div>
+<p>Search for <code class="docutils literal notranslate"><span class="pre">554</span> <span class="pre">5.7.1</span> <span class="pre">error</span></code> and
+<code class="docutils literal notranslate"><span class="pre">Client</span> <span class="pre">host</span> <span class="pre">rejected:</span> <span class="pre">Access</span> <span class="pre">denied</span></code>.</p>
+</div>
+<div class="section" id="checking-your-smtp-server-is-reachable">
+<h3>Checking your SMTP server is reachable<a class="headerlink" href="#checking-your-smtp-server-is-reachable" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">Attempt to telnet to the email service to make sure the server is
+reachable.</p>
+</li>
+<li><p class="first">You must run the following commands from the same machine or virtual
+instance where <code class="docutils literal notranslate"><span class="pre">mattermost/bin/mattermost</span></code> is located.</p>
+</li>
+<li><p class="first">Telnet to the email server with <code class="docutils literal notranslate"><span class="pre">telnet</span> <span class="pre">mail.example.com</span> <span class="pre">25</span></code>. If
+the command works you should see something like</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Trying</span> <span class="mf">24.121</span><span class="o">.</span><span class="mf">12.143</span><span class="o">...</span>
+<span class="n">Connected</span> <span class="n">to</span> <span class="n">mail</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span><span class="o">.</span>
+<span class="mi">220</span> <span class="n">mail</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span> <span class="n">NO</span> <span class="n">UCE</span> <span class="n">ESMTP</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Then type something like <code class="docutils literal notranslate"><span class="pre">HELO</span> <span class="pre">&lt;your</span> <span class="pre">mail</span> <span class="pre">server</span> <span class="pre">domain&gt;</span></code>. If the
+command works you should see something like</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">250</span><span class="o">-</span><span class="n">mail</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span> <span class="n">NO</span> <span class="n">UCE</span>
+<span class="mi">250</span><span class="o">-</span><span class="n">STARTTLS</span>
+<span class="mi">250</span><span class="o">-</span><span class="n">PIPELINING</span>
+<span class="mi">250</span> <span class="mi">8</span><span class="n">BITMIME</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">As we’re not installing telnet by default on the official docker images you either need to use <code class="docutils literal notranslate"><span class="pre">ping</span></code> on those or install telnet yourself either directly or by modifying the Dockerfile.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For further assistance, review the <a class="reference external" href="https://forum.mattermost.org/c/trouble-shoot">Troubleshooting forum</a> for previously reported errors, or <a class="reference external" href="https://mattermost.com/pl/default-ask-mattermost-community/">join the Mattermost user community for troubleshooting help</a>. To submit an improvement or correction to this page, click <strong>Edit</strong> in the top-right corner of the page.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="config-cloudfront.html" class="btn btn-neutral float-right" title="Configuring CloudFront to host Mattermost static assets" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../administration/branding.html" class="btn btn-neutral" title="Custom Branding Tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/install/smtp-email-setup.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

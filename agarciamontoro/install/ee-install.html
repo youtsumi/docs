@@ -1,0 +1,494 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Enterprise Install and Upgrade &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Configuring Transport Encryption" href="transport-encryption/config.html" />
+    <link rel="prev" title="Using Sockets for Database" href="sockets-db.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="requirements.html">Software and Hardware Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-ubuntu-2004.html">Installing on Ubuntu 20.04 LTS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-ubuntu-1804.html">Installing on Ubuntu 18.04 LTS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mattermost-omnibus.html">Installing Mattermost Omnibus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-kubernetes.html">Installing on Kubernetes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-debian.html">Installing on Debian Buster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-rhel-7.html">Installing on RHEL 7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-rhel-8.html">Installing on RHEL 8</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-centos-oracle-scientific.html">Installing on CentOS, Oracle Linux, and Scientific Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sockets-db.html">Instructions On Setting Up a Socket-based Mattermost Database</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Enterprise Install and Upgrade</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#installing-enterprise-edition">Installing Enterprise Edition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#upgrading-to-mattermost-enterprise-edition">Upgrading to Mattermost Enterprise Edition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#converting-team-edition-to-enterprise-edition">Converting Team Edition to Enterprise Edition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#changing-a-license-key">Changing a License Key</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="transport-encryption/config.html">Configuring Transport Encryption</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deploy-bitnami.html">Deploy Mattermost on Bitnami</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docker-local-machine.html">Local Machine Setup using Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docker-ebs.html">AWS Elastic Beanstalk Docker Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-mmte-helm-gitlab-helm.html">Installing Mattermost Team Edition in GitLab Helm Chart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="desktop.html">Desktop Application Install Guides</a></li>
+<li class="toctree-l3"><a class="reference internal" href="desktop-managed-resources.html">Desktop Managed Resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="desktop-msi-gpo.html">Desktop MSI Installer and Group Policy Installation Guides (Beta)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
+    
+    <li>Enterprise Install and Upgrade</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/install/ee-install.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="enterprise-install-and-upgrade">
+<span id="ee-install"></span><h1>Enterprise Install and Upgrade<a class="headerlink" href="#enterprise-install-and-upgrade" title="Permalink to this headline">¶</a></h1>
+<p>Mattermost Enterprise Edition is free to use in “team mode” without Enterprise features enabled. There are two variants of Enterprise Edition: E10 and E20, and you can <a class="reference external" href="https://mattermost.com/pricing-feature-comparison/">compare their features online</a>.</p>
+<p>Once you’ve downloaded and installed Mattermost, start an Enterprise E20 trial via <strong>Main Menu &gt; System Console &gt; Edition and License &gt; Start trial</strong>. You can view <a class="reference external" href="https://mattermost.com/pricing/">pricing and feature information</a> and purchase a <a class="reference external" href="https://customers.mattermost.com/login/">license key online</a>.</p>
+<div class="section" id="installing-enterprise-edition">
+<h2>Installing Enterprise Edition<a class="headerlink" href="#installing-enterprise-edition" title="Permalink to this headline">¶</a></h2>
+<p>To install Mattermost Enterprise Edition directly please use one of the following guides:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://docs.mattermost.com/install/install-kubernetes.html">Production Kubernetes Deployment</a></li>
+<li><a class="reference external" href="https://docs.mattermost.com/install/install-ubuntu-1804.html">Production Enterprise Edition on Ubuntu 18.04</a></li>
+<li><a class="reference external" href="https://docs.mattermost.com/install/install-rhel-7.html">Production Enterprise Edition on RHEL 7</a></li>
+<li><a class="reference external" href="https://docs.mattermost.com/install/install-rhel-8.html">Production Enterprise Edition on RHEL 8</a></li>
+<li><a class="reference external" href="https://docs.mattermost.com/install/install-debian.html">Production Enterprise Edition on Debian Stretch</a></li>
+<li><a class="reference external" href="https://docs.mattermost.com/install/prod-docker.html">Production Docker Deployment using Docker Compose</a></li>
+</ul>
+</div>
+<div class="section" id="upgrading-to-mattermost-enterprise-edition">
+<h2>Upgrading to Mattermost Enterprise Edition<a class="headerlink" href="#upgrading-to-mattermost-enterprise-edition" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="checking-your-mattermost-edition-and-version">
+<h3>Checking your Mattermost Edition and Version<a class="headerlink" href="#checking-your-mattermost-edition-and-version" title="Permalink to this headline">¶</a></h3>
+<p>If you’re already running Mattermost, you can check the Mattermost edition and version from the command line using:</p>
+<blockquote>
+<div><cite>mattermost version</cite></div></blockquote>
+<p>To check your edition and version from the web interface, open <strong>Main Menu &gt; About Mattermost</strong>.</p>
+<ul class="simple">
+<li><strong>Mattermost Enterprise Edition</strong> indicates you can apply a license key to enable Enterprise features.</li>
+<li><strong>Mattermost Team Edition</strong> indicates you’re using the open source version and need to upgrade (per upgrade instructions below) before a license key can be applied.</li>
+</ul>
+</div>
+<div class="section" id="upgrading-to-enterprise-edition-from-mattermost-team-edition">
+<h3>Upgrading to Enterprise Edition from Mattermost Team Edition<a class="headerlink" href="#upgrading-to-enterprise-edition-from-mattermost-team-edition" title="Permalink to this headline">¶</a></h3>
+<p>The open source Mattermost Team Edition is functionally identical to the commercial Mattermost Enterprise Edition in its free “team mode”, but there is no ability to unlock Enterprise features.</p>
+<p>To enable unlocking Enterprise features, replace the Mattermost Team Edition binary with a Mattermost Enterprise Edition binary via an <a class="reference external" href="https://docs.mattermost.com/administration/upgrade.html#upgrade-team-edition-to-enterprise-edition">upgrade procedure</a>.</p>
+<p>If you’d like to back up Mattermost prior to upgrading, <a class="reference external" href="https://docs.mattermost.com/administration/migrating.html#migrating-the-mattermost-server">the migration guide</a>  outlines the process required to back up and restore your database.</p>
+</div>
+<div class="section" id="upgrading-to-enterprise-edition-in-gitlab-omnibus">
+<h3>Upgrading to Enterprise Edition in GitLab Omnibus<a class="headerlink" href="#upgrading-to-enterprise-edition-in-gitlab-omnibus" title="Permalink to this headline">¶</a></h3>
+<p>GitLab Omnibus runs the open source Mattermost Team Edition. To upgrade to Mattermost Enterprise Edition, follow these steps:</p>
+<ol class="arabic simple">
+<li>Disable the built-in Mattermost instance on GitLab Omnibus:</li>
+</ol>
+<ul class="simple">
+<li>Go to <code class="docutils literal notranslate"><span class="pre">/etc/gitlab/gitlab.rb</span></code> and set the following line to false:</li>
+</ul>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>mattermost[&#39;enable&#39;] = false
+</pre></div>
+</div>
+<ul class="simple">
+<li>Then run the following command to apply the updated setting:</li>
+</ul>
+<ol class="arabic simple" start="2">
+<li>Install Mattermost using <a class="reference external" href="https://docs.mattermost.com/install/ee-install.html#installing-enterprise-edition">one of the guides above</a>.</li>
+<li>Migrate the database used by GitLab Mattermost for your new Enterprise Edition instance.</li>
+<li>(Optional) Set up <a class="reference external" href="https://docs.gitlab.com/ee/user/project/integrations/mattermost_slash_commands.html">GitLab slash command integration</a> with your Mattermost instance.</li>
+</ol>
+<p>If you need to migrate Team Edition prior to install, <a class="reference external" href="https://docs.mattermost.com/administration/migrating.html">please follow the migration guide</a>.</p>
+</div>
+<div class="section" id="upgrading-enterprise-edition-to-a-newer-version">
+<h3>Upgrading Enterprise Edition to a Newer Version<a class="headerlink" href="#upgrading-enterprise-edition-to-a-newer-version" title="Permalink to this headline">¶</a></h3>
+<p>Upgrade a previous version of Mattermost Enterprise Edition to a later version by following the <a class="reference external" href="https://docs.mattermost.com/administration/upgrade.html#upgrade-enterprise-edition">upgrade procedure</a>.</p>
+</div>
+</div>
+<div class="section" id="converting-team-edition-to-enterprise-edition">
+<h2>Converting Team Edition to Enterprise Edition<a class="headerlink" href="#converting-team-edition-to-enterprise-edition" title="Permalink to this headline">¶</a></h2>
+<p>From Mattermost v5.27 on, if you’re running a Linux system with x86-64 architecture, you can convert Team Edition to Enterprise Edition in the System Console using a built-in conversion utility. This tool is recommended if you’d like to run an Enterprise trial or upgrade to Enterprise E10 or E20 on standalone servers.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>If you’re using Mattermost in a managed environment, such as GitLab Omnibus, and want to start an Enterprise Edition trial, you can use this tool. However if you plan to upgrade permanently and scale your production environment, we strongly recommend installing a new standalone server and following the appropriate <a class="reference external" href="https://docs.mattermost.com/administration/migrating.html">migration process</a>.</li>
+<li>If you’re using a modified version of Mattermost, using this tool will overwrite your changes and replace them with the official Enterprise Edition binary.</li>
+<li>For versions prior to v5.27, please follow <a class="reference external" href="https://docs.mattermost.com/administration/upgrade.html#upgrading-team-edition-to-enterprise-edition">these upgrade instructions</a>.</li>
+</ul>
+</div>
+<p>Navigate to <strong>System Console &gt; Edition and License</strong> and select <strong>Upgrade to Enterprise Edition</strong>.</p>
+<p>During the upgrade process, the Mattermost Enterprise Edition binary file that matches your current server version is downloaded, decompressed, and extracted. The Team Edition binary is then replaced by the Enterprise Edition version. Once this process is complete, you’re prompted to restart your server.</p>
+<p>The Mattermost version listed in <strong>System Console &gt; Edition and License</strong> will change from <strong>Team Edition</strong> to <strong>Enterprise Edition</strong>, and you can now activate an Enterprise Edition trial or upload a license.</p>
+<div class="section" id="permissions-and-limitations">
+<h3>Permissions and Limitations<a class="headerlink" href="#permissions-and-limitations" title="Permalink to this headline">¶</a></h3>
+<p>If you’re using a package manager, such as GitLab Omnibus, to manage your Mattermost installation the Mattermost system user won’t have sufficient permissions to perform the upgrade. If this is the case, you’ll need to change the file permissions manually.</p>
+<p>Changing the permissions in this way doesn’t affect your Mattermost deployment or impact any data. The permission change is done solely for the upgrade.</p>
+<p>To change the permissions using the command line on the Mattermost server, you need access to the command line tool as <em>mattermost</em> user.
+Open the command line tool on the Mattermost server and <code class="docutils literal notranslate"><span class="pre">cd</span></code> to the Mattermost installation directory. Run the following commands (replacing <code class="docutils literal notranslate"><span class="pre">&lt;PathToBinaryFile&gt;</span></code> with the appropriate path - typically <code class="docutils literal notranslate"><span class="pre">/opt/mattermost/bin/mattermost</span></code>) to change the ownership of the binary file to <em>mattermost</em> user and grant write access:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>chown mattermost &lt;PathToBinaryFile&gt;
+chmod +w &lt;PathToBinaryFile&gt;
+</pre></div>
+</div>
+<p>In the Mattermost System Console, retry the upgrade. When the upgrade is complete, return to the command prompt on the Mattermost server and run the following command to restore the file permissions, replacing <code class="docutils literal notranslate"><span class="pre">&lt;OriginalFileOwner&gt;</span></code> with the appropriate value:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>chown &lt;OriginalFileOwner&gt; &lt;PathToBinaryFile&gt;
+chmod -w &lt;PathToBinaryFile&gt;
+</pre></div>
+</div>
+<p>Note that automated updates or actions performed by other System Admins after the conversion can overwrite the changes, possibly reverting the system to Team Edition. This includes the <code class="docutils literal notranslate"><span class="pre">run</span> <span class="pre">gitlab-ctl</span> <span class="pre">configure</span></code> command to update Mattermost within GitLab Omnibus. If this occurs, you won’t be able to use Enterprise Edition features until converting the server back, but none of your data will be affected.</p>
+</div>
+<div class="section" id="troubleshooting">
+<h3>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="mattermost-has-reverted-to-team-edition">
+<h4>Mattermost has reverted to Team Edition<a class="headerlink" href="#mattermost-has-reverted-to-team-edition" title="Permalink to this headline">¶</a></h4>
+<p>If you converted Team Edition to Enterprise Edition on a managed deployment and then upgraded, the upgrade will have overwritten Enterprise Edition with the latest version of Team Edition.</p>
+<p>You can convert to Enterprise Edition again by following the steps above. If you plan to use Mattermost Enterprise Edition permanently, we recommend migrating your server to a self-managed one.</p>
+</div>
+<div class="section" id="the-manual-process-reset-my-file-permissions">
+<h4>The manual process reset my file permissions<a class="headerlink" href="#the-manual-process-reset-my-file-permissions" title="Permalink to this headline">¶</a></h4>
+<p>If you manually changed your file permissions, you can change them back.</p>
+<ol class="arabic simple">
+<li>Open the command line tool on the Mattermost server.</li>
+<li><code class="docutils literal notranslate"><span class="pre">cd</span></code> to the Mattermost installation directory (typically <code class="docutils literal notranslate"><span class="pre">/opt/mattermost/bin/mattermost</span></code>).</li>
+<li>Enter:</li>
+</ol>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>chown &lt;OriginalFileOwner&gt; &lt;PathToBinaryFile&gt;
+chmod -w &lt;PathToBinaryFile&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="file-permissions-error">
+<h4>File permissions error<a class="headerlink" href="#file-permissions-error" title="Permalink to this headline">¶</a></h4>
+<p>If your Mattermost deployment is part of a managed package you may receive file permissions errors and the upgrade will fail. You can edit the permissions settings manually:</p>
+<ol class="arabic simple">
+<li>Open the command line tool on the Mattermost server.</li>
+<li><code class="docutils literal notranslate"><span class="pre">cd</span></code> to the Mattermost installation directory (typically <code class="docutils literal notranslate"><span class="pre">/opt/mattermost/bin/mattermost</span></code>).</li>
+<li>Enter:</li>
+</ol>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>chown &lt;OriginalFileOwner&gt; &lt;PathToBinaryFile&gt;
+chmod -w &lt;PathToBinaryFile&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="incompatible-system-architecture">
+<h4>Incompatible system architecture<a class="headerlink" href="#incompatible-system-architecture" title="Permalink to this headline">¶</a></h4>
+<p>This tool is currently only compatible with Linux systems using x86-64 architecture. If you’re running Mattermost on a different architecture, please follow the manual upgrade process.</p>
+</div>
+<div class="section" id="cant-retrieve-enterprise-edition-binary-file">
+<h4>Can’t retrieve Enterprise Edition binary file<a class="headerlink" href="#cant-retrieve-enterprise-edition-binary-file" title="Permalink to this headline">¶</a></h4>
+<p>If the upgrade fails due to file retrieval failure, unavailable binary, or connectivity error, please check your proxy settings and try again. If the problem persists, follow the manual upgrade process instead.</p>
+</div>
+</div>
+</div>
+<div class="section" id="changing-a-license-key">
+<h2>Changing a License Key<a class="headerlink" href="#changing-a-license-key" title="Permalink to this headline">¶</a></h2>
+<p>Make sure that the new license is for a number of users that is greater than or equal to the current total number of users on your system. To find the total number of users, go to <strong>System Console &gt; Reporting &gt; Site Statistics</strong>. The total number of users is in the <strong>Total Active Users</strong> field. The license is rejected if this value is greater than the value allowed by the key.</p>
+<div class="section" id="installing-a-new-license-key">
+<h3>Installing a New License Key<a class="headerlink" href="#installing-a-new-license-key" title="Permalink to this headline">¶</a></h3>
+<p><strong>Using the command line interface (CLI)</strong></p>
+<p>Use this command to upload a new license or to replace an existing license with a new one.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>mattermost license upload {license}
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you upload the license via the CLI using  <code class="docutils literal notranslate"><span class="pre">mattermost</span> <span class="pre">license</span> <span class="pre">upload</span></code>, you need to restart the Mattermost server after uploading. Additionally, if you’re running a cluster, the license file needs to be uploaded to every node. See <a class="reference external" href="https://docs.mattermost.com/administration/command-line-tools.html#mattermost-license-upload">our documentation for more information on the command line tools</a>.</p>
+</div>
+<div class="section" id="license-key-storage">
+<h4>License key storage<a class="headerlink" href="#license-key-storage" title="Permalink to this headline">¶</a></h4>
+<p>Once you’ve uploaded your license key to your Mattermost server it’s stored in your SQL database at <code class="docutils literal notranslate"><span class="pre">mattermost.Licenses</span></code>. You can check what keys are on your server by running <code class="docutils literal notranslate"><span class="pre">select</span> <span class="pre">*</span> <span class="pre">from</span> <span class="pre">mattermost.Licenses;</span></code>.</p>
+<p><strong>Using the System Console</strong></p>
+<ol class="arabic simple">
+<li>Open <strong>System Console &gt; About &gt; Edition and License</strong> (or <strong>System Console &gt; OTHER &gt; Edition and License</strong> in versions prior to 5.12).</li>
+<li>Click <strong>Remove Enterprise License and Downgrade Server</strong>. This clears the license from the server and refreshes the System Console.</li>
+<li>Upload the new license key file.</li>
+</ol>
+<p>Removing an E20 or E10 license key will not remove the configuration for Enterprise settings, however these features will not function until an E10 or E20 license key is applied.</p>
+<p>When you’re using High Availability it’s critical to ensure that all servers in the cluster have the E20 license properly installed to prevent multi-node clusters from failing. An E20 license is required for High Availability to work.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>When you apply an E20 license key to a previously E10-licensed server, the E10 features will retain their configuration settings in E20.</li>
+<li>When you apply an E10 license to a previously E20-licensed server, the E20 features will retain their configuration but will no longer be accessible for use.</li>
+</ul>
+</div>
+<p>Once the key is uploaded and installed, the details of your license are displayed.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="transport-encryption/config.html" class="btn btn-neutral float-right" title="Configuring Transport Encryption" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sockets-db.html" class="btn btn-neutral" title="Using Sockets for Database" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/install/ee-install.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,592 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Desktop Application Install Guides &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Desktop Managed Resources" href="desktop-managed-resources.html" />
+    <link rel="prev" title="How to install Mattermost Team Edition Helm Chart in a GitLab Helm Chart deployment" href="install-mmte-helm-gitlab-helm.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="requirements.html">Software and Hardware Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-ubuntu-2004.html">Installing on Ubuntu 20.04 LTS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-ubuntu-1804.html">Installing on Ubuntu 18.04 LTS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mattermost-omnibus.html">Installing Mattermost Omnibus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-kubernetes.html">Installing on Kubernetes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-debian.html">Installing on Debian Buster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-rhel-7.html">Installing on RHEL 7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-rhel-8.html">Installing on RHEL 8</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-centos-oracle-scientific.html">Installing on CentOS, Oracle Linux, and Scientific Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sockets-db.html">Instructions On Setting Up a Socket-based Mattermost Database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ee-install.html">Enterprise Install and Upgrade</a></li>
+<li class="toctree-l3"><a class="reference internal" href="transport-encryption/config.html">Configuring Transport Encryption</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deploy-bitnami.html">Deploy Mattermost on Bitnami</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docker-local-machine.html">Local Machine Setup using Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docker-ebs.html">AWS Elastic Beanstalk Docker Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-mmte-helm-gitlab-helm.html">Installing Mattermost Team Edition in GitLab Helm Chart</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Desktop Application Install Guides</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#windows-10-windows-8-1-windows-7">Windows 10+, Windows 8.1+, Windows 7+</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#macos-10-9">macOS 10.9+</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#linux">Linux</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reporting-issues">Reporting Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="desktop-managed-resources.html">Desktop Managed Resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="desktop-msi-gpo.html">Desktop MSI Installer and Group Policy Installation Guides (Beta)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
+    
+    <li>Desktop Application Install Guides</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/install/desktop.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="desktop-application-install-guides">
+<h1><a class="toc-backref" href="#contents">Desktop Application Install Guides</a><a class="headerlink" href="#desktop-application-install-guides" title="Permalink to this headline">¶</a></h1>
+<p>Mattermost desktop applications are available for Windows, Mac, and Linux operating systems. They support all the features of the web experience, plus:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Connect to multiple Mattermost servers from a single interface, and switch with shortcut keys.</li>
+<li>Auto-start Mattermost when a user logs into their machine.</li>
+<li>(Windows) Add Mattermost to Start menu, Taskbar, and System Tray.</li>
+<li>(Windows/Mac) Deep link to the desktop app via <code class="docutils literal notranslate"><span class="pre">mattermost://</span></code> protocol if app is already installed.</li>
+<li>(Mac) Add Mattermost to the Dock.</li>
+<li>(Linux) <code class="docutils literal notranslate"><span class="pre">Desktop</span> <span class="pre">Entry</span></code> for the application to more easily <a class="reference external" href="https://wiki.archlinux.org/index.php/Desktop_entries">integrate into a desktop environment</a>.</li>
+</ul>
+</div></blockquote>
+<p>Below is a list of additional resources:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="https://docs.mattermost.com/help/apps/desktop-guide.html">Guide for configuring your desktop app experience</a></li>
+<li><a class="reference external" href="https://docs.mattermost.com/help/apps/desktop-changelog.html">Changelog</a></li>
+<li><a class="reference external" href="https://github.com/mattermost/desktop">Source code</a></li>
+<li>Contributor’s guide (coming soon)</li>
+</ul>
+</div></blockquote>
+<p>You can <a class="reference external" href="https://mattermost.com/download/#mattermostApps">download the apps directly from our downloads page</a>. You may also use the following installation guides for Windows, Mac, and Linux.</p>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#desktop-application-install-guides" id="id1">Desktop Application Install Guides</a><ul>
+<li><a class="reference internal" href="#windows-10-windows-8-1-windows-7" id="id2">Windows 10+, Windows 8.1+, Windows 7+</a><ul>
+<li><a class="reference internal" href="#msi-installer-and-group-policies-beta" id="id3">MSI Installer and Group Policies (Beta)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#macos-10-9" id="id4">macOS 10.9+</a></li>
+<li><a class="reference internal" href="#linux" id="id5">Linux</a><ul>
+<li><a class="reference internal" href="#generic-linux-package" id="id6">Generic Linux package</a></li>
+<li><a class="reference internal" href="#ubuntu-and-debian-based-systems" id="id7">Ubuntu and Debian-based systems</a></li>
+<li><a class="reference internal" href="#arch-linux-based-systems" id="id8">Arch Linux-based systems</a></li>
+<li><a class="reference internal" href="#snapcraft-package" id="id9">Snapcraft package</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#troubleshooting" id="id10">Troubleshooting</a><ul>
+<li><a class="reference internal" href="#installation-has-failed-dialog" id="id11">“Installation has failed” dialog</a></li>
+<li><a class="reference internal" href="#the-application-mattermost-can-t-be-opened-dialog" id="id12">“The application “Mattermost” can’t be opened” dialog</a></li>
+<li><a class="reference internal" href="#desktop-app-window-is-black-and-doesn-t-load-the-page" id="id13">Desktop App window is black and doesn’t load the page</a></li>
+<li><a class="reference internal" href="#desktop-app-is-not-visible-but-the-mattermost-icon-is-in-the-task-bar" id="id14">Desktop App is not visible, but the Mattermost icon is in the Task Bar</a></li>
+<li><a class="reference internal" href="#desktop-app-constantly-refreshes-the-page" id="id15">Desktop App constantly refreshes the page</a></li>
+<li><a class="reference internal" href="#desktop-app-constantly-asks-to-log-in-to-mattermost-server" id="id16">Desktop App constantly asks to log in to Mattermost server</a></li>
+<li><a class="reference internal" href="#internal-error-browserwindow-unresponsive-event-has-been-emitted" id="id17">“Internal error: BrowserWindow ‘unresponsive’ event has been emitted”</a></li>
+<li><a class="reference internal" href="#desktop-app-not-responsive-within-citrix-virtual-apps-or-desktop-environment" id="id18">Desktop app not responsive within Citrix Virtual Apps or Desktop Environment</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#reporting-issues" id="id19">Reporting Issues</a><ul>
+<li><a class="reference internal" href="#windows" id="id20">Windows</a></li>
+<li><a class="reference internal" href="#macos" id="id21">macOS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="windows-10-windows-8-1-windows-7">
+<h2><a class="toc-backref" href="#contents">Windows 10+, Windows 8.1+, Windows 7+</a><a class="headerlink" href="#windows-10-windows-8-1-windows-7" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Download the latest version of the Mattermost desktop app:<ul>
+<li><a class="reference external" href="https://releases.mattermost.com/desktop/4.6.2/mattermost-desktop-setup-4.6.2-win.exe">32/64-bit version of Windows</a></li>
+</ul>
+</li>
+<li>From the <strong>Downloads</strong> folder right-click on the file <code class="docutils literal notranslate"><span class="pre">mattermost-desktop-setup-4.6.2-win.exe</span></code> and select <strong>Open</strong>.</li>
+</ol>
+<p>This will start an installer for the app. Once finished, the Mattermost desktop app will open automatically.</p>
+<div class="section" id="msi-installer-and-group-policies-beta">
+<h3><a class="toc-backref" href="#contents">MSI Installer and Group Policies (Beta)</a><a class="headerlink" href="#msi-installer-and-group-policies-beta" title="Permalink to this headline">¶</a></h3>
+<p>Download the latest version of the Mattermost desktop app MSI installer (Beta):</p>
+<blockquote>
+<div><ul class="simple">
+<li>MSI for <a class="reference external" href="https://releases.mattermost.com/desktop/4.6.2/mattermost-desktop-4.6.2-x64.msi">64-bit version of Windows</a></li>
+<li>MSI for <a class="reference external" href="https://releases.mattermost.com/desktop/4.6.2/mattermost-desktop-4.6.2-x86.msi">32-bit version of Windows</a></li>
+</ul>
+</div></blockquote>
+<p><a class="reference external" href="https://docs.mattermost.com/install/desktop-msi-gpo.html">See here</a> for instructions on installing the Mattermost desktop app via an MSI installer and configuring supported Group Policies.</p>
+<p>The following Group Policies are available:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="61%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Group Policy</th>
+<th class="head">Description</th>
+<th class="head">Required Version</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Enable Server Management</td>
+<td>If disabled, management of servers in the app settings are disabled.</td>
+<td>4.3 or later</td>
+</tr>
+<tr class="row-odd"><td>Default Server List</td>
+<td>Define one or more default, permanent servers.</td>
+<td>4.3 or later</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="macos-10-9">
+<h2><a class="toc-backref" href="#contents">macOS 10.9+</a><a class="headerlink" href="#macos-10-9" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Download the <a class="reference external" href="https://releases.mattermost.com/desktop/4.6.2/mattermost-desktop-4.6.2-mac.dmg">latest version of the Mattermost desktop app</a>.</li>
+<li>Double-click the download to open the disk image.</li>
+<li>Drag the Mattermost application to the <strong>Applications</strong> folder.</li>
+</ol>
+<p><a class="reference external" href="https://brew.sh">Homebrew</a> users can install with <code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">--cask</span> <span class="pre">mattermost</span></code>.</p>
+</div>
+<div class="section" id="linux">
+<h2><a class="toc-backref" href="#contents">Linux</a><a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="generic-linux-package">
+<h3><a class="toc-backref" href="#contents">Generic Linux package</a><a class="headerlink" href="#generic-linux-package" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Download the latest version of the Mattermost desktop app:</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>64-bit systems: <a class="reference external" href="https://releases.mattermost.com/desktop/4.6.2/mattermost-desktop-4.6.2-linux-x64.tar.gz">mattermost-desktop-4.6.2-linux-x64.tar.gz</a></li>
+<li>32-bit systems: <a class="reference external" href="https://releases.mattermost.com/desktop/4.6.2/mattermost-desktop-4.6.2-linux-ia32.tar.gz">mattermost-desktop-4.6.2-linux-ia32.tar.gz</a></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li>Extract the archive to a convenient location. You can then execute <code class="docutils literal notranslate"><span class="pre">mattermost-desktop</span></code>, which is located inside the extracted directory.</li>
+<li>To create a Desktop launcher, open the file <strong>README.md</strong> and follow the instructions in the <strong>Desktop launcher</strong> section.</li>
+</ol>
+</div>
+<div class="section" id="ubuntu-and-debian-based-systems">
+<h3><a class="toc-backref" href="#contents">Ubuntu and Debian-based systems</a><a class="headerlink" href="#ubuntu-and-debian-based-systems" title="Permalink to this headline">¶</a></h3>
+<p>Unofficial, community-driven <code class="docutils literal notranslate"><span class="pre">.deb</span></code> packages are available.</p>
+<ol class="arabic simple">
+<li>Download the latest version of the Mattermost Desktop App:</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>64-bit systems
+<a class="reference external" href="https://releases.mattermost.com/desktop/4.6.2/mattermost-desktop-4.6.2-linux-amd64.deb">mattermost-desktop-4.6.2-linux-amd64.deb</a></li>
+<li>32-bit systems
+<a class="reference external" href="https://releases.mattermost.com/desktop/4.6.2/mattermost-desktop-4.6.2-linux-i386.deb">mattermost-desktop-4.6.2-linux-i386.deb</a></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li>At the command line, execute one of the following commands depending on the package that you downloaded:</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="first docutils">
+<dt>64-bit systems</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">dpkg</span> <span class="pre">-i</span> <span class="pre">mattermost-desktop-4.6.2-linux-amd64.deb</span></code></dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>32-bit systems</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">dpkg</span> <span class="pre">-i</span> <span class="pre">mattermost-desktop-4.6.2-linux-i386.deb</span></code></dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li>To run Mattermost, open <strong>Dash</strong> (located at the top left corner), enter <strong>mattermost</strong>, then click the Mattermost icon.</li>
+</ol>
+</div>
+<div class="section" id="arch-linux-based-systems">
+<h3><a class="toc-backref" href="#contents">Arch Linux-based systems</a><a class="headerlink" href="#arch-linux-based-systems" title="Permalink to this headline">¶</a></h3>
+<p>To install the Desktop client on Arch Linux, see the <a class="reference external" href="https://wiki.archlinux.org/index.php/Mattermost">Mattermost page</a> on the Arch Linux wiki.</p>
+</div>
+<div class="section" id="snapcraft-package">
+<h3><a class="toc-backref" href="#contents">Snapcraft package</a><a class="headerlink" href="#snapcraft-package" title="Permalink to this headline">¶</a></h3>
+<p>A snap is available for systems that have Snapcraft installed. Snapcraft is installed by default on Ubuntu 16.04 and later, but for most other Linux distributions you can install it manually. To install Snapcraft, see <a class="reference external" href="https://snapcraft.io/docs/core/install">Install snapd</a> on the Snapcraft website.</p>
+<ol class="arabic simple">
+<li>At the command line, execute the following command:</li>
+</ol>
+<blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">snap</span> <span class="pre">install</span> <span class="pre">mattermost-desktop</span> <span class="pre">--beta</span></code></div></blockquote>
+<ol class="arabic simple" start="2">
+<li>To run Mattermost, open <strong>Dash</strong> (located at the top left corner), enter <strong>mattermost</strong>, then click the Mattermost icon.</li>
+</ol>
+</div>
+</div>
+<div class="section" id="troubleshooting">
+<h2><a class="toc-backref" href="#contents">Troubleshooting</a><a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="installation-has-failed-dialog">
+<h3><a class="toc-backref" href="#contents">“Installation has failed” dialog</a><a class="headerlink" href="#installation-has-failed-dialog" title="Permalink to this headline">¶</a></h3>
+<p>The app data might be corrupted. Remove all the files in <code class="docutils literal notranslate"><span class="pre">%LOCALAPPDATA%\mattermost</span></code>, then try reinstalling the app.</p>
+</div>
+<div class="section" id="the-application-mattermost-can-t-be-opened-dialog">
+<h3><a class="toc-backref" href="#contents">“The application “Mattermost” can’t be opened” dialog</a><a class="headerlink" href="#the-application-mattermost-can-t-be-opened-dialog" title="Permalink to this headline">¶</a></h3>
+<p>On macOS Catalina, this dialog can be triggered if the Mac Archive Utility is the default method for decompressing files. In this case using a third-party tool such as <a class="reference external" href="https://www.keka.io">Keka</a> or <a class="reference external" href="https://macpaw.com/the-unarchiver">Unarchiver</a> may resolve the problem.</p>
+</div>
+<div class="section" id="desktop-app-window-is-black-and-doesn-t-load-the-page">
+<h3><a class="toc-backref" href="#contents">Desktop App window is black and doesn’t load the page</a><a class="headerlink" href="#desktop-app-window-is-black-and-doesn-t-load-the-page" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>First, make sure you have installed the latest desktop app version <a class="reference external" href="https://mattermost.com/download/#mattermostApps">from our website</a>. Check your app version from <strong>Help &gt; Version</strong>.</li>
+<li>Try to clear cache and reload the app from <strong>View &gt; Clear Cache and Reload</strong> or use CTRL/CMD+SHIFT+R.</li>
+<li>Quit the app and restart it to see if the issue clears.</li>
+<li>Disable GPU hardware acceleration from <strong>File &gt; Settings</strong> on Windows and Linux or <strong>Mattermost &gt; Settings</strong> on macOS, and unselect <strong>Use GPU hardware acceleration</strong>.</li>
+<li>If you are using a special video driver, such as Optimus, try disabling it to see if the problem is resolved.</li>
+</ol>
+<p>If none of the above steps resolve the issue, please open a new ticket in the <a class="reference external" href="https://forum.mattermost.org/t/how-to-use-the-troubleshooting-forum/150">Mattermost Troubleshooting Forum</a>.</p>
+</div>
+<div class="section" id="desktop-app-is-not-visible-but-the-mattermost-icon-is-in-the-task-bar">
+<h3><a class="toc-backref" href="#contents">Desktop App is not visible, but the Mattermost icon is in the Task Bar</a><a class="headerlink" href="#desktop-app-is-not-visible-but-the-mattermost-icon-is-in-the-task-bar" title="Permalink to this headline">¶</a></h3>
+<p>This issue can occur on Windows in a multiple-monitor setup. When you disconnect the monitor that Mattermost is displayed on, Mattermost continues to display at screen coordinates that no longer exist.</p>
+<p>To resolve this issue, you can reset the desktop app screen location by deleting the screen location file. When the file is not present, the desktop app displays on the primary monitor by default.</p>
+<p><strong>To reset the desktop app screen location</strong></p>
+<ol class="arabic simple">
+<li>If the desktop app is running, right-click the Mattermost icon in the task bar and click <strong>Close Window</strong>.</li>
+<li>Open Windows File Explorer, and navigate to the <code class="docutils literal notranslate"><span class="pre">%APPDATA%\\Mattermost</span></code> folder.</li>
+<li>Delete the file <code class="docutils literal notranslate"><span class="pre">bounds-info.json</span></code>.</li>
+</ol>
+</div>
+<div class="section" id="desktop-app-constantly-refreshes-the-page">
+<h3><a class="toc-backref" href="#contents">Desktop App constantly refreshes the page</a><a class="headerlink" href="#desktop-app-constantly-refreshes-the-page" title="Permalink to this headline">¶</a></h3>
+<p>This issue can occur when <code class="docutils literal notranslate"><span class="pre">localStorage</span></code> has an unexpected state. To resolve the issue:</p>
+<ul class="simple">
+<li>Windows: Open Windows File Explorer, navigate to the <code class="docutils literal notranslate"><span class="pre">%APPDATA%\Mattermost</span></code> folder, then delete the <code class="docutils literal notranslate"><span class="pre">Local</span> <span class="pre">Storage</span></code> folder.</li>
+<li>Mac: Open Finder, navigate to the <code class="docutils literal notranslate"><span class="pre">~/Library/Application</span> <span class="pre">Support/Mattermost</span></code> folder, then delete the <code class="docutils literal notranslate"><span class="pre">Local</span> <span class="pre">Storage</span></code> folder.</li>
+<li>Linux: Open the File Manager, navigate to the <code class="docutils literal notranslate"><span class="pre">~/.config/Mattermost</span></code> folder, then delete the <code class="docutils literal notranslate"><span class="pre">Local</span> <span class="pre">Storage</span></code> folder.</li>
+</ul>
+</div>
+<div class="section" id="desktop-app-constantly-asks-to-log-in-to-mattermost-server">
+<h3><a class="toc-backref" href="#contents">Desktop App constantly asks to log in to Mattermost server</a><a class="headerlink" href="#desktop-app-constantly-asks-to-log-in-to-mattermost-server" title="Permalink to this headline">¶</a></h3>
+<p>This issue can occur after a crash or unexpected shutdown of the desktop app that causes the app data to be corrupted. To resolve the issue:</p>
+<ul class="simple">
+<li>Windows: Open Windows File Explorer, navigate to the``%APPDATA%\Mattermost`` folder, then delete the <code class="docutils literal notranslate"><span class="pre">IndexedDB</span></code> folder and the <code class="docutils literal notranslate"><span class="pre">Cookies</span></code> and <code class="docutils literal notranslate"><span class="pre">Cookies-journal</span></code> files.</li>
+<li>Mac: Open Finder, navigate to the <code class="docutils literal notranslate"><span class="pre">~/Library/Application</span> <span class="pre">Support/Mattermost</span></code> folder, then delete the <code class="docutils literal notranslate"><span class="pre">IndexedDB</span></code> folder and the <code class="docutils literal notranslate"><span class="pre">Cookies</span></code> and <code class="docutils literal notranslate"><span class="pre">Cookies-journal</span></code> files.</li>
+<li>Linux: Open the file manager, navigate to the <code class="docutils literal notranslate"><span class="pre">~/.config/Mattermost</span></code> folder, then delete the <code class="docutils literal notranslate"><span class="pre">IndexedDB</span></code> folder and the <code class="docutils literal notranslate"><span class="pre">Cookies</span></code> and <code class="docutils literal notranslate"><span class="pre">Cookies-journal</span></code> files.</li>
+</ul>
+</div>
+<div class="section" id="internal-error-browserwindow-unresponsive-event-has-been-emitted">
+<h3><a class="toc-backref" href="#contents">“Internal error: BrowserWindow ‘unresponsive’ event has been emitted”</a><a class="headerlink" href="#internal-error-browserwindow-unresponsive-event-has-been-emitted" title="Permalink to this headline">¶</a></h3>
+<p>Clicking <strong>Show Details</strong> on the dialog provides logs. Ways to resolve the issue:</p>
+<ol class="arabic simple">
+<li>Clear the cache via <strong>View &gt; Clear Cache and Reload</strong> or CTRL+SHIFT+R.</li>
+<li>Go to App Settings via <strong>File &gt; Settings</strong> or CTRL+COMMA  and unselect hardware acceleration.</li>
+</ol>
+</div>
+<div class="section" id="desktop-app-not-responsive-within-citrix-virtual-apps-or-desktop-environment">
+<h3><a class="toc-backref" href="#contents">Desktop app not responsive within Citrix Virtual Apps or Desktop Environment</a><a class="headerlink" href="#desktop-app-not-responsive-within-citrix-virtual-apps-or-desktop-environment" title="Permalink to this headline">¶</a></h3>
+<p>Append <code class="docutils literal notranslate"><span class="pre">Mattermost.exe;</span></code> to the Registry Key <code class="docutils literal notranslate"><span class="pre">HKLM\SYSTEM\CurrentControlSet\Services\CtxUvi\UviProcessExcludes</span></code> and reboot the system.</p>
+<p>For further assistance, review the <a class="reference external" href="https://forum.mattermost.org/c/trouble-shoot">Troubleshooting forum</a> for previously reported errors, or <a class="reference external" href="https://mattermost.com/pl/default-ask-mattermost-community/">join the Mattermost user community for troubleshooting help</a>.</p>
+</div>
+</div>
+<div class="section" id="reporting-issues">
+<h2><a class="toc-backref" href="#contents">Reporting Issues</a><a class="headerlink" href="#reporting-issues" title="Permalink to this headline">¶</a></h2>
+<p>When reporting bugs found in the Mattermost desktop app, it is helpful to include the contents of the Developer Tools Console along with <a class="reference external" href="https://docs.mattermost.com/process/support.html#general-questions-for-any-issues">the information on this page</a>. To access the Developer Tools Console, follow these instructions:</p>
+<ol class="arabic simple">
+<li>In the menu bar, go to <strong>View &gt; Toggle Developer Tools</strong>.</li>
+<li>Select the <strong>Console</strong> tab.</li>
+<li>Right-click the log window and select <strong>Save As</strong>.</li>
+<li>Save the file and then send it along with a description of your issue.</li>
+<li>Go to <strong>View &gt; Toggle Developer Tools</strong> to disable the Developer Tools.</li>
+</ol>
+<p>You can open an additional set of developer tools for each server you have added to the desktop app. The tools can be opened by pasting this command in the Developer Tools Console you opened with the steps described above:</p>
+<p><code class="docutils literal notranslate"><span class="pre">document.getElementsByTagName(&quot;webview&quot;)[0].openDevTools();</span></code></p>
+<p>Note that if you have more than one server added to the desktop client, you need to change the 0 to the number corresponding to the server you want to open in the Developer Tools Console, starting with 0 from the left.</p>
+<div class="section" id="windows">
+<h3><a class="toc-backref" href="#contents">Windows</a><a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h3>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/jnutU-g2QA8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+<div class="section" id="macos">
+<h3><a class="toc-backref" href="#contents">macOS</a><a class="headerlink" href="#macos" title="Permalink to this headline">¶</a></h3>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/avKDRodDS3s" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe><p>To submit an improvement or correction to this documentation, click <strong>Edit</strong> at the top of this page.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="desktop-managed-resources.html" class="btn btn-neutral float-right" title="Desktop Managed Resources" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="install-mmte-helm-gitlab-helm.html" class="btn btn-neutral" title="How to install Mattermost Team Edition Helm Chart in a GitLab Helm Chart deployment" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/install/desktop.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

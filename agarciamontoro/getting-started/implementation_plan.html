@@ -1,0 +1,733 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Implementation Plan &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Welcome Email to End Users" href="welcome_email.html" />
+    <link rel="prev" title="Administrator Tasks" href="../deployment/on-boarding.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../help/getting-started/light-install.html">Light Install Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="enterprise-roll-out-checklist.html">Enterprise Roll Out Checklist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/on-boarding.html">Administrator Tasks</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Implementation Plan</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction">1   Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#system-overview">2 System Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#management-overview">3   Management Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implementation-support">4        Implementation Support</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="welcome_email.html">Welcome Email to End Users</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
+    
+    <li>Implementation Plan</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/getting-started/implementation_plan.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="implementation-plan">
+<h1>Implementation Plan<a class="headerlink" href="#implementation-plan" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>1   Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="purpose">
+<h3>1.1 Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h3>
+<p>Mattermost is an open source, private cloud alternative to proprietary SaaS messaging solutions designed to offer organizations superior control, data sovereignty, configurability, freedom from lock-in, and enhanced security by keeping vital communications behind your firewall. You have chosen to implement Mattermost in our supported <a class="reference external" href="https://mattermost.com/product/">editions:</a></p>
+<blockquote>
+<div><ul class="simple">
+<li>Team Edition</li>
+<li>Enterprise Edition (E10) which adds additional features to the platform including <a class="reference external" href="https://docs.mattermost.com/deployment/sso-ldap.html">AD/LDAP Integration</a>, <a class="reference external" href="https://docs.mattermost.com/deployment/auth.html">Multi-Factor Authentication (“MFA”)</a>, <a class="reference external" href="https://docs.mattermost.com/mobile/mobile-hpns.html">Encrypted Push Notifications</a>, <a class="reference external" href="https://docs.mattermost.com/administration/branding.html">Branding</a>, <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#policy">Advanced Access Control Policy</a>, and next business day support.</li>
+<li>Enterprise Edition (E20) includes E10 features plus <a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml.html">SAML 2.0 Authentication</a>, <a class="reference external" href="https://docs.mattermost.com/administration/compliance.html">Compliance Reporting</a>, <a class="reference external" href="https://docs.mattermost.com/deployment/cluster.html">High Availability</a>, <a class="reference external" href="https://docs.mattermost.com/deployment/elasticsearch.html">Elasticsearch</a>, <a class="reference external" href="https://docs.mattermost.com/deployment/metrics.html">Performance Monitoring</a>, <a class="reference external" href="https://docs.mattermost.com/administration/data-retention.html">Data Retention Policy</a>, and enterprise class support.</li>
+</ul>
+</div></blockquote>
+<p>The purpose of this Implementation Plan is to:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Describe the solution to be deployed;</li>
+<li>Outline the process for implementing the solution (key personnel, tasks, schedule, etc.);</li>
+<li>Identify support required during the implementation process.</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="system-overview">
+<h2>2 System Overview<a class="headerlink" href="#system-overview" title="Permalink to this headline">¶</a></h2>
+<p>This section provides a brief overview of the system to be implemented, including a description of the system and its organization.</p>
+<div class="section" id="system-description">
+<h3>2.1 System Description<a class="headerlink" href="#system-description" title="Permalink to this headline">¶</a></h3>
+<p>Mattermost is a messaging solution designed to remove friction for inter-organizational communications. You are implementing Mattermost in order to:</p>
+<ol class="arabic simple">
+<li><strong>[STATE REASON]</strong></li>
+<li><strong>[STATE REASON]</strong></li>
+<li><strong>[STATE REASON]</strong></li>
+</ol>
+<p>In this implementation, you are planning to deploy Mattermost to <strong>[NUMBER OF USERS]</strong> users on the following teams:</p>
+<ol class="arabic simple">
+<li><strong>[TEAM 1]</strong></li>
+<li><strong>[TEAM 2]</strong></li>
+<li><strong>[TEAM 3]</strong></li>
+</ol>
+</div>
+<div class="section" id="system-organization">
+<h3>2.2  System Organization<a class="headerlink" href="#system-organization" title="Permalink to this headline">¶</a></h3>
+<p>A Mattermost Enterprise E20 implementation consists of the following system components:</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>Mattermost Server</strong>
+- The Mattermost Server is a single binary that includes the RESTful JSON web service, authentication client, authentication provider, notification service, and data management service. The Mattermost Server can be deployed in stand-alone or high availability mode where two or more servers are clustered together using gossip protocol and a proxy server that routes traffic from client applications to healthy servers in the cluster.</li>
+<li><strong>Mattermost Database</strong>
+- A MySQL or PostgreSQL database in stand-alone or high-availability configurations (master with read replicas). When choosing the database, consider the <a class="reference external" href="https://docs.mattermost.com/install/requirements.html#database-software">inherent search limitations of the database type</a> and whether <a class="reference external" href="https://docs.mattermost.com/deployment/elasticsearch.html">Elasticsearch</a> is most appropriate for your deployment.</li>
+<li><strong>Mattermost Push Notification Service</strong>
+- Hosted or on-prem service that pushes notifications to Mattermost Android and Mattermost iOS mobile applications.</li>
+<li><strong>Mattermost Client Applications</strong>
+- Client applications are available for Mattermost for the following platforms: Android, iOS, Windows, OSX, and Linux (Beta).</li>
+<li><strong>Mattermost Web Client</strong>
+- Mattermost users can use their favorite Web browser to connect to their Mattermost server in place of the Mattermost mobile and desktop applications.</li>
+<li><strong>Proxy Server</strong>
+- The use of a proxy server (NGINX, Apache, HAProxy, ELB, etc.) is recommended with Mattermost to obtain the benefits of: SSL termination, HTTP to HTTPS redirection, port mapping :80 to :8065, and the creation of standard request logs.</li>
+</ul>
+</div></blockquote>
+<p>The following diagram is a high-level illustration of the Mattermost platform and how its various components interact with each other within a network:</p>
+<img alt="../_images/network1.PNG" src="../_images/network1.PNG" />
+<p><strong>Reference</strong>: <a class="reference external" href="https://docs.mattermost.com/deployment/deployment.html">https://docs.mattermost.com/deployment/deployment.html</a></p>
+<p>A recommended installation of Mattermost Enterprise E20 configured with a redundant, highly available, highly scalable mode, with application (Mattermost Server) and database high availability features enabled, will require the following physical, or virtual, servers:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="31%" />
+<col width="15%" />
+<col width="25%" />
+<col width="13%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Task</th>
+<th class="head">Qty</th>
+<th class="head">CPU</th>
+<th class="head">Memory</th>
+<th class="head">Storage</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Mattermost Server</td>
+<td>2</td>
+<td>2 vCPUs/cores</td>
+<td>4 GB</td>
+<td>45-90 GB</td>
+</tr>
+<tr class="row-odd"><td>Database Server</td>
+<td>2</td>
+<td>2 vCPUs/cores</td>
+<td>8 GB</td>
+<td>100 GB</td>
+</tr>
+<tr class="row-even"><td>Proxy</td>
+<td>2</td>
+<td>1 vCPUs/cores</td>
+<td>4 GB</td>
+<td>10 GB</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Mattermost hardware sizing guidance can be found here: <a class="reference external" href="https://docs.mattermost.com/install/requirements.html#hardware-requirements">https://docs.mattermost.com/install/requirements.html#hardware-requirements</a></p>
+</div>
+</div>
+<div class="section" id="project-references">
+<h3>2.3 Project References<a class="headerlink" href="#project-references" title="Permalink to this headline">¶</a></h3>
+<p>This section provides a bibliography of key project references and deliverables that have been produced before this point in the project development.</p>
+<blockquote>
+<div><ul class="simple">
+<li>Mattermost Product Overview: <a class="reference external" href="https://docs.mattermost.com/overview/index.html">https://docs.mattermost.com/overview/index.html</a></li>
+<li>Mattermost Software/Hardware Requirements: <a class="reference external" href="https://docs.mattermost.com/install/requirements.html">https://docs.mattermost.com/install/requirements.html</a></li>
+<li>Mattermost Security Features: <a class="reference external" href="https://docs.mattermost.com/overview/security.html">https://docs.mattermost.com/overview/security.html</a></li>
+<li>Mattermost Administrator Guide: <a class="reference external" href="https://docs.mattermost.com/guides/administrator.html">https://docs.mattermost.com/guides/administrator.html</a></li>
+<li>Mattermost User Guide: <a class="reference external" href="https://docs.mattermost.com/guides/user.html">https://docs.mattermost.com/guides/user.html</a></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="glossary">
+<h3>2.4      Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h3>
+<p>Provide a glossary of all terms and abbreviations used in the manual.  If it is several pages in length, it may be placed in an appendix.</p>
+<p>—</p>
+</div>
+</div>
+<div class="section" id="management-overview">
+<h2>3   Management Overview<a class="headerlink" href="#management-overview" title="Permalink to this headline">¶</a></h2>
+<p>The subsequent sections provide a brief description of the implementation and major tasks involved in this section.</p>
+<div class="section" id="description-of-implementation">
+<h3>3.1 Description of Implementation<a class="headerlink" href="#description-of-implementation" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="team">
+<h3>3.2 Team<a class="headerlink" href="#team" title="Permalink to this headline">¶</a></h3>
+<p>In this section, identify the System Proponent, the name of the responsible organization(s), and titles and telephone numbers of the staff who serve as points of contact for the system implementation.  These points of contact could include the Project Manager. Program Manager, Security Manager.  Database Administrator, Configuration Management Manager, or other managers with responsibilities relating to the system implementation.  The site implementation representative for each field installation or implementation site should also be included, if appropriate.  List all managers and staff with whom the implementation must be coordinated.</p>
+<div class="section" id="team-members">
+<h4>3.2.1 Team Members<a class="headerlink" href="#team-members" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="27%" />
+<col width="35%" />
+<col width="22%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Title</th>
+<th class="head">Email</th>
+<th class="head">Phone</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Jane Doe</td>
+<td>Project Manager</td>
+<td><a class="reference external" href="mailto:jane&#46;doe&#37;&#52;&#48;company&#46;com">jane<span>&#46;</span>doe<span>&#64;</span>company<span>&#46;</span>com</a></td>
+<td>111.111.1111</td>
+</tr>
+<tr class="row-odd"><td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="major-tasks">
+<h3>3.3 Major Tasks<a class="headerlink" href="#major-tasks" title="Permalink to this headline">¶</a></h3>
+<p>This section provides a brief description of each major task required for the implementation of the system. Add as many subsections as necessary to this section to describe all the major tasks adequately. The tasks described in this section are not site-specific, but generic or overall project tasks that are required to install hardware and software, prepare data, and verify the system.</p>
+<div class="section" id="create-system-architecture-document">
+<h4>3.3.1 Create System Architecture Document<a class="headerlink" href="#create-system-architecture-document" title="Permalink to this headline">¶</a></h4>
+<p>The System Architecture Document is used to document the environments that Mattermost will be deployed to including:</p>
+<blockquote>
+<div><ul class="simple">
+<li>The environment (development, staging, production, etc.)</li>
+<li>Server, or virtual machine, specifications</li>
+<li>IP addresses and DNS</li>
+<li>Network diagram</li>
+</ul>
+</div></blockquote>
+<p><strong>Reference</strong>: <a class="reference external" href="https://docs.mattermost.com/deployment/deployment.html">https://docs.mattermost.com/deployment/deployment.html</a></p>
+</div>
+<div class="section" id="gather-required-software-and-documentation">
+<h4>3.3.2 Gather Required Software and Documentation<a class="headerlink" href="#gather-required-software-and-documentation" title="Permalink to this headline">¶</a></h4>
+<p>Gather all of the software and documentation required for a successful implementation of the Mattermost platform and place it within the organization’s configuration management system.</p>
+</div>
+<div class="section" id="prepare-deployment-environments">
+<h4>3.3.3 Prepare Deployment Environments<a class="headerlink" href="#prepare-deployment-environments" title="Permalink to this headline">¶</a></h4>
+<p>Build out the required deployment environments (development, staging, production, etc.) and implement configuration management (using a tool like Chef, Puppet, Salt, etc.)</p>
+<p><strong>Reference</strong>: <a class="reference external" href="https://docs.mattermost.com/install/requirements.html">https://docs.mattermost.com/install/requirements.html</a></p>
+</div>
+<div class="section" id="install-software">
+<h4>3.3.4 Install Software<a class="headerlink" href="#install-software" title="Permalink to this headline">¶</a></h4>
+<p>Install and configure Mattermost and its component software (MySQL or PostgreSQL, Nginx or another proxy, etc.)</p>
+<p><strong>Reference</strong>: <a class="reference external" href="https://docs.mattermost.com/guides/administrator.html#installing-mattermost">https://docs.mattermost.com/guides/administrator.html#installing-mattermost</a></p>
+<p>Install in High Availability (E20): <a class="reference external" href="https://docs.mattermost.com/deployment/cluster.html">https://docs.mattermost.com/deployment/cluster.html</a></p>
+</div>
+<div class="section" id="test-deployment">
+<h4>3.3.5 Test Deployment<a class="headerlink" href="#test-deployment" title="Permalink to this headline">¶</a></h4>
+<p>Verify that the software has been deployed successfully in each environment. Create, or update, automated tests to verify deployments.</p>
+<p><strong>Reference</strong>: <a class="reference external" href="https://docs.mattermost.com/administration/health-check.html">https://docs.mattermost.com/administration/health-check.html</a></p>
+</div>
+<div class="section" id="bulk-load-data">
+<h4>3.3.6 Bulk Load Data<a class="headerlink" href="#bulk-load-data" title="Permalink to this headline">¶</a></h4>
+<p>Large quantities of data can be imported from a JSON file into Mattermost at the command line using the bulk loading feature. This feature is most suitable for migrating data from an existing messaging system, or for pre-populating a new installation with data.</p>
+<p>You can import the following data types:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Teams</li>
+<li>Channels (Public and Private)</li>
+<li>Users</li>
+<li>Users’ Team memberships</li>
+<li>Users’ Channel memberships</li>
+<li>Users’ notification preferences</li>
+<li>Posts (regular, non-reply posts)</li>
+<li>Direct Message and Group Message channels</li>
+<li>Direct Messages and Group Messages</li>
+</ul>
+</div></blockquote>
+<p><strong>Reference</strong>: <a class="reference external" href="https://docs.mattermost.com/deployment/bulk-loading.html">https://docs.mattermost.com/deployment/bulk-loading.html</a></p>
+</div>
+<div class="section" id="implement-backup">
+<h4>3.3.7 Implement Backup<a class="headerlink" href="#implement-backup" title="Permalink to this headline">¶</a></h4>
+<p>Implement backup procedures to protect data stored within the Mattermost database, files uploaded by users, and the Mattermost config.json file.</p>
+<p><strong>Reference</strong>: <a class="reference external" href="https://docs.mattermost.com/administration/backup.html">https://docs.mattermost.com/administration/backup.html</a></p>
+</div>
+<div class="section" id="implement-monitoring">
+<h4>3.3.8 Implement Monitoring<a class="headerlink" href="#implement-monitoring" title="Permalink to this headline">¶</a></h4>
+<p>Mattermost E20 supports integrated health and performance monitoring with Prometheus and Grafana. A guide to the statistics collected and reported on is available in the reference below:</p>
+<p><strong>Reference</strong>: <a class="reference external" href="https://docs.mattermost.com/deployment/metrics.html">https://docs.mattermost.com/deployment/metrics.html</a></p>
+</div>
+<div class="section" id="ad-ldap-setup-e10-e20">
+<h4>3.3.9 AD/LDAP Setup (E10, E20)<a class="headerlink" href="#ad-ldap-setup-e10-e20" title="Permalink to this headline">¶</a></h4>
+<p>Mattermost supports AD/LDAP integration for user authentication and user attribute syncing.</p>
+<p><strong>Reference</strong>: <a class="reference external" href="https://docs.mattermost.com/deployment/sso-ldap.html">https://docs.mattermost.com/deployment/sso-ldap.html</a></p>
+</div>
+<div class="section" id="multi-factor-authentication-e10-e20">
+<h4>3.3.10 Multi-Factor Authentication (E10, E20)<a class="headerlink" href="#multi-factor-authentication-e10-e20" title="Permalink to this headline">¶</a></h4>
+<p>Configure multi-factor authentication (“MFA”) if required as part of your IT security policy. Compatible with Google Authenticator</p>
+<p><strong>Reference</strong>: <a class="reference external" href="https://docs.mattermost.com/deployment/auth.html">https://docs.mattermost.com/deployment/auth.html</a></p>
+</div>
+<div class="section" id="saml-single-sign-on-e20">
+<h4>3.3.11 SAML Single-Sign-On (E20)<a class="headerlink" href="#saml-single-sign-on-e20" title="Permalink to this headline">¶</a></h4>
+<p>Mattermost can be configured to act as a SAML 2.0 Service Provider. Mattermost officially supports Okta, OneLogin and Microsoft ADFS as the identity providers (IDPs).</p>
+<p><strong>Reference</strong>: <a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml.html">https://docs.mattermost.com/deployment/sso-saml.html</a></p>
+</div>
+<div class="section" id="train-administrators">
+<h4>3.3.12 Train Administrators<a class="headerlink" href="#train-administrators" title="Permalink to this headline">¶</a></h4>
+<p>Train administrators on the tasks required to manage Mattermost.</p>
+<p><strong>Reference</strong>: <a class="reference external" href="https://docs.mattermost.com/guides/administrator.html">https://docs.mattermost.com/guides/administrator.html</a></p>
+</div>
+<div class="section" id="update-legal-and-support-settings">
+<h4>3.3.13 Update Legal and Support Settings<a class="headerlink" href="#update-legal-and-support-settings" title="Permalink to this headline">¶</a></h4>
+<p>Mattermost has configuration settings for the terms of service, privacy policy, and support URLs and emails. It is highly recommended that you modify these in your configuration so that your users have the correct legal information and can contact administrators to resolve account issues. You can find these under <strong>System Console &gt; Legal and Support</strong> in prior versions or <strong>System Console</strong> &gt; <strong>Site Configuration</strong> &gt; <strong>Customization</strong> in versions after 5.12.</p>
+<img alt="Legal and Support settings" src="../_images/legal_and_support_settings.png" />
+</div>
+<div class="section" id="onboard-users">
+<h4>3.3.14 Onboard Users<a class="headerlink" href="#onboard-users" title="Permalink to this headline">¶</a></h4>
+<p>Send all users a welcome email with instructions on how to get started using Mattermost including links to the mobile applications and the User Guide.</p>
+<dl class="docutils">
+<dt><strong>References</strong>:</dt>
+<dd><ul class="first last simple">
+<li>Links to download Mattermost apps:  <a class="reference external" href="https://mattermost.com/download/#mattermostApps">https://mattermost.com/download/#mattermostApps</a></li>
+<li>User Guides: <a class="reference external" href="https://docs.mattermost.com/guides/user.html">https://docs.mattermost.com/guides/user.html</a></li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="implementation-schedule">
+<h3>3.4 Implementation Schedule<a class="headerlink" href="#implementation-schedule" title="Permalink to this headline">¶</a></h3>
+<p>In this section, provide a schedule of activities to be accomplished during implementation.  Show the required tasks (described in Section 3.3, Major Tasks) in chronological order, with the beginning and end dates of each task.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="61%" />
+<col width="17%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">&#160;</th>
+<th class="head">Task</th>
+<th class="head">Start Date</th>
+<th class="head">End Date</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1</td>
+<td>Create System Architecture Document</td>
+<td>xx/xx/xxxx</td>
+<td>xx/xx/xxxx</td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>Gather Required Software and Documentation</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>3</td>
+<td>Prepare Deployment Environments</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>4</td>
+<td>Install Software</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>5</td>
+<td>Test Deployment</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>6</td>
+<td>Bulk Load Data</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>7</td>
+<td>Implement Backup</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>8</td>
+<td>Implement Monitoring</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>9</td>
+<td>Train Administrators</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>10</td>
+<td>Onboard Users</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="security">
+<h3>3.5 Security<a class="headerlink" href="#security" title="Permalink to this headline">¶</a></h3>
+<p>If appropriate for the system to be implemented, include an overview of the system security features and requirements during the implementation.</p>
+<div class="section" id="system-security-features">
+<h4>3.5.1     System Security Features<a class="headerlink" href="#system-security-features" title="Permalink to this headline">¶</a></h4>
+<p>The Mattermost platform will be secured in the following ways:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Mattermost will be hosted entirely on-premises behind your company firewall with access restricted to VPN connections;</li>
+<li>Mobile access to Mattermost will be further restricted by the use of multi-factor authorization;</li>
+<li>Transmissions to and from Mattermost will be encrypted using TLS;</li>
+<li>Encryption-at-rest will be applied using your company’s standards;</li>
+<li>Mattermost’s integrity and audit controls store a complete history of messages, including edits and deletes, along with all files uploaded. User interface actions for “deleting” messages and channels remove the data only from the user interface; the data is retained within your database. If your compliance guidelines require it, you can turn off users’ ability to edit and delete their messages after they are posted.</li>
+<li>Mattermost will be protected against brute force attacks by its rate limiting API;</li>
+<li>Authentication to Mattermost will be controlled using your company’s Active Directory/LDAP/SAML directory server.</li>
+</ul>
+</div></blockquote>
+<p><strong>Reference</strong>: <a class="reference external" href="https://docs.mattermost.com/overview/security.html">https://docs.mattermost.com/overview/security.html</a></p>
+</div>
+<div class="section" id="security-during-implementation">
+<h4>3.5.2     Security During Implementation<a class="headerlink" href="#security-during-implementation" title="Permalink to this headline">¶</a></h4>
+<p>This section addresses security issues specifically related to the implementation effort, if any. For example, if LAN servers or workstations will be installed at a site with sensitive data preloaded on non-removable hard disk drives, address how security would be provided for the data on these devices during shipping, transport, and installation because theft of the devices could compromise the sensitive data.</p>
+<p>—</p>
+</div>
+</div>
+</div>
+<div class="section" id="implementation-support">
+<h2>4        Implementation Support<a class="headerlink" href="#implementation-support" title="Permalink to this headline">¶</a></h2>
+<p>This section describes the support software, materials, equipment, and facilities required for the implementation, as well as the personnel requirements and training necessary for the implementation.  The information provided in this section is not site-specific.  If there are additional support requirements not covered by the subsequent sections, others may be added as needed.</p>
+<div class="section" id="hardware-software-facilities-and-materials">
+<h3>4.1      Hardware, Software, Facilities, and Materials<a class="headerlink" href="#hardware-software-facilities-and-materials" title="Permalink to this headline">¶</a></h3>
+<p>In this section, list support software, materials, equipment, and facilities required for the implementation, if any.</p>
+<div class="section" id="hardware">
+<h4>4.1.1     Hardware<a class="headerlink" href="#hardware" title="Permalink to this headline">¶</a></h4>
+<p>This section provides a list of support equipment and includes all hardware used for testing time implementation.  For example, if a client/server database is implemented on a LAN, a network monitor or “sniffer” might be used, along with test programs. to determine the performance of the database and LAN at high-utilization rates.  If the equipment is site-specific, list it in Section 5, Implementation Requirements by Site.</p>
+</div>
+<div class="section" id="software">
+<h4>4.1.2     Software<a class="headerlink" href="#software" title="Permalink to this headline">¶</a></h4>
+<p>This section provides a list of software and databases required to support the implementation. Identify the software by name, code, or acronym.  Identify which software is commercial off-the-shelf and which is State-specific.  Identify any software used to facilitate the implementation process.  If the software is site-specific, list it in Section 4.</p>
+</div>
+<div class="section" id="facilities">
+<h4>4.1.3     Facilities<a class="headerlink" href="#facilities" title="Permalink to this headline">¶</a></h4>
+<p>In this section, identify the physical facilities and accommodations required during implementation.  Examples include physical workspace for assembling and testing hardware components, desk space for software installers, and classroom space for training the implementation stall.  Specify the hours per day needed, number of days, and anticipated dates. If the facilities needed are site-specific, provide this information in Section 4, Implementation Requirements by Site.</p>
+</div>
+<div class="section" id="material">
+<h4>4.1.4     Material<a class="headerlink" href="#material" title="Permalink to this headline">¶</a></h4>
+<p>This section provides a list of required support materials, such as magnetic tapes and disk packs.</p>
+</div>
+</div>
+<div class="section" id="personnel">
+<h3>4.2      Personnel<a class="headerlink" href="#personnel" title="Permalink to this headline">¶</a></h3>
+<p>This section describes personnel requirements and any known or proposed staffing requirements, if appropriate.  Also describe the training, if any, to be provided for the implementation staff.</p>
+<div class="section" id="personnel-requirements-and-staffing">
+<h4>4.2.1     Personnel Requirements and Staffing<a class="headerlink" href="#personnel-requirements-and-staffing" title="Permalink to this headline">¶</a></h4>
+<p>In this section, describe the number of personnel, length of time needed, types of skills, and skill levels for the staff required during the implementation period.  If particular staff members have been selected or proposed for the implementation, identify them and their roles in the implementation.</p>
+</div>
+<div class="section" id="training-of-implementation-staff">
+<h4>4.2.2     Training of Implementation Staff<a class="headerlink" href="#training-of-implementation-staff" title="Permalink to this headline">¶</a></h4>
+<p>This section addresses the training, if any, necessary to prepare staff for implementing and maintaining the system; it does not address user training, which is the subject of the Training Plan.  Describe the type and amount of training required for each of the following areas, if appropriate, for the system:</p>
+<blockquote>
+<div><ul class="simple">
+<li>System hardware/software installation</li>
+<li>System support</li>
+<li>System maintenance and modification</li>
+</ul>
+</div></blockquote>
+<p>Present a training curriculum listing the courses that will be provided, a course sequence. and a proposed schedule.  If appropriate, identify which courses particular types of staff should attend by job position description.</p>
+<p>If training will be provided by one or more commercial vendors, identify them, the course name(s), and a brief description of the course content.</p>
+<p>If the training will be provided by State staff, provide the course name(s) and an outline of the content of each course.  Identify the resources, support materials, and proposed instructors required to teach the course(s).</p>
+</div>
+</div>
+<div class="section" id="performance-monitoring-e20">
+<h3>4.3      Performance Monitoring (E20)<a class="headerlink" href="#performance-monitoring-e20" title="Permalink to this headline">¶</a></h3>
+<p>This section describes the performance monitoring tool and techniques and how it will be used to help decide if the implementation is successful: <a class="reference external" href="https://docs.mattermost.com/deployment/metrics.html">https://docs.mattermost.com/deployment/metrics.html</a></p>
+</div>
+<div class="section" id="configuration-management-interface">
+<h3>4.4      Configuration Management Interface<a class="headerlink" href="#configuration-management-interface" title="Permalink to this headline">¶</a></h3>
+<p>This section describes the interactions required with the Configuration Management (CM) representative on CM-related issues, such as when software listings will be distributed, and how to confirm that libraries have been moved from the development to the production environment.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="welcome_email.html" class="btn btn-neutral float-right" title="Welcome Email to End Users" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../deployment/on-boarding.html" class="btn btn-neutral" title="Administrator Tasks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/getting-started/implementation_plan.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

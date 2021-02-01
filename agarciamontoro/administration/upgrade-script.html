@@ -1,0 +1,524 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Upgrading Mattermost Server with a Script &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="लाइट इनस्टॉल गाइड" href="light-install-hindi.html" />
+    <link rel="prev" title="Deploy Mattermost on Cloudron (Unofficial)" href="../install/deploy-cloudron.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../install/prod-windows-2012.html">Production Install on Windows Server (Unofficial)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install/prod-docker.html">Deploy Mattermost on Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install/deploy-cloudron.html">Deploy Mattermost on Cloudron (Unofficial)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Upgrading Mattermost Server with a Script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="light-install-hindi.html">लाइट इनस्टॉल गाइड</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
+    
+    <li>Upgrading Mattermost Server with a Script</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/administration/upgrade-script.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="upgrading-mattermost-server-with-a-script">
+<h1>Upgrading Mattermost Server with a Script<a class="headerlink" href="#upgrading-mattermost-server-with-a-script" title="Permalink to this headline">¶</a></h1>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">This unofficial guide is maintained by the Mattermost community and this deployment configuration is not yet officially supported by Mattermost, Inc. Community testing, feedback, and improvements are welcome and greatly appreciated.</p>
+</div>
+<p><em>Preparing the script</em></p>
+<p>Copy and save the following script to your Mattermost server as <code class="docutils literal notranslate"><span class="pre">upgrade_mattermost.sh</span></code>.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="c1"># Immediately exit if a command run from a loop, a pipeline or a compound</span>
+<span class="c1"># command statement fails or a variable is used unset.</span>
+<span class="nb">set</span> -e
+
+
+<span class="c1">################################################################################</span>
+<span class="c1"># Configuration - please adapt it to your environment</span>
+<span class="c1">################################################################################</span>
+
+<span class="c1"># Mattermost path</span>
+<span class="nv">mattermostdir</span><span class="o">=</span><span class="s2">&quot;/opt/mattermost&quot;</span>
+
+<span class="c1"># Backup path</span>
+<span class="nv">backupdir</span><span class="o">=</span><span class="s2">&quot;/opt&quot;</span>
+
+<span class="c1"># Temporary path for download</span>
+<span class="nv">downloaddir</span><span class="o">=</span><span class="s2">&quot;/tmp&quot;</span>
+
+<span class="c1"># Specify the edition you use</span>
+<span class="c1">#edition=&quot;Team&quot;</span>
+<span class="nv">edition</span><span class="o">=</span><span class="s2">&quot;Enterprise&quot;</span>
+
+<span class="c1"># Start with plugins? Set 1 for starting with plugins active</span>
+<span class="nv">plugins</span><span class="o">=</span><span class="m">0</span>
+
+<span class="c1"># Set 1 for overriding the database backup question</span>
+<span class="nv">backupdatabase</span><span class="o">=</span><span class="m">0</span>
+
+<span class="c1">################################################################################</span>
+
+<span class="c1"># Check dependencies</span>
+<span class="k">if</span> <span class="o">((</span>EUID !<span class="o">=</span> <span class="m">0</span><span class="o">))</span><span class="p">;</span> <span class="k">then</span>
+     <span class="nb">echo</span> <span class="s2">&quot;[-] This script needs to be run as root to work properly. Aborted.&quot;</span>
+     <span class="nb">exit</span> <span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="k">if</span> ! <span class="nb">type</span> <span class="s2">&quot;systemctl&quot;</span> &gt;/dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="o">&amp;&amp;</span> ! <span class="nb">type</span> <span class="s2">&quot;service&quot;</span> &gt;/dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="p">;</span> <span class="k">then</span>
+     <span class="nb">echo</span> <span class="s2">&quot;[-] The daemon manager (systemd or sysvinit) is not accessible. Aborted.&quot;</span>
+     <span class="nb">exit</span> <span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="k">if</span> ! <span class="nb">type</span> <span class="s2">&quot;wget&quot;</span> &gt;/dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="o">&amp;&amp;</span> ! <span class="nb">type</span> <span class="s2">&quot;curl&quot;</span> &gt;/dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="p">;</span> <span class="k">then</span>
+     <span class="nb">echo</span> <span class="s2">&quot;[-] A download tool like wget or curl is not accessible. Aborted.&quot;</span>
+     <span class="nb">exit</span> <span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="c1"># Check requirements</span>
+<span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">edition</span><span class="si">}</span><span class="s2">&quot;</span> !<span class="o">=</span> <span class="s2">&quot;Team&quot;</span> <span class="o">]]</span> <span class="o">&amp;&amp;</span> <span class="o">[[</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">edition</span><span class="si">}</span><span class="s2">&quot;</span> !<span class="o">=</span> <span class="s2">&quot;Enterprise&quot;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+     <span class="nb">echo</span> <span class="s2">&quot;[-] The edition must either be \&quot;Team\&quot; or \&quot;Enterprise\&quot;. Aborted.&quot;</span>
+     <span class="nb">exit</span> <span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="c1"># Check config variables</span>
+<span class="nb">test</span> -d <span class="si">${</span><span class="nv">backup</span><span class="si">}</span>
+<span class="nb">test</span> -d <span class="si">${</span><span class="nv">downloaddir</span><span class="si">}</span>
+<span class="nb">test</span> -d <span class="si">${</span><span class="nv">mattermostdir</span><span class="si">}</span>
+
+<span class="c1"># Ask for database backup</span>
+<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">backupdatabase</span><span class="si">}</span><span class="s2">&quot;</span> -eq <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+     <span class="nb">read</span> -r -p <span class="s2">&quot;[?] Do you have a current backup of the Mattermost database? [Y/n] &quot;</span> input
+
+     <span class="k">case</span> <span class="s2">&quot;</span><span class="nv">$input</span><span class="s2">&quot;</span> in
+             <span class="o">[</span>yY<span class="o">])</span>
+                     <span class="nb">echo</span> <span class="s2">&quot;[+] Starting the update process of Mattermost...&quot;</span>
+                     <span class="p">;;</span>
+             *<span class="o">)</span>
+                     <span class="nb">echo</span> <span class="s2">&quot;[-] Please create a backup and start again&quot;</span>
+                     <span class="nb">exit</span> <span class="m">1</span>
+                     <span class="p">;;</span>
+     <span class="k">esac</span>
+<span class="k">fi</span>
+
+<span class="c1"># Check if Mattermost exists in the path provided above</span>
+<span class="k">if</span> <span class="o">[</span> ! -f <span class="s2">&quot;</span><span class="si">${</span><span class="nv">mattermostdir</span><span class="si">}</span><span class="s2">/bin/mattermost&quot;</span> <span class="o">]</span><span class="p">;</span>  <span class="k">then</span>
+     <span class="nb">echo</span> <span class="s2">&quot;Mattermost not found please check the path for the Mattermost directory&quot;</span>
+     <span class="nb">exit</span> <span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="c1"># Get version from argument</span>
+<span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;</span><span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+     <span class="nb">echo</span> <span class="s2">&quot;Please specify the version of Mattermost to download&quot;</span>
+     <span class="nb">exit</span> <span class="m">1</span>
+<span class="k">fi</span>
+<span class="nv">version</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">edition</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">==</span> <span class="s2">&quot;Team&quot;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+     <span class="nv">url</span><span class="o">=</span><span class="s2">&quot;https://releases.mattermost.com/</span><span class="si">${</span><span class="nv">version</span><span class="si">}</span><span class="s2">/mattermost-team-</span><span class="si">${</span><span class="nv">version</span><span class="si">}</span><span class="s2">-linux-amd64.tar.gz&quot;</span>
+<span class="k">else</span>
+     <span class="nv">url</span><span class="o">=</span><span class="s2">&quot;https://releases.mattermost.com/</span><span class="si">${</span><span class="nv">version</span><span class="si">}</span><span class="s2">/mattermost-</span><span class="si">${</span><span class="nv">version</span><span class="si">}</span><span class="s2">-linux-amd64.tar.gz&quot;</span>
+<span class="k">fi</span>
+
+<span class="c1"># Main</span>
+
+<span class="c1"># Get the file</span>
+<span class="k">function</span> get_the_file<span class="o">()</span> <span class="o">{</span>
+     <span class="nb">echo</span> <span class="s2">&quot;[+] Downloading Mattermost </span><span class="si">${</span><span class="nv">edition</span><span class="si">}</span><span class="s2"> \&quot;</span><span class="si">${</span><span class="nv">version</span><span class="si">}</span><span class="s2">\&quot;...&quot;</span>
+     <span class="k">if</span> <span class="nb">type</span> <span class="s2">&quot;curl&quot;</span> &gt;/dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="p">;</span> <span class="k">then</span>
+             <span class="k">if</span> ! curl -LC - <span class="s2">&quot;</span><span class="si">${</span><span class="nv">url</span><span class="si">}</span><span class="s2">&quot;</span> -o <span class="s2">&quot;</span><span class="si">${</span><span class="nv">downloaddir</span><span class="si">}</span><span class="s2">/mattermost-upgrade.tar.gz&quot;</span><span class="p">;</span> <span class="k">then</span>
+                     <span class="nb">echo</span> <span class="s2">&quot;[-] An issue occurred when downloading the Mattermost update package.&quot;</span>
+                     <span class="nb">exit</span> <span class="m">1</span>
+             <span class="k">fi</span>
+     <span class="k">else</span>
+             <span class="k">if</span> ! wget <span class="s2">&quot;</span><span class="si">${</span><span class="nv">url</span><span class="si">}</span><span class="s2">&quot;</span> -o <span class="s2">&quot;</span><span class="si">${</span><span class="nv">downloaddir</span><span class="si">}</span><span class="s2">/mattermost-upgrade.tar.gz&quot;</span><span class="p">;</span> <span class="k">then</span>
+                     <span class="nb">echo</span> <span class="s2">&quot;[-] An issue occurred when downloading the Mattermost update package.&quot;</span>
+                     <span class="nb">exit</span> <span class="m">1</span>
+             <span class="k">fi</span>
+     <span class="k">fi</span>
+
+     <span class="nb">echo</span> <span class="s2">&quot;[+] The Mattermost update package has been downloaded with successful&quot;</span>
+<span class="o">}</span>
+
+<span class="c1"># Check previous download</span>
+<span class="k">if</span> <span class="o">[</span> -e <span class="s2">&quot;</span><span class="si">${</span><span class="nv">downloaddir</span><span class="si">}</span><span class="s2">/mattermost-upgrade.tar.gz&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+     <span class="nb">read</span> -r -p <span class="s2">&quot;[?] A previous download exists. Do you want to replace it by a new one? [Y/n &quot;</span> input
+
+     <span class="k">case</span> <span class="s2">&quot;</span><span class="nv">$input</span><span class="s2">&quot;</span> in
+             <span class="o">[</span>yY<span class="o">])</span>
+                     <span class="nb">echo</span> <span class="s2">&quot;[+] Remove previous download.&quot;</span>
+                     rm -rf <span class="s2">&quot;</span><span class="si">${</span><span class="nv">downloaddir</span><span class="si">}</span><span class="s2">/mattermost-upgrade.tar.gz&quot;</span>
+                     get_the_file
+                     <span class="p">;;</span>
+     <span class="k">esac</span>
+<span class="k">else</span>
+     get_the_file
+<span class="k">fi</span>
+
+<span class="nb">echo</span> <span class="s2">&quot;[+] Extracting Mattermost update package...&quot;</span>
+mkdir -p <span class="s2">&quot;</span><span class="si">${</span><span class="nv">downloaddir</span><span class="si">}</span><span class="s2">/mattermost-upgrade&quot;</span>
+tar -xf <span class="s2">&quot;</span><span class="si">${</span><span class="nv">downloaddir</span><span class="si">}</span><span class="s2">/mattermost-upgrade.tar.gz&quot;</span> -C <span class="s2">&quot;</span><span class="si">${</span><span class="nv">downloaddir</span><span class="si">}</span><span class="s2">/mattermost-upgrade/&quot;</span>
+
+<span class="nb">echo</span> <span class="s2">&quot;[+] Stopping Mattermost service...&quot;</span>
+<span class="k">if</span> <span class="nb">type</span> systemctl &gt;/dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="p">;</span>  <span class="k">then</span>
+     systemctl stop mattermost
+<span class="k">else</span>
+     service mattermost stop
+<span class="k">fi</span>
+
+<span class="k">if</span> pgrep mattermost &gt; /dev/null<span class="p">;</span> <span class="k">then</span>
+     <span class="nb">echo</span> <span class="s2">&quot;[-] Mattermost is still running. Update not possible. Aborting...&quot;</span>
+     rm -rf <span class="s2">&quot;</span><span class="si">${</span><span class="nv">downloaddir</span><span class="si">}</span><span class="s2">/mattermost-upgrade&quot;</span>
+     rm -f <span class="s2">&quot;</span><span class="si">${</span><span class="nv">downloaddir</span><span class="si">}</span><span class="s2">/mattermost-upgrade.tar.gz&quot;</span>
+     <span class="nb">exit</span> <span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="nb">echo</span> <span class="s2">&quot;[+] Creating backup of Mattermost...&quot;</span>
+cp -ra <span class="s2">&quot;</span><span class="si">${</span><span class="nv">mattermostdir</span><span class="si">}</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">backupdir</span><span class="si">}</span><span class="s2">/mattermost-backup-</span><span class="k">$(</span>date +<span class="s1">&#39;%F-%H-%M&#39;</span><span class="k">)</span><span class="s2">/&quot;</span>
+
+<span class="nb">echo</span> <span class="s2">&quot;[+] Preparing update...&quot;</span>
+<span class="nv">USER</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>stat -c <span class="s1">&#39;%U&#39;</span> <span class="si">${</span><span class="nv">mattermostdir</span><span class="si">}</span>/bin/mattermost<span class="k">)</span><span class="s2">&quot;</span>
+<span class="nv">GROUP</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>stat -c <span class="s1">&#39;%G&#39;</span> <span class="si">${</span><span class="nv">mattermostdir</span><span class="si">}</span>/bin/mattermost<span class="k">)</span><span class="s2">&quot;</span>
+chown -hR <span class="s2">&quot;</span><span class="nv">$USER</span><span class="s2">&quot;</span>:<span class="s2">&quot;</span><span class="nv">$GROUP</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">downloaddir</span><span class="si">}</span><span class="s2">/mattermost-upgrade/&quot;</span>
+
+
+<span class="c1"># Clean up Mattermost directory</span>
+find <span class="s2">&quot;</span><span class="si">${</span><span class="nv">mattermostdir</span><span class="si">}</span><span class="s2">&quot;</span> -mindepth <span class="m">1</span> -maxdepth <span class="m">1</span> -not <span class="se">\(</span> -path <span class="s2">&quot;</span><span class="si">${</span><span class="nv">mattermostdir</span><span class="si">}</span><span class="s2">/config&quot;</span> -o -path <span class="s2">&quot;</span><span class="si">${</span><span class="nv">mattermostdir</span><span class="si">}</span><span class="s2">/logs&quot;</span> -o -path <span class="s2">&quot;</span><span class="si">${</span><span class="nv">mattermostdir</span><span class="si">}</span><span class="s2">/plugins&quot;</span> -o -path <span class="s2">&quot;</span><span class="si">${</span><span class="nv">mattermostdir</span><span class="si">}</span><span class="s2">/data&quot;</span> -o -path <span class="s2">&quot;</span><span class="si">${</span><span class="nv">mattermostdir</span><span class="si">}</span><span class="s2">/client&quot;</span> <span class="se">\)</span> -exec rm -rf <span class="o">{}</span> <span class="se">\;</span>
+find <span class="s2">&quot;</span><span class="si">${</span><span class="nv">mattermostdir</span><span class="si">}</span><span class="s2">/client&quot;</span> -mindepth <span class="m">1</span> -maxdepth <span class="m">1</span> -not <span class="se">\(</span> -path <span class="s2">&quot;</span><span class="si">${</span><span class="nv">mattermostdir</span><span class="si">}</span><span class="s2">/client/plugins&quot;</span> <span class="se">\)</span> -exec rm -rf <span class="o">{}</span> <span class="se">\;</span>
+
+
+<span class="c1"># Rename plugin directory</span>
+<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">plugins</span><span class="si">}</span><span class="s2">&quot;</span> -eq <span class="m">0</span> <span class="o">]</span><span class="p">;</span>  <span class="k">then</span>
+     <span class="nb">echo</span> <span class="s2">&quot;[+] Renaming plugin folders...&quot;</span>
+     <span class="k">if</span> <span class="o">[</span> -d <span class="s2">&quot;</span><span class="si">${</span><span class="nv">mattermostdir</span><span class="si">}</span><span class="s2">/plugins/&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+             mv <span class="s2">&quot;</span><span class="si">${</span><span class="nv">mattermostdir</span><span class="si">}</span><span class="s2">/plugins/&quot;</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">mattermostdir</span><span class="si">}</span><span class="s2">/plugins~&quot;</span>
+     <span class="k">fi</span>
+     <span class="k">if</span> <span class="o">[</span> -d <span class="s2">&quot;</span><span class="si">${</span><span class="nv">mattermostdir</span><span class="si">}</span><span class="s2">/client/plugins/&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+             mv <span class="s2">&quot;</span><span class="si">${</span><span class="nv">mattermostdir</span><span class="si">}</span><span class="s2">/client/plugins/&quot;</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">mattermostdir</span><span class="si">}</span><span class="s2">/client/plugins~&quot;</span>
+     <span class="k">fi</span>
+<span class="k">fi</span>
+
+<span class="nb">echo</span> <span class="s2">&quot;[+] Updating Mattermost...&quot;</span>
+cp -an <span class="s2">&quot;</span><span class="si">${</span><span class="nv">downloaddir</span><span class="si">}</span><span class="s2">/mattermost-upgrade/mattermost/&quot;</span>* <span class="s2">&quot;</span><span class="si">${</span><span class="nv">mattermostdir</span><span class="si">}</span><span class="s2">&quot;</span>
+
+
+<span class="nb">echo</span> <span class="s2">&quot;[+] Cleaning Mattermost temporary files...&quot;</span>
+rm -rf <span class="s2">&quot;</span><span class="si">${</span><span class="nv">downloaddir</span><span class="si">}</span><span class="s2">/mattermost-upgrade/&quot;</span>
+rm -f <span class="s2">&quot;</span><span class="si">${</span><span class="nv">downloaddir</span><span class="si">}</span><span class="s2">/mattermost-upgrade.gz&quot;</span>
+
+<span class="nb">echo</span> <span class="s2">&quot;[+] Allowing Mattermost to run on port 0-1023...&quot;</span>
+setcap <span class="nv">cap_net_bind_service</span><span class="o">=</span>+ep <span class="s2">&quot;</span><span class="si">${</span><span class="nv">mattermostdir</span><span class="si">}</span><span class="s2">/bin/mattermost&quot;</span>
+
+<span class="nb">echo</span> <span class="s2">&quot;[+] Starting Mattermost service...&quot;</span>
+<span class="k">if</span> <span class="nb">type</span> systemctl &gt;/dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="p">;</span>  <span class="k">then</span>
+     systemctl start mattermost
+<span class="k">else</span>
+     service mattermost start
+<span class="k">fi</span>
+
+<span class="nb">echo</span> <span class="s2">&quot;[+] Mattermost updated with successful&quot;</span>
+
+<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">plugins</span><span class="si">}</span><span class="s2">&quot;</span> -eq <span class="m">0</span> <span class="o">]</span><span class="p">;</span>  <span class="k">then</span>
+     <span class="nb">echo</span> <span class="s2">&quot;*************************************************&quot;</span>
+     <span class="nb">echo</span> <span class="s2">&quot;Dont forget to reactivate your plugins&quot;</span>
+     <span class="nb">echo</span> <span class="s2">&quot;mv \&quot;</span><span class="si">${</span><span class="nv">mattermostdir</span><span class="si">}</span><span class="s2">/plugins~\&quot; \&quot;</span><span class="si">${</span><span class="nv">mattermostdir</span><span class="si">}</span><span class="s2">/plugins\&quot;&quot;</span>
+     <span class="nb">echo</span> <span class="s2">&quot;mv \&quot;</span><span class="si">${</span><span class="nv">mattermostdir</span><span class="si">}</span><span class="s2">/client/plugins\&quot; \&quot;</span><span class="si">${</span><span class="nv">mattermostdir</span><span class="si">}</span><span class="s2">/client/plugins~\&quot;&quot;</span>
+     <span class="nb">echo</span> <span class="s2">&quot;*************************************************&quot;</span>
+<span class="k">fi</span>
+</pre></div>
+</div>
+<p>Make it executable.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># chmod +x ./upgrade_mattermost.sh</span>
+</pre></div>
+</div>
+<p>Please adjust the parameters at the beginning of the script according to your environment.</p>
+<p><em>Start the script</em></p>
+<p>To start the update process, start the script and add the desired version number as an argument.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># ./upgrade_mattermost.sh &lt;VERSION&gt;</span>
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># ./upgrade_mattermost.sh 5.26.0</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="light-install-hindi.html" class="btn btn-neutral float-right" title="लाइट इनस्टॉल गाइड" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../install/deploy-cloudron.html" class="btn btn-neutral" title="Deploy Mattermost on Cloudron (Unofficial)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/administration/upgrade-script.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

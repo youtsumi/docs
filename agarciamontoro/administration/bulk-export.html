@@ -1,0 +1,924 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Bulk Export Tool &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Important Notes" href="../install/troubleshooting.html" />
+    <link rel="prev" title="Announcement Banner (E10)" href="announcement-banner.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="command-line-tools.html">Command Line Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mmctl-cli-tool.html">mmctl Command Line Tool (Beta)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scripts.html">Scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="statistics.html">Statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../integrations/net-promoter-score.html">User Satisfaction Surveys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notices.html">In-Product Notices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="health-check.html">Health Check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="announcement-banner.html">Announcement Banner (E10)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Bulk Export Tool</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bulk-export-data">Bulk export data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#running-the-bulk-export-command">Running the bulk export command</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
+    
+    <li>Bulk Export Tool</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/administration/bulk-export.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="bulk-export-tool">
+<span id="bulk-export"></span><h1>Bulk Export Tool<a class="headerlink" href="#bulk-export-tool" title="Permalink to this headline">¶</a></h1>
+<p>Moving data from one Mattermost instance into another begins with exporting data to a <a class="reference external" href="https://jsonlines.org">JSONL</a> file using the
+<a class="reference external" href="https://docs.mattermost.com/deployment/bulk-loading.html">bulk loading feature</a>. This tool is useful if you have created a server for a proof of concept, have
+created another server for production use, and now want to retain the history from the proof of concept instance.</p>
+<p>You can export the following data types:</p>
+<ul class="simple">
+<li>Teams</li>
+<li>Channels (Public and Private)</li>
+<li>Users</li>
+<li>Users’ Team memberships</li>
+<li>Users’ Channel memberships</li>
+<li>Posts (Posts in the Public/Private channels and also replies to those posts)</li>
+</ul>
+<div class="section" id="bulk-export-data">
+<h2>Bulk export data<a class="headerlink" href="#bulk-export-data" title="Permalink to this headline">¶</a></h2>
+<p>At this time, the export supports attributes of the objects listed below. All Mattermost Bulk Export data files will begin with a <cite>Version</cite> object as the first line of the file. This indicates the version of the Mattermost Bulk Import file format with which the exported data is compatible.</p>
+<p>You can export the following data types:</p>
+<ul class="simple">
+<li>Teams</li>
+<li>Channels (Public and Private)</li>
+<li>Users</li>
+<li>Users’ Team memberships</li>
+<li>Users’ Channel memberships</li>
+<li>Users’ notification preferences</li>
+<li>Posts (regular, non-reply posts)</li>
+<li>Posts’ Replies</li>
+<li>Posts’ Reactions</li>
+<li>Custom Emoji</li>
+<li>Direct Message Channels</li>
+<li>Direct Message Posts</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Configuration for data types such as exporting specific areas of the server, exporting additional types of posts, permissions schemes, file attachments, webhooks, and bot messages is not yet supported. Deleted objects are also not yet supported.</p>
+<p class="last">For requests to add additional attributes or objects to our exporter, please add a feature request on our <a class="reference external" href="https://mattermost.uservoice.com/forums/306457-general">feature idea forum</a>.</p>
+</div>
+<div class="section" id="version-object">
+<h3>Version object<a class="headerlink" href="#version-object" title="Permalink to this headline">¶</a></h3>
+<table width="100%" border="1" cellpadding="5px" style="margin-bottom:20px;">
+  <tr class="row-odd">
+    <th class="head">Field name</th>
+    <th class="head">Type</th>
+    <th class="head">Description</th>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">type</td>
+    <td valign="middle">string</td>
+    <td>The string "version"</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">version</td>
+    <td valign="middle">number</td>
+    <td>The number 1.</td>
+  </tr>
+</table></div>
+<div class="section" id="team-object">
+<h3>Team object<a class="headerlink" href="#team-object" title="Permalink to this headline">¶</a></h3>
+<table width="100%" border="1" cellpadding="5px" style="margin-bottom:20px;">
+  <tr class="row-odd">
+    <th class="head">Field name</th>
+    <th class="head">Type</th>
+    <th class="head">Description</th>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">name</td>
+    <td valign="middle">string</td>
+    <td>The team name.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">display_name</td>
+    <td valign="middle">string</td>
+    <td>The display name for the team.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">type</td>
+    <td valign="middle">string</td>
+    <td>The type of team. Will have one of the following values:<br>
+        <kbd>"O"</kbd> for an open team<br>
+        <kbd>"I"</kbd> for an invite-only team.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">description</td>
+    <td valign="middle">string</td>
+    <td>The team description.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">allow_open_invite</td>
+    <td valign="middle">bool</td>
+    <td>Whether to allow open invitations. Will have one of the following values:<br>
+      <kbd>"true"</kbd><br>
+      <kbd>"false"</kbd></td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">scheme</td>
+    <td valign="middle">string</td>
+    <td>The name of the permissions scheme that applies to this team.</td>
+  </tr>
+</table></div>
+<div class="section" id="channel-object">
+<h3>Channel object<a class="headerlink" href="#channel-object" title="Permalink to this headline">¶</a></h3>
+<table width="100%" border="1" cellpadding="5px" style="margin-bottom:20px;">
+  <tr class="row-odd">
+    <th class="head">Field name</th>
+    <th class="head">Type</th>
+    <th class="head">Description</th>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">team</td>
+    <td valign="middle">string</td>
+    <td>The name of the team this channel belongs to.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">name</td>
+    <td valign="middle">string</td>
+    <td>The name of the channel.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">display_name</td>
+    <td valign="middle">string</td>
+    <td>The display name for the channel.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">type</td>
+    <td valign="middle">string</td>
+    <td>The type of channel. Will have one the following values:<br>
+        <kbd>"O"</kbd> for a public channel.<br>
+        <kbd>"P"</kbd> for a private channel.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">header</td>
+    <td valign="middle">string</td>
+    <td>The channel header.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">purpose</td>
+    <td valign="middle">string</td>
+    <td>The channel purpose.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">scheme</td>
+    <td valign="middle">string</td>
+    <td>The name of the permissions scheme that applies to this team.</td>
+  </tr>
+</table></div>
+<div class="section" id="user-object">
+<h3>User object<a class="headerlink" href="#user-object" title="Permalink to this headline">¶</a></h3>
+<table width="100%" border="1" cellpadding="5px" style="margin-bottom:20px;">
+  <tr class="row-odd">
+    <th class="head">Field name</th>
+    <th class="head">Type</th>
+    <th class="head">Description</th>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">username</td>
+    <td valign="middle">string</td>
+    <td>The user’s username. This is the unique identifier for the user.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">email</td>
+    <td valign="middle">string</td>
+    <td>The user’s email address.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">auth_service</td>
+    <td valign="middle">string</td>
+    <td>The authentication service used for this user account. This field will be absent for user/password authentication.<br>
+      <kbd>"gitlab"</kbd> - GitLab authentication.<br>
+      <kbd>"ldap"</kbd> - LDAP authentication (E10 and E20)<br>
+      <kbd>"saml"</kbd> - Generic SAML based authentication (E20)<br>
+      <kbd>"google"</kbd> - Google OAuth authentication (E20)<br>
+      <kbd>"office365"</kbd> - Microsoft Office 365 OAuth Authentication (E20)</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">auth_data</td>
+    <td valign="middle">string</td>
+    <td>The authentication data if <kbd>auth_service</kbd> is used. The value depends on the <kbd>auth_service</kbd> that is specified.<br>
+      The data comes from the following fields for the respective auth_services:<br>
+      <kbd>"gitlab"</kbd> - The value of the Id attribute provided in the GitLab auth data.<br>
+      <kbd>"ldap"</kbd> - The value of the LDAP attribute specified as the "ID Attribute" in the Mattermost LDAP configuration.<br>
+      <kbd>"saml"</kbd> - The value of the SAML email address attribute.<br>
+      <kbd>"google"</kbd> - The value of the OAuth Id attribute.<br>
+      <kbd>"office365"</kbd> - The value of the OAuth Id attribute.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">nickname</td>
+    <td valign="middle">string</td>
+    <td>The user’s nickname.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">first_name</td>
+    <td valign="middle">string</td>
+    <td>The user’s first name.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">last_name</td>
+    <td valign="middle">string</td>
+    <td>The user’s last name.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">position</td>
+    <td valign="middle">string</td>
+    <td>The user’s position.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">roles</td>
+    <td valign="middle">string</td>
+    <td>The user’s roles. </td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">locale</td>
+    <td valign="middle">string</td>
+    <td>The user’s localization configuration.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">use_markdown_preview</td>
+    <td valign="middle">bool</td>
+    <td><kbd>"true"</kbd> if the user has enabled markdown preview in the message input box.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">use_formatting</td>
+    <td valign="middle">bool</td>
+    <td><kbd>"true"</kbd> if the user has enabled post formatting for links, emoji, text styles, and line breaks.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">show_unread_section</td>
+    <td valign="middle">string</td>
+    <td><kbd>"true"</kbd> if the user has enabled showing unread messages at top of channel sidebar.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">theme</td>
+    <td valign="middle">string</td>
+    <td>The user’s theme. Formatted as a Mattermost theme string.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">military_time</td>
+    <td valign="middle">string</td>
+    <td><kbd>"true"</kbd> if the user has enabled a 24-hour clock. <kbd>"false"</kbd> if using a 12-hour clock.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">collapse_previews</td>
+    <td valign="middle">string</td>
+    <td><kbd>"true"</kbd> if user collapses link preview by default. <kbd>"false"</kbd> if user expands link previews by default.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">message_display</td>
+    <td valign="middle">string</td>
+    <td>The style the user prefers for displayed messages. Options are <kbd>"clean"</kbd> if the user uses the standard style or <kbd>"compact"</kbd> if the user uses compact style.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">channel_display_mode</td>
+    <td valign="middle">string</td>
+    <td><kbd>"full"</kbd> if the users displays channel messages at the full width of the screen or <kbd>"centered"</kbd> if the user uses a fixed width, centered block.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">tutorial_step</td>
+    <td valign="middle">string</td>
+    <td><kbd>"1"</kbd>, <kbd>"2"</kbd>, or <kbd>"3"</kbd> indicates which specified tutorial step to start with for the user. <kbd>"999"</kbd> skips the tutorial.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">email_interval</td>
+    <td valign="middle">string</td>
+    <td>Email batching interval to use during bulk import. </td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">delete_at</td>
+    <td valign="middle">int64</td>
+    <td>Timestamp of when the user was deactivated.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">teams</td>
+    <td valign="middle">array</td>
+    <td>The teams which the user is member of. Is an array of <b>UserTeamMembership</b> objects.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">notify_props</td>
+    <td valign="middle">object</td>
+    <td>The user’s notify preferences, as defined by the <b>UserNotifyProps</b> object.</td>
+  </tr>
+</table></div>
+<div class="section" id="usernotifyprops-object">
+<h3>UserNotifyProps object<a class="headerlink" href="#usernotifyprops-object" title="Permalink to this headline">¶</a></h3>
+<p>This object is a member of the User object.</p>
+<table width="100%" border="1" cellpadding="5px" style="margin-bottom:20px;">
+  <tr class="row-odd">
+    <th class="head">Field name</th>
+    <th class="head">Type</th>
+    <th class="head">Description</th>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">desktop</td>
+    <td valign="middle">string</td>
+    <td>Preference for sending desktop notifications. Will be one of the following values:<br>
+    <kbd>"all"</kbd> - For all activity.<br>
+    <kbd>"mention"</kbd> - Only for mentions.<br>
+    <kbd>"none"</kbd> - Never.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">desktop_sound</td>
+    <td valign="middle">string</td>
+    <td>Preference for whether desktop notification sound is played. Will be one of the following values:<br>
+    <kbd>"true"</kbd> - Sound is played.<br>
+    <kbd>"false"</kbd> - Sound is not played.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">email</td>
+    <td valign="middle">string</td>
+    <td>Preference for email notifications. Will be one of the following values:<br>
+    <kbd>"true"</kbd> - Email notifications are sent immediately.<br>
+    <kbd>"false"</kbd> - Email notifications are not sent.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">mobile</td>
+    <td valign="middle">string</td>
+    <td>Preference for sending mobile push notifications. Will be one of the following values:<br>
+    <kbd>"all"</kbd> - For all activity.<br>
+    <kbd>"mention"</kbd> - Only for mentions.<br>
+    <kbd>"none"</kbd> - Never.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">mobile_push_status</td>
+    <td valign="middle">string</td>
+    <td>Preference for when push notifications are triggered. Will be one of the following values:<br>
+    <kbd>"online"</kbd> - When online, away or offline.<br>
+    <kbd>"away"</kbd> - When away or offline.<br>
+    <kbd>"offline"</kbd> - When offline.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">channel</td>
+    <td valign="middle">string</td>
+    <td>Preference for whether @all, @channel, and @here trigger mentions. Will be one of the following values:<br>
+    <kbd>"true"</kbd> - Mentions are triggered.<br>
+    <kbd>"false"</kbd> - Mentions are not triggered.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">comments</td>
+    <td valign="middle">string</td>
+    <td>Preference for reply mention notifications. Will be one of the following values:<br>
+    <kbd>"any"</kbd> - Trigger notifications on messages in reply threads that the user starts or participates in.<br>
+    <kbd>"root"</kbd> - Trigger notifications on messages in threads that the user starts.<br>
+    <kbd>"never"</kbd> - Do not trigger notifications on messages in reply threads unless the user is mentioned.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">mention_keys</td>
+    <td valign="middle">string</td>
+    <td>Preference for custom non-case sensitive words that trigger mentions. Words are separated by commas.</td>
+  </tr>
+</table></div>
+<div class="section" id="userteammembership-object">
+<h3>UserTeamMembership object<a class="headerlink" href="#userteammembership-object" title="Permalink to this headline">¶</a></h3>
+<table width="100%" border="1" cellpadding="5px" style="margin-bottom:20px;">
+  <tr class="row-odd">
+    <th class="head">Field name</th>
+    <th class="head">Type</th>
+    <th class="head">Description</th>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">name</td>
+    <td valign="middle">string</td>
+    <td>The name of the team this user is a member of.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">roles</td>
+    <td valign="middle">string</td>
+    <td>The roles the user has within this team. </td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">theme</td>
+    <td valign="middle">string</td>
+    <td>The user’s theme for this team. Formatted as a Mattermost theme string.</td>
+  </tr>
+   <tr class="row-odd">
+    <td valign="middle">channels</td>
+    <td valign="middle">array</td>
+    <td>The channels within this team that the user is a member of. Listed as an array of <b>UserChannelMembership</b> objects.</td>
+  </tr>
+</table></div>
+<div class="section" id="userchannelmembership-object">
+<h3>UserChannelMembership object<a class="headerlink" href="#userchannelmembership-object" title="Permalink to this headline">¶</a></h3>
+<table width="100%" border="1" cellpadding="5px" style="margin-bottom:20px;">
+  <tr class="row-odd">
+    <th class="head">Field name</th>
+    <th class="head">Type</th>
+    <th class="head">Description</th>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">name</td>
+    <td valign="middle">string</td>
+    <td>The name of the channel in the parent team that this user is a member of.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">roles</td>
+    <td valign="middle">string</td>
+    <td>The roles the user has within this channel. </td>
+  </tr>
+      <tr class="row-odd">
+    <td valign="middle">notify_props</td>
+    <td valign="middle">object</td>
+    <td>The notify preferences for this user in this channel as defined by the <b>ChannelNotifyProps</b> object.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">favorite</td>
+    <td valign="middle">boolean</td>
+    <td>Whether the channel is marked as a favorite for this user. Will be one of the following values:<br>
+        <kbd>"true"</kbd> - Yes.<br>
+        <kbd>"false"</kbd> - No.</td>
+    </td>
+  </tr>
+</table><div class="section" id="channelnotifyprops-object">
+<h4>ChannelNotifyProps object<a class="headerlink" href="#channelnotifyprops-object" title="Permalink to this headline">¶</a></h4>
+<p>This object is a member of the ChannelMembership object.</p>
+<table width="100%" border="1" cellpadding="5px" style="margin-bottom:20px;">
+  <tr class="row-odd">
+    <th class="head">Field name</th>
+    <th class="head">Type</th>
+    <th class="head">Description</th>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">desktop</td>
+    <td valign="middle">string</td>
+    <td>Preference for sending desktop notifications. Will be one of the following values:<br>
+    <kbd>"default"</kbd> - Global default.<br>
+    <kbd>"all"</kbd> - For all activity.<br>
+    <kbd>"mention"</kbd> - Only for mentions.<br>
+    <kbd>"none"</kbd> - Never.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">mobile</td>
+    <td valign="middle">string</td>
+    <td>Preference for sending mobile notifications. Will be one of the following values:<br>
+    <kbd>"default"</kbd> - Global default.<br>
+    <kbd>"all"</kbd> - For all activity.<br>
+    <kbd>"mention"</kbd> - Only for mentions.<br>
+    <kbd>"none"</kbd> - Never.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">mark_unread</td>
+    <td valign="middle">string</td>
+    <td>Preference for marking channel as unread. Will be one of the following values:<br>
+        <kbd>"all"</kbd> - For all unread messages.<br>
+        <kbd>"mention"</kbd> - Only for mentions.</td>
+  </tr>
+</table></div>
+</div>
+<div class="section" id="post-object">
+<h3>Post object<a class="headerlink" href="#post-object" title="Permalink to this headline">¶</a></h3>
+<table width="100%" border="1" cellpadding="5px" style="margin-bottom:20px;">
+  <tr class="row-odd">
+    <th class="head">Field name</th>
+    <th class="head">Type</th>
+    <th class="head">Description</th>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">team</td>
+    <td valign="middle">string</td>
+    <td>The name of the team that this post is in.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">channel</td>
+    <td valign="middle">string</td>
+    <td>The name of the channel that this post is in.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">user</td>
+    <td valign="middle">string</td>
+    <td>The username of the user for this post.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">message</td>
+    <td valign="middle">string</td>
+    <td>The message that the post contains.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">props</td>
+    <td valign="middle">object</td>
+    <td>The props for a post. Contains additional formatting information used by integrations and bot posts. For a more detailed explanation see the <a href="https://docs.mattermost.com/developer/message-attachments.html">message attachments documentation</a>.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">create_at</td>
+    <td valign="middle">int</td>
+    <td>The timestamp for the post, in milliseconds since the Unix epoch.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">reactions</td>
+    <td valign="middle">array</td>
+    <td>The emoji reactions to this post. Will be an array of Reaction objects.</td>
+</table></div>
+<div class="section" id="reply-object">
+<h3>Reply object<a class="headerlink" href="#reply-object" title="Permalink to this headline">¶</a></h3>
+<table width="100%" border="1" cellpadding="5px" style="margin-bottom:20px;">
+  <tr class="row-odd">
+    <th class="head">Field name</th>
+    <th class="head">Type</th>
+    <th class="head">Description</th>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">user</td>
+    <td valign="middle">string</td>
+    <td>The username of the user for this reply.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">message</td>
+    <td valign="middle">string</td>
+    <td>The message that the reply contains.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">create_at</td>
+    <td valign="middle">int</td>
+    <td>The timestamp for the reply, in milliseconds since the Unix epoch.</td>
+  </tr>
+</table></div>
+<div class="section" id="reaction-object">
+<h3>Reaction object<a class="headerlink" href="#reaction-object" title="Permalink to this headline">¶</a></h3>
+<p>This object is a member of the Post object.</p>
+<table width="100%" border="1" cellpadding="5px" style="margin-bottom:20px;">
+  <tr class="row-odd">
+    <th class="head">Field name</th>
+    <th class="head">Type</th>
+    <th class="head">Description</th>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">user</td>
+    <td valign="middle">string</td>
+    <td>The username of the user for this reply.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">emoji_name</td>
+    <td valign="middle">string</td>
+    <td>The emoji of the reaction.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">create_at</td>
+    <td valign="middle">int</td>
+    <td>The timestamp for the reply, in milliseconds since the Unix epoch.</td>
+  </tr>
+</table></div>
+<div class="section" id="emoji-object">
+<h3>Emoji object<a class="headerlink" href="#emoji-object" title="Permalink to this headline">¶</a></h3>
+<table width="100%" border="1" cellpadding="5px" style="margin-bottom:20px;">
+  <tr class="row-odd">
+    <th class="head">Field name</th>
+    <th class="head">Type</th>
+    <th class="head">Description</th>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">name</td>
+    <td valign="middle">string</td>
+    <td>The emoji name.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">image</td>
+    <td valign="middle">string</td>
+    <td>The path (either absolute or relative to the current working directory) to the image file for this emoji.</td>
+  </tr>
+</table></div>
+<div class="section" id="directchannel-object">
+<h3>DirectChannel object<a class="headerlink" href="#directchannel-object" title="Permalink to this headline">¶</a></h3>
+<table width="100%" border="1" cellpadding="5px" style="margin-bottom:20px;">
+  <tr class="row-odd">
+    <th class="head">Field name</th>
+    <th class="head">Type</th>
+    <th class="head">Description</th>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">members</td>
+    <td valign="middle">array</td>
+    <td>List of channel members.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">header</td>
+    <td valign="middle">string</td>
+    <td>The channel header.</td>
+  </tr>
+</table></div>
+<div class="section" id="directpost-object">
+<h3>DirectPost object<a class="headerlink" href="#directpost-object" title="Permalink to this headline">¶</a></h3>
+<table width="100%" border="1" cellpadding="5px" style="margin-bottom:20px;">
+  <tr class="row-odd">
+    <th class="head">Field name</th>
+    <th class="head">Type</th>
+    <th class="head">Description</th>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">user</td>
+    <td valign="middle">string</td>
+    <td>The username of the user for this post.</td>
+  </tr>
+  <tr class="row-odd">
+    <td valign="middle">message</td>
+    <td valign="middle">string</td>
+    <td>The message that the post contains.</td>
+  </tr>
+      <tr class="row-odd">
+    <td valign="middle">create_at</td>
+    <td valign="middle">int</td>
+    <td>The timestamp for the post, in milliseconds since the Unix epoch.</td>
+</table></div>
+</div>
+<div class="section" id="running-the-bulk-export-command">
+<h2>Running the bulk export command<a class="headerlink" href="#running-the-bulk-export-command" title="Permalink to this headline">¶</a></h2>
+<p>The export command runs in the <a class="reference external" href="https://docs.mattermost.com/administration/command-line-tools.html">CLI</a>.  It has permissions to access all information in the Mattermost database.</p>
+<p>To run the export command:</p>
+<ol class="arabic simple">
+<li>Navigate to the directory where the Mattermost server is installed. On a default install of Mattermost, the directory is <code class="docutils literal notranslate"><span class="pre">/opt/mattermost</span></code>.</li>
+<li>Run the following command to extract data from all teams on the server. Note that you can change the file name and specify an absolute or relative path to dictate where the file is exported:</li>
+</ol>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">-u</span> <span class="pre">mattermost</span> <span class="pre">bin/mattermost</span> <span class="pre">export</span> <span class="pre">bulk</span> <span class="pre">file.json</span> <span class="pre">--all-teams</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">-u</span> <span class="pre">mattermost</span> <span class="pre">bin/mattermost</span> <span class="pre">export</span> <span class="pre">bulk</span> <span class="pre">/home/user/bulk_data.json</span> <span class="pre">--all-teams</span></code></p>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li>Retrieve your file from the location you specified.</li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../install/troubleshooting.html" class="btn btn-neutral float-right" title="Important Notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="announcement-banner.html" class="btn btn-neutral" title="Announcement Banner (E10)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/administration/bulk-export.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

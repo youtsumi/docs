@@ -1,0 +1,432 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Architecture Overview &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Deployment Overview" href="../deployment/deployment.html" />
+    <link rel="prev" title="Self-Managed Administrator’s Guide" href="../guides/administrator.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#basics">Basics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#push-notification-service">Push Notification Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#proxy">Proxy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#communication-protocols">Communication Protocols</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#high-availability-and-scalability">High Availability and Scalability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reference-architectures">Reference Architectures</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#users-on-e20-general">5,000 Users on E20 - General</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#users-on-e20-aws">5,000 Users on E20 - AWS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">10,000 Users on E20 - General</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">10,000 Users on E20 - AWS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">25,000 Users on E20 - General</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">25,000 Users on E20 - AWS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">50,000 Users on E20 - AWS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#database-with-vips">Database with VIPs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#load-testing">Load Testing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
+    
+    <li>Architecture Overview</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/overview/architecture.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="architecture-overview">
+<h1>Architecture Overview<a class="headerlink" href="#architecture-overview" title="Permalink to this headline">¶</a></h1>
+<p>This page provides an overview of the Mattermost architecture with reference architecture. For a more detailed deployment overview, <a class="reference external" href="https://docs.mattermost.com/deployment/deployment.html">check out our deployment wiki</a>.</p>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="basics">
+<h2>Basics<a class="headerlink" href="#basics" title="Permalink to this headline">¶</a></h2>
+<p>At its core, Mattermost is a single-compiled Go binary that is exposed as a Restful JSON web server with Javascript and Go clients. See the Restful API docs <a class="reference external" href="https://api.mattermost.com">here</a>.</p>
+<p>It is configured using <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html">config/config.json</a> and provides the following:</p>
+<ul class="simple">
+<li><strong>Authentication client</strong>, which provides the functionality for users to log into Mattermost via email address and password in Team Edition. Enterprise E10 adds the ability for users to authenticate using Active Directory or LDAP, and Enterprise E20 adds the ability to authenticate using SAML SSO providers like ADFS, OneLogin and Okta.</li>
+<li><strong>Authentication provider</strong>, which enables the Mattermost server to authenticate to other services like GitLab and Zapier using OAuth 2.0.</li>
+<li><strong>Notification service</strong>, which sends notifications via SMTP or a Push Notification Service for mobile applications.</li>
+<li><strong>Data management service</strong>, which connects to supported databases and file storage solutions (local, network-attached storage, Amazon S3, etc), and manages the reading and writing of data to and from them.</li>
+</ul>
+<p>The binary talks to a database, typically MySQL or PostgreSQL, and a filestore.</p>
+<img alt="../_images/architecture_basics.png" src="../_images/architecture_basics.png" />
+<div class="section" id="push-notification-service">
+<h3>Push Notification Service<a class="headerlink" href="#push-notification-service" title="Permalink to this headline">¶</a></h3>
+<p>The Mattermost <a class="reference external" href="https://docs.mattermost.com/mobile/mobile-hpns.html">hosted push notification service</a> can be used to send push notifications to mobile clients. Team Edition users can deploy the service using the Mattermost <a class="reference external" href="https://docs.mattermost.com/overview/faq.html#tpns">test push notification service</a> or deploy their own push notification service and <a class="reference external" href="https://docs.mattermost.com/mobile/mobile-compile-yourself.html">compile their mobile applications</a> to use that service.</p>
+</div>
+<div class="section" id="proxy">
+<h3>Proxy<a class="headerlink" href="#proxy" title="Permalink to this headline">¶</a></h3>
+<p>A proxy server is a server (a computer system or an application) that acts as an intermediary for requests from clients seeking resources from other servers. Mattermost recommends using a proxy in front of Mattermost to increase security, performance and the ability to monitor and shape traffic connecting to Mattermost:</p>
+<ul class="simple">
+<li><strong>Security</strong>: A proxy server can manage Secure Socket Layer (TLS/SSL) encryption and set policy on how network traffic will be routed to the Mattermost server.</li>
+<li><strong>Performance</strong>: In a high availability configuration, the proxy server balances the network load across multiple Mattermost servers for optimized performance. A hardware proxy with dedicated devices for processing SSL encryption and decryption can also be used to increase performance.</li>
+<li><strong>Monitoring</strong>: A proxy server can monitor connection traffic and record traffic in standard audit logs that common monitoring tools like Kibana and Splunk can consume and report on. Some of the events that can be captured include file uploads and downloads, which are not tracked by the Mattermost Server logging process.</li>
+</ul>
+<p>Mattermost provides documentation and support for the <a class="reference external" href="https://www.nginx.com/">NGINX proxy</a>. For information on how to install and configure NGINX for your environment, see <a class="reference external" href="https://docs.mattermost.com/guides/administrator.html#installing-mattermost">our guide</a>. Mattermost also unofficially supports other proxies including <a class="reference external" href="https://docs.mattermost.com/install/config-apache2.html">Apache 2</a>.</p>
+<img alt="../_images/architecture_with_proxy.png" src="../_images/architecture_with_proxy.png" />
+</div>
+<div class="section" id="communication-protocols">
+<h3>Communication Protocols<a class="headerlink" href="#communication-protocols" title="Permalink to this headline">¶</a></h3>
+<p>There are also communication protocols (HTTPS and WS) that define the type of connection the user makes with the Mattermost server.</p>
+<p><strong>HTTPS Connection</strong> (Secure Hypertext Transfer Protocol)</p>
+<p>HTTPS connections to the Mattermost Server render pages and provide access to core platform functionality, but do not include real-time interactivity (which is enabled by WSS connections).</p>
+<p>HTTPS is a secure, encrypted protocol and is highly recommended for production. Unencrypted HTTP connections may be used in initial testing and configuration, but should never be used in a production environment.</p>
+<p><strong>WSS Connection</strong> (Secure WebSocket Protocol)</p>
+<p>Secure WebSocket (WSS) connections to the Mattermost Server enable real-time updates and notifications between clients and the server.</p>
+<p>If a WSS connection is not available and HTTPS is substituted, the system will appear to work but real-time updates and notifications will not. In this mode of operation, updates will only appear on a page refresh. WSS has a persistent connection to the Mattermost Server when a client is connected, while HTTPS has an intermittent connection and only connects to the server when a page or file is requested.</p>
+<img alt="../_images/architecture_with_protocol.png" src="../_images/architecture_with_protocol.png" />
+</div>
+</div>
+<div class="section" id="high-availability-and-scalability">
+<h2>High Availability and Scalability<a class="headerlink" href="#high-availability-and-scalability" title="Permalink to this headline">¶</a></h2>
+<p>Enterprise Edition E20 supports:</p>
+<ol class="arabic simple">
+<li>Clustered Mattermost servers, which minimize latency by:</li>
+</ol>
+<ul class="simple">
+<li>storing static assets over a global CDN</li>
+<li>deploying multiple Mattermost servers to host API communication closer to the location of end users</li>
+</ul>
+<p>They can also be used to handle scale and failure handoffs in disaster recovery scenarios.</p>
+<ol class="arabic simple" start="2">
+<li>Database read replicas, where replicas can be:</li>
+</ol>
+<ul class="simple">
+<li>configured as a redundant backup to the active database server</li>
+<li>used to scale up the number of concurrent users</li>
+<li>deployed closer to the location of end users, reducing latency</li>
+</ul>
+<p>Moreover, search replicas are also supported to handle search queries.</p>
+<img alt="../_images/architecture_high_availability.png" src="../_images/architecture_high_availability.png" />
+</div>
+<div class="section" id="reference-architectures">
+<h2>Reference Architectures<a class="headerlink" href="#reference-architectures" title="Permalink to this headline">¶</a></h2>
+<p>The following diagrams show the suggested architecture configurations for E20 enterprise deployments of Mattermost at different scales. These diagrams are meant as guidelines for typical Mattermost deployments. Hardware and infrastructure requirements can vary significantly based on usage and policies.</p>
+<p>There are two versions of each diagram. One is generalized while the other focuses on AWS.</p>
+<p>Each generalized diagram represents a full high availability deployment across all critical components. The proxy, database, file storage and Elasticsearch layers can be replaced by cloud services. Push proxy can be replaced by the Mattermost <a class="reference external" href="https://docs.mattermost.com/mobile/mobile-hpns.html">HPNS</a>.</p>
+<p>Each AWS diagram represents a full high availability deployment on Amazon Web Services making full use of the available services. Push proxy can optionally be deployed manually in place of HPNS.</p>
+<div class="section" id="users-on-e20-general">
+<h3>5,000 Users on E20 - General<a class="headerlink" href="#users-on-e20-general" title="Permalink to this headline">¶</a></h3>
+<img alt="../_images/MattermostDeployment5kUsers.png" src="../_images/MattermostDeployment5kUsers.png" />
+</div>
+<div class="section" id="users-on-e20-aws">
+<h3>5,000 Users on E20 - AWS<a class="headerlink" href="#users-on-e20-aws" title="Permalink to this headline">¶</a></h3>
+<img alt="../_images/MattermostDeployment5kaws.png" src="../_images/MattermostDeployment5kaws.png" />
+</div>
+<div class="section" id="id1">
+<h3>10,000 Users on E20 - General<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<img alt="../_images/MattermostDeployment10kUsers.png" src="../_images/MattermostDeployment10kUsers.png" />
+</div>
+<div class="section" id="id2">
+<h3>10,000 Users on E20 - AWS<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<img alt="../_images/MattermostDeployment10kaws.png" src="../_images/MattermostDeployment10kaws.png" />
+</div>
+<div class="section" id="id3">
+<h3>25,000 Users on E20 - General<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<img alt="../_images/MattermostDeployment25kUsers.png" src="../_images/MattermostDeployment25kUsers.png" />
+</div>
+<div class="section" id="id4">
+<h3>25,000 Users on E20 - AWS<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<img alt="../_images/MattermostDeployment25kaws.png" src="../_images/MattermostDeployment25kaws.png" />
+</div>
+<div class="section" id="id5">
+<h3>50,000 Users on E20 - AWS<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<img alt="../_images/MattermostDeployment50kaws.png" src="../_images/MattermostDeployment50kaws.png" />
+</div>
+<div class="section" id="database-with-vips">
+<h3>Database with VIPs<a class="headerlink" href="#database-with-vips" title="Permalink to this headline">¶</a></h3>
+<p>The following diagram is a suggested configuration for highly-available databases through virtual IPs.</p>
+<img alt="../_images/DatabasewithVIPs.png" src="../_images/DatabasewithVIPs.png" />
+</div>
+<div class="section" id="load-testing">
+<h3>Load Testing<a class="headerlink" href="#load-testing" title="Permalink to this headline">¶</a></h3>
+<p>Mattermost Enterprise Edition was <a class="reference external" href="https://github.com/mattermost/mattermost-load-test">load tested</a> with 60,000 concurrent active users with:</p>
+<ul class="simple">
+<li>6 Mattermost servers: m4.2xlarge (8 vCPU, 32 GB RAM)</li>
+<li>1 MySQL database server with 5 read replicas: db.r4.2xlarge (8 vCPU, 61 GB RAM)</li>
+<li>3 load test runners (for running the loadtest)</li>
+<li>3 NGINX proxies</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../deployment/deployment.html" class="btn btn-neutral float-right" title="Deployment Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../guides/administrator.html" class="btn btn-neutral" title="Self-Managed Administrator’s Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/overview/architecture.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

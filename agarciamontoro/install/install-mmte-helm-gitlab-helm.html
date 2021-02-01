@@ -1,0 +1,576 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to install Mattermost Team Edition Helm Chart in a GitLab Helm Chart deployment &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Desktop Application Install Guides" href="desktop.html" />
+    <link rel="prev" title="AWS Elastic Beanstalk Docker Setup" href="docker-ebs.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="requirements.html">Software and Hardware Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-ubuntu-2004.html">Installing on Ubuntu 20.04 LTS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-ubuntu-1804.html">Installing on Ubuntu 18.04 LTS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mattermost-omnibus.html">Installing Mattermost Omnibus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-kubernetes.html">Installing on Kubernetes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-debian.html">Installing on Debian Buster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-rhel-7.html">Installing on RHEL 7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-rhel-8.html">Installing on RHEL 8</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-centos-oracle-scientific.html">Installing on CentOS, Oracle Linux, and Scientific Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sockets-db.html">Instructions On Setting Up a Socket-based Mattermost Database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ee-install.html">Enterprise Install and Upgrade</a></li>
+<li class="toctree-l3"><a class="reference internal" href="transport-encryption/config.html">Configuring Transport Encryption</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deploy-bitnami.html">Deploy Mattermost on Bitnami</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docker-local-machine.html">Local Machine Setup using Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docker-ebs.html">AWS Elastic Beanstalk Docker Setup</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Installing Mattermost Team Edition in GitLab Helm Chart</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-mattermost-team-edition-helm-chart">Install Mattermost Team Edition Helm Chart</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#deploy-the-mattermost-team-edition-helm-chart">Deploy the Mattermost Team Edition Helm Chart</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#create-an-oauth-application-with-gitlab">Create an OAuth application with GitLab</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#deploy-gitlab-helm-chart">Deploy GitLab Helm Chart</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#deploy-mattermost-team-edition-helm-chart-with-gitlab-helm-chart">Deploy Mattermost Team Edition Helm Chart with GitLab Helm Chart</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="desktop.html">Desktop Application Install Guides</a></li>
+<li class="toctree-l3"><a class="reference internal" href="desktop-managed-resources.html">Desktop Managed Resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="desktop-msi-gpo.html">Desktop MSI Installer and Group Policy Installation Guides (Beta)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
+    
+    <li>How to install Mattermost Team Edition Helm Chart in a GitLab Helm Chart deployment</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/install/install-mmte-helm-gitlab-helm.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-install-mattermost-team-edition-helm-chart-in-a-gitlab-helm-chart-deployment">
+<span id="install-mmte-helm-gitlab-helm"></span><h1>How to install Mattermost Team Edition Helm Chart in a GitLab Helm Chart deployment<a class="headerlink" href="#how-to-install-mattermost-team-edition-helm-chart-in-a-gitlab-helm-chart-deployment" title="Permalink to this headline">¶</a></h1>
+<p>This document describes how to use Mattermost Team Edition Helm Chart in proximity with an existing GitLab Helm Chart deployment. Once the Mattermost Team Edition Helm Chart is installed, GitLab SSO integration is configured which utilizes shared configurations to streamline authentication, storage, encryption, and traffic routing.</p>
+<p>As the Mattermost Helm Chart is installed in a separate namespace, it is recommended that <code class="docutils literal notranslate"><span class="pre">cert-manager</span></code> and <code class="docutils literal notranslate"><span class="pre">nginx-ingress</span></code> be configured to manage cluster-wide ingress and certificate resources.</p>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>A running Kubernetes cluster.</li>
+<li><a class="reference external" href="https://helm.sh/docs/intro/install/)">Helm v2</a>.</li>
+<li><a class="reference external" href="https://rancher.com/docs/rancher/v2.x/en/installation/ha/helm-init/">Tiller</a> (the Helm server-side component) installed on the cluster.</li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For the Team Edition you can have just one replica running.</p>
+</div>
+</div>
+<div class="section" id="install-mattermost-team-edition-helm-chart">
+<h2>Install Mattermost Team Edition Helm Chart<a class="headerlink" href="#install-mattermost-team-edition-helm-chart" title="Permalink to this headline">¶</a></h2>
+<p>This chart creates a Mattermost Team Edition deployment on a Kubernetes cluster using the Helm package manager. For detailed instructions, refer to the <a class="reference external" href="https://github.com/mattermost/mattermost-helm/tree/master/charts/mattermost-team-edition">Mattermost Team Edition documentation</a>.</p>
+</div>
+<div class="section" id="deploy-the-mattermost-team-edition-helm-chart">
+<h2>Deploy the Mattermost Team Edition Helm Chart<a class="headerlink" href="#deploy-the-mattermost-team-edition-helm-chart" title="Permalink to this headline">¶</a></h2>
+<p>Once you have installed the Mattermost Team Edition Helm Chart, you can deploy it using the following command:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ helm repo add mattermost https://helm.mattermost.com
+$ helm repo update
+$ helm upgrade --install mattermost -f values.yaml mattermost/mattermost-team-edition
+</pre></div>
+</div>
+<p>Wait for the pods to run. Then, using the ingress host you specified in the configuration, access your Mattermost server.</p>
+</div>
+<div class="section" id="create-an-oauth-application-with-gitlab">
+<h2>Create an OAuth application with GitLab<a class="headerlink" href="#create-an-oauth-application-with-gitlab" title="Permalink to this headline">¶</a></h2>
+<p>The next part of the process is setting up the GitLab SSO integration.</p>
+<p>To create the OAuth application to allow Mattermost to use GitLab as the authentication provider, please follow the instructions <a class="reference external" href="https://docs.mattermost.com/deployment/sso-gitlab.html">here</a>.</p>
+<p>Please take note of the <code class="docutils literal notranslate"><span class="pre">Application</span> <span class="pre">ID</span></code>, <code class="docutils literal notranslate"><span class="pre">Application</span> <span class="pre">Secret</span> <span class="pre">Key</span></code>, <code class="docutils literal notranslate"><span class="pre">User</span> <span class="pre">API</span> <span class="pre">Endpoint</span></code>, <code class="docutils literal notranslate"><span class="pre">Auth</span> <span class="pre">Endpoint</span></code> and <code class="docutils literal notranslate"><span class="pre">Token</span> <span class="pre">Endpoint</span></code> settings, as these values will be used later.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Only the default GitLab SSO is officially supported. “Double SSO”, where GitLab SSO is chained to other SSO solutions, is not supported. It may be possible to connect GitLab SSO with AD, LDAP, SAML, or MFA add-ons in some cases, but because of the special logic required they’re not officially supported and are known not to work on some experiences.</p>
+</div>
+</div>
+<div class="section" id="deploy-gitlab-helm-chart">
+<h2>Deploy GitLab Helm Chart<a class="headerlink" href="#deploy-gitlab-helm-chart" title="Permalink to this headline">¶</a></h2>
+<p>To deploy the GitLab Helm Chart, follow the instructions described <a class="reference external" href="https://docs.gitlab.com/ee/install/kubernetes/gitlab_chart.html">here</a>.</p>
+<p>Here’s a light way to install it:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ helm repo add gitlab https://charts.gitlab.io/
+$ helm repo update
+$ helm upgrade --install gitlab gitlab/gitlab <span class="se">\</span>
+  --timeout <span class="m">600</span> <span class="se">\</span>
+  --set global.hosts.domain<span class="o">=</span>&lt;your-domain&gt; <span class="se">\</span>
+  --set global.hosts.externalIP<span class="o">=</span>&lt;external-ip&gt; <span class="se">\</span>
+  --set certmanager-issuer.email<span class="o">=</span>&lt;email&gt;
+</pre></div>
+</div>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">&lt;your-domain&gt;</span></code>: your desired domain, eg. <code class="docutils literal notranslate"><span class="pre">gitlab.example.com</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;external-ip&gt;</span></code>: the external IP pointing to your Kubernetes cluster.</li>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;email&gt;</span></code>: email to register in Let’s Encrypt to retrieve TLS certificates.</li>
+</ul>
+<p>Once you’ve deployed the GitLab instance, follow the instructions for the <a class="reference external" href="https://docs.gitlab.com/charts/installation/deployment.html#initial-login">initial login</a>.</p>
+<p>If you’re following a process other than the one provided and experience authentication and/or deployment issues, let us know in our <a class="reference external" href="https://mattermost.org/troubleshoot/">Troubleshooting forum</a> and we’ll be happy to help.</p>
+</div>
+<div class="section" id="deploy-mattermost-team-edition-helm-chart-with-gitlab-helm-chart">
+<h2>Deploy Mattermost Team Edition Helm Chart with GitLab Helm Chart<a class="headerlink" href="#deploy-mattermost-team-edition-helm-chart-with-gitlab-helm-chart" title="Permalink to this headline">¶</a></h2>
+<p>When you’ve successfully authenticated and connected to your GitLab instance, the next step is to integrate the two charts. The steps in this document presume in-chart Minio instance usage. For information about out-of-chart object storage configuration, review <a class="reference external" href="https://gitlab.com/gitlab-org/charts/gitlab/tree/master/doc/charts/registry#storage">this document</a> for GCS and S3 examples. Alternatively, visit your provider’s Help documentation for configuration settings.</p>
+<p>Prerequisites:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Mattermost Team Edition Helm Chart Version: 3.8.2.</li>
+<li>A running GitLab Helm Chart release.</li>
+<li>The name of the secret that holds your PostgreSQL password <code class="docutils literal notranslate"><span class="pre">&lt;gitlab&gt;-postgresql-password</span></code>.</li>
+<li>(Optional) The name of the secret that holds your MinIO keys <code class="docutils literal notranslate"><span class="pre">&lt;gitlab&gt;-minio-secret</span></code>.</li>
+<li>The service name for your PostgreSQL, <code class="docutils literal notranslate"><span class="pre">&lt;gitlab&gt;-postgresql</span></code>, and the port. If you installed the GitLab Helm Chart in <code class="docutils literal notranslate"><span class="pre">default</span></code> namespace, then the port is <code class="docutils literal notranslate"><span class="pre">5432</span></code>.</li>
+<li>(Optional) The service name for MinIO, <code class="docutils literal notranslate"><span class="pre">&lt;gitlab&gt;-minio-svc</span></code>, and the port. If you installed the GitLab Helm Chart in <code class="docutils literal notranslate"><span class="pre">default</span></code> namespace, then the port is <code class="docutils literal notranslate"><span class="pre">9000</span></code>.</li>
+<li>The names of <code class="docutils literal notranslate"><span class="pre">kubernetes.io/ingress.class</span></code>, <code class="docutils literal notranslate"><span class="pre">kubernetes.io/ingress.provider</span></code>, and <code class="docutils literal notranslate"><span class="pre">certmanager.k8s.io/issuer</span></code>.</li>
+</ul>
+</div></blockquote>
+<p>To deploy Mattermost Team Edition with GitLab Helm Chart, disable the running <code class="docutils literal notranslate"><span class="pre">MySql</span></code> chart and configure <code class="docutils literal notranslate"><span class="pre">InitContainer</span></code> and <code class="docutils literal notranslate"><span class="pre">Environment</span> <span class="pre">variables</span></code> in <code class="docutils literal notranslate"><span class="pre">values.yaml</span></code>. The list below indicates the values that should be changed. Note that we assume the GitLab chart name is <code class="docutils literal notranslate"><span class="pre">gitlab</span></code>.</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">&lt;your-mattermost-domain&gt;</span></code>: URL that users will use to access Mattermost, matching the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#site-url">Site URL field</a>, e.g. <code class="docutils literal notranslate"><span class="pre">mattermost.gitlab.example.com</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;name-of-your-tls-secret&gt;</span></code>: A name to store the TLS certificate for your domains, e.g. <code class="docutils literal notranslate"><span class="pre">mattermost-tls</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;ingress-class&gt;</span></code>: The ingress class. In a basic GitLab deployment, this is <code class="docutils literal notranslate"><span class="pre">gitlab-nginx</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;ingress-provider&gt;</span></code>: The ingress provider. In a basic GitLab deployment, this is <code class="docutils literal notranslate"><span class="pre">nginx</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;certmanager-issuer&gt;</span></code>: The cert manager issuer. In a basic GitLab deployment, this is <code class="docutils literal notranslate"><span class="pre">gitlab-issuer</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;gitlab-ap-secret&gt;</span></code>: The Application secret, which you created in step <a class="reference internal" href="#create-an-oauth-application-with-gitlab">Create an OAuth application with GitLab</a>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;gitlab-app-id&gt;</span></code>: The Application ID, which you created in step <a class="reference internal" href="#create-an-oauth-application-with-gitlab">Create an OAuth application with GitLab</a>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;your-gitlab-domain&gt;</span></code>: The GitLab domain name, e.g., <code class="docutils literal notranslate"><span class="pre">gitlab.example.com</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;gitlab-postgres.username&gt;</span></code>: The GitLab PostgreSQL username. Default is <code class="docutils literal notranslate"><span class="pre">gitlab</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;gitlab-postgres.passwd-secret&gt;</span></code>: Secret that holds your PostgreSQL password. Default is <code class="docutils literal notranslate"><span class="pre">gitlab-postgresql-password</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;gitlab-postgres-host&gt;</span></code>: Postgres host of your Kubernetes service. Default is <code class="docutils literal notranslate"><span class="pre">gitlab-postgresql</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;gitlab-postgres-port&gt;</span></code>: Postgres port of your Kubernetes service. Default is <code class="docutils literal notranslate"><span class="pre">5432</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;mattermost-database-name&gt;</span></code>: Mattermost database, e.g., <code class="docutils literal notranslate"><span class="pre">mattermost-db</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;gitlab-minio-host&gt;</span></code>: MinIO host of your Kubernetes service. Default is <code class="docutils literal notranslate"><span class="pre">gitlab-minio-svc</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;gitlab-minio-port&gt;</span></code>: MinIO port of your Kubernetes service. Default is <code class="docutils literal notranslate"><span class="pre">9000</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;gitlab-minio-secret&gt;</span></code>: Secret that holds your MinIO keys. Default is <code class="docutils literal notranslate"><span class="pre">gitlab-minio-secret</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;mattermost-minio-bucket-name&gt;</span></code>: Mattermost MinIO bucket name, e.g., <code class="docutils literal notranslate"><span class="pre">mattermost-data</span></code>.</li>
+</ul>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>persistence:
+  data:
+    enabled: <span class="nb">false</span>
+
+<span class="c1"># Mattermost configuration:</span>
+configJSON:
+  ServiceSettings:
+    SiteUrl: <span class="s2">&quot;https://&lt;your-mattermost-domain&gt;&quot;</span>
+  TeamSettings:
+    SiteName: <span class="s2">&quot;Mattermost&quot;</span>
+  EmailSettings:
+    EnableSignUpWithEmail: <span class="nb">false</span>
+
+ingress:
+  enabled: <span class="nb">true</span>
+  path: /
+  annotations:
+    kubernetes.io/ingress.class:  &lt;ingress-class&gt;
+    kubernetes.io/ingress.provider: &lt;ingress-provider&gt;
+    certmanager.k8s.io/issuer:  &lt;certmanager-issuer&gt;
+  hosts:
+    - &lt;your-mattermost-domain&gt;
+  tls:
+    - secretName: &lt;name-of-your-tls-secret&gt;
+      hosts:
+        - &lt;your-mattermost-domain&gt;
+
+auth:
+  gitlab:
+    Enable: <span class="s2">&quot;true&quot;</span>
+    Secret: <span class="s2">&quot;&lt;gitlab-app-secret&gt;&quot;</span>
+    Id: <span class="s2">&quot;&lt;gitlab-app-id&gt;&quot;</span>
+    Scope: <span class="s2">&quot;&quot;</span>
+    AuthEndpoint: <span class="s2">&quot;https://&lt;your-gitlab-domain&gt;/oauth/authorize&quot;</span>
+    TokenEndpoint: <span class="s2">&quot;https://&lt;your-gitlab-domain&gt;/oauth/token&quot;</span>
+    UserApiEndpoint: <span class="s2">&quot;https://&lt;your-gitlab-domain&gt;/api/v4/user&quot;</span>
+
+externalDB:
+  enabled: <span class="nb">true</span>
+  existingUser: &lt;gitlab-postgres-username&gt;
+  existingSecret: <span class="s2">&quot;&lt;gitlab-postgres.passwd-secret&gt;&quot;</span>
+
+mysql:
+  enabled: <span class="nb">false</span>
+
+<span class="c1">## Additional env vars</span>
+extraEnvVars:
+  - name: POSTGRES_PASSWORD_GITLAB
+    valueFrom:
+      secretKeyRef:
+        name: &lt;gitlab-postgres-passwd-secret&gt;
+        key: postgres-password
+  - name: POSTGRES_USER_GITLAB
+    value: &lt;gitlab-postgres-username&gt;
+  - name: POSTGRES_HOST_GITLAB
+    value: &lt;gitlab-postgres-host&gt;
+  - name: POSTGRES_PORT_GITLAB
+    value: <span class="s2">&quot;&lt;gitlab-postgres-port&gt;&quot;</span>
+  - name: POSTGRES_DB_NAME_MATTERMOST
+    value: &lt;mattermost-database-name&gt;
+  - name: MM_SQLSETTINGS_DRIVERNAME
+    value: <span class="s2">&quot;postgres&quot;</span>
+  - name: MM_SQLSETTINGS_DATASOURCE
+    value: postgres://<span class="k">$(</span>POSTGRES_USER_GITLAB<span class="k">)</span>:<span class="k">$(</span>POSTGRES_PASSWORD_GITLAB<span class="k">)</span>@<span class="k">$(</span>POSTGRES_HOST_GITLAB<span class="k">)</span>:<span class="k">$(</span>POSTGRES_PORT_GITLAB<span class="k">)</span>/<span class="k">$(</span>POSTGRES_DB_NAME_MATTERMOST<span class="k">)</span>?sslmode<span class="o">=</span>disable<span class="p">&amp;</span><span class="nv">connect_timeout</span><span class="o">=</span><span class="m">10</span>
+  - name: MINIO_ENDPOINT
+    value: &lt;gitlab-minio-host&gt;
+  - name: MINIO_PORT
+    value: <span class="s2">&quot;&lt;gitlab-minio-port&gt;&quot;</span>
+  - name: MM_FILESETTINGS_DRIVERNAME
+    value: amazons3
+  - name: MM_FILESETTINGS_AMAZONS3ENDPOINT
+    value: <span class="k">$(</span>MINIO_ENDPOINT<span class="k">)</span>:<span class="k">$(</span>MINIO_PORT<span class="k">)</span>
+  - name: MM_FILESETTINGS_AMAZONS3ACCESSKEYID
+    valueFrom:
+      secretKeyRef:
+        name: &lt;gitlab-minio-secret&gt;
+        key: accesskey
+  - name: MM_FILESETTINGS_AMAZONS3SECRETACCESSKEY
+    valueFrom:
+      secretKeyRef:
+        name: &lt;gitlab-minio-secret&gt;
+        key: secretkey
+  - name: MM_FILESETTINGS_AMAZONS3BUCKET
+    value: &lt;mattermost-minio-bucket-name&gt;
+
+<span class="c1">## Additional init containers</span>
+extraInitContainers:
+  - name: bootstrap-database
+    image: <span class="s2">&quot;postgres:9.6-alpine&quot;</span>
+    imagePullPolicy: IfNotPresent
+    env:
+      - name: POSTGRES_PASSWORD_GITLAB
+        valueFrom:
+          secretKeyRef:
+            name: &lt;gitlab-postgres.-passwd-secret&gt;
+            key: postgres-password
+      - name: POSTGRES_USER_GITLAB
+        value: &lt;gitlab-postgres-username&gt;
+      - name: POSTGRES_HOST_GITLAB
+        value:&lt;gitlab-postgres-host&gt;
+      - name: POSTGRES_PORT_GITLAB
+        value: <span class="s2">&quot;&lt;gitlab-postgres-port&gt;&quot;</span>
+      - name: POSTGRES_DB_NAME_MATTERMOST
+        value: &lt;mattermost-database-name&gt;
+    command:
+      - sh
+      - <span class="s2">&quot;-c&quot;</span>
+      - <span class="p">|</span>
+        <span class="k">if</span> <span class="nv">PGPASSWORD</span><span class="o">=</span><span class="nv">$POSTGRES_PASSWORD_GITLAB</span> psql -h <span class="nv">$POSTGRES_HOST_GITLAB</span> -p <span class="nv">$POSTGRES_PORT_GITLAB</span> -U <span class="nv">$POSTGRES_USER_GITLAB</span> -lqt <span class="p">|</span> cut -d <span class="se">\|</span> -f <span class="m">1</span> <span class="p">|</span> grep -qw <span class="nv">$POSTGRES_DB_NAME_MATTERMOST</span><span class="p">;</span> <span class="k">then</span>
+        <span class="nb">echo</span> <span class="s2">&quot;database already exist, exiting initContainer&quot;</span>
+        <span class="nb">exit</span> <span class="m">0</span>
+        <span class="k">else</span>
+        <span class="nb">echo</span> <span class="s2">&quot;Database does not exist. creating....&quot;</span>
+        <span class="nv">PGPASSWORD</span><span class="o">=</span><span class="nv">$POSTGRES_PASSWORD_GITLAB</span> createdb -h <span class="nv">$POSTGRES_HOST_GITLAB</span> -p <span class="nv">$POSTGRES_PORT_GITLAB</span> -U <span class="nv">$POSTGRES_USER_GITLAB</span> <span class="nv">$POSTGRES_DB_NAME_MATTERMOST</span>
+        <span class="nb">echo</span> <span class="s2">&quot;Done&quot;</span>
+        <span class="k">fi</span>
+  - name: create-minio-bucket
+    image: <span class="s2">&quot;minio/mc:RELEASE.2018-07-13T00-53-22Z&quot;</span>
+    env:
+      - name: MINIO_ENDPOINT
+        value: &lt;gitlab-minio-host&gt;
+      - name: MINIO_PORT
+        value: <span class="s2">&quot;&lt;gitlab-minio-port&gt;&quot;</span>
+      - name: MINIO_ACCESS_KEY
+        valueFrom:
+          secretKeyRef:
+            name: &lt;gitlab-minio-secret&gt;
+            key: accesskey
+      - name: MINIO_SECRET_KEY
+        valueFrom:
+          secretKeyRef:
+            name: &lt;gitlab-minio-secret&gt;
+            key: secretkey
+      - name: MATTERMOST_BUCKET_NAME
+        value: &lt;mattermost-minio-bucket-name&gt;
+    command:
+      - sh
+      - <span class="s2">&quot;-c&quot;</span>
+      - <span class="p">|</span>
+        <span class="nb">echo</span> <span class="s2">&quot;Connecting to Minio server: http://</span><span class="nv">$MINIO_ENDPOINT</span><span class="s2">:</span><span class="nv">$MINIO_PORT</span><span class="s2">&quot;</span>
+        mc config host add myminio http://<span class="nv">$MINIO_ENDPOINT</span>:<span class="nv">$MINIO_PORT</span> <span class="nv">$MINIO_ACCESS_KEY</span> <span class="nv">$MINIO_SECRET_KEY</span>
+        /usr/bin/mc ls myminio
+        <span class="nb">echo</span> <span class="nv">$?</span>
+        /usr/bin/mc ls myminio/<span class="nv">$MATTERMOST_BUCKET_NAME</span> &gt; /dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+        <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -eq <span class="m">1</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+          <span class="nb">echo</span> <span class="s2">&quot;Creating bucket &#39;</span><span class="nv">$MATTERMOST_BUCKET_NAME</span><span class="s2">&#39;&quot;</span>
+          /usr/bin/mc mb myminio/<span class="nv">$MATTERMOST_BUCKET_NAME</span>
+        <span class="k">else</span>
+          <span class="nb">echo</span> <span class="s2">&quot;Bucket &#39;</span><span class="nv">$MATTERMOST_BUCKET_NAME</span><span class="s2">&#39; already exists.&quot;</span>
+          <span class="nb">exit</span> <span class="m">0</span>
+        <span class="k">fi</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="desktop.html" class="btn btn-neutral float-right" title="Desktop Application Install Guides" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="docker-ebs.html" class="btn btn-neutral" title="AWS Elastic Beanstalk Docker Setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/install/install-mmte-helm-gitlab-helm.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

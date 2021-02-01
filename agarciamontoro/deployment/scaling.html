@@ -1,0 +1,417 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Scaling for Enterprise &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="High Availability Cluster (E20)" href="cluster.html" />
+    <link rel="prev" title="Custom Terms of Service (Beta) (E20)" href="../administration/custom-terms-of-service.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Scaling for Enterprise</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#single-machine-deployment">Single Machine Deployment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#multi-machine-deployment">Multi Machine Deployment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cluster-based-deployment">Cluster Based Deployment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sample-scaling-guide">Sample Scaling Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hosting-recommendation-for-100-000-users">Hosting Recommendation for 100,000+ users</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cluster.html">High Availability Cluster (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cluster-310.html">High Availability Cluster (v3.10 and earlier)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="elasticsearch.html">Elasticsearch (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="metrics.html">Performance Monitoring (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/performance-alerting-guide.html">Mattermost Performance Alerting Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
+    
+    <li>Scaling for Enterprise</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/deployment/scaling.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="scaling-for-enterprise">
+<h1>Scaling for Enterprise<a class="headerlink" href="#scaling-for-enterprise" title="Permalink to this headline">¶</a></h1>
+<p>Mattermost is designed to scale from small teams hosted on a single server to large enterprises running in cluster-based, highly available deployment configurations.</p>
+<p>Server requirements vary based on usage and it is highly recommended that pilots are run before enterprise-wide deployments in order to estimate full scale usage based on your specific organizational needs.</p>
+<div class="section" id="single-machine-deployment">
+<h2>Single Machine Deployment<a class="headerlink" href="#single-machine-deployment" title="Permalink to this headline">¶</a></h2>
+<p>Organizations can typically run Mattermost on a single server with up to 2,000 users, though more users have been observed based on different usage and server configurations.</p>
+<ul class="simple">
+<li>See <a class="reference external" href="https://docs.mattermost.com/guides/administrator.html#installing-mattermost">install guides for step-by-step configuration instructions for single machine setup</a>.</li>
+<li>See <a class="reference external" href="https://docs.mattermost.com/install/requirements.html">hardware and software requirements for hardware sizing</a>.</li>
+</ul>
+</div>
+<div class="section" id="multi-machine-deployment">
+<h2>Multi Machine Deployment<a class="headerlink" href="#multi-machine-deployment" title="Permalink to this headline">¶</a></h2>
+<p>Deployments between 2,000 and 10,000 registered users with moderate usage can run on a standard three-machine Mattermost deployment with a proxy, an application server and a database server. At this scale, demands of larger organizations can typically be met by using powerful hardware in a standard configuration.</p>
+<ul class="simple">
+<li>See <a class="reference external" href="https://docs.mattermost.com/guides/administrator.html#installing-mattermost">install guides for step-by-step configuration instructions for multi-machine setup.</a></li>
+<li>See <a class="reference external" href="https://docs.mattermost.com/install/requirements.html">hardware and software requirements for hardware sizing</a>.</li>
+</ul>
+</div>
+<div class="section" id="cluster-based-deployment">
+<h2>Cluster Based Deployment<a class="headerlink" href="#cluster-based-deployment" title="Permalink to this headline">¶</a></h2>
+<p><em>Available in Enterprise Edition E20</em></p>
+<p>Deployments over 10,000 registered users with moderate usage can be supported by adding additional servers in cluster-based, high availability configuration. To date, the largest simulation included <a class="reference external" href="https://mattermost.com/blog/performance-scale-mattermost/">70,000 concurrent users on a single Mattermost instance</a>.</p>
+<p>This configuration uses a load balancer to distribute requests from users across multiple Mattermost application servers, allowing the system to scale beyond the limits of any single server.</p>
+<p>For more information, see <a class="reference external" href="https://docs.mattermost.com/deployment/cluster.html">high availability deployment guide for horizontal scaling setup</a>.</p>
+</div>
+<div class="section" id="sample-scaling-guide">
+<h2>Sample Scaling Guide<a class="headerlink" href="#sample-scaling-guide" title="Permalink to this headline">¶</a></h2>
+<p>This guide demonstrates how to budget for and build large-scale Mattermost deployments.</p>
+<p>Mattermost can be deployed on-premises or on the cloud platform of your choice, including AWS, Google Cloud, Microsoft Azure and Oracle Cloud. This guide uses AWS as an example.</p>
+<p>Based on the <a class="reference external" href="https://docs.mattermost.com/install/requirements.html#hardware-requirements">hardware requirements</a>, here’s what Mattermost’s server architecture looks like for a 10,000-user deployment:</p>
+<img alt="../_images/scaling-1.png" src="../_images/scaling-1.png" />
+<p><strong>Sizing Guide Using AWS</strong></p>
+<p>On AWS, we recommend using the following EC2 server types as a baseline:</p>
+<ul class="simple">
+<li>App servers:  m5.xlarge</li>
+<li>Database servers:  r4.xlarge</li>
+</ul>
+<p>For the purposes of this guide, we will assume medium usage (10 MB/user/month with a 2x safety factor) for <a class="reference external" href="https://docs.mattermost.com/install/requirements.html#alternate-storage-calculations">storage estimates</a> and 200 MB/user/month for data transfer estimates. We will also assume on-demand pricing with no upfront payments, though more savings (typically 40% or more) can be achieved with reserved servers on 1–3 year commitments and upfront payments.</p>
+<p>As deployments scale above 5,000 users, additional servers are added for performance load-balancing and for providing additional redundancy (see our <a class="reference external" href="https://docs.mattermost.com/deployment/cluster.html#mattermost-server-configuration">High Availability Cluster guide</a>).</p>
+<p><a class="reference external" href="https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vRkhRPFsf1_91AXFbqnmUT0UnpdZ1ZagbiTw9sfuBAL21ncnu7fynZ3yDrp22-LXCeXh0-xF_NFFPp3/pubhtml">This spreadsheet</a> shows how much hardware you’ll need for different-sized Mattermost deployments and provides an estimate of how much each will cost. It includes links to AWS’s cost calculator for various deployment sizes. The smaller deployment examples (i.e., 1,000 users and 5,000 users) are on the conservative side, with separate servers per function that can easily be scaled out as Mattermost is rolled out.</p>
+<p>Here’s an example of the hardware you’ll need for a 10,000-user deployment:</p>
+<img alt="../_images/scaling-3.PNG" src="../_images/scaling-3.PNG" />
+<p>For more information, check out our <a class="reference external" href="https://docs.mattermost.com/guides/administrator.html">Administrator’s Guide</a>.</p>
+</div>
+<div class="section" id="hosting-recommendation-for-100-000-users">
+<h2>Hosting Recommendation for 100,000+ users<a class="headerlink" href="#hosting-recommendation-for-100-000-users" title="Permalink to this headline">¶</a></h2>
+<p>The following matrix presents key features for a successful multi-region Mattermost implementation that scales to 100,000 users with support for high availability and geographically based traffic routing in on premises, AWS, and Azure deployments.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Feature</th>
+<th class="head">On Premises</th>
+<th class="head">Amazon AWS</th>
+<th class="head">Azure</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Multi-region/data center support</td>
+<td>Yes</td>
+<td>Regions: 16</td>
+<td>Regions: 54</td>
+</tr>
+<tr class="row-odd"><td>Auto scaling for Mattermost nodes</td>
+<td>Yes - using a solution like Kubernetes</td>
+<td><a class="reference external" href="https://aws.amazon.com/ec2/autoscaling/">AWS Auto Scaling</a></td>
+<td><a class="reference external" href="https://azure.microsoft.com/en-us/features/autoscale/">Azure Autoscale</a></td>
+</tr>
+<tr class="row-even"><td>Geographic based traffic routing</td>
+<td>Yes</td>
+<td><a class="reference external" href="https://aws.amazon.com/route53/">Route 53</a></td>
+<td><a class="reference external" href="https://azure.microsoft.com/en-us/services/dns/">Azure DNS</a></td>
+</tr>
+<tr class="row-odd"><td>Load balancing</td>
+<td>Yes</td>
+<td><a class="reference external" href="https://aws.amazon.com/elasticloadbalancing/">Elastic Load Balancer</a></td>
+<td><a class="reference external" href="https://azure.microsoft.com/en-us/services/load-balancer/">Azure Load Balancer</a></td>
+</tr>
+<tr class="row-even"><td>Multi-region, HA storage</td>
+<td>Yes</td>
+<td><a class="reference external" href="https://aws.amazon.com/s3/">S3</a></td>
+<td>?</td>
+</tr>
+<tr class="row-odd"><td>Multi-region, HA MySQL</td>
+<td>Yes - using a solution like Galera</td>
+<td><a class="reference external" href="https://aws.amazon.com/rds/aurora/">Aurora</a> / <a class="reference external" href="https://aws.amazon.com/rds/mysql/">RDS for MySQL</a></td>
+<td><a class="reference external" href="https://azure.microsoft.com/en-us/services/mysql/">Azure MySQL</a></td>
+</tr>
+<tr class="row-even"><td>Multi-region, HA PostgreSQL</td>
+<td>Yes</td>
+<td><a class="reference external" href="https://aws.amazon.com/rds/aurora/">Aurora</a> / <a class="reference external" href="https://aws.amazon.com/rds/postgresql/">RDS for PostgreSQL</a></td>
+<td><a class="reference external" href="https://azure.microsoft.com/en-us/services/postgresql/">Azure PostgreSQL</a></td>
+</tr>
+<tr class="row-odd"><td>Multi-region, HA elasticsearch</td>
+<td>Yes</td>
+<td><a class="reference external" href="https://aws.amazon.com/elasticsearch-service/">Amazon Elasticsearch Service</a></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="cluster.html" class="btn btn-neutral float-right" title="High Availability Cluster (E20)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../administration/custom-terms-of-service.html" class="btn btn-neutral" title="Custom Terms of Service (Beta) (E20)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/deployment/scaling.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,743 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Important Upgrade Notes &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Mattermost Changelog" href="changelog.html" />
+    <link rel="prev" title="Upgrading Mattermost Server" href="upgrade.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="upgrade.html">Upgrading Mattermost Server</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Important Upgrade Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html">Mattermost Changelog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../help/apps/desktop-changelog.html">Desktop Application Changelog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobile-changelog.html">Mattermost Mobile Apps Changelog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="version-archive.html">Version Archive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extended-support-release.html">Extended Support Release</a></li>
+<li class="toctree-l3"><a class="reference internal" href="release-lifecycle.html">Release Lifecycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="downgrade.html">Downgrading Mattermost Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="open-source-components.html">Open Source Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="release-definitions.html">Release Definitions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
+    
+    <li>Important Upgrade Notes</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/administration/important-upgrade-notes.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="important-upgrade-notes">
+<h1>Important Upgrade Notes<a class="headerlink" href="#important-upgrade-notes" title="Permalink to this headline">¶</a></h1>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">Support for Mattermost Server v5.25 <a class="reference external" href="https://docs.mattermost.com/administration/extended-support-release.html">Extended Support Release</a> is coming to the end of its life cycle on April 16, 2021. Upgrading to Mattermost Server v5.31 <a class="reference external" href="https://docs.mattermost.com/administration/extended-support-release.html">Extended Support Release</a> or later is highly recommended.</p>
+</div>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">PostgreSQL ended long-term support for <a class="reference external" href="https://www.postgresql.org/support/versioning">version 9.4 in February 2020</a>. From v5.26 Mattermost officially supports PostgreSQL version 10 as PostgreSQL 9.4 is no longer supported. New installs will require PostgreSQL 10+. Previous Mattermost versions, including our current ESR, will continue to be compatible with PostgreSQL 9.4. PostgreSQL 9.4 and all 9.x versions are now fully deprecated in our v5.30 release (December 16, 2020). Please follow the instructions under the Upgrading Section within <a class="reference external" href="https://www.postgresql.org/support/versioning/">the PostgreSQL documentation</a>.</p>
+</div>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">TLS versions 1.0 and 1.1 have been deprecated by browser vendors. In Mattermost Server v5.32 (February 16), mmctl will return an error when connected to Mattermost servers deployed with these TLS versions and System Admins will need to explicitly add a flag in their commands to continue to use them. We recommend upgrading to TLS version 1.2 or higher.</p>
+</div>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">platform</span></code> binary and “–platform” flag will be deprecated in a future release. If you are using the “–platform” flag or are using the <code class="docutils literal notranslate"><span class="pre">platform</span></code> binary directly to run the Mattermost server application via a systemd file or custom script, you will be required to use only the <code class="docutils literal notranslate"><span class="pre">mattermost</span></code> binary.</p>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="24%" />
+<col width="51%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">If you’re upgrading from a version earlier than…</th>
+<th class="head" colspan="2">Then…</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td rowspan="2">v5.29.0</td>
+<td colspan="2">A new configuration setting <code class="docutils literal notranslate"><span class="pre">ThreadAutoFollow</span></code> has been added to support <a class="reference external" href="https://docs.google.com/presentation/d/1QSrPws3N8AMSjVyOKp15FKT7O0fGMSx8YidjSDS4Wng/edit#slide=id.g2f0aecc189_0_245">Collapsed Reply Threads</a> releasing in beta in Q1 2021. This
+setting is enabled by default and may affect server performance. It is recommended to review our <a class="reference external" href="https://docs.mattermost.com/install/requirements.html#hardware-requirements">documentation on hardware requirements</a> to ensure your servers are appropriately scaled for the size of your user base.</td>
+</tr>
+<tr class="row-odd"><td colspan="2">Disabled the xmlsec1-based SAML library in favor of the re-enabled and improved SAML library.</td>
+</tr>
+<tr class="row-even"><td rowspan="3">v5.28.0</td>
+<td colspan="2"><p class="first">Now when the service crashes, it will generate a coredump instead of just dumping the stack trace to the console. This allows us to preserve the full
+information of the crash to help with debugging it.</p>
+<p class="last">For more information about coredumps, please see: <a class="reference external" href="https://man7.org/linux/man-pages/man5/core.5.html">https://man7.org/linux/man-pages/man5/core.5.html</a>.</p>
+</td>
+</tr>
+<tr class="row-odd"><td colspan="2">In-product notices have been introduced to keep System Admins and end users informed of the latest product enhancements available in new server and desktop
+versions. <a class="reference external" href="https://docs.mattermost.com/administration/notices.html">Learn more about in-product notices</a> and how to disable them in our documentation.</td>
+</tr>
+<tr class="row-even"><td colspan="2">Disabled the xmlsec1-based SAML library in favor of the re-enabled and improved SAML library.</td>
+</tr>
+<tr class="row-odd"><td>v5.27.0</td>
+<td colspan="2">Disabled the xmlsec1-based SAML library in favor of the re-enabled and improved SAML library.</td>
+</tr>
+<tr class="row-even"><td rowspan="3">v5.26.0</td>
+<td colspan="2">In v5.26, Elasticsearch indexes needed to be recreated. Admins should re-index Elasticsearch using the <strong>Purge index</strong> and then <strong>Index now</strong> button so that all
+the changes will be included in the index. Systems may be left with a limited search during the indexing, so it should be done during a time when there is
+little to no activity because it may take several hours.</td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p class="first">An <code class="docutils literal notranslate"><span class="pre">EnableExperimentalGossipEncryption</span></code> option was added under <code class="docutils literal notranslate"><span class="pre">ClusterSettings</span></code>. If this is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, and <code class="docutils literal notranslate"><span class="pre">UseExperimentalGossip</span></code> is also <code class="docutils literal notranslate"><span class="pre">true</span></code>,
+all communication through the cluster using the gossip protocol will be encrypted. The encryption uses <code class="docutils literal notranslate"><span class="pre">AES-256</span></code> by default, and it is not kept configurable
+by design. However, if one wishes, they can set the value in Systems table manually for the <code class="docutils literal notranslate"><span class="pre">ClusterEncryptionKey</span></code> row. A key is a byte array converted to
+base64. It should be either 16, 24, or 32 bytes to select AES-128, AES-192, or AES-256.</p>
+<p>To update the key, one can execute:
+<code class="docutils literal notranslate"><span class="pre">UPDATE</span> <span class="pre">Systems</span> <span class="pre">SET</span> <span class="pre">Value='&lt;value&gt;'</span> <span class="pre">WHERE</span> <span class="pre">Name='ClusterEncryptionKey';</span></code> in MySQL and
+<code class="docutils literal notranslate"><span class="pre">UPDATE</span> <span class="pre">systems</span> <span class="pre">SET</span> <span class="pre">value='&lt;value&gt;'</span> <span class="pre">WHERE</span> <span class="pre">name='ClusterEncryptionKey'</span></code> for PostgreSQL.</p>
+<p class="last">For any change in this config setting to take effect, the whole cluster must be shut down first. Then the config change made, and then restarted. In a cluster,
+all servers either will completely use encryption or not. There cannot be any partial usage.</p>
+</td>
+</tr>
+<tr class="row-even"><td colspan="2">SAML Setting “Use Improved SAML Library (Beta)” was forcefully disabled. Follow instructions at
+<a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml-before-you-begin.html">https://docs.mattermost.com/deployment/sso-saml-before-you-begin.html</a> for enabling SAML using the feature-equivalent <code class="docutils literal notranslate"><span class="pre">xmlsec1</span></code> utility.</td>
+</tr>
+<tr class="row-odd"><td rowspan="2">v5.25.0</td>
+<td colspan="2">Some incorrect instructions regarding SAML setup with Active Directory ADFS for setting the “Relying Party Trust Identifier” were corrected. Although the
+settings will continue to work, it is encouraged that you
+<a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml-adfs-msws2016.html#add-a-relying-party-trust">modify those settings</a>.</td>
+</tr>
+<tr class="row-even"><td colspan="2">Disabled the xmlsec1-based SAML library in favor of the re-enabled and improved SAML library.</td>
+</tr>
+<tr class="row-odd"><td rowspan="5">v5.24.0</td>
+<td colspan="2">A new configuration setting, <code class="docutils literal notranslate"><span class="pre">ExtendSessionLengthWithActivity</span></code> automatically extends sessions to keep users logged in if they are active in their Mattermost
+apps. It is recommended to enable this setting to improve user experience if compliant with your organization’s policies.
+<a class="reference external" href="https://mattermost.com/blog/session-expiry-experience">Learn more here</a>.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><p class="first">The <code class="docutils literal notranslate"><span class="pre">mattermost_http_request_duration_seconds</span></code> histogram metric (in Enterprise Edition) has been removed. This information was already captured by
+<code class="docutils literal notranslate"><span class="pre">mattermost_api_time</span></code>, which also contains the API handler name, HTTP method, and the response code.</p>
+<p class="last">As an example, if you are using
+<code class="docutils literal notranslate"><span class="pre">rate(mattermost_http_request_duration_seconds_sum{server=~&quot;$var&quot;}[5m])</span> <span class="pre">/</span>&#160;&#160; <span class="pre">rate(mattermost_http_request_duration_seconds_count{server=~&quot;$var&quot;}[5m])</span></code>
+to measure average call duration, it needs to be replaced with
+<code class="docutils literal notranslate"><span class="pre">sum(rate(mattermost_api_time_sum{server=~&quot;$var&quot;}[5m]))</span> <span class="pre">by</span> <span class="pre">(instance)</span> <span class="pre">/</span>&#160;&#160; <span class="pre">sum(rate(mattermost_api_time_count{server=~&quot;$var&quot;}[5m]))</span> <span class="pre">by</span> <span class="pre">(instance)</span></code>.</p>
+</td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p class="first">Due to fixing performance issues related to emoji reactions, the performance of the upgrade has been affected in that the schema upgrade now takes more time in
+environments with lots of reactions in their database. These environments are recommended to perform the schema migration during low usage times and potentially
+in advance of the upgrade. Since this migration happens before the Mattermost server is fully launched, non-High Availability installs will be unreachable
+during this time.</p>
+<p>The migration is a single line of SQL and can be applied directly to the database through the MySQL/PSQL command line clients if you prefer to decouple this
+from restarting the Mattermost server. It is fully backwards compatible so the schema change can be applied to any previous version of Mattermost without issue.
+During the time the schema change is running (~30s per million rows in the Reactions table), if end users attempt to react to posts, the emoji reactions will
+not load for end users.</p>
+<p>MySQL: <code class="docutils literal notranslate"><span class="pre">ALTER</span> <span class="pre">TABLE</span> <span class="pre">Reactions</span> <span class="pre">DROP</span> <span class="pre">PRIMARY</span> <span class="pre">KEY,</span> <span class="pre">ADD</span> <span class="pre">PRIMARY</span> <span class="pre">KEY</span> <span class="pre">(PostId,</span> <span class="pre">UserId,</span> <span class="pre">EmojiName);</span></code></p>
+<p class="last">PostgreSQL: <code class="docutils literal notranslate"><span class="pre">ALTER</span> <span class="pre">TABLE</span> <span class="pre">reactions</span> <span class="pre">DROP</span> <span class="pre">CONSTRAINT</span> <span class="pre">reactions_pkey,</span> <span class="pre">ADD</span> <span class="pre">PRIMARY</span> <span class="pre">KEY</span> <span class="pre">(PostId,</span> <span class="pre">UserId,</span> <span class="pre">EmojiName);</span></code></p>
+</td>
+</tr>
+<tr class="row-even"><td colspan="2">On mobile apps, users will not be able to see LDAP group mentions (E20 feature) in the autocomplete dropdown. Users will still receive notifications if they are
+part of an LDAP group. However, the group mention keyword will not be highlighted.</td>
+</tr>
+<tr class="row-odd"><td colspan="2">SAML Setting “Use Improved SAML Library (Beta)” was forcefully disabled. Follow instructions at
+<a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml-before-you-begin.html">https://docs.mattermost.com/deployment/sso-saml-before-you-begin.html</a> for enabling SAML using the feature-equivalent <code class="docutils literal notranslate"><span class="pre">xmlsec1</span></code> utility.</td>
+</tr>
+<tr class="row-even"><td rowspan="4">v5.22.0</td>
+<td colspan="2"><p class="first">Due to fixing performance issues related to emoji reactions, the performance of the upgrade has been affected in that the schema upgrade now takes more time in
+environments with lots of reactions in their database. These environments are recommended to perform the schema migration during low usage times and potentially
+in advance of the upgrade. Since this migration happens before the Mattermost server is fully launched, non-High Availability installs will be unreachable
+during this time.</p>
+<p>The migration is a single line of SQL and can be applied directly to the database through the MySQL/PSQL command line clients if you prefer to decouple this
+from restarting the Mattermost server. It is fully backwards compatible so the schema change can be applied to any previous version of Mattermost without issue.
+During the time the schema change is running (~30s per million rows in the Reactions table), if end users attempt to react to posts, the emoji reactions will
+not load for end users.</p>
+<p>MySQL: <code class="docutils literal notranslate"><span class="pre">ALTER</span> <span class="pre">TABLE</span> <span class="pre">Reactions</span> <span class="pre">DROP</span> <span class="pre">PRIMARY</span> <span class="pre">KEY,</span> <span class="pre">ADD</span> <span class="pre">PRIMARY</span> <span class="pre">KEY</span> <span class="pre">(PostId,</span> <span class="pre">UserId,</span> <span class="pre">EmojiName);</span></code></p>
+<p class="last">Postgres: <code class="docutils literal notranslate"><span class="pre">ALTER</span> <span class="pre">TABLE</span> <span class="pre">reactions</span> <span class="pre">DROP</span> <span class="pre">CONSTRAINT</span> <span class="pre">reactions_pkey,</span> <span class="pre">ADD</span> <span class="pre">PRIMARY</span> <span class="pre">KEY</span> <span class="pre">(PostId,</span> <span class="pre">UserId,</span> <span class="pre">EmojiName);</span></code></p>
+</td>
+</tr>
+<tr class="row-odd"><td colspan="2">The Channel Moderation Settings feature is supported on mobile app versions v1.30 and later. In earlier versions of the mobile app, users who attempt to post or
+react to posts without proper permissions will see an error.</td>
+</tr>
+<tr class="row-even"><td colspan="2">Direct access to the <code class="docutils literal notranslate"><span class="pre">Props</span></code> field in the <code class="docutils literal notranslate"><span class="pre">model.Post</span></code> structure has been deprecated. The available <code class="docutils literal notranslate"><span class="pre">GetProps()</span></code> and <code class="docutils literal notranslate"><span class="pre">SetProps()</span></code> methods should now be
+used. Also, direct copy of the <code class="docutils literal notranslate"><span class="pre">model.Post</span></code> structure must be avoided in favor of the provided <code class="docutils literal notranslate"><span class="pre">Clone()</span></code> method.</td>
+</tr>
+<tr class="row-odd"><td colspan="2">SAML Setting “Use Improved SAML Library (Beta)” was forcefully disabled. Follow instructions at
+<a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml-before-you-begin.html">https://docs.mattermost.com/deployment/sso-saml-before-you-begin.html</a> for enabling SAML using the feature-equivalent <code class="docutils literal notranslate"><span class="pre">xmlsec1</span></code> utility.</td>
+</tr>
+<tr class="row-even"><td rowspan="2">v5.21.0</td>
+<td colspan="2">Honour key value expiry in KVCompareAndSet, KVCompareAndDelete, and KVList. We also improved handling of plugin key value race conditions and deleted keys in
+Postgres.</td>
+</tr>
+<tr class="row-odd"><td colspan="2">SAML Setting “Use Improved SAML Library (Beta)” was forcefully disabled. Follow instructions at
+<a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml-before-you-begin.html">https://docs.mattermost.com/deployment/sso-saml-before-you-begin.html</a> for enabling SAML using the feature-equivalent <code class="docutils literal notranslate"><span class="pre">xmlsec1</span></code> utility.</td>
+</tr>
+<tr class="row-even"><td rowspan="2">v5.20.0</td>
+<td colspan="2">Any <a class="reference external" href="https://docs.mattermost.com/administration/plugins.html#pre-packaged-plugins">pre-packaged plugin</a> that is not enabled in the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> will no
+longer install automatically, but can continue to be installed via the
+<a class="reference external" href="https://docs.mattermost.com/administration/plugins.html#plugin-marketplace">Plugin Marketplace</a>.</td>
+</tr>
+<tr class="row-odd"><td colspan="2">Boolean elements from interactive dialogs are no longer serialized as strings. While we try to avoid breaking changes, this change was necessary to allow
+both the web and mobile apps to work with the boolean elements introduced with v5.16.</td>
+</tr>
+<tr class="row-even"><td>v5.19.0</td>
+<td colspan="2"><code class="docutils literal notranslate"><span class="pre">LockTeammateNameDisplay</span></code> setting was moved to Enterprise Edition E20 as it was erroneously available in Team Edition and Enterprise Edition E10.</td>
+</tr>
+<tr class="row-odd"><td rowspan="4">v5.18.0</td>
+<td colspan="2">Marking a post unread from the mobile app requires v1.26 or later. If using v5.18, but mobile is on v1.25 or earlier, marking a post unread from webapp/desktop
+will only be reflected on mobile the next time the app launches or is brought to the foreground.</td>
+</tr>
+<tr class="row-even"><td colspan="2">The Go module path of <code class="docutils literal notranslate"><span class="pre">mattermost-server</span></code> was changed to comply with the Go module version specification. Developers using Go modules with
+<code class="docutils literal notranslate"><span class="pre">mattermost-server</span></code> as a dependency must change the module and import paths to <code class="docutils literal notranslate"><span class="pre">github.com/mattermost/mattermost-server/v5</span></code> when upgrade this dependency
+to <cite>v5.18</cite>. See <a class="reference external" href="https://blog.golang.org/v2-go-modules">https://blog.golang.org/v2-go-modules</a> for further information.</td>
+</tr>
+<tr class="row-odd"><td colspan="2">Removed <code class="docutils literal notranslate"><span class="pre">Team.InviteId</span></code> from the related Websocket event and sanitized it on all team API endpoints for users without invite permissions.</td>
+</tr>
+<tr class="row-even"><td colspan="2">Removed the ability to change the type of a channel using the <code class="docutils literal notranslate"><span class="pre">PUT</span> <span class="pre">/channels/{channel_id}</span></code> API endpoint. The new <code class="docutils literal notranslate"><span class="pre">PUT</span> <span class="pre">/channels/{channel_id}/privacy</span></code>
+endpoint should be used for that purpose.</td>
+</tr>
+<tr class="row-odd"><td rowspan="3">v5.16.0</td>
+<td colspan="2">Support for Internet Explorer (IE11) is removed. See
+<a class="reference external" href="https://forum.mattermost.org/t/mattermost-is-dropping-support-for-internet-explorer-ie11-in-v5-16/7575">this forum post</a> to learn more.</td>
+</tr>
+<tr class="row-even"><td colspan="2">The <a class="reference external" href="https://github.com/mattermost/desktop/blob/master/CHANGELOG.md">Mattermost Desktop v4.3.0</a> release includes a change to how desktop notifications are sent
+from non-secure URLs (<a class="reference external" href="http://">http://</a>). Organizations using non-secure Mattermost Servers (<a class="reference external" href="http://">http://</a>) will need to update to Mattermost Server versions 5.16.0+, 5.15.1,
+5.14.4 or 5.9.5 (ESR) to continue receiving desktop notifications when using Mattermost Desktop v4.3.0 or later.</td>
+</tr>
+<tr class="row-odd"><td colspan="2">When enabling <a class="reference external" href="https://docs.mattermost.com/deployment/guest-accounts.html">Guest Accounts</a>, all users who have the ability to invite users will be able to
+invite guests by default. System Admins will need to remove this permission on each role via <strong>System Console &gt; Permissions Schemes</strong>.  In Mattermost Server
+version 5.17, the System Admin will be the only role to automatically get the invite guest permission, however the fix will not be applicable in 5.16 due to
+database migration processes.</td>
+</tr>
+<tr class="row-even"><td rowspan="2">v5.14.0</td>
+<td colspan="2">Webhooks are now only displayed if the user is the creator of the webhook or a System Administrator.</td>
+</tr>
+<tr class="row-odd"><td colspan="2">With the update from Google+ to Google People, system admins need to ensure the <code class="docutils literal notranslate"><span class="pre">GoogleSettings.Scope</span></code> config.json setting is set to <code class="docutils literal notranslate"><span class="pre">profile</span> <span class="pre">email</span></code> and
+<code class="docutils literal notranslate"><span class="pre">UserAPIEndpoint</span></code> setting should be set to <code class="docutils literal notranslate"><span class="pre">https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses,nicknames,metadata</span></code> per
+<a class="reference external" href="https://docs.mattermost.com/deployment/sso-google.html">updated documentation</a>.</td>
+</tr>
+<tr class="row-even"><td rowspan="4">v5.12.0</td>
+<td colspan="2">If your plugin uses the <code class="docutils literal notranslate"><span class="pre">DeleteEphemeralMessage</span></code> plugin API, update it to accept a <code class="docutils literal notranslate"><span class="pre">postId</span> <span class="pre">string</span></code> parameter.
+See <a class="reference external" href="https://developers.mattermost.com/extend/plugins/server/reference/#API.DeleteEphemeralPost">documentation</a> to learn more.</td>
+</tr>
+<tr class="row-odd"><td colspan="2">Image link and YouTube previews do not display unless <strong>System Console &gt; Enable Link Previews</strong> is enabled. Please ensure that your Mattermost server is
+connected to the internet and has network access to the websites from which previews are expected to appear.
+<a class="reference external" href="https://forum.mattermost.org/t/link-previews-managed-server-side-in-v5-12-and-later/7712">Learn more here</a>.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><code class="docutils literal notranslate"><span class="pre">ExperimentalEnablePostMetadata</span></code> setting was removed. Post metadata, including post dimensions, is now stored in the database to correct scroll position and
+eliminate scroll jumps as content loads in a channel.</td>
+</tr>
+<tr class="row-odd"><td colspan="2">Added the ability to enforce the administration of teams/channels with Group Sync. If Group Sync is enabled, all Team and Channel Admin designations will be
+lost upon upgrade. It is highly recommended that prior to upgrading, Team and Channel Admins are added to admin-specific LDAP groups corresponding to their
+teams and channels. After upgrading, those groups will need to be role-synced to the Team or Channel Admin role.</td>
+</tr>
+<tr class="row-even"><td>v5.11.0</td>
+<td colspan="2"><p class="first">If your integration uses <code class="docutils literal notranslate"><span class="pre">Update.Props</span> <span class="pre">==</span> <span class="pre">nil</span></code> to clear <code class="docutils literal notranslate"><span class="pre">Props</span></code>, this will no longer work in 5.11+. Instead, use <code class="docutils literal notranslate"><span class="pre">Update.Props</span> <span class="pre">==</span> <span class="pre">{}</span></code> to clear properties.</p>
+<p class="last">This change was made because <code class="docutils literal notranslate"><span class="pre">Update.Props</span> <span class="pre">==</span> <span class="pre">nil</span></code> unintentionally cleared all <code class="docutils literal notranslate"><span class="pre">Props</span></code>, such as the profile picture, instead of preserving them.</p>
+</td>
+</tr>
+<tr class="row-odd"><td>v5.10.0</td>
+<td colspan="2"><code class="docutils literal notranslate"><span class="pre">SupportedTimezonesPath</span></code> setting in config.json and changes to timezones in the UI based on the <code class="docutils literal notranslate"><span class="pre">timezones.json</span></code> file was removed. This was made to support
+<a class="reference external" href="https://docs.mattermost.com/administration/config-in-database.html#configuration-in-the-mattermost-database">storing configurations in the database</a>.</td>
+</tr>
+<tr class="row-even"><td rowspan="2">v5.9.0</td>
+<td colspan="2"><p class="first">If <code class="docutils literal notranslate"><span class="pre">DisableLegacyMfa</span></code> setting in <code class="docutils literal notranslate"><span class="pre">config.json</span></code> is set to <code class="docutils literal notranslate"><span class="pre">true</span></code> and <a class="reference external" href="https://docs.mattermost.com/deployment/auth.html">multi-factor authentication</a> is
+enabled, ensure your users have upgraded to mobile app version 1.17 or later. Otherwise, users who have MFA enabled may not be able to log in successfully.</p>
+<p>If the setting is not defined in the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file, the <code class="docutils literal notranslate"><span class="pre">DisableLegacyMfa</span></code> setting is set to <code class="docutils literal notranslate"><span class="pre">false</span></code> by default to ensure no breaking changes.</p>
+<p class="last">We recommend setting <code class="docutils literal notranslate"><span class="pre">DisableLegacyMfa</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code> for additional security hardening.</p>
+</td>
+</tr>
+<tr class="row-odd"><td colspan="2">The public IP of the Mattermost application server is considered a reserved IP for additional security hardening in the context of untrusted external requests
+such as Open Graph metadata, webhooks, or slash commands.
+<a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#allow-untrusted-internal-connections-to">See documentation</a> for additional information.</td>
+</tr>
+<tr class="row-even"><td>v5.8.0</td>
+<td colspan="2">The local image proxy has been added, and images displayed within the client are now affected by the <code class="docutils literal notranslate"><span class="pre">AllowUntrustedInternalConnections</span></code> setting.
+<a class="reference external" href="https://docs.mattermost.com/administration/image-proxy.html#local-image-proxy">See documentation</a> for more details if you have trouble loading images.</td>
+</tr>
+<tr class="row-odd"><td rowspan="2">v5.6.0</td>
+<td colspan="2">Built-in WebRTC is removed. See <a class="reference external" href="https://forum.mattermost.org/t/built-in-webrtc-video-and-audio-calls-removed-in-v5-6-in-favor-of-open-source-plugins/5998">here for more details</a>.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><p class="first">If <code class="docutils literal notranslate"><span class="pre">EnablePublicChannelsMaterialization</span></code> setting in <code class="docutils literal notranslate"><span class="pre">config.json</span></code> is set to <code class="docutils literal notranslate"><span class="pre">false</span></code>, an offline migration prior to upgrade may be required to synchronize
+the materialized table for public channels to increase channel search performance in the channel switcher (CTRL/CMD+K), channel autocomplete (~), and elsewhere
+in the UI. Use the following steps:</p>
+<ol class="arabic simple">
+<li>Shut down your application servers.</li>
+<li>Connect to your Mattermost database.</li>
+<li>Execute the following queries:</li>
+</ol>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">DELETE</span> <span class="k">FROM</span> <span class="n">PublicChannels</span><span class="p">;</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">PublicChannels</span>
+    <span class="p">(</span><span class="n">Id</span><span class="p">,</span> <span class="n">DeleteAt</span><span class="p">,</span> <span class="n">TeamId</span><span class="p">,</span> <span class="n">DisplayName</span><span class="p">,</span> <span class="n">Name</span><span class="p">,</span> <span class="n">Header</span><span class="p">,</span> <span class="n">Purpose</span><span class="p">)</span>
+<span class="k">SELECT</span>
+    <span class="k">c</span><span class="p">.</span><span class="n">Id</span><span class="p">,</span> <span class="k">c</span><span class="p">.</span><span class="n">DeleteAt</span><span class="p">,</span> <span class="k">c</span><span class="p">.</span><span class="n">TeamId</span><span class="p">,</span> <span class="k">c</span><span class="p">.</span><span class="n">DisplayName</span><span class="p">,</span> <span class="k">c</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span> <span class="k">c</span><span class="p">.</span><span class="n">Header</span><span class="p">,</span> <span class="k">c</span><span class="p">.</span><span class="n">Purpose</span>
+<span class="k">FROM</span>
+    <span class="n">Channels</span> <span class="k">c</span>
+<span class="k">WHERE</span>
+    <span class="k">c</span><span class="p">.</span><span class="k">Type</span> <span class="o">=</span> <span class="s1">&#39;O&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The queries above rebuild the materialized <code class="docutils literal notranslate"><span class="pre">PublicChannels</span></code> table without modifying the authoritative <code class="docutils literal notranslate"><span class="pre">Channels</span></code> table.</p>
+<p class="last">Note that this migration is not required if the experimental <code class="docutils literal notranslate"><span class="pre">PublicChannels</span></code> feature was never disabled. This feature launched in Mattermost v5.4 with a
+temporary flag to disable should an issue arise, but nothing prompted doing so. If you did not modify this setting, there is no need to perform this migration.</p>
+</td>
+</tr>
+<tr class="row-odd"><td rowspan="2">v5.4.0</td>
+<td colspan="2">Mattermost mobile app version 1.13+ is required. File uploads will fail on earlier mobile app versions.</td>
+</tr>
+<tr class="row-even"><td colspan="2">In certain upgrade scenarios the new <strong>Allow Team Administrators to edit others posts</strong> setting under <strong>General</strong> then <strong>Users and Teams</strong> may be
+set to <strong>True</strong> while the Mattermost default in 5.1 and earlier and with new 5.4+ installations is <strong>False</strong>.</td>
+</tr>
+<tr class="row-odd"><td>v5.3.0</td>
+<td colspan="2">Those servers with Elasticsearch enabled will notice that hashtag search is case-sensitive.</td>
+</tr>
+<tr class="row-even"><td>v5.2.0</td>
+<td colspan="2">Those servers upgrading from v4.1 - v4.4 directly to v5.2 or later and have Jira enabled will need to re-enable the Jira plugin after an upgrade.</td>
+</tr>
+<tr class="row-odd"><td>v5.1.0</td>
+<td colspan="2"><code class="docutils literal notranslate"><span class="pre">mattermost</span> <span class="pre">export</span></code> CLI command is renamed to <code class="docutils literal notranslate"><span class="pre">mattermost</span> <span class="pre">export</span> <span class="pre">schedule</span></code>. Make sure to update your scripts if you use this command.</td>
+</tr>
+<tr class="row-even"><td rowspan="9">v5.0.0</td>
+<td colspan="2">All API v3 endpoints are removed. <a class="reference external" href="https://api.mattermost.com/#tag/APIv3-Deprecation">See documentation</a> to learn how to migrate your integrations to API v4.</td>
+</tr>
+<tr class="row-odd"><td colspan="2"><code class="docutils literal notranslate"><span class="pre">platform</span></code> binary is renamed to <code class="docutils literal notranslate"><span class="pre">mattermost</span></code> for a clearer install and upgrade experience. You should point your <code class="docutils literal notranslate"><span class="pre">systemd</span></code> service file at the new
+<code class="docutils literal notranslate"><span class="pre">mattermost</span></code> binary. All command line tools, including the bulk loading tool and developer tools, are also be renamed from <code class="docutils literal notranslate"><span class="pre">platform</span></code> to <code class="docutils literal notranslate"><span class="pre">mattermost</span></code>.</td>
+</tr>
+<tr class="row-even"><td colspan="2">A Mattermost user setting to configure desktop notification duration in <strong>Account Settings &gt; Notifications &gt; Desktop Notifications</strong> is removed.</td>
+</tr>
+<tr class="row-odd"><td colspan="2">Slash commands configured to receive a GET request will have the payload being encoded in the query string instead of receiving it in the body of the request,
+consistent with standard HTTP requests. Although unlikely, this could break custom slash commands that use GET requests incorrectly.</td>
+</tr>
+<tr class="row-even"><td colspan="2">A new <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting to whitelist types of protocols for auto-linking will be added.
+If you rely on custom protocols auto-linking in Mattermost, whitelist them in <code class="docutils literal notranslate"><span class="pre">config.json</span></code> before upgrading.</td>
+</tr>
+<tr class="row-odd"><td colspan="2">A new <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting to disable the <a class="reference external" href="https://api.mattermost.com/#tag/teams%2Fpaths%2F~1teams~1%7Bteam_id%7D%2Fput">permanent APIv4 delete team parameter</a> is added. The setting will be off by default for all new and existing
+installs, except those deployed on GitLab Omnibus. If you reply on the APIv4 parameter, enable the setting in <code class="docutils literal notranslate"><span class="pre">config.json</span></code> before upgrading.</td>
+</tr>
+<tr class="row-even"><td colspan="2">An unused <code class="docutils literal notranslate"><span class="pre">ExtraUpdateAt</span></code> field will be removed from the channel modal.</td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p class="first">This release includes support for post messages longer than the default of 4000 characters, but may require a manual database migration. This migration is
+entirely optional, and need only be done if you want to enable post messages up to 16383 characters. For many installations, no migration will be required, or
+the old limit remains sufficient.</p>
+<p>To check your current post limit after upgrading to 5.0.0, look for a log message on startup:</p>
+<blockquote>
+<div>[2018/03/27 09:08:00 EDT] [INFO] Post.Message supports at most 16383 characters (65535 bytes)</div></blockquote>
+<p>As of 5.0.0, the maximum post message size is 16383 (multi-byte) characters. If your logs show a number less than this limit and you want to enable longer
+post messages, you will need to manually migrate your database as described below. This migration can be slow for larger <code class="docutils literal notranslate"><span class="pre">Posts</span></code> tables, so it’s best to
+schedule this upgrade during off-peak hours.</p>
+<p>To migrate a MySQL database, connect to your database and run the following:</p>
+<blockquote>
+<div>ALTER TABLE Posts MODIFY COLUMN Message TEXT;</div></blockquote>
+<p>To migrate a PostgreSQL database, connect to your database and run the following:</p>
+<blockquote>
+<div>ALTER TABLE Posts ALTER COLUMN Message TYPE VARCHAR(65535);</div></blockquote>
+<p class="last">Restart your Mattermost instances.</p>
+</td>
+</tr>
+<tr class="row-even"><td colspan="2">Deployments on Enterprise E20 will need to enable <code class="docutils literal notranslate"><span class="pre">RunJobs</span></code> in the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> and allow the permissions migration to complete before using <a class="reference external" href="https://docs.mattermost.com/deployment/advanced-permissions.html">Team
+Override Schemes</a>.</td>
+</tr>
+<tr class="row-odd"><td rowspan="5">v4.10.0</td>
+<td colspan="2">Old email invitation links will no longer work due to a bug fix where teams could be re-joined via the link.
+Team invite links copied from the Team Invite Link dialog, password reset links and email verification links are not affected and are still valid.</td>
+</tr>
+<tr class="row-even"><td colspan="2">Server logs written to <strong>System Console &gt; Logs</strong> and to the <code class="docutils literal notranslate"><span class="pre">mattermost.log</span></code> file specified in <strong>System Console &gt; Logging &gt; File Log Directory</strong>
+now use JSON formatting. If you have built a tool that parses the server logs and sends them to an external system, make sure it supports the JSON format.</td>
+</tr>
+<tr class="row-odd"><td colspan="2">Team icons with transparency will be filled with a white background in the Team sidebar.</td>
+</tr>
+<tr class="row-even"><td colspan="2">Those servers with SAML authentication enabled should upgrade during non-peak hours. SAML email addresses are migrated to lowercase to prevent login issues,
+which could result in longer than usual upgrade time.</td>
+</tr>
+<tr class="row-odd"><td colspan="2">If you use PostgreSQL database and the password contains special characters (e.g. <code class="docutils literal notranslate"><span class="pre">[]</span></code>), escape them in your password, e.g., xxx[]xxx will be xxx%5B%5Dxxx.</td>
+</tr>
+<tr class="row-even"><td rowspan="4">v4.9.0</td>
+<td colspan="2">To improve the production use of Mattermost with Docker, the Docker image is now running a as non-root user and listening on port 8000. Please read the
+<a class="reference external" href="https://github.com/mattermost/mattermost-docker#upgrading-mattermost-to-49">upgrade instructions</a> for important changes to existing installations.</td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p class="first">Several configuration settings have been migrated to roles in the database and changing their <code class="docutils literal notranslate"><span class="pre">config.json</span></code> values no longer takes effect. These permissions
+can still be modified by their respective System Console settings as before. The affected <code class="docutils literal notranslate"><span class="pre">config.json</span></code> settings are:</p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">RestrictPublicChannelManagement</span></code>,
+<code class="docutils literal notranslate"><span class="pre">RestrictPrivateChannelManagement</span></code>,
+<code class="docutils literal notranslate"><span class="pre">RestrictPublicChannelCreation</span></code>,
+<code class="docutils literal notranslate"><span class="pre">RestrictPrivateChannelCreation</span></code>,
+<code class="docutils literal notranslate"><span class="pre">RestrictPublicChannelDeletion</span></code>,
+<code class="docutils literal notranslate"><span class="pre">RestrictPrivateChannelDeletion</span></code>,
+<code class="docutils literal notranslate"><span class="pre">RestrictPrivateChannelManageMembers</span></code>,
+<code class="docutils literal notranslate"><span class="pre">EnableTeamCreation</span></code>,
+<code class="docutils literal notranslate"><span class="pre">EnableOnlyAdminIntegrations</span></code>,
+<code class="docutils literal notranslate"><span class="pre">RestrictPostDelete</span></code>,
+<code class="docutils literal notranslate"><span class="pre">AllowEditPost</span></code>,
+<code class="docutils literal notranslate"><span class="pre">RestrictTeamInvite</span></code>,
+<code class="docutils literal notranslate"><span class="pre">RestrictCustomEmojiCreation</span></code>.</p>
+</td>
+</tr>
+<tr class="row-even"><td colspan="2">The behavior of the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting <code class="docutils literal notranslate"><span class="pre">PostEditTimeLimit</span></code> has been updated to accomodate the migration to a roles based permission system.
+When post editing is permitted, set <code class="docutils literal notranslate"><span class="pre">&quot;PostEditTimeLimit&quot;:</span> <span class="pre">-1</span></code> to allow editing anytime, or set <code class="docutils literal notranslate"><span class="pre">&quot;PostEditTimeLimit&quot;</span></code> to a positive integer to restrict
+editing time in seconds. If post editing is disabled, this setting does not apply.</td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p class="first">If using Let’s Encrypt without a proxy server, the server will fail to start with an error message unless the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#forward-port-80-to-443">Forward80To443</a> <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+<p class="last">If forwarding port 80 to 443, the server will fail to start with an error message unless the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#listen-address">ListenAddress</a> <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is set to listen on port 443.</p>
+</td>
+</tr>
+<tr class="row-even"><td>v4.6.2</td>
+<td colspan="2">If using Let’s Encrypt without a proxy server, forward port 80 through a firewall, with the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#forward-port-80-to-443">Forward80To443</a> <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting set to <code class="docutils literal notranslate"><span class="pre">true</span></code> to complete the Let’s
+Encrypt certification.</td>
+</tr>
+<tr class="row-odd"><td rowspan="2">v4.4.0</td>
+<td colspan="2">Composite database indexes were added to the <code class="docutils literal notranslate"><span class="pre">Posts</span></code> table. This may lead to longer ugprade times for servers with more than 1 million messages.</td>
+</tr>
+<tr class="row-even"><td colspan="2">LDAP sync now depends on email. Make sure all users on your AD/LDAP server have an email address or that their account is deactivated in Mattermost.</td>
+</tr>
+<tr class="row-odd"><td rowspan="4">v4.2.0</td>
+<td colspan="2">Mattermost now handles multiple content types for integrations, including plaintext content type. If your integration suddenly prints the JSON payload data
+instead of rendering the generated message, make sure your integration is returning the <code class="docutils literal notranslate"><span class="pre">application/json</span></code> content-type to retain previous behavior.</td>
+</tr>
+<tr class="row-even"><td colspan="2"><p class="first">By default, user-supplied URLs such as those used for Open Graph metadata, webhooks, or slash commands will no longer be allowed to connect to reserved IP
+addresses including loopback or link-local addresses used for internal networks.</p>
+<p>This change may cause private integrations to break in testing environments, which may point to a URL such as <a class="reference external" href="http://127.0.0.1:1021/my-command">http://127.0.0.1:1021/my-command</a>.</p>
+<p>If you point private integrations to such URLs, you may whitelist such domains, IP addresses, or CIDR notations via the
+<a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#allow-untrusted-internal-connections-to">AllowedUntrustedInternalConnections config setting</a>
+in your local environment. Although not recommended, you may also whitelist the addresses in your production environments. See
+<a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#allow-untrusted-internal-connections-to">documentation to learn more</a>.</p>
+<p class="last">Push notification, OAuth 2.0 and WebRTC server URLs are trusted and not affected by this setting.</p>
+</td>
+</tr>
+<tr class="row-odd"><td colspan="2">Uploaded file attachments are now grouped by day and stored in <code class="docutils literal notranslate"><span class="pre">/data/&lt;date-of-upload-as-YYYYMMDD&gt;/teams/...</span></code> of your file storage system.</td>
+</tr>
+<tr class="row-even"><td colspan="2">Mattermost <cite>/platform`</cite> repo has been separated to <code class="docutils literal notranslate"><span class="pre">/mattermost-webapp</span></code> and <code class="docutils literal notranslate"><span class="pre">/mattermost-server</span></code>. This may affect you if you have a private fork of the
+<code class="docutils literal notranslate"><span class="pre">/platform</span></code> repo. <a class="reference external" href="https://forum.mattermost.org/t/mattermost-separating-platform-into-two-repositories-on-september-6th/3708">More details here</a>.</td>
+</tr>
+<tr class="row-odd"><td>v4.0.0</td>
+<td colspan="2"><p class="first">(High Availability only)</p>
+<p class="last">You must manually add new items to the <code class="docutils literal notranslate"><span class="pre">ClusterSettings</span></code> section of your existing <code class="docutils literal notranslate"><span class="pre">config.json</span></code>.
+See the <em>Upgrading to Version 4.0 and Later</em> section of <a class="reference internal" href="../deployment/cluster.html"><span class="doc">High Availability Cluster (E20)</span></a> for details.</p>
+</td>
+</tr>
+<tr class="row-even"><td>v3.9.0</td>
+<td colspan="2">Old email invitation links, password reset links, and email verification links will no longer work due to a security change.
+Team invite links copied from the Team Invite Link dialog are not affected and are still valid.</td>
+</tr>
+<tr class="row-odd"><td rowspan="3">v3.8.0</td>
+<td colspan="2"><p class="first">A change is required in the proxy configuration.
+If you’re using NGINX:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Open the NGINX configuration file as root. The file is usually <code class="docutils literal notranslate"><span class="pre">/etc/nginx/sites-available/mattermost</span></code> but might be different on your system.</li>
+<li>Locate the line: <code class="docutils literal notranslate"><span class="pre">location</span> <span class="pre">/api/v3/users/websocket</span> <span class="pre">{</span></code></li>
+<li>Replace the line with <code class="docutils literal notranslate"><span class="pre">location</span> <span class="pre">~</span> <span class="pre">/api/v[0-9]+/(users/)?websocket$</span> <span class="pre">{</span></code></li>
+</ol>
+</div></blockquote>
+<p class="last">If you are using a proxy other than NGINX, make the equivalent change to that proxy’s configuration.</p>
+</td>
+</tr>
+<tr class="row-even"><td colspan="2"><p class="first">You need to verify settings in the System Console due to a security-related change.</p>
+<blockquote class="last">
+<div><ol class="arabic simple">
+<li>Go to the the GENERAL section of the System Console</li>
+<li>Click <strong>Logging</strong></li>
+<li>Make sure that the <strong>File Log Directory</strong> field is either empty or has a directory path only. It must not have a filename as part of the path.</li>
+</ol>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td colspan="2">Backwards compatibility with the old CLI tool was removed. If you have any scripts that rely on the old CLI, they must be revised to use the
+<a class="reference external" href="../administration/command-line-tools.html">new CLI</a>.</td>
+</tr>
+<tr class="row-even"><td rowspan="2">v3.6.0</td>
+<td colspan="2"><p class="first">Update the maximum number of files that can be open.</p>
+<dl class="last docutils">
+<dt>On RHEL6 and Ubuntu 14.04:</dt>
+<dd><ul class="first last simple">
+<li>Verify that the line <code class="docutils literal notranslate"><span class="pre">limit</span> <span class="pre">nofile</span> <span class="pre">50000</span> <span class="pre">50000</span></code> is included in the <code class="docutils literal notranslate"><span class="pre">/etc/init/mattermost.conf</span></code> file.</li>
+</ul>
+</dd>
+<dt>On RHEL7 and Ubuntu 16.04:</dt>
+<dd><ul class="first last simple">
+<li>Verify that the line <code class="docutils literal notranslate"><span class="pre">LimitNOFILE=49152</span></code> is included in the <code class="docutils literal notranslate"><span class="pre">/etc/systemd/system/mattermost.service</span></code> file.</li>
+</ul>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p class="first">(Enterprise Only)</p>
+<p class="last">Previous <code class="docutils literal notranslate"><span class="pre">config.json</span></code> values for restricting Public and Private channel management will be used as the default values for new settings for restricting
+Public and Private channel creation and deletion.</p>
+</td>
+</tr>
+<tr class="row-even"><td>v3.4.0</td>
+<td colspan="2">If public links are enabled, existing public links will no longer be valid. This is because in earlier versions, existing public links were not invalidated
+when the Public Link Salt was regenerated. You must update any place where you have published these links.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="changelog.html" class="btn btn-neutral float-right" title="Mattermost Changelog" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="upgrade.html" class="btn btn-neutral" title="Upgrading Mattermost Server" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/administration/important-upgrade-notes.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

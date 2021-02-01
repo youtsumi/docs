@@ -1,0 +1,459 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Desktop App Deployment Guide &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="AppConfig for EMM Solutions with Mattermost Mobile Apps" href="../mobile/mobile-appconfig.html" />
+    <link rel="prev" title="Desktop MSI Installer and Group Policy Installation Guides (Beta)" href="../install/desktop-msi-gpo.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="deployment.html">Deployment Overview</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Desktop App Deployment Guide</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#custom-build-configuration">Custom Build Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#windows-app-pre-configuration-and-silent-deployment">Windows App: Pre-Configuration and Silent Deployment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#windows-app-silently-removing-the-app">Windows App: Silently Removing the app</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../mobile/mobile-appconfig.html">AppConfig for EMM Solutions with Mattermost Mobile Apps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/image-proxy.html">Image Proxy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/encryption.html">Encryption Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="client-side-data.html">Client-side Data Storage FAQ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/backup.html">Backup and Disaster Recovery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bleve.html">Bleve Search (Experimental)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
+    
+    <li>Desktop App Deployment Guide</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/deployment/desktop-app-deployment.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="desktop-app-deployment-guide">
+<h1>Desktop App Deployment Guide<a class="headerlink" href="#desktop-app-deployment-guide" title="Permalink to this headline">¶</a></h1>
+<p>Mattermost desktop applications are available for Windows, Mac and Linux operating systems.</p>
+<p>You can <a class="reference external" href="https://mattermost.com/download/#mattermostApps">download the apps directly from our download page</a> and visit our <a class="reference external" href="https://docs.mattermost.com/install/desktop.html">installation guides</a> for help during setup and for troubleshooting tips.</p>
+<p>This page provides a guide on how to customize and distribute your own Mattermost Desktop App, and how to distribute the official Windows Desktop App silently to end users, pre-configured with the server URL and other app settings.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#custom-build-configuration" id="id1">Custom Build Configuration</a></li>
+<li><a class="reference internal" href="#windows-app-pre-configuration-and-silent-deployment" id="id2">Windows App: Pre-Configuration and Silent Deployment</a></li>
+<li><a class="reference internal" href="#windows-app-silently-removing-the-app" id="id3">Windows App: Silently Removing the app</a></li>
+</ul>
+</div>
+<div class="section" id="custom-build-configuration">
+<h2><a class="toc-backref" href="#id1">Custom Build Configuration</a><a class="headerlink" href="#custom-build-configuration" title="Permalink to this headline">¶</a></h2>
+<p>You can customize and distribute your own Mattermost Desktop application by configuring <a class="reference external" href="https://github.com/mattermost/desktop/blob/master/src/common/config/buildConfig.js">src/common/config/buildConfig.js</a>.</p>
+<ol class="arabic simple">
+<li>Configure the Desktop App’s <cite>buildConfig.js</cite> file. There are multiple parameters you can configure to customize the user experience:</li>
+</ol>
+<div class="section" id="defaultteams">
+<h3><cite>defaultTeams</cite><a class="headerlink" href="#defaultteams" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="docutils">
+<dt>Description</dt>
+<dd><p class="first">List of server URLs and their display names added to the desktop app by default, which the user cannot modify. Users can still add servers <a class="reference external" href="https://docs.mattermost.com/help/apps/desktop-guide.html#server-management">through the Server Management page</a> unless <code class="docutils literal notranslate"><span class="pre">enableServerManagement</span></code> is set to false.</p>
+<p class="last">Expects an array of key-value pairs.</p>
+</dd>
+<dt>Example</dt>
+<dd><div class="first last highlight-none notranslate"><div class="highlight"><pre><span></span>defaultTeams: [
+  {
+    name: &#39;example&#39;,
+    url: &#39;https://example.com&#39;
+  },
+  {
+    name: &#39;mattermost&#39;,
+    url: &#39;https://www.mattermost.com&#39;
+  }
+]
+</pre></div>
+</div>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="helplink">
+<h3><cite>helpLink</cite><a class="headerlink" href="#helplink" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="docutils">
+<dt>Description</dt>
+<dd><p class="first">The URL of the help documentation in Help &gt; Learn More menu bar item. If none is specified, the menu option is hidden.</p>
+<p class="last">Expects a string.</p>
+</dd>
+<dt>Examples</dt>
+<dd><div class="first last highlight-none notranslate"><div class="highlight"><pre><span></span>helpLink: &#39;https://about.mattermost.com/default-desktop-app-documentation/&#39;
+helpLink: &#39;&#39;
+</pre></div>
+</div>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="enableservermanagement">
+<h3><cite>enableServerManagement</cite><a class="headerlink" href="#enableservermanagement" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="docutils">
+<dt>Description</dt>
+<dd><p class="first">Controls whether users can add, edit, or remove servers on the app settings page. If set to false, at least one server must be specified for <code class="docutils literal notranslate"><span class="pre">defaultTeams</span></code> or else users cannot interact with any servers.</p>
+<p class="last">Expects a boolean, true or false.</p>
+</dd>
+<dt>Examples</dt>
+<dd><div class="first last highlight-none notranslate"><div class="highlight"><pre><span></span>enableServerManagement: true
+</pre></div>
+</div>
+</dd>
+</dl>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li>To build the application, follow the <a class="reference external" href="https://github.com/mattermost/desktop/blob/master/docs/development.md">Mattermost Desktop Development Guide</a>.</li>
+</ol>
+</div>
+</div>
+<div class="section" id="windows-app-pre-configuration-and-silent-deployment">
+<h2><a class="toc-backref" href="#id2">Windows App: Pre-Configuration and Silent Deployment</a><a class="headerlink" href="#windows-app-pre-configuration-and-silent-deployment" title="Permalink to this headline">¶</a></h2>
+<p>You can distribute the official Windows Desktop App silently to end users, pre-configured with the server URL. You can also set all the <a class="reference external" href="https://docs.mattermost.com/help/apps/desktop-guide.html#app-options">app settings</a> except for the <strong>Start app on login</strong> option.</p>
+<ol class="arabic simple">
+<li>Download the latest Windows installer from the <a class="reference external" href="https://mattermost.com/download/#mattermostApps">Mattermost download page</a>.</li>
+<li>Move the executable file into a shared place such as a file server.</li>
+<li>To create a batch file in Windows:</li>
+</ol>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Open a text editor of your choice, such as Notepad or Notepad++.</li>
+<li>Copy and paste the following commands in the text file:</li>
+</ol>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>rem &quot;Step 1: Install Mattermost Desktop App silently into user&#39;s local disk&quot;
+start /wait \\SERVER\shared_folder\mattermost-setup-4.3.1-win64.exe --silent
+
+rem &quot;Step 2: Generate initial config.json into user&#39;s config directory&quot;
+(
+  echo {
+  echo   &quot;version&quot;: 1,
+  echo   &quot;teams&quot;: [
+  echo     {
+  echo       &quot;name&quot;: &quot;community&quot;,
+  echo       &quot;url&quot;: &quot;https://community.mattermost.com/core&quot;
+  echo     }
+  echo   ],
+  echo   &quot;showTrayIcon&quot;: false,
+  echo   &quot;trayIconTheme&quot;: &#39;light&#39;,
+  echo   &quot;minimizeToTray&quot;: false,
+  echo   &quot;notifications&quot;: {
+  echo     &quot;flashWindow&quot;: 0,
+  echo     &quot;bounceIcon&quot;: false,
+  echo     &quot;bounceIconType&quot;: &#39;informational&#39;,
+  echo   },
+  echo   &quot;showUnreadBadge&quot;: true,
+  echo   &quot;useSpellChecker&quot;: true,
+  echo   &quot;enableHardwareAcceleration&quot;: true,
+  echo   &quot;autostart&quot;: true,
+  echo   &quot;spellCheckerLocale&quot;: &#39;en-US&#39;,
+  echo }
+) &gt; %APPDATA%\Mattermost\config.json
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Instead of using this command to install the Desktop App into a shared folder, you can also copy the executable to the folder before running it. This allows the shared folder to only require read-only permissions.</p>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li>Save the text file with the extension <code class="docutils literal notranslate"><span class="pre">.bat</span></code>. For instance, <code class="docutils literal notranslate"><span class="pre">mattermost-app-install.bat</span></code>.</li>
+<li>Use standard software asset management tools to distribute and deploy the batch file to each user.</li>
+</ol>
+</div></blockquote>
+<p>Once run, the desktop app is added to the user’s local directory, along with the pre-configured config.json file. The installer creates a shortcut for the Desktop App in the user’s start menu; if a zip version is used, you need to create the shortcut manually.</p>
+</div>
+<div class="section" id="windows-app-silently-removing-the-app">
+<h2><a class="toc-backref" href="#id3">Windows App: Silently Removing the app</a><a class="headerlink" href="#windows-app-silently-removing-the-app" title="Permalink to this headline">¶</a></h2>
+<p>To remove the app silently from the computer of a user, you can run the following command :</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>%userprofile%\AppData\local\Programs\mattermost-desktop\Uninstall Mattermost.exe /currentuser /S
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The exe needs to be closed when this command is run</p>
+</div>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../mobile/mobile-appconfig.html" class="btn btn-neutral float-right" title="AppConfig for EMM Solutions with Mattermost Mobile Apps" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../install/desktop-msi-gpo.html" class="btn btn-neutral" title="Desktop MSI Installer and Group Policy Installation Guides (Beta)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/deployment/desktop-app-deployment.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

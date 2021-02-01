@@ -1,0 +1,609 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Configure SAML with Okta &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Configure SAML with OneLogin" href="sso-saml-onelogin.html" />
+    <link rel="prev" title="SAML Single Sign-On (E20)" href="sso-saml.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="bulk-loading.html">Bulk Loading Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/migrating.html">Migration Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/hipchat-migration-guidelines.html">Migrating from HipChat to Mattermost</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/migration-announcement-email-template.html">Migration Announcement Email</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/user-provisioning.html">Provisioning Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="admin-roles.html">Additional System Admin Roles (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-ldap.html">Active Directory/LDAP Setup (E10/E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auth.html">Multi-factor Authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ldap-group-sync.html">AD/LDAP Groups (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html">Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="sso-saml.html">SAML Single Sign-On (E20)</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Okta SAML Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sso-saml-onelogin.html">OneLogin SAML Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sso-saml-adfs.html">Microsoft ADFS SAML Configuration for Windows Server 2012</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sso-saml-adfs-msws2016.html">Microsoft ADFS SAML Configuration for Windows Server 2016</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sso-saml.html#using-saml-attributes-to-apply-roles">Using SAML Attributes to Apply Roles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sso-saml.html#roadmap">Roadmap</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sso-saml.html#configuration-assistance">Configuration Assistance</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sso-saml-technical.html">SAML Single-Sign-On (E20): Technical Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-gitlab.html">GitLab Single Sign-On</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-google.html">Google Single Sign-On (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-office.html">Office 365 Single Sign-On (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ssl-client-certificate.html">SSL Client Certificate Setup (Beta)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="certificate-based-authentication.html">Certificate-Based Authentication (Experimental)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="team-channel-management.html">Managing Team and Channel Members (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced-permissions.html">Advanced Permissions (E10/E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="permissions-backend.html">Advanced Permissions: Backend Infrastructure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guest-accounts.html">Guest Accounts (Beta) (E10/E20)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
+    
+      <li><a href="sso-saml.html">SAML Single Sign-On (E20)</a> &raquo;</li>
+    
+    <li>Configure SAML with Okta</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/deployment/sso-saml-okta.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="configure-saml-with-okta">
+<h1>Configure SAML with Okta<a class="headerlink" href="#configure-saml-with-okta" title="Permalink to this headline">¶</a></h1>
+<p>The following process provides steps to configure SAML 2.0 with Okta for Mattermost.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#before-you-begin" id="id1">Before You Begin</a></li>
+<li><a class="reference internal" href="#set-up-a-connection-app-for-mattermost-sso" id="id2">Set Up a Connection App for Mattermost SSO</a></li>
+<li><a class="reference internal" href="#configure-saml-sign-in-for-mattermost" id="id3">Configure SAML Sign-in for Mattermost</a></li>
+<li><a class="reference internal" href="#configure-saml-synchronization-with-ad-ldap" id="id4">Configure SAML synchronization with AD/LDAP</a><ul>
+<li><a class="reference internal" href="#override-saml-data-with-ad-ldap-data" id="id5">Override SAML Data with AD/LDAP Data</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#frequently-asked-questions" id="id6">Frequently Asked Questions</a><ul>
+<li><a class="reference internal" href="#how-to-bind-authentication-to-id-attribute-instead-of-email" id="id7">How to Bind Authentication to Id Attribute instead of Email</a></li>
+<li><a class="reference internal" href="#can-saml-via-microsoft-adfs-be-configured-with-integrated-windows-authentication-iwa" id="id8">Can SAML via Microsoft ADFS be configured with Integrated Windows Authentication (IWA)?</a></li>
+<li><a class="reference internal" href="#how-do-i-migrate-users-from-one-authentication-method-e-g-email-to-saml" id="id9">How do I migrate users from one authentication method (e.g. email) to SAML?</a></li>
+<li><a class="reference internal" href="#how-is-saml-different-from-oauth-2-0-and-openid-connect" id="id10">How is SAML different from OAuth 2.0 and OpenId Connect?</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="before-you-begin">
+<h2><a class="toc-backref" href="#contents">Before You Begin</a><a class="headerlink" href="#before-you-begin" title="Permalink to this headline">¶</a></h2>
+<p>Before you begin, you’ll need to install the XML Security Library.</p>
+<ol class="arabic simple">
+<li>Make sure you have the <a class="reference external" href="https://www.aleksey.com/xmlsec/download.html">XML Security Library</a> installed on your Mattermost instance. The XML Security Library is usually included as part of Debian GNU/Linux.</li>
+<li>Install the <em>xmlsec1-openssl</em> library</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>On Ubuntu: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">xmlsec1</span></code></li>
+<li>On RHEL: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">yum</span> <span class="pre">install</span> <span class="pre">xmlsec1-openssl</span></code></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li>Generate encryption certificates for encrypting the SAML connection.</li>
+</ol>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li>You can use the <a class="reference external" href="https://github.com/mattermost/docs/tree/master/source/scripts/generate-certificates">Bash script</a> from the <em>mattermost/docs</em> repository on GitHub, or any other suitable method.</li>
+<li>Save the two files that are generated. They are the private key and the public key. In the System Console, they are referred to as the <strong>Service Provider Private Key</strong> and the <strong>Service Provider Public Certificate</strong> respectively.</li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="set-up-a-connection-app-for-mattermost-sso">
+<h2><a class="toc-backref" href="#contents">Set Up a Connection App for Mattermost SSO</a><a class="headerlink" href="#set-up-a-connection-app-for-mattermost-sso" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Sign into Okta as an administrator.</p>
+</li>
+<li><p class="first">Switch to the <strong>Classic UI</strong>, using the drop-down in the upper left.</p>
+</li>
+<li><p class="first">Go to <strong>Admin Dashboard &gt; Applications &gt; Add Application</strong>.</p>
+</li>
+<li><p class="first">Click <strong>Create New App</strong> and choose <strong>SAML 2.0</strong> as the Sign on method.</p>
+<blockquote>
+<div><img alt="../_images/okta_1_new_app.PNG" src="../_images/okta_1_new_app.PNG" />
+</div></blockquote>
+</li>
+<li><p class="first">Enter <strong>General Settings</strong> for the application, including <strong>App name</strong> and <strong>App logo</strong> (optional). It’s recommended to display the application icon to users, including in the Okta Mobile app.</p>
+</li>
+</ol>
+<blockquote>
+<div><p>If you’d like to use a Mattermost logo for the application, you can download one <a class="reference external" href="https://mattermost.org/brand-guidelines/">from our page</a>.</p>
+<blockquote>
+<div><img alt="../_images/okta_2_general_settings.PNG" src="../_images/okta_2_general_settings.PNG" />
+</div></blockquote>
+</div></blockquote>
+<ol class="arabic simple" start="6">
+<li>Enter <strong>SAML Settings</strong>, including:</li>
+</ol>
+<blockquote>
+<div><ul>
+<li><p class="first"><strong>Single sign on URL:</strong> <code class="docutils literal notranslate"><span class="pre">https://&lt;your-mattermost-url&gt;/login/sso/saml</span></code> where <code class="docutils literal notranslate"><span class="pre">https://&lt;your-mattermost-url&gt;</span></code> should typically match the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#site-url">Mattermost Site URL</a>.</p>
+</li>
+<li><p class="first"><strong>Audience URI:</strong> For instance, <code class="docutils literal notranslate"><span class="pre">mattermost</span></code></p>
+</li>
+<li><p class="first"><strong>Name ID format:</strong> <code class="docutils literal notranslate"><span class="pre">unspecified</span></code></p>
+</li>
+<li><p class="first"><strong>Application username:</strong> <code class="docutils literal notranslate"><span class="pre">Email</span></code></p>
+<blockquote>
+<div><img alt="../_images/okta_3_initial_saml_settings.PNG" src="../_images/okta_3_initial_saml_settings.PNG" />
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<ol class="arabic" start="7">
+<li><p class="first">To set up encryption for your SAML connection select <strong>Show Advanced Settings</strong>.</p>
+<blockquote>
+<div><img alt="../_images/okta_4_initial_saml_settings.PNG" src="../_images/okta_4_initial_saml_settings.PNG" />
+</div></blockquote>
+</li>
+<li><p class="first">Set <strong>Assertion Encryption</strong> as <strong>Encrypted</strong> and upload the Service Provider Public Certificate you generated in step 2 to the <strong>Encryption Certificate</strong> field.</p>
+<blockquote>
+<div><img alt="../_images/okta_5_advanced_saml_settings.PNG" src="../_images/okta_5_advanced_saml_settings.PNG" />
+</div></blockquote>
+</li>
+<li><p class="first">Enter attribute statements, which will be used to map attributes between Okta and Mattermost. For more information on which attributes are configurable, see our <a class="reference internal" href="../administration/prev-config-settings.html#saml-enterprise"><span class="std std-ref">documentation on SAML configuration settings</span></a>. Email and username attributes are required. For Mattermost servers running 3.3 and earlier, first name and last name attributes are also required.</p>
+<blockquote>
+<div><img alt="../_images/okta_6_attribute_statements.PNG" src="../_images/okta_6_attribute_statements.PNG" />
+</div></blockquote>
+</li>
+<li><p class="first">Click <strong>Next</strong>. Then, set Okta support parameters for the application. Recommended settings:</p>
+</li>
+</ol>
+<blockquote>
+<div><ul>
+<li><p class="first"><strong>I’m an Okta customer adding an internal app</strong></p>
+</li>
+<li><p class="first"><strong>This is an internal app that we have created</strong></p>
+<blockquote>
+<div><img alt="../_images/okta_7_support_configuration.PNG" src="../_images/okta_7_support_configuration.PNG" />
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="11">
+<li>Click <strong>Finish</strong>. On the next screen, click the <strong>Sign On</strong> tab and click <strong>View Setup Instructions</strong>.</li>
+</ol>
+<blockquote>
+<div><p>11.1 Select the <strong>Identity Provider metadata</strong> link and copy the link from the browser URL box. This will be used during the SAML configuration steps in the next section.</p>
+<blockquote>
+<div><img alt="../_images/okta_8_view_instructions.PNG" src="../_images/okta_8_view_instructions.PNG" />
+</div></blockquote>
+</div></blockquote>
+<ol class="arabic" start="12">
+<li><p class="first">Take note of <strong>Identity Provider Single Sign-On URL</strong> (also known as <strong>SAML SSO URL</strong>), and the Identity Provider Issuer, as both may be needed to configure SAML for Mattermost. Additionally, ensure you download the X.509 Certificate file and save it. You may need to upload it to Mattermost in a later step.</p>
+<blockquote>
+<div><img alt="../_images/okta_9_view_instructions.PNG" src="../_images/okta_9_view_instructions.PNG" />
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="configure-saml-sign-in-for-mattermost">
+<h2><a class="toc-backref" href="#contents">Configure SAML Sign-in for Mattermost</a><a class="headerlink" href="#configure-saml-sign-in-for-mattermost" title="Permalink to this headline">¶</a></h2>
+<p>Start Mattermost server and sign into Mattermost as a System Administrator. Go to <strong>System Console &gt; Authentication &gt; SAML</strong>, and paste the copied Identity Provider Metadata URL in the <strong>Identity Provider Metadata URL</strong> field, then select <strong>Get SAML Metadata from IdP</strong>.</p>
+<p>This populates the <strong>SAML SSO URL</strong> and the <strong>Identity Provider Issuer URL</strong> fields automatically and the Identity Provider Public Certificate is also downloaded from the server and set locally.</p>
+<dl class="docutils">
+<dt>Alternatively you can enter the following fields manually:</dt>
+<dd><ul class="first last">
+<li><p class="first"><strong>SAML SSO URL:</strong> <code class="docutils literal notranslate"><span class="pre">Identity</span> <span class="pre">Provider</span> <span class="pre">Single</span> <span class="pre">Sign-On</span> <span class="pre">URL</span></code> from Okta, specified earlier.</p>
+</li>
+<li><p class="first"><strong>Identity Provider Issuer URL:</strong> <code class="docutils literal notranslate"><span class="pre">Identity</span> <span class="pre">Provider</span> <span class="pre">Issuer</span></code> from Okta, specified earlier.</p>
+</li>
+<li><p class="first"><strong>Identity Provider Public Certificate:</strong> X.509 Public Certificate file you downloaded from Okta earlier.</p>
+<blockquote>
+<div><img alt="../_images/okta_10_mattermost_basics.PNG" src="../_images/okta_10_mattermost_basics.PNG" />
+</div></blockquote>
+</li>
+</ul>
+</dd>
+</dl>
+<ol class="arabic" start="2">
+<li><p class="first">Configure Mattermost to verify the signature. The <strong>Service Provider Login URL</strong> is the <code class="docutils literal notranslate"><span class="pre">Single</span> <span class="pre">sign</span> <span class="pre">on</span> <span class="pre">URL</span></code> you specified in Okta earlier.</p>
+<blockquote>
+<div><img alt="../_images/okta_11_mattermost_verification.PNG" src="../_images/okta_11_mattermost_verification.PNG" />
+</div></blockquote>
+</li>
+<li><p class="first">Enable encryption based on the parameters provided earlier.</p>
+<blockquote>
+<div><img alt="../_images/okta_12_mattermost_encryption.PNG" src="../_images/okta_12_mattermost_encryption.PNG" />
+</div></blockquote>
+</li>
+<li><p class="first">Configure Mattermost to sign SAML requests using the Service Provider Private Key.</p>
+</li>
+<li><p class="first">Set attributes for the SAML Assertions, which will be used to update user information in Mattermost. Attributes for email and username are required and should match the values you entered in Okta earlier. See <a class="reference internal" href="../administration/prev-config-settings.html#saml-enterprise"><span class="std std-ref">documentation on SAML configuration settings</span></a> for more detail.</p>
+</li>
+</ol>
+<p>For Mattermost servers running 3.3 and earlier, the first name and last name attributes are also required fields.</p>
+<blockquote>
+<div><img alt="../_images/okta_13_mattermost_attributes.PNG" src="../_images/okta_13_mattermost_attributes.PNG" />
+</div></blockquote>
+<ol class="arabic" start="6">
+<li><p class="first">(Optional) Customize the login button text.</p>
+<blockquote>
+<div><img alt="../_images/okta_14_mattermost_login_button.PNG" src="../_images/okta_14_mattermost_login_button.PNG" />
+</div></blockquote>
+</li>
+<li><p class="first">Click <strong>Save</strong>.</p>
+</li>
+<li><p class="first">(Optional) If you configured First Name Attribute and Last Name Attribute, go to <strong>System Console</strong> &gt; <strong>Site Configuration</strong> &gt; <strong>Users and Teams</strong> (or <strong>System Console &gt; General &gt; Users and Teams</strong> in versions prior to 5.12) and set <strong>Teammate Name Display</strong> to <em>Show first and last name</em>. This is recommended for a better user experience.</p>
+</li>
+</ol>
+<p>Once complete, and to confirm SAML SSO is successfully enabled, switch your System Administrator account from email to SAML-based authentication via <strong>Account Settings &gt; General &gt; Sign-in Method &gt; Switch to SAML SSO</strong> and sign in with your SAML credentials to complete the switch.</p>
+<p>It’s also recommended to post an announcement for your users to explain how the migration will work.</p>
+<p>You may also configure SAML for Okta by editing <code class="docutils literal notranslate"><span class="pre">config.json</span></code> to enable SAML based on <a class="reference internal" href="../administration/prev-config-settings.html#saml-enterprise"><span class="std std-ref">SAML configuration settings</span></a>. You must restart the Mattermost server for the changes to take effect.</p>
+</div>
+<div class="section" id="configure-saml-synchronization-with-ad-ldap">
+<h2><a class="toc-backref" href="#contents">Configure SAML synchronization with AD/LDAP</a><a class="headerlink" href="#configure-saml-synchronization-with-ad-ldap" title="Permalink to this headline">¶</a></h2>
+<p>In addition to configuring SAML sign-in, you can optionally configure synchronizing SAML accounts with AD/LDAP. When configured:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Mattermost queries AD/LDAP for relevant account information and updates SAML accounts based on changes to attributes (first name, last name, and nickname)</li>
+<li>Accounts disabled in AD/LDAP are made inactive in Mattermost, and their active sessions are revoked once Mattermost synchronizes attributes.</li>
+</ul>
+</div></blockquote>
+<p>To configure SAML synchronization with AD/LDAP:</p>
+<ol class="arabic simple">
+<li>Go to <strong>System Console &gt; Authentication &gt; SAML 2.0</strong> (or <strong>System Console &gt; SAML</strong> in versions prior to 5.12) and set <strong>Enable Synchronizing SAML Accounts With AD/LDAP</strong> to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</li>
+<li>Go to  <strong>System Console &gt; Authentication &gt; AD/LDAP</strong> (or <strong>System Console &gt; AD/LDAP</strong> in versions prior to 5.12) and set <strong>Enable Synchronization with AD/LDAP</strong> to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</li>
+<li>To ignore guest users when sychronizing, go to <strong>System Console &gt; Authentication &gt; SAML 2.0</strong> and set <strong>Ignore Guest Users when Synchronizing with AD/LDAP</strong> to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</li>
+<li>Set the rest of the AD/LDAP settings based on <a class="reference external" href="http://docs.mattermost.com/administration/config-settings.html#ad-ldap">configuration settings documentation</a> to connect Mattermost with your AD/LDAP server.</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>If you don’t want to enable AD/LDAP sign-in, go to <strong>System Console &gt; Authentication &gt; AD/LDAP</strong> (or <strong>System Console &gt; AD/LDAP</strong> in versions prior to 5.12) and keep <strong>Enable sign-in with AD/LDAP</strong> as <code class="docutils literal notranslate"><span class="pre">false</span></code>.</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li>To specify how often Mattermost synchronizes SAML user accounts with AD/LDAP, go to <strong>System Console &gt; Authentication &gt; AD/LDAP</strong> (or <strong>System Console &gt; AD/LDAP</strong> in versions prior to 5.12) and set&nbsp;<strong>Synchronization Interval</strong>. The default setting is 60 minutes. If you want to synchronize immediately after disabling an account, click <strong>AD/LDAP Synchronize Now</strong>.</li>
+<li>To confirm that Mattermost can successfully connect to your AD/LDAP server, go to <strong>System Console &gt; Authentication &gt; AD/LDAP</strong> (or <strong>System Console &gt; AD/LDAP</strong> in versions prior to 5.12) and select <strong>AD/LDAP Test</strong>.</li>
+</ol>
+<p>Once the synchronization with AD/LDAP is enabled, user attributes are synchronized with AD/LDAP based on their email address. If a user with a given email address doesn’t have an AD/LDAP account, they will be deactivated in Mattermost on the next AD/LDAP sync. To re-activate the account:</p>
+<ol class="arabic simple">
+<li>Add the user to your AD/LDAP server.</li>
+<li>Purge all caches in Mattermost in <strong>System Console &gt; Web Server &gt; Purge All Caches</strong> (or <strong>System Console &gt; Configuration &gt; Purge All Caches</strong> in versions prior to 5.12).</li>
+<li>Run AD/LDAP sync in <strong>System Console &gt; Authentication &gt; AD/LDAP &gt; AD/LDAP Synchronize Now</strong> (or <strong>System Console &gt; AD/LDAP &gt; AD/LDAP Synchronize Now</strong> in versions prior to 5.12).</li>
+<li>Purge all caches again in Mattermost in <strong>System Console &gt; Web Server &gt; Purge All Caches</strong> (or <strong>System Console &gt; Configuration &gt; Purge All Caches</strong> in versions prior to 5.12), which re-activates the account in Mattermost.</li>
+</ol>
+<blockquote>
+<div><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If a user is deactivated from AD/LDAP, they will be deactivated in Mattermost on the next sync. They will be shown as “Inactive” in the System Console users list, all of their sessions will expire and they won’t be able to log back in to Mattermost.</p>
+<p class="last">If a user is deactivated from SAML, their session won’t expire until they’re deactivated from AD/LDAP. However, they won’t be able to log back in to Mattermost.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>SAML synchronization with AD/LDAP is designed to pull user attributes such as first name and last name from your AD/LDAP, not to control authentication.</p>
+<p class="last">In particular, the user filter cannot be used to control who can log in to Mattermost, this should be controlled by your SAML service provider’s group permissions.</p>
+</div>
+</div></blockquote>
+<p>See <a class="reference internal" href="sso-saml-technical.html#sso-saml-technical"><span class="std std-ref">technical description of SAML synchronization with AD/LDAP</span></a> for more details.</p>
+<div class="section" id="override-saml-data-with-ad-ldap-data">
+<h3><a class="toc-backref" href="#contents">Override SAML Data with AD/LDAP Data</a><a class="headerlink" href="#override-saml-data-with-ad-ldap-data" title="Permalink to this headline">¶</a></h3>
+<p>Alternatively, you can choose to override SAML bind data with AD/LDAP information. For more infomation on binding a user with the SAML ID Attribute, please refer to this <a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml-okta.html#bind-authentication-to-id-attribute-instead-of-email">documentation</a>.</p>
+<p>This process overrides SAML email address with AD/LDAP email address data or SAML Id Attribute with AD/LDAP Id Attribute if configured. We recommend using this configuration with the SAML ID Attribute to help ensure new users are not created when the email address changes for a user.</p>
+<p>To ensure existing user accounts do not get disabled in this process, ensure the SAML IDs match the LDAP IDs by exporting data from both systems and comparing the ID data. Mapping ID Attributes for both AD/LDAP and SAML within Mattermost to fields that hold the same data will ensure the IDs match as well.</p>
+<ol class="arabic simple">
+<li>Set the SAML <code class="docutils literal notranslate"><span class="pre">Id</span> <span class="pre">Attribute</span></code> on <strong>System Console &gt; Authentication &gt; SAML 2.0</strong> &gt; <strong>Id Attribute</strong> (or <strong>System Console &gt; SAML &gt; Id Attribute</strong> in versions prior to 5.12)</li>
+<li>Set <strong>System Console &gt; Authentication &gt; SAML 2.0 &gt; Override SAML bind data with AD/LDAP information</strong> (or <strong>System Console &gt; SAML &gt; Override SAML bind data with AD/LDAP information</strong> in versions prior to 5.12) to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</li>
+<li>Set <strong>System Console</strong> &gt; <strong>Authentication</strong> &gt; <strong>SAML 2.0</strong> &gt; <strong>Enable Synchronizing SAML Accounts With AD/LDAP</strong> (or <strong>System Console &gt; SAML &gt; Enable Synchronizing SAML Accounts With AD/LDAP</strong> in versions prior to 5.12) to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</li>
+<li>Run AD/LDAP sync in <strong>System Console &gt; Authentication &gt; AD/LDAP &gt; AD/LDAP Synchronize Now</strong> (or <strong>System Console &gt; AD/LDAP &gt; AD/LDAP Synchronize Now</strong> in versions prior to 5.12).</li>
+</ol>
+</div>
+</div>
+<div class="section" id="frequently-asked-questions">
+<h2><a class="toc-backref" href="#contents">Frequently Asked Questions</a><a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="how-to-bind-authentication-to-id-attribute-instead-of-email">
+<h3><a class="toc-backref" href="#contents">How to Bind Authentication to Id Attribute instead of Email</a><a class="headerlink" href="#how-to-bind-authentication-to-id-attribute-instead-of-email" title="Permalink to this headline">¶</a></h3>
+<p>Alternatively, you can use an Id Attribute instead of email to bind the user.  We recommend choosing an ID that is unique and will not change over time.</p>
+<p>Configuring with an Id Attribute allows you to reuse an email address for a new user without the old user’s information being exposed. For instance, if a user with an email address <a class="reference external" href="mailto:joe&#46;smith&#37;&#52;&#48;mattermost&#46;com">joe<span>&#46;</span>smith<span>&#64;</span>mattermost<span>&#46;</span>com</a> was once an employee, a new employee named Joe Smith can use the same email. This configuration is also useful when a user’s name changes and their email needs to be updated.</p>
+<p>This process was designed with backwards compatibility to email binding. Here is the process applied to new account creations and to accounts logging in after the configuration:</p>
+<blockquote>
+<div><ul class="simple">
+<li>A user authenticated with SAML is bound to the SAML service user using the Id Attribute (as long as it has been configured) or bound by email using the email received from SAML.</li>
+<li>When the user tries to login and the SAML server responds with a valid authentication, then the server uses the “Id” field of the SAML authentication to search the user.</li>
+<li>If a user bound to that ID already exists, it logs in as that user.</li>
+<li>If a user bound to that ID does not exist, it will search base on the email.</li>
+<li>If a user bound to the email exists, it logs in with email and updates the autentication data to the ID, instead of the email.</li>
+<li>If a user bound to the ID or email does not exist, it will create a new Mattermost account bound to the SAML account by ID and will allow the user to log in.</li>
+</ul>
+<p>Note:  Existing accounts will not update until they log in to the server.</p>
+</div></blockquote>
+</div>
+<div class="section" id="can-saml-via-microsoft-adfs-be-configured-with-integrated-windows-authentication-iwa">
+<h3><a class="toc-backref" href="#contents">Can SAML via Microsoft ADFS be configured with Integrated Windows Authentication (IWA)?</a><a class="headerlink" href="#can-saml-via-microsoft-adfs-be-configured-with-integrated-windows-authentication-iwa" title="Permalink to this headline">¶</a></h3>
+<p>Yes. IWA is supported on the browser, with support added to iOS and Android mobile apps in Q2/2019 (mobile apps v1.18 and later).</p>
+<p>However, IWA is not supported on the Mattermost Desktop Apps due to a limitation in Electron. As a workaround you may create a browser desktop shortcut for quick access to Mattermost, just like a Desktop App.</p>
+</div>
+<div class="section" id="how-do-i-migrate-users-from-one-authentication-method-e-g-email-to-saml">
+<h3><a class="toc-backref" href="#contents">How do I migrate users from one authentication method (e.g. email) to SAML?</a><a class="headerlink" href="#how-do-i-migrate-users-from-one-authentication-method-e-g-email-to-saml" title="Permalink to this headline">¶</a></h3>
+<p>Use the <span class="xref std std-doc">mattermost user migrate_auth CLI command</span>.</p>
+</div>
+<div class="section" id="how-is-saml-different-from-oauth-2-0-and-openid-connect">
+<h3><a class="toc-backref" href="#contents">How is SAML different from OAuth 2.0 and OpenId Connect?</a><a class="headerlink" href="#how-is-saml-different-from-oauth-2-0-and-openid-connect" title="Permalink to this headline">¶</a></h3>
+<p>OAuth 2.0 was primarily intended for delegated authorization, where an app is authorized to access resources, such as Google contact list. It doesn’t deal with authentication.</p>
+<p>OpenID Connect is built on top of OAuth 2.0, which supports authentication and thus direct SSO.</p>
+<p>SAML is like OpenID Connect, except typically used in enterprise settings. OpenID Connect is more common in consumer websites and web/mobile apps.</p>
+<p>Learn more at <a class="reference external" href="https://hackernoon.com/demystifying-oauth-2-0-and-openid-connect-and-saml-12aa4cf9fdba">https://hackernoon.com/demystifying-oauth-2-0-and-openid-connect-and-saml-12aa4cf9fdba</a>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sso-saml-onelogin.html" class="btn btn-neutral float-right" title="Configure SAML with OneLogin" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sso-saml.html" class="btn btn-neutral" title="SAML Single Sign-On (E20)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/deployment/sso-saml-okta.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

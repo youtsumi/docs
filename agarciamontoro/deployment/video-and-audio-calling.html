@@ -1,0 +1,420 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Voice, video, and screensharing &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Productivity Tools" href="productivity-tools.html" />
+    <link rel="prev" title="Bots" href="bots.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../developer/toolkit.html">Mattermost Developer Toolkit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="atlassian-integrations.html">Atlassian Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="microsoft-integrations.html">Microsoft Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ci-cd-tools.html">CI/CD Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="incident-response-and-monitoring.html">Incident Response and Monitoring Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bots.html">Bots</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Voice, video, and screensharing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#zoom">Zoom</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#microsoft-teams-meetings">Microsoft Teams Meetings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cisco-webex-cloud">Cisco Webex Cloud</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bigbluebutton">BigBlueButton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#skype-for-business-beta">Skype for Business (Beta)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#webrtc">WebRTC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#kopano-webmeetings">Kopano WebMeetings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#jitsi">Jitsi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sip-pbx">SIP PBX</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#appear-in">appear.in</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="productivity-tools.html">Productivity Tools</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
+    
+    <li>Voice, video, and screensharing</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/deployment/video-and-audio-calling.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="voice-video-and-screensharing">
+<h1>Voice, video, and screensharing<a class="headerlink" href="#voice-video-and-screensharing" title="Permalink to this headline">¶</a></h1>
+<p>Our <a class="reference external" href="https://integrations.mattermost.com">Integrations Directory</a> has several integrations to connect by voice or video call, or to share your screen with team members in Mattermost.</p>
+<p>Here are some popular options below, including self-hosted on-prem, self-hosted private cloud solutions, and vendor-hosted SaaS solutions.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">You can also neatly link voice, video and screensharing solutions to channels by using Markdown formatting in the channel header. Example: <code class="docutils literal notranslate"><span class="pre">[Click</span> <span class="pre">for</span> <span class="pre">video</span> <span class="pre">call](https://link_to_solution)</span></code>.</p>
+</div>
+<div class="section" id="zoom">
+<h2>Zoom<a class="headerlink" href="#zoom" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Start and join voice calls, video calls, and use screensharing with your team members, developed by Mattermost.</li>
+<li>Click a video icon in a Mattermost channel to invite team members to join a Zoom call, hosted using the credentials of the user who initiated the call.</li>
+<li>Requires one paid <a class="reference external" href="https://zoom.us/pricing">Zoom Pro, Business, Education, or API plan,</a> to generate an API key and secret.</li>
+<li>Supports a self-hosted cloud solution and a vendor-hosted cloud solution.</li>
+<li>Docs available at: <a class="reference external" href="https://docs.mattermost.com/integrations/zoom.html">https://docs.mattermost.com/integrations/zoom.html</a>.</li>
+<li>Source code available at: <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-zoom">https://github.com/mattermost/mattermost-plugin-zoom</a>.</li>
+</ul>
+</div>
+<div class="section" id="microsoft-teams-meetings">
+<h2>Microsoft Teams Meetings<a class="headerlink" href="#microsoft-teams-meetings" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Start and join voice calls, video calls, and use screensharing with your team members, developed by Mattermost.</li>
+<li>Click a video icon in a Mattermost channel to invite team members to join a Microsoft Teams Meeting, hosted using the credentials of the user who initiated the call.</li>
+<li>Requires a Microsoft Teams account.</li>
+<li>Requires Mattermost Enterprise Edition E20.</li>
+<li>Source code and docs available at: <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-msteams-meetings">https://github.com/mattermost/mattermost-plugin-msteams-meetings</a>.</li>
+</ul>
+</div>
+<div class="section" id="cisco-webex-cloud">
+<h2>Cisco Webex Cloud<a class="headerlink" href="#cisco-webex-cloud" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Start and join voice and video calls, and share your screen with members of your team, developed by Mattermost.</li>
+<li>Use the <code class="docutils literal notranslate"><span class="pre">/webex</span></code> slash command or click the video icon in a Mattermost channel to invite team members to join a Webex call, hosted using the credentials of the user who initiated the call.</li>
+<li>Requires one paid <a class="reference external" href="https://developer.webex.com/">Cisco Webex Developer Account,</a> to generate an API key and secret.</li>
+<li>Supports a self-hosted cloud solution and a vendor-hosted cloud solution.</li>
+<li>Source code and docs available at: <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-webex">https://github.com/mattermost/mattermost-plugin-webex</a>.</li>
+</ul>
+</div>
+<div class="section" id="bigbluebutton">
+<h2>BigBlueButton<a class="headerlink" href="#bigbluebutton" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Start and join voice calls, video calls, and use screensharing with your team members, developed by Blindside Networks.</li>
+<li>A test install is provided to try out the feature on a Mattermost installation.</li>
+<li>Supports a self-hosted on-prem solution and a vendor-hosted cloud solution.</li>
+<li>Source code and docs available at: <a class="reference external" href="https://github.com/blindsidenetworks/mattermost-plugin-bigbluebutton">https://github.com/blindsidenetworks/mattermost-plugin-bigbluebutton</a>.</li>
+</ul>
+</div>
+<div class="section" id="skype-for-business-beta">
+<h2>Skype for Business (Beta)<a class="headerlink" href="#skype-for-business-beta" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Start and join voice calls, video calls and use screensharing with your team members, developed by kosgrz, and maintained by Mattermost.</li>
+<li>Clicking a video icon in a Mattermost channel invites team members to join a Skype for Business call, hosted using the credentials of the user who initiated the call.</li>
+<li>Supports a vendor-hosted cloud solution.</li>
+<li>Source code and docs available at: <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-skype4business">https://github.com/mattermost/mattermost-plugin-skype4business</a>.</li>
+</ul>
+</div>
+<div class="section" id="webrtc">
+<h2>WebRTC<a class="headerlink" href="#webrtc" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Start one-on-one voice and video calls, based on the WebRTC protocol, developed by Nikhil Rajan.</li>
+<li>Calls embedded into the Mattermost interface for seamless user experience.</li>
+<li>No third-party dependency, uses a browser-to-browser and serverless approach to initiate calls.</li>
+<li>Source code and docs available at: <a class="reference external" href="https://github.com/niklabh/mattermost-plugin-webrtc-video">https://github.com/niklabh/mattermost-plugin-webrtc-video</a>.</li>
+</ul>
+</div>
+<div class="section" id="kopano-webmeetings">
+<h2>Kopano WebMeetings<a class="headerlink" href="#kopano-webmeetings" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Start one-on-one voice and video calls, based on the WebRTC protocol, developed by Kopano.</li>
+<li>Calls embedded into the Mattermost interface for seamless user experience.</li>
+<li>Supports a self-hosted on-prem solution.</li>
+<li>Source code and docs available at: <a class="reference external" href="https://stash.kopano.io/projects/KM/repos/mattermost-plugin-kopanowebmeetings/browse">https://stash.kopano.io/projects/KM/repos/mattermost-plugin-kopanowebmeetings/browse</a>.</li>
+</ul>
+</div>
+<div class="section" id="jitsi">
+<h2>Jitsi<a class="headerlink" href="#jitsi" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Start and join voice calls, video calls, and use screensharing with your team members, developed by Sean Sackowitz.</li>
+<li>Click a video icon in a Mattermost channel to invite team members to join a Jitsi call.</li>
+<li>Supports a self-hosted on-prem solution.</li>
+<li>Source code and docs available at: <a class="reference external" href="https://github.com/seansackowitz/mattermost-plugin-jitsi">https://github.com/seansackowitz/mattermost-plugin-jitsi</a>.</li>
+</ul>
+</div>
+<div class="section" id="sip-pbx">
+<h2>SIP PBX<a class="headerlink" href="#sip-pbx" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Connect your company’s individual desk extensions, external telephone lines, and mobile networks with Mattermost, developed by Bytemine GmbH.</li>
+<li>Supports a self-hosted on-prem solution.</li>
+<li>Source code and docs available at: <a class="reference external" href="https://github.com/bytemine/mattersip">https://github.com/bytemine/mattersip</a>.</li>
+</ul>
+</div>
+<div class="section" id="appear-in">
+<h2>appear.in<a class="headerlink" href="#appear-in" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Start and join voice calls, video calls, and use screensharing with your team members, developed by zarej.</li>
+<li>Use the <code class="docutils literal notranslate"><span class="pre">/appearin</span></code> slash command to start a new appear.in call.</li>
+<li>Supports a self-hosted on-prem solution.</li>
+<li>Source code and docs available at: <a class="reference external" href="https://github.com/zarej/Mattermost-Integration-with-Appear.in">https://github.com/zarej/Mattermost-Integration-with-Appear.in</a>.</li>
+</ul>
+<p>Have a proposal for a voice and video call integration? <a class="reference external" href="https://mattermost.uservoice.com/forums/306457-general?category_id=202591">Let us know in the feature proposal forum</a>.</p>
+<p>Have you built an integration? <a class="reference external" href="https://integrations.mattermost.com/submit-an-integration/">Let us know</a> and we’ll share in our <a class="reference external" href="https://integrations.mattermost.com">Integrations Directory</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="productivity-tools.html" class="btn btn-neutral float-right" title="Productivity Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="bots.html" class="btn btn-neutral" title="Bots" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/deployment/video-and-audio-calling.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

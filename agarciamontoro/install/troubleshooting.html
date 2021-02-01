@@ -1,0 +1,917 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Important Notes &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="MySQL Installation Troubleshooting" href="trouble_mysql.html" />
+    <link rel="prev" title="Bulk Export Tool" href="../administration/bulk-export.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Important Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#general-troubleshooting">General Troubleshooting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#review-mattermost-logs">Review Mattermost Logs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#review-mattermost-environment">Review Mattermost Environment</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#administration-issues">Administration Issues</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#lost-system-administrator-account">Lost System Administrator Account</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#switching-system-administrator-account-to-single-sign-on-sso">Switching System Administrator Account to Single Sign-on (SSO)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#locked-out-of-system-administrator-account">Locked Out of System Administrator Account</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#password-resets">Password Resets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#multi-factor-authentication-mfa">Multi-Factor Authentication (MFA)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#saml-issues">SAML issues</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#unable-to-switch-to-saml-authentication-successfully">Unable to Switch to SAML Authentication Successfully</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#system-admin-locks-themselves-out-of-the-system">System Admin locks themselves out of the system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#an-account-with-that-username-already-exists-please-contact-your-administrator"><code class="docutils literal notranslate"><span class="pre">An</span> <span class="pre">account</span> <span class="pre">with</span> <span class="pre">that</span> <span class="pre">username</span> <span class="pre">already</span> <span class="pre">exists.</span> <span class="pre">Please</span> <span class="pre">contact</span> <span class="pre">your</span> <span class="pre">Administrator.</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#an-account-with-that-email-already-exists-please-contact-your-administrator"><code class="docutils literal notranslate"><span class="pre">An</span> <span class="pre">account</span> <span class="pre">with</span> <span class="pre">that</span> <span class="pre">email</span> <span class="pre">already</span> <span class="pre">exists.</span> <span class="pre">Please</span> <span class="pre">contact</span> <span class="pre">your</span> <span class="pre">Administrator.</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#saml-login-was-unsuccessful-because-one-of-the-attributes-is-incorrect-please-contact-your-system-administrator"><code class="docutils literal notranslate"><span class="pre">SAML</span> <span class="pre">login</span> <span class="pre">was</span> <span class="pre">unsuccessful</span> <span class="pre">because</span> <span class="pre">one</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">attributes</span> <span class="pre">is</span> <span class="pre">incorrect.</span> <span class="pre">Please</span> <span class="pre">contact</span> <span class="pre">your</span> <span class="pre">System</span> <span class="pre">Administrator.</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#an-error-occurred-while-building-service-provider-metadata"><code class="docutils literal notranslate"><span class="pre">An</span> <span class="pre">error</span> <span class="pre">occurred</span> <span class="pre">while</span> <span class="pre">building</span> <span class="pre">Service</span> <span class="pre">Provider</span> <span class="pre">Metadata.</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#saml-2-0-is-not-configured-or-supported-on-this-server"><code class="docutils literal notranslate"><span class="pre">SAML</span> <span class="pre">2.0</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">configured</span> <span class="pre">or</span> <span class="pre">supported</span> <span class="pre">on</span> <span class="pre">this</span> <span class="pre">server.</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#an-error-occurred-while-initiating-the-request-to-the-identity-provider-please-contact-your-system-administrator"><code class="docutils literal notranslate"><span class="pre">An</span> <span class="pre">error</span> <span class="pre">occurred</span> <span class="pre">while</span> <span class="pre">initiating</span> <span class="pre">the</span> <span class="pre">request</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">Identity</span> <span class="pre">Provider.</span> <span class="pre">Please</span> <span class="pre">contact</span> <span class="pre">your</span> <span class="pre">System</span> <span class="pre">Administrator.</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1"><code class="docutils literal notranslate"><span class="pre">SAML</span> <span class="pre">login</span> <span class="pre">was</span> <span class="pre">unsuccessful</span> <span class="pre">because</span> <span class="pre">one</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">attributes</span> <span class="pre">is</span> <span class="pre">incorrect.</span> <span class="pre">Please</span> <span class="pre">contact</span> <span class="pre">your</span> <span class="pre">System</span> <span class="pre">Administrator.</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#saml-login-was-unsuccessful-because-encryption-is-not-enabled-please-contact-your-system-administrator"><code class="docutils literal notranslate"><span class="pre">SAML</span> <span class="pre">login</span> <span class="pre">was</span> <span class="pre">unsuccessful</span> <span class="pre">because</span> <span class="pre">encryption</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">enabled.</span> <span class="pre">Please</span> <span class="pre">contact</span> <span class="pre">your</span> <span class="pre">System</span> <span class="pre">Administrator.</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#saml-login-was-unsuccessful-as-the-identity-provider-response-is-not-encrypted-please-contact-your-system-administrator"><code class="docutils literal notranslate"><span class="pre">SAML</span> <span class="pre">login</span> <span class="pre">was</span> <span class="pre">unsuccessful</span> <span class="pre">as</span> <span class="pre">the</span> <span class="pre">Identity</span> <span class="pre">Provider</span> <span class="pre">response</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">encrypted.</span> <span class="pre">Please</span> <span class="pre">contact</span> <span class="pre">your</span> <span class="pre">System</span> <span class="pre">Administrator.</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#an-error-occurred-while-parsing-the-response-from-the-identity-provider-please-contact-your-system-administrator"><code class="docutils literal notranslate"><span class="pre">An</span> <span class="pre">error</span> <span class="pre">occurred</span> <span class="pre">while</span> <span class="pre">parsing</span> <span class="pre">the</span> <span class="pre">response</span> <span class="pre">from</span> <span class="pre">the</span> <span class="pre">Identity</span> <span class="pre">Provider.</span> <span class="pre">Please</span> <span class="pre">contact</span> <span class="pre">your</span> <span class="pre">System</span> <span class="pre">Administrator.</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#an-error-occurred-while-encoding-the-request-for-the-identity-provider-please-contact-your-system-administrator"><code class="docutils literal notranslate"><span class="pre">An</span> <span class="pre">error</span> <span class="pre">occurred</span> <span class="pre">while</span> <span class="pre">encoding</span> <span class="pre">the</span> <span class="pre">request</span> <span class="pre">for</span> <span class="pre">the</span> <span class="pre">Identity</span> <span class="pre">Provider.</span> <span class="pre">Please</span> <span class="pre">contact</span> <span class="pre">your</span> <span class="pre">System</span> <span class="pre">Administrator.</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#saml-login-was-unsuccessful-because-an-error-occurred-while-decrypting-the-response-from-the-identity-provider-please-contact-your-system-administrator"><code class="docutils literal notranslate"><span class="pre">SAML</span> <span class="pre">login</span> <span class="pre">was</span> <span class="pre">unsuccessful</span> <span class="pre">because</span> <span class="pre">an</span> <span class="pre">error</span> <span class="pre">occurred</span> <span class="pre">while</span> <span class="pre">decrypting</span> <span class="pre">the</span> <span class="pre">response</span> <span class="pre">from</span> <span class="pre">the</span> <span class="pre">Identity</span> <span class="pre">Provider.</span> <span class="pre">Please</span> <span class="pre">contact</span> <span class="pre">your</span> <span class="pre">System</span> <span class="pre">Administrator.</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#an-error-occurred-while-validating-the-response-from-the-identity-provider-please-contact-your-system-administrator"><code class="docutils literal notranslate"><span class="pre">An</span> <span class="pre">error</span> <span class="pre">occurred</span> <span class="pre">while</span> <span class="pre">validating</span> <span class="pre">the</span> <span class="pre">response</span> <span class="pre">from</span> <span class="pre">the</span> <span class="pre">Identity</span> <span class="pre">Provider.</span> <span class="pre">Please</span> <span class="pre">contact</span> <span class="pre">your</span> <span class="pre">System</span> <span class="pre">Administrator.</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#why-does-the-objectguid-of-a-user-in-mattermost-differ-from-what-we-re-seeing-in-adfs">Why does the objectGUID of a user in Mattermost differ from what we’re seeing in ADFS?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#deployment-and-clustering">Deployment and Clustering</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#red-server-status">Red Server Status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#websocket-disconnect">WebSocket Disconnect</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#app-refreshes-continuously">App Refreshes Continuously</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#messages-do-not-post-until-after-reloading">Messages Do Not Post Until After Reloading</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#server-administration">Server Administration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#please-check-connection-mattermost-unreachable-if-issue-persists-ask-administrator-to-check-websocket-port"><code class="docutils literal notranslate"><span class="pre">Please</span> <span class="pre">check</span> <span class="pre">connection,</span> <span class="pre">Mattermost</span> <span class="pre">unreachable.</span> <span class="pre">If</span> <span class="pre">issue</span> <span class="pre">persists,</span> <span class="pre">ask</span> <span class="pre">administrator</span> <span class="pre">to</span> <span class="pre">check</span> <span class="pre">WebSocket</span> <span class="pre">port.</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#panic-runtime-error-invalid-memory-address-or-nil-pointer-dereference"><code class="docutils literal notranslate"><span class="pre">panic:</span> <span class="pre">runtime</span> <span class="pre">error:</span> <span class="pre">invalid</span> <span class="pre">memory</span> <span class="pre">address</span> <span class="pre">or</span> <span class="pre">nil</span> <span class="pre">pointer</span> <span class="pre">dereference</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#we-couldn-t-find-an-existing-account-matching-your-email-address-for-this-team-this-team-may-require-an-invite-from-the-team-owner-to-join"><code class="docutils literal notranslate"><span class="pre">We</span> <span class="pre">couldn't</span> <span class="pre">find</span> <span class="pre">an</span> <span class="pre">existing</span> <span class="pre">account</span> <span class="pre">matching</span> <span class="pre">your</span> <span class="pre">email</span> <span class="pre">address</span> <span class="pre">for</span> <span class="pre">this</span> <span class="pre">team.</span> <span class="pre">This</span> <span class="pre">team</span> <span class="pre">may</span> <span class="pre">require</span> <span class="pre">an</span> <span class="pre">invite</span> <span class="pre">from</span> <span class="pre">the</span> <span class="pre">team</span> <span class="pre">owner</span> <span class="pre">to</span> <span class="pre">join.</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#failed-to-upgrade-websocket-connection"><code class="docutils literal notranslate"><span class="pre">Failed</span> <span class="pre">to</span> <span class="pre">upgrade</span> <span class="pre">websocket</span> <span class="pre">connection</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#settings">Settings</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#user-statuses-get-stuck-on-away-or-offline-status">User Statuses get Stuck on “Away” or “Offline” Status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#system-console-settings-revert-to-previous-values-after-saving">System Console Settings Revert to Previous Values after Saving</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mattermost-can-t-connect-to-ldap-ad-server">Mattermost Can’t Connect to LDAP/AD Server</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#mobile">Mobile</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#login-with-adfs-office365-is-not-working">Login with ADFS/Office365 is Not Working</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-connecting-bar-doesn-t-clear">The “Connecting…” Bar Doesn’t Clear</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#im-not-receiving-push-notifications-on-my-device">I’m Not Receiving Push Notifications on my Device</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#all-outbound-connections-go-through-a-proxy-how-can-i-connect-to-the-mattermost-hosted-push-notification-service">All Outbound Connections go Through a Proxy. How Can I Connect to the Mattermost Hosted Push Notification Service?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2"><code class="docutils literal notranslate"><span class="pre">Cannot</span> <span class="pre">connect</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">server.</span> <span class="pre">Please</span> <span class="pre">check</span> <span class="pre">your</span> <span class="pre">server</span> <span class="pre">URL</span> <span class="pre">and</span> <span class="pre">internet</span> <span class="pre">connection.</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-issues">Configuration Issues</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#integrations">Integrations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Mobile</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#none-of-these-solve-my-problem">None of These Solve my Problem!</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trouble_mysql.html">MySQL Installation Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
+    
+    <li>Important Notes</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/install/troubleshooting.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p id="troubleshooting">This document summarizes common troubleshooting issues and techniques.</p>
+<p>Depending on the type of error or problem you’re experiencing, refer to the sections below for troubleshooting guidance. If you’re a new user, it might help to go over the installation steps again to confirm the process. Alternatively, review the <a class="reference external" href="https://forum.mattermost.org/c/trouble-shoot">Troubleshooting forum</a> for previously reported errors, or <a class="reference external" href="https://mattermost.com/pl/default-ask-mattermost-community/">join the Mattermost user community for troubleshooting help</a>.</p>
+<p>If you’re an Enterprise Edition subscriber, you may open a support ticket in the <a class="reference external" href="https://mattermost.zendesk.com/hc/en-us/requests/new">Enterprise Edition Support portal</a>.</p>
+<div class="section" id="important-notes">
+<h1>Important Notes<a class="headerlink" href="#important-notes" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>Do not manipulate the Mattermost database directly. Mattermost is designed to stop working if data integrity is compromised.</li>
+<li>Any manipulation of the database must be done using the built in command line tools.</li>
+<li>Start simple with the step-by-step install guides for your operating system.</li>
+</ul>
+</div>
+<div class="section" id="general-troubleshooting">
+<h1>General Troubleshooting<a class="headerlink" href="#general-troubleshooting" title="Permalink to this headline">¶</a></h1>
+<p>Some of these suggestions can be done directly, and others may need consultation from your network administrator.</p>
+<div class="section" id="review-mattermost-logs">
+<h2>Review Mattermost Logs<a class="headerlink" href="#review-mattermost-logs" title="Permalink to this headline">¶</a></h2>
+<p>You can access logs for Mattermost and use them for troubleshooting. These steps assume that you have <a class="reference external" href="https://docs.mattermost.com/help/getting-started/managing-members.html#system-admin">System Admin permissions</a>.</p>
+<p><strong>Mattermost Server</strong></p>
+<ul class="simple">
+<li>Ensure that log files are being created: Navigate to <strong>System Console &gt; Environment &gt; Logging</strong>, confirm that <strong>Output logs to file</strong> is set to <strong>true</strong>.</li>
+<li>You can obtain the path for the log files in <strong>System Console &gt; Environment &gt; Logging &gt; File Log Directory</strong>.</li>
+</ul>
+<p>The resulting server log file is called <code class="docutils literal notranslate"><span class="pre">mattermost.log</span></code> and can be opened with a standard text editor or shared directly.</p>
+<p>For a more complete log open <strong>System Console &gt; Environment &gt; Logging</strong> and set <strong>File Log Level</strong> to <strong>DEBUG</strong>, then replicate the issue to have it logged again. Make sure to revert to <strong>INFO</strong> after troubleshooting to save disk space.</p>
+<p>If filesystem access is not possible, navigate to <strong>System Console &gt; Reporting &gt; Server Logs</strong> to locate the current system logs which can be copied to a file.</p>
+<p>You can find more on logging settings <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#logging">here</a>.</p>
+<p><strong>Mattermost Desktop App</strong></p>
+<p>The desktop app log file can be found in the user directory:</p>
+<ul class="simple">
+<li><strong>Windows:</strong> <code class="docutils literal notranslate"><span class="pre">%userprofile%\AppData\Roaming\Mattermost\logs</span></code></li>
+<li><strong>Linux:</strong> <code class="docutils literal notranslate"><span class="pre">~/.local/share/Mattermost/logs</span></code></li>
+</ul>
+<p><strong>Mattermost Browser App</strong></p>
+<p>The browser-based app does not produce additional log files. If the app has to be debugged, use the development tools integrated in your browser.</p>
+<p><strong>Mattermost Push Notification Service</strong></p>
+<p>Logging for the Mattermost Push Notification Service is handled via system log with logger and is appended to <code class="docutils literal notranslate"><span class="pre">/var/log/syslog</span></code>.</p>
+</div>
+<div class="section" id="review-mattermost-environment">
+<h2>Review Mattermost Environment<a class="headerlink" href="#review-mattermost-environment" title="Permalink to this headline">¶</a></h2>
+<p>Put together a timeline to eliminate events prior to the error/problem occurring. For example, if you recently reconfigured your firewall and are now having connection issues it might be worth reviewing the settings or rolling back to see whether that resolves the problem.</p>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>If the problem occurred subsequent to some period of normal operation, did anything change in the environment?</dt>
+<dd><ul class="first last">
+<li>Was the client, host, or server upgraded?</li>
+<li>Was an operating system update applied?</li>
+<li>Did the network environment change? For example, was a server moved or a domain migrated?</li>
+<li>Did the system (client or server) recently fail or abnormally terminate?</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>How many users are impacted?</dt>
+<dd><ul class="first last">
+<li>Is this problem affecting one, some, or all users?</li>
+<li>Is the problem occurring only for a user who was recently added to the environment, such as a new employee?</li>
+<li>Do differences exist between the users who are affected and the users who are not affected?</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>You can also search the error messages online. Existing solutions from our <a class="reference external" href="https://forum.mattermost.org/t/how-to-use-the-troubleshooting-forum/150">forum</a> can often be found and applied.</p>
+</div>
+</div>
+<div class="section" id="administration-issues">
+<h1>Administration Issues<a class="headerlink" href="#administration-issues" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="lost-system-administrator-account">
+<h2>Lost System Administrator Account<a class="headerlink" href="#lost-system-administrator-account" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>To reset the account, run from the command line:
+<code class="docutils literal notranslate"><span class="pre">./mattermost</span> <span class="pre">-assign_role</span> <span class="pre">-team_name=&quot;yourteam&quot;</span> <span class="pre">-email=&quot;you&#64;example.com&quot;</span> <span class="pre">-role=&quot;system_admin&quot;</span></code>.</li>
+<li>Log out and back in to apply the change.</li>
+</ul>
+</div>
+<div class="section" id="switching-system-administrator-account-to-single-sign-on-sso">
+<h2>Switching System Administrator Account to Single Sign-on (SSO)<a class="headerlink" href="#switching-system-administrator-account-to-single-sign-on-sso" title="Permalink to this headline">¶</a></h2>
+<p>When Mattermost is initially set up, the first account created becomes the System Admin account. This account will typically use email authentication to sign in, since it is usually created before other sign in methods are configured.</p>
+<p>After setting up SSO authentication, it is common for the System Admin to want to turn off email sign in so users will only have SSO as a sign in option.</p>
+<p>Before doing this, the System Admin needs to change their sign in method to SSO by doing the following:</p>
+<ol class="arabic simple">
+<li>Sign in to Mattermost using an email and password.</li>
+<li>Go to <strong>Account Settings &gt; Security &gt; Sign-in Method</strong>.</li>
+<li>Select <strong>Switch</strong> to select a sign-in method and complete the process provided.</li>
+</ol>
+<p>The System Admin can now turn off email sign in and still access their account. To avoid locking other existing users out of their accounts, it is recommended the System Admin ask them to switch authentication methods as well.</p>
+</div>
+<div class="section" id="locked-out-of-system-administrator-account">
+<h2>Locked Out of System Administrator Account<a class="headerlink" href="#locked-out-of-system-administrator-account" title="Permalink to this headline">¶</a></h2>
+<p>If the System Admin is locked out of the system during SAML configuration process, they can set an existing account to System Admin using <a class="reference external" href="https://docs.mattermost.com/deployment/on-boarding.html#common-tasks">a command line tool</a>.</p>
+<p>If email sign in was turned off before the System Admin switched sign in methods, sign up for a new account and promote it to System Admin from the command line:</p>
+<ol class="arabic simple">
+<li>Sign in to the server Mattermost is running on via <code class="docutils literal notranslate"><span class="pre">ssh</span></code>.</li>
+<li>Go to the directory of the Mattermost application. If you’ve followed our setup process this is <code class="docutils literal notranslate"><span class="pre">/opt/mattermost</span></code>.</li>
+<li>Run</li>
+</ol>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo -u mattermost bin/mattermost roles system_admin {username}
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li>Replace <code class="docutils literal notranslate"><span class="pre">{username}</span></code> with the name of the user you’d like to promote to System Admin.</li>
+</ol>
+</div>
+<div class="section" id="password-resets">
+<h2>Password Resets<a class="headerlink" href="#password-resets" title="Permalink to this headline">¶</a></h2>
+<p><strong>Email address or username sign in</strong></p>
+<p>If you sign in to Mattermost using an email address or username, you can send a password reset request by selecting <strong>I forgot my password</strong>. The Mattermost Support team does not have access to your Mattermost server/instance. If you experience any problems, the next step is to contact your Mattermost System Admin.</p>
+<p>If you’re not sure who the System Admin is, contact the internal IT team at your organization for further help.</p>
+<p><strong>AD/LDAP users</strong></p>
+<p>The password reset process is performed on the directory level as Mattermost pulls the credential information from the LDAP directory. If you experience issues with your password for your LDAP log in, contact your organization’s LDAP administrator for further help.</p>
+<p><strong>SSO users (OneLogin/Okta etc)</strong></p>
+<p>The password reset process is completed on the IdP provider side, and not via the Mattermost System Console.</p>
+</div>
+<div class="section" id="multi-factor-authentication-mfa">
+<h2>Multi-Factor Authentication (MFA)<a class="headerlink" href="#multi-factor-authentication-mfa" title="Permalink to this headline">¶</a></h2>
+<p>If MFA has stopped working, confirm that your server clock is not out of sync. On Unix systems you can view the hardware time of your system using <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">hwclock</span> <span class="pre">-r</span></code>. If you’re using systemd you can also use <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">timedatectl</span></code>.</p>
+</div>
+</div>
+<div class="section" id="saml-issues">
+<h1>SAML issues<a class="headerlink" href="#saml-issues" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="unable-to-switch-to-saml-authentication-successfully">
+<h2>Unable to Switch to SAML Authentication Successfully<a class="headerlink" href="#unable-to-switch-to-saml-authentication-successfully" title="Permalink to this headline">¶</a></h2>
+<p>First, ensure you have installed the <a class="reference external" href="https://www.aleksey.com/xmlsec/download.html">XML Security Library</a> on your Mattermost instance and that <strong>it is available in your</strong> PATH.</p>
+<p>Second, ensure you have completed each step of the SAML configuration.</p>
+</div>
+<div class="section" id="system-admin-locks-themselves-out-of-the-system">
+<h2>System Admin locks themselves out of the system<a class="headerlink" href="#system-admin-locks-themselves-out-of-the-system" title="Permalink to this headline">¶</a></h2>
+<p>If the System Admin is locked out of the system during SAML configuration process, they can set an existing account to System Admin using <a class="reference external" href="https://docs.mattermost.com/deployment/on-boarding.html#common-tasks">a command line tool</a>.</p>
+</div>
+<div class="section" id="an-account-with-that-username-already-exists-please-contact-your-administrator">
+<h2><code class="docutils literal notranslate"><span class="pre">An</span> <span class="pre">account</span> <span class="pre">with</span> <span class="pre">that</span> <span class="pre">username</span> <span class="pre">already</span> <span class="pre">exists.</span> <span class="pre">Please</span> <span class="pre">contact</span> <span class="pre">your</span> <span class="pre">Administrator.</span></code><a class="headerlink" href="#an-account-with-that-username-already-exists-please-contact-your-administrator" title="Permalink to this headline">¶</a></h2>
+<p>This usually means an existing account has another authentication method enabled. If so, the user should sign in using that method (such as email and password), then change their sign-in method to SAML via <strong>Account Settings &gt; Security &gt; Sign-in method</strong>.</p>
+<p>This error message can also be received if the <code class="docutils literal notranslate"><span class="pre">Username</span> <span class="pre">Attribute</span></code> of their SAML credentials doesn’t match the username of their Mattermost account. If so, the user can update the attribute at their identity provider (for instance, back to the old value if it had been previously updated).</p>
+</div>
+<div class="section" id="an-account-with-that-email-already-exists-please-contact-your-administrator">
+<h2><code class="docutils literal notranslate"><span class="pre">An</span> <span class="pre">account</span> <span class="pre">with</span> <span class="pre">that</span> <span class="pre">email</span> <span class="pre">already</span> <span class="pre">exists.</span> <span class="pre">Please</span> <span class="pre">contact</span> <span class="pre">your</span> <span class="pre">Administrator.</span></code><a class="headerlink" href="#an-account-with-that-email-already-exists-please-contact-your-administrator" title="Permalink to this headline">¶</a></h2>
+<p>This usually means an existing account has another authentication method enabled. If so, the user should sign in using that method (such as email and password), then change their sign-in method to SAML via <strong>Account Settings &gt; Security &gt; Sign-in method</strong>.</p>
+<p>This error message can also be received if the <code class="docutils literal notranslate"><span class="pre">Email</span> <span class="pre">Attribute</span></code> of their SAML credentials doesn’t match the email address of their Mattermost account. If so, the user can update the attribute at their identity provider (for instance, back to the old value if it had been previously updated).</p>
+</div>
+<div class="section" id="saml-login-was-unsuccessful-because-one-of-the-attributes-is-incorrect-please-contact-your-system-administrator">
+<h2><code class="docutils literal notranslate"><span class="pre">SAML</span> <span class="pre">login</span> <span class="pre">was</span> <span class="pre">unsuccessful</span> <span class="pre">because</span> <span class="pre">one</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">attributes</span> <span class="pre">is</span> <span class="pre">incorrect.</span> <span class="pre">Please</span> <span class="pre">contact</span> <span class="pre">your</span> <span class="pre">System</span> <span class="pre">Administrator.</span></code><a class="headerlink" href="#saml-login-was-unsuccessful-because-one-of-the-attributes-is-incorrect-please-contact-your-system-administrator" title="Permalink to this headline">¶</a></h2>
+<p>Confirm all attributes, including <code class="docutils literal notranslate"><span class="pre">Email</span> <span class="pre">Attribute</span></code> and <code class="docutils literal notranslate"><span class="pre">Username</span> <span class="pre">Attribute</span></code>, are correct in both the Identity Provider configuration and in <strong>System Console &gt; SAML</strong>.</p>
+</div>
+<div class="section" id="an-error-occurred-while-building-service-provider-metadata">
+<h2><code class="docutils literal notranslate"><span class="pre">An</span> <span class="pre">error</span> <span class="pre">occurred</span> <span class="pre">while</span> <span class="pre">building</span> <span class="pre">Service</span> <span class="pre">Provider</span> <span class="pre">Metadata.</span></code><a class="headerlink" href="#an-error-occurred-while-building-service-provider-metadata" title="Permalink to this headline">¶</a></h2>
+<p>This error indicates that the installation does not have an Enterprise license. The error message you receive will look similar to this:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ERRO<span class="o">[</span><span class="m">2019</span>-12-23T10:04:33.5074-07:00<span class="o">]</span> An error occurred <span class="k">while</span> building Service Provider Metadata.  <span class="nv">caller</span><span class="o">=</span><span class="s2">&quot;mlog/log.go:175&quot;</span> <span class="nv">err_details</span><span class="o">=</span><span class="s2">&quot;err=Your license does not support SAML authentication.&quot;</span> <span class="nv">err_where</span><span class="o">=</span>GetSamlMetadata <span class="nv">http_code</span><span class="o">=</span><span class="m">501</span> <span class="nv">ip_addr</span><span class="o">=</span><span class="s2">&quot;::1&quot;</span> <span class="nv">method</span><span class="o">=</span>GET <span class="nv">path</span><span class="o">=</span>/api/v4/saml/metadata <span class="nv">request_id</span><span class="o">=</span>fbtsbxzb33f67gn6yuy73asxjw <span class="nv">user_id</span><span class="o">=</span>
+</pre></div>
+</div>
+<p>To resolve the issue, upload an Enterprise License and restart the process.</p>
+</div>
+<div class="section" id="saml-2-0-is-not-configured-or-supported-on-this-server">
+<h2><code class="docutils literal notranslate"><span class="pre">SAML</span> <span class="pre">2.0</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">configured</span> <span class="pre">or</span> <span class="pre">supported</span> <span class="pre">on</span> <span class="pre">this</span> <span class="pre">server.</span></code><a class="headerlink" href="#saml-2-0-is-not-configured-or-supported-on-this-server" title="Permalink to this headline">¶</a></h2>
+<p>The error indicates that the installation is using the Mattermost Team Edition. The error message you receive will look similar to this:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ERRO<span class="o">[</span><span class="m">2019</span>-12-23T10:12:56.5884001-07:00<span class="o">]</span> An error occurred <span class="k">while</span> building Service Provider Metadata.  <span class="nv">caller</span><span class="o">=</span><span class="s2">&quot;mlog/log.go:175&quot;</span> <span class="nv">err_details</span><span class="o">=</span><span class="s2">&quot;err=SAML 2.0 is not configured or supported on this server.&quot;</span> <span class="nv">err_where</span><span class="o">=</span>GetSamlMetadata <span class="nv">http_code</span><span class="o">=</span><span class="m">501</span> <span class="nv">ip_addr</span><span class="o">=</span><span class="s2">&quot;::1&quot;</span> <span class="nv">method</span><span class="o">=</span>GET <span class="nv">path</span><span class="o">=</span>/api/v4/saml/metadata <span class="nv">request_id</span><span class="o">=</span>1c7jrw3fzbggpe9rs83r5ge5fw <span class="nv">user_id</span><span class="o">=</span>
+</pre></div>
+</div>
+<p>To resolve the issue, install Enterprise Edition and restart the process.</p>
+</div>
+<div class="section" id="an-error-occurred-while-initiating-the-request-to-the-identity-provider-please-contact-your-system-administrator">
+<h2><code class="docutils literal notranslate"><span class="pre">An</span> <span class="pre">error</span> <span class="pre">occurred</span> <span class="pre">while</span> <span class="pre">initiating</span> <span class="pre">the</span> <span class="pre">request</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">Identity</span> <span class="pre">Provider.</span> <span class="pre">Please</span> <span class="pre">contact</span> <span class="pre">your</span> <span class="pre">System</span> <span class="pre">Administrator.</span></code><a class="headerlink" href="#an-error-occurred-while-initiating-the-request-to-the-identity-provider-please-contact-your-system-administrator" title="Permalink to this headline">¶</a></h2>
+<p>This error message can have multiple causes. The log messages provide more information about the root cause and are provided below, along with a suggested fix.</p>
+<p><strong>Issue: Missing a Certificate File</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ERRO<span class="o">[</span><span class="m">2019</span>-12-20T17:20:24.3999581-07:00<span class="o">]</span> Identity Provider Public Certificate File was not found. Please contact your System Administrator.  <span class="nv">caller</span><span class="o">=</span><span class="s2">&quot;mlog/log.go:175&quot;</span> <span class="nv">err_details</span><span class="o">=</span> <span class="nv">err_where</span><span class="o">=</span>SamlInterfaceImpl.BuildRequest <span class="nv">http_code</span><span class="o">=</span><span class="m">500</span> <span class="nv">ip_addr</span><span class="o">=</span><span class="s2">&quot;::1&quot;</span> <span class="nv">method</span><span class="o">=</span>GET <span class="nv">path</span><span class="o">=</span>/login/sso/saml <span class="nv">request_id</span><span class="o">=</span>tm9ywzxcbj88dypkhjgg8hideo <span class="nv">user_id</span><span class="o">=</span>
+</pre></div>
+</div>
+<p>Install the Identity Provider Certificate and restart the process.</p>
+<p><strong>Issue: Missing Service Provider Private Key</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ERRO<span class="o">[</span><span class="m">2019</span>-12-23T08:51:28.423397-07:00<span class="o">]</span> An error occurred <span class="k">while</span> configuring SAML Service Provider  <span class="nv">caller</span><span class="o">=</span><span class="s2">&quot;app/enterprise.go:154&quot;</span> <span class="nv">error</span><span class="o">=</span><span class="s2">&quot;saml-public.crt: cannot read: failed to get config file saml-private.key: failed to read file from .../mattermost-server/config/saml-private.key: open .../mattermost-server/config/saml-private.key: no such file or directory&quot;</span>
+</pre></div>
+</div>
+<p>Install the Service Provider Private Key and restart the process.</p>
+<p><strong>Issue: Missing Service Provider Public Certificate</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ERRO<span class="o">[</span><span class="m">2019</span>-12-23T09:06:27.654774-07:00<span class="o">]</span> An error occurred <span class="k">while</span> configuring SAML Service Provider  <span class="nv">caller</span><span class="o">=</span><span class="s2">&quot;app/enterprise.go:154&quot;</span> <span class="nv">error</span><span class="o">=</span><span class="s2">&quot;saml-public.crt: cannot read: failed to get config file saml-public.crt: failed to read file from .../mattermost-server/config/saml-public.crt: open .../mattermost-server/config/saml-public.crt: no such file or directory&quot;</span>
+</pre></div>
+</div>
+<p>Install the Service Provider Public Certificate and restart the process.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If making adjustments for these errors within System Console, no restart is required. However, if making configuration changes outside System Console, such as moving certificate files to the corrrect path, a server restart is required.</p>
+</div>
+</div>
+<div class="section" id="id1">
+<h2><code class="docutils literal notranslate"><span class="pre">SAML</span> <span class="pre">login</span> <span class="pre">was</span> <span class="pre">unsuccessful</span> <span class="pre">because</span> <span class="pre">one</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">attributes</span> <span class="pre">is</span> <span class="pre">incorrect.</span> <span class="pre">Please</span> <span class="pre">contact</span> <span class="pre">your</span> <span class="pre">System</span> <span class="pre">Administrator.</span></code><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>This error indicates that a required attribute was missing from the assertion received from the Idp provider, check log file for which attribute is missing.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ERRO<span class="o">[</span><span class="m">2019</span>-12-09T21:23:24.506631-07:00<span class="o">]</span> SAML login was unsuccessful because one of the attributes is incorrect. Please contact your System Administrator.  <span class="nv">caller</span><span class="o">=</span><span class="s2">&quot;mlog/log.go:174&quot;</span> <span class="nv">err_details</span><span class="o">=</span><span class="s2">&quot;id attribute is missing&quot;</span> <span class="nv">err_where</span><span class="o">=</span>SamlInterfaceLibImpl.DoLogin <span class="nv">http_code</span><span class="o">=</span><span class="m">302</span> <span class="nv">ip_addr</span><span class="o">=</span><span class="s2">&quot;::1&quot;</span> <span class="nv">method</span><span class="o">=</span>POST <span class="nv">path</span><span class="o">=</span>/login/sso/saml <span class="nv">request_id</span><span class="o">=</span>5bb6uchhm38kxys6rqm8i5p4ow <span class="nv">user_id</span><span class="o">=</span>
+</pre></div>
+</div>
+<p>To address the issue, update settings on Idp to include the required attribute.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Turning on debug logging will allow the assertion to be logged.</p>
+</div>
+</div>
+<div class="section" id="saml-login-was-unsuccessful-because-encryption-is-not-enabled-please-contact-your-system-administrator">
+<h2><code class="docutils literal notranslate"><span class="pre">SAML</span> <span class="pre">login</span> <span class="pre">was</span> <span class="pre">unsuccessful</span> <span class="pre">because</span> <span class="pre">encryption</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">enabled.</span> <span class="pre">Please</span> <span class="pre">contact</span> <span class="pre">your</span> <span class="pre">System</span> <span class="pre">Administrator.</span></code><a class="headerlink" href="#saml-login-was-unsuccessful-because-encryption-is-not-enabled-please-contact-your-system-administrator" title="Permalink to this headline">¶</a></h2>
+<p>This error indicates a mismatch between SP Provider (Mattermost) configuration and Idp Provider configuration. The SP Provider SAML is configured to expect an unencrypted SAML assertion but the assertion received was encrypted.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ERRO<span class="o">[</span><span class="m">2019</span>-12-23T10:53:42.332484-07:00<span class="o">]</span> SAML login was unsuccessful because encryption is not enabled. Please contact your System Administrator.  <span class="nv">caller</span><span class="o">=</span><span class="s2">&quot;mlog/log.go:175&quot;</span> <span class="nv">err_details</span><span class="o">=</span> <span class="nv">err_where</span><span class="o">=</span>SamlInterfaceImpl.DoLogin <span class="nv">http_code</span><span class="o">=</span><span class="m">302</span> <span class="nv">ip_addr</span><span class="o">=</span><span class="s2">&quot;::1&quot;</span> <span class="nv">method</span><span class="o">=</span>POST <span class="nv">path</span><span class="o">=</span>/login/sso/saml <span class="nv">request_id</span><span class="o">=</span>63s9b8i7u38nzfeuqyzdbank7h <span class="nv">user_id</span><span class="o">=</span>
+</pre></div>
+</div>
+<p>To address this issue, turn on encryption and restart the process.</p>
+</div>
+<div class="section" id="saml-login-was-unsuccessful-as-the-identity-provider-response-is-not-encrypted-please-contact-your-system-administrator">
+<h2><code class="docutils literal notranslate"><span class="pre">SAML</span> <span class="pre">login</span> <span class="pre">was</span> <span class="pre">unsuccessful</span> <span class="pre">as</span> <span class="pre">the</span> <span class="pre">Identity</span> <span class="pre">Provider</span> <span class="pre">response</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">encrypted.</span> <span class="pre">Please</span> <span class="pre">contact</span> <span class="pre">your</span> <span class="pre">System</span> <span class="pre">Administrator.</span></code><a class="headerlink" href="#saml-login-was-unsuccessful-as-the-identity-provider-response-is-not-encrypted-please-contact-your-system-administrator" title="Permalink to this headline">¶</a></h2>
+<p>This error indicates a mismatch between SP Provider (Mattermost) configuration and Idp Provider configuration. The SP Provider SAML is configured to expect an unencrypted SAML Assertion but the assertion received was encrypted.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ERRO<span class="o">[</span><span class="m">2019</span>-12-23T10:59:13.486763-07:00<span class="o">]</span> SAML login was unsuccessful as the Identity Provider response is not encrypted. Please contact your System Administrator.  <span class="nv">caller</span><span class="o">=</span><span class="s2">&quot;mlog/log.go:175&quot;</span> <span class="nv">err_details</span><span class="o">=</span> <span class="nv">err_where</span><span class="o">=</span>SamlInterfaceImpl.DoLogin <span class="nv">http_code</span><span class="o">=</span><span class="m">302</span> <span class="nv">ip_addr</span><span class="o">=</span><span class="s2">&quot;::1&quot;</span> <span class="nv">method</span><span class="o">=</span>POST <span class="nv">path</span><span class="o">=</span>/login/sso/saml <span class="nv">request_id</span><span class="o">=</span>j61b8mqpc3n97pgqqeuxupx93y <span class="nv">user_id</span><span class="o">=</span>
+</pre></div>
+</div>
+<p>To address this issue, turn on encryption and restart the process.</p>
+</div>
+<div class="section" id="an-error-occurred-while-parsing-the-response-from-the-identity-provider-please-contact-your-system-administrator">
+<h2><code class="docutils literal notranslate"><span class="pre">An</span> <span class="pre">error</span> <span class="pre">occurred</span> <span class="pre">while</span> <span class="pre">parsing</span> <span class="pre">the</span> <span class="pre">response</span> <span class="pre">from</span> <span class="pre">the</span> <span class="pre">Identity</span> <span class="pre">Provider.</span> <span class="pre">Please</span> <span class="pre">contact</span> <span class="pre">your</span> <span class="pre">System</span> <span class="pre">Administrator.</span></code><a class="headerlink" href="#an-error-occurred-while-parsing-the-response-from-the-identity-provider-please-contact-your-system-administrator" title="Permalink to this headline">¶</a></h2>
+<p>This error is caused by a malformed response or certificate issue, see log file for more information.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ERRO<span class="o">[</span><span class="m">2019</span>-12-23T11:22:16.733242-07:00<span class="o">]</span> An error occurred <span class="k">while</span> parsing the response from the Identity Provider. Please contact your System Administrator.  <span class="nv">caller</span><span class="o">=</span><span class="s2">&quot;mlog/log.go:175&quot;</span> <span class="nv">err_details</span><span class="o">=</span><span class="s2">&quot;err=illegal base64 data at input byte 15012&quot;</span> <span class="nv">err_where</span><span class="o">=</span>SamlInterfaceImpl.DoLogin <span class="nv">http_code</span><span class="o">=</span><span class="m">302</span> <span class="nv">ip_addr</span><span class="o">=</span><span class="s2">&quot;::1&quot;</span> <span class="nv">method</span><span class="o">=</span>POST <span class="nv">path</span><span class="o">=</span>/login/sso/saml <span class="nv">request_id</span><span class="o">=</span>uhnbq1objfyqpyqct3sy3fch9y <span class="nv">user_id</span><span class="o">=</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="an-error-occurred-while-encoding-the-request-for-the-identity-provider-please-contact-your-system-administrator">
+<h2><code class="docutils literal notranslate"><span class="pre">An</span> <span class="pre">error</span> <span class="pre">occurred</span> <span class="pre">while</span> <span class="pre">encoding</span> <span class="pre">the</span> <span class="pre">request</span> <span class="pre">for</span> <span class="pre">the</span> <span class="pre">Identity</span> <span class="pre">Provider.</span> <span class="pre">Please</span> <span class="pre">contact</span> <span class="pre">your</span> <span class="pre">System</span> <span class="pre">Administrator.</span></code><a class="headerlink" href="#an-error-occurred-while-encoding-the-request-for-the-identity-provider-please-contact-your-system-administrator" title="Permalink to this headline">¶</a></h2>
+<p>This error indicates an issue with <code class="docutils literal notranslate"><span class="pre">xmlsec1</span></code>; either <code class="docutils literal notranslate"><span class="pre">xmlsec1</span></code> is not installed or the version of <code class="docutils literal notranslate"><span class="pre">xmlsec1</span></code> in use does not accept self-signed certificate.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ERRO<span class="o">[</span><span class="m">2019</span>-12-23T12:42:04.389431-07:00<span class="o">]</span> An error occurred <span class="k">while</span> encoding the request <span class="k">for</span> the Identity Provider. Please contact your System Administrator.  <span class="nv">caller</span><span class="o">=</span><span class="s2">&quot;mlog/log.go:175&quot;</span> <span class="nv">err_details</span><span class="o">=</span> <span class="nv">err_where</span><span class="o">=</span>SamlInterfaceImpl.BuildRequest <span class="nv">http_code</span><span class="o">=</span><span class="m">500</span> <span class="nv">ip_addr</span><span class="o">=</span><span class="s2">&quot;::1&quot;</span> <span class="nv">method</span><span class="o">=</span>GET <span class="nv">path</span><span class="o">=</span>/login/sso/saml <span class="nv">request_id</span><span class="o">=</span>mg4mdc78q3r798y5ierdz5qqdc <span class="nv">user_id</span><span class="o">=</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="saml-login-was-unsuccessful-because-an-error-occurred-while-decrypting-the-response-from-the-identity-provider-please-contact-your-system-administrator">
+<h2><code class="docutils literal notranslate"><span class="pre">SAML</span> <span class="pre">login</span> <span class="pre">was</span> <span class="pre">unsuccessful</span> <span class="pre">because</span> <span class="pre">an</span> <span class="pre">error</span> <span class="pre">occurred</span> <span class="pre">while</span> <span class="pre">decrypting</span> <span class="pre">the</span> <span class="pre">response</span> <span class="pre">from</span> <span class="pre">the</span> <span class="pre">Identity</span> <span class="pre">Provider.</span> <span class="pre">Please</span> <span class="pre">contact</span> <span class="pre">your</span> <span class="pre">System</span> <span class="pre">Administrator.</span></code><a class="headerlink" href="#saml-login-was-unsuccessful-because-an-error-occurred-while-decrypting-the-response-from-the-identity-provider-please-contact-your-system-administrator" title="Permalink to this headline">¶</a></h2>
+<p>This error indicates an issue with <code class="docutils literal notranslate"><span class="pre">xmlsec1</span></code>; either <code class="docutils literal notranslate"><span class="pre">xmlsec1</span></code> is not installed or the version of <code class="docutils literal notranslate"><span class="pre">xmlsec1</span></code> in use does not accept self-signed certificates.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ERRO<span class="o">[</span><span class="m">2019</span>-12-23T12:45:45.041627-07:00<span class="o">]</span> SAML login was unsuccessful because an error occurred <span class="k">while</span> decrypting the response from the Identity Provider. Please contact your System Administrator.  <span class="nv">caller</span><span class="o">=</span><span class="s2">&quot;mlog/log.go:175&quot;</span> <span class="nv">err_details</span><span class="o">=</span><span class="s2">&quot;err=failed to decrypt xml: error invoking xmlsec1: : exec: \&quot;xmlsec1\&quot;: executable file not found in </span><span class="nv">$PATH</span><span class="s2">&quot;</span> <span class="nv">err_where</span><span class="o">=</span>SamlInterfaceImpl.DoLogin <span class="nv">http_code</span><span class="o">=</span><span class="m">302</span> <span class="nv">ip_addr</span><span class="o">=</span><span class="s2">&quot;::1&quot;</span> <span class="nv">method</span><span class="o">=</span>POST <span class="nv">path</span><span class="o">=</span>/login/sso/saml <span class="nv">request_id</span><span class="o">=</span>i7d7kc4hk3ymzneetdbuafz9ca <span class="nv">user_id</span><span class="o">=</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="an-error-occurred-while-validating-the-response-from-the-identity-provider-please-contact-your-system-administrator">
+<h2><code class="docutils literal notranslate"><span class="pre">An</span> <span class="pre">error</span> <span class="pre">occurred</span> <span class="pre">while</span> <span class="pre">validating</span> <span class="pre">the</span> <span class="pre">response</span> <span class="pre">from</span> <span class="pre">the</span> <span class="pre">Identity</span> <span class="pre">Provider.</span> <span class="pre">Please</span> <span class="pre">contact</span> <span class="pre">your</span> <span class="pre">System</span> <span class="pre">Administrator.</span></code><a class="headerlink" href="#an-error-occurred-while-validating-the-response-from-the-identity-provider-please-contact-your-system-administrator" title="Permalink to this headline">¶</a></h2>
+<p>This error message applies to various validation issues. The log message provides more information about the cause of the issue.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ERRO<span class="o">[</span><span class="m">2019</span>-12-23T13:09:49.171975-07:00<span class="o">]</span> An error occurred <span class="k">while</span> validating the response from the Identity Provider. Please contact your System Administrator.  <span class="nv">caller</span><span class="o">=</span><span class="s2">&quot;mlog/log.go:175&quot;</span> <span class="nv">err_details</span><span class="o">=</span><span class="s2">&quot;err=unsupported SAML Version&quot;</span> <span class="nv">err_where</span><span class="o">=</span>SamlInterfaceImpl.DoLogin <span class="nv">http_code</span><span class="o">=</span><span class="m">302</span> <span class="nv">ip_addr</span><span class="o">=</span><span class="s2">&quot;::1&quot;</span> <span class="nv">method</span><span class="o">=</span>POST <span class="nv">path</span><span class="o">=</span>/login/sso/saml <span class="nv">request_id</span><span class="o">=</span>5omhhgei8jr68jba3j4tiwo48c <span class="nv">user_id</span><span class="o">=</span>
+</pre></div>
+</div>
+<p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">unsupported</span> <span class="pre">SAML</span> <span class="pre">Version</span></code>: The assertion xml contains the wrong SAML version, 2.0 supported.</li>
+<li><code class="docutils literal notranslate"><span class="pre">missing</span> <span class="pre">ID</span> <span class="pre">attribute</span> <span class="pre">on</span> <span class="pre">SAML</span> <span class="pre">Response</span></code>: The assertion did not contain an ID attribute. Invalid XML received.</li>
+<li><code class="docutils literal notranslate"><span class="pre">no</span> <span class="pre">signature</span></code>: No signature, but signature validation required.</li>
+<li><code class="docutils literal notranslate"><span class="pre">invalid</span> <span class="pre">signature</span> <span class="pre">reference</span> <span class="pre">uri</span></code>: Invalid signature tag. Invalid XML received.</li>
+<li><code class="docutils literal notranslate"><span class="pre">destination</span> <span class="pre">mismatch</span> <span class="pre">expected:</span> <span class="pre">x</span> <span class="pre">not</span> <span class="pre">y</span></code>: <code class="docutils literal notranslate"><span class="pre">AssertionConsumerServiceURL</span></code> did not match expected.</li>
+<li><code class="docutils literal notranslate"><span class="pre">too</span> <span class="pre">soon</span></code> or <code class="docutils literal notranslate"><span class="pre">too</span> <span class="pre">late</span></code>: Assertion <code class="docutils literal notranslate"><span class="pre">NotOnOrAfter</span></code> or <code class="docutils literal notranslate"><span class="pre">NotBefore</span></code> attribute outside current time.</li>
+</ul>
+</div>
+<div class="section" id="why-does-the-objectguid-of-a-user-in-mattermost-differ-from-what-we-re-seeing-in-adfs">
+<h2>Why does the objectGUID of a user in Mattermost differ from what we’re seeing in ADFS?<a class="headerlink" href="#why-does-the-objectguid-of-a-user-in-mattermost-differ-from-what-we-re-seeing-in-adfs" title="Permalink to this headline">¶</a></h2>
+<p>The Active Directory ObjectGUID attribute LDAP display name <code class="docutils literal notranslate"><span class="pre">objectGUID</span></code> is a 16 byte array which can be displayed in different ways:</p>
+<ul class="simple">
+<li>The <code class="docutils literal notranslate"><span class="pre">ldapsearch</span></code> Linux command displays it as base64: <code class="docutils literal notranslate"><span class="pre">Hrz/HqNKnU+lCNTYHx9Ycw==</span></code>. This is also the format used in LDIF files.</li>
+<li><dl class="first docutils">
+<dt>The <a class="reference external" href="https://github.com/go-ldap/ldap">LDAP Golang package we use</a> shows the value as hexadecimal (base 16) array with each byte separated by a backslash: <code class="docutils literal notranslate"><span class="pre">\1e\bc\ff\1e\a3\4a\9d\4f\a5\08\d4\d8\1f\1f\58\73</span></code>.</dt>
+<dd><ul class="first last">
+<li>You can remove the backslashes: <code class="docutils literal notranslate"><span class="pre">1ebcff1ea34a9d4fa508d4d81f1f5873</span></code> and parse it with <a class="reference external" href="https://play.golang.org/p/9b8iDPuz0Nm">Golang</a> as snippets which prints the base 10 representation of each value: <code class="docutils literal notranslate"><span class="pre">30</span> <span class="pre">188</span> <span class="pre">255</span> <span class="pre">30</span> <span class="pre">163</span> <span class="pre">74</span> <span class="pre">157</span> <span class="pre">79</span> <span class="pre">165</span> <span class="pre">8</span> <span class="pre">212</span> <span class="pre">216</span> <span class="pre">31</span> <span class="pre">31</span> <span class="pre">88</span> <span class="pre">115</span></code>.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>Windows PowerShell displays the value like this: <code class="docutils literal notranslate"><span class="pre">1effbc1e-4aa3-4f9d-a508-d4d81f1f5873</span></code>.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="deployment-and-clustering">
+<h1>Deployment and Clustering<a class="headerlink" href="#deployment-and-clustering" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="red-server-status">
+<h2>Red Server Status<a class="headerlink" href="#red-server-status" title="Permalink to this headline">¶</a></h2>
+<p>When High Availability is enabled, the System Console displays the server status as red or green, indicating if the servers are communicating correctly with the cluster. The servers use inter-node communication to ping the other machines in the cluster, and once a ping is established the servers exchange information, such as server version and configuration files.</p>
+<p>A server status of red can occur for the following reasons:</p>
+<ul class="simple">
+<li><strong>Configuration file mismatch:</strong> Mattermost will still attempt the inter-node communication, but the System Console will show a red status for the server since the high availability feature assumes the same configuration file to function properly.</li>
+<li><strong>Server version mismatch:</strong> Mattermost will still attempt the inter-node communication, but the System Console will show a red status for the server since the High Availability feature assumes the same version of Mattermost is installed on each server in the cluster. It’s recommended to use the <a class="reference external" href="https://mattermost.org/download/">latest version of Mattermost</a> on all servers. Follow the upgrade procedure in <a class="reference internal" href="../administration/upgrade.html"><span class="doc">Upgrading Mattermost Server</span></a> for any server that needs to be upgraded.</li>
+<li><strong>Server is down:</strong> If an inter-node communication fails to send a message it makes another attempt in 15 seconds. If the second attempt fails, the server is assumed to be down. An error message is written to the logs and the System Console shows a status of red for that server. The inter-node communication continues to ping down the server in 15-second intervals. When the server comes back up, any new messages are sent to it.</li>
+</ul>
+</div>
+<div class="section" id="websocket-disconnect">
+<h2>WebSocket Disconnect<a class="headerlink" href="#websocket-disconnect" title="Permalink to this headline">¶</a></h2>
+<p>When a client WebSocket receives a disconnect it will automatically attempt to re-establish a connection every three seconds with a backoff. After the connection is established, the client attempts to receive any messages that were sent while it was disconnected.</p>
+</div>
+<div class="section" id="app-refreshes-continuously">
+<h2>App Refreshes Continuously<a class="headerlink" href="#app-refreshes-continuously" title="Permalink to this headline">¶</a></h2>
+<p>When configuration settings are modified through the System Console, the client refreshes every time a user connects to a different app server. This occurs because the servers have different <code class="docutils literal notranslate"><span class="pre">config.json</span></code> files in a High Availability cluster.</p>
+<p>Modify configuration settings directly through <code class="docutils literal notranslate"><span class="pre">config.json</span></code> <a class="reference external" href="https://docs.mattermost.com/deployment/cluster.html#updating-configuration-changes-while-operating-continuously">following these steps</a>.</p>
+</div>
+<div class="section" id="messages-do-not-post-until-after-reloading">
+<h2>Messages Do Not Post Until After Reloading<a class="headerlink" href="#messages-do-not-post-until-after-reloading" title="Permalink to this headline">¶</a></h2>
+<p>When running in High Availability mode, make sure all Mattermost application servers are running the same version of Mattermost. If they are running different versions, it can lead to a state where the lower version app server cannot handle a request and the request will not be sent until the frontend application is refreshed and sent to a server with a valid Mattermost version.</p>
+<p>Symptoms to look for include requests failing seemingly at random or a single application server having a drastic rise in goroutines and API errors.</p>
+</div>
+</div>
+<div class="section" id="server-administration">
+<h1>Server Administration<a class="headerlink" href="#server-administration" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="please-check-connection-mattermost-unreachable-if-issue-persists-ask-administrator-to-check-websocket-port">
+<h2><code class="docutils literal notranslate"><span class="pre">Please</span> <span class="pre">check</span> <span class="pre">connection,</span> <span class="pre">Mattermost</span> <span class="pre">unreachable.</span> <span class="pre">If</span> <span class="pre">issue</span> <span class="pre">persists,</span> <span class="pre">ask</span> <span class="pre">administrator</span> <span class="pre">to</span> <span class="pre">check</span> <span class="pre">WebSocket</span> <span class="pre">port.</span></code><a class="headerlink" href="#please-check-connection-mattermost-unreachable-if-issue-persists-ask-administrator-to-check-websocket-port" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Message appears in blue bar on team site.</li>
+<li>To check the WebSocket connection, open the developer console in your browser and view the <strong>Network</strong> panel. If the WebSocket is not connecting properly, you will see a pending WebSocket connection show up in the list. The screenshot below shows an example from Chrome.</li>
+</ul>
+<img alt="../_images/websocket.png" src="../_images/websocket.png" />
+<ul class="simple">
+<li><strong>If this issue is reported repeatedly</strong>, the most likely cause is a proxy being misconfigured somewhere in your infrastructure, and possibly stripping headers off of WebSocket communications.</li>
+<li>Mattermost clients connect to the server using multiple protocols, <code class="docutils literal notranslate"><span class="pre">https</span></code> to enable general site functionality, and <code class="docutils literal notranslate"><span class="pre">wss</span></code> for real-time updates. This error message appears when the <code class="docutils literal notranslate"><span class="pre">https</span></code> connection is working, but the <code class="docutils literal notranslate"><span class="pre">wss</span></code> connection has issues, most commonly having headers stripped off by a firewall or proxy that is either misconfigured or which does not support secure WebSockets.</li>
+</ul>
+<p><strong>Note:</strong> If your <code class="docutils literal notranslate"><span class="pre">https</span></code> connection is working and <code class="docutils literal notranslate"><span class="pre">wss</span></code> is not, and you dismiss the blue bar message, your team site will render, but will not support real time communications (you will need to refresh to see updates and the system is effectively “broken”).</p>
+<p><strong>Solution:</strong></p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Follow the <a class="reference external" href="https://docs.mattermost.com/install/install-ubuntu-1604.html#installing-nginx-server">installation guide to set up your WebSocket port properly</a>.</li>
+<li>Speak with the owner of any other proxies between your device and the Mattermost server to ensure <code class="docutils literal notranslate"><span class="pre">wss</span></code> connections are passing through without issue.</li>
+</ol>
+</div></blockquote>
+<p>If this issue is reported rarely, in some cases the issue comes from <em>intermittent</em> internet connectivity, where the initial load works, but the device then becomes disconnected from the internet and real time updates over the <code class="docutils literal notranslate"><span class="pre">wss</span></code> connection fail repeatedly and the error is displayed to check if the <code class="docutils literal notranslate"><span class="pre">wss</span></code> connection were misconfigured.</p>
+<p>If only a small number of users have this issue, it could be from intermittent internet access, if almost every user has this issue, it’s likely from a misconfiguration of the <code class="docutils literal notranslate"><span class="pre">wss</span></code> connection.</p>
+<div class="section" id="cannot-connect-to-the-server-please-check-your-server-url-and-internet-connection">
+<h3><code class="docutils literal notranslate"><span class="pre">Cannot</span> <span class="pre">connect</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">server.</span> <span class="pre">Please</span> <span class="pre">check</span> <span class="pre">your</span> <span class="pre">server</span> <span class="pre">URL</span> <span class="pre">and</span> <span class="pre">internet</span> <span class="pre">connection.</span></code><a class="headerlink" href="#cannot-connect-to-the-server-please-check-your-server-url-and-internet-connection" title="Permalink to this headline">¶</a></h3>
+<p>This error may appear on some devices when trying to connect to a server that is using an SSL curve that’s not supported by the client device.</p>
+<p><strong>Solution:</strong></p>
+<p>If you are using NGINX as a proxy, set the <code class="docutils literal notranslate"><span class="pre">ssl_ecdh_curve</span></code> directive in your site configuration file (for example, in <code class="docutils literal notranslate"><span class="pre">/etc/nginx/sites-available/mattermost</span></code>), to a value that’s supported by both client and server. Suggested values for varying levels of compatibility can be found at <a class="reference external" href="https://wiki.mozilla.org/Security/Server_Side_TLS">Mozilla’s Security/Server Side TLS</a> page.</p>
+<p>As security and encryption standards often change rapidly, it’s best to check for up-to-date information. However, the suggested value as of January 2018 is to use the curves: prime256v1, secp384r1, secp521r1.</p>
+<p>For NGINX, this would translate to <code class="docutils literal notranslate"><span class="pre">ssl_ecdh_curve</span> <span class="pre">prime256v1:secp384r1:secp521r1;</span></code>.</p>
+<p><strong>Note:</strong> Setting multiple curves requires nginx 1.11.0, if you can only set one curve, the most compatible is prime256v1.</p>
+</div>
+<div class="section" id="x509-certificate-signed-by-unknown-authority">
+<h3><code class="docutils literal notranslate"><span class="pre">x509:</span> <span class="pre">certificate</span> <span class="pre">signed</span> <span class="pre">by</span> <span class="pre">unknown</span> <span class="pre">authority</span></code><a class="headerlink" href="#x509-certificate-signed-by-unknown-authority" title="Permalink to this headline">¶</a></h3>
+<p>This error may appear in server logs when attempting to sign-up when using self-signed certificates to set up SSL, which is not yet supported by Mattermost.</p>
+<p><strong>Solution:</strong></p>
+<p>Set up a load balancer like NGINX <a class="reference external" href="https://docs.mattermost.com/install/install-ubuntu-1604.html#configuring-nginx-with-ssl-and-http-2">per production install guide</a>. The core team is looking into allowing self-signed certificates in the future.</p>
+<p>As a work around, in <strong>System Console &gt; Security &gt; Connections</strong> set <strong>Enable Insecure Outgoing Connections</strong> to <strong>True</strong>.</p>
+<p>This will allow insecure TLS connections, but be careful in doing so as it also opens your Mattermost site to man-in-the-middle attacks.</p>
+</div>
+</div>
+<div class="section" id="panic-runtime-error-invalid-memory-address-or-nil-pointer-dereference">
+<h2><code class="docutils literal notranslate"><span class="pre">panic:</span> <span class="pre">runtime</span> <span class="pre">error:</span> <span class="pre">invalid</span> <span class="pre">memory</span> <span class="pre">address</span> <span class="pre">or</span> <span class="pre">nil</span> <span class="pre">pointer</span> <span class="pre">dereference</span></code><a class="headerlink" href="#panic-runtime-error-invalid-memory-address-or-nil-pointer-dereference" title="Permalink to this headline">¶</a></h2>
+<p>This error can occur if you’ve manually manipulated the Mattermost database, typically with deletions. Mattermost is designed to serve as a searchable archive, and manual manipulation of the database elements compromises integrity and may prevent upgrade.</p>
+<p><strong>Solution:</strong></p>
+<p>Restore from database backup created prior to manual database updates, or reinstall the system.</p>
+</div>
+<div class="section" id="we-couldn-t-find-an-existing-account-matching-your-email-address-for-this-team-this-team-may-require-an-invite-from-the-team-owner-to-join">
+<h2><code class="docutils literal notranslate"><span class="pre">We</span> <span class="pre">couldn't</span> <span class="pre">find</span> <span class="pre">an</span> <span class="pre">existing</span> <span class="pre">account</span> <span class="pre">matching</span> <span class="pre">your</span> <span class="pre">email</span> <span class="pre">address</span> <span class="pre">for</span> <span class="pre">this</span> <span class="pre">team.</span> <span class="pre">This</span> <span class="pre">team</span> <span class="pre">may</span> <span class="pre">require</span> <span class="pre">an</span> <span class="pre">invite</span> <span class="pre">from</span> <span class="pre">the</span> <span class="pre">team</span> <span class="pre">owner</span> <span class="pre">to</span> <span class="pre">join.</span></code><a class="headerlink" href="#we-couldn-t-find-an-existing-account-matching-your-email-address-for-this-team-this-team-may-require-an-invite-from-the-team-owner-to-join" title="Permalink to this headline">¶</a></h2>
+<p>This error appears when a user tries to sign in, and Mattermost can’t find an account matching the credentials they entered.</p>
+<p><strong>Solution:</strong></p>
+<ol class="arabic simple">
+<li>If you’re signing in with email and have previously created an account:</li>
+</ol>
+<p>Check that you are using the correct email address. If you can’t remember what email address was used, contact the System Admin for assistance.</p>
+<ol class="arabic simple" start="2">
+<li>If you haven’t signed up for an account on this team yet:</li>
+</ol>
+<p>Click the link at the bottom of the sign-in page that says “Don’t have an account? Create one now” to create an account. If the link is not available, contact a Team or System Admin for an invitation.</p>
+<ol class="arabic" start="3">
+<li><p class="first">If your account uses a different sign-in method (for example, the account was created with email but the user is trying to use SSO to sign in):</p>
+<ul>
+<li><p class="first">Check the sign in page.</p>
+</li>
+<li><p class="first">If the sign-in method the account was created with is available, use that to sign in.</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>Note:</strong> You may then switch authentication methods from <strong>Account Settings &gt; Security &gt; Sign-in Method</strong>.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">If the sign-in method is not available, contact the System Admin.</p>
+<blockquote>
+<div><ul class="simple">
+<li>This can happen if the site was originally set up to allow an account to be created using either GitLab or email, but then the System Admin turned one of the options off.</li>
+<li>The System Administrator can fix this issue by:<ol class="arabic">
+<li>Turning the sign-in option back on.</li>
+<li>Asking the user to switch sign-in methods before turning the sign-in option off.</li>
+</ol>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="failed-to-upgrade-websocket-connection">
+<h2><code class="docutils literal notranslate"><span class="pre">Failed</span> <span class="pre">to</span> <span class="pre">upgrade</span> <span class="pre">websocket</span> <span class="pre">connection</span></code><a class="headerlink" href="#failed-to-upgrade-websocket-connection" title="Permalink to this headline">¶</a></h2>
+<p>This error can occur if you’re using multiple URLs to reach Mattermost via proxy forwarding.</p>
+<p><strong>Solution:</strong></p>
+<ol class="arabic simple">
+<li>Upgrade to a Mattermost server v3.8.0 or later, which adds <a class="reference external" href="https://github.com/mattermost/mattermost-server/pull/5667">WebSocket CORS support</a>.</li>
+<li>Follow the installation guide to configure <a class="reference external" href="https://docs.mattermost.com/install/install-ubuntu-1604.html#configuring-nginx-as-a-proxy-for-mattermost-server">NGINX as a proxy for Mattermost server</a>.</li>
+<li>If you’re doing reverse proxy with IIS, upgrade to IIS 8.0 or later and enable WebSockets. For more information, see <a class="reference external" href="https://www.iis.net/learn/get-started/whats-new-in-iis-8/iis-80-websocket-protocol-support">IIS 8.0 WebSocket Protocol Support</a>.</li>
+</ol>
+<div class="section" id="websocket-closed-or-websocket-re-established-connection">
+<h3><code class="docutils literal notranslate"><span class="pre">Websocket</span> <span class="pre">closed</span></code> or <code class="docutils literal notranslate"><span class="pre">Websocket</span> <span class="pre">re-established</span> <span class="pre">connection</span></code><a class="headerlink" href="#websocket-closed-or-websocket-re-established-connection" title="Permalink to this headline">¶</a></h3>
+<p>This alert can appear every few seconds in the desktop application or web browser connected to Mattermost.</p>
+<p><strong>Solution:</strong></p>
+<ul class="simple">
+<li>If you’re using an Amazon ELB check that <code class="docutils literal notranslate"><span class="pre">Idle</span> <span class="pre">Timeout</span></code> is set to <code class="docutils literal notranslate"><span class="pre">120s</span></code>, if it’s significantly lower it will cause an undesireable WebSocket disconnections.</li>
+<li>If you’re using NGINX, make sure you follow the <a class="reference external" href="https://docs.mattermost.com/install/config-proxy-nginx.html">Mattermost configuration instructions</a> for setting the  <code class="docutils literal notranslate"><span class="pre">proxy_read_timeout</span></code>.</li>
+</ul>
+</div>
+<div class="section" id="context-deadline-exceeded">
+<h3><code class="docutils literal notranslate"><span class="pre">context</span> <span class="pre">deadline</span> <span class="pre">exceeded</span></code><a class="headerlink" href="#context-deadline-exceeded" title="Permalink to this headline">¶</a></h3>
+<p>This error appears when a request from Mattermost to another system, such as an Elasticsearch server, experiences a connection timeout.</p>
+<p><strong>Solution:</strong></p>
+<ol class="arabic simple">
+<li>Verify that the Mattermost server is able to connect to the system referenced in the error message.</li>
+<li>Increase the request timeout value for that integration in the Mattermost <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file.</li>
+<li>Ensure the target system is behaving properly and has sufficient resources to handle current load.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="section" id="settings">
+<h1>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="user-statuses-get-stuck-on-away-or-offline-status">
+<h2>User Statuses get Stuck on “Away” or “Offline” Status<a class="headerlink" href="#user-statuses-get-stuck-on-away-or-offline-status" title="Permalink to this headline">¶</a></h2>
+<p>If you notice more than one user being stuck at an “Away” or “Offline” status, try one of the following steps:</p>
+<ol class="arabic simple">
+<li>If you’re using an NGINX proxy, configure IP Hash load balancing to determine what server should be selected for the next request (based on the client’s IP address) <a class="reference external" href="https://nginx.org/en/docs/http/load_balancing.html">as described here</a>.</li>
+<li>If you’re using an AWS Application Load Balancer (ALB), enable Sticky Sessions feature in Amazon EC2’s Elastic Load Balancing <a class="reference external" href="https://aws.amazon.com/blogs/aws/new-elastic-load-balancing-feature-sticky-sessions/">as described here</a>.</li>
+</ol>
+<p>If neither of the above steps help resolve the issue, please open a new topic <a class="reference external" href="https://forum.mattermost.org/">in the Mattermost forums</a> for further troubleshooting.</p>
+</div>
+<div class="section" id="system-console-settings-revert-to-previous-values-after-saving">
+<h2>System Console Settings Revert to Previous Values after Saving<a class="headerlink" href="#system-console-settings-revert-to-previous-values-after-saving" title="Permalink to this headline">¶</a></h2>
+<p>If you try to save a System Console page and notice that the settings revert to previous values, your <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file may have a permissions issue.</p>
+<p>Check that the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file is owned by the same user as the process that runs the Mattermost server. If not, change the owner to be the Mattermost user and restart the server.</p>
+</div>
+<div class="section" id="mattermost-can-t-connect-to-ldap-ad-server">
+<h2>Mattermost Can’t Connect to LDAP/AD Server<a class="headerlink" href="#mattermost-can-t-connect-to-ldap-ad-server" title="Permalink to this headline">¶</a></h2>
+<p>LDAP and Active Directory troubleshooting can be found on <a class="reference external" href="https://docs.mattermost.com/deployment/sso-ldap.html#troubleshooting-faq">this page</a>.</p>
+</div>
+</div>
+<div class="section" id="mobile">
+<h1>Mobile<a class="headerlink" href="#mobile" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="login-with-adfs-office365-is-not-working">
+<h2>Login with ADFS/Office365 is Not Working<a class="headerlink" href="#login-with-adfs-office365-is-not-working" title="Permalink to this headline">¶</a></h2>
+<p>In line with Microsoft guidance we recommend <a class="reference external" href="https://docs.microsoft.com/en-us/windows-server/identity/ad-fs/operations/configure-intranet-forms-based-authentication-for-devices-that-do-not-support-wia">configuring intranet forms-based authentication for devices that do not support WIA</a>.</p>
+</div>
+<div class="section" id="the-connecting-bar-doesn-t-clear">
+<h2>The “Connecting…” Bar Doesn’t Clear<a class="headerlink" href="#the-connecting-bar-doesn-t-clear" title="Permalink to this headline">¶</a></h2>
+<p>If your app is working properly, you should see a grey “Connecting…” bar that clears or says “Connected” after the app reconnects.</p>
+<p>If you’re seeing this message all the time, and your internet connection seems fine, ask your server administrator whether the server uses NGINX or another webserver as a reverse proxy. If so, they should check that it is configured correctly for <a class="reference external" href="https://docs.mattermost.com/install/install-ubuntu-1604.html#configuring-nginx-as-a-proxy-for-mattermost-server">supporting the websocket connection for APIv4 endpoints</a>.</p>
+</div>
+<div class="section" id="im-not-receiving-push-notifications-on-my-device">
+<h2>I’m Not Receiving Push Notifications on my Device<a class="headerlink" href="#im-not-receiving-push-notifications-on-my-device" title="Permalink to this headline">¶</a></h2>
+<p>If you didn’t receive a push notification when <span class="xref std std-doc">testing push notifications</span>, use the following procedure to troubleshoot:</p>
+<ol class="arabic simple">
+<li>Under <strong>System Console &gt; Environment &gt; Logging &gt; File Log Level</strong> (or <strong>System Console &gt; General &gt; Logging &gt; File Log Level</strong> in versions prior to 5.12) select <strong>DEBUG</strong> in order to watch for push notifications in the server log.</li>
+<li>Delete and reinstall your mobile application.</li>
+<li>Sign in with “Account A” and <strong>confirm you want to receive push notifications</strong> when prompted by the mobile app.</li>
+<li>On desktop, go to <strong>Account Settings &gt; Security &gt; View and Logout of Active Sessions</strong> and check that there is a session for the native mobile app matching your login time.</li>
+<li>Repeat the procedure for <span class="xref std std-doc">testing push notifications</span>.</li>
+<li>If no push notification appears go to <strong>System Console &gt; Logs</strong> and click <strong>Reload</strong>. Look at the bottom of the logs for a message similar to:</li>
+</ol>
+<p><code class="docutils literal notranslate"><span class="pre">[2016/04/21</span> <span class="pre">03:16:44</span> <span class="pre">UTC]</span> <span class="pre">[DEBG]</span> <span class="pre">Sending</span> <span class="pre">push</span> <span class="pre">notification</span> <span class="pre">to</span> <span class="pre">608xyz0...</span> <span class="pre">wi</span> <span class="pre">msg</span> <span class="pre">of</span> <span class="pre">'&#64;accountb:</span> <span class="pre">Hello'</span></code></p>
+<blockquote>
+<div><ul class="simple">
+<li>If the log message appears, it means a message was sent to the HPNS server and was not received by your mobile application. Please contact <a class="reference external" href="mailto:support&#37;&#52;&#48;mattermost&#46;com">support<span>&#64;</span>mattermost<span>&#46;</span>com</a> with the subject “HPNS issue on Step 8” for help from the support team.</li>
+<li>If the log message does not appear, it means no mobile push notification was sent to “Account A”. Please repeat the process, starting at step 2, and double-check each step.</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="7">
+<li><strong>IMPORTANT:</strong> After your issue is resolved, go to <strong>System Console &gt; Environment &gt; Logging &gt; File Log Level</strong> (or <strong>System Console &gt; General &gt; Logging &gt; File Log Level</strong> in versions prior to 5.12) and select <strong>ERROR</strong> to switch your logging detail level to Errors Only, instead of <strong>DEBUG</strong>, in order to conserve disk space.</li>
+</ol>
+</div>
+<div class="section" id="all-outbound-connections-go-through-a-proxy-how-can-i-connect-to-the-mattermost-hosted-push-notification-service">
+<h2>All Outbound Connections go Through a Proxy. How Can I Connect to the Mattermost Hosted Push Notification Service?<a class="headerlink" href="#all-outbound-connections-go-through-a-proxy-how-can-i-connect-to-the-mattermost-hosted-push-notification-service" title="Permalink to this headline">¶</a></h2>
+<p>You can set up an internal server to proxy the connection out of their network to the Mattermost Hosted Push Notification Service (HPNS) by following the steps below:</p>
+<ol class="arabic simple">
+<li>Make sure your proxy server is properly configured to support SSL. Confirm it works by checking the URL at <a class="reference external" href="https://www.digicert.com/help/">https://www.digicert.com/help/</a>.</li>
+<li>Set up a proxy to forward requests to <code class="docutils literal notranslate"><span class="pre">https://push.mattermost.com</span></code>.</li>
+<li>In Mattermost set <strong>System Console &gt; Environment &gt; Push Notification Server &gt; Enable Push Notifications</strong> (or <strong>System Console &gt; Notification Settings &gt; Mobile Push &gt; Enable Push Notifications</strong> in versions prior to 5.12) to <strong>Manually enter Push Notification Service location</strong>.</li>
+<li>Enter the URL of your proxy in the <strong>Push Notification Server</strong> field.</li>
+</ol>
+<p><strong>Note:</strong> Depending on how your proxy is configured you may need to add a port number and create a URL like <code class="docutils literal notranslate"><span class="pre">https://push.internalproxy.com:8000</span></code> mapped to <code class="docutils literal notranslate"><span class="pre">https://push.mattermost.com</span></code>.</p>
+</div>
+<div class="section" id="id2">
+<h2><code class="docutils literal notranslate"><span class="pre">Cannot</span> <span class="pre">connect</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">server.</span> <span class="pre">Please</span> <span class="pre">check</span> <span class="pre">your</span> <span class="pre">server</span> <span class="pre">URL</span> <span class="pre">and</span> <span class="pre">internet</span> <span class="pre">connection.</span></code><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>First, confirm that your server URL has no typos and that it includes <code class="docutils literal notranslate"><span class="pre">http://</span></code> or <code class="docutils literal notranslate"><span class="pre">https://</span></code> according to the server deployment configuration.</p>
+<p>If the server URL is correct, there could be an issue with the SSL certificate configuration.</p>
+<p>To check your SSL certificate set up, test it by visiting a site such as <a class="reference external" href="https://www.ssllabs.com/ssltest/index.html">SSL Labs</a>. If there’s an error about the missing chain or certificate path, there is likely an intermediate certificate missing that needs to be included.</p>
+<p>Please note that the apps cannot connect to servers with self-signed certificates, consider using <a class="reference external" href="https://docs.mattermost.com/install/config-ssl-http2-nginx.html">Let’s Encrypt</a> instead.</p>
+</div>
+</div>
+<div class="section" id="configuration-issues">
+<h1>Configuration Issues<a class="headerlink" href="#configuration-issues" title="Permalink to this headline">¶</a></h1>
+<p>In some cases, the configuration from the product’s website differs from the Mattermost configuration. Review the configuration to ensure it’s aligned with Mattermost.</p>
+<ul class="simple">
+<li>See detailed client software requirements for PC, mobile, and email.</li>
+<li>See detailed server software requirements for operating system and database.</li>
+<li>Check which Mattermost server version you’re on, and confirm whether it’s the latest version.</li>
+<li>Have you made any changes to the default settings in the System Console (or in <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file)?</li>
+<li>What device (webapp, desktop app), browser, and operating system (Windows, macOS, etc.) are you using?</li>
+<li>Confirm that the SSL/TLS certificate was installed successfully by entering your Mattermost server URL to Symantec’s online SSL/TLS certificate checker.</li>
+<li>Look for JavaScript errors in the Chrome developer console: Open the Chrome menu in the top-right of the browser window and select <strong>More Tools &gt; Developer Tools</strong>.</li>
+</ul>
+<div class="section" id="integrations">
+<h2>Integrations<a class="headerlink" href="#integrations" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="youtube-videos-show-a-video-not-found-preview">
+<h3>YouTube Videos Show a “Video not found” Preview<a class="headerlink" href="#youtube-videos-show-a-video-not-found-preview" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>First, make sure the YouTube video exists by pasting a link to the video into your browser’s address bar.</li>
+<li>If you are using the Mattermost Desktop App, please ensure you have installed version 3.5.0 or later.</li>
+<li>If you have specified <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#google-api-key">a Google API key</a> to enable the display of titles for embedded YouTube video previews, regenerate the key.</li>
+</ol>
+</div>
+<div class="section" id="hitting-an-error-command-with-a-trigger-of-failed-when-configuring-giphy-integration">
+<h3>Hitting an Error “Command with a trigger of failed” When Configuring Giphy Integration<a class="headerlink" href="#hitting-an-error-command-with-a-trigger-of-failed-when-configuring-giphy-integration" title="Permalink to this headline">¶</a></h3>
+<p>When trying to configure the Giphy integration in Mattermost, you may hit the error “Command with a trigger of &lt;keyword&gt; failed”. To solve this, you need to edit your <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file and configure <code class="docutils literal notranslate"><span class="pre">AllowedUntrustedInternalConnections</span></code> to contain the hostname of the webhook.</p>
+</div>
+<div class="section" id="gfycat-gifs-are-not-loading-even-though-they-show-up-in-the-emoji-picker">
+<h3>Gfycat gifs are not loading even though they show up in the emoji picker<a class="headerlink" href="#gfycat-gifs-are-not-loading-even-though-they-show-up-in-the-emoji-picker" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Check whether the server has access to the Gfycat servers. It may be behind a proxy or firewall which is blocking outgoing connections.</li>
+<li>Check whether the server reaches the link metadata timeout (see <strong>System Console &gt; Experimental &gt; Link Metadata Timeout</strong>).</li>
+</ol>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>Mobile<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="build-gets-stuck-at-bundlereleasejsandassets">
+<h3>Build Gets Stuck at <code class="docutils literal notranslate"><span class="pre">bundleReleaseJsAndAssets</span></code><a class="headerlink" href="#build-gets-stuck-at-bundlereleasejsandassets" title="Permalink to this headline">¶</a></h3>
+<p>As a workaround, you can bundle the <code class="docutils literal notranslate"><span class="pre">js</span></code> manually first with</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/
+</pre></div>
+</div>
+<p>and then ignore the gradle task with</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./gradlew assembleRelease -x bundleReleaseJsAndAssets
+</pre></div>
+</div>
+</div>
+<div class="section" id="no-image-previews-available-in-the-mobile-app">
+<h3>No Image Previews Available in The Mobile App<a class="headerlink" href="#no-image-previews-available-in-the-mobile-app" title="Permalink to this headline">¶</a></h3>
+<p>This can happen if the server running Mattermost has its mime types not set up correctly. A server running Linux has this file located in <code class="docutils literal notranslate"><span class="pre">/etc/mime.types</span></code>. This might vary depending on your specific OS and distribution.</p>
+<p>Some distributions also ship without <code class="docutils literal notranslate"><span class="pre">mailcap</span></code> which can result in missing or incorrectly configured mime types.</p>
+</div>
+</div>
+</div>
+<div class="section" id="none-of-these-solve-my-problem">
+<h1>None of These Solve my Problem!<a class="headerlink" href="#none-of-these-solve-my-problem" title="Permalink to this headline">¶</a></h1>
+<p>To help us narrow down whether it’s a server configuration issue, device specific issue, or an issue with the app, please try the following steps and include the results in your support request or <a class="reference external" href="https://forum.mattermost.org/c/trouble-shoot">Troubleshooting forum</a> post.</p>
+<p><strong>Connect to another server</strong></p>
+<ol class="arabic simple">
+<li>Create an account at <a class="reference external" href="https://community.mattermost.com">https://community.mattermost.com</a>.</li>
+<li>Erase your mobile application and reinstall it.</li>
+<li>In your mobile app, enter the server URL <a class="reference external" href="https://community.mattermost.com">https://community.mattermost.com</a> and then your login credentials to test whether the connection is working.</li>
+</ol>
+<p><strong>Connect with another device</strong></p>
+<ul class="simple">
+<li>If you have another mobile device available, try connecting with that to see if your issue still reproduces.</li>
+<li>If you don’t have another device available, check with other teammates to see if they are having the same issue.</li>
+</ul>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="trouble_mysql.html" class="btn btn-neutral float-right" title="MySQL Installation Troubleshooting" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../administration/bulk-export.html" class="btn btn-neutral" title="Bulk Export Tool" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/install/troubleshooting.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

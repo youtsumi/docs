@@ -1,0 +1,517 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Configuring Cluster Transport Encryption (E20) &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Deploy Mattermost on Bitnami" href="../deploy-bitnami.html" />
+    <link rel="prev" title="Configuring Database Transport Encryption" href="config-database.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../deployment/deployment.html">Deployment Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/administrator.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../guides/administrator.html#installing-mattermost">Installing Mattermost</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../requirements.html">Software and Hardware Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install-ubuntu-2004.html">Installing on Ubuntu 20.04 LTS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install-ubuntu-1804.html">Installing on Ubuntu 18.04 LTS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mattermost-omnibus.html">Installing Mattermost Omnibus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install-kubernetes.html">Installing on Kubernetes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install-debian.html">Installing on Debian Buster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install-rhel-7.html">Installing on RHEL 7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install-rhel-8.html">Installing on RHEL 8</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install-centos-oracle-scientific.html">Installing on CentOS, Oracle Linux, and Scientific Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sockets-db.html">Instructions On Setting Up a Socket-based Mattermost Database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ee-install.html">Enterprise Install and Upgrade</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="config.html">Configuring Transport Encryption</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="config-mattermost.html">Configuring Proxy to Mattermost Transport Encryption</a></li>
+<li class="toctree-l4"><a class="reference internal" href="config-database.html">Configuring Database Transport Encryption</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Configuring Cluster Transport Encryption (E20)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../deploy-bitnami.html">Deploy Mattermost on Bitnami</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../docker-local-machine.html">Local Machine Setup using Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../docker-ebs.html">AWS Elastic Beanstalk Docker Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install-mmte-helm-gitlab-helm.html">Installing Mattermost Team Edition in GitLab Helm Chart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../desktop.html">Desktop Application Install Guides</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../desktop-managed-resources.html">Desktop Managed Resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../desktop-msi-gpo.html">Desktop MSI Installer and Group Policy Installation Guides (Beta)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/administrator.html#onboard-users">Onboard Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
+    
+      <li><a href="config.html">Configuring Transport Encryption</a> &raquo;</li>
+    
+    <li>Configuring Cluster Transport Encryption (E20)</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/install/transport-encryption/config-cluster.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="configuring-cluster-transport-encryption-e20">
+<h1>Configuring Cluster Transport Encryption (E20)<a class="headerlink" href="#configuring-cluster-transport-encryption-e20" title="Permalink to this headline">¶</a></h1>
+<p>Mattermost is able to encrypt the messages sent within the cluster of a deployment
+using SSH tunneling. The guide walks through the deployment of this solution on
+Ubuntu 18.04, but it can be adapted for any Linux operating system.</p>
+<p>While this document only describes the configuration of a three-node cluster, it is
+by no means limited to that amount.</p>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>SSH port whitelisted between each node of the deployment</li>
+<li>Active ufw/iptables on each node</li>
+<li>Access to the root/sudo user of each node for configuration</li>
+<li>A configured Mattermost cluster</li>
+<li>Mattermost running with a dedicated service user</li>
+<li>Mattermost service is stopped on each cluster node</li>
+</ul>
+<p><strong>Note:</strong> Support on the application level is currently in development and will
+deprecate this document.</p>
+</div>
+<div class="section" id="example-environment">
+<h2>Example Environment<a class="headerlink" href="#example-environment" title="Permalink to this headline">¶</a></h2>
+<p>In this scenario there are three application nodes in our environment with the following
+hostname/IP mapping:</p>
+<ul class="simple">
+<li><strong>transport-encryption-mattermost1:</strong> 10.10.250.146</li>
+<li><strong>transport-encryption-mattermost2:</strong> 10.10.250.231</li>
+<li><strong>transport-encryption-mattermost3:</strong> 10.10.250.165</li>
+</ul>
+</div>
+<div class="section" id="preparations">
+<h2>Preparations<a class="headerlink" href="#preparations" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Connect to each Mattermost server with a sudo or root user</li>
+<li>Make a note of the IP from each cluster member used for the internal communication</li>
+<li>Ensure <code class="docutils literal notranslate"><span class="pre">AllowTcpForwarding</span></code> is enabled in <code class="docutils literal notranslate"><span class="pre">/etc/ssh/sshd_config</span></code> of each cluster node</li>
+</ul>
+</div>
+<div class="section" id="ssh-authentication">
+<h2>SSH Authentication<a class="headerlink" href="#ssh-authentication" title="Permalink to this headline">¶</a></h2>
+<p>On each node, generate a SSH key-pair for the service account. In our scenario this is
+called <code class="docutils literal notranslate"><span class="pre">mattermost</span></code>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo -u mattermost ssh-keygen -t rsa
+  Generating public/private rsa key pair.
+  Enter file in which to save the key (/home/mattermost/.ssh/id_rsa):
+  Enter passphrase (empty for no passphrase):
+  Enter same passphrase again:
+  Your identification has been saved in /home/mattermost/.ssh/id_rsa.
+  Your public key has been saved in /home/mattermost/.ssh/id_rsa.pub.
+  The key fingerprint is:
+  SHA256:redacted mattermost@transport-encryption-mattermost1
+</pre></div>
+</div>
+<p>The location of the SSH key itself is irrelevant if company policies require
+the usage of another storage location.</p>
+<p>Next, ensure that the SSH public key of each node is added to the <code class="docutils literal notranslate"><span class="pre">authorized_keys</span></code>
+file of the other nodes of the cluster. To do so, copy the contents of <code class="docutils literal notranslate"><span class="pre">/home/mattermost/.ssh/id_rsa.pub</span></code>
+of nodes 2 and 3, and add it to <code class="docutils literal notranslate"><span class="pre">/home/mattermost/.ssh/authorized_keys</span></code> of node 1.</p>
+<p>Repeat this step for each node of the cluster. As a result, each node should be
+able to establish an SSH connection to the other nodes of the cluster.</p>
+<p><strong>Note:</strong> This service account can be separate from the service account already used
+for the Mattermost <code class="docutils literal notranslate"><span class="pre">systemd</span></code> service itself. It is important that it is allowed
+to create a SSH tunnel with port forwarding, but it does not require any additional
+permissions.</p>
+</div>
+<div class="section" id="ufw-configuration">
+<h2>ufw Configuration<a class="headerlink" href="#ufw-configuration" title="Permalink to this headline">¶</a></h2>
+<p>As a next step, allow SSH access from each of the other member nodes, e.g.:</p>
+<ul class="simple">
+<li>mattermost1 allows from mattermost2 and mattermost3</li>
+<li>mattermost2 allows from mattermost1 and mattermost3</li>
+<li>mattermost3 allows from mattermost1 and mattermost2</li>
+</ul>
+<p>To do so, we add an exception in the firewall. The commands for <code class="docutils literal notranslate"><span class="pre">mattermost1</span></code> look as
+follows:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo ufw allow from 10.10.250.231/32 to any port ssh
+Rule added
+$ sudo ufw allow from 10.10.250.165/32 to any port ssh
+Rule added
+$ sudo ufw status
+Status: active
+
+To                         Action      From
+--                         ------      ----
+22/tcp                     ALLOW       10.10.250.10
+8065/tcp                   ALLOW       Anywhere
+22/tcp                     ALLOW       10.10.250.231
+22/tcp                     ALLOW       10.10.250.165
+</pre></div>
+</div>
+<p>Repeat the same steps on the other nodes, replacing the IPs with the ones from the
+other member nodes. Do so for each member node, excluding the node itself.</p>
+<p>Next, open <code class="docutils literal notranslate"><span class="pre">/etc/ufw/after.rules</span></code> and add the following block to the
+bottom of the file:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*nat
+:POSTROUTING ACCEPT [0:0]
+:PREROUTING ACCEPT [0:0]
+
+-A OUTPUT -p tcp -d 10.10.250.231 --dport 8075 -j DNAT --to-destination 127.0.0.1:18075
+-A OUTPUT -p tcp -d 10.10.250.231 --dport 8074 -j DNAT --to-destination 127.0.0.1:18074
+-A OUTPUT -p tcp -d 10.10.250.165 --dport 8075 -j DNAT --to-destination 127.0.0.1:28075
+-A OUTPUT -p tcp -d 10.10.250.165 --dport 8074 -j DNAT --to-destination 127.0.0.1:28074
+
+COMMIT
+</pre></div>
+</div>
+<p>Two lines always belong to a single node, so in a deployment with four nodes:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>-A OUTPUT -p tcp -d ip_node_2 --dport 8075 -j DNAT --to-destination 127.0.0.1:18075
+-A OUTPUT -p tcp -d ip_node_2 --dport 8074 -j DNAT --to-destination 127.0.0.1:18074
+-A OUTPUT -p tcp -d ip_node_3 --dport 8075 -j DNAT --to-destination 127.0.0.1:28075
+-A OUTPUT -p tcp -d ip_node_3 --dport 8074 -j DNAT --to-destination 127.0.0.1:28074
+-A OUTPUT -p tcp -d ip_node_4 --dport 8075 -j DNAT --to-destination 127.0.0.1:38075
+-A OUTPUT -p tcp -d ip_node_4 --dport 8074 -j DNAT --to-destination 127.0.0.1:38074
+</pre></div>
+</div>
+<p>Please be aware that the ports on the right side must be unique, so if you have a cluster of
+six nodes, use 8075 and 8074 with 1 to 5 in front of it. If the cluster is of bigger size, additional
+ports must be used.</p>
+<p>Ensure that your operating system has IP forwarding enabled using the following command:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sysctl -w net.ipv4.ip_forward=1
+</pre></div>
+</div>
+<p>After that, reload the ufw rules and confirm that the iptable rules were successfully
+created:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ iptables -t nat -L
+Chain PREROUTING (policy ACCEPT)
+target     prot opt source               destination
+
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination
+DNAT       tcp  --  anywhere             10.10.250.231        tcp dpt:8075 to:127.0.0.1:18075
+DNAT       tcp  --  anywhere             10.10.250.231        tcp dpt:8074 to:127.0.0.1:18074
+DNAT       tcp  --  anywhere             10.10.250.165        tcp dpt:8075 to:127.0.0.1:28075
+DNAT       tcp  --  anywhere             10.10.250.165        tcp dpt:8074 to:127.0.0.1:28074
+</pre></div>
+</div>
+<p>Repeat those steps for every node on the cluster. At the end of this section
+the following should be configured:</p>
+<ul class="simple">
+<li>SSH access enabled in firewall from each cluster node to another</li>
+<li>Per node 2 iptables rules for port 8074 and 8075</li>
+<li>IP forwarding enabled</li>
+</ul>
+</div>
+<div class="section" id="ssh-configuration">
+<h2>SSH Configuration<a class="headerlink" href="#ssh-configuration" title="Permalink to this headline">¶</a></h2>
+<p>As a next step, we will ensure that the SSH tunnels are created as part of the Mattermost service
+start. To do so, create a file called <code class="docutils literal notranslate"><span class="pre">pre_start.sh</span></code> in <code class="docutils literal notranslate"><span class="pre">/opt/mattermost/bin</span></code> on <code class="docutils literal notranslate"><span class="pre">mattermost1</span></code>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
+ssh -N -f -o ServerAliveInterval=60 -o ExitOnForwardFailure=yes -L 18075:10.10.250.231:8075 10.10.250.231 || true
+ssh -N -f -o ServerAliveInterval=60 -o ExitOnForwardFailure=yes -L 18074:10.10.250.231:8074 10.10.250.231 || true
+ssh -N -f -o ServerAliveInterval=60 -o ExitOnForwardFailure=yes -L 28075:10.10.250.165:8075 10.10.250.165 || true
+ssh -N -f -o ServerAliveInterval=60 -o ExitOnForwardFailure=yes -L 28074:10.10.250.165:8074 10.10.250.165 || true
+</pre></div>
+</div>
+<p><strong>Note:</strong> We are ignoring the error from the SSH connection itself in case a tunnel
+is already active. Otherwise the Mattermost server would fail to start.</p>
+<p><strong>Note:</strong> Please make sure to back up this script in case of a version upgrade.</p>
+<p>Afterwards, we set the executable bit on the shell script:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ chmod +x /opt/mattermost/bin/pre_start.sh
+</pre></div>
+</div>
+<p>Open the systemd unit file of Mattermost and search for <code class="docutils literal notranslate"><span class="pre">Type=Notify</span></code>. After this, enter
+a <code class="docutils literal notranslate"><span class="pre">ExecStartPre</span></code> script that will be executed before Mattermost itself is started:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[Service]
+Type=notify
+ExecStartPre=/opt/mattermost/bin/pre_start.sh
+</pre></div>
+</div>
+<p>Reload the systemd daemon afterwards:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ systemctl daemon-reload
+</pre></div>
+</div>
+<p>Repeat the same steps on each of the member nodes and adapt the node IPs and amount
+of entries for your environment.</p>
+</div>
+<div class="section" id="cluster-start">
+<h2>Cluster Start<a class="headerlink" href="#cluster-start" title="Permalink to this headline">¶</a></h2>
+<p>Once each node is configured, restart the service on each cluster
+and confirm that it’s running using the command below:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>root@transport-encryption-mattermost1:/opt/mattermost/bin# systemctl start mattermost
+root@transport-encryption-mattermost1:/opt/mattermost/bin# systemctl status mattermost.service
+● mattermost.service - Mattermost
+   Loaded: loaded (/lib/systemd/system/mattermost.service; static; vendor preset: enabled)
+   Active: active (running) since Fri 2019-10-04 19:44:20 UTC; 5min ago
+  Process: 16734 ExecStartPre=/opt/mattermost/bin/pre_start.sh (code=exited, status=0/SUCCESS)
+</pre></div>
+</div>
+<p>Next, open the Mattermost System Console and confirm that each node is reporting successfully
+in the High Availability section.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../deploy-bitnami.html" class="btn btn-neutral float-right" title="Deploy Mattermost on Bitnami" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="config-database.html" class="btn btn-neutral" title="Configuring Database Transport Encryption" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/install/transport-encryption/config-cluster.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

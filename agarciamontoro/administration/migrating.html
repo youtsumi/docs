@@ -1,0 +1,556 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Migration Guide &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Migrating from HipChat to Mattermost" href="hipchat-migration-guidelines.html" />
+    <link rel="prev" title="Bulk Loading Data" href="../deployment/bulk-loading.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../deployment/bulk-loading.html">Bulk Loading Data</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Migration Guide</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#migrating-the-mattermost-server">Migrating the Mattermost Server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#migrating-to-mattermost-from-other-messaging-solutions">Migrating to Mattermost From Other Messaging Solutions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hipchat-migration-guidelines.html">Migrating from HipChat to Mattermost</a></li>
+<li class="toctree-l3"><a class="reference internal" href="migration-announcement-email-template.html">Migration Announcement Email</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user-provisioning.html">Provisioning Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/admin-roles.html">Additional System Admin Roles (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/sso-ldap.html">Active Directory/LDAP Setup (E10/E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/auth.html">Multi-factor Authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/ldap-group-sync.html">AD/LDAP Groups (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/ldap-group-constrained-team-channel.html">Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/sso-saml.html">SAML Single Sign-On (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/sso-saml-technical.html">SAML Single-Sign-On (E20): Technical Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/sso-gitlab.html">GitLab Single Sign-On</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/sso-google.html">Google Single Sign-On (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/sso-office.html">Office 365 Single Sign-On (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/ssl-client-certificate.html">SSL Client Certificate Setup (Beta)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/certificate-based-authentication.html">Certificate-Based Authentication (Experimental)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/team-channel-management.html">Managing Team and Channel Members (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/advanced-permissions.html">Advanced Permissions (E10/E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/permissions-backend.html">Advanced Permissions: Backend Infrastructure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/guest-accounts.html">Guest Accounts (Beta) (E10/E20)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
+    
+    <li>Migration Guide</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/administration/migrating.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="migration-guide">
+<h1>Migration Guide<a class="headerlink" href="#migration-guide" title="Permalink to this headline">¶</a></h1>
+<p>Thousands of organizations are moving to Mattermost for powerful, flexible, and easy-to-manage workplace messaging. Mattermost deploys as a single Linux binary with MySQL or PostgreSQL and can scale from dozens to tens of thousands of users in a single channel.</p>
+<p>This guide summarizes different approaches to migrating from one Mattermost deployment to another and migrating from other messengers (such as Slack, HipChat, Jabber, and bespoke solutions) to Mattermost.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#migrating-the-mattermost-server" id="id1">Migrating the Mattermost Server</a></li>
+<li><a class="reference internal" href="#migrating-to-mattermost-from-other-messaging-solutions" id="id2">Migrating to Mattermost From Other Messaging Solutions</a><ul>
+<li><a class="reference internal" href="#migrating-from-bespoke-messaging-solutions-to-mattermost" id="id3">Migrating From Bespoke Messaging Solutions to Mattermost</a><ul>
+<li><a class="reference internal" href="#why-it-teams-choose-to-leave-bespoke-solutions" id="id4">Why IT Teams Choose to Leave Bespoke Solutions</a></li>
+<li><a class="reference internal" href="#why-it-teams-choose-mattermost-over-bespoke-solutions" id="id5">Why IT Teams Choose Mattermost over Bespoke Solutions</a></li>
+<li><a class="reference internal" href="#bringing-data-from-bespoke-solutions-into-mattermost" id="id6">Bringing Data from Bespoke Solutions into Mattermost</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#migrating-from-slack" id="id7">Migrating from Slack</a><ul>
+<li><a class="reference internal" href="#migrating-from-slack-using-the-mattermost-mmetl-tool-and-bulk-import" id="id8">Migrating from Slack Using the Mattermost mmetl Tool and Bulk Import</a></li>
+<li><a class="reference internal" href="#migrating-from-slack-using-the-mattermost-web-app" id="id9">Migrating from Slack using the Mattermost Web App</a></li>
+<li><a class="reference internal" href="#migrating-from-slack-using-the-mattermost-cli" id="id10">Migrating from Slack Using the Mattermost CLI</a></li>
+<li><a class="reference internal" href="#using-the-imported-team" id="id11">Using the Imported Team</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#migrating-from-bitnami" id="id12">Migrating from Bitnami</a></li>
+<li><a class="reference internal" href="#migrating-from-hipchat-server-and-hipchat-data-center-to-mattermost" id="id13">Migrating from HipChat Server and HipChat Data Center to Mattermost</a></li>
+<li><a class="reference internal" href="#migrating-from-jabber-to-mattermost" id="id14">Migrating from Jabber to Mattermost</a></li>
+<li><a class="reference internal" href="#migrating-from-pidgin-to-mattermost" id="id15">Migrating from Pidgin to Mattermost</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="migrating-the-mattermost-server">
+<h2><a class="toc-backref" href="#contents">Migrating the Mattermost Server</a><a class="headerlink" href="#migrating-the-mattermost-server" title="Permalink to this headline">¶</a></h2>
+<p>The following instructions migrate Mattermost from one server to another by backing up and restoring the Mattermost database and <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file. For these instructions <strong>SOURCE</strong> refers to the Mattermost server <em>from which</em> your system will be migrated and <strong>DESTINATION</strong> refers to the Mattermost server <em>to which</em> your system will be migrated.</p>
+<ol class="arabic simple">
+<li><dl class="first docutils">
+<dt>Back up your SOURCE Mattermost server.</dt>
+<dd><ol class="first last arabic">
+<li>See <a class="reference external" href="https://docs.mattermost.com/administration/backup.html">Backup Guide</a>.</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Upgrade your SOURCE Mattermost server to the latest major build version.</dt>
+<dd><ol class="first last arabic">
+<li>See <a class="reference external" href="https://docs.mattermost.com/guides/administrator.html#upgrade-mattermost">Mattermost Upgrade Guide</a>.</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Install the latest major build of Mattermost server as your DESTINATION.</dt>
+<dd><ol class="first last arabic">
+<li>See <a class="reference external" href="https://docs.mattermost.com/guides/administrator.html#installing-mattermost">Installing Mattermost</a> for install guides. Make sure your new instance is properly configured and tested. The database type (MySQL or PostgreSQL) and version of SOURCE and DESTINATION deployments need to match.</li>
+<li>Stop the DESTINATION server using <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">stop</span> <span class="pre">mattermost</span></code>, then backup the database and <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file.</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Migrate database from SOURCE to DESTINATION.</dt>
+<dd><ol class="first last arabic">
+<li>Backup the database from the SOURCE Mattermost server and restore it in place of the database to which the DESTINATION server is connected.</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Migrate <code class="docutils literal notranslate"><span class="pre">config.json</span></code> from SOURCE to DESTINATION.</dt>
+<dd><ol class="first last arabic">
+<li>Copy of <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file from SOURCE deployment to DESTINATION.</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>If you use local storage (<code class="docutils literal notranslate"><span class="pre">FileSettings.DriverName</span></code> is set to <code class="docutils literal notranslate"><span class="pre">local</span></code>), migrate <code class="docutils literal notranslate"><span class="pre">./data</span></code> from SOURCE to DESTINATION.</dt>
+<dd><ol class="first last arabic">
+<li>Copy the <code class="docutils literal notranslate"><span class="pre">./data</span></code> directory from SOURCE deployment to DESTINATION.</li>
+<li>If you use a directory other than <code class="docutils literal notranslate"><span class="pre">./data</span></code>, copy that directory instead.</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Start the DESTINATION deployment.</dt>
+<dd><ol class="first last arabic">
+<li>Run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">start</span> <span class="pre">mattermost</span></code>.</li>
+<li>Open the <strong>System Console</strong>, make a minor change, and save it to upgrade your <code class="docutils literal notranslate"><span class="pre">config.json</span></code> schema to the latest version using default values for any new settings added.</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Test that the system is working by going to the URL of an existing team.</dt>
+<dd><ol class="first last arabic">
+<li>You may need to refresh your Mattermost browser page in order to get the latest updates from the upgrade.</li>
+</ol>
+</dd>
+</dl>
+</li>
+</ol>
+<p>Once your migration is complete and verified, you can optionally <a class="reference external" href="https://docs.mattermost.com/administration/upgrade.html#upgrade-team-edition-to-enterprise-edition">upgrade the Team Edition of Mattermost to Enterprise Edition using the upgrade guide</a>.</p>
+</div>
+<div class="section" id="migrating-to-mattermost-from-other-messaging-solutions">
+<h2><a class="toc-backref" href="#contents">Migrating to Mattermost From Other Messaging Solutions</a><a class="headerlink" href="#migrating-to-mattermost-from-other-messaging-solutions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="migrating-from-bespoke-messaging-solutions-to-mattermost">
+<h3><a class="toc-backref" href="#contents">Migrating From Bespoke Messaging Solutions to Mattermost</a><a class="headerlink" href="#migrating-from-bespoke-messaging-solutions-to-mattermost" title="Permalink to this headline">¶</a></h3>
+<p>Many enterprises run bespoke, unsupported, lightly documented messaging systems driven by the initial excitement of the product’s promise.</p>
+<p>Often the solutions were championed by tech-savvy early adopters who loved a few features and pushed out the solution broadly.</p>
+<p>Over time, management moves to an IT team, where an unsupported solution becomes problematic to maintain and secure. Mattermost is often selected to replace bespoke solutions by IT and DevOps teams as a stable, enterprise-grade, commercially supported solution on an open source platform that meets and exceeds the flexibility and innovation of bespoke solutions.</p>
+<div class="section" id="why-it-teams-choose-to-leave-bespoke-solutions">
+<h4><a class="toc-backref" href="#contents">Why IT Teams Choose to Leave Bespoke Solutions</a><a class="headerlink" href="#why-it-teams-choose-to-leave-bespoke-solutions" title="Permalink to this headline">¶</a></h4>
+<p>Because messaging solutions in technical teams often contain confidential and highly exploitable data, messaging solutions become a security concern that could impact all of an organization’s technical infrastructure.</p>
+<p>When IT teams are asked to maintain a bespoke messaging solution, they often need to consider security issues such as the following:</p>
+<ol class="arabic simple">
+<li>Is the solution backed by a commercial entity with significant legal obligations to ensure the safety and security of the product?</li>
+<li>Is there a security bulletin available to alert our organization of high-priority security updates, with clear instructions to apply the updates?</li>
+<li>Does the solution have a clear and up-to-date list of security updates?</li>
+<li>Are security updates released prior to detailed disclosure of vulnerability details, so as to provide our organization with time to apply security updates before vulnerabilities are widely known?</li>
+<li>In addition to internal testing, is there a Responsible Disclosure Policy for external security researchers to confidentially report security issues, and a recognition program for their contributions?</li>
+</ol>
+<p>Bespoke communication products that provide weak security assurance can dramatically increase the risk to IT teams and their organizations.</p>
+<p>When early adopters of a bespoke solutions ask IT to “take over” and assume the risk of managing a rapidly installed, difficult-to-maintain system with limited or no assurance of security, the IT team is under a great deal of pressure.</p>
+<p>Often at this point, IT teams accelerate their exploration of Mattermost as a long-term solution, given the <a class="reference external" href="https://mattermost.com/customers/">thousands of organizations (many in mission critical, high security industries) that have switched</a>.</p>
+</div>
+<div class="section" id="why-it-teams-choose-mattermost-over-bespoke-solutions">
+<h4><a class="toc-backref" href="#contents">Why IT Teams Choose Mattermost over Bespoke Solutions</a><a class="headerlink" href="#why-it-teams-choose-mattermost-over-bespoke-solutions" title="Permalink to this headline">¶</a></h4>
+<p>Mattermost is designed to replace bespoke messaging solutions through a platform that is unmatched in flexibility. From the <a class="reference external" href="https://github.com/search?utf8=✓&amp;q=mattermost&amp;type=">hundreds of open source projects extending and customizing Mattermost through APIs and drivers</a>, to an innovative client and server plugin framework for adapting the Mattermost user experience to the specific workflows and needs, thousands of high performance teams rely on Mattermost daily.</p>
+<p>In addition, IT teams prefer Mattermost for its specific <a class="reference external" href="https://docs.mattermost.com/overview/security.html">security assurances</a>:</p>
+<ol class="arabic simple">
+<li>Mattermost products are backed by Mattermost, Inc., which has commercial contracts with hundreds of enterprises around the world, many with Fortune 500 and Global 2000 organizations who require significant obligations and assurances from vendors of critical infrastructure.</li>
+<li>Mattermost offers a <a class="reference external" href="https://mattermost.com/security-updates/#sign-up">security bulletin</a> to alert IT teams and customers of high priority security updates, with step-by-step instructions for upgrade and options for commercial support.</li>
+<li>Mattermost maintains an <a class="reference external" href="https://mattermost.com/security-updates/">up-to-date list of security updates</a> for both its open source and commercial offerings.</li>
+<li>To keep IT teams safe, Mattermost waits 14 days after releasing a security patch before disclosing the specific details of the vulnerability each addresses.</li>
+<li>A <a class="reference external" href="https://mattermost.com/security-vulnerability-report/">Responsible Disclosure Policy</a> is available to supplement internal security reviews with confidential reports from external security researchers, with a recognition program for security research contributions after the security patch is properly released.</li>
+</ol>
+</div>
+<div class="section" id="bringing-data-from-bespoke-solutions-into-mattermost">
+<h4><a class="toc-backref" href="#contents">Bringing Data from Bespoke Solutions into Mattermost</a><a class="headerlink" href="#bringing-data-from-bespoke-solutions-into-mattermost" title="Permalink to this headline">¶</a></h4>
+<p>Migrating from bespoke messengers to Mattermost can be challenging. Because of the difficulty of upgrading and maintaining bespoke solutions, the format for storing data is unpredictable, and the community around any single legacy release is small.</p>
+<p>If your data in the bespoke messenger is vital, consider:</p>
+<ol class="arabic simple">
+<li><a class="reference external" href="https://docs.mattermost.com/deployment/bulk-loading.html">Mattermost Bulk Load tool</a> - Use the Mattermost Bulk Load tool to ETL from your bespoke system to Mattermost.</li>
+<li><a class="reference external" href="https://github.com/Brightscout/mattermost-etl">Mattermost ETL framework from BrightScout</a>- Consider the Mattermost ETL framework from BrightScout to custom-configure an adapter to plug in to the Bulk Load tool mentioned above.</li>
+<li><strong>Legacy Slack import</strong> - If you only recently switched from Slack to a bespoke tool, consider going back to import the data and users from the old Slack instance directly into Mattermost, leveraging the extensive support for Slack-import provided.</li>
+<li><strong>Export to Slack, then import to Mattermost</strong> - <a class="reference external" href="https://get.slack.help/hc/en-us/articles/201748703-Import-message-history">Export HipChat, Flowdock, Campfire, Chatwork, Hall, or CSV files to Slack</a> and then export to a Slack export file and import the file into Mattermost.</li>
+</ol>
+<p>If your data in the bespoke messenger is not vital, consider:</p>
+<ol class="arabic simple">
+<li><strong>Parallel systems</strong> - Running Mattermost in parallel with your bespoke system until the majority of workflow and collaboration has moved to Mattermost</li>
+<li><strong>Hard switch</strong> - Announce a “hard switch” to Mattermost after a period of time of running both systems in parallel. Often this has been done due to security concerns in bespoke products or products nearing end-of-life.</li>
+</ol>
+<p>Sometimes systems running in parallel turn into a hard switch migration when a bespoke or deprecated system experiences a major outage or a security exploit. In 2017, this was experienced by many companies using Mattermost and HipChat.com in parallel when <a class="reference external" href="https://thenextweb.com/insider/2017/04/24/hipchat-hacked-weekend-bad/#.tnw_lAotA9OV">HipChat suffered a major security breach where customer data was stolen by an unknown attacker</a>.</p>
+<p>When IT adopts management of Mattermost, often they will purchase the commercial version for additional compliance, access control, and scale features, in addition to high quality commercial support for upgrades and migrations. Teams can <a class="reference external" href="https://mattermost.com/pricing-self-managed/">purchase Mattermost Enterpise Edition with a credit card online</a> or <a class="reference external" href="https://mattermost.com/contact-us/">contact sales</a> to engage in an enterprise procurement process.</p>
+</div>
+</div>
+<div class="section" id="migrating-from-slack">
+<h3><a class="toc-backref" href="#contents">Migrating from Slack</a><a class="headerlink" href="#migrating-from-slack" title="Permalink to this headline">¶</a></h3>
+<p>Slack offers two ways to <a class="reference external" href="https://get.slack.help/hc/en-us/articles/201658943-Export-your-workspace-data">export your data from their product</a>.</p>
+<ol class="arabic simple">
+<li>A Slack export file can be generated from <strong>Slack &gt; Administration &gt; Workspace settings &gt; Import/Export Data &gt; Export &gt; Start Export</strong>. This export does not include private channels, direct, or group messages.</li>
+<li>You can request a “Corporate Export” from Slack directly to get a larger export including private channels, direct, and group messages.</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">As a proprietary SaaS service, Slack is able to change its export format quickly and without notice. If you encounter issues not mentioned in the documentation below, please alert the product team by <a class="reference external" href="https://mattermost.org/filing-issues/">filing an issue</a>.</p>
+</div>
+<div class="section" id="migrating-from-slack-using-the-mattermost-mmetl-tool-and-bulk-import">
+<h4><a class="toc-backref" href="#contents">Migrating from Slack Using the Mattermost mmetl Tool and Bulk Import</a><a class="headerlink" href="#migrating-from-slack-using-the-mattermost-mmetl-tool-and-bulk-import" title="Permalink to this headline">¶</a></h4>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This method is the recommended way to import Slack’s corporate export file. It can be used with Mattermost v5.0 and onwards.</p>
+</div>
+<ol class="arabic simple">
+<li>Use the <a class="reference external" href="https://github.com/grundleborg/slack-advanced-exporter">slack-advanced-exporter</a> to download attachments and add users’ email addresses to your Slack corporate export file.</li>
+<li>Use the <a class="reference external" href="https://github.com/mattermost/mmetl">mmetl tool</a> to transform Slack’s corporate export file into the <code class="docutils literal notranslate"><span class="pre">jsonl</span></code> format required by the bulk import tool.</li>
+<li>Bulk load the files using the steps provided in the <a class="reference external" href="https://docs.mattermost.com/deployment/bulk-loading.html#bulk-loading-data">bulk loading documentation</a>.</li>
+</ol>
+</div>
+<div class="section" id="migrating-from-slack-using-the-mattermost-web-app">
+<h4><a class="toc-backref" href="#contents">Migrating from Slack using the Mattermost Web App</a><a class="headerlink" href="#migrating-from-slack-using-the-mattermost-web-app" title="Permalink to this headline">¶</a></h4>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For larger imports, particularly those where you have used the <cite>slack-advanced-exporter tool</cite> to add Slack post attachments to the archive or the Corporate Export file, it is recommended to import the Slack data using the <a class="reference external" href="https://docs.mattermost.com/administration/migrating.html#migrating-from-slack-using-the-mattermost-mmetl-tool-and-bulk-import">mmetl tool and bulk loading tool</a>.</p>
+</div>
+<ol class="arabic simple">
+<li>Generate a Slack export file from <strong>Slack &gt; Administration &gt; Workspace Settings &gt; Import/Export Data &gt; Export &gt; Start Export</strong>. Alternatively, use the Slack Corporate Export file after receiving it from Slack.</li>
+<li>In Mattermost go to <strong>Team Settings &gt; Import &gt; Import from Slack</strong>. Team Admin or System Admin permission is required to access this menu option.</li>
+<li>Click <strong>Select file</strong> to upload Slack export file and click <strong>Import</strong>.</li>
+</ol>
+</div>
+<div class="section" id="migrating-from-slack-using-the-mattermost-cli">
+<h4><a class="toc-backref" href="#contents">Migrating from Slack Using the Mattermost CLI</a><a class="headerlink" href="#migrating-from-slack-using-the-mattermost-cli" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic">
+<li><p class="first">Generate a Slack export file from <strong>Slack &gt; Administration &gt; Workspace Settings &gt; Import/Export Data &gt; Export &gt; Start Export</strong>.</p>
+</li>
+<li><p class="first">Run the following Mattermost CLI command, with the name of a team you have already created:</p>
+<p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">mattermost</span> <span class="pre">import</span> <span class="pre">slack</span> <span class="pre">team_name</span> <span class="pre">/path/to/your-slack-export.zip</span></code></p>
+</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">To run the CLI command, you must be in the directory that contains the Mattermost installation. On a default installation of Mattermost, the directory is <code class="docutils literal notranslate"><span class="pre">/opt/mattermost/</span></code>. Also, if you followed our <a class="reference external" href="../guides/administrator.html#installing-mattermost">installation process</a>, you must run the command as the user <em>mattermost</em>. The executable is in the <code class="docutils literal notranslate"><span class="pre">bin</span></code> subdirectory and is called <code class="docutils literal notranslate"><span class="pre">mattermost</span></code>.</p>
+</div>
+</div>
+<div class="section" id="using-the-imported-team">
+<h4><a class="toc-backref" href="#contents">Using the Imported Team</a><a class="headerlink" href="#using-the-imported-team" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>During the import process, the emails and usernames from Slack are used to create new Mattermost accounts. If emails are not present in the Slack export archive, then placeholder values will be generated and the System Admin will need to update these manually.</li>
+<li>Slack users can activate their new Mattermost accounts by using Mattermost’s <strong>Password Reset</strong> screen with their email addresses from Slack to set new passwords for their Mattermost accounts.</li>
+<li>Once logged in, Mattermost users will have access to previous Slack messages in the public channels imported from Slack.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="migrating-from-bitnami">
+<h3><a class="toc-backref" href="#contents">Migrating from Bitnami</a><a class="headerlink" href="#migrating-from-bitnami" title="Permalink to this headline">¶</a></h3>
+<p>Bitnami uses MySQL, and renames the Mattermost database tables by converting the names to all lower case. For example, in non-Bitnami installations, the Users table is named “Users”, but in Bitnami, the table is “users”. As a result, when you migrate your data from Bitnami to a non-Bitnami installation, you must modify the MySQL startup script so that it starts MySQL in lowercase table mode.</p>
+<p>You can modify the script by adding the <code class="docutils literal notranslate"><span class="pre">--lower-case-table-names=1</span></code> switch to the MySQL start command. The location of the start-up script generally depends on how you installed MySQL, whether by using the package manager for the operating system, or by manually installing MySQL. You must modify the start-up script before migrating the data.</p>
+<p>For more information about letter case in MySQL table names and the <code class="docutils literal notranslate"><span class="pre">--lower-case-table-names</span></code> switch, see the <a class="reference external" href="https://dev.mysql.com/doc/refman/5.7/en/identifier-case-sensitivity.html">Identifier Case Sensitivity</a> topic in the MySQL documentation.</p>
+</div>
+<div class="section" id="migrating-from-hipchat-server-and-hipchat-data-center-to-mattermost">
+<h3><a class="toc-backref" href="#contents">Migrating from HipChat Server and HipChat Data Center to Mattermost</a><a class="headerlink" href="#migrating-from-hipchat-server-and-hipchat-data-center-to-mattermost" title="Permalink to this headline">¶</a></h3>
+<p>Please see <a class="reference external" href="https://docs.mattermost.com/administration/hipchat-migration-guidelines.html">HipChat Migration Guide</a>.</p>
+</div>
+<div class="section" id="migrating-from-jabber-to-mattermost">
+<h3><a class="toc-backref" href="#contents">Migrating from Jabber to Mattermost</a><a class="headerlink" href="#migrating-from-jabber-to-mattermost" title="Permalink to this headline">¶</a></h3>
+<p>BrightScout helped a major U.S. Federal Agency rapidly migrate from Jabber to Mattermost and open sourced their Extract, Transform and Load (ETL) tool at <a class="reference external" href="https://github.com/Brightscout/mattermost-etl">https://github.com/Brightscout/mattermost-etl</a>.</p>
+<p>Read more about their <a class="reference external" href="https://mattermost.com/blog/u-s-federal-agency-migrates-from-jabber-to-mattermost-the-open-source-way/">case study</a> online.</p>
+</div>
+<div class="section" id="migrating-from-pidgin-to-mattermost">
+<h3><a class="toc-backref" href="#contents">Migrating from Pidgin to Mattermost</a><a class="headerlink" href="#migrating-from-pidgin-to-mattermost" title="Permalink to this headline">¶</a></h3>
+<p>In some cases people are using Pidgin clients with different backends to communicate. To continue using Pidgin with a Mattermost backend consider using <a class="reference external" href="https://github.com/Brightscout/mattermost-etl">Mattermost ETL tool</a> created by BrightScout to migrate data from your existing backend into Mattermost, then use the <a class="reference external" href="https://github.com/EionRobb/purple-mattermost">Pidgin-Mattermost plugin</a> (complete with an installer for end user machines) to continue to support legacy Pidgin users while offering a whole new Mattermost experience on web, mobile, and PC.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="hipchat-migration-guidelines.html" class="btn btn-neutral float-right" title="Migrating from HipChat to Mattermost" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../deployment/bulk-loading.html" class="btn btn-neutral" title="Bulk Loading Data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/administration/migrating.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

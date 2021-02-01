@@ -1,0 +1,442 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Mattermost Performance Alerting Guide &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Production Install on Windows Server (Unofficial)" href="../install/prod-windows-2012.html" />
+    <link rel="prev" title="Performance Monitoring (E20)" href="../deployment/metrics.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../deployment/scaling.html">Scaling for Enterprise</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/cluster.html">High Availability Cluster (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/cluster-310.html">High Availability Cluster (v3.10 and earlier)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/elasticsearch.html">Elasticsearch (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/metrics.html">Performance Monitoring (E20)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Mattermost Performance Alerting Guide</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cpu-utilization-rate">CPU Utilization Rate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#memory-usage">Memory Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#number-of-goroutines">Number of Goroutines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#number-of-api-errors-per-second">Number of API Errors per Second</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mean-api-request-time">Mean API Request Time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#plugin-hooks">Plugin Hooks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#other-alerts">Other Alerts</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
+    
+    <li>Mattermost Performance Alerting Guide</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/administration/performance-alerting-guide.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mattermost-performance-alerting-guide">
+<h1>Mattermost Performance Alerting Guide<a class="headerlink" href="#mattermost-performance-alerting-guide" title="Permalink to this headline">¶</a></h1>
+<p>Mattermost recommends using Prometheus and Grafana to track performance metrics of the Mattermost application servers. The purpose of this guide is to help you set up alerts on your Grafana dashboard.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We highly recommend setting up performance alerting for deployments above 5,000 users, where additional servers have been added for performance load-balancing.</p>
+</div>
+<p><strong>Prerequisites</strong></p>
+<p>Set up performance monitoring for Mattermost. See our <a class="reference external" href="https://docs.mattermost.com/deployment/metrics.html">documentation</a> to learn more.</p>
+<p>To get alerts, first set up a Notification Channel in Grafana. Here’s how you can set it up to automatically post alerts in Mattermost:</p>
+<ol class="arabic simple">
+<li>In Mattermost:</li>
+</ol>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li>Create an Alerts channel</li>
+<li>Create an <a class="reference external" href="https://docs.mattermost.com/developer/webhooks-incoming.html">incoming webhook</a> for the Alerts channel and copy the URL</li>
+</ol>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li>In Grafana:</li>
+</ol>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li>Under the alert icon in the sidebar, click <strong>Notification channels</strong></li>
+<li>Click <strong>Add channel</strong></li>
+<li>Enter <strong>Mattermost Alerts Channel</strong> as the name</li>
+<li>For type, select <strong>Slack</strong></li>
+<li>Paste your webhook URL into the URL field</li>
+<li>Include an &#64; mention in the mention field, if you want to send mentions when an alert is posted to Mattermost</li>
+<li>Press <strong>Send Test</strong> to test the alert</li>
+</ol>
+</div></blockquote>
+<p>If you would also like to get email alerts, you can follow <a class="reference external" href="https://docs.grafana.org/alerting/notifications/#email.">these instructions</a> to set that up.</p>
+<p><strong>Configuring Alerts</strong></p>
+<p>The <a class="reference external" href="https://grafana.com/dashboards?search=mattermost">Mattermost dashboards</a> for Grafana come with some partially pre-configured alerts on the following charts:</p>
+<ul class="simple">
+<li>CPU Utilization Rate</li>
+<li>Memory Usage</li>
+<li>Number of Goroutines</li>
+<li>Number of API Errors per Second</li>
+<li>Mean API Request Time</li>
+</ul>
+<p>To configure alerts, set an appropriate threshold and enable notifications. Enabling notifications is the same for each chart, but setting the correct threshold can have some variances that are better handled on a per-chart basis.</p>
+<ol class="arabic simple">
+<li>For each chart, click on the chart name and click <strong>Edit</strong>:</li>
+</ol>
+<img alt="../_images/perf-1.png" src="../_images/perf-1.png" />
+<ol class="arabic simple" start="2">
+<li>Then click on the <strong>Alert</strong> tab:</li>
+</ol>
+<img alt="../_images/perf-2.png" src="../_images/perf-2.png" />
+<ol class="arabic simple" start="3">
+<li>The alert threshold, which will be discussed in the sections below, is the last field under <strong>Conditions</strong> (the one set to 600 in the screenshot above).</li>
+</ol>
+<p>See the sections below for how to set the threshold for each individual chart. If you would like to add your own custom alert conditions, configure them here.</p>
+<img alt="../_images/perf-3.png" src="../_images/perf-3.png" />
+<ol class="arabic simple" start="4">
+<li>To enable the notifications for any alerts, click on the <strong>Notification</strong> tab on the left and select <strong>Mattermost Alerts Channel</strong> under <strong>Send to</strong>:</li>
+</ol>
+<img alt="../_images/perf-4.png" src="../_images/perf-4.png" />
+<p>Enter a message if you would like to add more context to the alert.</p>
+<p>By default, the alerts are configured to check the average of a chart over the last minute to see if that value is above a threshold. If it’s above the threshold, the alert will be triggered. Since it’s an average over the last minute, small spikes that go past the threshold won’t necessarily cause an alert. This helps prevent false positives that would result from natural spikes in usage. The alert state for each chart is evaluated every minute.</p>
+<p>The sections below describe each chart in more detail.</p>
+<div class="section" id="cpu-utilization-rate">
+<h2>CPU Utilization Rate<a class="headerlink" href="#cpu-utilization-rate" title="Permalink to this headline">¶</a></h2>
+<p>CPU Utilization Rate is fairly straightforward. CPU Utilization Rate tracks the CPU usage of the app servers as a percentage. The maximum percentage is based on the number of CPU cores or vCPUs your app server has. For example, if you have four CPU cores and your app server was at 100% utilization rate on all four cores, the graph would show 400% for that app server.</p>
+<p>It’s best to set the alert threshold based on your average CPU utilization and how many cores/vCPUs your app servers have. Take a look at the chart over the last seven days. You’ll want to set the threshold somewhere between your maximum CPU usage (cores * 100) and the CPU usage you see. The lower you set the threshold, the more alerts, and therefore the more false positives, you will get. Set the threshold too high and you may not receive an alert for an incident until it’s gotten worse. The same principle applies to all alerts, regardless of the chart.</p>
+<p>For example, on our community server, we have the threshold set to 15%:</p>
+<img alt="../_images/perf-5.png" src="../_images/perf-5.png" />
+<p>This value is below our maximum CPU usage and above our average usage at peak times. Therefore, we will get alerts if we begin experiencing unusually high CPU usage.</p>
+</div>
+<div class="section" id="memory-usage">
+<h2>Memory Usage<a class="headerlink" href="#memory-usage" title="Permalink to this headline">¶</a></h2>
+<p>Memory Usage tracks the megabytes of RAM that your app servers are using. Set the threshold similar to the CPU Utilization Rate: below maximum available memory and above your average usage during peak times.</p>
+<p>Here’s how we have the alert set on our Community server:</p>
+<img alt="../_images/perf-6.png" src="../_images/perf-6.png" />
+</div>
+<div class="section" id="number-of-goroutines">
+<h2>Number of Goroutines<a class="headerlink" href="#number-of-goroutines" title="Permalink to this headline">¶</a></h2>
+<p>Goroutines are functions or methods that run concurrently with other functions and methods. Goroutines are like lightweight threads with low-creation costs. A rising number of goroutines can be a good measure of the performance of your app servers. A continuous increase indicates your app server can’t keep up and is creating goroutines faster than they can complete their tasks and stop.</p>
+<p>Set the threshold somewhere above the average number of goroutines you see during peak load times. Small spikes are usually nothing to worry about. It’s the uncontrolled climbing of goroutines that you want to watch out for.</p>
+<p>Here’s how we have it set on our Community server:</p>
+<img alt="../_images/perf-7.png" src="../_images/perf-7.png" />
+</div>
+<div class="section" id="number-of-api-errors-per-second">
+<h2>Number of API Errors per Second<a class="headerlink" href="#number-of-api-errors-per-second" title="Permalink to this headline">¶</a></h2>
+<p>Any 4xx or 5xx HTTP response status codes are counted as a REST API error. API errors themselves are not necessarily a problem. There are many legitimate reasons for an API error to occur, such as users’ sessions expiring or clients requesting to see if a resource exists and is being given a <code class="docutils literal notranslate"><span class="pre">404</span> <span class="pre">Not</span> <span class="pre">Found</span></code> response. It is normal to have some API errors that scale with your installation base.</p>
+<p>That said, errors against the REST API can be indicative of deployment and other issues. For example, if one of your app servers did not deploy correctly for whatever reason, it may begin returning a high number of API errors. Another example would be a rogue bot spamming the API with bad requests. Alerts on API errors per second would help catch these and other issues.</p>
+<p>Here’s how it’s set on our Community server:</p>
+<img alt="../_images/perf-8.png" src="../_images/perf-8.png" />
+</div>
+<div class="section" id="mean-api-request-time">
+<h2>Mean API Request Time<a class="headerlink" href="#mean-api-request-time" title="Permalink to this headline">¶</a></h2>
+<p>The Mean API Request Time is the average amount of time a REST API request to the Mattermost app server takes to complete. If an app server starts to perform poorly, you’ll likely see a rise in the mean request time as it takes longer to complete requests. This could also happen if your database can’t sustain the load from the app servers. It may also be indicative of an issue between the app servers and your proxy.</p>
+<p>You’ll want to set the alert threshold a little above what the mean request time is during your peak load times.</p>
+<p>Here’s how it’s set on our community server:</p>
+<img alt="../_images/perf-9-b.png" src="../_images/perf-9-b.png" />
+</div>
+<div class="section" id="plugin-hooks">
+<h2>Plugin Hooks<a class="headerlink" href="#plugin-hooks" title="Permalink to this headline">¶</a></h2>
+<p>You can trace hooks and plugin API calls with Prometheus. Below are some examples of hooks and API Prometheus metrics that you may want to be aware of when troubleshooting or monitoring your server’s performance.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># HELP mattermost_plugin_hook_time Time to execute plugin hook handler in seconds.
+# TYPE mattermost_plugin_hook_time histogram
+mattermost_plugin_hook_time_bucket{hook_name=&quot;ChannelHasBeenCreated&quot;,plugin_id=&quot;com.mattermost.demo-plugin&quot;,success=&quot;true&quot;,le=&quot;0.005&quot;} 0
+mattermost_plugin_hook_time_bucket{hook_name=&quot;ChannelHasBeenCreated&quot;,plugin_id=&quot;com.mattermost.demo-plugin&quot;,success=&quot;true&quot;,le=&quot;0.01&quot;} 0
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># HELP mattermost_plugin_multi_hook_time Time to execute multiple plugin hook handler in seconds.
+# TYPE mattermost_plugin_multi_hook_time histogram
+mattermost_plugin_multi_hook_time_bucket{plugin_id=&quot;com.mattermost.custom-attributes&quot;,le=&quot;0.005&quot;} 100
+mattermost_plugin_multi_hook_time_bucket{plugin_id=&quot;com.mattermost.custom-attributes&quot;,le=&quot;0.01&quot;} 100
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># HELP mattermost_plugin_multi_hook_server_time Time for the server to execute multiple plugin hook handlers in seconds.
+# TYPE mattermost_plugin_multi_hook_server_time histogram
+mattermost_plugin_multi_hook_server_time_bucket{le=&quot;0.005&quot;} 1043
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># HELP mattermost_plugin_api_time Time to execute plugin API handlers in seconds.
+# TYPE mattermost_plugin_api_time histogram
+mattermost_plugin_api_time_bucket{api_name=&quot;AddUserToChannel&quot;,plugin_id=&quot;com.mattermost.plugin-incident-response&quot;,success=&quot;true&quot;,le=&quot;0.005&quot;} 0
+mattermost_plugin_api_time_bucket{api_name=&quot;AddUserToChannel&quot;,plugin_id=&quot;com.mattermost.plugin-incident-response&quot;,success=&quot;true&quot;,le=&quot;0.01&quot;} 0
+</pre></div>
+</div>
+</div>
+<div class="section" id="other-alerts">
+<h2>Other Alerts<a class="headerlink" href="#other-alerts" title="Permalink to this headline">¶</a></h2>
+<p>If you want more alerts, you can set them up on any of the Grafana charts you’d like. We recommend reviewing custom metrics listed on our <a class="reference external" href="https://docs.mattermost.com/deployment/metrics.html#statistics">Performance Monitoring feature documentation</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../install/prod-windows-2012.html" class="btn btn-neutral float-right" title="Production Install on Windows Server (Unofficial)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../deployment/metrics.html" class="btn btn-neutral" title="Performance Monitoring (E20)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/administration/performance-alerting-guide.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

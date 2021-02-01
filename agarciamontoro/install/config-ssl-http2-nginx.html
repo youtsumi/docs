@@ -1,0 +1,531 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Configuring NGINX with SSL and HTTP/2 &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+    <li>Configuring NGINX with SSL and HTTP/2</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/install/config-ssl-http2-nginx.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="configuring-nginx-with-ssl-and-http-2">
+<span id="config-ssl-http2-nginx"></span><h1>Configuring NGINX with SSL and HTTP/2<a class="headerlink" href="#configuring-nginx-with-ssl-and-http-2" title="Permalink to this headline">¶</a></h1>
+<p>NGINX is configured using a file in the <code class="docutils literal notranslate"><span class="pre">/etc/nginx/sites-available</span></code> directory. You need to create the file and then enable it. When creating the file, you need the IP address of your Mattermost server and the fully qualified domain name (FQDN) of your Mattermost website.</p>
+<p>Using SSL gives greater security by ensuring that communications between Mattermost clients and the Mattermost server are encrypted. It also allows you to configure NGINX to use the HTTP/2 protocol.</p>
+<p>Although you can configure HTTP/2 without SSL, both Firefox and Chrome browsers support HTTP/2 on secure connections only.</p>
+<p>You can use any certificate that you want, but these instructions show you how to download and install certificates from <a class="reference external" href="https://letsencrypt.org/">Let’s Encrypt</a>, a free certificate authority.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If Let’s Encrypt is enabled, forward port 80 through a firewall, with <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#forward-port-80-to-443">Forward80To443</a> <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting set to <code class="docutils literal notranslate"><span class="pre">true</span></code> to complete the Let’s Encrypt certification.</p>
+</div>
+<p><strong>To configure NGINX as a proxy with SSL and HTTP/2:</strong></p>
+<ol class="arabic simple">
+<li>Log in to the server that hosts NGINX and open a terminal window.</li>
+<li>Install git.</li>
+</ol>
+<blockquote>
+<div><p>If you are using Ubuntu or Debian:</p>
+<p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">git</span></code></p>
+<p>If you are using RHEL:</p>
+<p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">yum</span> <span class="pre">install</span> <span class="pre">git</span></code></p>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li>Clone the Let’s Encrypt repository on GitHub.</li>
+</ol>
+<blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/letsencrypt/letsencrypt</span></code></div></blockquote>
+<ol class="arabic simple" start="4">
+<li>Change to the <code class="docutils literal notranslate"><span class="pre">letsencrypt</span></code> directory.</li>
+</ol>
+<blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">letsencrypt</span></code></div></blockquote>
+<ol class="arabic simple" start="5">
+<li>Stop NGINX.</li>
+</ol>
+<blockquote>
+<div><p>On Ubuntu 14.04 and RHEL 6:</p>
+<p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">service</span> <span class="pre">nginx</span> <span class="pre">stop</span></code></p>
+<p>On Ubuntu 18.04, RHEL 7, and RHEL 8:</p>
+<p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">stop</span> <span class="pre">nginx</span></code></p>
+</div></blockquote>
+<ol class="arabic simple" start="6">
+<li>Run <code class="docutils literal notranslate"><span class="pre">netstat</span></code> to make sure that nothing is listening on port 80.</li>
+</ol>
+<blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">netstat</span> <span class="pre">-na</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">':80.*LISTEN'</span></code></div></blockquote>
+<ol class="arabic simple" start="7">
+<li>Run the Let’s Encrypt installer.</li>
+</ol>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">./letsencrypt-auto</span> <span class="pre">certonly</span> <span class="pre">--standalone</span></code></p>
+<p>When prompted, enter your domain name. After the installation is complete, you can find the certificate in the   <code class="docutils literal notranslate"><span class="pre">/etc/letsencrypt/live</span></code> directory.</p>
+</div></blockquote>
+<ol class="arabic simple" start="8">
+<li>Open the file <code class="docutils literal notranslate"><span class="pre">/etc/nginx/sites-available/mattermost</span></code> as root in a text editor and update the <em>server</em> section to incorporate the highlighted lines in the following sample. Make sure to replace <em>{domain-name}</em> with your own domain name, in 3 places.</li>
+</ol>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>upstream backend {
+   server 10.10.10.2:8065;
+   keepalive 32;
+}
+
+proxy_cache_path /var/cache/nginx levels=1:2 keys_zone=mattermost_cache:10m max_size=3g inactive=120m use_temp_path=off;
+
+server {
+  listen 80 default_server;
+  server_name mattermost.example.com;
+  return 301 https://$server_name$request_uri;
+}
+
+server {
+   listen 443 ssl http2;
+   server_name    mattermost.example.com;
+
+   http2_push_preload on; # Enable HTTP/2 Server Push
+
+   ssl on;
+   ssl_certificate /etc/letsencrypt/live/{domain-name}/fullchain.pem;
+   ssl_certificate_key /etc/letsencrypt/live/{domain-name}/privkey.pem;
+   ssl_session_timeout 1d;
+
+   # Enable TLS versions (TLSv1.3 is required upcoming HTTP/3 QUIC).
+   ssl_protocols TLSv1.2 TLSv1.3;
+
+   # Enable TLSv1.3&#39;s 0-RTT. Use $ssl_early_data when reverse proxying to
+   # prevent replay attacks.
+   #
+   # @see: https://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_early_data
+   ssl_early_data on;
+
+   ssl_ciphers &#39;ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256&#39;;
+   ssl_prefer_server_ciphers on;
+   ssl_session_cache shared:SSL:50m;
+   # HSTS (ngx_http_headers_module is required) (15768000 seconds = 6 months)
+   add_header Strict-Transport-Security max-age=15768000;
+   # OCSP Stapling ---
+   # fetch OCSP records from URL in ssl_certificate and cache them
+   ssl_stapling on;
+   ssl_stapling_verify on;
+
+   add_header X-Early-Data $tls1_3_early_data;
+
+   location ~ /api/v[0-9]+/(users/)?websocket$ {
+       proxy_set_header Upgrade $http_upgrade;
+       proxy_set_header Connection &quot;upgrade&quot;;
+       client_max_body_size 50M;
+       proxy_set_header Host $http_host;
+       proxy_set_header X-Real-IP $remote_addr;
+       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+       proxy_set_header X-Forwarded-Proto $scheme;
+       proxy_set_header X-Frame-Options SAMEORIGIN;
+       proxy_buffers 256 16k;
+       proxy_buffer_size 16k;
+       client_body_timeout 60;
+       send_timeout 300;
+       lingering_timeout 5;
+       proxy_connect_timeout 90;
+       proxy_send_timeout 300;
+       proxy_read_timeout 90s;
+       proxy_pass http://backend;
+   }
+
+   location / {
+       client_max_body_size 50M;
+       proxy_set_header Connection &quot;&quot;;
+       proxy_set_header Host $http_host;
+       proxy_set_header X-Real-IP $remote_addr;
+       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+       proxy_set_header X-Forwarded-Proto $scheme;
+       proxy_set_header X-Frame-Options SAMEORIGIN;
+       proxy_buffers 256 16k;
+       proxy_buffer_size 16k;
+       proxy_read_timeout 600s;
+       proxy_cache mattermost_cache;
+       proxy_cache_revalidate on;
+       proxy_cache_min_uses 2;
+       proxy_cache_use_stale timeout;
+       proxy_cache_lock on;
+       proxy_http_version 1.1;
+       proxy_pass http://backend;
+   }
+}
+
+# This block is useful for debugging TLS v1.3. Please feel free to remove this
+# and use the `$ssl_early_data` variable exposed by nginx directly should you
+# wish to do so.
+map $ssl_early_data $tls1_3_early_data {
+  &quot;~.&quot; $ssl_early_data;
+  default &quot;&quot;;
+}
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="9">
+<li>Remove the existing default sites-enabled file.</li>
+</ol>
+<blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">rm</span> <span class="pre">/etc/nginx/sites-enabled/default</span></code></div></blockquote>
+<p>On RHEL 7: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">rm</span> <span class="pre">/etc/nginx/conf.d/default</span></code></p>
+<ol class="arabic simple" start="10">
+<li>Enable the mattermost configuration.</li>
+</ol>
+<blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">ln</span> <span class="pre">-s</span> <span class="pre">/etc/nginx/sites-available/mattermost</span> <span class="pre">/etc/nginx/sites-enabled/mattermost</span></code></div></blockquote>
+<p>On RHEL 7: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">ln</span> <span class="pre">-s</span> <span class="pre">/etc/nginx/conf.d/mattermost</span> <span class="pre">/etc/nginx/conf.d/default.conf</span></code></p>
+<ol class="arabic simple" start="11">
+<li>Restart NGINX.</li>
+</ol>
+<blockquote>
+<div><p>On Ubuntu 14.04 and RHEL 6:</p>
+<p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">service</span> <span class="pre">nginx</span> <span class="pre">start</span></code></p>
+<p>On Ubuntu 18.04, RHEL 7, and RHEL 8:</p>
+<p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">start</span> <span class="pre">nginx</span></code></p>
+</div></blockquote>
+<ol class="arabic simple" start="12">
+<li>Verify that you can see Mattermost through the proxy.</li>
+</ol>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">https://localhost</span></code></p>
+<p>If everything is working, you will see the HTML for the Mattermost signup page. You will see invalid certificate when accessing through the IP or localhost. Use the full FQDN domain to verify if the SSL certificate has pinned properly and is valid.</p>
+</div></blockquote>
+<ol class="arabic simple" start="13">
+<li>Check that your SSL certificate is set up correctly.</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>Test the SSL certificate by visiting a site such as <a class="reference external" href="https://www.ssllabs.com/ssltest/index.html">https://www.ssllabs.com/ssltest/index.html</a></li>
+<li>If there’s an error about the missing chain or certificate path, there is likely an intermediate certificate missing that needs to be included.</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="14">
+<li>Configure <code class="docutils literal notranslate"><span class="pre">cron</span></code> so that the certificate will automatically renew every month.</li>
+</ol>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">crontab</span> <span class="pre">-e</span></code></p>
+<p>In the following line, use your own domain name in place of <em>{domain-name}</em></p>
+<p><code class="docutils literal notranslate"><span class="pre">&#64;monthly</span> <span class="pre">/home/ubuntu/letsencrypt/letsencrypt-auto</span> <span class="pre">certonly</span> <span class="pre">--reinstall</span> <span class="pre">--nginx</span> <span class="pre">-d</span> <span class="pre">{domain-name}</span> <span class="pre">&amp;&amp;</span> <span class="pre">sudo</span> <span class="pre">service</span> <span class="pre">nginx</span> <span class="pre">reload</span></code></p>
+</div></blockquote>
+<div class="section" id="nginx-configuration-faq">
+<h2>NGINX Configuration FAQ<a class="headerlink" href="#nginx-configuration-faq" title="Permalink to this headline">¶</a></h2>
+<p><strong>Why are Websocket connections returning a 403 error?</strong></p>
+<p>This is likely due to a failing cross-origin check. A check is applied for WebSocket code to see if the <code class="docutils literal notranslate"><span class="pre">Origin</span></code> header is the same as the host header. If it’s not, a 403 error is returned. Open the file <code class="docutils literal notranslate"><span class="pre">/etc/nginx/sites-available/mattermost</span></code> as <em>root</em> in a text editor and make sure that the host header being set in the proxy is dynamic:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>location ~ /api/v[0-9]+/(users/)?websocket$ {
+  proxy_pass            http://backend;
+  (...)
+<span class="hll">  proxy_set_header      Host $host;
+</span>  proxy_set_header      X-Forwarded-For $remote_addr;
+}
+</pre></div>
+</div>
+<p>Then in <code class="docutils literal notranslate"><span class="pre">config.json</span></code> set the <code class="docutils literal notranslate"><span class="pre">AllowCorsFrom</span></code> setting to match the domain being used by clients. You may need to add variations of the host name that clients may send. Your NGINX log will be helpful in diagnosing the problem.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;EnableUserAccessTokens&quot;: false,
+<span class="hll">&quot;AllowCorsFrom&quot;: &quot;domain.com domain.com:443 im.domain.com&quot;,
+</span>&quot;SessionLengthWebInDays&quot;: 30,
+</pre></div>
+</div>
+<p>For other troubleshooting tips for WebSocket errors, see <a class="reference external" href="https://docs.mattermost.com/install/troubleshooting.html#please-check-connection-mattermost-unreachable-if-issue-persists-ask-administrator-to-check-websocket-port">potential solutions here</a>.</p>
+<p><strong>How do I setup an NGINX proxy with the Mattermost Docker installation?</strong></p>
+<ol class="arabic simple">
+<li>Find the name of the Mattermost network and connect it to the NGINX proxy:</li>
+</ol>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>docker network ls
+# Grep the name of your Mattermost network like &quot;mymattermost_default&quot;.
+docker network connect mymattermost_default nginx-proxy
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li>Restart the Mattermost Docker containers.</li>
+</ol>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>docker-compose stop app
+docker-compose start app
+</pre></div>
+</div>
+</div></blockquote>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">You don’t need to run the ‘web’ container, since NGINX proxy accepts incoming requests.</p>
+</div>
+<ol class="arabic simple" start="3">
+<li>Update your <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> file to include a new environment variable <code class="docutils literal notranslate"><span class="pre">VIRTUAL_HOST</span></code> and an <code class="docutils literal notranslate"><span class="pre">expose</span></code> directive.</li>
+</ol>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>environment:
+  # set same as db credentials and dbname
+  - MM_USERNAME=mmuser
+  - MM_PASSWORD=mmuser-password
+  - MM_DBNAME=mattermost
+  - VIRTUAL_HOST=mymattermost.tld
+expose:
+  - &quot;80&quot;
+  - &quot;443&quot;
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Why does NGINX fail when installing Gitlab CE with Mattermost on Azure?</strong></p>
+<p>You may need to update the Callback URLs for the Application entry of Mattermost inside your GitLab instance.</p>
+<ol class="arabic simple">
+<li>Log in to your GitLab instance as the admin.</li>
+<li>Go to <strong>Admin &gt; Applications</strong>.</li>
+<li>Click <strong>Edit</strong> on GitLab-Mattermost.</li>
+<li>Update the Callback URLs to your new domain/URL.</li>
+<li>Save the changes.</li>
+<li>Update the external URL for GitLab and Mattermost in the <code class="docutils literal notranslate"><span class="pre">/etc/gitlab/gitlab.rb</span></code> configuration file.</li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/install/config-ssl-http2-nginx.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>
