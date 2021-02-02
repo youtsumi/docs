@@ -1,0 +1,443 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Upgrading Mattermost Server &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Important Upgrade Notes" href="important-upgrade-notes.html" />
+    <link rel="prev" title="MySQL Installation Troubleshooting" href="../install/trouble_mysql.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Upgrading Mattermost Server</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#upgrading-to-the-latest-version">Upgrading to the Latest Version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#upgrading-team-edition-to-enterprise-edition">Upgrading Team Edition to Enterprise Edition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#uploading-a-license-key">Uploading a License Key</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="important-upgrade-notes.html">Important Upgrade Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html">Mattermost Changelog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../help/apps/desktop-changelog.html">Desktop Application Changelog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobile-changelog.html">Mattermost Mobile Apps Changelog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="version-archive.html">Version Archive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extended-support-release.html">Extended Support Release</a></li>
+<li class="toctree-l3"><a class="reference internal" href="release-lifecycle.html">Release Lifecycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="downgrade.html">Downgrading Mattermost Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="open-source-components.html">Open Source Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="release-definitions.html">Release Definitions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
+    
+    <li>Upgrading Mattermost Server</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/administration/upgrade.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="upgrading-mattermost-server">
+<h1>Upgrading Mattermost Server<a class="headerlink" href="#upgrading-mattermost-server" title="Permalink to this headline">¶</a></h1>
+<p>In most cases you can upgrade Mattermost Server in a few minutes, but the upgrade can take longer depending on several factors, including the size and complexity of your installation, and the version that you’re upgrading from.</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">Support for Mattermost Server v5.25 <a class="reference external" href="https://docs.mattermost.com/administration/extended-support-release.html">Extended Support Release</a> is coming to the end of its life cycle on April 16, 2021. Upgrading to Mattermost Server v5.31 <a class="reference external" href="https://docs.mattermost.com/administration/extended-support-release.html">Extended Support Release</a> or later is highly recommended.</p>
+</div>
+<div class="section" id="upgrading-to-the-latest-version">
+<h2>Upgrading to the Latest Version<a class="headerlink" href="#upgrading-to-the-latest-version" title="Permalink to this headline">¶</a></h2>
+<p>If you are upgrading from version 3.0 or later, these instructions apply to you. If you are upgrading from a version prior to 3.0.0, you must first <a class="reference external" href="../administration/upgrading-to-3.0.html">upgrade to version 3.0.3</a>.</p>
+<p id="before-you-begin"><strong>Before you begin</strong></p>
+<p>Read these instructions carefully from start to finish. Make sure that you understand each step before starting the upgrade. If you have questions or concerns, you can ask on the Mattermost forum at <a class="reference external" href="https://forum.mattermost.org/">https://forum.mattermost.org/</a>.</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">Review the <a class="reference internal" href="important-upgrade-notes.html"><span class="doc">Important Upgrade Notes</span></a> to make sure you are aware of any actions you need to take before or after upgrading from your particular version.</p>
+</div>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">If you’re upgrading from a version prior to v5.0 be sure to also modify your service file to work with the binary changes introduced with 5.0. Your execution directory should point to the Mattermost base directory (i.e. <code class="docutils literal notranslate"><span class="pre">/opt/mattermost</span></code>) and your binary should point to the <code class="docutils literal notranslate"><span class="pre">mattermost</span></code> binary (i.e. <code class="docutils literal notranslate"><span class="pre">/opt/mattermost/bin/mattermost</span></code>).</p>
+</div>
+<p>You should gather the following information before starting the upgrade:</p>
+<dl class="docutils">
+<dt>Existing install directory - <em>{install-path}</em></dt>
+<dd>If you don’t know where Mattermost Server is installed, use the <code class="docutils literal notranslate"><span class="pre">whereis</span> <span class="pre">mattermost</span></code> command. The output should be similar to <em>/opt/mattermost/bin/mattermost</em>. The install directory is everything before the first occurrence of the string <em>/mattermost</em>. In this example, the <em>{install-path}</em> is <code class="docutils literal notranslate"><span class="pre">/opt</span></code>.
+If that command does not produce any results because your version is older, try <code class="docutils literal notranslate"><span class="pre">whereis</span> <span class="pre">platform</span></code> instead.</dd>
+<dt>Location of your local storage directory</dt>
+<dd>The local storage directory contains all the files that users have attached to their messages. If you don’t know its location, open the System Console and go to <strong>Environment &gt; File Storage</strong> (or <strong>Files &gt; Storage</strong> in versions prior to 5.12) and read the value in <strong>Local Storage Directory</strong>. Relative paths are relative to the <code class="docutils literal notranslate"><span class="pre">mattermost</span></code> directory. For example, if the local storage directory is <code class="docutils literal notranslate"><span class="pre">./data/</span></code> then the absolute path is <code class="docutils literal notranslate"><span class="pre">{install-path}/mattermost/data</span></code>.</dd>
+</dl>
+<p><strong>To upgrade Mattermost Server</strong></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you’re upgrading a High Availability cluster, <a class="reference external" href="https://docs.mattermost.com/deployment/cluster.html#upgrade-guide">review these upgrade notes instead</a>.</p>
+</div>
+<ol class="arabic">
+<li><p class="first">Review the <a class="reference internal" href="important-upgrade-notes.html"><span class="doc">Important Upgrade Notes</span></a> to make sure you are aware of any actions you need to take before or after upgrading from your particular version.</p>
+</li>
+<li><p class="first">In a terminal window on the server that hosts Mattermost, change to your home directory. If any, delete files and directories that might still exist from a previous download.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /tmp
+</pre></div>
+</div>
+</li>
+<li><p class="first">Download <a class="reference external" href="https://mattermost.com/download/">the latest version of Mattermost Server</a>. In the following command, replace <code class="docutils literal notranslate"><span class="pre">X.X.X</span></code> with the version that you want to download:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>wget https://releases.mattermost.com/X.X.X/mattermost-X.X.X-linux-amd64.tar.gz
+</pre></div>
+</div>
+</li>
+<li><p class="first">Extract the Mattermost Server files.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>tar -xf mattermost*.gz --transform<span class="o">=</span><span class="s1">&#39;s,^[^/]\+,\0-upgrade,&#39;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">transform</span></code> option adds a suffix to the topmost extracted directory so it does not conflict with the usual install directory.</p>
+</li>
+<li><p class="first">Stop your Mattermost server.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl stop mattermost
+</pre></div>
+</div>
+</li>
+<li><p class="first">Back up your data and application.</p>
+<ol class="arabic">
+<li><p class="first">Back up your database using your organization’s standard procedures for backing up MySQL or PostgreSQL.</p>
+</li>
+<li><p class="first">Back up your application by copying into an archive folder (e.g. <code class="docutils literal notranslate"><span class="pre">mattermost-back-YYYY-MM-DD-HH-mm</span></code>).</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="o">{</span>install-path<span class="o">}</span>
+sudo cp -ra mattermost/ mattermost-back-<span class="k">$(</span>date +<span class="s1">&#39;%F-%H-%M&#39;</span><span class="k">)</span>/
+</pre></div>
+</div>
+</li>
+</ol>
+</li>
+<li><p class="first">Remove all files <em>except special directories</em> from within the current mattermost directory.</p>
+<p>The special directories within mattermost are <code class="docutils literal notranslate"><span class="pre">config</span></code>, <code class="docutils literal notranslate"><span class="pre">logs</span></code>, <code class="docutils literal notranslate"><span class="pre">plugins</span></code>, <code class="docutils literal notranslate"><span class="pre">client/plugins</span></code>, and <code class="docutils literal notranslate"><span class="pre">data</span></code> (unless you have a different value configured for local storage, as per <em>Before you begin</em>). The following command clears the contents of mattermost, preserving only those directories and their contents.
+You should first modify the last part to <code class="docutils literal notranslate"><span class="pre">xargs</span> <span class="pre">echo</span> <span class="pre">rm</span> <span class="pre">-r</span></code> to verify what will be executed.</p>
+<p>If you store TLSCert/TLSKey files or other information within your <code class="docutils literal notranslate"><span class="pre">/opt/mattermost</span></code> folder, you should add <code class="docutils literal notranslate"><span class="pre">-o</span> <span class="pre">-path</span> <span class="pre">mattermost/yourFolderHere</span></code> to the below command or you will have to manually copy the TLSCert/TLSKey files from the backup into the new install.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo find mattermost/ mattermost/client/ -mindepth <span class="m">1</span> -maxdepth <span class="m">1</span> <span class="se">\!</span> <span class="se">\(</span> -type d <span class="se">\(</span> -path mattermost/client -o -path mattermost/client/plugins -o -path mattermost/config -o -path mattermost/logs -o -path mattermost/plugins -o -path mattermost/data <span class="se">\)</span> -prune <span class="se">\)</span> <span class="p">|</span> sort <span class="p">|</span> sudo xargs rm -r
+</pre></div>
+</div>
+</li>
+<li><p class="first">Change ownership of the new files before copying them.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo chown -hR mattermost:mattermost /tmp/mattermost-upgrade/
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If you didn’t use <code class="docutils literal notranslate"><span class="pre">mattermost</span></code> as the owner and group of the install directory, run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">chown</span> <span class="pre">-hR</span> <span class="pre">{owner}:{group}</span> <span class="pre">tmp/mattermost-upgrade/</span></code>.</p>
+<p class="last">If you’re uncertain what owner or group was defined, use the <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-l</span> <span class="pre">{install-path}/mattermost/bin/mattermost</span></code> command to obtain them.</p>
+</div>
+</li>
+<li><p class="first">Copy the new files to your install directory and remove the temporary files.</p>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">n</span></code> (no-clobber) flag and trailing <code class="docutils literal notranslate"><span class="pre">.</span></code> on source are very important.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo cp -an /tmp/mattermost-upgrade/. mattermost/
+sudo rm -r /tmp/mattermost-upgrade/
+</pre></div>
+</div>
+</li>
+<li><p class="first">If you want to use port 80 to serve your server, or if you have TLS set up on your Mattermost server, you <em>must</em> activate the CAP_NET_BIND_SERVICE capability to allow the new Mattermost binary to bind to low ports.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="o">{</span>install-path<span class="o">}</span>/mattermost
+sudo setcap <span class="nv">cap_net_bind_service</span><span class="o">=</span>+ep ./bin/mattermost
+</pre></div>
+</div>
+</li>
+<li><p class="first">Start your Mattermost server.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl start mattermost
+</pre></div>
+</div>
+</li>
+<li><p class="first">If you’re using a High Availability deployment you need to apply the steps above on all the nodes in your cluster. Once complete, the <strong>Config File MD5</strong> columns in the High Availability section of the system console should be green. If they’re yellow, please ensure that all nodes have the same server version and the same configuration.</p>
+</li>
+</ol>
+<p>If they still show yellow, then you need to trigger a config propagation across the cluster:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Open the System Console and change a setting, then revert it. This will enable the <strong>Save</strong> button for that page.</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+<p>This will not change any config, but sends the existing config to all nodes in the cluster.</p>
+</div></blockquote>
+<p>After the server is upgraded, users might need to refresh their browsers to experience any new features.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We only support a one minor version difference between the server versions when performing a rolling upgrade (for example v5.27.1 + v5.27.2 or v5.26.4 + v5.27.1 is supported, whereas v5.25.5 + v5.27.0 is not supported). Running two different versions of Mattermost in your cluster should not be done outside of an upgrade scenario.</p>
+</div>
+</div>
+<div class="section" id="upgrading-team-edition-to-enterprise-edition">
+<h2>Upgrading Team Edition to Enterprise Edition<a class="headerlink" href="#upgrading-team-edition-to-enterprise-edition" title="Permalink to this headline">¶</a></h2>
+<p>To upgrade from the Team Edition to the Enterprise Edition, follow the normal upgrade instructions provided above, making sure that you download the Enterprise Edition in Step 3.</p>
+</div>
+<div class="section" id="uploading-a-license-key">
+<h2>Uploading a License Key<a class="headerlink" href="#uploading-a-license-key" title="Permalink to this headline">¶</a></h2>
+<p>When Enterprise Edition is running, open <strong>System Console &gt; About &gt; Editions and License</strong> and upload your license key.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="important-upgrade-notes.html" class="btn btn-neutral float-right" title="Important Upgrade Notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../install/trouble_mysql.html" class="btn btn-neutral" title="MySQL Installation Troubleshooting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/administration/upgrade.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,451 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Administrator Tasks &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Implementation Plan" href="../getting-started/implementation_plan.html" />
+    <link rel="prev" title="Enterprise Roll Out Checklist" href="../getting-started/enterprise-roll-out-checklist.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment Overview</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../help/getting-started/light-install.html">Light Install Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting-started/enterprise-roll-out-checklist.html">Enterprise Roll Out Checklist</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Administrator Tasks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#getting-started-tasks">Getting Started Tasks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#important-administration-notes">Important Administration Notes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common-tasks">Common Tasks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user-experience-optimizations">User Experience Optimizations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../getting-started/implementation_plan.html">Implementation Plan</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../getting-started/welcome_email.html">Welcome Email to End Users</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
+    
+    <li>Administrator Tasks</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/deployment/on-boarding.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="administrator-tasks">
+<h1>Administrator Tasks<a class="headerlink" href="#administrator-tasks" title="Permalink to this headline">¶</a></h1>
+<p>This document provides instructions for common administrator tasks, including some recommendations on tasks to prepare your Mattermost instance to onboard users.</p>
+<div class="section" id="getting-started-tasks">
+<h2>Getting Started Tasks<a class="headerlink" href="#getting-started-tasks" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Once you’ve installed and deployed Mattermost, ensure all configuration settings are appropriately set under <strong>System Console &gt; Environment</strong> including:</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>Web Server</li>
+<li>Database</li>
+<li>File Storage</li>
+<li>SMTP</li>
+<li>Push Notification Server</li>
+</ul>
+</div></blockquote>
+<p>These settings can also be set in the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file. Please see our <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html">configuration settings documentation</a> for a full listing of all configuration settings.</p>
+<p>2. Adjust settings under <strong>System Console &gt; Site Configuration</strong> to brand and customize how users will interact with the site.
+Be sure to update the Support Email and Help Link in Mattermost under <strong>System Console &gt; Site Configuration &gt; Customization</strong> to provide your users a resource for password resets or questions on their Mattermost account.</p>
+<blockquote>
+<div><ul class="simple">
+<li>The Support Email is used on email notifications and during tutorial for users to ask support questions.</li>
+<li>The Help Link is on the Mattermost login page, sign-up pages, and Main Menu and can be used to to link to your help desk ticketing system.</li>
+</ul>
+</div></blockquote>
+<p>These settings can also be set in the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file.  Please see our <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html">configuration settings documenation</a> for a full listing of all configuration settings.</p>
+<ol class="arabic simple" start="3">
+<li>Begin to onboard users by enabling account creation or by connecting an authentication service to assist with user provisioning.</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>Users can be pre-provisioned with migration and bulk loading data processes based on prior collaboration systems. Please see our <a class="reference external" href="https://docs.mattermost.com/administration/migrating.html#migration-guide">migration guide</a> and <a class="reference external" href="https://docs.mattermost.com/deployment/bulk-loading.html">bulk loading documentation</a> for additional details.</li>
+<li><a class="reference external" href="https://docs.mattermost.com/deployment/sso-ldap.html#active-directory-ldap-setup-e10-e20">AD/LDAP authentication</a> and <a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml.html">SAML authentication</a> are available for Enterprise Edition, providing identity management, single sign-on, and automatic account provisioning.</li>
+</ul>
+</div></blockquote>
+<p>If your organization requires more structure and project management artifacts for the implementation of Mattermost, please see our <a class="reference external" href="https://docs.mattermost.com/getting-started/enterprise-roll-out-checklist.html">Enterprise roll out checklist</a>.</p>
+</div>
+<div class="section" id="important-administration-notes">
+<h2>Important Administration Notes<a class="headerlink" href="#important-administration-notes" title="Permalink to this headline">¶</a></h2>
+<p><strong>DO NOT manipulate the Mattermost database</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li>In particular, DO NOT manually delete data from the database directly. Mattermost is designed as a continuous archive and cannot be supported after manual manipulation.</li>
+<li>If you need to permanently delete a team or user, use the <a class="reference external" href="https://docs.mattermost.com/administration/command-line-tools.html">Command Line Tool</a>.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="common-tasks">
+<h2>Common Tasks<a class="headerlink" href="#common-tasks" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Creating System Admin account from the command line</strong></dt>
+<dd><ul class="first last simple">
+<li>If the System Admin leaves the organization or is otherwise unavailable, you can use the command line interface to assign the <em>system_admin</em> role to an existing user. In the <code class="docutils literal notranslate"><span class="pre">/opt/mattermost</span></code> directory, type <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">-u</span> <span class="pre">mattermost</span> <span class="pre">bin/mattermost</span> <span class="pre">roles</span> <span class="pre">system_admin</span> <span class="pre">{user-name}</span></code>, where <em>{user-name}</em> is the username of the person with the new role. For more information about using the command line interface, see <a class="reference external" href="https://docs.mattermost.com/administration/command-line-tools.html">Command Line Tools</a>.</li>
+<li>The user needs to log out and log back in before the <em>system_admin</em> role is applied.</li>
+</ul>
+</dd>
+<dt><strong>Migrating to AD/LDAP or SAML from email-based authentication</strong></dt>
+<dd><ul class="first last simple">
+<li>If you have Enterprise Edition, you can migrate from email authentication to Active Directory/LDAP or to SAML Single Sign-on. To set up Active Directory/LDAP, see <a class="reference external" href="https://docs.mattermost.com/deployment/sso-ldap.html#active-directory-ldap-setup-e10-e20">Active Directory/LDAP Setup (E10/E20)</a>. To set up SAML Single Sign-on, see <a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml.html">SAML Single-Sign-On (E20)</a>.</li>
+<li>After the new authentication method is enabled, existing users cannot use the new method until they go to <strong>Account Settings &gt; Security &gt; Sign-in method</strong> and click <strong>Switch to using AD/LDAP</strong> or <strong>Switch to using SAML Single Sign-on</strong>. After they have switched, they can no longer use their email and password to sign in.</li>
+</ul>
+</dd>
+<dt><strong>Deactivating a user</strong></dt>
+<dd><ul class="first last simple">
+<li>System Admins can go to <strong>System Console &gt; Users</strong> for a list of all users on the server. The list can be searched and filtered to make finding the user easier. Click the user’s role and in the menu that opens, click <strong>Deactivate</strong>.</li>
+<li>To preserve audit history, users are typically never deleted from the system. If permanently deleting a user is necessary (e.g. for the purposes of <a class="reference external" href="https://gdpr-info.eu/">GDPR</a>), a <a class="reference external" href="https://docs.mattermost.com/administration/command-line-tools.html">CLI tool</a> can be used to do so.</li>
+<li>Note that AD/LDAP user accounts cannot be deactivated from Mattermost; they must be deactivated from your Active Directory.</li>
+</ul>
+</dd>
+<dt><strong>Checking for a valid license in Enterprise Edition without logging in</strong></dt>
+<dd><ul class="first last">
+<li><p class="first">Open the log file <code class="docutils literal notranslate"><span class="pre">mattermost.log</span></code>. It’s usually in the <code class="docutils literal notranslate"><span class="pre">mattermost/logs/</span></code> directory but might be elsewhere on your system. Find the last occurrence of a log entry that starts with the text <code class="docutils literal notranslate"><span class="pre">[INFO]</span> <span class="pre">License</span> <span class="pre">key</span></code>. If the license key is valid, the complete line should be similar to the following example:</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[2017/05/19 16:51:40 UTC] [INFO] License key valid unlocking enterprise features.
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="user-experience-optimizations">
+<h2>User Experience Optimizations<a class="headerlink" href="#user-experience-optimizations" title="Permalink to this headline">¶</a></h2>
+<p>We highly recommend the following best practices, configuration options, and features for an optimal Mattermost user experience.</p>
+<p><strong>1. Upgrade your Mattermost Server</strong></p>
+<p>When you upgrade your Mattermost server frequently, your users can access new features, improved user experiences, bug fixes, security fixes, and guaranteed mobile app compatibility.</p>
+<p>Mattermost releases updates monthly to <a class="reference external" href="https://mattermost.com/">Mattermost Team Edition</a> and <a class="reference external" href="https://mattermost.com/pricing-self-managed/">Mattermost Enterprise Edition</a>. The <a class="reference external" href="https://docs.mattermost.com/administration/changelog.html">Mattermost Changelog</a> provides all information about changes in each version.</p>
+<p>Upgrading your Mattermost server only takes a few minutes. See the <a class="reference external" href="https://docs.mattermost.com/administration/upgrade.html">Upgrade Guide</a> for step-by-step instructions.</p>
+<p><strong>2. Install Plugins</strong></p>
+<p>You can enable plugins and integrations to connect your team’s workflows and toolsets into Mattermost. Plugins and integrations customize and extend the Mattermost platform.</p>
+<p><strong>Install and manage plugins</strong></p>
+<p>To enable and manage plugins, go to <strong>System Console &gt; Plugins</strong>.</p>
+<p>Next, install plugins with a single click from the <strong>Main Menu &gt; Plugin Marketplace</strong>. See the <a class="reference external" href="https://docs.mattermost.com/administration/plugins.html#plugin-marketplace">Plugin Marketplace</a> documentation for details.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Consider installing and enabling the following productivity plugins for your users:</dt>
+<dd><ul class="first last simple">
+<li>Enable audio/video calling and screen sharing with <a class="reference external" href="https://integrations.mattermost.com/?s=Jitsi%20Plugin">Jitsi</a> or <a class="reference external" href="https://integrations.mattermost.com/?s=Zoom%20Plugin">Zoom</a>.</li>
+<li>Create polls with <a class="reference external" href="https://integrations.mattermost.com/?s=Matterpoll%20Plugin">Matterpoll</a>.</li>
+<li>Share GIFs with <a class="reference external" href="https://integrations.mattermost.com/?s=gif&amp;submit=">GIF Commands</a>.</li>
+<li>Create and share memes with <a class="reference external" href="https://integrations.mattermost.com/?s=Memes%20Plugin">Memes</a>.</li>
+<li>Set personal reminders with <a class="reference external" href="https://integrations.mattermost.com/?s=Remind%20Plugin">Remind</a>.</li>
+<li>Create and share to do items with <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-todo">Todo</a>.</li>
+<li>Customize welcome messages for new users with <a class="reference external" href="https://integrations.mattermost.com/?s=WelcomeBot%20Plugin">WelcomeBot</a>.</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+<p>Explore all plugins and integrations available in the <a class="reference external" href="https://integrations.mattermost.com/">Mattermost Plugin Marketplace</a>.</p>
+<p><strong>Enable and manage integrations</strong></p>
+<p>To enable integrations such as webhooks, slash commands, OAuth2.0, and bots, to go <strong>System Console &gt; Integrations</strong>. More information on these integrations can be found <a class="reference external" href="https://docs.mattermost.com/guides/integration.html">here</a>.</p>
+<p><strong>3. Enable Automatically Extended Sessions</strong></p>
+<p>Keep your desktop and mobile users logged in and <a class="reference external" href="https://mattermost.com/blog/session-expiry-experience/">extend user sessions automatically</a> by setting <strong>System Console &gt; Sessions &gt; Extend session length with activity</strong> to <code class="docutils literal notranslate"><span class="pre">true</span></code>. See the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#extend-session-length-with-activity">Extend session length with activity</a> configuration settings documentation for details.</p>
+<p><strong>4. Enable Full Content Push Notifications</strong></p>
+<p>Enable push notifications on mobile devices to deliver messages in real time by setting <strong>System Console &gt; Push Notification Server &gt; Enable Push Notifications</strong> to <code class="docutils literal notranslate"><span class="pre">Use</span> <span class="pre">TPNS</span></code>. See the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#push-notification-server">Push notification server</a> configuration settings documentation for details.</p>
+<p>Enable full content push notifications, including the sender’s name, the channel name, and the message text, by setting <strong>System Console &gt; Notifications &gt; Push Notification Contents</strong> to <code class="docutils literal notranslate"><span class="pre">Full</span> <span class="pre">message</span> <span class="pre">contents</span></code>. See the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#push-notification-contents">Push notification contents</a> configuration settings documentation for details.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>Mattermost Enterprise Edition E10 and E20 customers can <a class="reference external" href="https://docs.mattermost.com/mobile/mobile-hpns.html">enable HPNS</a> that includes production-level uptime SLAs.</li>
+<li>Mattermost Enterprise Edition E20 customers can <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#push-notification-contents">enable ID-Only push notifications</a> so push notification content is not passed through Apple Push Notification Service (APNS) or Google Firebase Cloud Messaging (FCM) before reaching the device. The ID-only push notification setting <a class="reference external" href="https://mattermost.com/blog/id-only-push-notifications/">offers a high level of privacy</a> while allowing team members to benefit from mobile push notifications.</li>
+</ul>
+</div>
+<p><strong>5. Enable Custom Emoji</strong></p>
+<p><a class="reference external" href="https://docs.mattermost.com/help/messaging/emoji.html">Emojis</a> enable users to express concepts such as emotions and physical gestures in messages. Enable the emoji picker by setting <strong>System Console &gt; Emoji &gt; Enable Emoji Picker</strong> to <code class="docutils literal notranslate"><span class="pre">true</span></code>. See the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-emoji-picker">Enable emoji picker</a> configuration settings documentation for details.</p>
+<p>Empower users to create and share their own custom emojis by setting <strong>System Console &gt; Emoji &gt; Enable Custom Emoji</strong> to <code class="docutils literal notranslate"><span class="pre">true</span></code>. See the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-custom-emoji">Enable custom emoji</a> configuration settings documentation for details.</p>
+<p><strong>6. Enable GIF Picker (Beta)</strong></p>
+<p>GIFs are animated images that can make messaging more fun and engaging. Enable users to access the Mattermost GIF picker from the message draft area by setting <strong>System Console &gt; GIF (Beta) &gt; Enable GIF Picker</strong> to <code class="docutils literal notranslate"><span class="pre">true</span></code>. See the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-gif-picker">Enable GIF picker</a> configuration settings documentation for details.</p>
+<p><strong>7. Enable Link Previews</strong></p>
+<p>Link previews provide a visual glimpse of relevant content for links shared in messages. Enable link previews by setting <strong>System Console &gt; Posts &gt; Enable Link Previews</strong> to <code class="docutils literal notranslate"><span class="pre">true</span></code>. See the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-link-previews">Enable link previews</a> configuration settings documentation for details.</p>
+<p><strong>8. Enable Batched Email Notifications</strong></p>
+<p>Email notifications can be batched together so users don’t get overwhelmed with too many emails.</p>
+<p>Enable email notifications first by setting <strong>System Console &gt; Notifications &gt; Enable Email Notifications</strong> to <code class="docutils literal notranslate"><span class="pre">true</span></code>. See the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-email-notifications">Enable email notifications</a> configuration settings documentation for details. Note that email notifications require an <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#smtp-server">SMTP email server</a> to be configured.</p>
+<p>Then, enable batched email notifications by setting <strong>System Console &gt; Notifications &gt; Enable Email Batching</strong> to <code class="docutils literal notranslate"><span class="pre">true</span></code>. See the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-email-batching">Enable email batching</a> configuration settings documentation for details. Note that email batching is not available if you are running your deployment in <a class="reference external" href="https://docs.mattermost.com/deployment/cluster.html">High Availability</a>.</p>
+<p><strong>9. Enable Elasticsearch (E20)</strong></p>
+<p>Mattermost Enterprise Edition E20 customers can enable <a class="reference external" href="https://docs.mattermost.com/deployment/elasticsearch.html">Elasticsearch</a> for optimized search performance at enterprise-scale. Elasticsearch solves many known issues with full text database search, such as dots, dashes, and email addresses returning unexpected results.</p>
+<p>Enable Elasticsearch by setting <strong>System Console &gt; Elasticsearch &gt; Enable Indexing</strong> to <code class="docutils literal notranslate"><span class="pre">true</span></code>. See the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#elasticsearch">Elasticsearch</a> configuration settings documentation for details. Enabling Elasticsearch requires <a class="reference external" href="https://docs.mattermost.com/deployment/elasticsearch.html#setting-up-an-elasticsearch-server">setting up an Elasticsearch server</a>.</p>
+<p><strong>10. Try Experimental Features</strong></p>
+<p>Mattermost often releases experimental features to get user feedback on new functionality and product enhancements. For example, new <a class="reference external" href="https://mattermost.com/blog/dev-sneak-peek-experimental-sidebar-features">experimental sidebar features</a> include custom, collapsible channel categories, unread filtering, and many more enhancements for managing channels in your sidebar.</p>
+<p>Enable experimental sidebar features by enabling <strong>System Console &gt; Experimental &gt; Experimental Sidebar Features</strong>. See the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#experimental-sidebar-features-experimental">Experimental sidebar features (Experimental)</a> configuration settings documentation for details.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../getting-started/implementation_plan.html" class="btn btn-neutral float-right" title="Implementation Plan" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../getting-started/enterprise-roll-out-checklist.html" class="btn btn-neutral" title="Enterprise Roll Out Checklist" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/deployment/on-boarding.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

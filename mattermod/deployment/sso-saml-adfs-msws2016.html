@@ -1,0 +1,718 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Configure SAML with Microsoft ADFS using Microsoft Windows Server 2016 &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="SAML Single-Sign-On (E20): Technical Documentation" href="sso-saml-technical.html" />
+    <link rel="prev" title="Configure SAML with Microsoft ADFS for Windows Server 2012" href="sso-saml-adfs.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="bulk-loading.html">Bulk Loading Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/migrating.html">Migration Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/hipchat-migration-guidelines.html">Migrating from HipChat to Mattermost</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/migration-announcement-email-template.html">Migration Announcement Email</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/user-provisioning.html">Provisioning Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="admin-roles.html">Additional System Admin Roles (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-ldap.html">Active Directory/LDAP Setup (E10/E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auth.html">Multi-factor Authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ldap-group-sync.html">AD/LDAP Groups (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html">Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="sso-saml.html">SAML Single Sign-On (E20)</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="sso-saml-okta.html">Okta SAML Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sso-saml-onelogin.html">OneLogin SAML Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sso-saml-adfs.html">Microsoft ADFS SAML Configuration for Windows Server 2012</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Microsoft ADFS SAML Configuration for Windows Server 2016</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sso-saml.html#using-saml-attributes-to-apply-roles">Using SAML Attributes to Apply Roles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sso-saml.html#roadmap">Roadmap</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sso-saml.html#configuration-assistance">Configuration Assistance</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sso-saml-technical.html">SAML Single-Sign-On (E20): Technical Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-gitlab.html">GitLab Single Sign-On</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-google.html">Google Single Sign-On (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-office.html">Office 365 Single Sign-On (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ssl-client-certificate.html">SSL Client Certificate Setup (Beta)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="certificate-based-authentication.html">Certificate-Based Authentication (Experimental)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="team-channel-management.html">Managing Team and Channel Members (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced-permissions.html">Advanced Permissions (E10/E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="permissions-backend.html">Advanced Permissions: Backend Infrastructure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guest-accounts.html">Guest Accounts (Beta) (E10/E20)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
+    
+      <li><a href="sso-saml.html">SAML Single Sign-On (E20)</a> &raquo;</li>
+    
+    <li>Configure SAML with Microsoft ADFS using Microsoft Windows Server 2016</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/deployment/sso-saml-adfs-msws2016.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="configure-saml-with-microsoft-adfs-using-microsoft-windows-server-2016">
+<h1>Configure SAML with Microsoft ADFS using Microsoft Windows Server 2016<a class="headerlink" href="#configure-saml-with-microsoft-adfs-using-microsoft-windows-server-2016" title="Permalink to this headline">¶</a></h1>
+<p>This document provides steps to configure SAML 2.0 with Microsoft ADFS for Mattermost and Microsoft Windows Server 2016.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#before-you-begin" id="id1">Before You Begin</a></li>
+<li><a class="reference internal" href="#prerequisites" id="id2">Prerequisites</a></li>
+<li><a class="reference internal" href="#add-a-relying-party-trust" id="id3">Add a Relying Party Trust</a></li>
+<li><a class="reference internal" href="#create-claim-rules" id="id4">Create Claim Rules</a></li>
+<li><a class="reference internal" href="#export-identity-provider-certificate" id="id5">Export Identity Provider Certificate</a></li>
+<li><a class="reference internal" href="#configure-saml-sign-in-for-mattermost" id="id6">Configure SAML Sign-in for Mattermost</a></li>
+<li><a class="reference internal" href="#frequently-asked-questions" id="id7">Frequently Asked Questions</a><ul>
+<li><a class="reference internal" href="#how-to-bind-authentication-to-id-attribute-instead-of-email" id="id8">How to Bind Authentication to Id Attribute instead of Email</a></li>
+<li><a class="reference internal" href="#can-saml-via-microsoft-adfs-be-configured-with-integrated-windows-authentication-iwa" id="id9">Can SAML via Microsoft ADFS be configured with Integrated Windows Authentication (IWA)?</a></li>
+<li><a class="reference internal" href="#how-do-i-migrate-users-from-one-authentication-method-e-g-email-to-saml" id="id10">How do I migrate users from one authentication method (e.g. email) to SAML?</a></li>
+<li><a class="reference internal" href="#how-is-saml-different-from-oauth-2-0-and-openid-connect" id="id11">How is SAML different from OAuth 2.0 and OpenId Connect?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#configure-saml-synchronization-with-ad-ldap" id="id12">Configure SAML synchronization with AD/LDAP</a><ul>
+<li><a class="reference internal" href="#override-saml-data-with-ad-ldap-data" id="id13">Override SAML Data with AD/LDAP Data</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="before-you-begin">
+<h2><a class="toc-backref" href="#contents">Before You Begin</a><a class="headerlink" href="#before-you-begin" title="Permalink to this headline">¶</a></h2>
+<p>Before you begin, you’ll need to install the XML Security Library.</p>
+<ol class="arabic simple">
+<li>Make sure you have the <a class="reference external" href="https://www.aleksey.com/xmlsec/download.html">XML Security Library</a> installed on your Mattermost instance. The XML Security Library is usually included as part of Debian GNU/Linux.</li>
+<li>Install the <em>xmlsec1-openssl</em> library</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>On Ubuntu: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">xmlsec1</span></code></li>
+<li>On RHEL: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">yum</span> <span class="pre">install</span> <span class="pre">xmlsec1-openssl</span></code></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li>Generate encryption certificates for encrypting the SAML connection.</li>
+</ol>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li>You can use the <a class="reference external" href="https://github.com/mattermost/docs/tree/master/source/scripts/generate-certificates">Bash script</a> from the <em>mattermost/docs</em> repository on GitHub, or any other suitable method.</li>
+<li>Save the two files that are generated. They are the private key and the public key. In the System Console, they are referred to as the <strong>Service Provider Private Key</strong> and the <strong>Service Provider Public Certificate</strong> respectively.</li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="prerequisites">
+<h2><a class="toc-backref" href="#contents">Prerequisites</a><a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>An Active Directory instance where all users have specified email and username attributes. For Mattermost servers running 3.3 and earlier, users must also have their first name and last name attributes specified.</li>
+<li>A running Microsoft Server. The screenshots used in this guide are from Microsoft Server 2012R2, but similar steps should work for other versions.</li>
+<li>An SSL certificate to sign your ADFS login page.</li>
+<li>ADFS installed on your Microsoft Server. You can find a detailed guide for deploying and configuring ADFS in <a class="reference external" href="https://msdn.microsoft.com/en-us/library/gg188612.aspx">this article</a>.</li>
+</ul>
+</div></blockquote>
+<p>On your ADFS installation, open the ADFS console. Select <strong>Service</strong> and then <strong>Endpoints</strong>. In the <strong>Type</strong> column search for <code class="docutils literal notranslate"><span class="pre">SAML</span> <span class="pre">2.0/WS-Federation</span></code> and note down the value of <strong>URL Path</strong> column. This is also known as the <strong>SAML SSO URL Endpoint</strong> in this guide. If you chose the defaults for the installation, this will be <code class="docutils literal notranslate"><span class="pre">/adfs/ls</span></code>.</p>
+</div>
+<div class="section" id="add-a-relying-party-trust">
+<h2><a class="toc-backref" href="#contents">Add a Relying Party Trust</a><a class="headerlink" href="#add-a-relying-party-trust" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Open the ADFS management snap-in and select <strong>AD FS &gt; Relying Party Trusts &gt; Add Relying Party Trust</strong> on the right sidebar. You can also right-click <strong>Relying Party Trusts</strong> and choose <strong>Add Relying Party Trust</strong> from the context menu.</p>
+<blockquote>
+<div><img alt="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_000.png" src="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_000.png" />
+</div></blockquote>
+</li>
+<li><p class="first">In the <strong>Welcome</strong> screen of the configuration wizard choose <strong>Claims aware</strong> and select <strong>Start</strong>.</p>
+<blockquote>
+<div><img alt="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_001.png" src="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_001.png" />
+</div></blockquote>
+</li>
+<li><p class="first">In the <strong>Select Data Source</strong> screen, choose <strong>Enter data about the relying party manually</strong>.</p>
+<blockquote>
+<div><img alt="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_002.png" src="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_002.png" />
+</div></blockquote>
+</li>
+<li><p class="first">In the <strong>Specify Display Name</strong> screen enter a <strong>Display Name</strong> (e.g., <code class="docutils literal notranslate"><span class="pre">Mattermost</span></code>). You can add optional notes.</p>
+<blockquote>
+<div><img alt="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_003.png" src="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_003.png" />
+</div></blockquote>
+</li>
+<li><p class="first">In the <strong>Configure Certificate</strong> screen, leave the certificate settings at their default values.</p>
+<blockquote>
+<div><img alt="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_004.png" src="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_004.png" />
+</div></blockquote>
+</li>
+</ol>
+<p>If you would like to set up encryption for your SAML connection, select <strong>Browse</strong> and upload your Service Provider Public Certificate.</p>
+<blockquote>
+<div><img alt="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_005.png" src="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_005.png" />
+</div></blockquote>
+<ol class="arabic" start="6">
+<li><p class="first">In the <strong>Configure URL</strong> screen, select <strong>Enable Support for the SAML 2.0 WebSSO protocol</strong> and enter the <strong>SAML 2.0 SSO service URL</strong> in the following format:<code class="docutils literal notranslate"><span class="pre">https://&lt;your-mattermost-url&gt;/login/sso/saml</span></code> where <code class="docutils literal notranslate"><span class="pre">&lt;your-mattermost-url&gt;</span></code> should typically match the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#site-url">Mattermost Site URL</a>.</p>
+<blockquote>
+<div><img alt="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_006.png" src="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_006.png" />
+</div></blockquote>
+</li>
+<li><p class="first">In the <strong>Configure Identifiers</strong> screen, enter the <strong>Relying party trust identifier</strong>. This identifies the claims being requested. The <strong>SAML 2.0 SSO service URL</strong> format should be <code class="docutils literal notranslate"><span class="pre">https://&lt;your-mattermost-url&gt;/login/sso/saml</span></code> where <code class="docutils literal notranslate"><span class="pre">&lt;your-mattermost-url&gt;</span></code> matches your <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#site-url">Mattermost Site URL</a>. Then choose <strong>Next</strong>.</p>
+<blockquote>
+<div><img alt="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_007.png" src="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_007.png" />
+<img alt="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_008.png" src="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_008.png" />
+</div></blockquote>
+</li>
+</ol>
+<p>This string must match the <strong>Service Provider Identifier</strong> string. For more information about the Relying party trust identifier and how prefix matching is applied see <a class="reference external" href="https://docs.microsoft.com/en-us/windows-server/identity/ad-fs/technical-reference/how-uris-are-used-in-ad-fs">this documentation</a>.</p>
+<p>Add your <strong>SAML 2.0 SSO service URL</strong> from above the same way.</p>
+<ol class="arabic" start="8">
+<li><p class="first">In the <strong>Choose Access Control Policy</strong> screen select the access control policy suitable for your environment. This guide assumes the default values <strong>Permit everyone</strong> and an unchecked box.</p>
+<blockquote>
+<div><img alt="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_009.png" src="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_009.png" />
+</div></blockquote>
+</li>
+<li><p class="first">In the <strong>Ready to Add Trust</strong> screen, you can review your settings.</p>
+<blockquote>
+<div><img alt="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_010.png" src="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_010.png" />
+</div></blockquote>
+</li>
+<li><p class="first">In the <strong>Finish</strong> screen select <strong>Configure claims issuance policy for this application</strong> and then <strong>Close</strong>.</p>
+<blockquote>
+<div><img alt="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_011.png" src="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_011.png" />
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="create-claim-rules">
+<h2><a class="toc-backref" href="#contents">Create Claim Rules</a><a class="headerlink" href="#create-claim-rules" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">In the <strong>Issuance Transform Rules</strong> tab of the <strong>Claim Rules</strong> editor, choose <strong>Add Rule…</strong>.</p>
+<blockquote>
+<div><img alt="../_images/SSO-SAML-ADFS_create-claim-rules_001.png" src="../_images/SSO-SAML-ADFS_create-claim-rules_001.png" />
+</div></blockquote>
+</li>
+<li><p class="first">In the <strong>Choose Rule Type</strong> screen, select <strong>Send LDAP Attributes as Claims</strong> from the drop-down menu, then click <strong>Next</strong>.</p>
+<blockquote>
+<div><img alt="../_images/SSO-SAML-ADFS_create-claim-rules_002.png" src="../_images/SSO-SAML-ADFS_create-claim-rules_002.png" />
+</div></blockquote>
+</li>
+<li><p class="first">In the <strong>Configure Claim Rule</strong> screen, enter a <strong>Claim Rule Name</strong> of your choice, select <strong>Active Directory</strong> as the <strong>Attribute Store</strong> and add the following mapping:</p>
+</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>From the LDAP Attribute column, <strong>select</strong> <code class="docutils literal notranslate"><span class="pre">E-Mail-Addresses</span></code>. From the Outgoing Claim Type, <strong>type</strong> <code class="docutils literal notranslate"><span class="pre">Email</span></code></li>
+<li>From the LDAP Attribute column, <strong>select</strong> <code class="docutils literal notranslate"><span class="pre">Given-Name</span></code>. From the Outgoing Claim Type, <strong>type</strong> <code class="docutils literal notranslate"><span class="pre">FirstName</span></code></li>
+<li>From the LDAP Attribute column, <strong>select</strong> <code class="docutils literal notranslate"><span class="pre">Surname</span></code>. From the Outgoing Claim Type, <strong>type</strong> <code class="docutils literal notranslate"><span class="pre">LastName</span></code></li>
+<li>From the LDAP Attribute column, <strong>select</strong> <code class="docutils literal notranslate"><span class="pre">SAM-Account-Name</span></code>. From the Outgoing Claim Type, <strong>type</strong> <code class="docutils literal notranslate"><span class="pre">Username</span></code></li>
+</ul>
+</div></blockquote>
+<p>For Mattermost 3.4 and later, the <em>FirstName</em> and <em>LastName</em> attributes are optional.</p>
+<p>Select <strong>Finish</strong> to add the rule.</p>
+<p>The entries in the <strong>Outgoing Claim Type</strong> column can be modified and the entries may contain dashes but no spaces. They are used to map the corresponding fields in Mattermost.</p>
+<blockquote>
+<div><img alt="../_images/SSO-SAML-ADFS_create-claim-rules_003.png" src="../_images/SSO-SAML-ADFS_create-claim-rules_003.png" />
+</div></blockquote>
+<ol class="arabic" start="4">
+<li><p class="first">Select <strong>Add Rule</strong> to create another new rule.</p>
+</li>
+<li><p class="first">In the <strong>Choose Rule Type</strong> screen, select <strong>Transform an Incoming Claim</strong> from the drop-down menu, then click <strong>Next</strong>.</p>
+<blockquote>
+<div><img alt="../_images/SSO-SAML-ADFS_create-claim-rules_004.png" src="../_images/SSO-SAML-ADFS_create-claim-rules_004.png" />
+</div></blockquote>
+</li>
+<li><p class="first">In the <strong>Configure Claim Rule</strong> screen, enter a <strong>Claim Rule Name</strong> of your choice, then</p>
+</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>Select <em>Name ID</em> for the <strong>Incoming claim type</strong></li>
+<li>Select <em>Unspecified</em> for the <strong>Incoming name ID format</strong></li>
+<li>Select <em>E-Mail Address</em> for the <strong>Outgoing claim type</strong></li>
+</ul>
+</div></blockquote>
+<p>Select the <strong>Pass through all claim values</strong> option and click <strong>Finish</strong>.</p>
+<blockquote>
+<div><img alt="../_images/SSO-SAML-ADFS_create-claim-rules_005.png" src="../_images/SSO-SAML-ADFS_create-claim-rules_005.png" />
+</div></blockquote>
+<ol class="arabic simple" start="7">
+<li>Click <strong>Finish</strong> to create the claim rule, then <strong>OK</strong> to finish creating rules.</li>
+<li>Open Windows PowerShell as an administrator and run the following command:</li>
+</ol>
+<blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">Set-ADFSRelyingPartyTrust</span> <span class="pre">-TargetName</span> <span class="pre">&lt;display-name&gt;</span> <span class="pre">-SamlResponseSignature</span> <span class="pre">&quot;MessageAndAssertion&quot;</span></code></div></blockquote>
+<p>where <em>&lt;display-name&gt;</em> is the name you specified in step 4 of <em>Add a Relying Party Trust</em>. In our example it would be <code class="docutils literal notranslate"><span class="pre">mattermost</span></code>.</p>
+<p>This action will add the signature to SAML messages, making verification successful.</p>
+</div>
+<div class="section" id="export-identity-provider-certificate">
+<h2><a class="toc-backref" href="#contents">Export Identity Provider Certificate</a><a class="headerlink" href="#export-identity-provider-certificate" title="Permalink to this headline">¶</a></h2>
+<p>Next, we export the identity provider certificate, which will be later uploaded to Mattermost to finish SAML configuration.</p>
+<ol class="arabic">
+<li><p class="first">Open the ADFS management snap-in, select <strong>AD FS &gt; Service &gt; Certificates</strong> and double click on the certificate under <strong>Token-signing</strong>. You can also right-click the field, then click <strong>View Certificate</strong> in the context menu.</p>
+<blockquote>
+<div><img alt="../_images/SSO-SAML-ADFS_export-id-provider-cert_001.png" src="../_images/SSO-SAML-ADFS_export-id-provider-cert_001.png" />
+</div></blockquote>
+</li>
+<li><p class="first">In the <strong>Certificate</strong> screen open the the <strong>Details</strong> tab, select <strong>Copy to File</strong> and then <strong>OK</strong>.</p>
+<blockquote>
+<div><img alt="../_images/SSO-SAML-ADFS_export-id-provider-cert_003.png" src="../_images/SSO-SAML-ADFS_export-id-provider-cert_003.png" />
+</div></blockquote>
+</li>
+<li><p class="first">In the <strong>Certificate Export Wizard</strong> screen, click <strong>Next</strong>.</p>
+<blockquote>
+<div><img alt="../_images/SSO-SAML-ADFS_export-id-provider-cert_004.png" src="../_images/SSO-SAML-ADFS_export-id-provider-cert_004.png" />
+<p>Then, select the option <strong>Base-64 encoded X.509 (.CER)</strong> and click <strong>Next</strong> again.</p>
+<img alt="../_images/SSO-SAML-ADFS_export-id-provider-cert_005.png" src="../_images/SSO-SAML-ADFS_export-id-provider-cert_005.png" />
+</div></blockquote>
+</li>
+<li><p class="first">In the <strong>Certificate Export Wizard</strong> screen, click <strong>Browse</strong> to specify the location you want the Identity Provider Certificate to be exported, and specify the file name.</p>
+<blockquote>
+<div><img alt="../_images/SSO-SAML-ADFS_export-id-provider-cert_006.png" src="../_images/SSO-SAML-ADFS_export-id-provider-cert_006.png" />
+</div></blockquote>
+</li>
+<li><p class="first">Click <strong>Save</strong>. In the <strong>Certificate Export Wizard</strong> screen, verify the file path is correct, and click <strong>Next</strong>.</p>
+</li>
+<li><p class="first">In the <strong>Completing the Certificate Export Wizard</strong>, click <strong>Finish</strong>, then <strong>OK</strong> to confirm the export was successful.</p>
+<blockquote>
+<div><img alt="../_images/SSO-SAML-ADFS_export-id-provider-cert_007.png" src="../_images/SSO-SAML-ADFS_export-id-provider-cert_007.png" />
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="configure-saml-sign-in-for-mattermost">
+<h2><a class="toc-backref" href="#contents">Configure SAML Sign-in for Mattermost</a><a class="headerlink" href="#configure-saml-sign-in-for-mattermost" title="Permalink to this headline">¶</a></h2>
+<p>Create a metadata URL by appending “FederationMetadata/2007-06/FederationMetadata.xml” to the root URL of the ADFS server, for example: <code class="docutils literal notranslate"><span class="pre">https://&lt;adfs.domain.com&gt;/federationmetadata/2007-06/FederationMetadata.xml&gt;</span></code>.</p>
+<p>Next, start Mattermost server and sign into Mattermost as a System Administrator. Go to <strong>System Console &gt; Authentication &gt; SAML</strong>, paste the  metadata URL in the <strong>Identity Provider Metadata URL</strong> field, and then select <strong>Get SAML Metadata from IdP</strong>.</p>
+<p>This populates the <strong>SAML SSO URL</strong> and the <strong>Identity Provider Issuer URL</strong> fields automatically and the Identity Provider Public Certificate is also downloaded from the server and set locally.</p>
+<dl class="docutils">
+<dt>The following fields can be selected:</dt>
+<dd><ul class="first last simple">
+<li>Set <strong>Enable Login With SAML 2.0</strong> to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</li>
+<li>Set <strong>Enable Synchronizing SAML Accounts With AD/LDAP</strong> to suit your environment.</li>
+<li>Set <strong>Override SAML bind data with AD/LDAP information</strong> to suit your environment.</li>
+</ul>
+</dd>
+<dt>If you don’t plan to use a metadata URL you can manually enter the following fields:</dt>
+<dd><ul class="first last">
+<li><p class="first">For <strong>SAML SSO URL</strong> use the <code class="docutils literal notranslate"><span class="pre">SAML</span> <span class="pre">2.0/W-Federation</span> <span class="pre">URL</span> <span class="pre">ADFS</span> <span class="pre">Endpoint</span></code> you copied at the beginning of the process.</p>
+</li>
+<li><p class="first">For <strong>Identity Provider Issuer URL</strong> use the <code class="docutils literal notranslate"><span class="pre">Relying</span> <span class="pre">party</span> <span class="pre">trust</span> <span class="pre">identifier</span></code> from ADFS.</p>
+</li>
+<li><p class="first">For <strong>Identity Provider Public Certificate</strong> use  the``X.509 Public Certificate``.</p>
+<blockquote>
+<div><img alt="../_images/SSO-SAML-ADFS_configure-saml_001.png" src="../_images/SSO-SAML-ADFS_configure-saml_001.png" />
+</div></blockquote>
+</li>
+</ul>
+</dd>
+</dl>
+<ol class="arabic simple" start="2">
+<li>Configure Mattermost to verify the signature.</li>
+</ol>
+<blockquote>
+<div><ul>
+<li><p class="first">Set <strong>Verify Signature</strong> to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+</li>
+<li><p class="first">For <strong>Service Provider Login URL</strong> use the <code class="docutils literal notranslate"><span class="pre">SAML</span> <span class="pre">2.0</span> <span class="pre">SSO</span> <span class="pre">service</span> <span class="pre">URL</span></code> you specified in ADFS.</p>
+<blockquote>
+<div><img alt="../_images/SSO-SAML-ADFS_configure-saml_002.png" src="../_images/SSO-SAML-ADFS_configure-saml_002.png" />
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li>Enable encryption.</li>
+</ol>
+<blockquote>
+<div><ul>
+<li><p class="first">Set <strong>Enable Encryption</strong> to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+</li>
+<li><p class="first">For <strong>Service Provider Private Key</strong> use the Service Provider Private Key generated at the start of this process.</p>
+</li>
+<li><p class="first">For <strong>Service Provider Public Certificate</strong> use the Service Provider Public Certificate you generated at the start of this process.</p>
+</li>
+<li><p class="first">Set <strong>Sign Request</strong> to suit your environment.</p>
+<blockquote>
+<div><img alt="../_images/SSO-SAML-ADFS_configure-saml_003.png" src="../_images/SSO-SAML-ADFS_configure-saml_003.png" />
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li>Set attributes for the SAML Assertions, which will be used to update user information in Mattermost. Attributes for email and username are required and should match the values you entered in ADFS earlier. See <a class="reference internal" href="../administration/prev-config-settings.html#saml-enterprise"><span class="std std-ref">documentation on SAML configuration settings</span></a> for more detail.</li>
+</ol>
+<p>For Mattermost servers running 3.3 and earlier, the first name and last name attributes are also required fields.</p>
+<blockquote>
+<div><img alt="../_images/SSO-SAML-ADFS_configure-saml_004.png" src="../_images/SSO-SAML-ADFS_configure-saml_004.png" />
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li>Click <strong>Save</strong>.</li>
+<li>(Optional) If you configured First Name Attribute and Last Name Attribute, go to <strong>System Console &gt; Site Configuration &gt; Users and Teams</strong> (or <strong>System Console &gt; General &gt; Users and Teams</strong> in versions prior to 5.12) and set <strong>Teammate Name Display</strong> to <strong>Show first and last name</strong>. This is recommended for a better user experience.</li>
+</ol>
+<p>You’re done! If you’d like to confirm SAML SSO is successfully enabled, switch your System Administrator account from email to SAML-based authentication via <strong>Account Settings &gt; General &gt; Sign-in Method &gt; Switch to SAML SSO</strong> and sign in with your SAML credentials to complete the switch.</p>
+<p>It’s also recommended to post an announcement about how the migration will work to users.</p>
+<p>You may also configure SAML for ADFS by editing <code class="docutils literal notranslate"><span class="pre">config.json</span></code> to enable SAML based on <a class="reference internal" href="../administration/prev-config-settings.html#saml-enterprise"><span class="std std-ref">SAML configuration settings</span></a>. You must restart the Mattermost server for the changes to take effect.</p>
+</div>
+<div class="section" id="frequently-asked-questions">
+<h2><a class="toc-backref" href="#contents">Frequently Asked Questions</a><a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="how-to-bind-authentication-to-id-attribute-instead-of-email">
+<h3><a class="toc-backref" href="#contents">How to Bind Authentication to Id Attribute instead of Email</a><a class="headerlink" href="#how-to-bind-authentication-to-id-attribute-instead-of-email" title="Permalink to this headline">¶</a></h3>
+<p>Alternatively, you can use an Id Attribute instead of email to bind the user.  We recommend choosing an ID that is unique and will not change over time.</p>
+<p>Configuring with an Id Attribute allows you to reuse an email address for a new user without the old user’s information being exposed. For instance, if a user with an email address <a class="reference external" href="mailto:joe&#46;smith&#37;&#52;&#48;mattermost&#46;com">joe<span>&#46;</span>smith<span>&#64;</span>mattermost<span>&#46;</span>com</a> was once an employee, a new employee named Joe Smith can use the same email. This configuration is also useful when a user’s name changes and their email needs to be updated.</p>
+<p>This process was designed with backwards compatibility to email binding. Here is the process applied to new account creations and to accounts logging in after the configuration:</p>
+<blockquote>
+<div><ul class="simple">
+<li>A user authenticated with SAML is bound to the SAML service user using the Id Attribute (as long as it has been configured) or bound by email using the email received from SAML.</li>
+<li>When the user tries to login and the SAML server responds with a valid authentication, then the server uses the “Id” field of the SAML authentication to search the user.</li>
+<li>If a user bound to that ID already exists, it logs in as that user.</li>
+<li>If a user bound to that ID does not exist, it will search base on the email.</li>
+<li>If a user bound to the email exists, it logs in with email and updates the autentication data to the ID, instead of the email.</li>
+<li>If a user bound to the ID or email does not exist, it will create a new Mattermost account bound to the SAML account by ID and will allow the user to log in.</li>
+</ul>
+<p>Note:  Existing accounts will not update until they log in to the server.</p>
+</div></blockquote>
+</div>
+<div class="section" id="can-saml-via-microsoft-adfs-be-configured-with-integrated-windows-authentication-iwa">
+<h3><a class="toc-backref" href="#contents">Can SAML via Microsoft ADFS be configured with Integrated Windows Authentication (IWA)?</a><a class="headerlink" href="#can-saml-via-microsoft-adfs-be-configured-with-integrated-windows-authentication-iwa" title="Permalink to this headline">¶</a></h3>
+<p>Yes. IWA is supported on the browser, with support added to iOS and Android mobile apps in Q2/2019 (mobile apps v1.18 and later).</p>
+<p>However, IWA is not supported on the Mattermost Desktop Apps due to a limitation in Electron. As a workaround you may create a browser desktop shortcut for quick access to Mattermost, just like a Desktop App.</p>
+</div>
+<div class="section" id="how-do-i-migrate-users-from-one-authentication-method-e-g-email-to-saml">
+<h3><a class="toc-backref" href="#contents">How do I migrate users from one authentication method (e.g. email) to SAML?</a><a class="headerlink" href="#how-do-i-migrate-users-from-one-authentication-method-e-g-email-to-saml" title="Permalink to this headline">¶</a></h3>
+<p>Use the <span class="xref std std-doc">mattermost user migrate_auth CLI command</span>.</p>
+</div>
+<div class="section" id="how-is-saml-different-from-oauth-2-0-and-openid-connect">
+<h3><a class="toc-backref" href="#contents">How is SAML different from OAuth 2.0 and OpenId Connect?</a><a class="headerlink" href="#how-is-saml-different-from-oauth-2-0-and-openid-connect" title="Permalink to this headline">¶</a></h3>
+<p>OAuth 2.0 was primarily intended for delegated authorization, where an app is authorized to access resources, such as Google contact list. It doesn’t deal with authentication.</p>
+<p>OpenID Connect is built on top of OAuth 2.0, which supports authentication and thus direct SSO.</p>
+<p>SAML is like OpenID Connect, except typically used in enterprise settings. OpenID Connect is more common in consumer websites and web/mobile apps.</p>
+<p>Learn more at <a class="reference external" href="https://hackernoon.com/demystifying-oauth-2-0-and-openid-connect-and-saml-12aa4cf9fdba">https://hackernoon.com/demystifying-oauth-2-0-and-openid-connect-and-saml-12aa4cf9fdba</a>.</p>
+</div>
+</div>
+<div class="section" id="configure-saml-synchronization-with-ad-ldap">
+<h2><a class="toc-backref" href="#contents">Configure SAML synchronization with AD/LDAP</a><a class="headerlink" href="#configure-saml-synchronization-with-ad-ldap" title="Permalink to this headline">¶</a></h2>
+<p>In addition to configuring SAML sign-in, you can optionally configure synchronizing SAML accounts with AD/LDAP. When configured:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Mattermost queries AD/LDAP for relevant account information and updates SAML accounts based on changes to attributes (first name, last name, and nickname)</li>
+<li>Accounts disabled in AD/LDAP are made inactive in Mattermost, and their active sessions are revoked once Mattermost synchronizes attributes.</li>
+</ul>
+</div></blockquote>
+<p>To configure SAML synchronization with AD/LDAP:</p>
+<ol class="arabic simple">
+<li>Go to <strong>System Console &gt; Authentication &gt; SAML 2.0</strong> (or <strong>System Console &gt; SAML</strong> in versions prior to 5.12) and set <strong>Enable Synchronizing SAML Accounts With AD/LDAP</strong> to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</li>
+<li>Go to  <strong>System Console &gt; Authentication &gt; AD/LDAP</strong> (or <strong>System Console &gt; AD/LDAP</strong> in versions prior to 5.12) and set <strong>Enable Synchronization with AD/LDAP</strong> to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</li>
+<li>To ignore guest users when sychronizing, go to <strong>System Console &gt; Authentication &gt; SAML 2.0</strong> and set <strong>Ignore Guest Users when Synchronizing with AD/LDAP</strong> to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</li>
+<li>Set the rest of the AD/LDAP settings based on <a class="reference external" href="http://docs.mattermost.com/administration/config-settings.html#ad-ldap">configuration settings documentation</a> to connect Mattermost with your AD/LDAP server.</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>If you don’t want to enable AD/LDAP sign-in, go to <strong>System Console &gt; Authentication &gt; AD/LDAP</strong> (or <strong>System Console &gt; AD/LDAP</strong> in versions prior to 5.12) and keep <strong>Enable sign-in with AD/LDAP</strong> as <code class="docutils literal notranslate"><span class="pre">false</span></code>.</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li>To specify how often Mattermost synchronizes SAML user accounts with AD/LDAP, go to <strong>System Console &gt; Authentication &gt; AD/LDAP</strong> (or <strong>System Console &gt; AD/LDAP</strong> in versions prior to 5.12) and set&nbsp;<strong>Synchronization Interval</strong>. The default setting is 60 minutes. If you want to synchronize immediately after disabling an account, click <strong>AD/LDAP Synchronize Now</strong>.</li>
+<li>To confirm that Mattermost can successfully connect to your AD/LDAP server, go to <strong>System Console &gt; Authentication &gt; AD/LDAP</strong> (or <strong>System Console &gt; AD/LDAP</strong> in versions prior to 5.12) and select <strong>AD/LDAP Test</strong>.</li>
+</ol>
+<p>Once the synchronization with AD/LDAP is enabled, user attributes are synchronized with AD/LDAP based on their email address. If a user with a given email address doesn’t have an AD/LDAP account, they will be deactivated in Mattermost on the next AD/LDAP sync. To re-activate the account:</p>
+<ol class="arabic simple">
+<li>Add the user to your AD/LDAP server.</li>
+<li>Purge all caches in Mattermost in <strong>System Console &gt; Web Server &gt; Purge All Caches</strong> (or <strong>System Console &gt; Configuration &gt; Purge All Caches</strong> in versions prior to 5.12).</li>
+<li>Run AD/LDAP sync in <strong>System Console &gt; Authentication &gt; AD/LDAP &gt; AD/LDAP Synchronize Now</strong> (or <strong>System Console &gt; AD/LDAP &gt; AD/LDAP Synchronize Now</strong> in versions prior to 5.12).</li>
+<li>Purge all caches again in Mattermost in <strong>System Console &gt; Web Server &gt; Purge All Caches</strong> (or <strong>System Console &gt; Configuration &gt; Purge All Caches</strong> in versions prior to 5.12), which re-activates the account in Mattermost.</li>
+</ol>
+<blockquote>
+<div><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If a user is deactivated from AD/LDAP, they will be deactivated in Mattermost on the next sync. They will be shown as “Inactive” in the System Console users list, all of their sessions will expire and they won’t be able to log back in to Mattermost.</p>
+<p class="last">If a user is deactivated from SAML, their session won’t expire until they’re deactivated from AD/LDAP. However, they won’t be able to log back in to Mattermost.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>SAML synchronization with AD/LDAP is designed to pull user attributes such as first name and last name from your AD/LDAP, not to control authentication.</p>
+<p class="last">In particular, the user filter cannot be used to control who can log in to Mattermost, this should be controlled by your SAML service provider’s group permissions.</p>
+</div>
+</div></blockquote>
+<p>See <a class="reference internal" href="sso-saml-technical.html#sso-saml-technical"><span class="std std-ref">technical description of SAML synchronization with AD/LDAP</span></a> for more details.</p>
+<div class="section" id="override-saml-data-with-ad-ldap-data">
+<h3><a class="toc-backref" href="#contents">Override SAML Data with AD/LDAP Data</a><a class="headerlink" href="#override-saml-data-with-ad-ldap-data" title="Permalink to this headline">¶</a></h3>
+<p>Alternatively, you can choose to override SAML bind data with AD/LDAP information. For more infomation on binding a user with the SAML ID Attribute, please refer to this <a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml-okta.html#bind-authentication-to-id-attribute-instead-of-email">documentation</a>.</p>
+<p>This process overrides SAML email address with AD/LDAP email address data or SAML Id Attribute with AD/LDAP Id Attribute if configured. We recommend using this configuration with the SAML ID Attribute to help ensure new users are not created when the email address changes for a user.</p>
+<p>To ensure existing user accounts do not get disabled in this process, ensure the SAML IDs match the LDAP IDs by exporting data from both systems and comparing the ID data. Mapping ID Attributes for both AD/LDAP and SAML within Mattermost to fields that hold the same data will ensure the IDs match as well.</p>
+<ol class="arabic simple">
+<li>Set the SAML <code class="docutils literal notranslate"><span class="pre">Id</span> <span class="pre">Attribute</span></code> on <strong>System Console &gt; Authentication &gt; SAML 2.0</strong> &gt; <strong>Id Attribute</strong> (or <strong>System Console &gt; SAML &gt; Id Attribute</strong> in versions prior to 5.12)</li>
+<li>Set <strong>System Console &gt; Authentication &gt; SAML 2.0 &gt; Override SAML bind data with AD/LDAP information</strong> (or <strong>System Console &gt; SAML &gt; Override SAML bind data with AD/LDAP information</strong> in versions prior to 5.12) to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</li>
+<li>Set <strong>System Console</strong> &gt; <strong>Authentication</strong> &gt; <strong>SAML 2.0</strong> &gt; <strong>Enable Synchronizing SAML Accounts With AD/LDAP</strong> (or <strong>System Console &gt; SAML &gt; Enable Synchronizing SAML Accounts With AD/LDAP</strong> in versions prior to 5.12) to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</li>
+<li>Run AD/LDAP sync in <strong>System Console &gt; Authentication &gt; AD/LDAP &gt; AD/LDAP Synchronize Now</strong> (or <strong>System Console &gt; AD/LDAP &gt; AD/LDAP Synchronize Now</strong> in versions prior to 5.12).</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sso-saml-technical.html" class="btn btn-neutral float-right" title="SAML Single-Sign-On (E20): Technical Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sso-saml-adfs.html" class="btn btn-neutral" title="Configure SAML with Microsoft ADFS for Windows Server 2012" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/deployment/sso-saml-adfs-msws2016.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

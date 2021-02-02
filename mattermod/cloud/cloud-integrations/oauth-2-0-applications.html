@@ -1,0 +1,328 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>OAuth 2.0 Applications &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../../search.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/administrator.html">Self-Managed Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+    
+    <li>OAuth 2.0 Applications</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/cloud/cloud-integrations/oauth-2-0-applications.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="oauth-2-0-applications">
+<h1>OAuth 2.0 Applications<a class="headerlink" href="#oauth-2-0-applications" title="Permalink to this headline">¶</a></h1>
+<p>OAuth 2.0 is a protocol that allows Mattermost to authorize API requests from external applications. The authorization allows</p>
+<blockquote>
+<div><ul class="simple">
+<li>users with an account on a Mattermost server to sign in to third-party applications. You can find a <a class="reference external" href="https://github.com/enahum/mattermost-oauth2-client-sample">sample OAuth2 Client Application for Mattermost here</a> to test the functionality.</li>
+<li>a Mattermost server to authenticate requests to a third-party API. One popular application is Zapier integration which allows you to integrate more than 700 applications with Mattermost through OAuth 2.0. See our <a class="reference external" href="https://docs.mattermost.com/integrations/zapier.html">Zapier documentation</a> to learn more.</li>
+</ul>
+</div></blockquote>
+<p>This documentation includes the following details:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="https://docs.mattermost.com/developer/oauth-2-0-applications.html#id1">Register your application in Mattermost</a></li>
+<li><a class="reference external" href="https://docs.mattermost.com/developer/oauth-2-0-applications.html#id3">Granting permissions to your application</a></li>
+</ul>
+</div></blockquote>
+<div class="section" id="register-your-application-in-mattermost">
+<h2>Register your application in Mattermost<a class="headerlink" href="#register-your-application-in-mattermost" title="Permalink to this headline">¶</a></h2>
+<p>You must register your application in Mattermost to generate OAuth 2.0 credentials (client ID and secret), which your application can use to authenticate API calls to Mattermost, and which Mattermost uses to authorize API requests from the application.</p>
+<p>If you would like to set up a Zapier integration with OAuth 2.0, see our <a class="reference external" href="https://docs.mattermost.com/integrations/zapier.html">Zapier documentation</a> to learn more.</p>
+<div class="section" id="enable-oauth-2-0-applications">
+<h3>Enable OAuth 2.0 Applications<a class="headerlink" href="#enable-oauth-2-0-applications" title="Permalink to this headline">¶</a></h3>
+<p>OAuth 2.0 applications are off by default and can be enabled by the System Administrator as follows:</p>
+<p>1 - Login to your Mattermost server as the System Administrator.</p>
+<p>2 - Go to <strong>Main Menu &gt; System Console &gt; Integrations &gt; Custom Integrations</strong> in prior versions or <strong>System Console &gt; Integrations &gt; Integration Management</strong> in versions after 5.12.</p>
+<p>3 - Set <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-oauth-2-0-service-provider">Enable OAuth 2.0 Service Provider</a> to <strong>True</strong>.</p>
+<p>4 - (Optional) If you would like to allow external applications to post with customizable usernames and profile pictures, then set <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-webhooks-and-slash-commands-to-override-usernames">Enable integrations to override usernames</a> and <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-webhooks-and-slash-commands-to-override-profile-picture-iconss">Enable integrations to override profile picture icons</a> to <strong>True</strong>.</p>
+<p>5 - (Optional) If you would like to allow users on your system who are not System Admins to create OAuth 2.0 applications, then set <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#restrict-managing-integrations-to-admins">Restrict managing integrations to Admins</a> to <strong>False</strong>.</p>
+</div>
+<div class="section" id="register-an-oauth-2-0-application">
+<h3>Register an OAuth 2.0 Application<a class="headerlink" href="#register-an-oauth-2-0-application" title="Permalink to this headline">¶</a></h3>
+<p>1 - Go to <strong>Main Menu</strong> &gt; <strong>Integrations</strong></p>
+<p>2 - Click <strong>OAuth 2.0 Applications</strong>, then click <strong>Add OAuth 2.0 Application</strong></p>
+<p>3 - Set <strong>Is Trusted</strong>: When set to <strong>Yes</strong>, your application is considered trusted by Mattermost. This means Mattermost doesn’t require users to accept authorization when signing to third-party applications. When set to <strong>No</strong>, users will be provided with the following page to accept or deny authorization when authenticating for the first time.</p>
+<img alt="cloud/cloud-integrations/../images/oauth2_authorization_screen.PNG" src="cloud/cloud-integrations/../images/oauth2_authorization_screen.PNG" />
+<p>Only System Admins can set OAuth 2.0 applications as trusted.</p>
+<p>4 - Specify the <strong>Display Name</strong>: Enter a name for your application made of up to 64 characters. This is the name users will see when granting access to the application, when viewing a list of authorized applications in <strong>Account Settings &gt; Security &gt; OAuth 2.0 Applications</strong> and when viewing a list of OAuth 2.0 applications in <strong>Main Menu</strong> &gt; <strong>Integrations</strong>.</p>
+<p>5 - Add <strong>Description</strong>: This is a short description of your application that users will see when viewing a list of authorized applications in <strong>Account Settings &gt; Security &gt; OAuth 2.0 Applications</strong>.</p>
+<p>6 - Specify the <strong>Homepage</strong>: This is the homepage of the OAuth 2.0 application and lets users visit the app page to learn more what it does. The URL must be a valid URL and start with <code class="docutils literal notranslate"><span class="pre">http://</span></code> or <code class="docutils literal notranslate"><span class="pre">https://</span></code> depending on your server configuration.</p>
+<p>7 - (Optional) Add <strong>Icon URL</strong>: The image users will see when viewing a list of authorized applications in <strong>Account Settings &gt; Security &gt; OAuth 2.0 Applications</strong> and when viewing a list of OAuth 2.0 applications in <strong>Main Menu</strong> &gt; <strong>Integrations</strong>. Must be a valid URL and start with <code class="docutils literal notranslate"><span class="pre">http://</span></code> or <code class="docutils literal notranslate"><span class="pre">https://</span></code>.</p>
+<p>8 - Add <strong>Callback URLs</strong>: These are the URL(s) to which Mattermost will redirect users after accepting or denying authorization of your application, and which will be the only URL(s) that handle authorization codes or access tokens. If more than one URL is specified, users will be redirected to the URL used for the initial authorization of the app. Each URL must be on a separate line and start with <code class="docutils literal notranslate"><span class="pre">http://</span></code> or <code class="docutils literal notranslate"><span class="pre">https://</span></code>.</p>
+<p>9 - Click <strong>Save</strong> to create the application.</p>
+<img alt="cloud/cloud-integrations/../images/oauth2_app_screen.png" src="cloud/cloud-integrations/../images/oauth2_app_screen.png" />
+<p>10 - You will be provided with a <strong>Client ID</strong>, <strong>Client Secret</strong> and the authorized redirect URLs. Save these values and use them in your application to connect it to Mattermost.</p>
+<img alt="cloud/cloud-integrations/../images/oauth2_confirmation_screen.PNG" src="cloud/cloud-integrations/../images/oauth2_confirmation_screen.PNG" />
+<p>Note: <strong>Client Secret</strong> can be regenerated by the application creator or System Administrator. Tokens created with the old secret will remain valid and authorization of existing users will continue to work; however, new authorizations and requests for new tokens will fail until the client secret has been updated in your app configuration.</p>
+<img alt="cloud/cloud-integrations/../images/oauth2_regenerate_secret.PNG" src="cloud/cloud-integrations/../images/oauth2_regenerate_secret.PNG" />
+</div>
+</div>
+<div class="section" id="granting-permissions-to-your-application">
+<h2>Granting permissions to your application<a class="headerlink" href="#granting-permissions-to-your-application" title="Permalink to this headline">¶</a></h2>
+<p>Once you have created an OAuth 2.0 application, all users on the Mattermost server are automatically given access to it.</p>
+<p>The application does not automatically have permissions based on the user who registers the app - the permissions are based on which users go through the OAuth flow, which could be the user who registers the app or anyone else on the system.</p>
+<p>If the application was registered as a trusted OAuth 2.0 app on the Mattermost server, authorization from users is not required. Otherwise, the following page will be provided to accept or deny authorization when authenticating the app for the first time.</p>
+<img alt="cloud/cloud-integrations/../images/oauth2_authorization_screen.PNG" src="cloud/cloud-integrations/../images/oauth2_authorization_screen.PNG" />
+<p>Once authorized, the application receives an access token to perform requests on behalf of that user. The application can then perform any action for which the user has permission.</p>
+<p>Users can view a list of authorized apps from <strong>Account Settings &gt; Security &gt; OAuth 2.0 Applications</strong>, and revoke authorization from this setting.</p>
+<img alt="cloud/cloud-integrations/../images/oauth2_deauthorize_app.png" src="cloud/cloud-integrations/../images/oauth2_deauthorize_app.png" />
+</div>
+<div class="section" id="deleting-your-application">
+<h2>Deleting your application<a class="headerlink" href="#deleting-your-application" title="Permalink to this headline">¶</a></h2>
+<p>Deleting the application will revoke access from all users.</p>
+<p>Only the user who created the application or a System Administrator can delete the app.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/cloud/cloud-integrations/oauth-2-0-applications.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

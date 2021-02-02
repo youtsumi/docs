@@ -1,0 +1,393 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Electronic Discovery &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Compliance Reporting and Oversight (E20)" href="compliance.html" />
+    <link rel="prev" title="Productivity Tools" href="../deployment/productivity-tools.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Electronic Discovery</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mattermost-compliance-exports">Mattermost Compliance Exports</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mattermost-restful-api">Mattermost RESTful API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mattermost-database">Mattermost Database</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="compliance.html">Compliance Reporting and Oversight (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="compliance-export.html">Compliance Export Beta (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="audit-log.html">Audit Log v2 (Experimental) (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data-retention.html">Data Retention Policy (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="custom-terms-of-service.html">Custom Terms of Service (Beta) (E20)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
+    
+    <li>Electronic Discovery</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/administration/ediscovery.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="electronic-discovery">
+<span id="ediscovery"></span><h1>Electronic Discovery<a class="headerlink" href="#electronic-discovery" title="Permalink to this headline">¶</a></h1>
+<p>Electronic discovery (also known as eDiscovery) refers to a process where where electronic data is searched with the intent to use it as evidence in a legal case.</p>
+<p>This page describes how to extract data from Mattermost for eDiscovery. There are three primary methods that can be used to accomplish the goal of extracting user post data from Mattermost:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://docs.mattermost.com/administration/compliance-export.html">Mattermost Compliance Exports</a></li>
+<li>Mattermost RESTful API</li>
+<li>Mattermost database using standard SQL queries</li>
+</ul>
+<p>Each of the options is discussed in detail below.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Litigation hold (also known as legal hold) is an extension of eDiscovery where in addition to searching for records, no electronically stored information nor paper documents may be discarded if they may be deemed relevant for a present or future legal case.</p>
+</div>
+<div class="section" id="mattermost-compliance-exports">
+<h2>Mattermost Compliance Exports<a class="headerlink" href="#mattermost-compliance-exports" title="Permalink to this headline">¶</a></h2>
+<p>Mattermost Enterprise E20 has compliance report export capabilities.</p>
+<p>Mattermost can export compliance related data, including the content of messages and who might have seen those messages, in three formats: Actiance XML, Global Relay EML and generic CSV. Reports can be configured to run on a delay basis and stored in a shared location.</p>
+<p>For more information about the exports feature and how to set up reporting, see <a class="reference external" href="https://docs.mattermost.com/administration/compliance-export.html">our documentation</a>.</p>
+</div>
+<div class="section" id="mattermost-restful-api">
+<h2>Mattermost RESTful API<a class="headerlink" href="#mattermost-restful-api" title="Permalink to this headline">¶</a></h2>
+<p>The Mattermost API can be used to export a user’s posts in CSV compliance format that is part of Mattermost Enterprise E20. The following section outlines how to use the API to create and retrieve a report for a specific user via the API. Please note that full documentation for the Mattermost API can be found at <a class="reference external" href="https://api.mattermost.com">https://api.mattermost.com</a>.</p>
+<p>To use the API, you must first authenticate <a class="reference external" href="https://api.mattermost.com/#tag/authentication">as described here</a>. The account you are authenticating with must have <code class="docutils literal notranslate"><span class="pre">manage_system</span></code> permissions. If you are using Curl you can authenticate using the following command:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>curl -i -d &#39;{&quot;login_id&quot;: &quot;username&quot;, &quot;password&quot;: &quot;password&quot;}&#39; https://yourmattermosturl/api/v4/users/login
+</pre></div>
+</div>
+<p>Mattermost will return a response that looks like this:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>HTTP/2 200
+server: nginx/1.10.3 (Ubuntu)
+date: Thu, 12 Jul 2018 14:43:45 GMT
+content-type: application/json
+content-length: 679
+set-cookie: MMAUTHTOKEN=yi94pwci6ibjfc9phbikhqutbe; Path=/; Expires=Sat, 11 Aug 2018 14:43:45 GMT; Max-Age=2592000; HttpOnly; Secure
+set-cookie: MMUSERID=qfjzamfg47bu9gsyyfbqjk4s6a; Path=/; Expires=Sat, 11 Aug 2018 14:43:45 GMT; Max-Age=2592000; Secure
+token: yi94pwci6ibjfc9phbikhqutbe
+x-request-id: 5y45pxyfxpb8updtge1zts39he
+x-version-id: 5.0.0.5.0.1.18c0fbd759664a85fe95132bb7fc04cf.true
+</pre></div>
+</div>
+<p>Include the <code class="docutils literal notranslate"><span class="pre">token</span></code> value sent in the response as part of the Authorization header on your future API requests with the Bearer method, e.g.:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>curl -i -H &#39;Authorization: Bearer yi94pwci6ibjfc9phbikhqutbe http://yourmattermosturl/api/v4/users/me
+</pre></div>
+</div>
+<p>Once you are authenticated in to Mattermost you can use the <a class="reference external" href="https://api.mattermost.com/#tag/compliance%2Fpaths%2F~1compliance~1reports%2Fpost">Compliance API to create a new compliance report</a>. The curl based example below demonstrates how to send a request that bases the authentication token and asks Mattermost to create a report that spans posts from Dec 31, 2017 - 8:15 PM to Dec 31, 2018 - 8:15 PM for a user with the email address <a class="reference external" href="mailto:craig&#37;&#52;&#48;mattermost&#46;com">craig<span>&#64;</span>mattermost<span>&#46;</span>com</a></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The data in the JSON payload must be formatted as Unix Epoch. A tool like <a class="reference external" href="https://www.epochconverter.com/">https://www.epochconverter.com/</a> can be useful when converting to and from the required format.</p>
+</div>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>curl --header &quot;Content-Type: application/json&quot; \
+--request POST \
+-H &#39;Authorization: Bearer yi94pwci6ibjfc9phbikhqutbe \
+--data &#39;{&quot;id&quot;:&quot;&quot;,&quot;create_at&quot;:0,&quot;user_id&quot;:&quot;craig&quot;,&quot;status&quot;:&quot;&quot;,&quot;count&quot;:0,&quot;desc&quot;:&quot; &quot;,&quot;type&quot;:&quot;&quot;,&quot;start_at&quot;:1514769359000,&quot;end_at&quot;: 1546305359000,&quot;keywords&quot;:&quot;&quot;,&quot;emails&quot;:&quot;craig@mattermost.com&quot;}&#39; \
+https://yourmattermosturl/api/v4/compliance/reports
+</pre></div>
+</div>
+<p>If the post is successful Mattermost will return a message that looks like the following, indicating that the server is running the compliance export process:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;du6kektczifqxexeroywpz3nbc&quot;</span><span class="p">,</span><span class="nt">&quot; create_at&quot;</span><span class="p">:</span><span class="mi">1531444617901</span><span class="p">,</span> <span class="nt">&quot;user_id&quot;</span><span class="p">:</span><span class="s2">&quot;qfjzamfg47bu9gsyyfbqjk4s6a&quot;</span><span class="p">,</span> <span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="s2">&quot;running&quot;</span><span class="p">,</span> <span class="nt">&quot;count&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="nt">&quot;desc&quot;</span><span class="p">:</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;adhoc&quot;</span><span class="p">,</span> <span class="nt">&quot;start_at&quot;</span><span class="p">:</span><span class="mi">1514769359000</span><span class="p">,</span> <span class="nt">&quot;end_at&quot;</span><span class="p">:</span><span class="mi">1546305359000</span><span class="p">,</span> <span class="nt">&quot;keywords&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="nt">&quot;emails&quot;</span><span class="p">:</span><span class="s2">&quot;craig@mattermost.com&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>When the export process is complete (the execution time is based on the number of records to return and the current server load) you will need to send another HTTP Post request to Mattermost to retrieve and download a zip file containing the report that looks like the following curl request:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>curl --request GET \
+-H &#39;Authorization: Bearer p9o1qx457fbc9gdrn39z9ah59o&#39; \
+--data &#39;{&quot;status_code&quot;:0,&quot;id&quot;:&quot;du6kektczifqxexeroywpz3nbc&quot;,&quot;message&quot;:&quot;&quot;,&quot;requestion_id&quot;:&quot;&quot;}&#39; \
+--output report-zip.zip \
+https://yourmattermosturl/api/v4/compliance/reports/du6kektczifqxexeroywpz3nbc/download
+</pre></div>
+</div>
+<p>When sending the request, you need to get the report ID from the response returned by Mattermost when the report was created. You also need to supply a name to safe that file as. In the example above the file will be saved as <code class="docutils literal notranslate"><span class="pre">report-zip.zip</span></code>.</p>
+</div>
+<div class="section" id="mattermost-database">
+<h2>Mattermost Database<a class="headerlink" href="#mattermost-database" title="Permalink to this headline">¶</a></h2>
+<p>Selecting messages from the Mattermost database using standard SQL is quite easy. If you know the username, the following query can be used to select all messages for the specified user:</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">mattermost</span><span class="p">.</span><span class="n">Posts</span> <span class="k">WHERE</span> <span class="n">UserId</span> <span class="o">=</span> <span class="p">(</span><span class="k">SELECT</span> <span class="n">Id</span> <span class="k">FROM</span> <span class="n">mattermost</span><span class="p">.</span><span class="n">Users</span> <span class="k">WHERE</span> <span class="n">Username</span> <span class="o">=</span> <span class="s1">&#39;username&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>If you want to limit the results of the query based on the date and time that the messages were posted, you can modify the above query to:</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">mattermost</span><span class="p">.</span><span class="n">Posts</span> <span class="k">WHERE</span> <span class="n">UserId</span> <span class="o">=</span> <span class="p">(</span><span class="k">SELECT</span> <span class="n">Id</span> <span class="k">FROM</span> <span class="n">mattermost</span><span class="p">.</span><span class="n">Users</span> <span class="k">WHERE</span> <span class="n">Username</span> <span class="o">=</span> <span class="s1">&#39;username&#39;</span> <span class="k">AND</span> <span class="n">CreateAt</span> <span class="o">&gt;</span> <span class="mi">1530405832000</span> <span class="k">AND</span> <span class="n">CreateAt</span> <span class="o">&lt;</span> <span class="mi">1532997832000</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The Mattermost database stores date/time stamps in the Unix Epoch (<a class="reference external" href="https://en.wikipedia.org/wiki/Unix_time">https://en.wikipedia.org/wiki/Unix_time</a>) format and a tool like <a class="reference external" href="https://www.epochconverter.com/">https://www.epochconverter.com/</a> can be useful in converting to and from the required format.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="compliance.html" class="btn btn-neutral float-right" title="Compliance Reporting and Oversight (E20)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../deployment/productivity-tools.html" class="btn btn-neutral" title="Productivity Tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/administration/ediscovery.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

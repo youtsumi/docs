@@ -1,0 +1,432 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Extended Support Release &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Release Lifecycle" href="release-lifecycle.html" />
+    <link rel="prev" title="Version Archive" href="version-archive.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="upgrade.html">Upgrading Mattermost Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="important-upgrade-notes.html">Important Upgrade Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html">Mattermost Changelog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../help/apps/desktop-changelog.html">Desktop Application Changelog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobile-changelog.html">Mattermost Mobile Apps Changelog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="version-archive.html">Version Archive</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Extended Support Release</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#what-is-an-extended-support-release">What is an Extended Support Release?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#what-is-the-life-cycle-of-an-extended-support-release">What is the life cycle of an Extended Support Release?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#what-is-included-in-an-extended-support-release-dot-release">What is included in an Extended Support Release dot release?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#who-should-use-an-extended-support-release">Who should use an Extended Support Release?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-do-i-install-the-extended-support-release">How do I install the Extended Support Release?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#what-are-the-current-supported-extended-support-release-versions">What are the current supported Extended Support Release versions?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-do-i-restore-a-previous-extended-support-release">How do I restore a previous Extended Support Release?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#why-is-an-extended-support-release-supported-for-9-months-and-not-longer">Why is an Extended Support Release supported for 9 months and not longer?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#can-customers-pay-for-extended-support">Can customers pay for extended support?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-do-we-notify-customers-about-new-and-deprecated-extended-support-releases">How do we notify customers about new and deprecated Extended Support Releases?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="release-lifecycle.html">Release Lifecycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="downgrade.html">Downgrading Mattermost Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="open-source-components.html">Open Source Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="release-definitions.html">Release Definitions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
+    
+    <li>Extended Support Release</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/administration/extended-support-release.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="extended-support-release">
+<h1>Extended Support Release<a class="headerlink" href="#extended-support-release" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-an-extended-support-release">
+<h2>What is an Extended Support Release?<a class="headerlink" href="#what-is-an-extended-support-release" title="Permalink to this headline">¶</a></h2>
+<p>During each monthly release, Mattermost backports high severity or high impact security fixes to the previous three monthly releases. Extended Support Releases (ESRs) are releases that will receive backports for security fixes and major bug fixes for the length of their life cycle.</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">Support for Mattermost Server v5.25 <a class="reference external" href="https://docs.mattermost.com/administration/extended-support-release.html">Extended Support Release</a> is coming to the end of its life cycle on April 16, 2021. Upgrading to Mattermost Server v5.31 <a class="reference external" href="https://docs.mattermost.com/administration/extended-support-release.html">Extended Support Release</a> or later is highly recommended.</p>
+</div>
+</div>
+<div class="section" id="what-is-the-life-cycle-of-an-extended-support-release">
+<h2>What is the life cycle of an Extended Support Release?<a class="headerlink" href="#what-is-the-life-cycle-of-an-extended-support-release" title="Permalink to this headline">¶</a></h2>
+<p>Mattermost provides an ESR when a significant number of new features and improvements have been added to the product, and those new features have had sufficient time to stabilize. A new ESR is released twice a year every January and July release. An ESR is supported for 9 months to provide customers enough time to test and upgrade to the next ESR.</p>
+<p>When an ESR is at the end of its life cycle, there will be announcements ahead of time to provide time for people to test, certify, and deploy a newer ESR version before support ends. There will be a clear upgrade path provided between ESR versions.</p>
+<p>After a release reaches its end-of-life, no further updates will be provided for that version.</p>
+<p>Please see <a class="reference external" href="https://docs.mattermost.com/administration/release-lifecycle.html">Release Lifecycle documentation</a> for full list of lifecycles for each Mattermost release.</p>
+<p>To receive updates about Extended Support Releases, sign up for our mailing list <a class="reference external" href="https://eepurl.com/dCKn2P">here</a>.</p>
+<img alt="../_images/ESR20212.png" src="../_images/ESR20212.png" />
+</div>
+<div class="section" id="what-is-included-in-an-extended-support-release-dot-release">
+<h2>What is included in an Extended Support Release dot release?<a class="headerlink" href="#what-is-included-in-an-extended-support-release-dot-release" title="Permalink to this headline">¶</a></h2>
+<p>Dot releases for ESR versions will contain high severity or high impact security fixes and bug fixes. They will not include changes to product functionality or new features.</p>
+</div>
+<div class="section" id="who-should-use-an-extended-support-release">
+<h2>Who should use an Extended Support Release?<a class="headerlink" href="#who-should-use-an-extended-support-release" title="Permalink to this headline">¶</a></h2>
+<p>ESRs are intended for organizations who value stability over having the newest features and improvements, or who have a long internal testing and certification process to undergo when upgrading.</p>
+<p>If your organization prefers to have the newest features and improvements, Extended Support Releases may not be the best fit for you.</p>
+</div>
+<div class="section" id="how-do-i-install-the-extended-support-release">
+<h2>How do I install the Extended Support Release?<a class="headerlink" href="#how-do-i-install-the-extended-support-release" title="Permalink to this headline">¶</a></h2>
+<p>Follow our normal <a class="reference external" href="https://docs.mattermost.com/guides/administrator.html#installing-mattermost">install</a> or <a class="reference external" href="https://docs.mattermost.com/administration/upgrade.html">upgrade</a> guides. Please follow the <a class="reference external" href="https://docs.mattermost.com/administration/important-upgrade-notes.html">important upgrade notes</a> for all the versions since the current ESR version you have currently installed. Please also see <a class="reference external" href="https://docs.mattermost.com/administration/changelog.html">the changelog</a> for list of database, API and config.json updates for each release.</p>
+<p>When downloading the Mattermost version, choose an Extended Support Release from the list below.</p>
+</div>
+<div class="section" id="what-are-the-current-supported-extended-support-release-versions">
+<h2>What are the current supported Extended Support Release versions?<a class="headerlink" href="#what-are-the-current-supported-extended-support-release-versions" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="8%" />
+<col width="9%" />
+<col width="9%" />
+<col width="44%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Version</th>
+<th class="head">Type</th>
+<th class="head">Release Date</th>
+<th class="head">End of Support</th>
+<th class="head">Latest Dot Release Download link</th>
+<th class="head">Upgrade Notes</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>5.31</td>
+<td>Feature</td>
+<td>January 16, 2021</td>
+<td>October 15, 2021</td>
+<td><a class="reference external" href="https://releases.mattermost.com/5.31.0/mattermost-5.31.0-linux-amd64.tar.gz">5.31.0</a></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>5.25</td>
+<td>Quality</td>
+<td>July 16, 2020</td>
+<td>April 15, 2021</td>
+<td><a class="reference external" href="https://releases.mattermost.com/5.25.7/mattermost-5.25.7-linux-amd64.tar.gz">5.25.7</a></td>
+<td>The xmlsec1-based SAML library was disabled in
+favor of the re-enabled and improved SAML library</td>
+</tr>
+<tr class="row-even"><td>5.19</td>
+<td>Quality</td>
+<td>January 16, 2020</td>
+<td>October 15, 2020</td>
+<td><a class="reference external" href="https://releases.mattermost.com/5.19.3/mattermost-5.19.3-linux-amd64.tar.gz">5.19.3</a></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>5.9</td>
+<td>Quality</td>
+<td>April 16, 2019</td>
+<td>April 15, 2020</td>
+<td><a class="reference external" href="https://releases.mattermost.com/5.9.8/mattermost-5.9.8-linux-amd64.tar.gz">5.9.8</a></td>
+<td>Please upgrade to 5.0 prior to upgrading to 5.9</td>
+</tr>
+<tr class="row-even"><td>4.10</td>
+<td>Quality</td>
+<td>May 16, 2018</td>
+<td>July 15, 2019</td>
+<td><a class="reference external" href="https://releases.mattermost.com/4.10.10/mattermost-4.10.10-linux-amd64.tar.gz">4.10.10</a></td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="how-do-i-restore-a-previous-extended-support-release">
+<h2>How do I restore a previous Extended Support Release?<a class="headerlink" href="#how-do-i-restore-a-previous-extended-support-release" title="Permalink to this headline">¶</a></h2>
+<p>Before you perform an upgrade, please ensure you have done a full back up of your current version.  You can restore the database and previous version if you need to revert an upgrade.  Please note that previous ESR versions are subject to an end of support date.</p>
+</div>
+<div class="section" id="why-is-an-extended-support-release-supported-for-9-months-and-not-longer">
+<h2>Why is an Extended Support Release supported for 9 months and not longer?<a class="headerlink" href="#why-is-an-extended-support-release-supported-for-9-months-and-not-longer" title="Permalink to this headline">¶</a></h2>
+<p>We chose 9 months because the overhead for maintaining an ESR is high (and becomes higher the longer the support window is).
+If we increase the support window, it decreases how much we can develop the product. We specifically chose “ESR” instead of “LTS”, since it is not intended to be a multi-year long term support release. The 9 months support timeframe will not be extended in any case.</p>
+</div>
+<div class="section" id="can-customers-pay-for-extended-support">
+<h2>Can customers pay for extended support?<a class="headerlink" href="#can-customers-pay-for-extended-support" title="Permalink to this headline">¶</a></h2>
+<p>At this point, we are not planning on letting customers pay for extended support, but we are open to discuss options for this. Please speak to your Customer Success Manager if you have additional requirements for extended support.</p>
+</div>
+<div class="section" id="how-do-we-notify-customers-about-new-and-deprecated-extended-support-releases">
+<h2>How do we notify customers about new and deprecated Extended Support Releases?<a class="headerlink" href="#how-do-we-notify-customers-about-new-and-deprecated-extended-support-releases" title="Permalink to this headline">¶</a></h2>
+<p>For a new upcoming ESR, we send out an email announcement on or close to release day. We also add a reminder on our release announcement, changelog, and via a Forum post (<a class="reference external" href="https://forum.mattermost.org/t/upcoming-extended-support-release-updates/8526">see example</a>).</p>
+<p>For a deprecated ESR, we send out an email announcement 3 months in advance. We also add reminders on our release announcements, changelogs, <a class="reference external" href="https://docs.mattermost.com/administration/important-upgrade-notes.html">important upgrade notes</a>, and our <a class="reference external" href="https://forum.mattermost.org/">Forum site</a>.</p>
+<p>To receive updates about Extended Support Releases, sign up for our mailing list <a class="reference external" href="https://eepurl.com/dCKn2P">here</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="release-lifecycle.html" class="btn btn-neutral float-right" title="Release Lifecycle" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="version-archive.html" class="btn btn-neutral" title="Version Archive" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/administration/extended-support-release.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

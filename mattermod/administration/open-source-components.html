@@ -1,0 +1,525 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Open Source Components &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Release Definitions" href="release-definitions.html" />
+    <link rel="prev" title="Downgrading Mattermost Server" href="downgrade.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="upgrade.html">Upgrading Mattermost Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="important-upgrade-notes.html">Important Upgrade Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html">Mattermost Changelog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../help/apps/desktop-changelog.html">Desktop Application Changelog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobile-changelog.html">Mattermost Mobile Apps Changelog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="version-archive.html">Version Archive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extended-support-release.html">Extended Support Release</a></li>
+<li class="toctree-l3"><a class="reference internal" href="release-lifecycle.html">Release Lifecycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="downgrade.html">Downgrading Mattermost Server</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Open Source Components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#desktop">Desktop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mobile">Mobile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#redux">Redux</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#server">Server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#webapp">Webapp</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="release-definitions.html">Release Definitions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
+    
+    <li>Open Source Components</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/administration/open-source-components.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="open-source-components">
+<h1>Open Source Components<a class="headerlink" href="#open-source-components" title="Permalink to this headline">¶</a></h1>
+<p>The following open source components are used to provide the full benefits of Mattermost Enterprise Edition.</p>
+<div class="section" id="desktop">
+<h2>Desktop<a class="headerlink" href="#desktop" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Mattermost Desktop v4.6.0 - <a class="reference external" href="https://github.com/mattermost/desktop/blob/release-4.6/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Desktop v4.5.0 - <a class="reference external" href="https://github.com/mattermost/desktop/blob/release-4.5/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Desktop v4.4.0 - <a class="reference external" href="https://github.com/mattermost/desktop/blob/release-4.4/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Desktop v4.3.0 - <a class="reference external" href="https://github.com/mattermost/desktop/blob/release-4.3/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Desktop v4.2.0 - <a class="reference external" href="https://github.com/mattermost/desktop/blob/release-4.2/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Desktop v4.1.0 - <a class="reference external" href="https://github.com/mattermost/desktop/blob/release-4.1/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Desktop v4.0.0 - <a class="reference external" href="https://github.com/mattermost/desktop/blob/release-4.0/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Desktop v3.7.0 - <a class="reference external" href="https://github.com/mattermost/desktop/blob/release-3.7/NOTICE.txt">View Open Source Components</a>.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="mobile">
+<h2>Mobile<a class="headerlink" href="#mobile" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Mattermost Mobile v1.39.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.39/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.38.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.38/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.37.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.37/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.36.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.36/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.35.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.35/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.34.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.34/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.33.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.33/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.32.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.32/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.31.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.31/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.30.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.30/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.29.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.29/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.28.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.28/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.27.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.27/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.26.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.26/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.25.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.25/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.24.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.24/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.23.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.23/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.22.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.22/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.21.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.21/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.20.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.20/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.19.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.19/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.18.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.18/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.17.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.17/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.16.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.16/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.15.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.15/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.14.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.14/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.13.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.13/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.12.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.12/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.11.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.11/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.10.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.10/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.9.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.9/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.8.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.8/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.7.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.7/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.6.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.6/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.5.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.5/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.4.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.4/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.3.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.3/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.2.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.2/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.1.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.1/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Mobile v1.0.1 - <a class="reference external" href="https://github.com/mattermost/mattermost-mobile/blob/release-1.0.1/NOTICE.txt">View Open Source Components</a>.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="redux">
+<h2>Redux<a class="headerlink" href="#redux" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Mattermost Enterprise Edition v5.31.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/release-5.31/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.30.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/release-5.30/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.29.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/release-5.29/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.28.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/release-5.28/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.27.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/release-5.27/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.26.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/release-5.26/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.25.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/release-5.25/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.24.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/release-5.24/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.23.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/release-5.23/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.22.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/release-5.22/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.21.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/release-5.21/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.20.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/release-5.20/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.19.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/release-5.19/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.18.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/release-5.18/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.17.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/release-5.17/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.16.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/release-5.16/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.15.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/release-5.15/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.14.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/release-5.14/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.13.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/release-5.13/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.12.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/release-5.12/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.11.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/release-5.11/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.10.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/release-5.10/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.9.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/release-5.9/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.8.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/release-5.8/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.7.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/release-5.7/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.6.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/release-5.6/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.5.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/release-5.5/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.4.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/release-5.4/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.3.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/release-5.3/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.2.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/release-5.2/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.1.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/release-5.1/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.0.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/release-5.0/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v4.10.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/release-4.10/NOTICE.txt">View Open Source Components</a>.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="server">
+<h2>Server<a class="headerlink" href="#server" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Mattermost Enterprise Edition v5.31.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-5.31/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.30.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-5.30/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.29.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-5.29/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.28.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-5.28/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.27.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-5.27/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.26.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-5.26/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.25.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-5.25/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.24.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-5.24/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.23.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-5.23/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.22.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-5.22/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.21.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-5.21/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.20.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-5.20/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.19.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-5.19/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.18.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-5.18/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.17.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-5.17/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.16.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-5.16/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.15.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-5.15/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.14.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-5.14/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.13.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-5.13/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.12.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-5.12/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.11.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-5.11/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.10.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-5.10/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.9.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-5.9/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.8.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-5.8/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.7.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-5.7/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.6.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-5.6/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.5.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-5.5/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.4.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-5.4/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.3.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-5.3/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.2.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-5.2/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.1.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-5.1/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.0.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-5.0/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v4.10.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-4.10/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v4.9.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-4.9/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v4.8.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-4.8/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v4.7.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-4.7/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v4.6.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-4.6/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v4.5.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-4.5/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v4.4.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-4.4/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v4.3.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-4.3/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v4.2.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-4.2/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v4.1.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-4.1/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v4.0.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-4.0/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v3.10.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-3.10/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v3.9.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-3.9/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v3.8.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-3.8/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v3.7.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-3.7/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v3.6.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-3.6/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v3.5.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-3.5/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v3.4.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-3.4/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v3.3.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-3.3/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v3.2.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-3.2/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v3.1.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/release-3.1/NOTICE.txt">View Open Source Components</a>.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="webapp">
+<h2>Webapp<a class="headerlink" href="#webapp" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Mattermost Enterprise Edition v5.31.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-5.31/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.30.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-5.30/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.29.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-5.29/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.28.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-5.28/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.27.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-5.27/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.26.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-5.26/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.25.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-5.25/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.24.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-5.24/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.23.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-5.23/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.22.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-5.22/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.21.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-5.21/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.20.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-5.20/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.19.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-5.19/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.18.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-5.18/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.17.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-5.17/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.16.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-5.16/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.15.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-5.15/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.14.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-5.14/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.13.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-5.13/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.12.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-5.12/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.11.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-5.11/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.10.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-5.10/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.9.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-5.9/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.8.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-5.8/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.7.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-5.7/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.6.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-5.6/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.5.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-5.5/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.4.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-5.4/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.3.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-5.3/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.2.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-5.2/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.1.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-5.1/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v5.0.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-5.0/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v4.10.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-4.10/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v4.9.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-4.9/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v4.8.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-4.8/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v4.7.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-4.7/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v4.6.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-4.6/NOTICE.txt">View Open Source Components</a>.</li>
+<li>Mattermost Enterprise Edition v4.5.0 - <a class="reference external" href="https://github.com/mattermost/mattermost-webapp/blob/release-4.5/NOTICE.txt">View Open Source Components</a>.</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="release-definitions.html" class="btn btn-neutral float-right" title="Release Definitions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="downgrade.html" class="btn btn-neutral" title="Downgrading Mattermost Server" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/administration/open-source-components.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,379 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Troubleshooting Mobile Applications &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Bulk Loading Data" href="../deployment/bulk-loading.html" />
+    <link rel="prev" title="Mobile Apps FAQ" href="mobile-faq.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="mobile-overview.html">Mobile Applications Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobile-appconfig.html">AppConfig for EMM Solutions with Mattermost Mobile Apps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobile-hpns.html">Hosted Push Notification Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mobile-faq.html">Mobile Apps FAQ</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Troubleshooting Mobile Applications</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#i-keep-getting-a-message-cannot-connect-to-the-server-please-check-your-server-url-and-internet-connection">I keep getting a message “Cannot connect to the server. Please check your server URL and internet connection.”</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#login-with-adfs-office365-is-not-working">Login with ADFS/Office365 is not working</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#i-see-a-connecting-bar-that-does-not-go-away">I see a “Connecting…” bar that does not go away</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#im-not-receiving-push-notifications-on-my-device">I’m not receiving push notifications on my device</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#all-my-outbound-connections-need-to-go-through-a-proxy-how-can-i-connect-to-the-mattermost-hosted-push-notification-service">All my outbound connections need to go through a proxy. How can I connect to the Mattermost Hosted Push Notification Service?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-gets-stuck-at-bundlereleasejsandassets">Build gets stuck at <code class="docutils literal notranslate"><span class="pre">bundleReleaseJsAndAssets</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#no-image-previews-available-in-the-mobile-app">No image previews available in the mobile app</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#none-of-these-solve-my-problem">None of these solve my problem!</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
+    
+    <li>Troubleshooting Mobile Applications</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/mobile/mobile-troubleshoot.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="troubleshooting-mobile-applications">
+<h1>Troubleshooting Mobile Applications<a class="headerlink" href="#troubleshooting-mobile-applications" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="i-keep-getting-a-message-cannot-connect-to-the-server-please-check-your-server-url-and-internet-connection">
+<h2>I keep getting a message “Cannot connect to the server. Please check your server URL and internet connection.”<a class="headerlink" href="#i-keep-getting-a-message-cannot-connect-to-the-server-please-check-your-server-url-and-internet-connection" title="Permalink to this headline">¶</a></h2>
+<p>First, confirm that your server URL has no typos and that it includes <code class="docutils literal notranslate"><span class="pre">http://</span></code> or <code class="docutils literal notranslate"><span class="pre">https://</span></code> according to the server deployment configuration.</p>
+<p>If the server URL is correct, there could be an issue with the SSL certificate configuration.</p>
+<p>To check your SSL certificate set up, test it by visiting a site such as <a class="reference external" href="https://www.ssllabs.com/ssltest/index.html">SSL Labs</a>. If there’s an error about the missing chain or certificate path, there is likely an intermediate certificate missing that needs to be included.</p>
+<p>Please note that the apps cannot connect to servers with self-signed certificates, consider using <a class="reference external" href="https://docs.mattermost.com/install/config-ssl-http2-nginx.html">Let’s Encrypt</a> instead.</p>
+</div>
+<div class="section" id="login-with-adfs-office365-is-not-working">
+<h2>Login with ADFS/Office365 is not working<a class="headerlink" href="#login-with-adfs-office365-is-not-working" title="Permalink to this headline">¶</a></h2>
+<p>In line with Microsoft guidance we recommend <a class="reference external" href="https://docs.microsoft.com/en-us/windows-server/identity/ad-fs/operations/configure-intranet-forms-based-authentication-for-devices-that-do-not-support-wia">configuring intranet forms-based authentication for devices that do not support WIA</a>.</p>
+</div>
+<div class="section" id="i-see-a-connecting-bar-that-does-not-go-away">
+<h2>I see a “Connecting…” bar that does not go away<a class="headerlink" href="#i-see-a-connecting-bar-that-does-not-go-away" title="Permalink to this headline">¶</a></h2>
+<p>If your app is working properly, you should see a grey “Connecting…” bar that clears or says “Connected” after the app reconnects.</p>
+<p>If you are seeing this message all the time, and your internet connection seems fine, ask your server administrator if the server uses NGINX or another webserver as a reverse proxy. If so, they should check that it is configured correctly for <a class="reference external" href="https://docs.mattermost.com/install/install-ubuntu-1604.html#configuring-nginx-as-a-proxy-for-mattermost-server">supporting the websocket connection for APIv4 endpoints</a>.</p>
+</div>
+<div class="section" id="im-not-receiving-push-notifications-on-my-device">
+<h2>I’m not receiving push notifications on my device<a class="headerlink" href="#im-not-receiving-push-notifications-on-my-device" title="Permalink to this headline">¶</a></h2>
+<p>Please see our documentation on <a class="reference internal" href="mobile-troubleshoot-notifications.html"><span class="doc">troubleshooting push notifications</span></a>.</p>
+</div>
+<div class="section" id="all-my-outbound-connections-need-to-go-through-a-proxy-how-can-i-connect-to-the-mattermost-hosted-push-notification-service">
+<h2>All my outbound connections need to go through a proxy. How can I connect to the Mattermost Hosted Push Notification Service?<a class="headerlink" href="#all-my-outbound-connections-need-to-go-through-a-proxy-how-can-i-connect-to-the-mattermost-hosted-push-notification-service" title="Permalink to this headline">¶</a></h2>
+<p>You can set up an internal server to proxy the connection out of their network to the Mattermost Hosted Push Notification Service (HPNS) by following the steps below:</p>
+<ol class="arabic simple">
+<li>Make sure your proxy server is properly configured to support SSL. Confirm it works by checking the URL at <a class="reference external" href="https://www.digicert.com/help/">https://www.digicert.com/help/</a>.</li>
+<li>Setup a proxy to forward requests to <code class="docutils literal notranslate"><span class="pre">https://push.mattermost.com</span></code>.</li>
+<li>In Mattermost set <strong>System Console</strong> &gt; <strong>Notification Settings</strong> &gt; <strong>Mobile Push</strong> &gt; <strong>Enable Push Notifications</strong> in prior versions or <strong>System Console &gt; Environment &gt; Push Notification Server &gt; Enable Push Notifications</strong> in versions after 5.12 to “Manually enter Push Notification Service location”</li>
+<li>Enter the URL of your proxy in the <strong>Push Notification Server</strong> field.</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Depending on how your proxy is configured you may need to add a port number and create a URL like <code class="docutils literal notranslate"><span class="pre">https://push.internalproxy.com:8000</span></code> mapped to <code class="docutils literal notranslate"><span class="pre">https://push.mattermost.com</span></code></p>
+</div>
+</div>
+<div class="section" id="build-gets-stuck-at-bundlereleasejsandassets">
+<h2>Build gets stuck at <code class="docutils literal notranslate"><span class="pre">bundleReleaseJsAndAssets</span></code><a class="headerlink" href="#build-gets-stuck-at-bundlereleasejsandassets" title="Permalink to this headline">¶</a></h2>
+<p>As a workaround, you can bundle the <code class="docutils literal notranslate"><span class="pre">js</span></code> manually first with</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/
+</pre></div>
+</div>
+<p>and then ignore the gradle task with</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./gradlew assembleRelease -x bundleReleaseJsAndAssets
+</pre></div>
+</div>
+</div>
+<div class="section" id="no-image-previews-available-in-the-mobile-app">
+<h2>No image previews available in the mobile app<a class="headerlink" href="#no-image-previews-available-in-the-mobile-app" title="Permalink to this headline">¶</a></h2>
+<p>This can happen if the server running Mattermost has its mime types not set up correctly.
+A server running Linux has this file located in <code class="docutils literal notranslate"><span class="pre">/etc/mime.types</span></code>. This might vary depending on your specific OS and distribution.</p>
+<p>Some distributions also ship without <code class="docutils literal notranslate"><span class="pre">mailcap</span></code> which can result in missing or incorrectly configured mime types.</p>
+</div>
+<div class="section" id="none-of-these-solve-my-problem">
+<h2>None of these solve my problem!<a class="headerlink" href="#none-of-these-solve-my-problem" title="Permalink to this headline">¶</a></h2>
+<p>For more troubleshooting help, <a class="reference external" href="https://forum.mattermost.org/c/trouble-shoot">open a new topic in our forums</a> with steps to reproduce your issue. If you’re an Enterprise Edition subscriber, you may open a support ticket in the <a class="reference external" href="https://mattermost.zendesk.com/hc/en-us/requests/new">Enterprise Edition Support portal</a>.</p>
+<p>To help us narrow down whether it’s a server configuration issue, device specific issue, or an issue with the app, please try the following things and include the results in your support request:</p>
+<p><strong>Connect to another server</strong></p>
+<ol class="arabic simple">
+<li>Create an account at <a class="reference external" href="https://demo.mattermost.com">https://demo.mattermost.com</a></li>
+<li>Erase your mobile application and reinstall it</li>
+<li>In your mobile app, enter the server URL <a class="reference external" href="https://demo.mattermost.com">https://demo.mattermost.com</a> and then your login credentials to see if the connection is working</li>
+</ol>
+<p><strong>Connect with another device</strong></p>
+<p>If you have another mobile device available, try connecting with that to see if your issue still reproduces.</p>
+<p>If you don’t have another device available, check with other teammates to see if they are having the same issue.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../deployment/bulk-loading.html" class="btn btn-neutral float-right" title="Bulk Loading Data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mobile-faq.html" class="btn btn-neutral" title="Mobile Apps FAQ" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/mobile/mobile-troubleshoot.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,443 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installing Mattermost Omnibus &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Installing Mattermost on Kubernetes" href="install-kubernetes.html" />
+    <link rel="prev" title="Installing Mattermost on Ubuntu 18.04 LTS" href="install-ubuntu-1804.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="requirements.html">Software and Hardware Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-ubuntu-2004.html">Installing on Ubuntu 20.04 LTS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-ubuntu-1804.html">Installing on Ubuntu 18.04 LTS</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Installing Mattermost Omnibus</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuring-mattermost-omnibus-repositories">Configuring Mattermost Omnibus Repositories</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Installing Mattermost Omnibus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#updating-mattermost-omnibus">Updating Mattermost Omnibus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuring-mattermost-omnibus">Configuring Mattermost Omnibus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#removing-mattermost-omnibus">Removing Mattermost Omnibus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#backup-and-restore-using-the-mattermost-omnibus-cli">Backup and Restore using the Mattermost Omnibus CLI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#frequently-asked-questions-faqs">Frequently Asked Questions (FAQs)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="install-kubernetes.html">Installing on Kubernetes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-debian.html">Installing on Debian Buster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-rhel-7.html">Installing on RHEL 7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-rhel-8.html">Installing on RHEL 8</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-centos-oracle-scientific.html">Installing on CentOS, Oracle Linux, and Scientific Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sockets-db.html">Instructions On Setting Up a Socket-based Mattermost Database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ee-install.html">Enterprise Install and Upgrade</a></li>
+<li class="toctree-l3"><a class="reference internal" href="transport-encryption/config.html">Configuring Transport Encryption</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deploy-bitnami.html">Deploy Mattermost on Bitnami</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docker-local-machine.html">Local Machine Setup using Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docker-ebs.html">AWS Elastic Beanstalk Docker Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-mmte-helm-gitlab-helm.html">Installing Mattermost Team Edition in GitLab Helm Chart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="desktop.html">Desktop Application Install Guides</a></li>
+<li class="toctree-l3"><a class="reference internal" href="desktop-managed-resources.html">Desktop Managed Resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="desktop-msi-gpo.html">Desktop MSI Installer and Group Policy Installation Guides (Beta)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
+    
+    <li>Installing Mattermost Omnibus</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/install/mattermost-omnibus.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installing-mattermost-omnibus">
+<h1>Installing Mattermost Omnibus<a class="headerlink" href="#installing-mattermost-omnibus" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Mattermost Omnibus is a Debian package that packages the individual components of a Mattermost deployment into a single installation process. The package leverages the <code class="docutils literal notranslate"><span class="pre">apt</span></code> package manager to install and keep the components of the platform updated, using a custom CLI and ansible recipes to link those components together and configure them.</p>
+<p>Mattermost Omnibus currently supports Ubuntu’s <code class="docutils literal notranslate"><span class="pre">bionic</span></code> and <code class="docutils literal notranslate"><span class="pre">focal</span></code> distributions. Support for RedHat/CentOS distributions will be available in future versions. The package bundles the free, unlicensed Mattermost Enterprise Edition.</p>
+</div>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>A clean Ubuntu server (18.04 or 20.04)</li>
+<li>A domain name pointing to that server</li>
+<li>Root level access to the server</li>
+</ul>
+</div>
+<div class="section" id="configuring-mattermost-omnibus-repositories">
+<h2>Configuring Mattermost Omnibus Repositories<a class="headerlink" href="#configuring-mattermost-omnibus-repositories" title="Permalink to this headline">¶</a></h2>
+<p>The Omnibus repositories are configured using a cURL command:</p>
+<p><code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">-o-</span> <span class="pre">https://deb.packages.mattermost.com/repo-setup.sh</span> <span class="pre">|</span> <span class="pre">sudo</span> <span class="pre">bash</span></code></p>
+<p>This command configures the repositories needed for a <code class="docutils literal notranslate"><span class="pre">PostgreSQL</span></code> database, an <code class="docutils literal notranslate"><span class="pre">nginx</span></code> web server to act as a proxy, and <code class="docutils literal notranslate"><span class="pre">certbot</span></code> to issue and renew the SSL certificate. It also configures the Mattermost Omnibus repository so that you can run the install command.</p>
+</div>
+<div class="section" id="id1">
+<h2>Installing Mattermost Omnibus<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>If you’re installing Omnibus, and have a domain and SSL use:</p>
+<p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">mattermost-omnibus</span> <span class="pre">-y</span></code></p>
+<p>In order to issue that certificate, the installer requests a domain name and an email address from you. These are used to generate the certificate and deliver any related communications respectively.</p>
+<p>After all the packages are installed, Omnibus runs the ansible scripts that configure all the platform components and starts the server. To access Mattermost, open a browser, navigate to your domain, and create the System Admin user to start using the platform.</p>
+</div>
+<div class="section" id="updating-mattermost-omnibus">
+<h2>Updating Mattermost Omnibus<a class="headerlink" href="#updating-mattermost-omnibus" title="Permalink to this headline">¶</a></h2>
+<p>Mattermost Omnibus is integrated with the <code class="docutils literal notranslate"><span class="pre">apt</span></code> package manager. When a new Mattermost version is released, run:</p>
+<p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">update</span> <span class="pre">&amp;&amp;</span> <span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">upgrade</span></code></p>
+<p>This downloads the latest version of Mattermost and updates your Mattermost platform.</p>
+</div>
+<div class="section" id="configuring-mattermost-omnibus">
+<h2>Configuring Mattermost Omnibus<a class="headerlink" href="#configuring-mattermost-omnibus" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Plugin uploads, local mode, and HTTPS are enabled by default. These settings are modified in the <code class="docutils literal notranslate"><span class="pre">yaml</span></code> file as described below.</p>
+</div>
+<p>With Mattermost Omnibus, the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file is no longer used as <a class="reference external" href="https://docs.mattermost.com/administration/config-in-database.html">Omnibus stores the Mattermost configuration in the database</a>. The Omnibus platform itself requires of a configuration of its own, that is stored in <code class="docutils literal notranslate"><span class="pre">/etc/mattermost/mmomni.yml</span></code>. This file contains the data that Omnibus needs to configure the platform and connect all the services together. So you’ll need to use mmctl to make changes to your Mattermost server configuration using <code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">--local</span> <span class="pre">config</span> <span class="pre">edit</span></code>.</p>
+<p>For Omnibus to work properly, there are some configuration parameters that are fixed and cannot be changed through the web interface - for example, the port that Mattermost uses to run. Other parameters need to be configured directly in the <code class="docutils literal notranslate"><span class="pre">mmomni.yml</span></code> file instead of in the Mattermost web interface or the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file.</p>
+<p>The properties that you can configure in this file are:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">db_user</span></code>: The PostgreSQL database user. This value is generated during the Omnibus installation and should not be changed.</li>
+<li><code class="docutils literal notranslate"><span class="pre">db_password</span></code>: The PostgreSQL database password. This value is generated during the Omnibus installation and should not be changed.</li>
+<li><code class="docutils literal notranslate"><span class="pre">fqdn</span></code>: The domain name for the Mattermost application. This is the value that is asked during the install process, and it’s used to populate the <code class="docutils literal notranslate"><span class="pre">ServiceSettings.SiteURL</span></code> Mattermost configuration property, as well as to retrieve and configure the SSL certificate for the server.</li>
+<li><code class="docutils literal notranslate"><span class="pre">email</span></code>: The email address used for certificate communications. This is the value that is asked during the install process, and it will not be used if HTTPS is disabled.</li>
+<li><code class="docutils literal notranslate"><span class="pre">https</span></code>: This indicates whether the platform should be configured to use HTTPS or HTTP with values <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>. The recommended way to install Mattermost is to use HTTPS, but you can disable it if required.</li>
+<li><code class="docutils literal notranslate"><span class="pre">data_directory</span></code>: This is the directory where Mattermost stores its data.</li>
+<li><code class="docutils literal notranslate"><span class="pre">enable_plugin_uploads</span></code>: This setting can be <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code> and is used to configure the <code class="docutils literal notranslate"><span class="pre">PluginSettings.EnableUploads</span></code> Mattermost configuration property.</li>
+<li><code class="docutils literal notranslate"><span class="pre">enable_local_mode</span></code>: This setting can be <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code> and is used to configure the <code class="docutils literal notranslate"><span class="pre">ServiceSettings.EnableLocalMode</span></code> Mattermost configuration property.</li>
+</ul>
+<p>After modifying the <code class="docutils literal notranslate"><span class="pre">mmomni.yml</span></code> configuration file, you need to run <code class="docutils literal notranslate"><span class="pre">mmomni</span> <span class="pre">reconfigure</span></code> for Omnibus to apply the changes and restart Mattermost.</p>
+</div>
+<div class="section" id="removing-mattermost-omnibus">
+<h2>Removing Mattermost Omnibus<a class="headerlink" href="#removing-mattermost-omnibus" title="Permalink to this headline">¶</a></h2>
+<p>If you wish to remove Mattermost and Mattermost Omnibus completely for any reason, you can run this command:</p>
+<p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">remove</span> <span class="pre">--purge</span> <span class="pre">mattermost</span> <span class="pre">mattermost-omnibus</span></code></p>
+</div>
+<div class="section" id="backup-and-restore-using-the-mattermost-omnibus-cli">
+<h2>Backup and Restore using the Mattermost Omnibus CLI<a class="headerlink" href="#backup-and-restore-using-the-mattermost-omnibus-cli" title="Permalink to this headline">¶</a></h2>
+<p>Mattermost Omnibus includes a CLI tool: <code class="docutils literal notranslate"><span class="pre">mmomni</span></code>, which is used to manage configuration.</p>
+<p>Server and domain migration as well as backup and restore is now much easier - you can take snapshots of all content in your Mattermost server. This includes all content, users, plugins, configurations, and databases. You can restore on the same server or move to another server at any time.</p>
+<p>Backup example:</p>
+<p><code class="docutils literal notranslate"><span class="pre">mmomni</span> <span class="pre">backup</span> <span class="pre">-o</span> <span class="pre">/tmp/Aug27-2020.tgz</span></code></p>
+<p>Restore example:</p>
+<p><code class="docutils literal notranslate"><span class="pre">mmomni</span> <span class="pre">restore</span> <span class="pre">/tmp/Aug27-2020.tgz</span></code> and <code class="docutils literal notranslate"><span class="pre">mmomni</span> <span class="pre">reconfigure</span></code></p>
+<p>Future releases may include automation for snapshot management.</p>
+</div>
+<div class="section" id="frequently-asked-questions-faqs">
+<h2>Frequently Asked Questions (FAQs)<a class="headerlink" href="#frequently-asked-questions-faqs" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="what-are-the-mmomni-commands-and-what-do-they-do">
+<h3>What are the <code class="docutils literal notranslate"><span class="pre">mmomni</span></code> commands and what do they do?<a class="headerlink" href="#what-are-the-mmomni-commands-and-what-do-they-do" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">mmomni</span> <span class="pre">backup</span></code>: Takes a complete snapshot of your Mattermost server and places the backup file in a specified file location.</li>
+<li><code class="docutils literal notranslate"><span class="pre">mmomni</span> <span class="pre">restore</span></code>: Restores specified backup file to your Mattermost server.</li>
+<li><code class="docutils literal notranslate"><span class="pre">mmomni</span> <span class="pre">reconfigure</span></code>: Reruns the process that changes domain, SSL, or any Omnibus-specified restrictions such as the ability to upload plugins. It also applies any changes made to the <code class="docutils literal notranslate"><span class="pre">mmomni.yml</span></code> configuration file.</li>
+<li><code class="docutils literal notranslate"><span class="pre">mmomni</span> <span class="pre">status</span></code>: Shows current status of all Omnibus components.</li>
+<li><code class="docutils literal notranslate"><span class="pre">mmomni</span> <span class="pre">tail</span></code>: Runs a join tail of logs of all Omnibus components.</li>
+</ul>
+</div>
+<div class="section" id="can-i-install-without-a-domain">
+<h3>Can I install without a domain?<a class="headerlink" href="#can-i-install-without-a-domain" title="Permalink to this headline">¶</a></h3>
+<p>Although the recommended way to install and configure Omnibus is with SSL enabled, if you want to use or test without it, you can run:</p>
+<p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">MMO_HTTPS=false</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">mattermost-omnibus</span></code></p>
+</div>
+<div class="section" id="what-happened-to-config-json">
+<h3>What happened to <code class="docutils literal notranslate"><span class="pre">config.json</span></code>?<a class="headerlink" href="#what-happened-to-config-json" title="Permalink to this headline">¶</a></h3>
+<p>Mattermost Omnibus <a class="reference external" href="https://docs.mattermost.com/administration/config-in-database.html">stores the configuration of the Mattermost server into the database</a>. You can edit your config by running the following mmctl command after connecting mmctl to the instance: <code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">config</span> <span class="pre">edit</span></code>. If you’re logged into the machine as the <code class="docutils literal notranslate"><span class="pre">mattermost</span></code> user, you can use <code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">--local</span> <span class="pre">config</span> <span class="pre">edit</span></code> as well.</p>
+</div>
+<div class="section" id="are-there-plans-to-add-other-packages-to-the-omnibus">
+<h3>Are there plans to add other packages to the Omnibus?<a class="headerlink" href="#are-there-plans-to-add-other-packages-to-the-omnibus" title="Permalink to this headline">¶</a></h3>
+<p>Yes! We are planning several packages and currently seeking feedback to help us prioritize these.</p>
+</div>
+<div class="section" id="are-there-plans-to-support-other-os-distros">
+<h3>Are there plans to support other OS distros?<a class="headerlink" href="#are-there-plans-to-support-other-os-distros" title="Permalink to this headline">¶</a></h3>
+<p>Yes! We are currently seeking feedback to help us prioritize these.</p>
+</div>
+<div class="section" id="can-i-use-mysql-instead-of-postgresql">
+<h3>Can I use MySQL instead of PostgreSQL?<a class="headerlink" href="#can-i-use-mysql-instead-of-postgresql" title="Permalink to this headline">¶</a></h3>
+<p>MySQL is not supported. Omnibus is architected to run with PostgreSQL.</p>
+</div>
+<div class="section" id="can-i-use-a-license-with-omnibus">
+<h3>Can I use a license with Omnibus?<a class="headerlink" href="#can-i-use-a-license-with-omnibus" title="Permalink to this headline">¶</a></h3>
+<p>Yes. Mattermost Omnibus bundles the free, unlicensed Mattermost Enterprise Edition, and Enterprise features are unlocked when you purchase and upload a license.</p>
+</div>
+<div class="section" id="can-i-use-an-omnibus-server-as-part-of-a-cluster">
+<h3>Can I use an Omnibus server as part of a cluster?<a class="headerlink" href="#can-i-use-an-omnibus-server-as-part-of-a-cluster" title="Permalink to this headline">¶</a></h3>
+<p>No, Omnibus is designed to be a self-contained Mattermost platform, so it expects all the necessary components to be in the same server.</p>
+</div>
+<div class="section" id="where-can-i-get-help">
+<h3>Where can I get help?<a class="headerlink" href="#where-can-i-get-help" title="Permalink to this headline">¶</a></h3>
+<p>If you have any problems installing Mattermost Omnibus, see the <a class="reference external" href="https://docs.mattermost.com/install/troubleshooting.html">troubleshooting guide</a> for common error messages, or <a class="reference external" href="https://mattermost.com/pl/default-ask-mattermost-community/">join the Mattermost user community for troubleshooting help</a>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="install-kubernetes.html" class="btn btn-neutral float-right" title="Installing Mattermost on Kubernetes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="install-ubuntu-1804.html" class="btn btn-neutral" title="Installing Mattermost on Ubuntu 18.04 LTS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/install/mattermost-omnibus.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

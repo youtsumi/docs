@@ -1,0 +1,481 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>SAML Single-Sign-On (E20): Technical Documentation &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="GitLab Single Sign-On" href="sso-gitlab.html" />
+    <link rel="prev" title="Configure SAML with Microsoft ADFS using Microsoft Windows Server 2016" href="sso-saml-adfs-msws2016.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="bulk-loading.html">Bulk Loading Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/migrating.html">Migration Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/hipchat-migration-guidelines.html">Migrating from HipChat to Mattermost</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/migration-announcement-email-template.html">Migration Announcement Email</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/user-provisioning.html">Provisioning Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="admin-roles.html">Additional System Admin Roles (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-ldap.html">Active Directory/LDAP Setup (E10/E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auth.html">Multi-factor Authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ldap-group-sync.html">AD/LDAP Groups (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html">Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-saml.html">SAML Single Sign-On (E20)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">SAML Single-Sign-On (E20): Technical Documentation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#saml-providers">SAML Providers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#saml-request-authnrequest">SAML Request (AuthNRequest)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#saml-responses">SAML Responses</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#technical-description-of-saml-synchronization-with-ad-ldap">Technical description of SAML synchronization with AD/LDAP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#frequently-asked-questions">Frequently Asked Questions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sso-gitlab.html">GitLab Single Sign-On</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-google.html">Google Single Sign-On (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-office.html">Office 365 Single Sign-On (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ssl-client-certificate.html">SSL Client Certificate Setup (Beta)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="certificate-based-authentication.html">Certificate-Based Authentication (Experimental)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="team-channel-management.html">Managing Team and Channel Members (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced-permissions.html">Advanced Permissions (E10/E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="permissions-backend.html">Advanced Permissions: Backend Infrastructure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guest-accounts.html">Guest Accounts (Beta) (E10/E20)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
+    
+    <li>SAML Single-Sign-On (E20): Technical Documentation</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/deployment/sso-saml-technical.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="saml-single-sign-on-e20-technical-documentation">
+<h1>SAML Single-Sign-On (E20): Technical Documentation<a class="headerlink" href="#saml-single-sign-on-e20-technical-documentation" title="Permalink to this headline">¶</a></h1>
+<p id="sso-saml-technical">Security Assertion Markup Language (SAML) is an open standard that allows identity providers (IdP), like OneLogin, to pass authorization credentials to service providers (SP), like Mattermost.</p>
+<p>In simpler terms, it means you can use one set of credentials to log in to many different sites. With a SAML identity provider account, you can log in to Mattermost and other sites securely with the same account.</p>
+<p>The main benefit is that it helps administrators centralize user management by controlling which sites users have access to with their SAML identity provider credentials.</p>
+<p>From v5.20 Mattermost supports using a single metadata URL to retrieve configuration information for the Identity Provider using your single sign-on URL to generate an IdP metadata URL. The IdP metadata XML file contains the IdP certificate, the entity ID, the redirect URL, and the logout URL.</p>
+<p>Using this URL populates the SAML SSO URL and the Identity Provider Issuer URL fields in the configuration process automatically and the Identity Provider Public Certificate is also downloaded from the server and set locally.</p>
+<p>This is currently supported for Okta and Microsoft ADFS server 2012 and 2016. OneLogin support will be added in a future release.</p>
+<p>For detailed steps, view the <a class="reference internal" href="sso-saml-okta.html"><span class="doc">Configure SAML with Okta</span></a>, <a class="reference internal" href="sso-saml-adfs.html"><span class="doc">Configure SAML with Microsoft ADFS for Windows Server 2012</span></a>, and <a class="reference internal" href="sso-saml-adfs-msws2016.html"><span class="doc">Configure SAML with Microsoft ADFS using Microsoft Windows Server 2016</span></a> documentation.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#saml-providers" id="id1">SAML Providers</a></li>
+<li><a class="reference internal" href="#saml-request-authnrequest" id="id2">SAML Request (AuthNRequest)</a></li>
+<li><a class="reference internal" href="#saml-responses" id="id3">SAML Responses</a></li>
+<li><a class="reference internal" href="#technical-description-of-saml-synchronization-with-ad-ldap" id="id4">Technical description of SAML synchronization with AD/LDAP</a></li>
+<li><a class="reference internal" href="#frequently-asked-questions" id="id5">Frequently Asked Questions</a><ul>
+<li><a class="reference internal" href="#how-can-i-obtain-a-saml-metadata-xml-file-consumed-by-mattermost" id="id6">How can I obtain a SAML metadata XML file consumed by Mattermost?</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="saml-providers">
+<h2><a class="toc-backref" href="#contents">SAML Providers</a><a class="headerlink" href="#saml-providers" title="Permalink to this headline">¶</a></h2>
+<p><strong>Identity Providers (IdP)</strong>: An identity provider performs the authentication. When a user clicks to log in, the identity provider confirms who the user is, and sends data to the service provider with the proper authorization to access the site.</p>
+<p><em>Examples</em>: OneLogin, Okta, Microsoft Active Directory (ADFS) or Azure.</p>
+<p><strong>Service Providers (SP)</strong>: A service provider gets authentication and authorization information from an IdP. Once received, it gives the user access to the system and logs the user in.</p>
+<p><em>Examples</em>: Mattermost, Zendesk, Zoom, Salesforce.</p>
+</div>
+<div class="section" id="saml-request-authnrequest">
+<h2><a class="toc-backref" href="#contents">SAML Request (AuthNRequest)</a><a class="headerlink" href="#saml-request-authnrequest" title="Permalink to this headline">¶</a></h2>
+<p>When Mattermost initiates an SP-initiated SAML request flow, it generates a <strong>HTTP-Redirect</strong> binding request to the IdP that contains an XML payload as a base64 string</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>bM441nuRIzAjKeMM8RhegMFjZ4L4xPBHhAfHYqgnYDQnSxC++Qn5IocWuzuBGz7JQmT9C57nxjxgbFIatiqUCQN17aYrLn/mWE09C5mJMYlcV68ibEkbR/JKUQ+2u/N+mSD4/C/QvFvuB6BcJaXaz0h7NwGhHROUte6MoGJKMPE=
+</pre></div>
+</div>
+<p>AuthNRequests can also be signed by Mattermost in v5.14 and later, in which case the XML payload is similar to:</p>
+<div class="highlight-XML notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;samlp:AuthnRequest</span> <span class="na">xmlns:samlp=</span><span class="s">&quot;urn:oasis:names:tc:SAML:2.0:protocol&quot;</span> <span class="na">xmlns:saml=</span><span class="s">&quot;urn:oasis:names:tc:SAML:2.0:assertion&quot;</span> <span class="na">xmlns:samlsig=</span><span class="s">&quot;https://www.w3.org/2000/09/xmldsig#&quot;</span> <span class="na">ID=</span><span class="s">&quot;_u5mpjadp1fdozfih4cj8ap4brh&quot;</span> <span class="na">Version=</span><span class="s">&quot;2.0&quot;</span> <span class="na">ProtocolBinding=</span><span class="s">&quot;urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST&quot;</span> <span class="na">AssertionConsumerServiceURL=</span><span class="s">&quot;http://localhost:8065/login/sso/saml&quot;</span> <span class="na">IssueInstant=</span><span class="s">&quot;2019-06-08T16:00:31Z&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;saml:Issuer</span> <span class="na">xmlns:saml=</span><span class="s">&quot;urn:oasis:names:tc:SAML:2.0:assertion&quot;</span><span class="nt">&gt;</span>https://www.okta.com/exkoxukx1D8OIfY03356<span class="nt">&lt;/saml:Issuer&gt;</span>
+    <span class="nt">&lt;samlsig:Signature</span> <span class="na">Id=</span><span class="s">&quot;Signature1&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;samlsig:SignedInfo&gt;</span>
+            <span class="nt">&lt;samlsig:CanonicalizationMethod</span> <span class="na">Algorithm=</span><span class="s">&quot;https://www.w3.org/2001/10/xml-exc-c14n#&quot;</span><span class="nt">&gt;&lt;/samlsig:CanonicalizationMethod&gt;</span>
+            <span class="nt">&lt;samlsig:SignatureMethod</span> <span class="na">Algorithm=</span><span class="s">&quot;https://www.w3.org/2000/09/xmldsig#rsa-sha1&quot;</span><span class="nt">&gt;&lt;/samlsig:SignatureMethod&gt;</span>
+            <span class="nt">&lt;samlsig:Reference</span> <span class="na">URI=</span><span class="s">&quot;#_u5mpjadp1fdozfih4cj8ap4brh&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;samlsig:Transforms&gt;</span>
+                    <span class="nt">&lt;samlsig:Transform</span> <span class="na">Algorithm=</span><span class="s">&quot;https://www.w3.org/2000/09/xmldsig#enveloped-signature&quot;</span><span class="nt">&gt;&lt;/samlsig:Transform&gt;</span>
+                <span class="nt">&lt;/samlsig:Transforms&gt;</span>
+                <span class="nt">&lt;samlsig:DigestMethod</span> <span class="na">Algorithm=</span><span class="s">&quot;https://www.w3.org/2000/09/xmldsig#sha1&quot;</span><span class="nt">&gt;&lt;/samlsig:DigestMethod&gt;</span>
+                <span class="nt">&lt;samlsig:DigestValue&gt;&lt;/samlsig:DigestValue&gt;</span>
+            <span class="nt">&lt;/samlsig:Reference&gt;</span>
+        <span class="nt">&lt;/samlsig:SignedInfo&gt;</span>
+        <span class="nt">&lt;samlsig:SignatureValue&gt;&lt;/samlsig:SignatureValue&gt;</span>
+        <span class="nt">&lt;samlsig:KeyInfo&gt;</span>
+            <span class="nt">&lt;samlsig:X509Data&gt;</span>
+                <span class="nt">&lt;samlsig:X509Certificate&gt;</span>MIIFmzCCA4OgAwIBAgIJAIusvV3gZIwiMA0GCSqGSIb3DQEBCwUAMGIxCzAJBgNVBAYTAlVTMRIwEAYDVQQHDAlQYWxvIEFsdG8xEzARBgNVBAoMCk1hdHRlcm1vc3QxDzANBgNVBAsMBkRldk9wczEZMBcGA1UEAwwQYmFzZS5leGFtcGxlLmNvbTAeFw0xOTA2MDcxMjQ0MTdaFw0yOTA2MDQxMjQ0MTdaMGIxCzAJBgNVBAYTAlVTMRIwEAYDVQQHDAlQYWxvIEFsdG8xEzARBgNVBAoMCk1hdHRlcm1vc3QxDzANBgNVBAsMBkRldk9wczEZMBcGA1UEAwwQYmFzZS5leGFtcGxlLmNvbTCCAiIwDQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBALAfDj+RyByszTOPRL4b+cilNF/3PB1I0CG3TNzgllgy5CwRGHLKn5/t8rPsJoWLKOUGenzVdXWuoVi3jyl5FZ1N60CBbXfmSWk20dSIkcYCcYEgs1BTBqKKYFw2dV4M0oppzNtlq7A0Glpg/gpaR/2TXEPAhOsUfORC2qAdJt9ev0AQjp5V0TkIKMZz8oo33Coi38TG5r/LG+ihRbpWzO7j9Rc2S5I6bczvG4wOg7nVKG+B5XBvuU9PjSqgxpd/F/fYf+ggAEru58E+VM4veCRV8vSPbBqDG4FMPV6DiA+tH/70n6zuPCS3soxX00kjKtP80QD6UgzvM2NN7PHiNlf0Zj6VCU3VdjEnypg7dzlHJuyyaAaTD5nSfkecamEoJpq7kaUB7uTmBHELRUhOOy24f54HnP72vnxicZL8cWsOkJwQAqIGzBxQ7J0uX4Os71WrV2YIur8QVk6KN6MBPxfiCh3xO/R+cycgx0aMrWZoyzOzP7NCTM5MNE41C48xeGviyCtUID4xiBow+xo6IDUaiCoUVJhz579ore8ic70a19DD0qHy4SpBvrUwCO54kvkgn6HjYlLC/k8nFM9F9W9wVAQD/QwIjd7EtLZLGgbU61Jv3q4kZxxq270hogCRY0lmI3RxkedGHhetF7kaizrikW5zJQEeido/ir37HhX5AgMBAAGjVDBSMBIGA1UdEwEB/wQIMAYBAf8CAQAwPAYDVR0RBDUwM4IQbG9ncy5leGFtcGxlLmNvbYITbWV0cmljcy5leGFtcGxlLmNvbYcEwKgAAYcEfwAAATANBgkqhkiG9w0BAQsFAAOCAgEAH1O91BABHXZjrU7v1OwG+GbU/4TYZqBXXNxax++OFSRCkEEoNKGg49R6J7lY4lrm12zBlw+oGSyjIOerzi39/dcxDkKpzyhGvEN4mExbDlybmdCVrHPeWgZl7uwqn4Bj1xiu97M6eMthgxJE7KVNDGDHthGL0/fTlONIh3qS7Far33hLHJJKy3+lC1MDB8cNltV3mf/ctHCx5Wa0bfZId0MJgd/seP0WU1HCf3kIxhnhsnOYs32xu7EGiM4/lgnquVd/q/f99ueSaDSHrep373/w2ce9iF3U0qcLd2iP8ayF/daGeW1dVPL9R10Oe4BpRjMkjlLwhZdjJeKSg9GBa2GXUEn1Ru9vpSw/C10no3Qx/6ZHweYbSmJ6hBg4T0nDBp6iVS1eQULNXxDuDWb26U0ESOO5jK8ATywuc45o0bqdvD1XOrGYGfGnofx7ofRWwKHWfltvxurnbsyo2vH6nM6K41K2DpVdyQOKAGvKe/oCWfdi+WyBQJGWcIp2OTC1XyWHv7JsY3lo04+islkHEcqJyd8Rf8GWmRHdXz0WzGiZbxWzAuvRRWnzM31VAws8kQBHTBwIJlJoGX4AXfEvPi+NTxkntf8cQdJucK9ZZbP4ycXHULO4LneyJoJ9Q7nxX11xWv7BDWxxclOXy6tyUkg9Fjb7pQ/HCVvGhRzilVU=<span class="nt">&lt;/samlsig:X509Certificate&gt;</span>
+            <span class="nt">&lt;/samlsig:X509Data&gt;</span>
+        <span class="nt">&lt;/samlsig:KeyInfo&gt;</span>
+    <span class="nt">&lt;/samlsig:Signature&gt;</span>
+<span class="nt">&lt;/samlp:AuthnRequest&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="saml-responses">
+<h2><a class="toc-backref" href="#contents">SAML Responses</a><a class="headerlink" href="#saml-responses" title="Permalink to this headline">¶</a></h2>
+<p>There are different types of SAML responses sent by the IdP to the SP. The response contains the Assertion with the NameID and attributes of a user.</p>
+<p>Below is a table of the different types of responses. Each response type is fully supported except when the SAML assertion is signed while the SAML response itself is not:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Signed SAML Response</th>
+<th class="head">Signed SAML Assertion</th>
+<th class="head">Encrypted SAML Assertion</th>
+<th class="head">Supported by Mattermost</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Partially, validation of assertion signature not supported</td>
+</tr>
+<tr class="row-odd"><td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>Partially, validation of assertion signature not supported</td>
+</tr>
+<tr class="row-even"><td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>No</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>For example XML responses for each type, see the <a class="reference external" href="https://www.samltool.com/generic_sso_res.php">OneLogin SAML response examples</a>.</p>
+</div>
+<div class="section" id="technical-description-of-saml-synchronization-with-ad-ldap">
+<h2><a class="toc-backref" href="#contents">Technical description of SAML synchronization with AD/LDAP</a><a class="headerlink" href="#technical-description-of-saml-synchronization-with-ad-ldap" title="Permalink to this headline">¶</a></h2>
+<p>When enabled, SAML synchronization with AD/LDAP occurs in phases:</p>
+<ol class="arabic simple">
+<li>Get all the current LDAP users from the Mattermost database who have <code class="docutils literal notranslate"><span class="pre">Users.AuthService</span></code> set to <code class="docutils literal notranslate"><span class="pre">ldap</span></code>. This is a SQL query issued against the Mattermost database: <code class="docutils literal notranslate"><span class="pre">SELECT</span> <span class="pre">*</span> <span class="pre">FROM</span> <span class="pre">Users</span> <span class="pre">WHERE</span> <span class="pre">AuthService</span> <span class="pre">=</span> <span class="pre">'ldap'</span></code>.</li>
+<li>Get all the current SAML users from the Mattermost database who have <code class="docutils literal notranslate"><span class="pre">Users.AuthService</span></code> set to <code class="docutils literal notranslate"><span class="pre">saml</span></code>. This is a SQL query issued against the Mattermost database: <code class="docutils literal notranslate"><span class="pre">SELECT</span> <span class="pre">*</span> <span class="pre">FROM</span> <span class="pre">Users</span> <span class="pre">WHERE</span> <span class="pre">AuthService</span> <span class="pre">=</span> <span class="pre">'saml'</span></code>.</li>
+<li>Get all the current LDAP users from the LDAP server as defined by <code class="docutils literal notranslate"><span class="pre">LdapSettings.UserFilter</span></code>. This is an <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/master/scripts/ldap-check.sh">LDAP query</a> issued against the LDAP server. Users are retrieved in batches as defined by <code class="docutils literal notranslate"><span class="pre">LdapSettings.MaxPageSize</span></code>.</li>
+<li>Update LDAP attributes. For each existing Mattermost user retrieved in step 1, attempt to find a match against the list of LDAP users from step 3. To find matches, <code class="docutils literal notranslate"><span class="pre">Users.AuthData</span></code> field of the Mattermost user is compared against the <code class="docutils literal notranslate"><span class="pre">LdapSettings.IdAttribute</span></code> LDAP setting.</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>If any attribute of the user has changed, that attribute is copied from the LDAP server and the user is marked as updated.</li>
+<li>If the corresponding <code class="docutils literal notranslate"><span class="pre">LdapSettings.IdAttribute</span></code> is not found, the user is assumed to be deleted from the LDAP server, and deactivated from Mattermost by setting the <code class="docutils literal notranslate"><span class="pre">Users.DeleteAt</span></code> field to a valid timestamp.</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li>Update SAML attributes. For each existing Mattermost user retrieved in step 2, attempt to find a match against the list of LDAP users from step 3. To find matches, <code class="docutils literal notranslate"><span class="pre">SamlSettings.Email</span></code> is compared against the <code class="docutils literal notranslate"><span class="pre">LdapSettings.EmailAttribute</span></code> LDAP setting.</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>If any attribute of the user has changed, that attribute is copied from the LDAP server and the user is marked as updated.</li>
+<li>If the corresponding <code class="docutils literal notranslate"><span class="pre">LdapSettings.EmailAttribute</span></code> is not found, the user is assumed to be deleted from the LDAP server, and deactivated from Mattermost by setting the <code class="docutils literal notranslate"><span class="pre">Users.DeleteAt</span></code> field to a valid timestamp.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="frequently-asked-questions">
+<h2><a class="toc-backref" href="#contents">Frequently Asked Questions</a><a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="how-can-i-obtain-a-saml-metadata-xml-file-consumed-by-mattermost">
+<h3><a class="toc-backref" href="#contents">How can I obtain a SAML metadata XML file consumed by Mattermost?</a><a class="headerlink" href="#how-can-i-obtain-a-saml-metadata-xml-file-consumed-by-mattermost" title="Permalink to this headline">¶</a></h3>
+<p>You can obtain the XML file by calling the Mattermost RESTful API endpoint at <code class="docutils literal notranslate"><span class="pre">/api/v4/saml/metadata</span></code>.</p>
+<p>For other useful SAML API calls, see the <a class="reference external" href="https://api.mattermost.com/#tag/SAML">API reference</a>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sso-gitlab.html" class="btn btn-neutral float-right" title="GitLab Single Sign-On" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sso-saml-adfs-msws2016.html" class="btn btn-neutral" title="Configure SAML with Microsoft ADFS using Microsoft Windows Server 2016" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/deployment/sso-saml-technical.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

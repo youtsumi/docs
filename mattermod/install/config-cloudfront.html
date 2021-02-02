@@ -1,0 +1,379 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Configuring CloudFront to host Mattermost static assets &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Using an Outbound Proxy" href="outbound-proxy.html" />
+    <link rel="prev" title="SMTP Email Setup" href="smtp-email-setup.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../administration/config-settings.html">Configuration Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/config-in-database.html">Configuration in the Mattermost Database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/prev-config-settings.html">Configuration Settings Prior to v5.12</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/customize-mattermost.html">Customizing Mattermost</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/customize-email.html">Email Templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/branding.html">Custom Branding Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smtp-email-setup.html">SMTP Email Setup</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Configuring CloudFront to host Mattermost static assets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#upgrade-notes">Upgrade Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="outbound-proxy.html">Using an Outbound Proxy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i18n.html">Chinese, Japanese and Korean Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config-apache2.html">Configuring Apache2 (Unofficial)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
+    
+    <li>Configuring CloudFront to host Mattermost static assets</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/install/config-cloudfront.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="configuring-cloudfront-to-host-mattermost-static-assets">
+<span id="config-cloudfront"></span><h1>Configuring CloudFront to host Mattermost static assets<a class="headerlink" href="#configuring-cloudfront-to-host-mattermost-static-assets" title="Permalink to this headline">¶</a></h1>
+<p>Configuring CloudFront to host Mattermost’s static assets allows for improved caching performance and shorter load times for those members of your team geographicly distributed throughout the world.</p>
+<ol class="arabic">
+<li><p class="first">Create an S3 bucket using your desired domain. In our example it will be <code class="docutils literal notranslate"><span class="pre">mattermost.example.com</span></code>.</p>
+</li>
+<li><p class="first">Enable static hosting for your S3 bucket.</p>
+</li>
+<li><p class="first">If your SiteURL is configured with a subpath (such as <a class="reference external" href="https://example.com/company/mattermost">https://example.com/company/mattermost</a>), your static assets must be rewritten before uploading. You can use the command below to rewrite the assets for the given subpath:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">mattermost</span> <span class="pre">config</span> <span class="pre">subpath</span> <span class="pre">--path</span> <span class="pre">/company/mattermost</span></code></p>
+</div></blockquote>
+</li>
+<li><p class="first">From the Mattermost distribution, upload the <code class="docutils literal notranslate"><span class="pre">client</span></code> directory to S3 and rename it to <code class="docutils literal notranslate"><span class="pre">static</span></code>. You can use the AWS CLI command below from within the <code class="docutils literal notranslate"><span class="pre">client</span></code> directory  to upload all the files to S3. The files must be publicly readable with the permission <code class="docutils literal notranslate"><span class="pre">public-read</span></code>.</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">aws</span> <span class="pre">s3</span> <span class="pre">cp</span> <span class="pre">--acl</span> <span class="pre">public-read</span> <span class="pre">--recursive</span> <span class="pre">.</span> <span class="pre">s3://static.spinmint.com/static/</span></code></p>
+</div></blockquote>
+</li>
+<li><p class="first">Set up your Mattermost app server and create a record from a subdomain of your desired domain to point directly to your app server. This is to bypass CloudFront to connect WebSockets. For our example we will use the domain <code class="docutils literal notranslate"><span class="pre">ws.mattermost.example.com</span></code>. If you have multiple app servers, this domain should point to the load balancer/proxy such as ALB or NGINX.</p>
+</li>
+<li><p class="first">Create a Web CloudFront distribution with the following configuration.</p>
+<ol class="loweralpha simple">
+<li>Set Origin Domain Name to the S3 bucket you created above.</li>
+<li>(Recommended) Set Redirect HTTP to <code class="docutils literal notranslate"><span class="pre">HTTPS</span></code> for Viewer Protocol Policy.</li>
+<li>Set allowed HTTP Methods to <code class="docutils literal notranslate"><span class="pre">GET,</span> <span class="pre">HEAD,</span> <span class="pre">OPTIONS,</span> <span class="pre">POST,</span> <span class="pre">PATCH,</span> <span class="pre">DELETE</span></code>.</li>
+<li>Set Forward Cookies to <code class="docutils literal notranslate"><span class="pre">All</span></code>.</li>
+<li>Set Query string forwarding and Caching to <code class="docutils literal notranslate"><span class="pre">Forward</span> <span class="pre">all,</span> <span class="pre">cache</span> <span class="pre">based</span> <span class="pre">on</span> <span class="pre">all</span></code>.</li>
+<li>Set your Alternate Domain Names to the domain you want Mattermost to be accessible from, e.g. <code class="docutils literal notranslate"><span class="pre">mattermost.example.com</span></code>.</li>
+<li>Select <code class="docutils literal notranslate"><span class="pre">Custom</span> <span class="pre">SSL</span> <span class="pre">Certificate</span></code> and set the certificate for your domain.</li>
+<li>Set Default Root Object to <code class="docutils literal notranslate"><span class="pre">/static/root.html</span></code>.</li>
+</ol>
+</li>
+<li><p class="first">After creating your distribution, you need to add an additional origin. Select the origins tab and create an origin. Set the origin domain name to your Mattermost load balancer.</p>
+</li>
+<li><p class="first">Next, create a behavior.</p>
+<ol class="loweralpha simple">
+<li>Set the Path Pattern to <code class="docutils literal notranslate"><span class="pre">/api/*</span></code>.</li>
+<li>Set the origin to your Mattermost app server or load balancer.</li>
+<li>Set allowed HTTP Methods to <code class="docutils literal notranslate"><span class="pre">GET,</span> <span class="pre">HEAD,</span> <span class="pre">OPTIONS,</span> <span class="pre">PUT,</span> <span class="pre">POST,</span> <span class="pre">PATCH,</span> <span class="pre">DELETE</span></code>.</li>
+<li>Set Forward Cookies to <cite>All</cite>.</li>
+<li>Set Query string forwarding and Caching to <code class="docutils literal notranslate"><span class="pre">Forward</span> <span class="pre">all,</span> <span class="pre">cache</span> <span class="pre">based</span> <span class="pre">on</span> <span class="pre">all</span></code>.</li>
+</ol>
+</li>
+<li><p class="first">Next, set up some custom error responses under the Error Pages tab.</p>
+<ol class="loweralpha simple">
+<li>Set HTTP Error Code to <code class="docutils literal notranslate"><span class="pre">403</span></code>.</li>
+<li>Set Customize Error Response to <code class="docutils literal notranslate"><span class="pre">Yes</span></code>.</li>
+<li>Set response page path to <code class="docutils literal notranslate"><span class="pre">/static/root.html</span></code>.</li>
+<li>Set HTTP Response Code to <code class="docutils literal notranslate"><span class="pre">200</span></code>.</li>
+<li>Repeat the above steps for HTTP Error Code 404.</li>
+</ol>
+</li>
+<li><p class="first">Now you can set up the domain you want Mattermost to be served from to point to your CloudFront distribution. Setting up this domain is beyond the scope of this guide.</p>
+</li>
+<li><p class="first">Finally, set these Mattermost <code class="docutils literal notranslate"><span class="pre">config.json</span></code> settings:</p>
+<ol class="loweralpha simple">
+<li>SiteURL: <code class="docutils literal notranslate"><span class="pre">https://mattermost.example.com</span></code></li>
+<li>WebsocketURL: <code class="docutils literal notranslate"><span class="pre">wss://ws.mattermost.example.com</span></code></li>
+<li>AllowCorsFrom: <code class="docutils literal notranslate"><span class="pre">https://mattermost.example.com</span></code></li>
+<li>AllowCookiesForSubdomains: <code class="docutils literal notranslate"><span class="pre">true</span></code></li>
+</ol>
+</li>
+</ol>
+<div class="section" id="upgrade-notes">
+<h2>Upgrade Notes<a class="headerlink" href="#upgrade-notes" title="Permalink to this headline">¶</a></h2>
+<p>When you upgrade your Mattermost app servers, you will need to re-upload the new client to your S3 bucket (see steps 3 and 4 above).</p>
+<p>You should also run a CloudFront invalidation for <code class="docutils literal notranslate"><span class="pre">/static/root.html</span></code>. You can do this in the console under the invalidations tab.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="outbound-proxy.html" class="btn btn-neutral float-right" title="Using an Outbound Proxy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="smtp-email-setup.html" class="btn btn-neutral" title="SMTP Email Setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/install/config-cloudfront.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

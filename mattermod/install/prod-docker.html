@@ -1,0 +1,401 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Deploy Mattermost on Docker &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Deploy Mattermost on Cloudron (Unofficial)" href="deploy-cloudron.html" />
+    <link rel="prev" title="Production Install on Windows Server (Unofficial)" href="prod-windows-2012.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="prod-windows-2012.html">Production Install on Windows Server (Unofficial)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Deploy Mattermost on Docker</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#docker-setup-on-ubuntu">Docker Setup on Ubuntu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#docker-setup-on-arch-linux">Docker Setup on Arch Linux</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#docker-setup-on-macos">Docker Setup on macOS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#other-options">Other Options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="deploy-cloudron.html">Deploy Mattermost on Cloudron (Unofficial)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/upgrade-script.html">Upgrading Mattermost Server with a Script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/light-install-hindi.html">लाइट इनस्टॉल गाइड</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
+    
+    <li>Deploy Mattermost on Docker</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/install/prod-docker.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="deploy-mattermost-on-docker">
+<span id="docker-local-machine"></span><h1>Deploy Mattermost on Docker<a class="headerlink" href="#deploy-mattermost-on-docker" title="Permalink to this headline">¶</a></h1>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">This unofficial guide is maintained by the Mattermost community and this deployment configuration is not yet officially supported by Mattermost, Inc. Community testing, feedback and improvements are welcome and greatly appreciated. You can <a class="reference external" href="https://github.com/mattermost/docs/blob/master/source/install/prod-docker.rst">edit this page on GitHub</a>.</p>
+</div>
+<p>Deploy Mattermost using a multi-node configuration with <a class="reference external" href="https://docs.docker.com/compose/">Docker Compose</a>. Experience with Docker Compose is recommended.</p>
+<p>For a single-node preview of Mattermost (without email) see <a class="reference external" href="https://docs.mattermost.com/install/docker-local-machine.html">Local Machine Setup using Docker</a>.</p>
+<p>If you have any problems installing, see the <a class="reference external" href="https://mattermost.org/troubleshoot/">troubleshooting guide</a>. To submit an improvement or correction, click <strong>Edit</strong> at the top of this page.</p>
+<div class="section" id="docker-setup-on-ubuntu">
+<h2>Docker Setup on Ubuntu<a class="headerlink" href="#docker-setup-on-ubuntu" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first"><strong>Install Docker</strong> using <a class="reference external" href="https://docs.docker.com/installation/ubuntulinux/">the Ubuntu online guide</a> or these instructions:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">wget</span>
+<span class="n">wget</span> <span class="o">-</span><span class="n">qO</span><span class="o">-</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">get</span><span class="o">.</span><span class="n">docker</span><span class="o">.</span><span class="n">com</span><span class="o">/</span> <span class="o">|</span> <span class="n">sh</span>
+<span class="n">sudo</span> <span class="n">usermod</span> <span class="o">-</span><span class="n">aG</span> <span class="n">docker</span> <span class="o">&lt;</span><span class="n">username</span><span class="o">&gt;</span>
+<span class="n">sudo</span> <span class="n">service</span> <span class="n">docker</span> <span class="n">start</span>
+<span class="n">newgrp</span> <span class="n">docker</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><strong>Install Docker Compose</strong> using <a class="reference external" href="https://docs.docker.com/compose/install/">the online guide</a>. You have to download the latest release from the <a class="reference external" href="https://github.com/docker/compose/releases/">Docker Compose Github page</a> and put the binary on your <code class="code docutils literal notranslate"><span class="pre">/usr/local/bin</span></code> folder. Usually, you can use the following command, replacing <code class="code docutils literal notranslate"><span class="pre">$dockerComposeVersion</span></code> with the Docker Compose version to install:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">curl</span> <span class="o">-</span><span class="n">L</span> <span class="s2">&quot;https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker-compose-$(uname -s)-$(uname -m)&quot;</span> <span class="o">-</span><span class="n">o</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span>
+<span class="n">sudo</span> <span class="n">chmod</span> <span class="o">+</span><span class="n">x</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><strong>Deploy the Mattermost Docker</strong></p>
+</li>
+</ol>
+<p>You can get the <code class="code docutils literal notranslate"><span class="pre">uid</span></code> (user ID) and <code class="code docutils literal notranslate"><span class="pre">gid</span></code> (group ID) of the Docker user by running:</p>
+<blockquote>
+<div><div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">id</span> <span class="o">&lt;</span><span class="n">username</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Replace <code class="code docutils literal notranslate"><span class="pre">&lt;username&gt;</span></code> with the actual username. The following setup assumes the result above is <code class="code docutils literal notranslate"><span class="pre">uid=1000</span></code> and <code class="code docutils literal notranslate"><span class="pre">gid=1000</span></code>.</p>
+<p>Set up using:</p>
+<blockquote>
+<div><div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">git</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">mattermost</span><span class="o">/</span><span class="n">mattermost</span><span class="o">-</span><span class="n">docker</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">mattermost</span><span class="o">-</span><span class="n">docker</span>
+<span class="n">docker</span><span class="o">-</span><span class="n">compose</span> <span class="n">build</span>
+<span class="n">mkdir</span> <span class="o">-</span><span class="n">pv</span> <span class="o">./</span><span class="n">volumes</span><span class="o">/</span><span class="n">app</span><span class="o">/</span><span class="n">mattermost</span><span class="o">/</span><span class="p">{</span><span class="n">data</span><span class="p">,</span><span class="n">logs</span><span class="p">,</span><span class="n">config</span><span class="p">,</span><span class="n">plugins</span><span class="p">,</span><span class="n">client</span><span class="o">-</span><span class="n">plugins</span><span class="p">}</span>
+<span class="n">sudo</span> <span class="n">chown</span> <span class="o">-</span><span class="n">R</span> <span class="mi">1000</span><span class="p">:</span><span class="mi">1000</span> <span class="o">./</span><span class="n">volumes</span><span class="o">/</span><span class="n">app</span><span class="o">/</span><span class="n">mattermost</span><span class="o">/</span>
+<span class="n">docker</span><span class="o">-</span><span class="n">compose</span> <span class="n">up</span> <span class="o">-</span><span class="n">d</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>The <code class="docutils literal notranslate"><span class="pre">docker-compose</span></code> network that is created defaults to 172.18.0.0/16.  If you need to change the default network this <a class="reference external" href="https://success.docker.com/article/how-do-i-configure-the-default-bridge-docker0-network-for-docker-engine-to-a-different-subnet">link</a> provides guidelines on how to do that. If the network is already set up with the default, you need to run the following command to remove it. Then, run the command again to regenerate the default network to include the new network setting.</p>
+<blockquote>
+<div><div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">network</span> <span class="n">rm</span> <span class="n">mattermost</span><span class="o">-</span><span class="n">server_mm</span><span class="o">-</span><span class="n">test</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>To verify the current Docker network use the following command to list it (you can access information about the options <a class="reference external" href="https://docs.docker.com/engine/reference/commandline/network_ls/">here</a>):</p>
+<blockquote>
+<div><div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">network</span> <span class="n">ls</span> <span class="p">[</span><span class="n">OPTIONS</span><span class="p">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li><strong>Configure TLS</strong> by following <a class="reference external" href="https://github.com/mattermost/mattermost-docker#install-with-ssl-certificate">the instructions</a>.</li>
+<li><strong>Configure Email</strong> by following the <a class="reference external" href="https://docs.mattermost.com/install/smtp-email-setup.html">SMTP email setup guide</a>.</li>
+<li>(Optional) To enable enterprise features, go to <strong>System Console &gt; Edition and License</strong> and select <strong>Start trial</strong>.</li>
+<li><strong>Configure your Server</strong> based on the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html">configuration settings documentation</a>.</li>
+</ol>
+<p>Once you’ve saved your configurations, start an Enterprise E20 trial via <strong>Main Menu &gt; System Console &gt; Edition and License &gt; Start trial</strong>.</p>
+<p>Additional guides:</p>
+<ul class="simple">
+<li><strong>Start, Stop, and Remove Containers</strong> using <a class="reference external" href="https://github.com/mattermost/mattermost-docker/#startingstopping-docker">management instructions.</a></li>
+<li><strong>Setup Database Backup</strong> following the <a class="reference external" href="https://github.com/mattermost/mattermost-docker#aws">database backup instructions.</a></li>
+</ul>
+</div>
+<div class="section" id="docker-setup-on-arch-linux">
+<h2>Docker Setup on Arch Linux<a class="headerlink" href="#docker-setup-on-arch-linux" title="Permalink to this headline">¶</a></h2>
+<p>To install on Arch Linux, see the <a class="reference external" href="https://wiki.archlinux.org/index.php/Mattermost">installation guide</a> on the Arch Linux wiki.</p>
+</div>
+<div class="section" id="docker-setup-on-macos">
+<h2>Docker Setup on macOS<a class="headerlink" href="#docker-setup-on-macos" title="Permalink to this headline">¶</a></h2>
+<p>You can run a deployment on macOS by <a class="reference external" href="https://docs.docker.com/docker-for-mac/">installing Docker Compose using the online guide</a> then following the above instructions.</p>
+</div>
+<div class="section" id="other-options">
+<h2>Other Options<a class="headerlink" href="#other-options" title="Permalink to this headline">¶</a></h2>
+<p>To install Mattermost Team Edition instead of Mattermost Enterprise Edition, open <code class="docutils literal notranslate"><span class="pre">docker-compose.yaml</span></code> and uncomment the following lines:</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span># args:
+#   - edition=team
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="deploy-cloudron.html" class="btn btn-neutral float-right" title="Deploy Mattermost on Cloudron (Unofficial)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="prod-windows-2012.html" class="btn btn-neutral" title="Production Install on Windows Server (Unofficial)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/install/prod-docker.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,362 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Provisioning Workflows &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Additional System Admin Roles (E20)" href="../deployment/admin-roles.html" />
+    <link rel="prev" title="Migration Announcement Email" href="migration-announcement-email-template.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../deployment/bulk-loading.html">Bulk Loading Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="migrating.html">Migration Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hipchat-migration-guidelines.html">Migrating from HipChat to Mattermost</a></li>
+<li class="toctree-l3"><a class="reference internal" href="migration-announcement-email-template.html">Migration Announcement Email</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Provisioning Workflows</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#user-provisioning">User Provisioning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user-deprovisioning">User Deprovisioning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/admin-roles.html">Additional System Admin Roles (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/sso-ldap.html">Active Directory/LDAP Setup (E10/E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/auth.html">Multi-factor Authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/ldap-group-sync.html">AD/LDAP Groups (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/ldap-group-constrained-team-channel.html">Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/sso-saml.html">SAML Single Sign-On (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/sso-saml-technical.html">SAML Single-Sign-On (E20): Technical Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/sso-gitlab.html">GitLab Single Sign-On</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/sso-google.html">Google Single Sign-On (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/sso-office.html">Office 365 Single Sign-On (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/ssl-client-certificate.html">SSL Client Certificate Setup (Beta)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/certificate-based-authentication.html">Certificate-Based Authentication (Experimental)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/team-channel-management.html">Managing Team and Channel Members (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/advanced-permissions.html">Advanced Permissions (E10/E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/permissions-backend.html">Advanced Permissions: Backend Infrastructure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/guest-accounts.html">Guest Accounts (Beta) (E10/E20)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
+    
+    <li>Provisioning Workflows</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/administration/user-provisioning.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="provisioning-workflows">
+<span id="user-provisoning"></span><h1>Provisioning Workflows<a class="headerlink" href="#provisioning-workflows" title="Permalink to this headline">¶</a></h1>
+<p>This document provides an overview of user provisioning and deprovisioning workflows in Mattermost.</p>
+<div class="section" id="user-provisioning">
+<h2>User Provisioning<a class="headerlink" href="#user-provisioning" title="Permalink to this headline">¶</a></h2>
+<p>There are currently three recommended user provisioning workflows in Mattermost:</p>
+<ol class="arabic simple">
+<li><strong>On demand:</strong> If user accounts are not pre-provisioned using one of the methods described below, then a new user account will be provisioned when the user first logs in. When the user logs in, they are asked to select a public team to join (all users must belong to at least one team) and then they are added automatically to Town Square and Off-Topic channels. Mattermost also has a default channel setting that allows everyone to be added to additional channels specified by the organization.</li>
+<li><strong>Pre-provisioned via bulk import:</strong> Mattermost features a <a class="reference external" href="https://docs.mattermost.com/deployment/bulk-loading.html">bulk data loading tool</a> that can be used for pre-provisioning new users by adding them to teams and channels before their first login to Mattermost. This tool automates the creation of Teams, Channels, Users and Posts (with file attachments). It can also be used to migrate users and content from an existing system.</li>
+<li><strong>Mattermost API:</strong> The Mattermost <a class="reference external" href="https://api.mattermost.com">RESTful API</a> can be used to pre-provision new user accounts as well as add and remove them from teams and channels. This model is commonly used by enterprises that have central account provisioning applications.</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Mattermost plans to release a new feature in early 2019 that will enable organizations to synchronize users to teams and channels based on group membership.</p>
+</div>
+<div class="section" id="mattermost-user-identifier">
+<h3>Mattermost User Identifier<a class="headerlink" href="#mattermost-user-identifier" title="Permalink to this headline">¶</a></h3>
+<p>The User Identifier used to uniquely identify users in Mattermost depends on the method of authentication:</p>
+<ul class="simple">
+<li><strong>Email/password</strong>: Email address or username. Created by the user or previously described account pre-provisioning process.</li>
+<li><strong>AD/LDAP</strong>: Configure a unique and unchanging ID Attribute from the AD/LDAP server to be used in Mattermost. If a user’s ID Attribute changes, it will create a new Mattermost account unassociated with their old one.</li>
+<li><strong>SAML 2.0</strong>: Selected during configuration. You may use an Id Attribute instead of email to bind the user. We recommend choosing an ID that is unique and will not change over time.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="user-deprovisioning">
+<h2>User Deprovisioning<a class="headerlink" href="#user-deprovisioning" title="Permalink to this headline">¶</a></h2>
+<p>Users in Mattermost can be deactivated in the following ways:</p>
+<ul class="simple">
+<li><strong>AD/LDAP Synchronization</strong>: AD/LDAP users can be deactivated in Mattermost based on their status in the directory server via synchronization. Learn more in <a class="reference external" href="https://docs.mattermost.com/deployment/sso-ldap.html#how-does-deactivating-users-work">AD/LDAP documentation</a>.</li>
+<li><strong>System Console</strong>: User management screen in <strong>System Console &gt; Users</strong> allows administrators to deactiveate users with email/password login.</li>
+<li><strong>RESTful API</strong> The Mattermost API can be used to deactivate users. See <a class="reference external" href="https://api.mattermost.com/#tag/users%2Fpaths%2F~1users~1%7Buser_id%7D%2Fdelete">API documentation to learn more</a>.</li>
+<li><strong>Command Line Interface</strong>: The Mattermost CLI can be used to deactivate users. See <a class="reference external" href="https://docs.mattermost.com/administration/command-line-tools.html#mattermost-user-deactivate">CLI documentation to learn more</a>.</li>
+</ul>
+<p>Once deactivated, users still exist in the Mattermost database and their messages can still be viewed in Mattermost.  To delete a user and all of their content, you can use the Mattermost CLI tool <a class="reference external" href="https://docs.mattermost.com/administration/command-line-tools.html#mattermost-user-delete">as described here</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">As long as the ID attribute selected via AD/LDAP or SAML 2.0 is a unique identifier, the user’s email address or name (along with other attributes) can be updated without breaking the user’s account.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../deployment/admin-roles.html" class="btn btn-neutral float-right" title="Additional System Admin Roles (E20)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="migration-announcement-email-template.html" class="btn btn-neutral" title="Migration Announcement Email" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/administration/user-provisioning.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,348 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>लाइट इनस्टॉल गाइड &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Mattermost User’s Guide" href="../guides/user.html" />
+    <link rel="prev" title="Upgrading Mattermost Server with a Script" href="upgrade-script.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../install/prod-windows-2012.html">Production Install on Windows Server (Unofficial)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install/prod-docker.html">Deploy Mattermost on Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install/deploy-cloudron.html">Deploy Mattermost on Cloudron (Unofficial)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="upgrade-script.html">Upgrading Mattermost Server with a Script</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">लाइट इनस्टॉल गाइड</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">इंस्टालेशन</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">उपयोगकर्ताओं को जोड़ें</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">अधिसूचना हब बनाए</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
+    
+    <li>लाइट इनस्टॉल गाइड</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/administration/light-install-hindi.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>लाइट इनस्टॉल गाइड<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>मैटरमोस्ट एक मैसेजिंग और कोलैबोरेशन मंच है। मैटरमोस्ट के द्वारा,आप प्रतिदिन इस्तेमाल किए जाने वाले उपकरण एक ही जगह पर एकीकृत कर सकते है और कोई भी  अधिसूचना या कार्य नहीं छूटेगा।</p>
+<p>आरंभ करने से पहले आपको इनकी आवश्यकता होगी:
+- रूट लेवल एक्सेस वाला उबंटू सर्वर (18.04 या 20.04)
+- (संस्तुत) आपके सर्वर से जुड़ा एक डोमेन नाम (जैसे कि mymattermostserver.com)
+- (संस्तुत) अपनी टीम के सदस्यों के ईमेल ताकि आप उन्हें सर्वर पर आमंत्रित कर सकें</p>
+<div class="section" id="id2">
+<h2>इंस्टालेशन<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://docs.mattermost.com/install/mattermost-omnibus.html">मैटरमोस्ट ओमनीबस</a> के द्वारा मैटरमोस्ट इनस्टॉल  करें।</p>
+<p>टर्मिनल विंडो खोलें और एंटेर करें:</p>
+<p><code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">-o-</span> <span class="pre">https://deb.packages.mattermost.com/repo-setup.sh</span> <span class="pre">|</span> <span class="pre">sudo</span> <span class="pre">bash</span></code></p>
+<p>फिर,मैटरमोस्ट ओमनीबस इनस्टॉल करने  लिए ये चलाएं:</p>
+<p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">mattermost-omnibus</span></code></p>
+<p>!नोट
+यद्यपि ओमनीबस को इनस्टॉल करने और कॉन्फ़िगर करने का संस्तुत तरीका SSL इनेबल्ड है, यदि आपको उसके बिना (या डोमेन नाम के बिना) उपयोग या परीक्षण करना चाहते हैं, तो ये चलाएं:</p>
+<p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">MMO_HTTPS=false</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">mattermost-omnibus</span></code></p>
+<p>जब आपका सर्वर चल रहा हो , तो उसे डोमेन नाम (जैसे कि mymattermostserver.com) के माध्यम से नेविगेट करें,जो आपके सर्वर (या यदि आप डोमेन नाम का उपयोग नहीं कर रहे हैं तो सर्वर के आईपी एड्रेस) को इंगित करता है। इसके बाद, एक टीम बनाएं और अपने मैटरमोस् सर्वर से जुड़ने के लिए लोगों को आमंत्रित करें।</p>
+<p>यदि आपको मैटरमोस्ट ओमनीबस स्थापित करने में कोई समस्या आ रही हो ,तो सामान्य त्रुटि संदेशों के लिए <a class="reference external" href="https://docs.mattermost.com/install/troubleshooting.html">ट्रबलशूटिंग गाइड</a> देखें, या समस्या निवारण सहायता के लिए <a class="reference external" href="https://mattermost.com/ask-mattermost-community">मैटरमोस्ट उपयोगकर्ता समुदाय</a> में शामिल हों।</p>
+</div>
+<div class="section" id="id6">
+<h2>उपयोगकर्ताओं को जोड़ें<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p>अब अपनी टीम के लोगों को आमंत्रण भेजकर उन्हें जोड़ें:</p>
+<ol class="arabic simple">
+<li>नेविगेशन पैनल के शीर्ष पर अपने यूजरनेम पर क्लिक करें।</li>
+<li>Invite People पर क्लिक करें और उन लोगों के ईमेल पते एंटेर करें जिन्हें आप जोड़ना चाहते हैं।</li>
+<li>Invite Members पर क्लिक करें।</li>
+</ol>
+<p>जब आमंत्रित व्यक्ति लिंक के साथ ईमेल प्राप्त करता है, तो आपके सर्वर से जुड़ने के लिए यह एक सिंगल क्लिक होगा, जिस चैनल को आपने बनाया है, उसी में चैट करें या स्वयं के चैनल बनाएं। उपयोगकर्ताओं को जोड़ने के बारे में अधिक जानकारी <a class="reference external" href="https://docs.mattermost.com/help/getting-started/managing-members.html#managing-members">यहाँ</a> उपलब्ध है।</p>
+</div>
+<div class="section" id="id8">
+<h2>अधिसूचना हब बनाए<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<p>एक <a class="reference external" href="https://community.mattermost.com/core/channels/community-heartbeat">“heartbeat” चैनल</a> बनाएं और एक ही जगह  पर अपने  स्टेटस अपडेट और महत्वपूर्ण सूचनाएं भेजने के लिए अपने सबसे अधिक उपयोग किए जाने वाले ऐप्स और प्लग इन को मैटरमोस्ट के साथ एकीकृत करें।</p>
+<p>आप <strong>Main Menu &gt; Plugin Marketplace</strong> के माध्यम से इंटीग्रेशन और प्लगइन्स पा और इंस्टॉल कर सकते हैं।</p>
+<p>GitHub, Jira और Jenkins से परिचय करें:</p>
+<ul class="simple">
+<li>अपनी समीक्षा को प्रबंधित करने, पुल रिक्वेस्ट,टिप्पणियों और मर्ज करने के लिए अपने स्लैश कमांड का उपयोग करके अपने Github संगठन को मैटरमोस्ट से कनेक्ट करें। GitHub मैटरमोस्ट में प्री-पैकेज्ड है। <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-github#configuration">कॉन्फ़िगरेशन स्टेप्स</a> का पालन करें, और फिर अपनी टीम को <code class="docutils literal notranslate"><span class="pre">/github</span> <span class="pre">connect</span></code> चलाना बताए  ताकि वे अधिसूचना प्राप्त कर सकें।</li>
+<li>अपने Jira अकाउंट को मैटरमोस्ट से कनेक्ट करें और बॉट के लिए एक चैनल सेटअप करें ताकि आपकी टीम हमेशा अद्यतित रहे। आरंभ करने के लिए <a class="reference external" href="https://mattermost.gitbook.io/plugin-jira/setup/configuration">कॉन्फ़िगरेशन गाइड</a> पर जाएँ।  कॉन्फ़िगर करने के बाद, <a class="reference external" href="https://mattermost.gitbook.io/plugin-jira/end-user-guide/getting-started">उपयोगकर्ता डॉक्यूमेंटेशन</a> को अपनी टीम के साथ साझा करें ताकि वे सूचनाएं प्राप्त कर सकें।</li>
+<li>अपने वर्कफ़्लोज़ को केंद्रीकृत करने और बिल्ड प्रबंधित करने के लिए अपने Jenkins सर्वर को मैटरमोस्ट से कनेक्ट करें। आरंभ करने के लिए <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-jenkins#installation">इंस्टॉलेशन गाइड</a> पर जाएं। अपनी टीम के साथ <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-jenkins#features">फीचर्स लिस्ट</a> साझा करें ताकि वह तेज़ी से कार्य शुरू कर सकें।</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../guides/user.html" class="btn btn-neutral float-right" title="Mattermost User’s Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="upgrade-script.html" class="btn btn-neutral" title="Upgrading Mattermost Server with a Script" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/administration/light-install-hindi.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,617 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Additional System Admin Roles (E20) &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Active Directory/LDAP Setup (E10/E20)" href="sso-ldap.html" />
+    <link rel="prev" title="Provisioning Workflows" href="../administration/user-provisioning.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="bulk-loading.html">Bulk Loading Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/migrating.html">Migration Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/hipchat-migration-guidelines.html">Migrating from HipChat to Mattermost</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/migration-announcement-email-template.html">Migration Announcement Email</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/user-provisioning.html">Provisioning Workflows</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Additional System Admin Roles (E20)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#assigning-admin-roles">Assigning Admin Roles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#editing-privileges-of-admin-roles-advanced">Editing Privileges of Admin Roles (Advanced)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#admin-roles-and-privileges">Admin Roles and Privileges</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#frequently-asked-questions">Frequently Asked Questions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sso-ldap.html">Active Directory/LDAP Setup (E10/E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auth.html">Multi-factor Authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ldap-group-sync.html">AD/LDAP Groups (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html">Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-saml.html">SAML Single Sign-On (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-saml-technical.html">SAML Single-Sign-On (E20): Technical Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-gitlab.html">GitLab Single Sign-On</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-google.html">Google Single Sign-On (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-office.html">Office 365 Single Sign-On (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ssl-client-certificate.html">SSL Client Certificate Setup (Beta)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="certificate-based-authentication.html">Certificate-Based Authentication (Experimental)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="team-channel-management.html">Managing Team and Channel Members (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced-permissions.html">Advanced Permissions (E10/E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="permissions-backend.html">Advanced Permissions: Backend Infrastructure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guest-accounts.html">Guest Accounts (Beta) (E10/E20)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
+    
+    <li>Additional System Admin Roles (E20)</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/deployment/admin-roles.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="additional-system-admin-roles-e20">
+<h1>Additional System Admin Roles (E20)<a class="headerlink" href="#additional-system-admin-roles-e20" title="Permalink to this headline">¶</a></h1>
+<p>From v5.28, System Admins can use the command line to assign roles that permit members to have admin access to specified areas of the System Console. This allows members of your organization to perform certain administrative tasks without providing them with access to all system administrative capabilities.</p>
+<p>From v5.30, System Admins can also use the System Console to manage additional System Admin roles and privileges.</p>
+<ul class="simple">
+<li><strong>System Manager:</strong> The System Manager has read/write permissions for management areas of the System Console, such as user management and integrations (excluding permissions). This role has read only access to authentication, reporting, and license interfaces.</li>
+<li><strong>User Manager:</strong> The User Manager role is able to read/write to all the user management areas (excluding permissions). The authentication interface is read only.</li>
+<li><strong>Viewer:</strong> This role is able to access all pages of the System Console but has no write access to any pages.</li>
+</ul>
+<p>There are two ways to assign roles:</p>
+<ol class="arabic simple">
+<li>In the System Console under <strong>User Management &gt; System Roles (Beta)</strong>.</li>
+<li>Using the <a class="reference external" href="https://docs.mattermost.com/administration/mmctl-cli-tool.html">mmctl tool</a>.</li>
+</ol>
+<p>When a user is assigned a role, they have access to the System Console. As each role has a different set of default permissions the items that they can view depend on the role they’ve been assigned.</p>
+<p><strong>System Manager</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="first docutils">
+<dt>Read/Write</dt>
+<dd><ul class="first last">
+<li>User Management</li>
+<li>Environment</li>
+<li>Site Configuration</li>
+<li>Integrations</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Read Only</dt>
+<dd><ul class="first last">
+<li>(User Management) Permissions</li>
+<li>Edition/License</li>
+<li>Reporting</li>
+<li>Authentication</li>
+<li>Plugins</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<p><strong>User Manager</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="first docutils">
+<dt>Read/Write</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>User Management</dt>
+<dd><ul class="first last">
+<li>Groups</li>
+<li>Teams</li>
+<li>Channels</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Read Only</dt>
+<dd><ul class="first last">
+<li>(User Management) Permissions</li>
+<li>Authentication</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<p><strong>Viewer</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="first docutils">
+<dt>Read Only</dt>
+<dd><ul class="first last">
+<li>All pages within the System Console</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<div class="section" id="assigning-admin-roles">
+<h2>Assigning Admin Roles<a class="headerlink" href="#assigning-admin-roles" title="Permalink to this headline">¶</a></h2>
+<p>System Admins can assign roles using the System Console or the mmctl tool. This can be done either locally or remotely.</p>
+<blockquote>
+<div><strong>In the System Console</strong></div></blockquote>
+<ul>
+<li><p class="first">Go to <strong>System Console &gt; User Management &gt; System Roles (Beta) &gt; Assigned People</strong>.</p>
+<p><strong>Using the mmctl tool</strong></p>
+<p>The format of the mmctl command is:</p>
+<p><code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">permissions</span> <span class="pre">role</span> <span class="pre">assign</span> <span class="pre">[role_name]</span> <span class="pre">[username...]</span></code></p>
+</li>
+</ul>
+<p><strong>To grant the System Manager role to a single user called Bob Smith:</strong></p>
+<blockquote>
+<div><p><strong>In the System Console</strong></p>
+<ol class="arabic simple">
+<li>Go to <strong>System Console &gt; User Management &gt; System Roles (Beta)</strong> then select the <strong>System Manager</strong> role.</li>
+<li>Under <strong>Assigned People</strong>, choose <strong>Add People</strong>.</li>
+<li>Search for and select <code class="docutils literal notranslate"><span class="pre">Bob</span> <span class="pre">Smith</span></code>, then select <strong>Add</strong> to grant the System Manager role to that user.</li>
+</ol>
+<p><strong>Using the mmctl tool</strong></p>
+<p>The format of the mmctl command is:</p>
+<p><code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">permissions</span> <span class="pre">role</span> <span class="pre">assign</span> <span class="pre">system_manager</span> <span class="pre">bob-smith</span></code></p>
+</div></blockquote>
+<p><strong>To grant the User Manager role to two users, Bob Smith and Sue Clark:</strong></p>
+<blockquote>
+<div><p><strong>In the System Console</strong></p>
+<ol class="arabic simple">
+<li>Go to <strong>System Console &gt; User Management &gt; System Roles (Beta)</strong> then select the <strong>User Manager</strong> role.</li>
+<li>Under <strong>Assigned People</strong>, choose <strong>Add People</strong>.</li>
+<li>Search for and select <strong>Bob Smith</strong> and <strong>Sue Clark</strong>, then select <strong>Add</strong> to grant the User Manager role to those users.</li>
+</ol>
+<p><strong>Using the mmctl tool</strong></p>
+<p>The format of the mmctl command is:</p>
+<p><code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">permissions</span> <span class="pre">role</span> <span class="pre">assign</span> <span class="pre">system_user_manager</span> <span class="pre">bob-smith</span> <span class="pre">sue-clark</span></code></p>
+</div></blockquote>
+<p><strong>To grant the Viewer role to two users, Bob Smith and Sue Clark:</strong></p>
+<blockquote>
+<div><p><strong>In the System Console</strong></p>
+<ol class="arabic simple">
+<li>Go to <strong>System Console &gt; User Management &gt; System Roles (Beta)</strong> then select the <strong>Viewer</strong> role.</li>
+<li>Under <strong>Assigned People</strong>, select <strong>Add People</strong>.</li>
+<li>Search for and select <strong>Bob Smith</strong> and <strong>Sue Clark</strong>, then select <strong>Add</strong> to grant the Viewer role to those users.</li>
+</ol>
+<p><strong>Using the mmctl tool</strong></p>
+<p>The format of the mmctl command is:</p>
+<p><code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">permissions</span> <span class="pre">role</span> <span class="pre">assign</span> <span class="pre">system_read_only_admin</span> <span class="pre">bob-smith</span> <span class="pre">sue-clark</span></code></p>
+</div></blockquote>
+<p><strong>To remove the System Manager role from a single user called Bob Smith:</strong></p>
+<blockquote>
+<div><p><strong>In the System Console</strong></p>
+<ol class="arabic simple">
+<li>Go to <strong>System Console &gt; User Management &gt; System Roles (Beta)</strong> then select the <strong>Viewer</strong> role.</li>
+<li>Under <strong>Assigned People</strong> search for <strong>Bob Smith</strong>, then select <strong>Remove</strong>.</li>
+</ol>
+<p><strong>Using the mmctl tool</strong></p>
+<p>The format of the mmctl command is:</p>
+<p><code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">permissions</span> <span class="pre">role</span> <span class="pre">unassign</span> <span class="pre">system_manager</span> <span class="pre">bob-smith</span></code></p>
+</div></blockquote>
+</div>
+<div class="section" id="editing-privileges-of-admin-roles-advanced">
+<h2>Editing Privileges of Admin Roles (Advanced)<a class="headerlink" href="#editing-privileges-of-admin-roles-advanced" title="Permalink to this headline">¶</a></h2>
+<p>Each of the admin roles have defined, default privileges as outlined above.</p>
+<p>System Admins can grant read and write access to other areas of the System Console, as well as remove read and write access (including default access), for each role. This is completed using the System Console or the mmctl tool, either locally or remotely.</p>
+<blockquote>
+<div><p><strong>In the System Console</strong></p>
+<ol class="arabic simple">
+<li>Go to <strong>System Console &gt; User Management &gt; System Roles (Beta)</strong> then select the <strong>System Manager</strong>, <strong>User Manager</strong>, or <strong>Viewer</strong> role.</li>
+<li>For each set of privileges, select the access level as <strong>Can edit</strong>, <strong>Read only</strong>, or <strong>No access</strong>.</li>
+</ol>
+<p><strong>Note:</strong> If you set privilege subsections to different access levels then the privilege access level displays as <strong>Mixed Access</strong>.</p>
+<p><strong>Using the mmctl tool</strong></p>
+<p>The format of the mmctl command is:</p>
+<p><code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">permissions</span> <span class="pre">add</span> <span class="pre">[role_name]</span> <span class="pre">[permission...]</span></code></p>
+</div></blockquote>
+<p><strong>To grant write access to the Authentication section of the System Console for all users with the User Manager role:</strong></p>
+<blockquote>
+<div><p><strong>In the System Console</strong></p>
+<ol class="arabic simple">
+<li>Go to <strong>System Console &gt; User Management &gt; System Roles (Beta)</strong> then select the <strong>User Manager</strong> role.</li>
+<li>Under <strong>Privileges &gt; Authentication</strong> select <strong>Can edit</strong>, then select <strong>Save</strong>.</li>
+</ol>
+<p><strong>Using the mmctl tool</strong></p>
+<p>The format of the mmctl command is:</p>
+<p><code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">permissions</span> <span class="pre">add</span> <span class="pre">system_user_manager</span> <span class="pre">sysconsole_write_authentication</span></code></p>
+</div></blockquote>
+<p><strong>To grant read only access to the Authentication section of the System Console for all users with the User Manager role:</strong></p>
+<blockquote>
+<div><p><strong>In the System Console</strong></p>
+<ol class="arabic simple">
+<li>Go to <strong>System Console &gt; User Management &gt; System Roles (Beta)</strong> then select the <strong>User Manager</strong> role.</li>
+<li>Under <strong>Privileges &gt; Authentication</strong> select <strong>Read only</strong>, then select <strong>Save</strong>.</li>
+</ol>
+<p><strong>Using the mmctl tool</strong></p>
+<p>The format of the mmctl command is:</p>
+<p><code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">permissions</span> <span class="pre">remove</span> <span class="pre">system_user_manager</span> <span class="pre">sysconsole_read_authentication</span></code></p>
+</div></blockquote>
+<p><strong>To remove write access to the Authentication section of the System Console for all users with the User Manager role:</strong></p>
+<blockquote>
+<div><p><strong>In the System Console</strong></p>
+<ol class="arabic simple">
+<li>Go to <strong>System Console &gt; User Management &gt; System Roles (Beta)</strong> then select the <strong>User Manager</strong> role.</li>
+<li>Under <strong>Privileges &gt; Authentication</strong> select <strong>No access</strong>, then choose <strong>Save</strong>.</li>
+</ol>
+<p><strong>Using the mmctl tool</strong></p>
+<p>The format of the mmctl command is:</p>
+<p><code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">permissions</span> <span class="pre">remove</span> <span class="pre">system_user_manager</span> <span class="pre">sysconsole_write_authentication</span></code></p>
+</div></blockquote>
+<p><strong>To reset a role to its default set of permissions:</strong></p>
+<p>This is completed using the mmctl tool only, either locally or remotely.</p>
+<p>The format of the mmctl command is:</p>
+<p><code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">permissions</span> <span class="pre">reset</span> <span class="pre">[role_name]</span></code></p>
+<p>For example, to reset the permissions of the <code class="docutils literal notranslate"><span class="pre">system_read_only_admin</span></code> role:</p>
+<p><code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">permissions</span> <span class="pre">reset</span> <span class="pre">system_read_only_admin</span></code></p>
+</div>
+<div class="section" id="admin-roles-and-privileges">
+<h2>Admin Roles and Privileges<a class="headerlink" href="#admin-roles-and-privileges" title="Permalink to this headline">¶</a></h2>
+<p><strong>Roles</strong></p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">system_manager</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">system_user_manager</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">system_read_only_admin</span></code></li>
+</ul>
+<p><strong>Privileges</strong></p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_READ_ABOUT</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_WRITE_ABOUT</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_READ_REPORTING</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_WRITE_REPORTING</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_READ_USERMANAGEMENT_USERS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_WRITE_USERMANAGEMENT_USERS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_READ_USERMANAGEMENT_GROUPS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_WRITE_USERMANAGEMENT_GROUPS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_READ_USERMANAGEMENT_TEAMS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_WRITE_USERMANAGEMENT_TEAMS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_READ_USERMANAGEMENT_CHANNELS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_WRITE_USERMANAGEMENT_CHANNELS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_READ_USERMANAGEMENT_PERMISSIONS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_WRITE_USERMANAGEMENT_PERMISSIONS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_READ_ENVIRONMENT</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_WRITE_ENVIRONMENT</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_READ_SITE</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_WRITE_SITE</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_READ_AUTHENTICATION</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_WRITE_AUTHENTICATION</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_READ_PLUGINS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_WRITE_PLUGINS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_READ_INTEGRATIONS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_WRITE_INTEGRATIONS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_READ_COMPLIANCE</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_WRITE_COMPLIANCE</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_READ_EXPERIMENTAL</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PERMISSION_SYSCONSOLE_WRITE_EXPERIMENTAL</span></code></li>
+</ul>
+</div>
+<div class="section" id="frequently-asked-questions">
+<h2>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="can-a-user-manager-or-system-manager-reset-an-administrators-email-or-password-without-their-knowledge">
+<h3>Can a User Manager or System Manager reset an administrator’s email or password without their knowledge?<a class="headerlink" href="#can-a-user-manager-or-system-manager-reset-an-administrators-email-or-password-without-their-knowledge" title="Permalink to this headline">¶</a></h3>
+<p>This is not possible with the default privileges of these roles. The ability to reset passwords or email addresses of administrators is limited to System Admins.</p>
+</div>
+<div class="section" id="can-a-user-manager-or-system-manager-access-the-configuration-file">
+<h3>Can a User Manager or System Manager access the configuration file?<a class="headerlink" href="#can-a-user-manager-or-system-manager-access-the-configuration-file" title="Permalink to this headline">¶</a></h3>
+<p>Yes. However, they will only have access to read actual values and modify values in accordance with their permissions. If appropriate read permissions do not exist, the default key values will be displayed.</p>
+</div>
+<div class="section" id="are-all-actions-of-admin-roles-logged">
+<h3>Are all actions of admin roles logged?<a class="headerlink" href="#are-all-actions-of-admin-roles-logged" title="Permalink to this headline">¶</a></h3>
+<p>Every change made by any admin is included in the audit log.</p>
+</div>
+<div class="section" id="can-a-system-manager-change-their-own-permissions-or-elevate-their-role">
+<h3>Can a System Manager change their own permissions or elevate their role?<a class="headerlink" href="#can-a-system-manager-change-their-own-permissions-or-elevate-their-role" title="Permalink to this headline">¶</a></h3>
+<p>No. System Managers can’t elevate their role, and aren’t able to elevate other members’ roles.</p>
+</div>
+<div class="section" id="can-any-of-the-new-roles-view-api-keys-passwords-or-other-sensitive-information-within-the-system-console-such-as-smtp-aws-elastic-search">
+<h3>Can any of the new roles view API keys/passwords or other sensitive information within the System Console (such as SMTP, AWS, Elastic Search)?<a class="headerlink" href="#can-any-of-the-new-roles-view-api-keys-passwords-or-other-sensitive-information-within-the-system-console-such-as-smtp-aws-elastic-search" title="Permalink to this headline">¶</a></h3>
+<p>No, password information is only visible to System Admins and is obfuscated for other roles.</p>
+</div>
+<div class="section" id="if-download-links-for-compliance-exports-are-enabled-in-the-system-console-can-a-read-only-admin-download-the-reports">
+<h3>If download links for compliance exports are enabled in the System Console, can a Read Only Admin download the reports?<a class="headerlink" href="#if-download-links-for-compliance-exports-are-enabled-in-the-system-console-can-a-read-only-admin-download-the-reports" title="Permalink to this headline">¶</a></h3>
+<p>Only roles that are explicitly granted access to <strong>System Console &gt; Compliance</strong> have access to download compliance reports.</p>
+</div>
+<div class="section" id="can-any-of-the-new-roles-force-join-private-channels">
+<h3>Can any of the new roles force-join Private channels?<a class="headerlink" href="#can-any-of-the-new-roles-force-join-private-channels" title="Permalink to this headline">¶</a></h3>
+<p>Yes at this time they can, however, we will be improving on this behavior in the future with a prompt that lets them know they are entering a private channel. We are also planning on adding a permission which would remove the ability to access Private channels.</p>
+</div>
+<div class="section" id="can-i-create-a-new-role-or-clone-an-existing-role">
+<h3>Can I create a new role or clone an existing role?<a class="headerlink" href="#can-i-create-a-new-role-or-clone-an-existing-role" title="Permalink to this headline">¶</a></h3>
+<p>No, but we are actively seeking feedback on this capability.</p>
+</div>
+<div class="section" id="can-i-use-an-ldap-filter-to-assign-these-roles">
+<h3>Can I use an LDAP filter to assign these roles?<a class="headerlink" href="#can-i-use-an-ldap-filter-to-assign-these-roles" title="Permalink to this headline">¶</a></h3>
+<p>No, but we are considering this functionality for a future enhancement.</p>
+</div>
+<div class="section" id="can-i-rename-the-roles">
+<h3>Can I rename the roles?<a class="headerlink" href="#can-i-rename-the-roles" title="Permalink to this headline">¶</a></h3>
+<p>This is being considered for future development.</p>
+</div>
+<div class="section" id="can-a-system-manager-or-user-manager-demote-or-deactivate-another-admin-or-manager">
+<h3>Can a System Manager or User Manager demote or deactivate another Admin or Manager?<a class="headerlink" href="#can-a-system-manager-or-user-manager-demote-or-deactivate-another-admin-or-manager" title="Permalink to this headline">¶</a></h3>
+<p>No privilege grants the authority to deactivate or demote another admin.</p>
+</div>
+<div class="section" id="can-a-system-manager-or-user-manager-assign-or-unassign-admin-roles">
+<h3>Can a System Manager or User Manager assign or unassign admin roles?<a class="headerlink" href="#can-a-system-manager-or-user-manager-assign-or-unassign-admin-roles" title="Permalink to this headline">¶</a></h3>
+<p>Only the System Admin has access to edit system roles.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sso-ldap.html" class="btn btn-neutral float-right" title="Active Directory/LDAP Setup (E10/E20)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../administration/user-provisioning.html" class="btn btn-neutral" title="Provisioning Workflows" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/deployment/admin-roles.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>
