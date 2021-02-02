@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Sharing Files &mdash; Mattermost 5.29 documentation</title>
+  <title>Sharing Files &mdash; Mattermost 5.31 documentation</title>
   
 
   
@@ -33,77 +33,13 @@
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Executing Commands" href="executing-commands.html" />
     <link rel="prev" title="Formatting Text" href="formatting-text.html" />
-	<!-- Bizible Script -->
-	<script src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
-
-	
-		<!-- Google Analytics -->
-		<script>
-			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-			ga('create', 'UA-67846571-2', 'auto');
-			ga('send', 'pageview');
-		</script>
-		<!-- End Google Analytics -->
-	
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-67846571-1"></script>
-	<script>
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-
-	gtag('config', 'UA-67846571-1');
-	</script>
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<!-- Second Google Analytics tag to assist mapping with mattermost.com visits --> 
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120238482-1"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-
-	  gtag('config', 'UA-120238482-1');
-	</script>
-
-	<!-- LeadLander -->
-	<script type="text/javascript" language="javascript">
-		var sf14gv = 31865;
-		(function() {
-			var sf14g = document.createElement('script');
-			sf14g.src = 'https://tracking.leadlander.com/lt.min.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sf14g, s);
-		})();
-	</script>
-
-	<!-- Munchkin code -->
-	<script type="text/javascript">
-		(function() {
-			var didInit = false;
-			function initMunchkin() {
-			if(didInit === false) {
-				didInit = true;
-				Munchkin.init('161-FBE-733');
-			}
-			}
-			var s = document.createElement('script');
-			s.type = 'text/javascript';
-			s.async = true;
-			s.src = '//munchkin.marketo.net/munchkin.js';
-			s.onreadystatechange = function() {
-			if (this.readyState == 'complete' || this.readyState == 'loaded') {
-				initMunchkin();
-			}
-			};
-			s.onload = initMunchkin;
-			document.getElementsByTagName('head')[0].appendChild(s);
-		})();
-	</script>
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
 
 
   
@@ -133,7 +69,7 @@
             
             
               <div class="version">
-                5.29
+                5.31
               </div>
             
           
@@ -165,11 +101,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../../guides/user.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../guides/user.html#messaging">Messaging</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="sending-messages.html">Messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="emoji.html">Using Emojis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mentioning-teammates.html">Mentioning Teammates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="formatting-text.html">Formatting Text</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Sharing Files</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#how-to-attach-files">How to Attach Files</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#file-previewer">File Previewer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#attach-files-to-messages">Attach Files to Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#preview-file-attachments">Preview File Attachments</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#attachment-limits-and-sizes">Attachment Limits and Sizes</a></li>
 </ul>
 </li>
@@ -235,47 +172,39 @@
             
   <div class="section" id="sharing-files">
 <h1>Sharing Files<a class="headerlink" href="#sharing-files" title="Permalink to this headline">¶</a></h1>
-<p>With attachments, you can share additional information that will help your
-team to visually understand your ideas. Sharing videos, voice recordings,
-screenshots, and photos will make your messages more effective and clear.</p>
-<div class="section" id="how-to-attach-files">
-<h2>How to Attach Files<a class="headerlink" href="#how-to-attach-files" title="Permalink to this headline">¶</a></h2>
-<p>You can attach files in the following ways:</p>
+<p>With file attachments, you can share additional information that will help your team to visually understand your ideas. Sharing videos, voice recordings, screenshots, and photos will make your messages more effective and clear.</p>
+<div class="section" id="attach-files-to-messages">
+<h2>Attach Files to Messages<a class="headerlink" href="#attach-files-to-messages" title="Permalink to this headline">¶</a></h2>
+<p>You can attach files to messages in the following ways:</p>
 <ul class="simple">
-<li>Use the attachment icon - click the paperclip icon inside the message input box</li>
-<li>Drag and Drop</li>
+<li>Use the attachment icon - select the paperclip icon inside the message input box</li>
+<li>Drag and drop</li>
 <li>Paste from the clipboard</li>
 </ul>
 </div>
-<div class="section" id="file-previewer">
-<h2>File Previewer<a class="headerlink" href="#file-previewer" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="preview-file-attachments">
+<h2>Preview File Attachments<a class="headerlink" href="#preview-file-attachments" title="Permalink to this headline">¶</a></h2>
 <p>Mattermost has a built-in file previewer that you can use to:</p>
 <ul class="simple">
 <li>Download files</li>
 <li>Share public links</li>
 <li>View media</li>
 </ul>
-<p>Click the thumbnail of an attached file to open it in the file previewer.</p>
+<p>Select the thumbnail of an attached file to open it in the file previewer.</p>
 <div class="section" id="downloading-files">
 <h3>Downloading Files<a class="headerlink" href="#downloading-files" title="Permalink to this headline">¶</a></h3>
-<p>You can download an attached file by clicking the download icon next to the file
-thumbnail.</p>
+<p>You can download an attached file by selecting the download icon next to the file thumbnail.</p>
 </div>
 <div class="section" id="sharing-public-links">
 <h3>Sharing Public Links<a class="headerlink" href="#sharing-public-links" title="Permalink to this headline">¶</a></h3>
-<p>Public URLs allow you to share attachments with anyone outside the Mattermost
-system. To share an attachment, click the thumbnail of an attachment, then click
-<strong>Get Public Link</strong>.</p>
+<p>Public URLs allow you to share attachments with anyone outside the Mattermost system. To share an attachment, select the thumbnail of an attachment, then select <strong>Get Public Link</strong>.</p>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
-<p class="last">If <strong>Get Public Link</strong> is not visible in the file previewer
-and you prefer that the feature is enabled, you can request your System
-Admin to enable the feature from the System Console under
-<strong>Security &gt; Public Links</strong>.</p>
+<p class="last">If <strong>Get Public Link</strong> is not visible in the file previewer, and you prefer that the feature is enabled, you can request your System Admin to enable the feature from the System Console under <strong>Site Configuration &gt; Public Links</strong>.</p>
 </div>
 </div>
 <div class="section" id="viewing-media">
-<h3>Viewing Media:<a class="headerlink" href="#viewing-media" title="Permalink to this headline">¶</a></h3>
+<h3>Viewing Media<a class="headerlink" href="#viewing-media" title="Permalink to this headline">¶</a></h3>
 <p>The following media formats are supported on most browsers:</p>
 <ul class="simple">
 <li>Images: BMP, GIF, JPG, JPEG, PNG, SVG</li>
@@ -283,15 +212,13 @@ Admin to enable the feature from the System Console under
 <li>Audio: MP3, M4A</li>
 <li>Files: PDF, TXT</li>
 </ul>
-<p>Other document previews (Word, Excel, PPT) are not yet supported.</p>
+<p>Other document previews (such as Word, Excel, or PPT) are not yet supported.</p>
 </div>
 </div>
 <div class="section" id="attachment-limits-and-sizes">
 <h2>Attachment Limits and Sizes<a class="headerlink" href="#attachment-limits-and-sizes" title="Permalink to this headline">¶</a></h2>
-<p>Please note that Mattermost supports a maximum of five (5) attached
-files per post.</p>
-<p>The default maximum file size is 50 MB, but this can be changed by the
-System Admin.</p>
+<p>The ability to attach a maximum of 10 files per post is available today for Cloud deployments and will be available for self-hosted deployments in Mattermost Server v5.32 and later.</p>
+<p>The default maximum file size is 50 MB, but this can be changed by the System Admin.</p>
 </div>
 </div>
 
@@ -382,7 +309,7 @@ System Admin.</p>
 		<div class="search__icon">
 			<i class="fa fa-search"></i>
 		</div>
-		<a href="http://docs.mattermost.com/" class="header__logo">
+		<a href="https://docs.mattermost.com/" class="header__logo">
 			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
 		</a>
 		<div class="links__icon">

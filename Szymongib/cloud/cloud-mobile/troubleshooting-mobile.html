@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Troubleshooting Mobile Applications &mdash; Mattermost 5.29 documentation</title>
+  <title>Troubleshooting Mobile Applications &mdash; Mattermost 5.31 documentation</title>
   
 
   
@@ -33,77 +33,13 @@
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Mattermost Incident Management" href="../../administration/devops-command-center.html" />
     <link rel="prev" title="Mobile Apps FAQ" href="mobile-apps-faq.html" />
-	<!-- Bizible Script -->
-	<script src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
-
-	
-		<!-- Google Analytics -->
-		<script>
-			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-			ga('create', 'UA-67846571-2', 'auto');
-			ga('send', 'pageview');
-		</script>
-		<!-- End Google Analytics -->
-	
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-67846571-1"></script>
-	<script>
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-
-	gtag('config', 'UA-67846571-1');
-	</script>
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<!-- Second Google Analytics tag to assist mapping with mattermost.com visits --> 
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120238482-1"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-
-	  gtag('config', 'UA-120238482-1');
-	</script>
-
-	<!-- LeadLander -->
-	<script type="text/javascript" language="javascript">
-		var sf14gv = 31865;
-		(function() {
-			var sf14g = document.createElement('script');
-			sf14g.src = 'https://tracking.leadlander.com/lt.min.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sf14g, s);
-		})();
-	</script>
-
-	<!-- Munchkin code -->
-	<script type="text/javascript">
-		(function() {
-			var didInit = false;
-			function initMunchkin() {
-			if(didInit === false) {
-				didInit = true;
-				Munchkin.init('161-FBE-733');
-			}
-			}
-			var s = document.createElement('script');
-			s.type = 'text/javascript';
-			s.async = true;
-			s.src = '//munchkin.marketo.net/munchkin.js';
-			s.onreadystatechange = function() {
-			if (this.readyState == 'complete' || this.readyState == 'loaded') {
-				initMunchkin();
-			}
-			};
-			s.onload = initMunchkin;
-			document.getElementsByTagName('head')[0].appendChild(s);
-		})();
-	</script>
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
 
 
   
@@ -133,7 +69,7 @@
             
             
               <div class="version">
-                5.29
+                5.31
               </div>
             
           
@@ -174,7 +110,6 @@
 <li class="toctree-l4"><a class="reference internal" href="#i-keep-getting-a-message-cannot-connect-to-the-server-please-check-your-server-url-and-internet-connection">I keep getting a message “Cannot connect to the server. Please check your server URL and internet connection.”</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#login-with-adfs-office365-is-not-working">Login with ADFS/Office365 is not working</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#i-see-a-connecting-bar-that-does-not-go-away">I see a “Connecting…” bar that does not go away</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#im-not-receiving-push-notifications-on-my-device">I’m not receiving push notifications on my device</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#build-gets-stuck-at-bundlereleasejsandassets">Build gets stuck at <code class="docutils literal notranslate"><span class="pre">bundleReleaseJsAndAssets</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#no-image-previews-available-in-the-mobile-app">No image previews available in the mobile app</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#none-of-these-solve-my-problem">None of these solve my problem!</a></li>
@@ -251,11 +186,7 @@
 <div class="section" id="i-see-a-connecting-bar-that-does-not-go-away">
 <h2>I see a “Connecting…” bar that does not go away<a class="headerlink" href="#i-see-a-connecting-bar-that-does-not-go-away" title="Permalink to this headline">¶</a></h2>
 <p>If your app is working properly, you should see a grey “Connecting…” bar that clears or says “Connected” after the app reconnects.</p>
-<p>If you are seeing this message all the time, and your internet connection seems fine, ask your server administrator if the server uses NGINX or another webserver as a reverse proxy. If so, they should check that it is configured correctly for <a class="reference external" href="https://docs.mattermost.com/install/install-ubuntu-1604.html#configuring-nginx-as-a-proxy-for-mattermost-server">supporting the websocket connection for APIv4 endpoints</a>.</p>
-</div>
-<div class="section" id="im-not-receiving-push-notifications-on-my-device">
-<h2>I’m not receiving push notifications on my device<a class="headerlink" href="#im-not-receiving-push-notifications-on-my-device" title="Permalink to this headline">¶</a></h2>
-<p>Please see our documentation on <a class="reference external" href="https://docs.mattermost.com/cloud/cloud-mobile/troubleshooting-mobile.html">troubleshooting push notifications</a>.</p>
+<p>If you are seeing this message all the time, and your internet connection seems fine, ask your server administrator if the server uses NGINX or another webserver as a reverse proxy. If so, they should check that it is configured correctly for <a class="reference external" href="https://docs.mattermost.com/install/install-ubuntu-1804.html#configuring-nginx-as-a-proxy-for-mattermost-server">supporting the websocket connection for APIv4 endpoints</a>.</p>
 </div>
 <div class="section" id="build-gets-stuck-at-bundlereleasejsandassets">
 <h2>Build gets stuck at <code class="docutils literal notranslate"><span class="pre">bundleReleaseJsAndAssets</span></code><a class="headerlink" href="#build-gets-stuck-at-bundlereleasejsandassets" title="Permalink to this headline">¶</a></h2>
@@ -270,8 +201,7 @@
 </div>
 <div class="section" id="no-image-previews-available-in-the-mobile-app">
 <h2>No image previews available in the mobile app<a class="headerlink" href="#no-image-previews-available-in-the-mobile-app" title="Permalink to this headline">¶</a></h2>
-<p>This can happen if the server running Mattermost has its mime types not set up correctly.
-A server running Linux has this file located in <code class="docutils literal notranslate"><span class="pre">/etc/mime.types</span></code>. This might vary depending on your specific OS and distribution.</p>
+<p>This can happen if the server running Mattermost has its mime types not set up correctly. A server running Linux has this file located in <code class="docutils literal notranslate"><span class="pre">/etc/mime.types</span></code>. This might vary depending on your specific OS and distribution.</p>
 <p>Some distributions also ship without <code class="docutils literal notranslate"><span class="pre">mailcap</span></code> which can result in missing or incorrectly configured mime types.</p>
 </div>
 <div class="section" id="none-of-these-solve-my-problem">
@@ -379,7 +309,7 @@ A server running Linux has this file located in <code class="docutils literal no
 		<div class="search__icon">
 			<i class="fa fa-search"></i>
 		</div>
-		<a href="http://docs.mattermost.com/" class="header__logo">
+		<a href="https://docs.mattermost.com/" class="header__logo">
 			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
 		</a>
 		<div class="links__icon">

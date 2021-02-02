@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Slash Commands &mdash; Mattermost 5.29 documentation</title>
+  <title>Slash Commands &mdash; Mattermost 5.31 documentation</title>
   
 
   
@@ -33,77 +33,13 @@
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Plugins (Beta)" href="../administration/plugins.html" />
     <link rel="prev" title="Outgoing Webhooks" href="webhooks-outgoing.html" />
-	<!-- Bizible Script -->
-	<script src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
-
-	
-		<!-- Google Analytics -->
-		<script>
-			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-			ga('create', 'UA-67846571-2', 'auto');
-			ga('send', 'pageview');
-		</script>
-		<!-- End Google Analytics -->
-	
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-67846571-1"></script>
-	<script>
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-
-	gtag('config', 'UA-67846571-1');
-	</script>
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<!-- Second Google Analytics tag to assist mapping with mattermost.com visits --> 
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120238482-1"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-
-	  gtag('config', 'UA-120238482-1');
-	</script>
-
-	<!-- LeadLander -->
-	<script type="text/javascript" language="javascript">
-		var sf14gv = 31865;
-		(function() {
-			var sf14g = document.createElement('script');
-			sf14g.src = 'https://tracking.leadlander.com/lt.min.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sf14g, s);
-		})();
-	</script>
-
-	<!-- Munchkin code -->
-	<script type="text/javascript">
-		(function() {
-			var didInit = false;
-			function initMunchkin() {
-			if(didInit === false) {
-				didInit = true;
-				Munchkin.init('161-FBE-733');
-			}
-			}
-			var s = document.createElement('script');
-			s.type = 'text/javascript';
-			s.async = true;
-			s.src = '//munchkin.marketo.net/munchkin.js';
-			s.onreadystatechange = function() {
-			if (this.readyState == 'complete' || this.readyState == 'loaded') {
-				initMunchkin();
-			}
-			};
-			s.onload = initMunchkin;
-			document.getElementsByTagName('head')[0].appendChild(s);
-		})();
-	</script>
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
 
 
   
@@ -133,7 +69,7 @@
             
             
               <div class="version">
-                5.29
+                5.31
               </div>
             
           
@@ -248,9 +184,9 @@
 <span id="id1"></span><h1>Slash Commands<a class="headerlink" href="#slash-commands" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This is the admin documentation for slash commands. If you’re a developer looking to build an integration, see <a class="reference external" href="https://developers.mattermost.com/integrate">our developer documentation</a>.</p>
+<p class="last">This is the admin documentation for slash commands. If you’re a developer looking to build an integration, see <a class="reference external" href="https://developers.mattermost.com/integrate/getting-started/">our developer documentation</a>.</p>
 </div>
-<p>Mattermost supports slash commands to easily integrate external applications into the server. They function similarly to <a class="reference internal" href="webhooks-outgoing.html"><span class="doc">outgoing webhooks</span></a>, except they can be used in any channel - including Private channels and direct messages.</p>
+<p>Mattermost supports slash commands to easily integrate external applications into the server. They function similarly to <a class="reference internal" href="webhooks-outgoing.html"><span class="doc">outgoing webhooks</span></a>, except they can be used in any channel - including Private channels and Direct Messages.</p>
 <p>Messages that begin with <code class="docutils literal notranslate"><span class="pre">/</span></code> are interpreted as slash commands. The commands will send an HTTP POST request to a web service, and process a response back to Mattermost. Mattermost supports both <a class="reference external" href="https://docs.mattermost.com/developer/slash-commands.html#built-in-commands">built-in</a> and <a class="reference external" href="https://docs.mattermost.com/developer/slash-commands.html#custom-slash-command">custom slash commands</a>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -260,7 +196,7 @@
 </div>
 <div class="section" id="built-in-commands">
 <h2>Built-in Commands<a class="headerlink" href="#built-in-commands" title="Permalink to this headline">¶</a></h2>
-<p>Each Mattermost installation comes with some built-in slash commands that are ready to use. These commands are available in the <a class="reference external" href="https://about.mattermost.com/download/">latest Mattermost release</a>:</p>
+<p>Each Mattermost installation comes with some built-in slash commands that are ready to use. These commands are available in the <a class="reference external" href="https://mattermost.com/download/">latest Mattermost release</a>:</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="33%" />
@@ -458,7 +394,7 @@ user_mentions_ids=[&quot;q5s3b7xzgprp5eid8h66j9epsy&quot;, &quot;czwmumrmw7dfxec
 <p>which would render in Mattermost as:</p>
 <img alt="Shows what the JSON response renders as in Mattermost" src="../_images/weatherBot1.PNG" />
 <ol class="arabic simple" start="11">
-<li>You’re all set! See <a class="reference external" href="https://developers.mattermost.com/integrate/slash-commands">developer documentation</a> for details on what parameters are supported by slash commands. For instance, you can override the username and profile picture the messages post as, or specify a custom post type when sending a webhook message for use by <a class="reference external" href="https://about.mattermost.com/default-plugins">plugins</a>.</li>
+<li>You’re all set! See <a class="reference external" href="https://developers.mattermost.com/integrate/slash-commands/">developer documentation</a> for details on what parameters are supported by slash commands. For instance, you can override the username and profile picture the messages post as, or specify a custom post type when sending a webhook message for use by <a class="reference external" href="https://about.mattermost.com/default-plugins">plugins</a>.</li>
 </ol>
 <p>Messages with advanced formatting can be created by including an <a class="reference internal" href="message-attachments.html"><span class="doc">attachment array</span></a> and <a class="reference internal" href="interactive-messages.html"><span class="doc">interactive message buttons</span></a> in the JSON payload.</p>
 <div class="admonition note">
@@ -479,8 +415,8 @@ user_mentions_ids=[&quot;q5s3b7xzgprp5eid8h66j9epsy&quot;, &quot;czwmumrmw7dfxec
 </div>
 <div class="section" id="share-your-integration">
 <h2>Share Your Integration<a class="headerlink" href="#share-your-integration" title="Permalink to this headline">¶</a></h2>
-<p>If you’ve built an integration for Mattermost, please consider <a class="reference external" href="https://www.mattermost.org/share-your-mattermost-projects/">sharing your work</a> in our <a class="reference external" href="https://about.mattermost.com/default-app-directory/">app directory</a>.</p>
-<p>The <a class="reference external" href="https://about.mattermost.com/default-app-directory/">app directory</a> lists open source integrations developed by the Mattermost community and are available for download, customization and deployment to your private cloud or on-prem infrastructure.</p>
+<p>If you’ve built an integration for Mattermost, please consider <a class="reference external" href="https://mattermost.org/share-your-mattermost-projects/">sharing your work</a> in our <a class="reference external" href="https://integrations.mattermost.com/">app directory</a>.</p>
+<p>The <a class="reference external" href="https://integrations.mattermost.com/">app directory</a> lists open source integrations developed by the Mattermost community and are available for download, customization and deployment to your private cloud or self-managed infrastructure.</p>
 </div>
 <div class="section" id="slack-compatibility">
 <h2>Slack Compatibility<a class="headerlink" href="#slack-compatibility" title="Permalink to this headline">¶</a></h2>
@@ -490,8 +426,8 @@ user_mentions_ids=[&quot;q5s3b7xzgprp5eid8h66j9epsy&quot;, &quot;czwmumrmw7dfxec
 <p>Mattermost automatically translates the data coming from Slack:</p>
 <ol class="arabic simple">
 <li>JSON responses written for Slack, that contain the following, are translated to Mattermost Markdown and rendered equivalently to Slack:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">&lt;&gt;</span></code> to denote a URL link, such as <code class="docutils literal notranslate"><span class="pre">{&quot;text&quot;:</span> <span class="pre">&quot;&lt;http://www.mattermost.com/&gt;&quot;}</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">|</span></code> within a <code class="docutils literal notranslate"><span class="pre">&lt;&gt;</span></code> to define linked text, such as <code class="docutils literal notranslate"><span class="pre">{&quot;text&quot;:</span> <span class="pre">&quot;Click</span> <span class="pre">&lt;http://www.mattermost.com/|here&gt;</span> <span class="pre">for</span> <span class="pre">a</span> <span class="pre">link.&quot;}</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;&gt;</span></code> to denote a URL link, such as <code class="docutils literal notranslate"><span class="pre">{&quot;text&quot;:</span> <span class="pre">&quot;&lt;https://mattermost.com/&gt;&quot;}</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">|</span></code> within a <code class="docutils literal notranslate"><span class="pre">&lt;&gt;</span></code> to define linked text, such as <code class="docutils literal notranslate"><span class="pre">{&quot;text&quot;:</span> <span class="pre">&quot;Click</span> <span class="pre">&lt;https://mattermost.com/|here&gt;</span> <span class="pre">for</span> <span class="pre">a</span> <span class="pre">link.&quot;}</span></code></li>
 <li><code class="docutils literal notranslate"><span class="pre">&lt;userid&gt;</span></code>  to trigger a mention to a user, such as <code class="docutils literal notranslate"><span class="pre">{&quot;text&quot;:</span> <span class="pre">&quot;&lt;5fb5f7iw8tfrfcwssd1xmx3j7y&gt;</span> <span class="pre">this</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">notification.&quot;}</span></code></li>
 <li><code class="docutils literal notranslate"><span class="pre">&lt;!channel&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;!here&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;!all&gt;</span></code> to trigger a mention to a channel, such as <code class="docutils literal notranslate"><span class="pre">{&quot;text&quot;:</span> <span class="pre">&quot;&lt;!channel&gt;</span> <span class="pre">this</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">notification.&quot;}</span></code></li>
 </ul>
@@ -513,7 +449,7 @@ user_mentions_ids=[&quot;q5s3b7xzgprp5eid8h66j9epsy&quot;, &quot;czwmumrmw7dfxec
 </div>
 <div class="section" id="troubleshooting">
 <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
-<p>See <a class="reference external" href="https://developers.mattermost.com/integrate/slash-commands">developer documentation</a> for troubleshooting, or <a class="reference external" href="https://mattermost.com/pl/default-ask-mattermost-community/">join the Mattermost user community for help</a>.</p>
+<p>See <a class="reference external" href="https://developers.mattermost.com/integrate/slash-commands/">developer documentation</a> for troubleshooting, or <a class="reference external" href="https://mattermost.com/pl/default-ask-mattermost-community/">join the Mattermost user community for help</a>.</p>
 </div>
 </div>
 
@@ -604,7 +540,7 @@ user_mentions_ids=[&quot;q5s3b7xzgprp5eid8h66j9epsy&quot;, &quot;czwmumrmw7dfxec
 		<div class="search__icon">
 			<i class="fa fa-search"></i>
 		</div>
-		<a href="http://docs.mattermost.com/" class="header__logo">
+		<a href="https://docs.mattermost.com/" class="header__logo">
 			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
 		</a>
 		<div class="links__icon">
