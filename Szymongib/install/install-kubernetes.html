@@ -208,9 +208,9 @@
 <p>Prerequisites for using the Mattermost Operator:</p>
 <ul class="simple">
 <li>Kubernetes cluster in version 1.16 or higher.</li>
-<li>Kubernetes CLI - <a class="reference external" href="https://kubernetes.io/docs/reference/kubectl/overview/">kubectl</a> - installed on local machine.</li>
+<li>Kubernetes CLI <a class="reference external" href="https://kubernetes.io/docs/reference/kubectl/overview/">kubectl</a> installed on local machine.</li>
 </ul>
-<p>It’s also recommended to have a basic understanding of Kubernetes concepts (such as deployments, pods) and actions (such as applying manifests, viewing pod logs). It’s also advisable to consult the <a class="reference external" href="https://kubernetes.io/docs/setup/">official Kubernetes setup documentation</a> on how to set up a cluster in your environment.</p>
+<p>It’s recommended that you have a basic understanding of Kubernetes concepts (such as deployments, pods) and actions (such as applying manifests, viewing pod logs). It’s also advisable to consult the <a class="reference external" href="https://kubernetes.io/docs/setup/">official Kubernetes setup documentation</a> on how to set up a cluster in your environment.</p>
 <p>If you’re unsure about which environment you want to use for your Kubernetes cluster, we suggest using a managed service such as as <a class="reference external" href="https://aws.amazon.com/eks/">Amazon EKS</a>, <a class="reference external" href="https://azure.microsoft.com/en-ca/services/kubernetes-service/">Azure Kubernetes Service</a>, <a class="reference external" href="https://cloud.google.com/kubernetes-engine/">Google Kubernetes Engine</a>, or <a class="reference external" href="https://www.digitalocean.com/products/kubernetes/">DigitalOcean Kubernetes</a>.</p>
 </div>
 <div class="section" id="confirm-resource-requirements">
@@ -270,7 +270,7 @@ $ kubectl apply -n mattermost-operator -f https://raw.githubusercontent.com/matt
 </div>
 <div class="section" id="installing-mysql-and-minio-operator">
 <h3>Installing MySQL and MinIO operator<a class="headerlink" href="#installing-mysql-and-minio-operator" title="Permalink to this headline">¶</a></h3>
-<p>The MySQL operator and MinIO operator are a good way to try out the Mattermost Operator or develop it on a local cluster but they <strong>are not recomended for production usage</strong>.</p>
+<p>The MySQL operator and MinIO operator are a good way to try out the Mattermost Operator or develop it on a local cluster but they <strong>are not recommended for production usage</strong>.</p>
 <p><strong>1. Install the MySQL operator</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ kubectl create ns mysql-operator
 $ kubectl apply -n mysql-operator -f https://raw.githubusercontent.com/mattermost/mattermost-operator/master/docs/mysql-operator/mysql-operator.yaml
@@ -287,14 +287,14 @@ $ kubectl apply -n minio-operator -f https://raw.githubusercontent.com/mattermos
 <span id="install-kubernetes-mattermost"></span><h2>Deploying a Mattermost Installation<a class="headerlink" href="#deploying-a-mattermost-installation" title="Permalink to this headline">¶</a></h2>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p>If you used the Mattermost Operator in version prior to v1.12.x or still using <code class="docutils literal notranslate"><span class="pre">ClusterInstallation</span></code> Custom Resource
+<p>If you used the Mattermost Operator in version prior to v1.12.x or are still using <code class="docutils literal notranslate"><span class="pre">ClusterInstallation</span></code> Custom Resource
 check out <a class="reference external" href="https://github.com/mattermost/mattermost-operator/blob/master/docs/migration.md">this guide</a> to see how to migrate to new <code class="docutils literal notranslate"><span class="pre">Mattermost</span></code> resource.</p>
 <p class="last">The <code class="docutils literal notranslate"><span class="pre">ClusterInstallation</span></code> is deprecated and will be removed in version v2.0.</p>
 </div>
 <p>This guide describes deploying a complete Mattermost installation in Kubernetes.</p>
-<p>Manifest files contain the configurations needed for the operator to properly setup the Mattermost installation.
+<p>Manifest files contain the configurations needed for the Operator to properly set up the Mattermost installation.
 Create the manifest files locally in a text editor, copy and paste the contents, and save the file. Recommended file names are provided, but your naming conventions may differ.
-Manifesets are applied with <code class="docutils literal notranslate"><span class="pre">kubectl</span></code>. Before running the commands make sure you are connected to your Kubernetes cluster.</p>
+Manifests are applied with <code class="docutils literal notranslate"><span class="pre">kubectl</span></code>. Before running the commands make sure you are connected to your Kubernetes cluster.</p>
 <p><strong>1. (Enterprise only) Create a Mattermost license secret</strong></p>
 <p>Open a text editor and create a secret manifest containing the Mattermost license.</p>
 <p>Make sure to replace <code class="docutils literal notranslate"><span class="pre">[LICENSE_FILE_CONTENTS]</span></code> with the contents of your Mattermost license file.</p>
@@ -310,7 +310,7 @@ Manifesets are applied with <code class="docutils literal notranslate"><span cla
 <p>Save the file as <code class="docutils literal notranslate"><span class="pre">mattermost-license-secret.yaml</span></code>.</p>
 <p><strong>2. Create an installation manifest file</strong></p>
 <p>The Mattermost installation manifest contains fields which must be adjusted for your configuration and environment requirements.</p>
-<p>Some of the most commonly used fields are:</p>
+<p>Some of the most commonly-used fields are:</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="33%" />
@@ -362,16 +362,15 @@ If you have previous experience with Kubernetes Custom Resources you can also ch
   <span class="nt">ingressName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">example.mattermost-example.com</span>   <span class="c1"># Adjust to your domain</span>
   <span class="nt">ingressAnnotations</span><span class="p">:</span>
     <span class="nt">kubernetes.io/ingress.class</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx</span>
-  <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5.28.0</span>
+  <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5.31.0</span>
   <span class="nt">licenseSecret</span><span class="p">:</span> <span class="s">&quot;&quot;</span>                             <span class="c1"># If you have created secret in step 1, put its name here</span>
 </pre></div>
 </div>
 <p>Save the file as <code class="docutils literal notranslate"><span class="pre">mattermost-installation.yaml</span></code>.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">To configure the Mattermost Installation with an external database and filestore refer to <a class="reference internal" href="#configuring-external-database-and-filestore-recommended">Configuring external database and filestore (Recommended)</a> before proceeding.
-If the external database and file store are not configured, the MySQL and MinIO Operators will be used.
-It requires both Operators to be installed on the cluster and it is not <strong>not recomended for production usage</strong>.</p>
+<p class="last">To configure the Mattermost installation with an external database and filestore refer to <a class="reference internal" href="#configuring-external-database-and-filestore-recommended">Configuring external database and filestore (Recommended)</a> before proceeding.
+If the external database and file store are not configured, the MySQL and MinIO Operators will be used. It requires both Operators to be installed on the cluster and it is not <strong>not recomended for production usage</strong>.</p>
 </div>
 <p><strong>3. Apply the installation manifest file</strong></p>
 <p>First, create the Mattermost namespace:</p>
