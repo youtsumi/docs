@@ -147,27 +147,32 @@
             
   <div class="section" id="deploying-a-mattermost-installation">
 <span id="install-kubernetes-mattermost"></span><h1>Deploying a Mattermost Installation<a class="headerlink" href="#deploying-a-mattermost-installation" title="Permalink to this headline">¶</a></h1>
-<p>This guide describes deploying a complete Mattermost installation in Kubernetes including a database. In most
-cases you’ll create and apply a single manifest. In the case of an Enterprise installation, two manifests will be applied - one
-for the license and one for the cluster installation.</p>
-<p>Manifest files contain the configurations needed for the
-operator to perform tasks and communicate with Kubernetes. Create the manifest file locally in a text editor,
-copy and paste the contents, and save the file. Recommended file names are provided, but your naming conventions may differ.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>If you used the Mattermost Operator in version prior to v1.12.x or are still using <code class="docutils literal notranslate"><span class="pre">ClusterInstallation</span></code> Custom Resource
+check out <a class="reference external" href="https://github.com/mattermost/mattermost-operator/blob/master/docs/migration.md">this guide</a> to see how to migrate to new <code class="docutils literal notranslate"><span class="pre">Mattermost</span></code> resource.</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">ClusterInstallation</span></code> is deprecated and will be removed in version v2.0.</p>
+</div>
+<p>This guide describes deploying a complete Mattermost installation in Kubernetes.</p>
+<p>Manifest files contain the configurations needed for the Operator to properly set up the Mattermost installation.
+Create the manifest files locally in a text editor, copy and paste the contents, and save the file. Recommended file names are provided, but your naming conventions may differ.
+Manifests are applied with <code class="docutils literal notranslate"><span class="pre">kubectl</span></code>. Before running the commands make sure you are connected to your Kubernetes cluster.</p>
 <p><strong>1. (Enterprise only) Create a Mattermost license secret</strong></p>
-<p>Open a text editor and create a text file with the following details.</p>
-<p><strong>Note:</strong> Replace <code class="docutils literal notranslate"><span class="pre">%LICENSE_FILE_CONTENTS%</span></code> with the contents of your Mattermost license file.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span>apiVersion: v1
-kind: Secret
-metadata:
-  name: mattermost-license
-type: Opaque
-stringData:
-  license: %LICENSE_FILE_CONTENTS%
+<p>Open a text editor and create a secret manifest containing the Mattermost license.</p>
+<p>Make sure to replace <code class="docutils literal notranslate"><span class="pre">[LICENSE_FILE_CONTENTS]</span></code> with the contents of your Mattermost license file.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Secret</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mattermost-license</span>
+<span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Opaque</span>
+<span class="nt">stringData</span><span class="p">:</span>
+  <span class="nt">license</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">LICENSE_FILE_CONTENTS</span><span class="p p-Indicator">]</span>
 </pre></div>
 </div>
 <p>Save the file as <code class="docutils literal notranslate"><span class="pre">mattermost-license-secret.yaml</span></code>.</p>
 <p><strong>2. Create an installation manifest file</strong></p>
-<p>The Mattermost installation manifest contains fields which must be edited in line with your configuration and environment requirements.</p>
+<p>The Mattermost installation manifest contains fields which must be adjusted for your configuration and environment requirements.</p>
+<p>Some of the most commonly-used fields are:</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="33%" />
@@ -197,87 +202,40 @@ stringData:
 <td>The Mattermost version.</td>
 <td>No</td>
 </tr>
-<tr class="row-even"><td>spec.mattermostLicenseSecret</td>
-<td>The name of the Kubernetes secret containing your license (e.g. mattermost-license-secret). Required for Enterprise deployments.</td>
+<tr class="row-even"><td>spec.licenseSecret</td>
+<td>The name of the Kubernetes secret containing your license (e.g. mattermost-license). Required for Enterprise deployments.</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>spec.database.storageSize</td>
-<td>The storage size for your database. Your Kubernetes cluster must have persistent volumes this size or larger.</td>
-<td>No</td>
-</tr>
-<tr class="row-even"><td>spec.minio.storageSize</td>
-<td>The storage size for your file storage. Your Kubernetes cluster must have persistent volumes this size or larger.</td>
-<td>No</td>
-</tr>
-<tr class="row-odd"><td>spec.elasticSearch</td>
-<td>The section for Elasticsearch settings. Remove this section if you will not be using Elasticsearch.</td>
-<td>No</td>
-</tr>
-<tr class="row-even"><td>spec.elasticSearch.host</td>
-<td>The hostname for your Elasticsearch instance. Remove this section if you will not be using Elasticsearch</td>
-<td>No</td>
-</tr>
-<tr class="row-odd"><td>spec.elasticSearch.username</td>
-<td>The username for your Elasticsearch instance.Remove this section if you will not be using Elasticsearch</td>
-<td>No</td>
-</tr>
-<tr class="row-even"><td>spec.elasticSearch.password</td>
-<td>The password for your Elasticsearch instance. Remove this section if you will not be using Elasticsearch</td>
+<tr class="row-odd"><td>spec.mattermostEnv</td>
+<td>List of custom environment variables for the Mattermost instance.</td>
 <td>No</td>
 </tr>
 </tbody>
 </table>
-<p>There are more advanced fields documented <a class="reference external" href="https://raw.githubusercontent.com/mattermost/mattermost-operator/master/docs/examples/full.yaml">here</a>.</p>
-<p>Open a text editor and create a text file with the following details.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mattermost.com/v1alpha1</span>
-<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterInstallation</span>
+<p>More fields are documented <a class="reference external" href="https://github.com/mattermost/mattermost-operator/blob/master/docs/examples/mattermost_full.yaml">in the example</a>.
+If you have previous experience with Kubernetes Custom Resources you can also check the <a class="reference external" href="https://github.com/mattermost/mattermost-operator/blob/master/config/crd/bases/installation.mattermost.com_mattermosts.yaml">Custom Resource Definition</a>.</p>
+<p>Open a text editor and create a Mattermost installation manifest:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">installation.mattermost.com/v1beta1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Mattermost</span>
 <span class="nt">metadata</span><span class="p">:</span>
-  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mm-example-full</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mm-example-full</span>                         <span class="c1"># Chose the desired name</span>
 <span class="nt">spec</span><span class="p">:</span>
-  <span class="nt">size</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5000users</span>
-  <span class="nt">ingressName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">example.mattermost-example.com</span>
+  <span class="nt">size</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5000users</span>                               <span class="c1"># Adjust to your requirements</span>
+  <span class="nt">ingressName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">example.mattermost-example.com</span>   <span class="c1"># Adjust to your domain</span>
   <span class="nt">ingressAnnotations</span><span class="p">:</span>
     <span class="nt">kubernetes.io/ingress.class</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx</span>
-  <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5.14.0</span>
-  <span class="nt">mattermostLicenseSecret</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
-  <span class="nt">database</span><span class="p">:</span>
-    <span class="nt">storageSize</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">50Gi</span>
-  <span class="nt">minio</span><span class="p">:</span>
-    <span class="nt">storageSize</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">50Gi</span>
-  <span class="nt">elasticSearch</span><span class="p">:</span>
-    <span class="nt">host</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
-    <span class="nt">username</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
-    <span class="nt">password</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
+  <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5.31.0</span>
+  <span class="nt">licenseSecret</span><span class="p">:</span> <span class="s">&quot;&quot;</span>                             <span class="c1"># If you have created secret in step 1, put its name here</span>
 </pre></div>
 </div>
 <p>Save the file as <code class="docutils literal notranslate"><span class="pre">mattermost-installation.yaml</span></code>.</p>
-<p>To configure the Mattermost Installation with an external database and filestore refer to <a class="reference internal" href="#configuring-external-database-and-filestore-recommended">Configuring external database and filestore (Recommended)</a> before proceeding.</p>
-<p><strong>3. Apply the installation manifest file</strong></p>
-<p>First, create the Mattermost namespace with this command:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ kubectl create ns mattermost
-</pre></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Steps 3 to 5 cover configuring Mattermost with external database and filestore which is recommended installation configuration.</p>
+<p class="last">When using MySQL and MinIO operators these steps can be skipped.
+It requires both Operators to be installed on the cluster and it is <strong>not recomended for production usage</strong>.</p>
 </div>
-<p>If you’re deploying Mattermost Enterprise Edition, apply the license file by specifying the path to the file you created in step 1:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ kubectl apply -n mattermost -f /path/to/mattermost-license-secret.yaml
-</pre></div>
-</div>
-<p>Finally, apply the installation file, specifying path to file you created in step 2:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ kubectl apply -n mattermost -f /path/to/mattermost-installation.yaml
-</pre></div>
-</div>
-<p>The deployment process can be monitored in the Kubernetes user interface.</p>
-<p><strong>4. Configure DNS and use Mattermost</strong></p>
-<p>When the deployment is complete, obtain the hostname or IP address of your Mattermost deployment using the following command:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ kubectl -n mattermost get ingress
-</pre></div>
-</div>
-<p>Copy the resulting hostname or IP address from the <code class="docutils literal notranslate"><span class="pre">ADDRESS</span></code> column, open your browser, and connect to Mattermost.</p>
-<p>Use your domain registration service to create a canonical name or IP address record for the <code class="docutils literal notranslate"><span class="pre">ingressName</span></code> in your manifest, pointing to the address you just copied. For example, on AWS you would do this within a hosted zone in Route53.</p>
-<p>Navigate to the <code class="docutils literal notranslate"><span class="pre">ingressName</span></code> URL in your browser and use Mattermost.</p>
-<div class="section" id="configuring-external-database-and-filestore-recommended">
-<h2>Configuring external database and filestore (Recommended)<a class="headerlink" href="#configuring-external-database-and-filestore-recommended" title="Permalink to this headline">¶</a></h2>
-<p>When installing Mattermost using the Mattermost Operator in a production scenario, it’s recommended that you use an external database and filestore.</p>
-<p><strong>1. Create database secret</strong></p>
+<p><strong>3. Create external database secret</strong></p>
 <p>The database secret needs to be created in the namespace that will hold the Mattermost installation. The secret should contain the following data:</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -294,15 +252,15 @@ stringData:
 <tbody valign="top">
 <tr class="row-even"><td>DB_CONNECTION_STRING</td>
 <td>Connection string to the database.</td>
-<td>true</td>
+<td>Yes</td>
 </tr>
 <tr class="row-odd"><td>MM_SQLSETTINGS_DATASOURCEREPLICAS</td>
 <td>Connection string to read replicas of the database.</td>
-<td>false</td>
+<td>No</td>
 </tr>
 <tr class="row-even"><td>DB_CONNECTION_CHECK_URL</td>
 <td>The URL used for checking that the database is accessible.</td>
-<td>false</td>
+<td>No</td>
 </tr>
 </tbody>
 </table>
@@ -323,7 +281,7 @@ stringData:
 <p class="last">For PostgreSQL the connection is checked with <a class="reference external" href="https://www.postgresql.org/docs/9.3/app-pg-isready.html">pg_isready</a> so the <code class="docutils literal notranslate"><span class="pre">DB_CONNECTION_CHECK_URL</span></code> is the same as connection string.
 For MySQL the check is performed via HTTP call therefore <code class="docutils literal notranslate"><span class="pre">DB_CONNECTION_CHECK_URL</span></code> should be an HTTP URL.</p>
 </div>
-<p><strong>2. Create filestore secret</strong></p>
+<p><strong>4. Create external filestore secret</strong></p>
 <p>The filestore secret needs to be created in the namespace that will hold the Mattermost installation. The secret should contain the following data:</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -340,11 +298,11 @@ For MySQL the check is performed via HTTP call therefore <code class="docutils l
 <tbody valign="top">
 <tr class="row-even"><td>accesskey</td>
 <td>Filestore access key.</td>
-<td>true</td>
+<td>Yes</td>
 </tr>
 <tr class="row-odd"><td>secretkey</td>
 <td>Filestore secret key.</td>
-<td>true</td>
+<td>Yes</td>
 </tr>
 </tbody>
 </table>
@@ -359,37 +317,39 @@ For MySQL the check is performed via HTTP call therefore <code class="docutils l
 <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Opaque</span>
 </pre></div>
 </div>
-<p><strong>3. Adjust cluster installation</strong></p>
-<p>To instruct Mattermost Operator to use the external database, modify the following fields:</p>
+<p><strong>5. Adjust installation manifest</strong></p>
+<p>To instruct Mattermost Operator to use the external database, modify Mattermost manifest by adding the following fields:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">spec</span><span class="p">:</span>
 <span class="nn">...</span>
   <span class="nt">database</span><span class="p">:</span>
+    <span class="nt">external</span><span class="p">:</span>
       <span class="nt">secret</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-postgres-connection</span>
 </pre></div>
 </div>
-<p>To instruct Mattermost Operator to use the external filestore, modify the following fields:</p>
+<p>To instruct Mattermost Operator to use the external filestore, modify Mattermost manifest by adding the following fields:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">spec</span><span class="p">:</span>
 <span class="nn">...</span>
-  <span class="nt">minio</span><span class="p">:</span>
-    <span class="nt">externalBucket</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-s3-bucket</span>
-    <span class="nt">externalURL</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">s3.amazonaws.com</span>
-    <span class="nt">secret</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-s3-iam-access-key</span>
+  <span class="nt">fileStore</span><span class="p">:</span>
+    <span class="nt">external</span><span class="p">:</span>
+      <span class="nt">url</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">s3.amazonaws.com</span>
+      <span class="nt">bucket</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-s3-bucket</span>
+      <span class="nt">secret</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-s3-iam-access-key</span>
 </pre></div>
 </div>
 <p>Additionally when using Amazon S3, set the <code class="docutils literal notranslate"><span class="pre">MM_FILESETTINGS_AMAZONS3SSE</span></code> and <code class="docutils literal notranslate"><span class="pre">MM_FILESETTINGS_AMAZONS3SSL</span></code> environment variables to <code class="docutils literal notranslate"><span class="pre">true</span></code>:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">spec</span><span class="p">:</span>
 <span class="nn">...</span>
-    <span class="nt">mattermostEnv</span><span class="p">:</span>
+  <span class="nt">mattermostEnv</span><span class="p">:</span>
     <span class="l l-Scalar l-Scalar-Plain">...</span>
-    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MM_FILESETTINGS_AMAZONS3SSE</span>
-      <span class="nt">value</span><span class="p">:</span> <span class="s">&quot;true&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">- name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">MM_FILESETTINGS_AMAZONS3SSE</span>
+      <span class="l l-Scalar l-Scalar-Plain">value</span><span class="p p-Indicator">:</span> <span class="s">&quot;true&quot;</span>
     <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MM_FILESETTINGS_AMAZONS3SSL</span>
       <span class="nt">value</span><span class="p">:</span> <span class="s">&quot;true&quot;</span>
 </pre></div>
 </div>
-<p>Example cluster installation configured with both external databases and filestore:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mattermost.com/v1alpha1</span>
-<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterInstallation</span>
+<p>Example Mattermost manifest configured with both external databases and filestore:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">installation.mattermost.com/v1beta1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Mattermost</span>
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mm-example-external-db</span>
 <span class="nt">spec</span><span class="p">:</span>
@@ -397,23 +357,54 @@ For MySQL the check is performed via HTTP call therefore <code class="docutils l
   <span class="nt">ingressName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">example.mattermost-example.com</span>
   <span class="nt">ingressAnnotations</span><span class="p">:</span>
     <span class="nt">kubernetes.io/ingress.class</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx</span>
-  <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5.28.0</span>
-  <span class="nt">mattermostLicenseSecret</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
+  <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5.31.0</span>
+  <span class="nt">licenseSecret</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
   <span class="nt">database</span><span class="p">:</span>
-    <span class="nt">secret</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-postgres-connection</span>
-    <span class="nt">storageSize</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">50Gi</span>
-  <span class="nt">minio</span><span class="p">:</span>
-    <span class="nt">externalBucket</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-s3-bucket</span>
-    <span class="nt">externalURL</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">s3.amazonaws.com</span>
-    <span class="nt">secret</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-s3-iam-access-key</span>
-    <span class="nt">storageSize</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">50Gi</span>
-  <span class="nt">elasticSearch</span><span class="p">:</span>
-    <span class="nt">host</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
-    <span class="nt">username</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
-    <span class="nt">password</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
+    <span class="nt">external</span><span class="p">:</span>
+      <span class="nt">secret</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-postgres-connection</span>
+  <span class="nt">fileStore</span><span class="p">:</span>
+    <span class="nt">external</span><span class="p">:</span>
+      <span class="nt">url</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">s3.amazonaws.com</span>
+      <span class="nt">bucket</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-s3-bucket</span>
+      <span class="nt">secret</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-s3-iam-access-key</span>
+  <span class="nt">mattermostEnv</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MM_FILESETTINGS_AMAZONS3SSE</span>
+    <span class="nt">value</span><span class="p">:</span> <span class="s">&quot;true&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MM_FILESETTINGS_AMAZONS3SSL</span>
+    <span class="nt">value</span><span class="p">:</span> <span class="s">&quot;true&quot;</span>
 </pre></div>
 </div>
+<p><strong>6. Apply the installation manifest file</strong></p>
+<p>First, create the Mattermost namespace:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ kubectl create ns mattermost
+</pre></div>
 </div>
+<p>If you’re deploying Mattermost Enterprise Edition, apply the license file by specifying the path to the file you created in step 1:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ kubectl apply -n mattermost -f <span class="o">[</span>PATH_TO_LICENCE_SECRET_MANIFEST<span class="o">]</span>
+</pre></div>
+</div>
+<p>Finally, apply the installation file, specifying path to file you created in step 2:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ kubectl apply -n mattermost -f <span class="o">[</span>PATH_TO_MATTERMOST_MANIFEST<span class="o">]</span>
+</pre></div>
+</div>
+<p>The deployment process can be monitored in the Kubernetes user interface or in command line by running:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ kubectl -n mattermost get mm -w
+</pre></div>
+</div>
+<p>The installation should be deployed successfuly, when the Custom Resource reaches the <code class="docutils literal notranslate"><span class="pre">stable</span></code> state.</p>
+<p><strong>7. Configure DNS and use Mattermost</strong></p>
+<p>When the deployment is complete, obtain the hostname or IP address of your Mattermost deployment using the following command:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ kubectl -n mattermost get ingress
+</pre></div>
+</div>
+<p>Copy the resulting hostname or IP address from the <code class="docutils literal notranslate"><span class="pre">ADDRESS</span></code> column, open your browser, and connect to Mattermost.</p>
+<p>Use your domain registration service to create a canonical name or IP address record for the <code class="docutils literal notranslate"><span class="pre">ingressName</span></code> in your manifest, pointing to the address you just copied. For example, on AWS you would do this within a hosted zone in Route53.</p>
+<p>Navigate to the <code class="docutils literal notranslate"><span class="pre">ingressName</span></code> URL in your browser and use Mattermost.</p>
+<p>If you just want to try it out on your local machine without configuring the domain, run:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ kubectl -n mattermost port-forward svc/<span class="o">[</span>YOUR_MATTERMOST_NAME<span class="o">]</span> <span class="m">8065</span>:8065
+</pre></div>
+</div>
+<p>And navigate to <a class="reference external" href="http://localhost:8065">http://localhost:8065</a>.</p>
 <div class="section" id="restoring-an-existing-mattermost-mysql-database">
 <h2>Restoring an Existing Mattermost MySQL Database<a class="headerlink" href="#restoring-an-existing-mattermost-mysql-database" title="Permalink to this headline">¶</a></h2>
 <p>The Mattermost Operator can be used in a backup and restore scenario to apply an existing Mattermost MySQL database to a new Mattermost installation, in its own namespace. This can also be helpful in the event that you need to revert your Mattermost instance’s database to the most recent backup point, on your existing installation. In both cases, you will need a backup of your database.</p>
