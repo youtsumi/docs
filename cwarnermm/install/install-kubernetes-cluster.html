@@ -149,8 +149,12 @@
 <span id="install-kubernetes-cluster"></span><h1>Setting Up a Kubernetes Cluster<a class="headerlink" href="#setting-up-a-kubernetes-cluster" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
-<p>If you don’t have a production-ready Kubernetes cluster, version 1.12 or higher, you will need to set one up. If you already have a Kubernetes cluster you can skip to Confirm Resource Requirements. Note that the Kubernetes-specific CLI tool, <a class="reference external" href="https://kubernetes.io/docs/reference/kubectl/overview/">kubectl</a>, also needs to be installed and configured.</p>
-<p>It’s recommended that you have an understanding of basic Kubernetes concepts (such as deployments, pods) and actions (such as applying manifests, viewing pod logs). It’s also advisable to consult the <a class="reference external" href="https://kubernetes.io/docs/setup/">official Kubernetes setup documentation</a> on how to set up a cluster in your environment.</p>
+<p>Prerequisites for using the Mattermost Operator:</p>
+<ul class="simple">
+<li>Kubernetes cluster in version 1.16 or higher.</li>
+<li>Kubernetes CLI <a class="reference external" href="https://kubernetes.io/docs/reference/kubectl/overview/">kubectl</a> installed on local machine.</li>
+</ul>
+<p>It’s recommended that you have a basic understanding of Kubernetes concepts (such as deployments, pods) and actions (such as applying manifests, viewing pod logs). It’s also advisable to consult the <a class="reference external" href="https://kubernetes.io/docs/setup/">official Kubernetes setup documentation</a> on how to set up a cluster in your environment.</p>
 <p>If you’re unsure about which environment you want to use for your Kubernetes cluster, we suggest using a managed service such as as <a class="reference external" href="https://aws.amazon.com/eks/">Amazon EKS</a>, <a class="reference external" href="https://azure.microsoft.com/en-ca/services/kubernetes-service/">Azure Kubernetes Service</a>, <a class="reference external" href="https://cloud.google.com/kubernetes-engine/">Google Kubernetes Engine</a>, or <a class="reference external" href="https://www.digitalocean.com/products/kubernetes/">DigitalOcean Kubernetes</a>.</p>
 </div>
 <div class="section" id="confirm-resource-requirements">
@@ -189,9 +193,9 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Note:</strong></p>
 <ul class="simple">
 <li>These resources take into account all components required for Mattermost, including proxy, database, and file storage.</li>
+<li>Requirements may be significantly lower when using the external database and filestore (recommended).</li>
 <li>Resource requirements may vary depending on user usage and bot activity.</li>
 <li>For larger installations, it may be beneficial to use nodes for the databases that have more memory and/or are optimized for memory.</li>
 <li>For installations of more than 25,000 users please <a class="reference external" href="https://mattermost.com/contact-us/">contact us</a> for sizing guidelines.</li>
