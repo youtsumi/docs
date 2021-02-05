@@ -2,46 +2,34 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Compliance Reporting and Oversight &mdash; Mattermost 5.30 documentation</title>
+  <title>Compliance Reporting and Oversight &mdash; Mattermost 5.31 documentation</title>
   
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
   
-
   
   
 
   
-    <link rel="canonical" href="https://docs.mattermost.com/cloud/cloud-administration/cloud-compliance.html" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
   
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/myscript.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-    
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Compliance Export Beta" href="compliance-export.html" />
     <link rel="prev" title="Using Mattermost with Webhook" href="../cloud-integrations/webhook.html" />
@@ -53,16 +41,21 @@
 	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
 	<!-- End Google Tag Manager -->
 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -76,7 +69,7 @@
             
             
               <div class="version">
-                5.30
+                5.31
               </div>
             
           
@@ -93,7 +86,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -135,7 +127,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -187,15 +178,15 @@
 <p>Daily compliance reports may also be generated, supporting integration with compliance solutions like <a class="reference external" href="https://docs.mattermost.com/administration/compliance.html#global-relay-support">Global Relay</a>.</p>
 <p>By default, all Mattermost Editions retain all messages, including edits and deletes, along with all files uploaded.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This feature is replaced by <a class="reference external" href="https://docs.mattermost.com/cloud/cloud-administration/compliance-export.html">Compliance Export (Beta)</a>, and will be removed in Mattermost in a future release. We recommend migrating to the new system. For a sample CSV output of the new compliance export system, <a class="reference external" href="https://github.com/mattermost/docs/blob/master/source/samples/csv_export.zip">download a CSV export file here</a>.</p>
+<p class="first admonition-title">Note</p>
+<p class="last">This feature is replaced by <a class="reference external" href="https://docs.mattermost.com/cloud/cloud-administration/compliance-export.html">Compliance Export (Beta)</a>, and will be removed in Mattermost in a future release. We recommend migrating to the new system. For a sample CSV output of the new compliance export system, <a class="reference external" href="https://github.com/mattermost/docs/blob/master/source/samples/csv_export.zip">download a CSV export file here</a>.</p>
 </div>
 <div class="section" id="enabling-compliance-reporting">
 <h2>Enabling Compliance Reporting<a class="headerlink" href="#enabling-compliance-reporting" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li><p>Go to <strong>System Console &gt; Compliance &gt; Compliance Monitoring</strong> and set the <strong>Enable Compliance Reporting</strong> value to <strong>true</strong>.</p></li>
-<li><p>(Optional) In <strong>Compliance Report Directory</strong> specify the directory in which to place completed compliance reports. Defaults to <code class="docutils literal notranslate"><span class="pre">./data/</span></code> if left blank.</p></li>
-<li><p>Click <strong>Save</strong>.</p></li>
+<li>Go to <strong>System Console &gt; Compliance &gt; Compliance Monitoring</strong> and set the <strong>Enable Compliance Reporting</strong> value to <strong>true</strong>.</li>
+<li>(Optional) In <strong>Compliance Report Directory</strong> specify the directory in which to place completed compliance reports. Defaults to <code class="docutils literal notranslate"><span class="pre">./data/</span></code> if left blank.</li>
+<li>Click <strong>Save</strong>.</li>
 </ol>
 <p>This will enable the option to generate Daily Compliance Reports.</p>
 </div>
@@ -209,90 +200,92 @@
 <h2>Run Compliance Reports<a class="headerlink" href="#run-compliance-reports" title="Permalink to this headline">¶</a></h2>
 <p>Compliance Reports are exports of all messages in Mattermost that match the report criteria. To run a report:</p>
 <ol class="arabic">
-<li><p>Go to <strong>System Console &gt; Compliance &gt; Compliance Monitoring</strong>.</p></li>
-<li><p>Fill in the following criteria:</p>
+<li><p class="first">Go to <strong>System Console &gt; Compliance &gt; Compliance Monitoring</strong>.</p>
+</li>
+<li><p class="first">Fill in the following criteria:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><strong>Job Name:</strong> Name the compliance report you are about to run (e.g. “HR Audit 455”).</p></li>
-<li><p><strong>From:</strong> Start Date for search in YYYY-MM-DD format (e.g. “2016-03-11”).</p></li>
-<li><p><strong>To:</strong> End Date of search in YYYY-MM-DD format (e.g. “2016-05-11”).</p></li>
-<li><p><strong>Emails:</strong> Comma-separated list of email addresses of users whose posted messages you want to search (e.g. <code class="docutils literal notranslate"><span class="pre">bill&#64;example.com,</span> <span class="pre">bob&#64;example.com</span></code>).</p></li>
-<li><p><strong>Keywords:</strong> Indicate the words that would be contained in a message for it to be included in the Compliance Report results.</p></li>
+<li><strong>Job Name:</strong> Name the compliance report you are about to run (e.g. “HR Audit 455”).</li>
+<li><strong>From:</strong> Start Date for search in YYYY-MM-DD format (e.g. “2016-03-11”).</li>
+<li><strong>To:</strong> End Date of search in YYYY-MM-DD format (e.g. “2016-05-11”).</li>
+<li><strong>Emails:</strong> Comma-separated list of email addresses of users whose posted messages you want to search (e.g. <code class="docutils literal notranslate"><span class="pre">bill&#64;example.com,</span> <span class="pre">bob&#64;example.com</span></code>).</li>
+<li><strong>Keywords:</strong> Indicate the words that would be contained in a message for it to be included in the Compliance Report results.</li>
 </ul>
 </div></blockquote>
 </li>
-<li><p>Click <strong>Run Compliance Report</strong>.</p></li>
+<li><p class="first">Click <strong>Run Compliance Report</strong>.</p>
+</li>
 </ol>
 <p>The report will be queued in the display below the fields described above. The properties of each compliance report run is explained as follows:</p>
 <ul class="simple">
-<li><p><strong>Timestamp:</strong> Time at which the report was requested.</p></li>
-<li><p><strong>Status:</strong> <code class="docutils literal notranslate"><span class="pre">running</span></code> indicates the report is being run; <code class="docutils literal notranslate"><span class="pre">finished</span></code> indicates the report is complete and ready for download.</p></li>
-<li><p><strong>Records:</strong> Shows the number of search results.</p></li>
-<li><p><strong>Type:</strong> <code class="docutils literal notranslate"><span class="pre">adhoc</span></code> indicates the report was requested by completing query fields; <code class="docutils literal notranslate"><span class="pre">daily</span></code> indicates the report is a daily export.</p></li>
-<li><p><strong>Description:</strong> Job Name indicated in request.</p></li>
-<li><p><strong>Requested by:</strong> Email of person requesting the report.</p></li>
-<li><p><strong>Params:</strong> Parameters of the compliance report request.</p></li>
+<li><strong>Timestamp:</strong> Time at which the report was requested.</li>
+<li><strong>Status:</strong> <code class="docutils literal notranslate"><span class="pre">running</span></code> indicates the report is being run; <code class="docutils literal notranslate"><span class="pre">finished</span></code> indicates the report is complete and ready for download.</li>
+<li><strong>Records:</strong> Shows the number of search results.</li>
+<li><strong>Type:</strong> <code class="docutils literal notranslate"><span class="pre">adhoc</span></code> indicates the report was requested by completing query fields; <code class="docutils literal notranslate"><span class="pre">daily</span></code> indicates the report is a daily export.</li>
+<li><strong>Description:</strong> Job Name indicated in request.</li>
+<li><strong>Requested by:</strong> Email of person requesting the report.</li>
+<li><strong>Params:</strong> Parameters of the compliance report request.</li>
 </ul>
 <p>Each compliance report includes a <strong>Download</strong> link which downloads a compressed file named <code class="docutils literal notranslate"><span class="pre">adhoc-[UNIQUE_ID].zip</span></code>. Inside the file is <code class="docutils literal notranslate"><span class="pre">meta.json</span></code>, which includes the parameters of the search executed and <code class="docutils literal notranslate"><span class="pre">posts.csv</span></code> which includes the contents of messages found by the request.</p>
 <div class="section" id="compliance-query-definition-stored-in-meta-json-file">
 <h3>Compliance query definition stored in <code class="docutils literal notranslate"><span class="pre">meta.json</span></code> file<a class="headerlink" href="#compliance-query-definition-stored-in-meta-json-file" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">meta.json</span></code> contains the following information about the compliance query:</p>
-<table class="docutils align-default">
+<table border="1" class="docutils">
 <colgroup>
-<col style="width: 18%" />
-<col style="width: 53%" />
-<col style="width: 29%" />
+<col width="18%" />
+<col width="53%" />
+<col width="29%" />
 </colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>Field</p></th>
-<th class="head"><p>Description</p></th>
-<th class="head"><p>Example</p></th>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field</th>
+<th class="head">Description</th>
+<th class="head">Example</th>
 </tr>
 </thead>
-<tbody>
-<tr class="row-even"><td><p>id</p></td>
-<td><p>Unique identifier for compliance query</p></td>
-<td><p>ja8z8egap7nq9kqetz3rt98khe</p></td>
+<tbody valign="top">
+<tr class="row-even"><td>id</td>
+<td>Unique identifier for compliance query</td>
+<td>ja8z8egap7nq9kqetz3rt98khe</td>
 </tr>
-<tr class="row-odd"><td><p>create_at</p></td>
-<td><p>Timestamp at which compliance query was executed</p></td>
-<td><p>1463637842478</p></td>
+<tr class="row-odd"><td>create_at</td>
+<td>Timestamp at which compliance query was executed</td>
+<td>1463637842478</td>
 </tr>
-<tr class="row-even"><td><p>user_id</p></td>
-<td><p>Mattermost User ID for person creating query</p></td>
-<td><p>3bq1shta93yztg3i6aiu1tzi5h</p></td>
+<tr class="row-even"><td>user_id</td>
+<td>Mattermost User ID for person creating query</td>
+<td>3bq1shta93yztg3i6aiu1tzi5h</td>
 </tr>
-<tr class="row-odd"><td><p>status</p></td>
-<td><p>Status of query: <em>finished</em> or <em>failed</em></p></td>
-<td><p>“finished”</p></td>
+<tr class="row-odd"><td>status</td>
+<td>Status of query: <em>finished</em> or <em>failed</em></td>
+<td>“finished”</td>
 </tr>
-<tr class="row-even"><td><p>count</p></td>
-<td><p>Count of messages found matching keyword</p></td>
-<td><p>36</p></td>
+<tr class="row-even"><td>count</td>
+<td>Count of messages found matching keyword</td>
+<td>36</td>
 </tr>
-<tr class="row-odd"><td><p>desc</p></td>
-<td><p>User entered description of compliance query</p></td>
-<td><p>Example Compliance Report</p></td>
+<tr class="row-odd"><td>desc</td>
+<td>User entered description of compliance query</td>
+<td>Example Compliance Report</td>
 </tr>
-<tr class="row-even"><td><p>type</p></td>
-<td><p>Type of compliance query: <em>adhoc</em> or <em>daily</em></p></td>
-<td><p>“adhoc”</p></td>
+<tr class="row-even"><td>type</td>
+<td>Type of compliance query: <em>adhoc</em> or <em>daily</em></td>
+<td>“adhoc”</td>
 </tr>
-<tr class="row-odd"><td><p>start_at</p></td>
-<td><p>Timestamp at which query began to run</p></td>
-<td><p>1451606400000</p></td>
+<tr class="row-odd"><td>start_at</td>
+<td>Timestamp at which query began to run</td>
+<td>1451606400000</td>
 </tr>
-<tr class="row-even"><td><p>end_at</p></td>
-<td><p>Timestamp at which query ended</p></td>
-<td><p>1463529600000</p></td>
+<tr class="row-even"><td>end_at</td>
+<td>Timestamp at which query ended</td>
+<td>1463529600000</td>
 </tr>
-<tr class="row-odd"><td><p>keywords</p></td>
-<td><p>Comma-separated, case insensitive keywords to match in query</p></td>
-<td><p>“drinking”</p></td>
+<tr class="row-odd"><td>keywords</td>
+<td>Comma-separated, case insensitive keywords to match in query</td>
+<td>“drinking”</td>
 </tr>
-<tr class="row-even"><td><p>emails</p></td>
-<td><p>Comma-separated emails of users to search. Blank returns all</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">frank.yu&#64;ha.ca,</span> <span class="pre">mary.li&#64;hi.co</span></code></p></td>
+<tr class="row-even"><td>emails</td>
+<td>Comma-separated emails of users to search. Blank returns all</td>
+<td><code class="docutils literal notranslate"><span class="pre">frank.yu&#64;ha.ca,</span> <span class="pre">mary.li&#64;hi.co</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -300,78 +293,78 @@
 <div class="section" id="compliance-query-results-stored-in-posts-csv-file">
 <h3>Compliance query results stored in <code class="docutils literal notranslate"><span class="pre">posts.csv</span></code> file<a class="headerlink" href="#compliance-query-results-stored-in-posts-csv-file" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">posts.csv</span></code> contains the following information about the compliance query results, one search result per row:</p>
-<table class="docutils align-default">
+<table border="1" class="docutils">
 <colgroup>
-<col style="width: 18%" />
-<col style="width: 55%" />
-<col style="width: 27%" />
+<col width="18%" />
+<col width="55%" />
+<col width="27%" />
 </colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>Field</p></th>
-<th class="head"><p>Description</p></th>
-<th class="head"><p>Example</p></th>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field</th>
+<th class="head">Description</th>
+<th class="head">Example</th>
 </tr>
 </thead>
-<tbody>
-<tr class="row-even"><td><p>TeamName</p></td>
-<td><p>URL name of team</p></td>
-<td><p>contosi</p></td>
+<tbody valign="top">
+<tr class="row-even"><td>TeamName</td>
+<td>URL name of team</td>
+<td>contosi</td>
 </tr>
-<tr class="row-odd"><td><p>TeamDisplayName</p></td>
-<td><p>Display name of team</p></td>
-<td><p>Contosi Corporation</p></td>
+<tr class="row-odd"><td>TeamDisplayName</td>
+<td>Display name of team</td>
+<td>Contosi Corporation</td>
 </tr>
-<tr class="row-even"><td><p>ChannelDisplayName</p></td>
-<td><p>Display name of channel where keyword was found</p></td>
-<td><p>Community Heartbeat</p></td>
+<tr class="row-even"><td>ChannelDisplayName</td>
+<td>Display name of channel where keyword was found</td>
+<td>Community Heartbeat</td>
 </tr>
-<tr class="row-odd"><td><p>ChannelName</p></td>
-<td><p>URL name of channel</p></td>
-<td><p>community-heartbeat</p></td>
+<tr class="row-odd"><td>ChannelName</td>
+<td>URL name of channel</td>
+<td>community-heartbeat</td>
 </tr>
-<tr class="row-even"><td><p>UserUsername</p></td>
-<td><p>Username of user posting the message containing keyword</p></td>
-<td><p>frank.yu</p></td>
+<tr class="row-even"><td>UserUsername</td>
+<td>Username of user posting the message containing keyword</td>
+<td>frank.yu</td>
 </tr>
-<tr class="row-odd"><td><p>UserEmail</p></td>
-<td><p>Email of user posting the message containing keyword</p></td>
-<td><p>“<a class="reference external" href="mailto:frank&#46;yu&#37;&#52;&#48;contosi&#46;com">frank<span>&#46;</span>yu<span>&#64;</span>contosi<span>&#46;</span>com</a>”</p></td>
+<tr class="row-odd"><td>UserEmail</td>
+<td>Email of user posting the message containing keyword</td>
+<td>“<a class="reference external" href="mailto:frank&#46;yu&#37;&#52;&#48;contosi&#46;com">frank<span>&#46;</span>yu<span>&#64;</span>contosi<span>&#46;</span>com</a>”</td>
 </tr>
-<tr class="row-even"><td><p>UserNickname</p></td>
-<td><p>Nickname of user posting the message containing keyword</p></td>
-<td><p>fan du</p></td>
+<tr class="row-even"><td>UserNickname</td>
+<td>Nickname of user posting the message containing keyword</td>
+<td>fan du</td>
 </tr>
-<tr class="row-odd"><td><p>PostId</p></td>
-<td><p>Unique ID of message post containing keyword</p></td>
-<td><p>xt9anyx6x3fx9y84aehgakdpze</p></td>
+<tr class="row-odd"><td>PostId</td>
+<td>Unique ID of message post containing keyword</td>
+<td>xt9anyx6x3fx9y84aehgakdpze</td>
 </tr>
-<tr class="row-even"><td><p>PostCreateAt</p></td>
-<td><p>Timestamp at which post was created</p></td>
-<td><p>2016-03-02T16:01:59Z</p></td>
+<tr class="row-even"><td>PostCreateAt</td>
+<td>Timestamp at which post was created</td>
+<td>2016-03-02T16:01:59Z</td>
 </tr>
-<tr class="row-odd"><td><p>PostDeletedAt</p></td>
-<td><p>Timestamp at which post was deleted (if applicable)</p></td>
-<td><p>2016-03-02T16:01:59Z</p></td>
+<tr class="row-odd"><td>PostDeletedAt</td>
+<td>Timestamp at which post was deleted (if applicable)</td>
+<td>2016-03-02T16:01:59Z</td>
 </tr>
-<tr class="row-even"><td><p>PostUpdatedAt</p></td>
-<td><p>Timestamp at which post was last edited (if applicable)</p></td>
-<td><p>2016-03-02T16:01:59Z</p></td>
+<tr class="row-even"><td>PostUpdatedAt</td>
+<td>Timestamp at which post was last edited (if applicable)</td>
+<td>2016-03-02T16:01:59Z</td>
 </tr>
-<tr class="row-odd"><td><p>PostParentId</p></td>
-<td><p>Unique ID of parent post if post is a comment</p></td>
-<td><p>xt9anyx6x3fx9y84aehgakdpze</p></td>
+<tr class="row-odd"><td>PostParentId</td>
+<td>Unique ID of parent post if post is a comment</td>
+<td>xt9anyx6x3fx9y84aehgakdpze</td>
 </tr>
-<tr class="row-even"><td><p>PostOriginalId</p></td>
-<td><p>Unique ID of post if deleted or edited</p></td>
-<td><p>xt9anyx6x3fx9y84aehgakdpze</p></td>
+<tr class="row-even"><td>PostOriginalId</td>
+<td>Unique ID of post if deleted or edited</td>
+<td>xt9anyx6x3fx9y84aehgakdpze</td>
 </tr>
-<tr class="row-odd"><td><p>PostMessage</p></td>
-<td><p>Message containing keyword</p></td>
-<td><p>Drinking from the fire hose</p></td>
+<tr class="row-odd"><td>PostMessage</td>
+<td>Message containing keyword</td>
+<td>Drinking from the fire hose</td>
 </tr>
-<tr class="row-even"><td><p>PostFilenames</p></td>
-<td><p>Comma separated list of filesnames attached to post</p></td>
-<td><p>[“/f../ho.png”,”/f../hi.png”]</p></td>
+<tr class="row-even"><td>PostFilenames</td>
+<td>Comma separated list of filesnames attached to post</td>
+<td>[“/f../ho.png”,”/f../hi.png”]</td>
 </tr>
 </tbody>
 </table>
@@ -381,8 +374,8 @@
 <h2>Global Relay Support<a class="headerlink" href="#global-relay-support" title="Permalink to this headline">¶</a></h2>
 <p>Mattermost daily compliance reports are compatible with Global Relay compliance solutions through the conversion of Mattermost <code class="docutils literal notranslate"><span class="pre">.CSV</span></code> exports into Global Relay <code class="docutils literal notranslate"><span class="pre">EML</span></code> files.</p>
 <ul class="simple">
-<li><p>This conversion can be done by in-house developers who have previously written scripts to convert other communication systems into Global Relay format based on your organization’s specific needs.</p></li>
-<li><p>You can also contact your Global Relay account manager about a services project to establish this conversion.</p></li>
+<li>This conversion can be done by in-house developers who have previously written scripts to convert other communication systems into Global Relay format based on your organization’s specific needs.</li>
+<li>You can also contact your Global Relay account manager about a services project to establish this conversion.</li>
 </ul>
 <p>You may also use the new <a class="reference external" href="https://docs.mattermost.com/cloud/cloud-administration/compliance-export.html">Compliance Export (Beta) feature</a> for Global Relay exports.</p>
 </div>
@@ -393,29 +386,29 @@
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="compliance-export.html" class="btn btn-neutral float-right" title="Compliance Export Beta" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../cloud-integrations/webhook.html" class="btn btn-neutral float-left" title="Using Mattermost with Webhook" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="compliance-export.html" class="btn btn-neutral float-right" title="Compliance Export Beta" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../cloud-integrations/webhook.html" class="btn btn-neutral" title="Using Mattermost with Webhook" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2015-2020 Mattermost.
+        &copy; Copyright 2015-2020 Mattermost
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -449,16 +442,27 @@
 </div>
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
 	<header>
 	<div class="header__container">
 		<div class="search__icon">

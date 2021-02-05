@@ -2,46 +2,34 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Before You Begin &mdash; Mattermost 5.30 documentation</title>
+  <title>Before You Begin &mdash; Mattermost 5.31 documentation</title>
   
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
-
   
   
 
   
-    <link rel="canonical" href="https://docs.mattermost.com/deployment/sso-saml-before-you-begin.html" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
   
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/myscript.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-    
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../search.html" />
 	<!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -51,16 +39,21 @@
 	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
 	<!-- End Google Tag Manager -->
 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -74,7 +67,7 @@
             
             
               <div class="version">
-                5.30
+                5.31
               </div>
             
           
@@ -91,7 +84,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -111,7 +103,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -158,22 +149,22 @@
 <h1>Before You Begin<a class="headerlink" href="#before-you-begin" title="Permalink to this headline">¶</a></h1>
 <p>Before you begin, you’ll need to install the XML Security Library.</p>
 <ol class="arabic simple">
-<li><p>Make sure you have the <a class="reference external" href="https://www.aleksey.com/xmlsec/download.html">XML Security Library</a> installed on your Mattermost instance. The XML Security Library is usually included as part of Debian GNU/Linux.</p></li>
-<li><p>Install the <em>xmlsec1-openssl</em> library</p></li>
+<li>Make sure you have the <a class="reference external" href="https://www.aleksey.com/xmlsec/download.html">XML Security Library</a> installed on your Mattermost instance. The XML Security Library is usually included as part of Debian GNU/Linux.</li>
+<li>Install the <em>xmlsec1-openssl</em> library</li>
 </ol>
 <blockquote>
 <div><ul class="simple">
-<li><p>On Ubuntu: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">xmlsec1</span></code></p></li>
-<li><p>On RHEL: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">yum</span> <span class="pre">install</span> <span class="pre">xmlsec1-openssl</span></code></p></li>
+<li>On Ubuntu: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">xmlsec1</span></code></li>
+<li>On RHEL: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">yum</span> <span class="pre">install</span> <span class="pre">xmlsec1-openssl</span></code></li>
 </ul>
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p>Generate encryption certificates for encrypting the SAML connection.</p></li>
+<li>Generate encryption certificates for encrypting the SAML connection.</li>
 </ol>
 <blockquote>
 <div><ol class="loweralpha simple">
-<li><p>You can use the <a class="reference external" href="https://github.com/mattermost/docs/tree/master/source/scripts/generate-certificates">Bash script</a> from the <em>mattermost/docs</em> repository on GitHub, or any other suitable method.</p></li>
-<li><p>Save the two files that are generated. They are the private key and the public key. In the System Console, they are referred to as the <strong>Service Provider Private Key</strong> and the <strong>Service Provider Public Certificate</strong> respectively.</p></li>
+<li>You can use the <a class="reference external" href="https://github.com/mattermost/docs/tree/master/source/scripts/generate-certificates">Bash script</a> from the <em>mattermost/docs</em> repository on GitHub, or any other suitable method.</li>
+<li>Save the two files that are generated. They are the private key and the public key. In the System Console, they are referred to as the <strong>Service Provider Private Key</strong> and the <strong>Service Provider Public Certificate</strong> respectively.</li>
 </ol>
 </div></blockquote>
 </div>
@@ -183,25 +174,20 @@
            
           </div>
           <footer>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2015-2020 Mattermost.
+        &copy; Copyright 2015-2020 Mattermost
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -235,16 +221,27 @@
 </div>
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
 	<header>
 	<div class="header__container">
 		<div class="search__icon">

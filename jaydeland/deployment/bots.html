@@ -2,46 +2,34 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Bots &mdash; Mattermost 5.30 documentation</title>
+  <title>Bots &mdash; Mattermost 5.31 documentation</title>
   
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
-
   
   
 
   
-    <link rel="canonical" href="https://docs.mattermost.com/deployment/bots.html" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
   
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/myscript.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-    
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Voice, video, and screensharing" href="video-and-audio-calling.html" />
     <link rel="prev" title="Incident Response and Monitoring Tools" href="incident-response-and-monitoring.html" />
@@ -53,16 +41,21 @@
 	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
 	<!-- End Google Tag Manager -->
 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -76,7 +69,7 @@
             
             
               <div class="version">
-                5.30
+                5.31
               </div>
             
           
@@ -93,7 +86,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -106,11 +98,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-collaboration">Incident Collaboration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
@@ -147,7 +140,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -200,9 +192,9 @@
 <h2>WelcomeBot<a class="headerlink" href="#welcomebot" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><ul class="simple">
-<li><p>Welcome users to your Mattermost instance, developed by Mattermost.</p></li>
-<li><p>Add a Welcome Bot that helps add new team members to channels to improve onboarding and HR processes.</p></li>
-<li><p>Source code + docs: <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-welcomebot">https://github.com/mattermost/mattermost-plugin-welcomebot</a></p></li>
+<li>Welcome users to your Mattermost instance, developed by Mattermost.</li>
+<li>Add a Welcome Bot that helps add new team members to channels to improve onboarding and HR processes.</li>
+<li>Source code + docs: <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-welcomebot">https://github.com/mattermost/mattermost-plugin-welcomebot</a></li>
 </ul>
 </div></blockquote>
 </div>
@@ -210,9 +202,9 @@
 <h2>BotKube<a class="headerlink" href="#botkube" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><ul class="simple">
-<li><p>Monitor and debug Kubernetes resources, developed by InfraCloud Technologies.</p></li>
-<li><p>Monitor your Kubernetes cluster, debug critical deployments and get recommendations for standard practices.</p></li>
-<li><p>Source code + docs: <a class="reference external" href="https://github.com/infracloudio/botkube">https://github.com/infracloudio/botkube</a></p></li>
+<li>Monitor and debug Kubernetes resources, developed by InfraCloud Technologies.</li>
+<li>Monitor your Kubernetes cluster, debug critical deployments and get recommendations for standard practices.</li>
+<li>Source code + docs: <a class="reference external" href="https://github.com/infracloudio/botkube">https://github.com/infracloudio/botkube</a></li>
 </ul>
 </div></blockquote>
 </div>
@@ -220,10 +212,10 @@
 <h2>Sample Golang bot<a class="headerlink" href="#sample-golang-bot" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><ul class="simple">
-<li><p>Sample bot for Go driver, developed by Mattermost.</p></li>
-<li><p>Learn how to use the Mattermost Go driver to interact with a Mattermost server, listen to events and respond to messages.</p></li>
-<li><p>Use API for simple tasks such as logging in to your server, creating a channel and posting a message.</p></li>
-<li><p>Source code + docs: <a class="reference external" href="https://github.com/mattermost/mattermost-bot-sample-golang">https://github.com/mattermost/mattermost-bot-sample-golang</a></p></li>
+<li>Sample bot for Go driver, developed by Mattermost.</li>
+<li>Learn how to use the Mattermost Go driver to interact with a Mattermost server, listen to events and respond to messages.</li>
+<li>Use API for simple tasks such as logging in to your server, creating a channel and posting a message.</li>
+<li>Source code + docs: <a class="reference external" href="https://github.com/mattermost/mattermost-bot-sample-golang">https://github.com/mattermost/mattermost-bot-sample-golang</a></li>
 </ul>
 </div></blockquote>
 </div>
@@ -231,10 +223,10 @@
 <h2>Hubot Adapter<a class="headerlink" href="#hubot-adapter" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><ul class="simple">
-<li><p>Hubot adapter for Mattermost written in JavaScript that uses Web API and Websockets, developed by Andy Lo-A-Foe.</p></li>
-<li><p>Use the bot to listen for commands and to execute actions based on your requests.</p></li>
-<li><p>Invite your bot to any Mattermost channel just like a regular user.</p></li>
-<li><p>Source code + docs: <a class="reference external" href="https://github.com/loafoe/hubot-matteruser">https://github.com/loafoe/hubot-matteruser</a></p></li>
+<li>Hubot adapter for Mattermost written in JavaScript that uses Web API and Websockets, developed by Andy Lo-A-Foe.</li>
+<li>Use the bot to listen for commands and to execute actions based on your requests.</li>
+<li>Invite your bot to any Mattermost channel just like a regular user.</li>
+<li>Source code + docs: <a class="reference external" href="https://github.com/loafoe/hubot-matteruser">https://github.com/loafoe/hubot-matteruser</a></li>
 </ul>
 </div></blockquote>
 </div>
@@ -242,10 +234,10 @@
 <h2>Python Chatbot<a class="headerlink" href="#python-chatbot" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><ul class="simple">
-<li><p>A python based chat bot for Mattermost, developed by Alex Tzonkov.</p></li>
-<li><p>Allows the creation of listeners, messages and replies to conversations in particular channels.</p></li>
-<li><p>Create and setup a bot to listen to a channel for particular prompts and respond appropriately.</p></li>
-<li><p>Source code + docs: <a class="reference external" href="https://github.com/attzonko/mmpy_bot">https://github.com/attzonko/mmpy_bot</a></p></li>
+<li>A python based chat bot for Mattermost, developed by Alex Tzonkov.</li>
+<li>Allows the creation of listeners, messages and replies to conversations in particular channels.</li>
+<li>Create and setup a bot to listen to a channel for particular prompts and respond appropriately.</li>
+<li>Source code + docs: <a class="reference external" href="https://github.com/attzonko/mmpy_bot">https://github.com/attzonko/mmpy_bot</a></li>
 </ul>
 </div></blockquote>
 <p>Have a proposal for a bot? <a class="reference external" href="https://mattermost.uservoice.com/forums/306457-general?category_id=202591">Let us know in the feature proposal forum</a>.</p>
@@ -258,29 +250,29 @@
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="video-and-audio-calling.html" class="btn btn-neutral float-right" title="Voice, video, and screensharing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="incident-response-and-monitoring.html" class="btn btn-neutral float-left" title="Incident Response and Monitoring Tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="video-and-audio-calling.html" class="btn btn-neutral float-right" title="Voice, video, and screensharing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="incident-response-and-monitoring.html" class="btn btn-neutral" title="Incident Response and Monitoring Tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2015-2020 Mattermost.
+        &copy; Copyright 2015-2020 Mattermost
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -314,16 +306,27 @@
 </div>
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
 	<header>
 	<div class="header__container">
 		<div class="search__icon">

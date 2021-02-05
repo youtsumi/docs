@@ -2,49 +2,37 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Light Install Guide &mdash; Mattermost 5.30 documentation</title>
+  <title>Light Install Guide &mdash; Mattermost 5.31 documentation</title>
   
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
   
-
   
   
 
   
-    <link rel="canonical" href="https://docs.mattermost.com/help/getting-started/light-install.html" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
   
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/myscript.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-    
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Enterprise Roll Out Checklist" href="../../getting-started/enterprise-roll-out-checklist.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="../../deployment/deployment.html" />
+    <link rel="prev" title="Deployment Overview" href="../../deployment/deployment.html" />
 	<!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -53,16 +41,21 @@
 	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
 	<!-- End Google Tag Manager -->
 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -76,7 +69,7 @@
             
             
               <div class="version">
-                5.30
+                5.31
               </div>
             
           
@@ -93,7 +86,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -106,6 +98,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../deployment/deployment.html">Deployment Overview</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../guides/administrator.html#getting-started">Getting Started</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Light Install Guide</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#installation">Installation</a></li>
@@ -122,7 +115,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../guides/administrator.html#deployment">Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/administrator.html#incident-collaboration">Incident Collaboration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../guides/administrator.html#onboard-users">Onboard Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../guides/administrator.html#administration">Administration</a></li>
@@ -142,7 +135,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -192,9 +184,9 @@
 <p>Mattermost is a messaging and collaboration platform. With Mattermost, you can integrate the tools you use every day into one place and never miss a notification or task.</p>
 <p>Before you get started you’ll need:</p>
 <ul class="simple">
-<li><p>A clean Ubuntu server (18.04 or 20.04) with root level access</p></li>
-<li><p>(Recommended) A domain name pointing to your server (e.g. <code class="docutils literal notranslate"><span class="pre">mymattermostserver.com</span></code>)</p></li>
-<li><p>(Recommended) Email addresses of your team members so you can invite them to the server</p></li>
+<li>A clean Ubuntu server (18.04 or 20.04) with root level access</li>
+<li>(Recommended) A domain name pointing to your server (e.g. <code class="docutils literal notranslate"><span class="pre">mymattermostserver.com</span></code>)</li>
+<li>(Recommended) Email addresses of your team members so you can invite them to the server</li>
 </ul>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
@@ -208,9 +200,9 @@
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
+<p class="first admonition-title">Note</p>
 <p>Although the recommended way to install and configure Omnibus is with SSL enabled, if you want to use or test without it (or without a domain name), you can run:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo <span class="nv">MMO_HTTPS</span><span class="o">=</span><span class="nb">false</span> apt install mattermost-omnibus
+<div class="last highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo <span class="nv">MMO_HTTPS</span><span class="o">=</span><span class="nb">false</span> apt install mattermost-omnibus
 </pre></div>
 </div>
 </div>
@@ -221,9 +213,9 @@
 <h2>Add Users<a class="headerlink" href="#add-users" title="Permalink to this headline">¶</a></h2>
 <p>Next, add people to your team by sending them an invitation:</p>
 <ol class="arabic simple">
-<li><p>Click your username at the top left of the Navigation Panel.</p></li>
-<li><p>Click <strong>Invite People</strong> and enter the email addresses of the people you want to add.</p></li>
-<li><p>Click <strong>Invite Members</strong>.</p></li>
+<li>Click your username at the top left of the Navigation Panel.</li>
+<li>Click <strong>Invite People</strong> and enter the email addresses of the people you want to add.</li>
+<li>Click <strong>Invite Members</strong>.</li>
 </ol>
 <p>When the invitee receives the email with the link, it’s a single click to join your server, chat to you in the channel you’ve created, or create their own channels. More information about adding users is available <a class="reference external" href="https://docs.mattermost.com/help/getting-started/managing-members.html#managing-members">here</a>.</p>
 </div>
@@ -233,9 +225,9 @@
 <p>You can find and install integrations and plugins via <strong>Main Menu &gt; Plugin Marketplace</strong>.</p>
 <p>Get started with GitHub, Jira, and Jenkins:</p>
 <ul class="simple">
-<li><p>Connect your GitHub organization to Mattermost using a slash command, to manage your reviews, pull requests, comments, and merges. GitHub is pre-packaged in Mattermost. Follow the <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-github#configuration">configuration steps</a>, and then let your team know to run /github connect so they can receive notifications.</p></li>
-<li><p>Connect your Jira account to Mattermost and set up a channel for the bot to post issues so your team is always up to date. Visit the <a class="reference external" href="https://mattermost.gitbook.io/plugin-jira/setup/configuration">configuration guide</a> to get started. Once configured, share the <a class="reference external" href="https://mattermost.gitbook.io/plugin-jira/end-user-guide/getting-started">end user documentation</a> with your team so they can start receiving notifications.</p></li>
-<li><p>Connect your Jenkins server to Mattermost to centralize your workflows and manage builds. Visit the <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-jenkins#installation">installation guide</a> to get started. Share the <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-jenkins#features">features list</a> with your team so they can ramp up quickly.</p></li>
+<li>Connect your GitHub organization to Mattermost using a slash command, to manage your reviews, pull requests, comments, and merges. GitHub is pre-packaged in Mattermost. Follow the <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-github#configuration">configuration steps</a>, and then let your team know to run /github connect so they can receive notifications.</li>
+<li>Connect your Jira account to Mattermost and set up a channel for the bot to post issues so your team is always up to date. Visit the <a class="reference external" href="https://mattermost.gitbook.io/plugin-jira/setup/configuration">configuration guide</a> to get started. Once configured, share the <a class="reference external" href="https://mattermost.gitbook.io/plugin-jira/end-user-guide/getting-started">end user documentation</a> with your team so they can start receiving notifications.</li>
+<li>Connect your Jenkins server to Mattermost to centralize your workflows and manage builds. Visit the <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-jenkins#installation">installation guide</a> to get started. Share the <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-jenkins#features">features list</a> with your team so they can ramp up quickly.</li>
 </ul>
 <p><strong>Next:</strong> <a class="reference external" href="https://docs.mattermost.com/help/getting-started/organizing-conversations.html">Learn more about organizing conversations</a> and setting up <a class="reference external" href="https://docs.mattermost.com/mobile/mobile-overview.html">Mattermost on your mobile device</a>.</p>
 </div>
@@ -246,29 +238,29 @@
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../../getting-started/enterprise-roll-out-checklist.html" class="btn btn-neutral float-right" title="Enterprise Roll Out Checklist" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../../deployment/deployment.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="../../getting-started/enterprise-roll-out-checklist.html" class="btn btn-neutral float-right" title="Enterprise Roll Out Checklist" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../deployment/deployment.html" class="btn btn-neutral" title="Deployment Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2015-2020 Mattermost.
+        &copy; Copyright 2015-2020 Mattermost
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -302,16 +294,27 @@
 </div>
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
 	<header>
 	<div class="header__container">
 		<div class="search__icon">

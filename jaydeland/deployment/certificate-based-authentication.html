@@ -2,46 +2,34 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Certificate-Based Authentication (Experimental) &mdash; Mattermost 5.30 documentation</title>
+  <title>Certificate-Based Authentication (Experimental) &mdash; Mattermost 5.31 documentation</title>
   
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
-
   
   
 
   
-    <link rel="canonical" href="https://docs.mattermost.com/deployment/certificate-based-authentication.html" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
   
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/myscript.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-    
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Managing Team and Channel Members (E20)" href="team-channel-management.html" />
     <link rel="prev" title="SSL Client Certificate Setup (Beta)" href="ssl-client-certificate.html" />
@@ -53,16 +41,21 @@
 	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
 	<!-- End Google Tag Manager -->
 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -76,7 +69,7 @@
             
             
               <div class="version">
-                5.30
+                5.31
               </div>
             
           
@@ -93,7 +86,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -106,11 +98,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-collaboration">Incident Collaboration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="bulk-loading.html">Bulk Loading Data</a></li>
@@ -119,12 +112,15 @@
 <li class="toctree-l3"><a class="reference internal" href="../administration/migration-announcement-email-template.html">Migration Announcement Email</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../administration/user-provisioning.html">Provisioning Workflows</a></li>
 <li class="toctree-l3"><a class="reference internal" href="admin-roles.html">Additional System Admin Roles (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-ldap.html">Active Directory/LDAP Setup (E10/E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auth.html">Multi-factor Authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ldap-group-sync.html">AD/LDAP Groups (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html">Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-saml.html">SAML Single Sign-On (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-saml-technical.html">SAML Single-Sign-On (E20): Technical Documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-gitlab.html">GitLab Single Sign-On</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-google.html">Google Single Sign-On (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-office.html">Office 365 Single Sign-On (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ssl-client-certificate.html">SSL Client Certificate Setup (Beta)</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Certificate-Based Authentication (Experimental)</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#set-up-mutual-tls-authentication-for-the-web-app">Set up mutual TLS authentication for the Web App</a></li>
@@ -154,7 +150,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -207,8 +202,8 @@
 <p>Before you begin, follow the <a class="reference external" href="https://docs.mattermost.com/guides/administrator.html#installing-mattermost">official guides to install Mattermost</a> on your system, including NGINX configuration as a proxy with SSL and HTTP/2, and a valid SSL certificate such as Let’s Encrypt.</p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#set-up-mutual-tls-authentication-for-the-web-app" id="id1">Set up mutual TLS authentication for the Web App</a></p></li>
-<li><p><a class="reference internal" href="#set-up-mattermost-server-to-log-in-with-a-client-certificate" id="id2">Set up Mattermost server to log in with a client certificate</a></p></li>
+<li><a class="reference internal" href="#set-up-mutual-tls-authentication-for-the-web-app" id="id1">Set up mutual TLS authentication for the Web App</a></li>
+<li><a class="reference internal" href="#set-up-mattermost-server-to-log-in-with-a-client-certificate" id="id2">Set up Mattermost server to log in with a client certificate</a></li>
 </ul>
 </div>
 <div class="section" id="set-up-mutual-tls-authentication-for-the-web-app">
@@ -218,12 +213,12 @@
 <div class="section" id="set-up-mattermost-server-to-log-in-with-a-client-certificate">
 <h2><a class="toc-backref" href="#contents">Set up Mattermost server to log in with a client certificate</a><a class="headerlink" href="#set-up-mattermost-server-to-log-in-with-a-client-certificate" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li><p>Make sure your Mattermost server is licensed with a valid Enterprise Edition E20 license.</p></li>
-<li><p>In <code class="docutils literal notranslate"><span class="pre">ExperimentalSettings</span></code> of the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file, set <code class="docutils literal notranslate"><span class="pre">ClientSideCertEnable</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">ClientSideCertCheck</span></code> to one of the following values:</p></li>
+<li>Make sure your Mattermost server is licensed with a valid Enterprise Edition E20 license.</li>
+<li>In <code class="docutils literal notranslate"><span class="pre">ExperimentalSettings</span></code> of the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file, set <code class="docutils literal notranslate"><span class="pre">ClientSideCertEnable</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">ClientSideCertCheck</span></code> to one of the following values:</li>
 </ol>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">primary</span></code> - After the client side certificate is verified, user’s email is retrieved from the certificate and is used to log in without a password.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">secondary</span></code> - After the client side certificate is verified, user’s email is retrieved from the certificate and matched against the one supplied by the user. If they match, the user logs in with regular email/password credentials.</p></li>
+<li><code class="docutils literal notranslate"><span class="pre">primary</span></code> - After the client side certificate is verified, user’s email is retrieved from the certificate and is used to log in without a password.</li>
+<li><code class="docutils literal notranslate"><span class="pre">secondary</span></code> - After the client side certificate is verified, user’s email is retrieved from the certificate and matched against the one supplied by the user. If they match, the user logs in with regular email/password credentials.</li>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file should then have the following lines</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&quot;ExperimentalSettings&quot;: {
@@ -233,7 +228,7 @@
 </pre></div>
 </div>
 <ol class="arabic simple" start="3">
-<li><p>Restart the Mattermost server.</p></li>
+<li>Restart the Mattermost server.</li>
 </ol>
 <p>On Ubuntu 14.04 and RHEL 6:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sudo restart mattermost
@@ -244,7 +239,7 @@
 </pre></div>
 </div>
 <ol class="arabic simple" start="4">
-<li><p>Go to <a class="reference external" href="https://example.mattermost.com">https://example.mattermost.com</a> and try to log in. The server should require the x.509 cert to have an <code class="docutils literal notranslate"><span class="pre">emailAddress</span></code> equal to the Mattermost user’s email.</p></li>
+<li>Go to <a class="reference external" href="https://example.mattermost.com">https://example.mattermost.com</a> and try to log in. The server should require the x.509 cert to have an <code class="docutils literal notranslate"><span class="pre">emailAddress</span></code> equal to the Mattermost user’s email.</li>
 </ol>
 </div>
 </div>
@@ -254,29 +249,29 @@
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="team-channel-management.html" class="btn btn-neutral float-right" title="Managing Team and Channel Members (E20)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="ssl-client-certificate.html" class="btn btn-neutral float-left" title="SSL Client Certificate Setup (Beta)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="team-channel-management.html" class="btn btn-neutral float-right" title="Managing Team and Channel Members (E20)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ssl-client-certificate.html" class="btn btn-neutral" title="SSL Client Certificate Setup (Beta)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2015-2020 Mattermost.
+        &copy; Copyright 2015-2020 Mattermost
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -310,16 +305,27 @@
 </div>
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
 	<header>
 	<div class="header__container">
 		<div class="search__icon">

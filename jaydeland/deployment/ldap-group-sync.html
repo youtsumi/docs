@@ -2,46 +2,34 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>AD/LDAP Groups (E20) &mdash; Mattermost 5.30 documentation</title>
+  <title>AD/LDAP Groups (E20) &mdash; Mattermost 5.31 documentation</title>
   
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
-
   
   
 
   
-    <link rel="canonical" href="https://docs.mattermost.com/deployment/ldap-group-sync.html" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
   
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/myscript.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-    
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership" href="ldap-group-constrained-team-channel.html" />
     <link rel="prev" title="Multi-factor Authentication" href="auth.html" />
@@ -53,16 +41,21 @@
 	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
 	<!-- End Google Tag Manager -->
 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -76,7 +69,7 @@
             
             
               <div class="version">
-                5.30
+                5.31
               </div>
             
           
@@ -93,7 +86,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -106,11 +98,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-collaboration">Incident Collaboration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="bulk-loading.html">Bulk Loading Data</a></li>
@@ -119,6 +112,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../administration/migration-announcement-email-template.html">Migration Announcement Email</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../administration/user-provisioning.html">Provisioning Workflows</a></li>
 <li class="toctree-l3"><a class="reference internal" href="admin-roles.html">Additional System Admin Roles (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-ldap.html">Active Directory/LDAP Setup (E10/E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auth.html">Multi-factor Authentication</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">AD/LDAP Groups (E20)</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
@@ -142,6 +136,8 @@
 <li class="toctree-l3"><a class="reference internal" href="sso-saml.html">SAML Single Sign-On (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-saml-technical.html">SAML Single-Sign-On (E20): Technical Documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-gitlab.html">GitLab Single Sign-On</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-google.html">Google Single Sign-On (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-office.html">Office 365 Single Sign-On (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ssl-client-certificate.html">SSL Client Certificate Setup (Beta)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="certificate-based-authentication.html">Certificate-Based Authentication (Experimental)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="team-channel-management.html">Managing Team and Channel Members (E20)</a></li>
@@ -167,7 +163,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -218,10 +213,10 @@
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>The groups feature is useful for organizations that have many new users to onboard or that onboard users frequently and want to ensure users are added to default teams and channels that are pertinent to them. The group feature currently supports:</p>
 <ul class="simple">
-<li><p>Creating groups by synchronization with your AD/LDAP system groups.</p></li>
-<li><p>Syncing groups to pre-defined roles in Mattermost.</p></li>
-<li><p>AD/LDAP nested groups.</p></li>
-<li><p>Using synchronized groups to manage <a class="reference external" href="https://docs.mattermost.com/deployment/ldap-group-constrained-team-channel.html">membership of teams and private channels</a>.</p></li>
+<li>Creating groups by synchronization with your AD/LDAP system groups.</li>
+<li>Syncing groups to pre-defined roles in Mattermost.</li>
+<li>AD/LDAP nested groups.</li>
+<li>Using synchronized groups to manage <a class="reference external" href="https://docs.mattermost.com/deployment/ldap-group-constrained-team-channel.html">membership of teams and private channels</a>.</li>
 </ul>
 <p>For more details about this feature and future plans read <a class="reference external" href="https://forum.mattermost.org/t/ldap-group-sync-alpha-release/6351">this forum post</a>. For a technical overview of the feature by Martin Kraft, who led the development of the feature, please see <a class="reference external" href="https://developers.mattermost.com/blog/2019-06-05-ldap-nested-groups-modelling-and-representation-in-code/">this blog post</a>.</p>
 <p>You can also watch a video overview about adding users to Mattermost with AD/LDAP on <a class="reference external" href="https://www.youtube.com/watch?v=zyku2ibsG0M">YouTube</a>.</p>
@@ -243,22 +238,22 @@
 <p>To synchronize specific AD/LDAP groups to Mattermost, specify the <code class="docutils literal notranslate"><span class="pre">Group</span> <span class="pre">ID</span> <span class="pre">Attribute</span></code> and the <code class="docutils literal notranslate"><span class="pre">Group</span> <span class="pre">Display</span> <span class="pre">Name</span> <span class="pre">Attribute</span></code> (e.g., “cn” for Common Name) under <strong>System Console &gt; Authentication &gt; AD/LDAP</strong>.</p>
 <p>Additionally, you can specify the <strong>Group</strong> filter used to retrieve groups. If the <strong>Group</strong> filter configuration is left blank, then all groups matching the default filter <code class="docutils literal notranslate"><span class="pre">(|(objectClass=group)(objectClass=groupOfNames)(objectClass=groupOfUniqueNames))</span></code> are returned.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Attribute values for <strong>Group ID</strong> and <strong>Group Display Name</strong> are case-sensitive.</p>
+<p class="first admonition-title">Note</p>
+<p class="last">Attribute values for <strong>Group ID</strong> and <strong>Group Display Name</strong> are case-sensitive.</p>
 </div>
 <p>Group synchronization occurs after user synchronization and results for group synchronization are available on the synchonization status table (located at the bottom of the <strong>AD/LDAP</strong> configuration page).</p>
 <p>After the AD/LDAP groups have been synchronized, go to <strong>System Console &gt; User Management &gt; Groups</strong> (or <strong>System Console &gt; Access Control &gt; Groups</strong> in versions prior to 5.12) to link and configure Mattermost groups.</p>
 <img alt="../_images/Group_filter1.png" src="../_images/Group_filter1.png" />
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The sync process does not create Mattermost groups. Mattermost groups are created when you “link” the AD/LDAP group as outlined in the next section <strong>Linking AD/LDAP groups to Mattermost groups</strong>. Existing AD/LDAP users are added to the Mattermost groups on the next synchronization and new users are added on their first login.</p>
+<p class="first admonition-title">Note</p>
+<p class="last">The sync process does not create Mattermost groups. Mattermost groups are created when you “link” the AD/LDAP group as outlined in the next section <strong>Linking AD/LDAP groups to Mattermost groups</strong>. Existing AD/LDAP users are added to the Mattermost groups on the next synchronization and new users are added on their first login.</p>
 </div>
 <p>On subsequent synchronizations and once groups are linked:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Users that have been added to an AD/LDAP group will be added to the linked Mattermost group and to teams and channels configured for that group.</p></li>
-<li><p>Mattermost groups that are linked to AD/LDAP groups no longer included in your filter are deleted.</p></li>
-<li><p>Users removed from an AD/LDAP group are removed from the linked Mattermost group, but their channel and team membership is only revoked when the channel or team is synchronized to an AD/LDAP group.</p></li>
+<li>Users that have been added to an AD/LDAP group will be added to the linked Mattermost group and to teams and channels configured for that group.</li>
+<li>Mattermost groups that are linked to AD/LDAP groups no longer included in your filter are deleted.</li>
+<li>Users removed from an AD/LDAP group are removed from the linked Mattermost group, but their channel and team membership is only revoked when the channel or team is synchronized to an AD/LDAP group.</li>
 </ul>
 </div></blockquote>
 <img alt="../_images/Group_Group_Member_Sync1.png" src="../_images/Group_Group_Member_Sync1.png" />
@@ -297,8 +292,8 @@
 <p>For new users, default teams and channels will be added when they log in for the first time. For existing users, default teams and channels will be added after the next scheduled AD/LDAP sychronization.</p>
 <p>It may take a few seconds to load all team and channel memberships for a user depending on the number of teams and channels the group is defaulted to. In our testing, it took 6 seconds for an organization with 200,000 users and 30,000 linked groups.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Users are not removed from the team or channel on subsequent synchronizations of the AD/LDAP groups. Users will need to be manually removed from the team or channel per the existing functionality. They will not be re-added if they were manually removed or removed themselves. To manage a team or private channel membership with synchronized groups, please see <a class="reference external" href="https://docs.mattermost.com/deployment/ldap-group-constrained-team-channel.html">this documentation</a>.</p>
+<p class="first admonition-title">Note</p>
+<p class="last">Users are not removed from the team or channel on subsequent synchronizations of the AD/LDAP groups. Users will need to be manually removed from the team or channel per the existing functionality. They will not be re-added if they were manually removed or removed themselves. To manage a team or private channel membership with synchronized groups, please see <a class="reference external" href="https://docs.mattermost.com/deployment/ldap-group-constrained-team-channel.html">this documentation</a>.</p>
 </div>
 <img alt="../_images/Team_Channel_Membership_Sync1.png" src="../_images/Team_Channel_Membership_Sync1.png" />
 </div>
@@ -312,8 +307,8 @@
 <img alt="../_images/Group_Members1.png" src="../_images/Group_Members1.png" />
 <p>Users can be removed from the Mattermost group on subsequent synchronizations. However, they will not be removed from teams and channels unless the team or channel is group-synced.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>When a member removes themselves manually from a channel, that action is tracked in the <strong>Channel Member History</strong> table. Users are not re-added to channels from which they previously removed themselves.</p>
+<p class="first admonition-title">Note</p>
+<p class="last">When a member removes themselves manually from a channel, that action is tracked in the <strong>Channel Member History</strong> table. Users are not re-added to channels from which they previously removed themselves.</p>
 </div>
 </div>
 <div class="section" id="disabling-and-re-activating-ad-ldap-users">
@@ -332,8 +327,8 @@
 <h2>Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership<a class="headerlink" href="#using-ad-ldap-synchronized-groups-to-manage-team-or-private-channel-membership" title="Permalink to this headline">¶</a></h2>
 <p>Mattermost groups created with synchronized AD/LDAP groups can be used to manage the membership of private teams and private channels. When a team or private channel is managed by synchronized groups, member users will be added and removed based on their membership to the synchronized AD/LDAP group.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>It is not possible to add guests to teams and channels that are managed using groups.</p>
+<p class="first admonition-title">Note</p>
+<p class="last">It is not possible to add guests to teams and channels that are managed using groups.</p>
 </div>
 <p>For instance, you may have an AD/LDAP group that contains your development team that you want to synchronize to a developer team. By using this feature, new developers will get added to the team when they are added to the synchronized AD/LDAP group and they will be removed from the team when removed from the AD/LDAP group.</p>
 <p>Similarly, you may have an AD/LDAP group that contains your leadership team that you want to synchronize to a private channel for coordination and updates.</p>
@@ -341,16 +336,16 @@
 <p>On teams that are managed by synchronized groups, guests, and member users outside of the group are restricted from:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Invitation through a team invite link</p></li>
-<li><p>Invitations through an email invite</p></li>
+<li>Invitation through a team invite link</li>
+<li>Invitations through an email invite</li>
 </ul>
 </div></blockquote>
 <p>Similarily on private channels that are managed by synchronized groups, guests and member users outside of the group are restricted from:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Invitation through a mention</p></li>
-<li><p>Invitation through the <code class="docutils literal notranslate"><span class="pre">/invite</span></code> slash command</p></li>
-<li><p>Being added to the channel with “add members”</p></li>
+<li>Invitation through a mention</li>
+<li>Invitation through the <code class="docutils literal notranslate"><span class="pre">/invite</span></code> slash command</li>
+<li>Being added to the channel with “add members”</li>
 </ul>
 </div></blockquote>
 <p>Users can remove themselves from teams and private channels managed by synchronized groups.</p>
@@ -358,61 +353,61 @@
 <h3>Managing Membership of a Team or Channel with Synchronized Groups<a class="headerlink" href="#managing-membership-of-a-team-or-channel-with-synchronized-groups" title="Permalink to this headline">¶</a></h3>
 <p>To manage membership of a private team with synchronized groups:</p>
 <ol class="arabic simple">
-<li><p>Navigate to <strong>System Console &gt; User Management &gt; Teams</strong>. Select the team you want to manage with group synchronization.</p></li>
-<li><p>Under <strong>Team Management</strong>, enable <strong>Sync Group Members</strong>. If <strong>Anyone can join this team</strong> is enabled or if specific email domains are set, they will be disabled by the Sync Group Members feature.</p></li>
-<li><p>Add one or more groups to the team. If there are groups already associated to default users into the team, they will already be present.</p></li>
-<li><p>Review the notice in the footer of the screen for any users that are not part of groups who will be removed from the team on the next synchronization.</p></li>
-<li><p>Click <strong>Save</strong>. Members will be updated on the next scheduled AD/LDAP synchronization.</p></li>
+<li>Navigate to <strong>System Console &gt; User Management &gt; Teams</strong>. Select the team you want to manage with group synchronization.</li>
+<li>Under <strong>Team Management</strong>, enable <strong>Sync Group Members</strong>. If <strong>Anyone can join this team</strong> is enabled or if specific email domains are set, they will be disabled by the Sync Group Members feature.</li>
+<li>Add one or more groups to the team. If there are groups already associated to default users into the team, they will already be present.</li>
+<li>Review the notice in the footer of the screen for any users that are not part of groups who will be removed from the team on the next synchronization.</li>
+<li>Click <strong>Save</strong>. Members will be updated on the next scheduled AD/LDAP synchronization.</li>
 </ol>
 <p>Alternatively you can use the CLI tool to set the team to be managed by groups:</p>
 <ol class="arabic simple">
-<li><p>Ensure there is at least one group already associated to the team. You can view and add default teams to a group via <strong>System Console &gt; User Management &gt; Groups &gt; Group Configuration</strong>. Please see more information on adding default teams and channels <a class="reference external" href="https://docs.mattermost.com/deployment/ldap-group-sync.html#add-default-teams-or-channels-for-the-group">here</a>. Additionally, you can use the CLI tool to view if there is already a group associated to the team by running the <a class="reference external" href="https://docs.mattermost.com/administration/command-line-tools.html#mattermost-group-team-list">group team list CLI command</a>.</p></li>
-<li><p>Ensure <strong>Team Settings &gt; General &gt; Allow any user with an account on this server to join this team</strong> is set to <code class="docutils literal notranslate"><span class="pre">No</span></code>.</p></li>
-<li><p>Convert the team to have its membership managed by synchronized groups by running the <a class="reference external" href="https://docs.mattermost.com/administration/command-line-tools.html#mattermost-group-team-enable">group team enable CLI command</a>.</p></li>
+<li>Ensure there is at least one group already associated to the team. You can view and add default teams to a group via <strong>System Console &gt; User Management &gt; Groups &gt; Group Configuration</strong>. Please see more information on adding default teams and channels <a class="reference external" href="https://docs.mattermost.com/deployment/ldap-group-sync.html#add-default-teams-or-channels-for-the-group">here</a>. Additionally, you can use the CLI tool to view if there is already a group associated to the team by running the <a class="reference external" href="https://docs.mattermost.com/administration/command-line-tools.html#mattermost-group-team-list">group team list CLI command</a>.</li>
+<li>Ensure <strong>Team Settings &gt; General &gt; Allow any user with an account on this server to join this team</strong> is set to <code class="docutils literal notranslate"><span class="pre">No</span></code>.</li>
+<li>Convert the team to have its membership managed by synchronized groups by running the <a class="reference external" href="https://docs.mattermost.com/administration/command-line-tools.html#mattermost-group-team-enable">group team enable CLI command</a>.</li>
 </ol>
 <p>To manage membership of a private channel with synchronized groups:</p>
 <ol class="arabic simple">
-<li><p>Navigate to <strong>System Console &gt; User Management &gt; Channels</strong>. Select the channel you want to manage with group synchronization.</p></li>
-<li><p>Under <strong>Channel Management</strong>, enable <strong>Sync Group Members</strong>. Please ensure the channel is set to <code class="docutils literal notranslate"><span class="pre">private</span></code>.</p></li>
-<li><p>Add one or more groups to the channel. If there are groups already associated to default users into the channel, they will already be present.</p></li>
-<li><p>Review the notice in the footer of the screen for any users that are not part of groups who will be removed from the channel on the next synchronization.</p></li>
-<li><p>Click save. Members will be updated on the next scheduled AD/LDAP synchronization.</p></li>
+<li>Navigate to <strong>System Console &gt; User Management &gt; Channels</strong>. Select the channel you want to manage with group synchronization.</li>
+<li>Under <strong>Channel Management</strong>, enable <strong>Sync Group Members</strong>. Please ensure the channel is set to <code class="docutils literal notranslate"><span class="pre">private</span></code>.</li>
+<li>Add one or more groups to the channel. If there are groups already associated to default users into the channel, they will already be present.</li>
+<li>Review the notice in the footer of the screen for any users that are not part of groups who will be removed from the channel on the next synchronization.</li>
+<li>Click save. Members will be updated on the next scheduled AD/LDAP synchronization.</li>
 </ol>
 <p>Alternatively you can use the CLI tool to set a private channel to be managed by groups:</p>
 <ol class="arabic simple">
-<li><p>Ensure there is at least one group already associated to the channel. You can view and add default channels to a group via <strong>System Console &gt; User Management &gt; Groups &gt; Group Configuration</strong>. Please see more information on adding default teams and channels <a class="reference external" href="https://docs.mattermost.com/deployment/ldap-group-sync.html#add-default-teams-or-channels-for-the-group">here</a>. Additionally, you can use the CLI tool to view if there is already a group associated to the channel by running the <a class="reference external" href="https://docs.mattermost.com/administration/command-line-tools.html#mattermost-group-team-list">group channel list CLI command</a>.</p></li>
-<li><p>Convert the team to have its membership managed by synchronized groups by running the <a class="reference external" href="https://docs.mattermost.com/administration/command-line-tools.html#mattermost-group-channel-enable">group channel enable CLI command</a>.</p></li>
+<li>Ensure there is at least one group already associated to the channel. You can view and add default channels to a group via <strong>System Console &gt; User Management &gt; Groups &gt; Group Configuration</strong>. Please see more information on adding default teams and channels <a class="reference external" href="https://docs.mattermost.com/deployment/ldap-group-sync.html#add-default-teams-or-channels-for-the-group">here</a>. Additionally, you can use the CLI tool to view if there is already a group associated to the channel by running the <a class="reference external" href="https://docs.mattermost.com/administration/command-line-tools.html#mattermost-group-team-list">group channel list CLI command</a>.</li>
+<li>Convert the team to have its membership managed by synchronized groups by running the <a class="reference external" href="https://docs.mattermost.com/administration/command-line-tools.html#mattermost-group-channel-enable">group channel enable CLI command</a>.</li>
 </ol>
 </div>
 <div class="section" id="assigning-roles-to-group-members">
 <h3>Assigning Roles to Group Members<a class="headerlink" href="#assigning-roles-to-group-members" title="Permalink to this headline">¶</a></h3>
 <p>Group members can be assigned predefined roles by System Admins, which are applied across the group during the scheduled sychronization. The roles are:</p>
 <ul class="simple">
-<li><p>Member (default)</p></li>
-<li><p>Team Admin (in Teams)</p></li>
-<li><p>Channel Admin (in Channels)</p></li>
+<li>Member (default)</li>
+<li>Team Admin (in Teams)</li>
+<li>Channel Admin (in Channels)</li>
 </ul>
 <p>The permissions for each role can be viewed and modified in <strong>System Console &gt; Permissions</strong>.</p>
 <p><strong>To set the Team Admin role in a synced group</strong></p>
 <ol class="arabic simple">
-<li><p>Navigate to <strong>System Console &gt; User Management &gt; Teams</strong>.</p></li>
-<li><p>Select <strong>Edit</strong> next to the team you want to configure.</p></li>
-<li><p>Ensure that <strong>Sync Group Members</strong> is enabled.</p></li>
-<li><p>Choose <strong>Add Group</strong> to add one or more groups to the team. If there are groups already associated to default users into the team, they will already be present.</p></li>
-<li><p>Select the arrow next to the current role in the <strong>Roles</strong> column to display and select the <strong>Team Admin</strong> option.</p></li>
-<li><p>Repeat as needed for any other synced groups you have added.</p></li>
-<li><p>Choose <strong>Save</strong>.</p></li>
+<li>Navigate to <strong>System Console &gt; User Management &gt; Teams</strong>.</li>
+<li>Select <strong>Edit</strong> next to the team you want to configure.</li>
+<li>Ensure that <strong>Sync Group Members</strong> is enabled.</li>
+<li>Choose <strong>Add Group</strong> to add one or more groups to the team. If there are groups already associated to default users into the team, they will already be present.</li>
+<li>Select the arrow next to the current role in the <strong>Roles</strong> column to display and select the <strong>Team Admin</strong> option.</li>
+<li>Repeat as needed for any other synced groups you have added.</li>
+<li>Choose <strong>Save</strong>.</li>
 </ol>
 <p>Roles are updated on the next scheduled AD/LDAP synchronization.</p>
 <p><strong>To set the Channel Admin role in a synced group</strong></p>
 <ol class="arabic simple">
-<li><p>Navigate to <strong>System Console &gt; User Management &gt; Channels</strong>.</p></li>
-<li><p>Select <strong>Edit</strong> next to the team you want to configure.</p></li>
-<li><p>Ensure that <strong>Sync Group Members</strong> is enabled.</p></li>
-<li><p>Choose <strong>Add Group</strong> to add one or more groups to the team. If there are groups already associated to default users into the team, they will already be present.</p></li>
-<li><p>Select the arrow next to the current role in the <strong>Roles</strong> column to display and select the <strong>Channel Admin</strong> option.</p></li>
-<li><p>Repeat as needed for any other synced groups you have added.</p></li>
-<li><p>Choose <strong>Save</strong>.</p></li>
+<li>Navigate to <strong>System Console &gt; User Management &gt; Channels</strong>.</li>
+<li>Select <strong>Edit</strong> next to the team you want to configure.</li>
+<li>Ensure that <strong>Sync Group Members</strong> is enabled.</li>
+<li>Choose <strong>Add Group</strong> to add one or more groups to the team. If there are groups already associated to default users into the team, they will already be present.</li>
+<li>Select the arrow next to the current role in the <strong>Roles</strong> column to display and select the <strong>Channel Admin</strong> option.</li>
+<li>Repeat as needed for any other synced groups you have added.</li>
+<li>Choose <strong>Save</strong>.</li>
 </ol>
 <p>Roles are updated on the next scheduled AD/LDAP synchronization.</p>
 <p><strong>Note:</strong>
@@ -436,8 +431,8 @@ Members who have been synced as part of a group cannot have their role changed v
 <p>A user can remove themselves from the team or from the private channel when it is managed by synchronized groups. They can be added back by users who have permission to manage members for a team or private channel by using the <code class="docutils literal notranslate"><span class="pre">/invite</span></code> slash command or by mentioning the user in a channel.</p>
 <p>If the user is removed from a synchronized group and later readded to the group, they can be manually added back to the team or Private channel as noted above.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Users will not be automatically added back by the AD/LDAP synchronization once they remove themselves or are removed by the LDAP synchronized group.</p>
+<p class="first admonition-title">Note</p>
+<p class="last">Users will not be automatically added back by the AD/LDAP synchronization once they remove themselves or are removed by the LDAP synchronized group.</p>
 </div>
 </div>
 <div class="section" id="disabling-group-synchronized-management-of-teams-and-private-channels">
@@ -487,29 +482,29 @@ Members who have been synced as part of a group cannot have their role changed v
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="ldap-group-constrained-team-channel.html" class="btn btn-neutral float-right" title="Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="auth.html" class="btn btn-neutral float-left" title="Multi-factor Authentication" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="ldap-group-constrained-team-channel.html" class="btn btn-neutral float-right" title="Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="auth.html" class="btn btn-neutral" title="Multi-factor Authentication" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2015-2020 Mattermost.
+        &copy; Copyright 2015-2020 Mattermost
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -543,16 +538,27 @@ Members who have been synced as part of a group cannot have their role changed v
 </div>
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
 	<header>
 	<div class="header__container">
 		<div class="search__icon">

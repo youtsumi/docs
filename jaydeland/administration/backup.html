@@ -2,46 +2,34 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Backup and Disaster Recovery &mdash; Mattermost 5.30 documentation</title>
+  <title>Backup and Disaster Recovery &mdash; Mattermost 5.31 documentation</title>
   
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
-
   
   
 
   
-    <link rel="canonical" href="https://docs.mattermost.com/administration/backup.html" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
   
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/myscript.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-    
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Bleve Search (Experimental)" href="../deployment/bleve.html" />
     <link rel="prev" title="Client-side Data Storage FAQ" href="../deployment/client-side-data.html" />
@@ -53,16 +41,21 @@
 	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
 	<!-- End Google Tag Manager -->
 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -76,7 +69,7 @@
             
             
               <div class="version">
-                5.30
+                5.31
               </div>
             
           
@@ -93,7 +86,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -106,9 +98,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/desktop-app-deployment.html">Desktop App Deployment Guide</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../mobile/mobile-appconfig.html">AppConfig for EMM Solutions with Mattermost Mobile Apps</a></li>
 <li class="toctree-l3"><a class="reference internal" href="image-proxy.html">Image Proxy</a></li>
@@ -123,7 +117,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-collaboration">Incident Collaboration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
@@ -143,7 +137,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -196,27 +189,27 @@
 <p>The state of your Mattermost server is contained in multiple data stores that need to be separately backed up and restored to fully recover your system from failure.</p>
 <p>To back up your Mattermost server:</p>
 <ol class="arabic">
-<li><p>Back up your Mattermost database using standard MySQL or PostgreSQL procedures depending on your database version.</p>
+<li><p class="first">Back up your Mattermost database using standard MySQL or PostgreSQL procedures depending on your database version.</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><a class="reference external" href="https://dev.mysql.com/doc/refman/5.6/en/backup-types.html">MySQL backup documentation</a> is available online. Use the selector on the page to choose your MySQL version.</p></li>
-<li><p><a class="reference external" href="https://www.postgresql.org/docs/9.5/static/backup-dump.html">PostgreSQL backup documentation</a> is available online. Use the navigation at the top of the page to select your PostgreSQL version.</p></li>
+<li><a class="reference external" href="https://dev.mysql.com/doc/refman/5.6/en/backup-types.html">MySQL backup documentation</a> is available online. Use the selector on the page to choose your MySQL version.</li>
+<li><a class="reference external" href="https://www.postgresql.org/docs/9.5/static/backup-dump.html">PostgreSQL backup documentation</a> is available online. Use the navigation at the top of the page to select your PostgreSQL version.</li>
 </ul>
 </div></blockquote>
 </li>
-<li><p>Back up your server settings stored in <code class="docutils literal notranslate"><span class="pre">config/config.json</span></code>.</p>
+<li><p class="first">Back up your server settings stored in <code class="docutils literal notranslate"><span class="pre">config/config.json</span></code>.</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>If you are using SAML configuration for Mattermost, your SAML certificate files will be saved in the <code class="docutils literal notranslate"><span class="pre">config</span></code> directory. Therefore, it is recommended to back up the entire directory.</p></li>
+<li>If you are using SAML configuration for Mattermost, your SAML certificate files will be saved in the <code class="docutils literal notranslate"><span class="pre">config</span></code> directory. Therefore, it is recommended to back up the entire directory.</li>
 </ul>
 </div></blockquote>
 </li>
-<li><p>Back up files stored by your users with one of the following options:</p>
+<li><p class="first">Back up files stored by your users with one of the following options:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>If you use local storage using the default <code class="docutils literal notranslate"><span class="pre">./data</span></code> directory back up this directory.</p></li>
-<li><p>If you use local storage using a non-default directory specified in the <code class="docutils literal notranslate"><span class="pre">Directory</span></code> setting in <code class="docutils literal notranslate"><span class="pre">config.json</span></code>, back up files in that location.</p></li>
-<li><p>If you store your files in S3, you can typically keep the files where they are located without backup.</p></li>
+<li>If you use local storage using the default <code class="docutils literal notranslate"><span class="pre">./data</span></code> directory back up this directory.</li>
+<li>If you use local storage using a non-default directory specified in the <code class="docutils literal notranslate"><span class="pre">Directory</span></code> setting in <code class="docutils literal notranslate"><span class="pre">config.json</span></code>, back up files in that location.</li>
+<li>If you store your files in S3, you can typically keep the files where they are located without backup.</li>
 </ul>
 </div></blockquote>
 </li>
@@ -232,10 +225,10 @@
 <h3>Automated backup<a class="headerlink" href="#automated-backup" title="Permalink to this headline">¶</a></h3>
 <p>Automating backups for a Mattermost server provides a copy of the server’s state at a particular point in time, which can be restored if a failure in the future leads to loss of data. Options include:</p>
 <ul class="simple">
-<li><p>Automation to periodically back up the Mattermost server, which may include all the components listed above or a subset depending on what you choose to protect.</p></li>
-<li><p>Automation to restore a server from backup, or deploy a new server, to reduce recovery time.</p></li>
-<li><p>Automation to verify a backup has been successfully produced to protect against backup automation failures.</p></li>
-<li><p>Storing backups off-site, to protect against physical loss of onsite systems.</p></li>
+<li>Automation to periodically back up the Mattermost server, which may include all the components listed above or a subset depending on what you choose to protect.</li>
+<li>Automation to restore a server from backup, or deploy a new server, to reduce recovery time.</li>
+<li>Automation to verify a backup has been successfully produced to protect against backup automation failures.</li>
+<li>Storing backups off-site, to protect against physical loss of onsite systems.</li>
 </ul>
 <p>Recovering from a failure using a backup is typically a manual process and will incur downtime. The alternative is to automate recovery using a high availability deployment.</p>
 </div>
@@ -243,10 +236,10 @@
 <h3>High Availability deployment<a class="headerlink" href="#high-availability-deployment" title="Permalink to this headline">¶</a></h3>
 <p>Deploying Mattermost in <a class="reference external" href="https://docs.mattermost.com/deployment/cluster.html">High Availability mode</a> allows for fast, automated recovery from component failure, such as a specific server running out of disk space or having a hardware issue, by running on redundant servers. Options include:</p>
 <ul class="simple">
-<li><p>Deploying redundant Mattermost servers, to protect against failures in the Mattermost server.</p></li>
-<li><p>Deploying redundant databases, to protect against failures in the database.</p></li>
-<li><p>Deploying redundant web proxies, to protect against failures in the web proxies.</p></li>
-<li><p>Deploying redundant infrastructure in a separate physical data center, to protect against failures in the primary data center.</p></li>
+<li>Deploying redundant Mattermost servers, to protect against failures in the Mattermost server.</li>
+<li>Deploying redundant databases, to protect against failures in the database.</li>
+<li>Deploying redundant web proxies, to protect against failures in the web proxies.</li>
+<li>Deploying redundant infrastructure in a separate physical data center, to protect against failures in the primary data center.</li>
 </ul>
 <p>A properly deployed High Availability deployment automatically switches over to a redundant system should a single server fail. High Availability does not protect against failures such as data corruption, since errors would propagate to redundant systems.</p>
 <p>A “complete” disaster recovery solution would protect against both real-time hardware failures using High Availability, data corruption failures using automation, and failures of the primary data center by offering both offsite backup and offsite redundant infrastructure. Because the complexity of a full disaster recovery solution is high, it is common for customers to consider trade-offs in cost and complexity relative to the anticipated risks and target recovery times.</p>
@@ -256,11 +249,10 @@
 <p>When using single sign-on with Mattermost Enterprise Edition an outage to your SSO provider can cause a partial outage on your Mattermost instance.</p>
 <p><strong>What happens during an SSO outage?</strong></p>
 <ul class="simple">
-<li><p><strong>Most people can still log in.</strong> By default, when a user logs in to Mattermost they receive a session token lasting 30 days (the duration can be configured in the System Console). During an SSO outage, users with valid session tokens can continue to using Mattermost uninterrupted.</p></li>
-<li><p><strong>Some people can’t log in.</strong> During an SSO outage, there are two situations under which a user cannot log in:</p>
-<ul>
-<li><p>Users whose session token expires during the outage</p></li>
-<li><p>Users trying to log in to new devices</p></li>
+<li><strong>Most people can still log in.</strong> By default, when a user logs in to Mattermost they receive a session token lasting 30 days (the duration can be configured in the System Console). During an SSO outage, users with valid session tokens can continue to using Mattermost uninterrupted.</li>
+<li><strong>Some people can’t log in.</strong> During an SSO outage, there are two situations under which a user cannot log in:<ul>
+<li>Users whose session token expires during the outage</li>
+<li>Users trying to log in to new devices</li>
 </ul>
 </li>
 </ul>
@@ -291,29 +283,29 @@
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../deployment/bleve.html" class="btn btn-neutral float-right" title="Bleve Search (Experimental)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../deployment/client-side-data.html" class="btn btn-neutral float-left" title="Client-side Data Storage FAQ" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="../deployment/bleve.html" class="btn btn-neutral float-right" title="Bleve Search (Experimental)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../deployment/client-side-data.html" class="btn btn-neutral" title="Client-side Data Storage FAQ" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2015-2020 Mattermost.
+        &copy; Copyright 2015-2020 Mattermost
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -347,16 +339,27 @@
 </div>
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
 	<header>
 	<div class="header__container">
 		<div class="search__icon">

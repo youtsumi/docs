@@ -2,46 +2,34 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Mobile Apps FAQ &mdash; Mattermost 5.30 documentation</title>
+  <title>Mobile Apps FAQ &mdash; Mattermost 5.31 documentation</title>
   
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
-
   
   
 
   
-    <link rel="canonical" href="https://docs.mattermost.com/guides/mobile-apps-faq.html" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
   
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/myscript.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-    
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../search.html" />
 	<!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -51,16 +39,21 @@
 	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
 	<!-- End Google Tag Manager -->
 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -74,7 +67,7 @@
             
             
               <div class="version">
-                5.30
+                5.31
               </div>
             
           
@@ -91,7 +84,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -111,7 +103,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -184,45 +175,45 @@
 <p>To ensure push notifications are coming from a trusted source, Apple and Google only allow push notifications sent from a service using a key or signature corresponding to a secret compiled into the mobile app itself.</p>
 <p>The full process is outlined below:</p>
 <ol class="arabic simple">
-<li><p>An action triggering a push notification is detected in the Mattermost server running in your private network.</p></li>
-<li><p>Your Mattermost server sends a push notification message to a Mattermost Push Notification Service (MPNS), either self-hosted in your private network, or publicly hosted by Mattermost, Inc.</p></li>
-<li><p>MPNS sends a push notification message to either Apple Push Notification Service (APNS) or to Google’s Firebase Cloud Messaging (FCM) service over a TLS connection.</p></li>
+<li>An action triggering a push notification is detected in the Mattermost server running in your private network.</li>
+<li>Your Mattermost server sends a push notification message to a Mattermost Push Notification Service (MPNS), either self-hosted in your private network, or publicly hosted by Mattermost, Inc.</li>
+<li>MPNS sends a push notification message to either Apple Push Notification Service (APNS) or to Google’s Firebase Cloud Messaging (FCM) service over a TLS connection.</li>
 </ol>
 <blockquote>
 <div><ul class="simple">
-<li><p>If sent to Apple, the message has a signature corresponding to a secret compiled in the iOS app.</p></li>
-<li><p>If sent to Google, the message uses a key corresponding to a secret compiled in the Android app.</p></li>
+<li>If sent to Apple, the message has a signature corresponding to a secret compiled in the iOS app.</li>
+<li>If sent to Google, the message uses a key corresponding to a secret compiled in the Android app.</li>
 </ul>
 </div></blockquote>
 <p>Regardless of whether you’re using iOS or Android, the MPNS needs to have access to the appropriate secret compiled into the mobile app.</p>
 <p>This means if you use the Mattermost apps from the Apple App Store or Google Play, you need to use the hosted push notification service from Mattermost, Inc. If you compile the apps yourself, you must also compile and use your own MPNS with the corresponding secret.</p>
 <ol class="arabic simple" start="4">
-<li><p>Either APNS or FCM receives the push notification message from MPNS over TLS, and then relays the message to the user’s iOS or Android device to be displayed.</p></li>
+<li>Either APNS or FCM receives the push notification message from MPNS over TLS, and then relays the message to the user’s iOS or Android device to be displayed.</li>
 </ol>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The use of push notifications with iOS and Android applications will require a moment where the contents of push notifications are visible and unencrypted by a server controlled by either Apple or Google. This is standard for any iOS or Android app. For this reason, there is an <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#push-notification-contents">option to omit the contents of Mattermost messages from push notifications</a>, or <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#push-notification-contents">to configure message content to be fetched from the server</a> when the notification reaches the device (<em>available in Enterprise Edition E20</em>) in order to meet certain compliance requirements.</p>
+<p class="first admonition-title">Note</p>
+<p class="last">The use of push notifications with iOS and Android applications will require a moment where the contents of push notifications are visible and unencrypted by a server controlled by either Apple or Google. This is standard for any iOS or Android app. For this reason, there is an <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#push-notification-contents">option to omit the contents of Mattermost messages from push notifications</a>, or <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#push-notification-contents">to configure message content to be fetched from the server</a> when the notification reaches the device (<em>available in Enterprise Edition E20</em>) in order to meet certain compliance requirements.</p>
 </div>
 </div>
 <div class="section" id="what-post-metadata-is-sent-in-mobile-push-notifications">
 <h2>What post metadata is sent in mobile push notifications?<a class="headerlink" href="#what-post-metadata-is-sent-in-mobile-push-notifications" title="Permalink to this headline">¶</a></h2>
 <p>The following post metadata is sent in all push notifications:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Team</span> <span class="pre">ID</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Channel</span> <span class="pre">ID</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Post</span> <span class="pre">ID</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">User</span> <span class="pre">ID</span></code> (post author)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Username</span></code> (post author or webhook override username)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Root</span> <span class="pre">ID</span></code> (only if the post is in a thread)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Type</span></code> (create or clear push notification)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Category</span></code> (iOS only, determines if the notifications can be replied to)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Badge</span> <span class="pre">number</span></code> (what the notification badge on the app icon should be set to when the notification is received)</p></li>
+<li><code class="docutils literal notranslate"><span class="pre">Team</span> <span class="pre">ID</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">Channel</span> <span class="pre">ID</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">Post</span> <span class="pre">ID</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">User</span> <span class="pre">ID</span></code> (post author)</li>
+<li><code class="docutils literal notranslate"><span class="pre">Username</span></code> (post author or webhook override username)</li>
+<li><code class="docutils literal notranslate"><span class="pre">Root</span> <span class="pre">ID</span></code> (only if the post is in a thread)</li>
+<li><code class="docutils literal notranslate"><span class="pre">Type</span></code> (create or clear push notification)</li>
+<li><code class="docutils literal notranslate"><span class="pre">Category</span></code> (iOS only, determines if the notifications can be replied to)</li>
+<li><code class="docutils literal notranslate"><span class="pre">Badge</span> <span class="pre">number</span></code> (what the notification badge on the app icon should be set to when the notification is received)</li>
 </ul>
 <p>Additional metadata may be sent depending on the System Console setting for <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#push-notification-contents">Push Notification Contents</a>:</p>
 <ul class="simple">
-<li><p><strong>Generic description with sender and channel names:</strong> <code class="docutils literal notranslate"><span class="pre">Channel</span> <span class="pre">name</span></code> metadata will be included.</p></li>
-<li><p><strong>Full message content sent in the notification payload:</strong> <code class="docutils literal notranslate"><span class="pre">Post</span> <span class="pre">content</span></code> and <code class="docutils literal notranslate"><span class="pre">Channel</span> <span class="pre">name</span></code> metadata will be included.</p></li>
-<li><p><strong>Full message content fetched from the server on receipt (*available in Enterprise Edition E20*):</strong> <code class="docutils literal notranslate"><span class="pre">Post</span> <span class="pre">content</span></code> and <code class="docutils literal notranslate"><span class="pre">Channel</span> <span class="pre">name</span></code> are not included in the notification payload. Instead the <code class="docutils literal notranslate"><span class="pre">Post</span> <span class="pre">ID</span></code> is used to fetch <code class="docutils literal notranslate"><span class="pre">Post</span> <span class="pre">content</span></code> and <code class="docutils literal notranslate"><span class="pre">Channel</span> <span class="pre">name</span></code> from the server after the push notification is received on the device.</p></li>
+<li><strong>Generic description with sender and channel names:</strong> <code class="docutils literal notranslate"><span class="pre">Channel</span> <span class="pre">name</span></code> metadata will be included.</li>
+<li><strong>Full message content sent in the notification payload:</strong> <code class="docutils literal notranslate"><span class="pre">Post</span> <span class="pre">content</span></code> and <code class="docutils literal notranslate"><span class="pre">Channel</span> <span class="pre">name</span></code> metadata will be included.</li>
+<li><strong>Full message content fetched from the server on receipt (*available in Enterprise Edition E20*):</strong> <code class="docutils literal notranslate"><span class="pre">Post</span> <span class="pre">content</span></code> and <code class="docutils literal notranslate"><span class="pre">Channel</span> <span class="pre">name</span></code> are not included in the notification payload. Instead the <code class="docutils literal notranslate"><span class="pre">Post</span> <span class="pre">ID</span></code> is used to fetch <code class="docutils literal notranslate"><span class="pre">Post</span> <span class="pre">content</span></code> and <code class="docutils literal notranslate"><span class="pre">Channel</span> <span class="pre">name</span></code> from the server after the push notification is received on the device.</li>
 </ul>
 </div>
 <div class="section" id="how-can-i-use-id-only-push-notifications-to-protect-notification-content-from-being-exposed-to-third-party-services">
@@ -235,20 +226,20 @@
 <h2>What are my options for securing the mobile apps?<a class="headerlink" href="#what-are-my-options-for-securing-the-mobile-apps" title="Permalink to this headline">¶</a></h2>
 <p>The following options for secure mobile app deployments are available:</p>
 <ol class="arabic simple">
-<li><p>Securing network connection to mobile apps</p></li>
+<li>Securing network connection to mobile apps</li>
 </ol>
 <blockquote>
 <div><ul class="simple">
-<li><p>Use HTTPS and WSS network connections to encrypt transport.</p></li>
-<li><p>Use of a mobile VPN client on mobile devices to establish secure connection to Mattermost server within private network.</p></li>
+<li>Use HTTPS and WSS network connections to encrypt transport.</li>
+<li>Use of a mobile VPN client on mobile devices to establish secure connection to Mattermost server within private network.</li>
 </ul>
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li><p>Use multifactor authentication options</p></li>
+<li>Use multifactor authentication options</li>
 </ol>
 <blockquote>
 <div><ul class="simple">
-<li><p>If a VPN client with multifactor authentication is not in use, it’s highly recommended that MFA is required on authenticating into Mattermost, either within Mattermost itself or via your SSO provider.</p></li>
+<li>If a VPN client with multifactor authentication is not in use, it’s highly recommended that MFA is required on authenticating into Mattermost, either within Mattermost itself or via your SSO provider.</li>
 </ul>
 </div></blockquote>
 </div>
@@ -256,46 +247,45 @@
 <h2>What are my options for securing push notifications?<a class="headerlink" href="#what-are-my-options-for-securing-push-notifications" title="Permalink to this headline">¶</a></h2>
 <p>The following options are available for securing your push notification service:</p>
 <ol class="arabic simple">
-<li><p>Protecting notification contents</p></li>
+<li>Protecting notification contents</li>
 </ol>
 <blockquote>
 <div><ul class="simple">
-<li><p>You can <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#push-notification-contents">choose what type of information to include in push notifications</a>, such as excluding the message contents if your compliance policies require it. Default server settings have message contents turned off.</p></li>
+<li>You can <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#push-notification-contents">choose what type of information to include in push notifications</a>, such as excluding the message contents if your compliance policies require it. Default server settings have message contents turned off.</li>
 </ul>
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li><p>Disabling push notifications</p></li>
+<li>Disabling push notifications</li>
 </ol>
 <blockquote>
 <div><ul class="simple">
-<li><p>Push notifications can also be disabled entirely depending on security requirements. Default server settings have push notifications disabled.</p></li>
+<li>Push notifications can also be disabled entirely depending on security requirements. Default server settings have push notifications disabled.</li>
 </ul>
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p>Encrypting connections for apps you compile yourself:</p></li>
+<li>Encrypting connections for apps you compile yourself:</li>
 </ol>
 <blockquote>
 <div><ul class="simple">
-<li><p>When using a privately-hosted Mattermost Push Notification Service (MPNS), use encrypted TLS connections between:</p>
-<ul>
-<li><p>MNPS and Apple Push Notification Service (APNS)</p></li>
-<li><p>MPNS and Google’s Firebase Cloud Messaging (FCM)</p></li>
-<li><p>MPNS and your Mattermost server</p></li>
+<li>When using a privately-hosted Mattermost Push Notification Service (MPNS), use encrypted TLS connections between:<ul>
+<li>MNPS and Apple Push Notification Service (APNS)</li>
+<li>MPNS and Google’s Firebase Cloud Messaging (FCM)</li>
+<li>MPNS and your Mattermost server</li>
 </ul>
 </li>
 </ul>
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li><p>Securing the Mattermost Apple App Store and Google Play apps:</p></li>
+<li>Securing the Mattermost Apple App Store and Google Play apps:</li>
 </ol>
 <blockquote>
 <div><ul class="simple">
-<li><p>When using Mattermost mobile apps from the App Store and Google Play, purchase an annual subscription to Mattermost Enterprise Edition E10 or higher, which offers a <span class="xref std std-doc">Hosted Push Notification Service (HPNS)</span>.</p></li>
+<li>When using Mattermost mobile apps from the App Store and Google Play, purchase an annual subscription to Mattermost Enterprise Edition E10 or higher, which offers a <span class="xref std std-doc">Hosted Push Notification Service (HPNS)</span>.</li>
 </ul>
 </div></blockquote>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>For configuration details, see guides for <span class="xref std std-doc">deploying the Mattermost App Store and Google Play apps</span> and <span class="xref std std-doc">deploying your own version of the apps</span>.</p>
+<p class="first admonition-title">Note</p>
+<p class="last">For configuration details, see guides for <span class="xref std std-doc">deploying the Mattermost App Store and Google Play apps</span> and <span class="xref std std-doc">deploying your own version of the apps</span>.</p>
 </div>
 </div>
 <div class="section" id="why-do-i-sometimes-see-a-delay-in-receiving-a-push-notification">
@@ -303,12 +293,12 @@
 <p><a class="reference external" href="https://developer.apple.com/library/archive/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/APNSOverview.html#//apple_ref/doc/uid/TP40008194-CH8-SW1">Apple Push Notification Service (APNS)</a> and <a class="reference external" href="https://firebase.google.com/docs/cloud-messaging">Google Fire Cloud Messaging (FCM)</a> determine when your device receives a push notification from Mattermost. Thus, a delay is usually as a result of those services.</p>
 <p>The technical flow for the device to receive a push notification is as follows:</p>
 <ol class="arabic simple">
-<li><p>User posts a message in Mattermost.</p></li>
-<li><p>Mattermost server identifies if notifications needs to be sent.</p></li>
-<li><p>If yes, Mattermost server sends a payload containing the push notification to the push proxy.</p></li>
-<li><p>The push proxy parses the notification and relays it to APNS and FCM.</p></li>
-<li><p>APNS and FCM informs the relevant devices that there is a push notification for Mattermost. This usually happens almost immediately, but may be delayed by a couple of minutes.</p></li>
-<li><p>Mattermost processes the notification and displays it on the user’s device.</p></li>
+<li>User posts a message in Mattermost.</li>
+<li>Mattermost server identifies if notifications needs to be sent.</li>
+<li>If yes, Mattermost server sends a payload containing the push notification to the push proxy.</li>
+<li>The push proxy parses the notification and relays it to APNS and FCM.</li>
+<li>APNS and FCM informs the relevant devices that there is a push notification for Mattermost. This usually happens almost immediately, but may be delayed by a couple of minutes.</li>
+<li>Mattermost processes the notification and displays it on the user’s device.</li>
 </ol>
 </div>
 <div class="section" id="how-do-i-deploy-mattermost-with-enterprise-mobility-management-emm-providers">
@@ -320,9 +310,9 @@
 <h2>How do I host the Mattermost push notification service?<a class="headerlink" href="#how-do-i-host-the-mattermost-push-notification-service" title="Permalink to this headline">¶</a></h2>
 <p>First, you can use the <span class="xref std std-doc">Mattermost Hosted Push Notification Service (HPNS)</span>. Organizations can also <a class="reference external" href="https://developers.mattermost.com/contribute/mobile/push-notifications/service/">host their own push proxy server instead</a>. This is applicable when you want to:</p>
 <ol class="arabic simple">
-<li><p>Customize the <a class="reference external" href="https://developers.mattermost.com/contribute/mobile/build-your-own/">Mattermost mobile apps</a>;</p></li>
-<li><p>Deploy your own push notification service, or</p></li>
-<li><p>Repackage the mobile apps with BlueCedar or AppDome (both of which are not officially supported but have been successfully deployed by some organizations).</p></li>
+<li>Customize the <a class="reference external" href="https://developers.mattermost.com/contribute/mobile/build-your-own/">Mattermost mobile apps</a>;</li>
+<li>Deploy your own push notification service, or</li>
+<li>Repackage the mobile apps with BlueCedar or AppDome (both of which are not officially supported but have been successfully deployed by some organizations).</li>
 </ol>
 </div>
 <div class="section" id="how-do-i-receive-mobile-push-notifications-if-my-it-policy-requires-the-use-of-a-corporate-proxy-server">
@@ -333,9 +323,9 @@
 <h2>How do I white label the app and customize build settings?<a class="headerlink" href="#how-do-i-white-label-the-app-and-customize-build-settings" title="Permalink to this headline">¶</a></h2>
 <p>All files in the <code class="docutils literal notranslate"><span class="pre">/assets/base</span></code> folder can be overriden as needed without conflicting with changes made to the upstream version of the app. To do this:</p>
 <ol class="arabic simple">
-<li><p>Create the folder <code class="docutils literal notranslate"><span class="pre">/assets/override</span></code>.</p></li>
-<li><p>Copy any files or folders that you wish to replace from <code class="docutils literal notranslate"><span class="pre">/assets/base</span></code> into <code class="docutils literal notranslate"><span class="pre">/assets/override</span></code>.</p></li>
-<li><p>Make your changes to the files in <code class="docutils literal notranslate"><span class="pre">/assets/override</span></code>.</p></li>
+<li>Create the folder <code class="docutils literal notranslate"><span class="pre">/assets/override</span></code>.</li>
+<li>Copy any files or folders that you wish to replace from <code class="docutils literal notranslate"><span class="pre">/assets/base</span></code> into <code class="docutils literal notranslate"><span class="pre">/assets/override</span></code>.</li>
+<li>Make your changes to the files in <code class="docutils literal notranslate"><span class="pre">/assets/override</span></code>.</li>
 </ol>
 <p>When you compile the app or run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">dist/assets</span></code>, the contents of those two folders will be merged with files in <code class="docutils literal notranslate"><span class="pre">/assets/override</span></code>, taking precedence in the case of any conflicts. For binary files such as images, an overridden file will completely replace the base version, while <code class="docutils literal notranslate"><span class="pre">JSON</span></code> files will be merged so that fields not set in the overridden copy use the base version.</p>
 <p>For a more specific example of how to use this feature, see the following section.</p>
@@ -344,12 +334,12 @@
 <h2>How do I preconfigure the server URL for my users?<a class="headerlink" href="#how-do-i-preconfigure-the-server-url-for-my-users" title="Permalink to this headline">¶</a></h2>
 <p>You can preconfigure the server URL and other settings by overriding default <code class="docutils literal notranslate"><span class="pre">config.json</span></code> settings and building the mobile apps yourself.</p>
 <ol class="arabic simple">
-<li><p>Fork the <a class="reference external" href="https://github.com/mattermost/mattermost-mobile">mattermost-mobile repository</a>.</p></li>
-<li><p>Create the file <code class="docutils literal notranslate"><span class="pre">/assets/override/config.json</span></code> in your forked mattermost-mobile repository.</p></li>
-<li><p>Copy and paste all the settings from <code class="docutils literal notranslate"><span class="pre">assets/base/config.json</span></code> to the newly-created <code class="docutils literal notranslate"><span class="pre">/assets/override/config.json</span></code> file that you want to override.</p></li>
-<li><p>To override the server URL, set <code class="docutils literal notranslate"><span class="pre">DefaultServerURL</span></code> to the server URL of your Mattermost server in <code class="docutils literal notranslate"><span class="pre">/assets/override/config.json</span></code>.</p></li>
-<li><p>(Optional) If you want to prevent users from changing the server URL, set <code class="docutils literal notranslate"><span class="pre">AutoSelectServerUrl</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
-<li><p>(Optional) Override any other settings you like.</p></li>
+<li>Fork the <a class="reference external" href="https://github.com/mattermost/mattermost-mobile">mattermost-mobile repository</a>.</li>
+<li>Create the file <code class="docutils literal notranslate"><span class="pre">/assets/override/config.json</span></code> in your forked mattermost-mobile repository.</li>
+<li>Copy and paste all the settings from <code class="docutils literal notranslate"><span class="pre">assets/base/config.json</span></code> to the newly-created <code class="docutils literal notranslate"><span class="pre">/assets/override/config.json</span></code> file that you want to override.</li>
+<li>To override the server URL, set <code class="docutils literal notranslate"><span class="pre">DefaultServerURL</span></code> to the server URL of your Mattermost server in <code class="docutils literal notranslate"><span class="pre">/assets/override/config.json</span></code>.</li>
+<li>(Optional) If you want to prevent users from changing the server URL, set <code class="docutils literal notranslate"><span class="pre">AutoSelectServerUrl</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</li>
+<li>(Optional) Override any other settings you like.</li>
 </ol>
 <p>After the above, your <code class="docutils literal notranslate"><span class="pre">/assets/override/config.json</span></code> file would look something like this:</p>
 <blockquote>
@@ -362,7 +352,7 @@
 </div>
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li><p>Finally, <a class="reference external" href="https://docs.mattermost.com/mobile/mobile-compile-yourself.html">compile your own version</a> of the Mattermost mobile app and Mattermost push proxy server.</p></li>
+<li>Finally, <a class="reference external" href="https://docs.mattermost.com/mobile/mobile-compile-yourself.html">compile your own version</a> of the Mattermost mobile app and Mattermost push proxy server.</li>
 </ol>
 </div>
 <div class="section" id="how-can-i-get-google-sso-to-work-with-the-mattermost-mobile-app">
@@ -375,7 +365,7 @@
 <p>The app checks for platform-specific configuration on app install. If no configuration is found, then the deep linking code sits silently and permalinks act as regular links.</p>
 <p><strong>Set up for iOS</strong></p>
 <ol class="arabic simple">
-<li><p>Create an <code class="docutils literal notranslate"><span class="pre">apple-app-site-association</span></code> file in the <code class="docutils literal notranslate"><span class="pre">.well-known</span></code> directory at the root of your server. It should be accessible by navigating to <code class="docutils literal notranslate"><span class="pre">https://&lt;your-site-name&gt;/.well-known/apple-app-site-association</span></code>. There should not be a file extension.</p></li>
+<li>Create an <code class="docutils literal notranslate"><span class="pre">apple-app-site-association</span></code> file in the <code class="docutils literal notranslate"><span class="pre">.well-known</span></code> directory at the root of your server. It should be accessible by navigating to <code class="docutils literal notranslate"><span class="pre">https://&lt;your-site-name&gt;/.well-known/apple-app-site-association</span></code>. There should not be a file extension.</li>
 </ol>
 <p>2. In order to handle deep links, paste the following <code class="docutils literal notranslate"><span class="pre">JSON</span></code> into the <code class="docutils literal notranslate"><span class="pre">apple-app-site-association</span></code> file. Make sure to place your app ID in the <code class="docutils literal notranslate"><span class="pre">appID</span></code> property:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -392,9 +382,9 @@
 </pre></div>
 </div>
 <ol class="arabic simple" start="3">
-<li><p>Add the associated domains entitlement to your app via the Apple developer portal.</p></li>
-<li><p>Add an entitlement that specifies the domains your app supports via the Xcode entitlements manager.</p></li>
-<li><p>Before installing the app with the new entitlement, make sure that you can view the contents of the <code class="docutils literal notranslate"><span class="pre">apple-app-site-association</span></code> file via a browser by navigating to <code class="docutils literal notranslate"><span class="pre">https://&lt;your-site-name&gt;/.well-known/apple-app-site-association</span></code>. The app will check for this file on install and, if found, will allow outside permalinks to open the app.</p></li>
+<li>Add the associated domains entitlement to your app via the Apple developer portal.</li>
+<li>Add an entitlement that specifies the domains your app supports via the Xcode entitlements manager.</li>
+<li>Before installing the app with the new entitlement, make sure that you can view the contents of the <code class="docutils literal notranslate"><span class="pre">apple-app-site-association</span></code> file via a browser by navigating to <code class="docutils literal notranslate"><span class="pre">https://&lt;your-site-name&gt;/.well-known/apple-app-site-association</span></code>. The app will check for this file on install and, if found, will allow outside permalinks to open the app.</li>
 </ol>
 <p>Official documentation for configuring deep linking on iOS can be found <a class="reference external" href="https://developer.apple.com/library/archive/documentation/General/Conceptual/AppSearch/UniversalLinks.html">here</a>.</p>
 <p><strong>Set up for Android</strong></p>
@@ -405,8 +395,8 @@
 <p>By setting up global network traffic management, you can send a user to an internal or external network when connecting with a mobile app. Moreover, you can have two separate layers of restrictions on internal and external traffic, such as:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>In the internal network, deploy on a private network via per device VPN.</p></li>
-<li><p>In the external network, deploy with <a class="reference external" href="https://docs.mattermost.com/deployment/ssl-client-certificate.html">TLS mutual auth</a> with an NGINX proxy, and <a class="reference external" href="https://docs.mattermost.com/deployment/certificate-based-authentication.html">client-side certificates</a> for desktop and iOS.</p></li>
+<li>In the internal network, deploy on a private network via per device VPN.</li>
+<li>In the external network, deploy with <a class="reference external" href="https://docs.mattermost.com/deployment/ssl-client-certificate.html">TLS mutual auth</a> with an NGINX proxy, and <a class="reference external" href="https://docs.mattermost.com/deployment/certificate-based-authentication.html">client-side certificates</a> for desktop and iOS.</li>
 </ul>
 </div></blockquote>
 <p>Many services such as Microsoft Azure provide options for <a class="reference external" href="https://docs.microsoft.com/en-us/azure/traffic-manager/traffic-manager-overview">managing network traffic</a>, or you can engage a services partner to assist.</p>
@@ -418,25 +408,20 @@
            
           </div>
           <footer>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2015-2020 Mattermost.
+        &copy; Copyright 2015-2020 Mattermost
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -470,16 +455,27 @@
 </div>
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
 	<header>
 	<div class="header__container">
 		<div class="search__icon">

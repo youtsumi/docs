@@ -2,46 +2,34 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>User Experience Guidelines &mdash; Mattermost 5.30 documentation</title>
+  <title>User Experience Guidelines &mdash; Mattermost 5.31 documentation</title>
   
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
-
   
   
 
   
-    <link rel="canonical" href="https://docs.mattermost.com/developer/fx-guidelines.html" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
   
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/myscript.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-    
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../search.html" />
 	<!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -51,16 +39,21 @@
 	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
 	<!-- End Google Tag Manager -->
 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -74,7 +67,7 @@
             
             
               <div class="version">
-                5.30
+                5.31
               </div>
             
           
@@ -91,7 +84,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -111,7 +103,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -160,47 +151,43 @@
 <p>If you’re interested in contributing to design discussions, please join the <a class="reference external" href="https://community.mattermost.com/core/channels/ux-design">Mattermost UX Design channel to discuss</a>.</p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#design-principles" id="id1">Design Principles</a></p>
-<ul>
-<li><p><a class="reference internal" href="#fast-obvious-forgiving" id="id2">1) Fast, Obvious, Forgiving</a></p></li>
-<li><p><a class="reference internal" href="#international-compatible-priority-focused" id="id3">2) International, Compatible, Priority-focused</a></p></li>
+<li><a class="reference internal" href="#design-principles" id="id1">Design Principles</a><ul>
+<li><a class="reference internal" href="#fast-obvious-forgiving" id="id2">1) Fast, Obvious, Forgiving</a></li>
+<li><a class="reference internal" href="#international-compatible-priority-focused" id="id3">2) International, Compatible, Priority-focused</a></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#technical-guidelines" id="id4">Technical Guidelines</a></p>
-<ul>
-<li><p><a class="reference internal" href="#plugins" id="id5">Plugins</a></p></li>
-<li><p><a class="reference internal" href="#bootstrap-classes" id="id6">Bootstrap Classes</a></p></li>
-<li><p><a class="reference internal" href="#custom-styles" id="id7">Custom Styles</a></p></li>
+<li><a class="reference internal" href="#technical-guidelines" id="id4">Technical Guidelines</a><ul>
+<li><a class="reference internal" href="#plugins" id="id5">Plugins</a></li>
+<li><a class="reference internal" href="#bootstrap-classes" id="id6">Bootstrap Classes</a></li>
+<li><a class="reference internal" href="#custom-styles" id="id7">Custom Styles</a></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#screen-and-content-dimensions" id="id8">Screen and Content Dimensions</a></p>
-<ul>
-<li><p><a class="reference internal" href="#web-desktop-app" id="id9">Web/Desktop App</a></p></li>
-<li><p><a class="reference internal" href="#mobile-app" id="id10">Mobile App</a></p></li>
+<li><a class="reference internal" href="#screen-and-content-dimensions" id="id8">Screen and Content Dimensions</a><ul>
+<li><a class="reference internal" href="#web-desktop-app" id="id9">Web/Desktop App</a></li>
+<li><a class="reference internal" href="#mobile-app" id="id10">Mobile App</a></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#ux-feedback-guidelines" id="id11">UX Feedback Guidelines</a></p></li>
-<li><p><a class="reference internal" href="#design-guidelines" id="id12">Design Guidelines</a></p>
-<ul>
-<li><p><a class="reference internal" href="#display-alignment" id="id13">Display: Alignment</a></p></li>
-<li><p><a class="reference internal" href="#display-button-placement" id="id14">Display: Button Placement</a></p></li>
-<li><p><a class="reference internal" href="#display-button-states" id="id15">Display: Button States</a></p></li>
-<li><p><a class="reference internal" href="#display-icons" id="id16">Display: Icons</a></p></li>
-<li><p><a class="reference internal" href="#display-instructions" id="id17">Display: Instructions</a></p></li>
-<li><p><a class="reference internal" href="#display-tooltips" id="id18">Display: Tooltips</a></p></li>
-<li><p><a class="reference internal" href="#display-username-display" id="id19">Display: Username display</a></p></li>
-<li><p><a class="reference internal" href="#display-number-of-choices" id="id20">Display: Number of Choices</a></p></li>
-<li><p><a class="reference internal" href="#feedback-error-messages" id="id21">Feedback: Error Messages</a></p></li>
-<li><p><a class="reference internal" href="#feedback-system-notice" id="id22">Feedback: System Notice</a></p></li>
-<li><p><a class="reference internal" href="#input-fields" id="id23">Input: Fields</a></p></li>
-<li><p><a class="reference internal" href="#input-hints" id="id24">Input: Hints</a></p></li>
-<li><p><a class="reference internal" href="#input-input-patterns" id="id25">Input: Input Patterns</a></p></li>
-<li><p><a class="reference internal" href="#input-validation" id="id26">Input: Validation</a></p></li>
-<li><p><a class="reference internal" href="#menu-items" id="id27">Menu items</a></p></li>
-<li><p><a class="reference internal" href="#notifications-header-bar" id="id28">Notifications: Header Bar</a></p></li>
-<li><p><a class="reference internal" href="#markdown-rendering" id="id29">Markdown Rendering</a></p></li>
-<li><p><a class="reference internal" href="#organization-reduce-obvious-steps" id="id30">Organization: Reduce Obvious Steps</a></p></li>
-<li><p><a class="reference internal" href="#testing-checklist" id="id31">Testing Checklist</a></p></li>
+<li><a class="reference internal" href="#ux-feedback-guidelines" id="id11">UX Feedback Guidelines</a></li>
+<li><a class="reference internal" href="#design-guidelines" id="id12">Design Guidelines</a><ul>
+<li><a class="reference internal" href="#display-alignment" id="id13">Display: Alignment</a></li>
+<li><a class="reference internal" href="#display-button-placement" id="id14">Display: Button Placement</a></li>
+<li><a class="reference internal" href="#display-button-states" id="id15">Display: Button States</a></li>
+<li><a class="reference internal" href="#display-icons" id="id16">Display: Icons</a></li>
+<li><a class="reference internal" href="#display-instructions" id="id17">Display: Instructions</a></li>
+<li><a class="reference internal" href="#display-tooltips" id="id18">Display: Tooltips</a></li>
+<li><a class="reference internal" href="#display-username-display" id="id19">Display: Username display</a></li>
+<li><a class="reference internal" href="#display-number-of-choices" id="id20">Display: Number of Choices</a></li>
+<li><a class="reference internal" href="#feedback-error-messages" id="id21">Feedback: Error Messages</a></li>
+<li><a class="reference internal" href="#feedback-system-notice" id="id22">Feedback: System Notice</a></li>
+<li><a class="reference internal" href="#input-fields" id="id23">Input: Fields</a></li>
+<li><a class="reference internal" href="#input-hints" id="id24">Input: Hints</a></li>
+<li><a class="reference internal" href="#input-input-patterns" id="id25">Input: Input Patterns</a></li>
+<li><a class="reference internal" href="#input-validation" id="id26">Input: Validation</a></li>
+<li><a class="reference internal" href="#menu-items" id="id27">Menu items</a></li>
+<li><a class="reference internal" href="#notifications-header-bar" id="id28">Notifications: Header Bar</a></li>
+<li><a class="reference internal" href="#markdown-rendering" id="id29">Markdown Rendering</a></li>
+<li><a class="reference internal" href="#organization-reduce-obvious-steps" id="id30">Organization: Reduce Obvious Steps</a></li>
+<li><a class="reference internal" href="#testing-checklist" id="id31">Testing Checklist</a></li>
 </ul>
 </li>
 </ul>
@@ -241,26 +228,26 @@
 <p>By default, every new feature should be a plugin. Why?</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Isolates complexity.</p></li>
-<li><p>Disabled by default and must be turned on by a System Admin.</p></li>
-<li><p>Grows the plugin ecosystem with better support for external plugins.</p></li>
+<li>Isolates complexity.</li>
+<li>Disabled by default and must be turned on by a System Admin.</li>
+<li>Grows the plugin ecosystem with better support for external plugins.</li>
 </ul>
 </div></blockquote>
 <p>Reasons you might not want to write a plugin:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>The feature requires high performance access.</p></li>
-<li><p>The feature would be used or extended by a plugin (e.g. bot accounts or Account Settings modal).</p></li>
-<li><p>The feature would be used by every Mattermost instance (e.g. flagged messages, replies).</p></li>
+<li>The feature requires high performance access.</li>
+<li>The feature would be used or extended by a plugin (e.g. bot accounts or Account Settings modal).</li>
+<li>The feature would be used by every Mattermost instance (e.g. flagged messages, replies).</li>
 </ul>
 </div></blockquote>
 <p>Reasons to write a plugin:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>To customize the Mattermost user interface.</p></li>
-<li><p>To extend Mattermost functionality to meet a specific, complex requirement.</p></li>
-<li><p>To build integrations that are managed by your Mattermost server.</p></li>
-<li><p>To prototype a new feature with a plugin.</p></li>
+<li>To customize the Mattermost user interface.</li>
+<li>To extend Mattermost functionality to meet a specific, complex requirement.</li>
+<li>To build integrations that are managed by your Mattermost server.</li>
+<li>To prototype a new feature with a plugin.</li>
 </ul>
 </div></blockquote>
 </div>
@@ -282,14 +269,14 @@
 <p>For desktop view:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>The target screen sizes are 1280 x 800 or 1920 x 1080. Note that the space available for content will be smaller than this due to the the frame of the window and system-specific components like the taskbar on Windows. For example, the desktop app on Windows 10 only has a usable height of 717 pixels when the tab bar is visible at 1280 x 800 resolution.</p></li>
-<li><p>The minimum content size is 769 x 600. When the width is 768 or less, the app switches to mobile view. When the height is below 600, UI elements may become misplaced.</p></li>
+<li>The target screen sizes are 1280 x 800 or 1920 x 1080. Note that the space available for content will be smaller than this due to the the frame of the window and system-specific components like the taskbar on Windows. For example, the desktop app on Windows 10 only has a usable height of 717 pixels when the tab bar is visible at 1280 x 800 resolution.</li>
+<li>The minimum content size is 769 x 600. When the width is 768 or less, the app switches to mobile view. When the height is below 600, UI elements may become misplaced.</li>
 </ul>
 </div></blockquote>
 <p>For mobile view:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>The minimum and target content size is 320 x 460, matching the available space when the app is opened in Safari on an iPhone 5.</p></li>
+<li>The minimum and target content size is 320 x 460, matching the available space when the app is opened in Safari on an iPhone 5.</li>
 </ul>
 </div></blockquote>
 </div>
@@ -298,7 +285,7 @@
 <p>At this time, the mobile app only supports an equivalent of mobile view. In that view:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>The minimum and target content size is 320 x 568, matching the screen size of an iPhone 5. Note that you’ll still need to leave space for system-specific components like the status bar or soft buttons on iOS, but much more of the screen is usable.</p></li>
+<li>The minimum and target content size is 320 x 568, matching the screen size of an iPhone 5. Note that you’ll still need to leave space for system-specific components like the status bar or soft buttons on iOS, but much more of the screen is usable.</li>
 </ul>
 </div></blockquote>
 </div>
@@ -312,25 +299,21 @@
 <p><strong>Entry-level UX feedback:</strong> Authentic questions or suggestions for design changes, presented with good intentions, coming from personal preferences with less than 2 minutes spent thinking about the pros and cons of the changes the feedback suggests.</p>
 <p>Example 1: Well intentioned suggestion that does not consider pros and cons.</p>
 <blockquote>
-<div><p>Why not change channel length from 22 characters to 50 characters?</p>
-</div></blockquote>
+<div>Why not change channel length from 22 characters to 50 characters?</div></blockquote>
 <p>Example 2: Attempt to help provide “input” in a design discussion, but instead of using objective criteria such as audience, community, customers, examples, research or principles, expresses a political “vote” that may bias or confuse a design discussion.</p>
 <blockquote>
-<div><p>+1, that is my personal preference!</p>
-</div></blockquote>
+<div>+1, that is my personal preference!</div></blockquote>
 <p>While it’s important to welcome people sharing entry-level feedback, and to extract from it useful ideas where possible, if entry-level feedback begins to unintentionally shut out more constructive feedback, a private note might be sent to the contributor with something like: “Highly appreciate your good intentions to share UX feedback. May I ask your help to review Mattermost’s UX Feedback Guidelines (link)?”</p>
 <p><strong>Intermediate UX feedback:</strong> - Comments, critique or questions about design with thoughtful consideration–including trade-offs–of the goal and principles of a design, along with UX principles of the project, and patterns from other products.</p>
 <p>Feedback speaks for itself, with relevant references to principles, audience, research and other objective criteria. May include descriptions of experience using the feature or similar features that can be generalized to the intended audience:</p>
 <p>Example: Thoughtful suggestion listing trade-offs that reference principles.</p>
 <blockquote>
-<div><p>What if we used a reply icon, similar to replies in email, for the comment function? Screenshots below. Pros: a) More familiar to email users. b) More distinct than the word balloon icon typically used for “Comment”, which is too easily confused for “Message”.  Cons: i) We use the symbol of “Reply” for “Comment” (the UI has an “Add Comment” button in the UI), which could be confusing. ii) When we add a “Forward” icon later to move a message to a different channel, the “Reply” and “Forward” metaphors may get muddled”.</p>
-</div></blockquote>
+<div>What if we used a reply icon, similar to replies in email, for the comment function? Screenshots below. Pros: a) More familiar to email users. b) More distinct than the word balloon icon typically used for “Comment”, which is too easily confused for “Message”.  Cons: i) We use the symbol of “Reply” for “Comment” (the UI has an “Add Comment” button in the UI), which could be confusing. ii) When we add a “Forward” icon later to move a message to a different channel, the “Reply” and “Forward” metaphors may get muddled”.</div></blockquote>
 <p>UX feedback at intermediate level or higher is highly appreciated. It should be encouraged and recognized as a substantial contribution to the design process.</p>
 <p><strong>Advanced UX feedback:</strong> - Constructive feedback that enlightens a design discussion, shares fact-based heuristics, helps clear blindspots and inconsistencies, and significantly improves a design, and potentially design guidelines. Analysis naturally considers variations needed across web, PC and mobile experiences.</p>
 <p>Example: Noticing a design issue and influencing a change in UX guidelines to correct things system-wide.</p>
 <blockquote>
-<div><p>A menu with 10 items without groupings seems too long. Both Apple (link) and Windows (link) user interface guidelines suggest fewer than 7 options before grouping. I’d propose we use fewer than 5. There’s research showing 5 items as a number most people can comfortably store mentally (link), and looking through other products I don’t see situations where we wouldn’t be able to group by 5. Also, fewer menu items, perhaps through sub-menus, should also help mobile experience, where ungrouped 10-item menus just look messy. I’ve added a PR on UX guidelines where we can discuss this as well.</p>
-</div></blockquote>
+<div>A menu with 10 items without groupings seems too long. Both Apple (link) and Windows (link) user interface guidelines suggest fewer than 7 options before grouping. I’d propose we use fewer than 5. There’s research showing 5 items as a number most people can comfortably store mentally (link), and looking through other products I don’t see situations where we wouldn’t be able to group by 5. Also, fewer menu items, perhaps through sub-menus, should also help mobile experience, where ungrouped 10-item menus just look messy. I’ve added a PR on UX guidelines where we can discuss this as well.</div></blockquote>
 </div>
 <hr class="docutils" />
 <div class="section" id="design-guidelines">
@@ -345,10 +328,12 @@
 <blockquote>
 <div><p><strong>Examples:</strong></p>
 <blockquote>
-<div><dl>
-<dt>Button positioned in the middle of the header.</dt><dd><a class="reference internal image-reference" href="../_images/align1.jpg"><img alt="Button positioning" src="../_images/align1.jpg" style="width: 500px;" /></a>
+<div><dl class="docutils">
+<dt>Button positioned in the middle of the header.</dt>
+<dd><a class="first last reference internal image-reference" href="../_images/align1.jpg"><img alt="Button positioning" src="../_images/align1.jpg" style="width: 500px;" /></a>
 </dd>
-<dt>Error message does not extend beyond the horizontal line separator.</dt><dd><a class="reference internal image-reference" href="../_images/align2.png"><img alt="Confined messages with respect to width" src="../_images/align2.png" style="width: 500px;" /></a>
+<dt>Error message does not extend beyond the horizontal line separator.</dt>
+<dd><a class="first last reference internal image-reference" href="../_images/align2.png"><img alt="Confined messages with respect to width" src="../_images/align2.png" style="width: 500px;" /></a>
 </dd>
 </dl>
 </div></blockquote>
@@ -357,8 +342,9 @@
 <blockquote>
 <div><p><strong>Example:</strong></p>
 <blockquote>
-<div><dl>
-<dt>Roles right-justified with respect to the text and irrespective of the icon.</dt><dd><a class="reference internal image-reference" href="../_images/align3.jpg"><img alt="Vertically justified" src="../_images/align3.jpg" style="width: 500px;" /></a>
+<div><dl class="docutils">
+<dt>Roles right-justified with respect to the text and irrespective of the icon.</dt>
+<dd><a class="first last reference internal image-reference" href="../_images/align3.jpg"><img alt="Vertically justified" src="../_images/align3.jpg" style="width: 500px;" /></a>
 </dd>
 </dl>
 </div></blockquote>
@@ -371,15 +357,18 @@
 <p>If there’s one button on the bottom right, it should be “Close”. If there are two, the one on the left should be “Cancel” and the one on the right should be an [ACTION_BUTTON], like “Save” or “Send Invitations”.</p>
 <p><strong>Example:</strong></p>
 <blockquote>
-<div><dl>
-<dt>Correct:</dt><dd><p>Single button at the bottom right should be “Close”.</p>
-<a class="reference internal image-reference" href="../_images/buttonPlacement1.png"><img alt="Button Placement 1" src="../_images/buttonPlacement1.png" style="width: 500px;" /></a>
+<div><dl class="docutils">
+<dt>Correct:</dt>
+<dd><p class="first">Single button at the bottom right should be “Close”.</p>
+<a class="last reference internal image-reference" href="../_images/buttonPlacement1.png"><img alt="Button Placement 1" src="../_images/buttonPlacement1.png" style="width: 500px;" /></a>
 </dd>
-<dt>Correct:</dt><dd><p>When there are two buttons on bottom right, left button should be “Cancel” and the button on the right should be the [ACTION_BUTTON], in this case “Send Invitations”.</p>
-<a class="reference internal image-reference" href="../_images/buttonPlacement2.png"><img alt="Button Placement 2" src="../_images/buttonPlacement2.png" style="width: 500px;" /></a>
+<dt>Correct:</dt>
+<dd><p class="first">When there are two buttons on bottom right, left button should be “Cancel” and the button on the right should be the [ACTION_BUTTON], in this case “Send Invitations”.</p>
+<a class="last reference internal image-reference" href="../_images/buttonPlacement2.png"><img alt="Button Placement 2" src="../_images/buttonPlacement2.png" style="width: 500px;" /></a>
 </dd>
-<dt>Incorrect:</dt><dd><p>When there are two buttons at the bottom right, left button should not be “Close”, as it’s not clear if closing will or won’t execute the [ACTION_BUTTON].</p>
-<a class="reference internal image-reference" href="../_images/buttonPlacement3.png"><img alt="Button Placement 3" src="../_images/buttonPlacement3.png" style="width: 500px;" /></a>
+<dt>Incorrect:</dt>
+<dd><p class="first">When there are two buttons at the bottom right, left button should not be “Close”, as it’s not clear if closing will or won’t execute the [ACTION_BUTTON].</p>
+<a class="last reference internal image-reference" href="../_images/buttonPlacement3.png"><img alt="Button Placement 3" src="../_images/buttonPlacement3.png" style="width: 500px;" /></a>
 </dd>
 </dl>
 </div></blockquote>
@@ -389,10 +378,10 @@
 <h3><a class="toc-backref" href="#id15">Display: Button States</a><a class="headerlink" href="#display-button-states" title="Permalink to this headline">¶</a></h3>
 <p>All buttons should have a visually distinct appearance for the following states (if applicable):</p>
 <ul class="simple">
-<li><p>default</p></li>
-<li><p>on_hover / on_hover (w tooltip)</p></li>
-<li><p>active</p></li>
-<li><p>disabled (greyed out or hidden)</p></li>
+<li>default</li>
+<li>on_hover / on_hover (w tooltip)</li>
+<li>active</li>
+<li>disabled (greyed out or hidden)</li>
 </ul>
 <p>The color of the on_hover state should be the same as in active state, with opacity = 0.7.</p>
 <p><strong>Example:</strong></p>
@@ -407,32 +396,36 @@
 <div class="section" id="display-icons">
 <h3><a class="toc-backref" href="#id16">Display: Icons</a><a class="headerlink" href="#display-icons" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
-<li><dl class="simple">
-<dt>When to use icons</dt><dd><ol class="loweralpha simple">
-<li><p>When there’s not enough space for the label and an icon can easily represent the label.</p></li>
-<li><p>When an icon can help the user more quickly understand a feature.</p></li>
+<li><dl class="first docutils">
+<dt>When to use icons</dt>
+<dd><ol class="first last loweralpha">
+<li>When there’s not enough space for the label and an icon can easily represent the label.</li>
+<li>When an icon can help the user more quickly understand a feature.</li>
 </ol>
 </dd>
 </dl>
 </li>
-<li><dl class="simple">
-<dt>When not to use icons</dt><dd><ol class="loweralpha simple">
-<li><p>When the term/phrase is too specific or complicated.</p></li>
+<li><dl class="first docutils">
+<dt>When not to use icons</dt>
+<dd><ol class="first last loweralpha">
+<li>When the term/phrase is too specific or complicated.</li>
 </ol>
 </dd>
 </dl>
 </li>
-<li><dl class="simple">
-<dt>Icons should vary across different options</dt><dd><ol class="loweralpha simple">
-<li><p>When using icons, different options in the same section should have different icons.</p></li>
+<li><dl class="first docutils">
+<dt>Icons should vary across different options</dt>
+<dd><ol class="first last loweralpha">
+<li>When using icons, different options in the same section should have different icons.</li>
 </ol>
 </dd>
 </dl>
 </li>
-<li><dl class="simple">
-<dt>Testing</dt><dd><ol class="loweralpha simple">
-<li><p>File a bug if the icon is difficult to understand or has cosmetic defects (size, blur, etc.).</p></li>
-<li><p>File a bug when an icon doesn’t obviously indicate the underlying feature.</p></li>
+<li><dl class="first docutils">
+<dt>Testing</dt>
+<dd><ol class="first last loweralpha">
+<li>File a bug if the icon is difficult to understand or has cosmetic defects (size, blur, etc.).</li>
+<li>File a bug when an icon doesn’t obviously indicate the underlying feature.</li>
 </ol>
 </dd>
 </dl>
@@ -451,12 +444,14 @@
 <blockquote>
 <div><p><strong>Example:</strong></p>
 <blockquote>
-<div><dl>
-<dt>Correct:</dt><dd><p>Instruction “Please check your inbox”, ending with a period.</p>
-<a class="reference internal image-reference" href="../_images/align5.jpg"><img alt="Period added" src="../_images/align5.jpg" style="width: 300px;" /></a>
+<div><dl class="docutils">
+<dt>Correct:</dt>
+<dd><p class="first">Instruction “Please check your inbox”, ending with a period.</p>
+<a class="last reference internal image-reference" href="../_images/align5.jpg"><img alt="Period added" src="../_images/align5.jpg" style="width: 300px;" /></a>
 </dd>
-<dt>Incorrect:</dt><dd><p>Instruction “Please check your inbox”, ending without a period.</p>
-<a class="reference internal image-reference" href="../_images/align4.png"><img alt="Period Missing" src="../_images/align4.png" style="width: 300px;" /></a>
+<dt>Incorrect:</dt>
+<dd><p class="first">Instruction “Please check your inbox”, ending without a period.</p>
+<a class="last reference internal image-reference" href="../_images/align4.png"><img alt="Period Missing" src="../_images/align4.png" style="width: 300px;" /></a>
 </dd>
 </dl>
 </div></blockquote>
@@ -467,8 +462,8 @@
 <h3><a class="toc-backref" href="#id18">Display: Tooltips</a><a class="headerlink" href="#display-tooltips" title="Permalink to this headline">¶</a></h3>
 <p>Tooltip text may be title case or sentence case depending on its context.</p>
 <ul class="simple">
-<li><p>Tooltips should be title case if the tooltip is a noun, e.g. “Pinned Posts”, or “Flagged Posts”.</p></li>
-<li><p>Tooltips should be sentence case if they are declaring an action, e.g. “Flag for follow up”, or “Create new private channel”.</p></li>
+<li>Tooltips should be title case if the tooltip is a noun, e.g. “Pinned Posts”, or “Flagged Posts”.</li>
+<li>Tooltips should be sentence case if they are declaring an action, e.g. “Flag for follow up”, or “Create new private channel”.</li>
 </ul>
 <div class="line-block">
 <div class="line"><br /></div>
@@ -480,9 +475,9 @@
 <p>Usernames should be preceded by the &#64; icon in all places except for the Direct Messages list in the left-hand sidebar, and for any post or comment made by the user.</p>
 <p>Examples of where an &#64; icon should precede the username are as follows:</p>
 <ul class="simple">
-<li><p>User list in the system console.</p></li>
-<li><p>Autocomplete.</p></li>
-<li><p>Members list for the current channel.</p></li>
+<li>User list in the system console.</li>
+<li>Autocomplete.</li>
+<li>Members list for the current channel.</li>
 </ul>
 </div>
 <hr class="docutils" />
@@ -491,12 +486,14 @@
 <p>To simplify decisions, when practical, limit the number of choices to 3 or 4, and add separators or headings between logical groups. See <a class="reference external" href="https://en.wikipedia.org/wiki/Hick%27s_law">Hick’s Law</a> for background on why this helps.</p>
 <p>Example:</p>
 <blockquote>
-<div><dl>
-<dt>Incorrect:</dt><dd><p>No clear separation between distinct options.</p>
-<a class="reference internal image-reference" href="../_images/choices1.png"><img alt="No separation" src="../_images/choices1.png" style="width: 500px;" /></a>
+<div><dl class="docutils">
+<dt>Incorrect:</dt>
+<dd><p class="first">No clear separation between distinct options.</p>
+<a class="last reference internal image-reference" href="../_images/choices1.png"><img alt="No separation" src="../_images/choices1.png" style="width: 500px;" /></a>
 </dd>
-<dt>Correct:</dt><dd><p>A clear separation between distinct options.</p>
-<a class="reference internal image-reference" href="../_images/choices2.png"><img alt="Clear separation" src="../_images/choices2.png" style="width: 500px;" /></a>
+<dt>Correct:</dt>
+<dd><p class="first">A clear separation between distinct options.</p>
+<a class="last reference internal image-reference" href="../_images/choices2.png"><img alt="Clear separation" src="../_images/choices2.png" style="width: 500px;" /></a>
 </dd>
 </dl>
 </div></blockquote>
@@ -507,31 +504,31 @@
 <p>On occasion, Mattermost users may encounter a problem that prevents them or the Mattermost system from successfully completing a task. The unexpected user behavior or system response should be communicated to the user through an error message, and should follow the design principles of forgiving and obvious.</p>
 <p>Error messages should:</p>
 <ul class="simple">
-<li><p>State the encountered problem with the component in the title (e.g. “Team URL Not Found”).</p></li>
-<li><p>Describe very briefly why the error happened under the title.</p></li>
-<li><p>When possible, have a link to direct users to help complete their original task or return to the previous state.</p></li>
-<li><p>Give recommendations/solution(s) for the next course of action.</p></li>
-<li><p>Be consistent with the Mattermost voice and professional look.</p></li>
-<li><p>Be avoided when possible (by avoiding the error condition).</p></li>
+<li>State the encountered problem with the component in the title (e.g. “Team URL Not Found”).</li>
+<li>Describe very briefly why the error happened under the title.</li>
+<li>When possible, have a link to direct users to help complete their original task or return to the previous state.</li>
+<li>Give recommendations/solution(s) for the next course of action.</li>
+<li>Be consistent with the Mattermost voice and professional look.</li>
+<li>Be avoided when possible (by avoiding the error condition).</li>
 </ul>
 <p>Error messages should not:</p>
 <ul class="simple">
-<li><p>Be in red or in capital letters.</p></li>
-<li><p>Say or have the term “Error”.</p></li>
-<li><p>Be lengthy.</p></li>
-<li><p>Be generic.</p></li>
-<li><p>End in an exclamation point.</p></li>
+<li>Be in red or in capital letters.</li>
+<li>Say or have the term “Error”.</li>
+<li>Be lengthy.</li>
+<li>Be generic.</li>
+<li>End in an exclamation point.</li>
 </ul>
 <p><strong>Examples:</strong></p>
 <blockquote>
-<div><dl class="simple">
-<dt>Incorrect:</dt><dd><p>This is an example of a bad error message:</p>
-</dd>
+<div><dl class="docutils">
+<dt>Incorrect:</dt>
+<dd>This is an example of a bad error message:</dd>
 </dl>
 <img alt="Bad Error Message" src="../_images/error2.png" />
-<dl class="simple">
-<dt>Correct:</dt><dd><p>This is an example of a good error message:</p>
-</dd>
+<dl class="docutils">
+<dt>Correct:</dt>
+<dd>This is an example of a good error message:</dd>
 </dl>
 <img alt="Good Error Message" src="../_images/error1.png" />
 </div></blockquote>
@@ -542,32 +539,32 @@
 <p>On occasion, Mattermost users may encounter a system notice generated by Mattermost as part of a recent release. The system notice should be communicated to the user via a pop-over message in the bottom right of the screen, and should follow the design principles of <a class="reference external" href="https://docs.mattermost.com/developer/fx-guidelines.html#fast-obvious-forgiving">Fast, Obvious, Forgiving</a>.</p>
 <p>Notice messages should:</p>
 <ul class="simple">
-<li><p>State that the notice is from Mattermost.</p></li>
-<li><p>Describe very briefly and in an unintimidating tone the reason of the notice.</p></li>
-<li><p>When possible, include a link that directs users to help documentation related to the notice description.</p></li>
-<li><p>Be clear who can see the message.</p></li>
-<li><p>Give three action options: a link that can be clicked, “remind me later” button or “don’t show again” button.</p></li>
-<li><p>Be consistent with the Mattermost voice and professional look.</p></li>
-<li><p>Be used very selectively to highlight significant change(s) within the current release.</p></li>
+<li>State that the notice is from Mattermost.</li>
+<li>Describe very briefly and in an unintimidating tone the reason of the notice.</li>
+<li>When possible, include a link that directs users to help documentation related to the notice description.</li>
+<li>Be clear who can see the message.</li>
+<li>Give three action options: a link that can be clicked, “remind me later” button or “don’t show again” button.</li>
+<li>Be consistent with the Mattermost voice and professional look.</li>
+<li>Be used very selectively to highlight significant change(s) within the current release.</li>
 </ul>
 <p>Notice messages should not:</p>
 <ul class="simple">
-<li><p>Be in colored text or in capital letters.</p></li>
-<li><p>Exclude who can see the message.</p></li>
-<li><p>Be lengthy.</p></li>
-<li><p>Be generic.</p></li>
-<li><p>End in an exclamation point.</p></li>
+<li>Be in colored text or in capital letters.</li>
+<li>Exclude who can see the message.</li>
+<li>Be lengthy.</li>
+<li>Be generic.</li>
+<li>End in an exclamation point.</li>
 </ul>
 <p><strong>Examples:</strong></p>
 <blockquote>
-<div><dl class="simple">
-<dt>Incorrect:</dt><dd><p>This is an example of a bad system notice:</p>
-</dd>
+<div><dl class="docutils">
+<dt>Incorrect:</dt>
+<dd>This is an example of a bad system notice:</dd>
 </dl>
 <img alt="Bad System Notice" src="../_images/systemnotice2.png" />
-<dl class="simple">
-<dt>Correct:</dt><dd><p>This is an example of a good system notice:</p>
-</dd>
+<dl class="docutils">
+<dt>Correct:</dt>
+<dd>This is an example of a good system notice:</dd>
 </dl>
 <img alt="Good System Notice" src="../_images/systemnotice1.png" />
 </div></blockquote>
@@ -595,18 +592,18 @@
 <p><strong>Fieldname:</strong></p>
 <blockquote>
 <div><p>The labels on input fields should be clear and concise for the intended user. Consider the surrounding UI for consistent naming of input fields with similar actions.</p>
-<dl class="simple">
-<dt>Correct:</dt><dd><p>Channel URL: The web address used to reach your channel.</p>
-</dd>
-<dt>Incorrect:</dt><dd><p>Handle: The name of the subdirectory used to navigate to a channel using the site URL appended with the handle name. Must use only valid URL inputs.</p>
-</dd>
+<dl class="docutils">
+<dt>Correct:</dt>
+<dd>Channel URL: The web address used to reach your channel.</dd>
+<dt>Incorrect:</dt>
+<dd>Handle: The name of the subdirectory used to navigate to a channel using the site URL appended with the handle name. Must use only valid URL inputs.</dd>
 </dl>
 <p>The fieldname of a setting should explicitly describe what a setting affects.</p>
-<dl class="simple">
-<dt>Correct:</dt><dd><p>Automatically expand link previews.</p>
-</dd>
-<dt>Incorrect:</dt><dd><p>Link previews</p>
-</dd>
+<dl class="docutils">
+<dt>Correct:</dt>
+<dd>Automatically expand link previews.</dd>
+<dt>Incorrect:</dt>
+<dd>Link previews</dd>
 </dl>
 </div></blockquote>
 <p><strong>Help text:</strong></p>
@@ -614,25 +611,24 @@
 <div><p>Text below an input field should clearly and concisely describe the purpose of the input in an active voice.</p>
 <p>In general, avoid describing the technical requirements of the field in Help Text, and use Placeholder input text, field validation and error messages to convey requirements. The exception to this guideline is if requirements are non-obvious, such as passwords needing different numbers of characters, symbols, etc.</p>
 <p>For a setting involving a CONDITION and an ACTION, the help text should be written as “ACTION when/for CONDITION”.</p>
-<dl class="simple">
-<dt>Correct:</dt><dd><p>Flash the taskbar icon when a new message is received.</p>
-</dd>
-<dt>Incorrect:</dt><dd><p>When a new message is received, flash the taskbar icon.</p>
-</dd>
+<dl class="docutils">
+<dt>Correct:</dt>
+<dd>Flash the taskbar icon when a new message is received.</dd>
+<dt>Incorrect:</dt>
+<dd>When a new message is received, flash the taskbar icon.</dd>
 </dl>
 <p>Ensure plural interpretations work when applicable and test help text with machine translation to reduce non-obvious, English-specific jargon:</p>
-<dl class="simple">
-<dt>Correct:</dt><dd><p>You can adjust a few configuration settings when setting up your instance of Mattermost.</p>
-</dd>
-<dt>Incorrect:</dt><dd><p>There are a few configuration settings you might want to fiddle with when setting up your instance of Mattermost.</p>
-</dd>
+<dl class="docutils">
+<dt>Correct:</dt>
+<dd>You can adjust a few configuration settings when setting up your instance of Mattermost.</dd>
+<dt>Incorrect:</dt>
+<dd>There are a few configuration settings you might want to fiddle with when setting up your instance of Mattermost.</dd>
 </dl>
 <p>Note: The incorrect string above machine-translated into German and then back into English becomes: “There are some configuration settings you could know if your instance Matter Most violin”.</p>
 </div></blockquote>
 <p><strong>Placeholder input text:</strong></p>
 <blockquote>
-<div><p>Show examples of valid input, such as <code class="docutils literal notranslate"><span class="pre">name&#64;example.com</span></code> for email addresses, as well as examples of functionality that is not obviously supported. For example, for a channel name field the placeholder input text could be <code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">Marketing,</span> <span class="pre">John’s</span> <span class="pre">Room,</span> <span class="pre">中国业务</span></code>.</p>
-</div></blockquote>
+<div>Show examples of valid input, such as <code class="docutils literal notranslate"><span class="pre">name&#64;example.com</span></code> for email addresses, as well as examples of functionality that is not obviously supported. For example, for a channel name field the placeholder input text could be <code class="docutils literal notranslate"><span class="pre">Example:</span> <span class="pre">Marketing,</span> <span class="pre">John’s</span> <span class="pre">Room,</span> <span class="pre">中国业务</span></code>.</div></blockquote>
 <p><strong>Field validation:</strong></p>
 <blockquote>
 <div><p>Use field validation to help prevent or correct any mistakes a user might make.</p>
@@ -646,8 +642,7 @@
 </div></blockquote>
 <p><strong>Example 2:</strong></p>
 <blockquote>
-<div><p>If a user enters invalid uppercase letters and spaces for a URL, show an error message and also offer a correction, substituting dashes for spaces and lower case letters for uppercase letters, so that the user can resubmit immediately with valid input.</p>
-</div></blockquote>
+<div>If a user enters invalid uppercase letters and spaces for a URL, show an error message and also offer a correction, substituting dashes for spaces and lower case letters for uppercase letters, so that the user can resubmit immediately with valid input.</div></blockquote>
 </div></blockquote>
 </div></blockquote>
 </div>
@@ -655,15 +650,18 @@
 <div class="section" id="input-input-patterns">
 <h3><a class="toc-backref" href="#id25">Input: Input Patterns</a><a class="headerlink" href="#input-input-patterns" title="Permalink to this headline">¶</a></h3>
 <p>All inputs such as textareas should behave consistently. If the default behavior is to perform an action on “Enter”, then all inputs of that type should be consistent and perform an action on “Enter”.</p>
-<dl>
-<dt><strong>Example 1:</strong></dt><dd><p>If pressing “Enter” posts a message in the center channel post input…</p>
-<img alt="Center channel post area" src="../_images/inputBehaviour1.png" />
+<dl class="docutils">
+<dt><strong>Example 1:</strong></dt>
+<dd><p class="first">If pressing “Enter” posts a message in the center channel post input…</p>
+<img alt="Center channel post area" class="last" src="../_images/inputBehaviour1.png" />
 </dd>
-<dt><strong>Example 2:</strong></dt><dd><p>…then pressing “Enter” in the comment thread textarea should also post a comment…</p>
-<img alt="Comment thread textarea" src="../_images/inputBehaviour2.png" />
+<dt><strong>Example 2:</strong></dt>
+<dd><p class="first">…then pressing “Enter” in the comment thread textarea should also post a comment…</p>
+<img alt="Comment thread textarea" class="last" src="../_images/inputBehaviour2.png" />
 </dd>
-<dt><strong>Example 3:</strong></dt><dd><p>…and other textareas or inputs should also perform their primary action when “Enter” is pressed. Here’s an example of the “Edit Header” modal:</p>
-<a class="reference internal image-reference" href="../_images/inputBehaviour3.png"><img alt="Edit header modal" src="../_images/inputBehaviour3.png" style="width: 500px;" /></a>
+<dt><strong>Example 3:</strong></dt>
+<dd><p class="first">…and other textareas or inputs should also perform their primary action when “Enter” is pressed. Here’s an example of the “Edit Header” modal:</p>
+<a class="last reference internal image-reference" href="../_images/inputBehaviour3.png"><img alt="Edit header modal" src="../_images/inputBehaviour3.png" style="width: 500px;" /></a>
 </dd>
 </dl>
 </div>
@@ -673,14 +671,16 @@
 <p><strong>Feedback on action:</strong></p>
 <p>User should be notified about the action they perform along with any implications associated with them.</p>
 <blockquote>
-<div><dl>
-<dt>Example 1:</dt><dd><p>“Settings are saved but will be applied after a server restart.”</p>
-<blockquote>
+<div><dl class="docutils">
+<dt>Example 1:</dt>
+<dd><p class="first">“Settings are saved but will be applied after a server restart.”</p>
+<blockquote class="last">
 <div><img alt="Settings saved" src="../_images/confirm2.jpg" />
 </div></blockquote>
 </dd>
-<dt>Example 2:</dt><dd><p>“Link copied to clipboard.”</p>
-<blockquote>
+<dt>Example 2:</dt>
+<dd><p class="first">“Link copied to clipboard.”</p>
+<blockquote class="last">
 <div><img alt="Confirmation message" src="../_images/confirm1.jpg" />
 </div></blockquote>
 </dd>
@@ -689,9 +689,10 @@
 <p><strong>Save prompt:</strong></p>
 <p>A prompt should appear if a user makes changes to a setting and attempts to navigate away without saving them.</p>
 <blockquote>
-<div><dl>
-<dt>Example:</dt><dd><p>“You have unsaved changes, are you sure you want to discard them?”</p>
-<blockquote>
+<div><dl class="docutils">
+<dt>Example:</dt>
+<dd><p class="first">“You have unsaved changes, are you sure you want to discard them?”</p>
+<blockquote class="last">
 <div><img alt="Save prompt" src="../_images/save1.png" />
 </div></blockquote>
 </dd>
@@ -712,15 +713,15 @@
 <h3><a class="toc-backref" href="#id28">Notifications: Header Bar</a><a class="headerlink" href="#notifications-header-bar" title="Permalink to this headline">¶</a></h3>
 <p>The header bar appears as a dropdown bar from the top of the screen. The header bar:</p>
 <ol class="arabic simple">
-<li><p>May include an “x” button to dismiss.</p></li>
-<li><p>Is limited to 60 characters.</p></li>
-<li><p>May include a time-out.</p></li>
-<li><p>Appears over the rest of the UI instead of pushing the UI down.</p></li>
+<li>May include an “x” button to dismiss.</li>
+<li>Is limited to 60 characters.</li>
+<li>May include a time-out.</li>
+<li>Appears over the rest of the UI instead of pushing the UI down.</li>
 </ol>
 <p>Multiple headers can appear, with the earliest notification at the top and more recent notifications appearing underneath.</p>
 <p><strong>Desktop</strong></p>
 <blockquote>
-<div><div class="figure align-default">
+<div><div class="figure">
 <img alt="Header Notification Desktop" src="../_images/header1.png" />
 </div>
 </div></blockquote>
@@ -733,10 +734,10 @@
 <div><p><strong>System-wide header notification:</strong></p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Triggered on login.</p></li>
-<li><p>Includes “x” button to dismiss.</p></li>
-<li><p>No timeout.</p></li>
-<li><p>Removed when system admin cancels.</p></li>
+<li>Triggered on login.</li>
+<li>Includes “x” button to dismiss.</li>
+<li>No timeout.</li>
+<li>Removed when system admin cancels.</li>
 </ul>
 <div class="line-block">
 <div class="line">Examples:</div>
@@ -747,10 +748,10 @@
 <p><strong>Action required header notification:</strong></p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Triggered on login.</p></li>
-<li><p>No “x” button to dismiss.</p></li>
-<li><p>No timeout.</p></li>
-<li><p>Dismissed when action completed.</p></li>
+<li>Triggered on login.</li>
+<li>No “x” button to dismiss.</li>
+<li>No timeout.</li>
+<li>Dismissed when action completed.</li>
 </ul>
 <div class="line-block">
 <div class="line">Examples:</div>
@@ -760,9 +761,9 @@
 <p><strong>Persistent issue header notification:</strong></p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Triggered on issue.</p></li>
-<li><p>No “x” button to dismiss.</p></li>
-<li><p>Dismissed when issue no longer persists.</p></li>
+<li>Triggered on issue.</li>
+<li>No “x” button to dismiss.</li>
+<li>Dismissed when issue no longer persists.</li>
 </ul>
 <div class="line-block">
 <div class="line">Examples:</div>
@@ -776,8 +777,8 @@
 <h3><a class="toc-backref" href="#id29">Markdown Rendering</a><a class="headerlink" href="#markdown-rendering" title="Permalink to this headline">¶</a></h3>
 <p>Markdown rendering in Mattermost is designed to be a fast, obvious and forgiving formatting standard for a messaging application. To achieve this goal, it has variations from markdown in GitHub (the most wildly used implementation), including:</p>
 <ul class="simple">
-<li><p>Bullets directly below a line of text render as a bullet, not as a continued line of text</p></li>
-<li><p>{Other variations to be concisely listed here, one line each}</p></li>
+<li>Bullets directly below a line of text render as a bullet, not as a continued line of text</li>
+<li>{Other variations to be concisely listed here, one line each}</li>
 </ul>
 <p>While we intend to eventually document all the variations from GitHub markdown, until that is complete we consider any variation in rendering from the current release of Mattermost to be a regression that should either be fixed prior to the next release, or documented here.</p>
 <p>Currently the <a class="reference external" href="https://github.com/mattermost/mattermost-server/tree/master/tests">/test tool</a> can be used for testing Mattermost markdown versus GitHub markdown.</p>
@@ -787,15 +788,18 @@
 <h3><a class="toc-backref" href="#id30">Organization: Reduce Obvious Steps</a><a class="headerlink" href="#organization-reduce-obvious-steps" title="Permalink to this headline">¶</a></h3>
 <p>If the action a user needs to perform is obvious, we should make conscious decisions to reduce some of the steps involved in that process.</p>
 <blockquote>
-<div><dl>
-<dt><strong>Example 1:</strong></dt><dd><p>Clicking on the search icon on mobile should focus the search bar when it slides in.</p>
-<img alt="Search mobile" src="../_images/reduce1.png" />
+<div><dl class="docutils">
+<dt><strong>Example 1:</strong></dt>
+<dd><p class="first">Clicking on the search icon on mobile should focus the search bar when it slides in.</p>
+<img alt="Search mobile" class="last" src="../_images/reduce1.png" />
 </dd>
-<dt><strong>Example 2:</strong></dt><dd><p>Clicking on the reply icon should move the focus to the comment box in the right-hand sidebar.</p>
-<img alt="Reply icon" src="../_images/reduce2.png" />
+<dt><strong>Example 2:</strong></dt>
+<dd><p class="first">Clicking on the reply icon should move the focus to the comment box in the right-hand sidebar.</p>
+<img alt="Reply icon" class="last" src="../_images/reduce2.png" />
 </dd>
-<dt><strong>Example 3:</strong></dt><dd><p>Switching channels should move the focus to the post box in the center channel.</p>
-<img alt="Switching channels" src="../_images/reduce3.png" />
+<dt><strong>Example 3:</strong></dt>
+<dd><p class="first">Switching channels should move the focus to the post box in the center channel.</p>
+<img alt="Switching channels" class="last" src="../_images/reduce3.png" />
 </dd>
 </dl>
 </div></blockquote>
@@ -828,8 +832,7 @@
 </div></blockquote>
 <p><strong>5) Does the UI work with a dark theme?</strong></p>
 <blockquote>
-<div><p>Sometimes bugs are found with theme colors, so it is important to test on both light and dark themes.</p>
-</div></blockquote>
+<div>Sometimes bugs are found with theme colors, so it is important to test on both light and dark themes.</div></blockquote>
 </div>
 </div>
 </div>
@@ -840,25 +843,20 @@
            
           </div>
           <footer>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2015-2020 Mattermost.
+        &copy; Copyright 2015-2020 Mattermost
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -892,16 +890,27 @@
 </div>
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
 	<header>
 	<div class="header__container">
 		<div class="search__icon">

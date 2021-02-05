@@ -2,46 +2,34 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Plugins (Beta) &mdash; Mattermost 5.30 documentation</title>
+  <title>Plugins (Beta) &mdash; Mattermost 5.31 documentation</title>
   
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
-
   
   
 
   
-    <link rel="canonical" href="https://docs.mattermost.com/administration/plugins.html" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
   
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/myscript.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-    
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Message Attachments" href="../developer/message-attachments.html" />
     <link rel="prev" title="Slash Commands" href="../developer/slash-commands.html" />
@@ -53,16 +41,21 @@
 	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
 	<!-- End Google Tag Manager -->
 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -76,7 +69,7 @@
             
             
               <div class="version">
-                5.30
+                5.31
               </div>
             
           
@@ -93,7 +86,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -162,6 +154,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../developer/bot-accounts.html">Bot Accounts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../developer/personal-access-tokens.html">Personal Access Tokens</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../developer/oauth-2-0-applications.html">OAuth 2.0 Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer/integration-faq.html">Integrations FAQ</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../integrations/embedding.html">Embedding Mattermost in Other Applications</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../integrations/webhook.html">Using Mattermost with Webhook</a></li>
 </ul>
@@ -172,7 +165,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -220,16 +212,16 @@
   <div class="section" id="plugins-beta">
 <h1>Plugins (Beta)<a class="headerlink" href="#plugins-beta" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This is the admin documentation for plugins. If you’re a developer looking to build a plugin, see <a class="reference external" href="https://developers.mattermost.com/extend/plugins">our developer documentation</a>.</p>
+<p class="first admonition-title">Note</p>
+<p class="last">This is the admin documentation for plugins. If you’re a developer looking to build a plugin, see <a class="reference external" href="https://developers.mattermost.com/extend/plugins/">our developer documentation</a>.</p>
 </div>
 <p>Mattermost supports plugins to customize and extend the platform. See our <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-demo">demo plugin</a> that illustrates the potential for a Mattermost plugin. To start writing your own plugin, consult our <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-starter-template">starter template</a>.</p>
 <p>Consider using a plugin in the following scenarios:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>When you want to customize the Mattermost user interface.</p></li>
-<li><p>When you want to extend Mattermost functionality to meet a specific, complex requirement.</p></li>
-<li><p>When you want to build integrations that are managed by your Mattermost server.</p></li>
+<li>When you want to customize the Mattermost user interface.</li>
+<li>When you want to extend Mattermost functionality to meet a specific, complex requirement.</li>
+<li>When you want to build integrations that are managed by your Mattermost server.</li>
 </ul>
 </div></blockquote>
 <p>Plugins are fully supported in both Team Edition and Enterprise Edition.</p>
@@ -254,10 +246,10 @@
 <h3>Configuring and enabling a plugin<a class="headerlink" href="#configuring-and-enabling-a-plugin" title="Permalink to this headline">¶</a></h3>
 <p>Once a plugin is installed (or pre-installed if shipped with Mattermost binary release):</p>
 <ol class="arabic simple">
-<li><p>Select <strong>Configure</strong> to open the <strong>Settings</strong> menu.</p></li>
-<li><p>Enter the plugin settings as required.</p></li>
-<li><p>Set <strong>Enable Plugin</strong> setting to <code class="docutils literal notranslate"><span class="pre">True</span></code>. If this flag is not enabled, the plugin will not become active.</p></li>
-<li><p>Test out the plugin as needed.</p></li>
+<li>Select <strong>Configure</strong> to open the <strong>Settings</strong> menu.</li>
+<li>Enter the plugin settings as required.</li>
+<li>Set <strong>Enable Plugin</strong> setting to <code class="docutils literal notranslate"><span class="pre">True</span></code>. If this flag is not enabled, the plugin will not become active.</li>
+<li>Test out the plugin as needed.</li>
 </ol>
 </div>
 <div class="section" id="upgrading-plugins">
@@ -274,8 +266,8 @@
 <p>There are two settings in <strong>System Console &gt; Plugin Management</strong>:</p>
 <img alt="https://user-images.githubusercontent.com/915956/66892854-94660d80-efa1-11e9-805c-a85223d43a07.png" src="https://user-images.githubusercontent.com/915956/66892854-94660d80-efa1-11e9-805c-a85223d43a07.png" />
 <ul class="simple">
-<li><p><strong>Enable Marketplace:</strong> Turns the Plugin Marketplace user interface on or off for System Administrators (end users cannot see the Plugin Marketplace).</p></li>
-<li><p><strong>Marketplace URL:</strong> The location of the Marketplace server to query for new plugins. Mattermost hosts a Plugin Marketplace for the community and this is the default value for this field. You can also set up your own Marketplace server.</p></li>
+<li><strong>Enable Marketplace:</strong> Turns the Plugin Marketplace user interface on or off for System Administrators (end users cannot see the Plugin Marketplace).</li>
+<li><strong>Marketplace URL:</strong> The location of the Marketplace server to query for new plugins. Mattermost hosts a Plugin Marketplace for the community and this is the default value for this field. You can also set up your own Marketplace server.</li>
 </ul>
 <p>When you first access the Marketplace, your Mattermost server will attempt to contact the Mattermost Plugin Marketplace server and return a list of available plugins that are appropriate based on the server version that is currently running. Only your server version and search query is passed over to the Mattermost Plugin Marketplace; we retain an anonymized record for product analytics whenever a new plugin is installed, unless you have opted out of <a class="reference external" href="https://docs.mattermost.com/administration/telemetry.html">Telemetry</a>.</p>
 <p>The <a class="reference external" href="https://github.com/mattermost/mattermost-marketplace">Plugin Marketplace server code</a> is available as an open source project and can be used to set up your own private Marketplace if desired.</p>
@@ -293,8 +285,8 @@
 <p>Plugins may have one or both of the following parts:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><strong>Web App plugins:</strong> Customize the Mattermost user interface by adding buttons to the channel header, overriding the <code class="docutils literal notranslate"><span class="pre">RHS</span></code>, or even rendering a custom post type within the center channel. All this is possible without having to fork the source code and rebase on every Mattermost release. For a sample plugin, see <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-zoom">our Zoom plugin</a>.</p></li>
-<li><p><strong>Server plugins:</strong> Run a Go process alongside the server, filtering messages, or integrating with third-party systems such as Jira, GitLab, or Jenkins. For a sample plugin, see <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-jira">our Jira plugin</a>.</p></li>
+<li><strong>Web App plugins:</strong> Customize the Mattermost user interface by adding buttons to the channel header, overriding the <code class="docutils literal notranslate"><span class="pre">RHS</span></code>, or even rendering a custom post type within the center channel. All this is possible without having to fork the source code and rebase on every Mattermost release. For a sample plugin, see <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-zoom">our Zoom plugin</a>.</li>
+<li><strong>Server plugins:</strong> Run a Go process alongside the server, filtering messages, or integrating with third-party systems such as Jira, GitLab, or Jenkins. For a sample plugin, see <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-jira">our Jira plugin</a>.</li>
 </ul>
 </div></blockquote>
 </div>
@@ -359,8 +351,8 @@ Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit? O
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Key size should be at least 3072 bits.</p>
+<p class="first admonition-title">Note</p>
+<p class="last">Key size should be at least 3072 bits.</p>
 </div>
 </div>
 <div class="section" id="exporting-the-private-key">
@@ -430,13 +422,13 @@ gpg --import ./my-pub-gpg-key
 <p>To manage plugins, go to <strong>System Console &gt; Plugins &gt; Plugin Management</strong>. From here, you can:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Enable or disable pre-packaged plugins.</p></li>
-<li><p>Install and manage custom plugins.</p></li>
+<li>Enable or disable pre-packaged plugins.</li>
+<li>Install and manage custom plugins.</li>
 </ul>
 </div></blockquote>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>In versions prior to 5.16, go to <strong>System Console &gt; Plugins (Beta) &gt; Configuration</strong>.</p>
+<p class="first admonition-title">Note</p>
+<p class="last">In versions prior to 5.16, go to <strong>System Console &gt; Plugins (Beta) &gt; Configuration</strong>.</p>
 </div>
 <div class="section" id="pre-packaged-plugins">
 <h3>Pre-packaged plugins<a class="headerlink" href="#pre-packaged-plugins" title="Permalink to this headline">¶</a></h3>
@@ -449,8 +441,8 @@ gpg --import ./my-pub-gpg-key
 <p>To enable plugin uploads, manually set <code class="docutils literal notranslate"><span class="pre">PluginSettings</span> <span class="pre">&gt;</span> <span class="pre">EnableUploads</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code> in your <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file and restart your server. You can disable plugin uploads at any time without affecting previously uploaded plugins.</p>
 <p>With plugin uploads enabled, navigate to <strong>System Console &gt; Plugins &gt; Management</strong> and upload a plugin bundle. Plugin bundles are <code class="docutils literal notranslate"><span class="pre">*.tar.gz</span></code> files containing the server executables and web app resources for the plugin. You can also specify a URL to install a plugin bundle from a remote source.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>When <code class="docutils literal notranslate"><span class="pre">RequirePluginSignature</span></code> is <code class="docutils literal notranslate"><span class="pre">true</span></code>, plugin uploads cannot be enabled, and may only be installed via the Plugin Marketplace (which verifies Plugin Code Signatures).</p>
+<p class="first admonition-title">Note</p>
+<p class="last">When <code class="docutils literal notranslate"><span class="pre">RequirePluginSignature</span></code> is <code class="docutils literal notranslate"><span class="pre">true</span></code>, plugin uploads cannot be enabled, and may only be installed via the Plugin Marketplace (which verifies Plugin Code Signatures).</p>
 </div>
 <p>Custom plugins may also be installed via the <a class="reference external" href="https://docs.mattermost.com/administration/command-line-tools.html#mattermost-plugin">command line interface</a>.</p>
 <p>While no longer recommended, plugins may also be installed manually by unpacking the plugin bundle inside the <code class="docutils literal notranslate"><span class="pre">plugins</span></code> directory of a Mattermost installation.</p>
@@ -502,29 +494,29 @@ gpg --import ./my-pub-gpg-key
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../developer/message-attachments.html" class="btn btn-neutral float-right" title="Message Attachments" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../developer/slash-commands.html" class="btn btn-neutral float-left" title="Slash Commands" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="../developer/message-attachments.html" class="btn btn-neutral float-right" title="Message Attachments" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../developer/slash-commands.html" class="btn btn-neutral" title="Slash Commands" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2015-2020 Mattermost.
+        &copy; Copyright 2015-2020 Mattermost
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -558,16 +550,27 @@ gpg --import ./my-pub-gpg-key
 </div>
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
 	<header>
 	<div class="header__container">
 		<div class="search__icon">

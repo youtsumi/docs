@@ -2,46 +2,34 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Provisioning Workflows &mdash; Mattermost 5.30 documentation</title>
+  <title>Provisioning Workflows &mdash; Mattermost 5.31 documentation</title>
   
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
-
   
   
 
   
-    <link rel="canonical" href="https://docs.mattermost.com/administration/user-provisioning.html" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
   
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/myscript.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-    
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Additional System Admin Roles (E20)" href="../deployment/admin-roles.html" />
     <link rel="prev" title="Migration Announcement Email" href="migration-announcement-email-template.html" />
@@ -53,16 +41,21 @@
 	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
 	<!-- End Google Tag Manager -->
 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -76,7 +69,7 @@
             
             
               <div class="version">
-                5.30
+                5.31
               </div>
             
           
@@ -93,7 +86,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -106,11 +98,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-collaboration">Incident Collaboration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../deployment/bulk-loading.html">Bulk Loading Data</a></li>
@@ -123,12 +116,15 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/admin-roles.html">Additional System Admin Roles (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/sso-ldap.html">Active Directory/LDAP Setup (E10/E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/auth.html">Multi-factor Authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/ldap-group-sync.html">AD/LDAP Groups (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/ldap-group-constrained-team-channel.html">Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/sso-saml.html">SAML Single Sign-On (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/sso-saml-technical.html">SAML Single-Sign-On (E20): Technical Documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/sso-gitlab.html">GitLab Single Sign-On</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/sso-google.html">Google Single Sign-On (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/sso-office.html">Office 365 Single Sign-On (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/ssl-client-certificate.html">SSL Client Certificate Setup (Beta)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/certificate-based-authentication.html">Certificate-Based Authentication (Experimental)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../deployment/team-channel-management.html">Managing Team and Channel Members (E20)</a></li>
@@ -154,7 +150,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -206,21 +201,21 @@
 <h2>User Provisioning<a class="headerlink" href="#user-provisioning" title="Permalink to this headline">¶</a></h2>
 <p>There are currently three recommended user provisioning workflows in Mattermost:</p>
 <ol class="arabic simple">
-<li><p><strong>On demand:</strong> If user accounts are not pre-provisioned using one of the methods described below, then a new user account will be provisioned when the user first logs in. When the user logs in, they are asked to select a public team to join (all users must belong to at least one team) and then they are added automatically to Town Square and Off-Topic channels. Mattermost also has a default channel setting that allows everyone to be added to additional channels specified by the organization.</p></li>
-<li><p><strong>Pre-provisioned via bulk import:</strong> Mattermost features a <a class="reference external" href="https://docs.mattermost.com/deployment/bulk-loading.html">bulk data loading tool</a> that can be used for pre-provisioning new users by adding them to teams and channels before their first login to Mattermost. This tool automates the creation of Teams, Channels, Users and Posts (with file attachments). It can also be used to migrate users and content from an existing system.</p></li>
-<li><p><strong>Mattermost API:</strong> The Mattermost <a class="reference external" href="https://api.mattermost.com">RESTful API</a> can be used to pre-provision new user accounts as well as add and remove them from teams and channels. This model is commonly used by enterprises that have central account provisioning applications.</p></li>
+<li><strong>On demand:</strong> If user accounts are not pre-provisioned using one of the methods described below, then a new user account will be provisioned when the user first logs in. When the user logs in, they are asked to select a public team to join (all users must belong to at least one team) and then they are added automatically to Town Square and Off-Topic channels. Mattermost also has a default channel setting that allows everyone to be added to additional channels specified by the organization.</li>
+<li><strong>Pre-provisioned via bulk import:</strong> Mattermost features a <a class="reference external" href="https://docs.mattermost.com/deployment/bulk-loading.html">bulk data loading tool</a> that can be used for pre-provisioning new users by adding them to teams and channels before their first login to Mattermost. This tool automates the creation of Teams, Channels, Users and Posts (with file attachments). It can also be used to migrate users and content from an existing system.</li>
+<li><strong>Mattermost API:</strong> The Mattermost <a class="reference external" href="https://api.mattermost.com">RESTful API</a> can be used to pre-provision new user accounts as well as add and remove them from teams and channels. This model is commonly used by enterprises that have central account provisioning applications.</li>
 </ol>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Mattermost plans to release a new feature in early 2019 that will enable organizations to synchronize users to teams and channels based on group membership.</p>
+<p class="first admonition-title">Note</p>
+<p class="last">Mattermost plans to release a new feature in early 2019 that will enable organizations to synchronize users to teams and channels based on group membership.</p>
 </div>
 <div class="section" id="mattermost-user-identifier">
 <h3>Mattermost User Identifier<a class="headerlink" href="#mattermost-user-identifier" title="Permalink to this headline">¶</a></h3>
 <p>The User Identifier used to uniquely identify users in Mattermost depends on the method of authentication:</p>
 <ul class="simple">
-<li><p><strong>Email/password</strong>: Email address or username. Created by the user or previously described account pre-provisioning process.</p></li>
-<li><p><strong>AD/LDAP</strong>: Configure a unique and unchanging ID Attribute from the AD/LDAP server to be used in Mattermost. If a user’s ID Attribute changes, it will create a new Mattermost account unassociated with their old one.</p></li>
-<li><p><strong>SAML 2.0</strong>: Selected during configuration. You may use an Id Attribute instead of email to bind the user. We recommend choosing an ID that is unique and will not change over time.</p></li>
+<li><strong>Email/password</strong>: Email address or username. Created by the user or previously described account pre-provisioning process.</li>
+<li><strong>AD/LDAP</strong>: Configure a unique and unchanging ID Attribute from the AD/LDAP server to be used in Mattermost. If a user’s ID Attribute changes, it will create a new Mattermost account unassociated with their old one.</li>
+<li><strong>SAML 2.0</strong>: Selected during configuration. You may use an Id Attribute instead of email to bind the user. We recommend choosing an ID that is unique and will not change over time.</li>
 </ul>
 </div>
 </div>
@@ -228,15 +223,15 @@
 <h2>User Deprovisioning<a class="headerlink" href="#user-deprovisioning" title="Permalink to this headline">¶</a></h2>
 <p>Users in Mattermost can be deactivated in the following ways:</p>
 <ul class="simple">
-<li><p><strong>AD/LDAP Synchronization</strong>: AD/LDAP users can be deactivated in Mattermost based on their status in the directory server via synchronization. Learn more in <a class="reference external" href="https://docs.mattermost.com/deployment/sso-ldap.html#how-does-deactivating-users-work">AD/LDAP documentation</a>.</p></li>
-<li><p><strong>System Console</strong>: User management screen in <strong>System Console &gt; Users</strong> allows administrators to deactiveate users with email/password login.</p></li>
-<li><p><strong>RESTful API</strong> The Mattermost API can be used to deactivate users. See <a class="reference external" href="https://api.mattermost.com/#tag/users%2Fpaths%2F~1users~1%7Buser_id%7D%2Fdelete">API documentation to learn more</a>.</p></li>
-<li><p><strong>Command Line Interface</strong>: The Mattermost CLI can be used to deactivate users. See <a class="reference external" href="https://docs.mattermost.com/administration/command-line-tools.html#mattermost-user-deactivate">CLI documentation to learn more</a>.</p></li>
+<li><strong>AD/LDAP Synchronization</strong>: AD/LDAP users can be deactivated in Mattermost based on their status in the directory server via synchronization. Learn more in <a class="reference external" href="https://docs.mattermost.com/deployment/sso-ldap.html#how-does-deactivating-users-work">AD/LDAP documentation</a>.</li>
+<li><strong>System Console</strong>: User management screen in <strong>System Console &gt; Users</strong> allows administrators to deactiveate users with email/password login.</li>
+<li><strong>RESTful API</strong> The Mattermost API can be used to deactivate users. See <a class="reference external" href="https://api.mattermost.com/#tag/users%2Fpaths%2F~1users~1%7Buser_id%7D%2Fdelete">API documentation to learn more</a>.</li>
+<li><strong>Command Line Interface</strong>: The Mattermost CLI can be used to deactivate users. See <a class="reference external" href="https://docs.mattermost.com/administration/command-line-tools.html#mattermost-user-deactivate">CLI documentation to learn more</a>.</li>
 </ul>
 <p>Once deactivated, users still exist in the Mattermost database and their messages can still be viewed in Mattermost.  To delete a user and all of their content, you can use the Mattermost CLI tool <a class="reference external" href="https://docs.mattermost.com/administration/command-line-tools.html#mattermost-user-delete">as described here</a>.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>As long as the ID attribute selected via AD/LDAP or SAML 2.0 is a unique identifier, the user’s email address or name (along with other attributes) can be updated without breaking the user’s account.</p>
+<p class="first admonition-title">Note</p>
+<p class="last">As long as the ID attribute selected via AD/LDAP or SAML 2.0 is a unique identifier, the user’s email address or name (along with other attributes) can be updated without breaking the user’s account.</p>
 </div>
 </div>
 </div>
@@ -246,29 +241,29 @@
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../deployment/admin-roles.html" class="btn btn-neutral float-right" title="Additional System Admin Roles (E20)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="migration-announcement-email-template.html" class="btn btn-neutral float-left" title="Migration Announcement Email" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="../deployment/admin-roles.html" class="btn btn-neutral float-right" title="Additional System Admin Roles (E20)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="migration-announcement-email-template.html" class="btn btn-neutral" title="Migration Announcement Email" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2015-2020 Mattermost.
+        &copy; Copyright 2015-2020 Mattermost
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -302,16 +297,27 @@
 </div>
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
 	<header>
 	<div class="header__container">
 		<div class="search__icon">

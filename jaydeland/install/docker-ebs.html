@@ -2,46 +2,34 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>AWS Elastic Beanstalk Docker Setup &mdash; Mattermost 5.30 documentation</title>
+  <title>AWS Elastic Beanstalk Docker Setup &mdash; Mattermost 5.31 documentation</title>
   
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
-
   
   
 
   
-    <link rel="canonical" href="https://docs.mattermost.com/install/docker-ebs.html" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
   
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/myscript.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-    
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="How to install Mattermost Team Edition Helm Chart in a GitLab Helm Chart deployment" href="install-mmte-helm-gitlab-helm.html" />
     <link rel="prev" title="Local Machine Setup using Docker" href="docker-local-machine.html" />
@@ -53,16 +41,21 @@
 	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
 	<!-- End Google Tag Manager -->
 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -76,7 +69,7 @@
             
             
               <div class="version">
-                5.30
+                5.31
               </div>
             
           
@@ -93,7 +86,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -106,6 +98,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="requirements.html">Software and Hardware Requirements</a></li>
@@ -137,7 +130,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-collaboration">Incident Collaboration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
@@ -157,7 +150,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -208,50 +200,48 @@
 Mode</em> for exploring product functionality. This configuration should not
 be used in production.</p>
 <ol class="arabic simple">
-<li><p>From your <a class="reference external" href="https://console.aws.amazon.com/console/home">AWS
+<li>From your <a class="reference external" href="https://console.aws.amazon.com/console/home">AWS
 console</a> select
-<strong>Compute &gt; Elastic Beanstalk</strong>.</p></li>
-<li><p>Select <strong>Create New Application</strong> from the top right.</p></li>
-<li><p>Name your Elastic Beanstalk application and click <strong>Next</strong>,</p></li>
-<li><p>On the New Environment page, select <strong>Create web server</strong> .</p></li>
-<li><p>If asked, select <strong>Create an IAM role and instance profile</strong>, then
-click <strong>Next</strong>.</p></li>
-<li><p>On the <strong>Environment Type</strong>:</p>
-<ol class="loweralpha simple">
-<li><p>Set Predefined Configuration to <strong>Multi-Container Docker</strong> under the generic
-heading in the drop-down list.</p></li>
-<li><p>Set Environment Type to <strong>Single instance</strong> in the drop-down
-list.</p></li>
-<li><p>Click <strong>Next</strong>.</p></li>
+<strong>Compute &gt; Elastic Beanstalk</strong>.</li>
+<li>Select <strong>Create New Application</strong> from the top right.</li>
+<li>Name your Elastic Beanstalk application and click <strong>Next</strong>,</li>
+<li>On the New Environment page, select <strong>Create web server</strong> .</li>
+<li>If asked, select <strong>Create an IAM role and instance profile</strong>, then
+click <strong>Next</strong>.</li>
+<li>On the <strong>Environment Type</strong>:<ol class="loweralpha">
+<li>Set Predefined Configuration to <strong>Multi-Container Docker</strong> under the generic
+heading in the drop-down list.</li>
+<li>Set Environment Type to <strong>Single instance</strong> in the drop-down
+list.</li>
+<li>Click <strong>Next</strong>.</li>
 </ol>
 </li>
-<li><p>For <strong>Application Source</strong>, select <strong>Upload your own</strong> and upload the
+<li>For <strong>Application Source</strong>, select <strong>Upload your own</strong> and upload the
 Dockerrun.aws.json file from
 <a class="reference external" href="https://raw.githubusercontent.com/mattermost/mattermost-docker/master/contrib/aws/Dockerrun.aws.json">https://raw.githubusercontent.com/mattermost/mattermost-docker/master/contrib/aws/Dockerrun.aws.json</a> (select the
-version you’d like to use), then click <strong>Next</strong>.</p></li>
-<li><p>Type an Environment Name and URL. Make sure the URL is available by
-clicking <strong>Check availability</strong>, then click <strong>Next</strong>.</p></li>
-<li><p>The options on the <strong>Additional Resources</strong> page may be left at default
-unless you wish to change them. Click <strong>Next</strong>.</p></li>
-<li><p>On the <strong>Configuration Details</strong> page:</p>
-<ol class="loweralpha simple">
-<li><p>Select an Instance Type of <strong>t2.small</strong> or larger.</p></li>
-<li><p>The remaining options may be left at their default values unless
-you wish to change them. Click <strong>Next</strong>.</p></li>
+version you’d like to use), then click <strong>Next</strong>.</li>
+<li>Type an Environment Name and URL. Make sure the URL is available by
+clicking <strong>Check availability</strong>, then click <strong>Next</strong>.</li>
+<li>The options on the <strong>Additional Resources</strong> page may be left at default
+unless you wish to change them. Click <strong>Next</strong>.</li>
+<li>On the <strong>Configuration Details</strong> page:<ol class="loweralpha">
+<li>Select an Instance Type of <strong>t2.small</strong> or larger.</li>
+<li>The remaining options may be left at their default values unless
+you wish to change them. Click <strong>Next</strong>.</li>
 </ol>
 </li>
-<li><p><strong>Environment tags</strong> may be left blank. Click <strong>Next</strong>.</p></li>
-<li><p>Review your information, then click <strong>Launch</strong>.</p></li>
-<li><p>It may take a few minutes for Beanstalk to launch your environment.
+<li><strong>Environment tags</strong> may be left blank. Click <strong>Next</strong>.</li>
+<li>Review your information, then click <strong>Launch</strong>.</li>
+<li>It may take a few minutes for Beanstalk to launch your environment.
 If the launch is successful, you will see a see a large green
-checkmark and the <strong>Health status</strong> displays in “Green”.</p></li>
-<li><p>Test your environment by clicking the domain link next to your
+checkmark and the <strong>Health status</strong> displays in “Green”.</li>
+<li>Test your environment by clicking the domain link next to your
 application name at the top of the dashboard. Alternatively, enter
 the domain into your browser in the form of
 <code class="docutils literal notranslate"><span class="pre">http://&lt;your-ebs-application-url&gt;.elasticbeanstalk.com</span></code>. You can
 also map your own domain if you wish. If everything is working
 correctly, the domain should navigate you to the Mattermost signup
-page. Enjoy exploring Mattermost!</p></li>
+page. Enjoy exploring Mattermost!</li>
 </ol>
 <div class="section" id="configuration-settings">
 <h2>Configuration Settings<a class="headerlink" href="#configuration-settings" title="Permalink to this headline">¶</a></h2>
@@ -267,35 +257,33 @@ functionality, enabling SMTP email is recommended.</p>
 <hr class="docutils" />
 <p>To enable email, configure an SMTP email service as follows:</p>
 <ol class="arabic simple">
-<li><p><strong>Set up an SMTP email sending service</strong> (if you don’t yet have an
-SMTP service with credentials)</p>
-<ul class="simple">
-<li><dl class="simple">
-<dt>Any SMTP email service can be used, you just need the following</dt><dd><p>information: <code class="docutils literal notranslate"><span class="pre">Server</span> <span class="pre">Name</span></code>, <code class="docutils literal notranslate"><span class="pre">Port</span></code>, <code class="docutils literal notranslate"><span class="pre">SMTP</span> <span class="pre">Username</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">SMTP</span> <span class="pre">Password</span></code>.</p>
-<ul>
-<li><dl class="simple">
-<dt>If you don’t have an SMTP service, here are simple instructions</dt><dd><p>to set one up with <a class="reference external" href="https://aws.amazon.com/ses/">Amazon Simple Email Service
-(SES)</a>:</p>
-<ol class="arabic simple">
-<li><p>Go to <a class="reference external" href="https://console.aws.amazon.com/ses">Amazon SES
+<li><strong>Set up an SMTP email sending service</strong> (if you don’t yet have an
+SMTP service with credentials)<ul>
+<li><dl class="first docutils">
+<dt>Any SMTP email service can be used, you just need the following</dt>
+<dd>information: <code class="docutils literal notranslate"><span class="pre">Server</span> <span class="pre">Name</span></code>, <code class="docutils literal notranslate"><span class="pre">Port</span></code>, <code class="docutils literal notranslate"><span class="pre">SMTP</span> <span class="pre">Username</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">SMTP</span> <span class="pre">Password</span></code>.<ul class="last">
+<li><dl class="first docutils">
+<dt>If you don’t have an SMTP service, here are simple instructions</dt>
+<dd>to set one up with <a class="reference external" href="https://aws.amazon.com/ses/">Amazon Simple Email Service
+(SES)</a>:<ol class="last arabic">
+<li>Go to <a class="reference external" href="https://console.aws.amazon.com/ses">Amazon SES
 console</a> then
-<code class="docutils literal notranslate"><span class="pre">SMTP</span> <span class="pre">Settings</span> <span class="pre">&gt;</span> <span class="pre">Create</span> <span class="pre">My</span> <span class="pre">SMTP</span> <span class="pre">Credentials</span></code></p></li>
-<li><p>Copy the <code class="docutils literal notranslate"><span class="pre">Server</span> <span class="pre">Name</span></code>, <code class="docutils literal notranslate"><span class="pre">Port</span></code>, <code class="docutils literal notranslate"><span class="pre">SMTP</span> <span class="pre">Username</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">SMTP</span> <span class="pre">Password</span></code> for Step 2 below.</p></li>
-<li><p>From the <code class="docutils literal notranslate"><span class="pre">Domains</span></code> menu set up and verify a new domain,
-then enable <code class="docutils literal notranslate"><span class="pre">Generate</span> <span class="pre">DKIM</span> <span class="pre">Settings</span></code> for the domain.</p>
-<ol class="arabic simple">
-<li><p>We recommend you set up <a class="reference external" href="https://en.wikipedia.org/wiki/Sender_Policy_Framework">Sender Policy
+<code class="docutils literal notranslate"><span class="pre">SMTP</span> <span class="pre">Settings</span> <span class="pre">&gt;</span> <span class="pre">Create</span> <span class="pre">My</span> <span class="pre">SMTP</span> <span class="pre">Credentials</span></code></li>
+<li>Copy the <code class="docutils literal notranslate"><span class="pre">Server</span> <span class="pre">Name</span></code>, <code class="docutils literal notranslate"><span class="pre">Port</span></code>, <code class="docutils literal notranslate"><span class="pre">SMTP</span> <span class="pre">Username</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">SMTP</span> <span class="pre">Password</span></code> for Step 2 below.</li>
+<li>From the <code class="docutils literal notranslate"><span class="pre">Domains</span></code> menu set up and verify a new domain,
+then enable <code class="docutils literal notranslate"><span class="pre">Generate</span> <span class="pre">DKIM</span> <span class="pre">Settings</span></code> for the domain.<ol class="arabic">
+<li>We recommend you set up <a class="reference external" href="https://en.wikipedia.org/wiki/Sender_Policy_Framework">Sender Policy
 Framework</a>
 (SPF) and/or <a class="reference external" href="https://en.wikipedia.org/wiki/DomainKeys_Identified_Mail">Domain Keys Identified
 Mail</a>
-(DKIM) for your email domain.</p></li>
+(DKIM) for your email domain.</li>
 </ol>
 </li>
-<li><p>Choose a sender address like <code class="docutils literal notranslate"><span class="pre">mattermost&#64;example.com</span></code> and
+<li>Choose a sender address like <code class="docutils literal notranslate"><span class="pre">mattermost&#64;example.com</span></code> and
 click <code class="docutils literal notranslate"><span class="pre">Send</span> <span class="pre">a</span> <span class="pre">Test</span> <span class="pre">Email</span></code> to verify setup is working
-correctly.</p></li>
+correctly.</li>
 </ol>
 </dd>
 </dl>
@@ -306,45 +294,40 @@ correctly.</p></li>
 </li>
 </ul>
 </li>
-<li><p><strong>Configure SMTP settings</strong></p>
-<ol class="arabic simple">
-<li><p>Open the <strong>System Console</strong> by logging into an existing team and
-accessing “System Console” from the main menu.</p>
-<ul class="simple">
-<li><dl class="simple">
-<dt>Alternatively, if a team doesn’t yet exist, go to</dt><dd><p><code class="docutils literal notranslate"><span class="pre">http://dockerhost:8065/</span></code> in your browser, create a team,
-then from the main menu click <strong>System Console</strong></p>
-</dd>
+<li><strong>Configure SMTP settings</strong><ol class="arabic">
+<li>Open the <strong>System Console</strong> by logging into an existing team and
+accessing “System Console” from the main menu.<ul>
+<li><dl class="first docutils">
+<dt>Alternatively, if a team doesn’t yet exist, go to</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">http://dockerhost:8065/</span></code> in your browser, create a team,
+then from the main menu click <strong>System Console</strong></dd>
 </dl>
 </li>
 </ul>
 </li>
-<li><p>Go to the <strong>Authentication</strong> &gt; <strong>Email</strong> tab and configure the following:</p>
-<ol class="arabic simple">
-<li><p><strong>Allow Sign Up With Email:</strong> <code class="docutils literal notranslate"><span class="pre">true</span></code></p></li>
+<li>Go to the <strong>Authentication</strong> &gt; <strong>Email</strong> tab and configure the following:<ol class="arabic">
+<li><strong>Allow Sign Up With Email:</strong> <code class="docutils literal notranslate"><span class="pre">true</span></code></li>
 </ol>
 </li>
-<li><p>Go to the <strong>Notifications</strong> &gt; <strong>Email</strong> tab and configure the following:</p>
-<ol class="arabic simple">
-<li><p><strong>Send Email Notifications:</strong> <code class="docutils literal notranslate"><span class="pre">true</span></code></p></li>
-<li><p><strong>Notification Display Name:</strong> Display name on email account
-sending notifications</p></li>
-<li><p><strong>Notification Email Address:</strong> Email address displayed on
-email account used to send notifications</p></li>
-<li><p><strong>SMTP Username</strong>: <code class="docutils literal notranslate"><span class="pre">SMTP</span> <span class="pre">Username</span></code> from Step 1</p></li>
-<li><p><strong>SMTP Password</strong>: <code class="docutils literal notranslate"><span class="pre">SMTP</span> <span class="pre">Password</span></code> from Step 1</p></li>
-<li><p><strong>SMTP Server</strong>: <code class="docutils literal notranslate"><span class="pre">SMTP</span> <span class="pre">Server</span></code> from Step 1</p></li>
-<li><p><strong>SMTP Port</strong>: <code class="docutils literal notranslate"><span class="pre">SMTP</span> <span class="pre">Port</span></code> from Step 1</p></li>
-<li><p><strong>Connection Security</strong>: <code class="docutils literal notranslate"><span class="pre">TLS</span> <span class="pre">(Recommended)</span></code></p></li>
-<li><p>Then click <strong>Save</strong></p></li>
-<li><p>Then click <strong>Test Connection</strong></p></li>
-<li><p>If the test failed please look in <strong>OTHER</strong> &gt; <strong>Logs</strong> for any
-errors that look like <code class="docutils literal notranslate"><span class="pre">[EROR]</span> <span class="pre">/api/v4/email/test</span> <span class="pre">...</span></code></p></li>
+<li>Go to the <strong>Notifications</strong> &gt; <strong>Email</strong> tab and configure the following:<ol class="arabic">
+<li><strong>Send Email Notifications:</strong> <code class="docutils literal notranslate"><span class="pre">true</span></code></li>
+<li><strong>Notification Display Name:</strong> Display name on email account
+sending notifications</li>
+<li><strong>Notification Email Address:</strong> Email address displayed on
+email account used to send notifications</li>
+<li><strong>SMTP Username</strong>: <code class="docutils literal notranslate"><span class="pre">SMTP</span> <span class="pre">Username</span></code> from Step 1</li>
+<li><strong>SMTP Password</strong>: <code class="docutils literal notranslate"><span class="pre">SMTP</span> <span class="pre">Password</span></code> from Step 1</li>
+<li><strong>SMTP Server</strong>: <code class="docutils literal notranslate"><span class="pre">SMTP</span> <span class="pre">Server</span></code> from Step 1</li>
+<li><strong>SMTP Port</strong>: <code class="docutils literal notranslate"><span class="pre">SMTP</span> <span class="pre">Port</span></code> from Step 1</li>
+<li><strong>Connection Security</strong>: <code class="docutils literal notranslate"><span class="pre">TLS</span> <span class="pre">(Recommended)</span></code></li>
+<li>Then click <strong>Save</strong></li>
+<li>Then click <strong>Test Connection</strong></li>
+<li>If the test failed please look in <strong>OTHER</strong> &gt; <strong>Logs</strong> for any
+errors that look like <code class="docutils literal notranslate"><span class="pre">[EROR]</span> <span class="pre">/api/v4/email/test</span> <span class="pre">...</span></code></li>
 </ol>
 </li>
-<li><p>(Optional) Go to the <strong>Security</strong> &gt; <strong>Sign Up</strong> tab and configure the following:</p>
-<ol class="arabic simple">
-<li><p><strong>Enable Email Invitations:</strong> <code class="docutils literal notranslate"><span class="pre">true</span></code></p></li>
+<li>(Optional) Go to the <strong>Security</strong> &gt; <strong>Sign Up</strong> tab and configure the following:<ol class="arabic">
+<li><strong>Enable Email Invitations:</strong> <code class="docutils literal notranslate"><span class="pre">true</span></code></li>
 </ol>
 </li>
 </ol>
@@ -356,58 +339,58 @@ errors that look like <code class="docutils literal notranslate"><span class="pr
 <div class="section" id="amazon-ses">
 <h3>Amazon SES<a class="headerlink" href="#amazon-ses" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>Set <strong>SMTP Username</strong> to <strong>[YOUR_SMTP_USERNAME]</strong></p></li>
-<li><p>Set <strong>SMTP Password</strong> to <strong>[YOUR_SMTP_PASSWORD]</strong></p></li>
-<li><p>Set <strong>SMTP Server</strong> to <strong>email-smtp.us-east-1.amazonaws.com</strong></p></li>
-<li><p>Set <strong>SMTP Port</strong> to <strong>465</strong></p></li>
-<li><p>Set <strong>Connection Security</strong> to <strong>TLS</strong></p></li>
+<li>Set <strong>SMTP Username</strong> to <strong>[YOUR_SMTP_USERNAME]</strong></li>
+<li>Set <strong>SMTP Password</strong> to <strong>[YOUR_SMTP_PASSWORD]</strong></li>
+<li>Set <strong>SMTP Server</strong> to <strong>email-smtp.us-east-1.amazonaws.com</strong></li>
+<li>Set <strong>SMTP Port</strong> to <strong>465</strong></li>
+<li>Set <strong>Connection Security</strong> to <strong>TLS</strong></li>
 </ul>
 </div>
 <div class="section" id="postfix">
 <h3>Postfix<a class="headerlink" href="#postfix" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>Make sure Postfix is installed on the machine where Mattermost is
-installed</p></li>
-<li><p>Set <strong>SMTP Username</strong> to <strong>(empty)</strong></p></li>
-<li><p>Set <strong>SMTP Password</strong> to <strong>(empty)</strong></p></li>
-<li><p>Set <strong>SMTP Server</strong> to <strong>localhost</strong></p></li>
-<li><p>Set <strong>SMTP Port</strong> to <strong>25</strong></p></li>
-<li><p>Set <strong>Connection Security</strong> to <strong>(empty)</strong></p></li>
+<li>Make sure Postfix is installed on the machine where Mattermost is
+installed</li>
+<li>Set <strong>SMTP Username</strong> to <strong>(empty)</strong></li>
+<li>Set <strong>SMTP Password</strong> to <strong>(empty)</strong></li>
+<li>Set <strong>SMTP Server</strong> to <strong>localhost</strong></li>
+<li>Set <strong>SMTP Port</strong> to <strong>25</strong></li>
+<li>Set <strong>Connection Security</strong> to <strong>(empty)</strong></li>
 </ul>
 </div>
 <div class="section" id="gmail">
 <h3>Gmail<a class="headerlink" href="#gmail" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>Set <strong>SMTP Username</strong> to <strong>your_email&#64;gmail.com</strong></p></li>
-<li><p>Set <strong>SMTP Password</strong> to <strong>your_password</strong></p></li>
-<li><p>Set <strong>SMTP Server</strong> to <strong>smtp.gmail.com</strong></p></li>
-<li><p>Set <strong>SMTP Port</strong> to <strong>587</strong></p></li>
-<li><p>Set <strong>Connection Security</strong> to <strong>STARTTLS</strong></p></li>
+<li>Set <strong>SMTP Username</strong> to <strong>your_email&#64;gmail.com</strong></li>
+<li>Set <strong>SMTP Password</strong> to <strong>your_password</strong></li>
+<li>Set <strong>SMTP Server</strong> to <strong>smtp.gmail.com</strong></li>
+<li>Set <strong>SMTP Port</strong> to <strong>587</strong></li>
+<li>Set <strong>Connection Security</strong> to <strong>STARTTLS</strong></li>
 </ul>
 <div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Additional configuration is required in Google to allow SMTP email to relay through their servers.
+<p class="first admonition-title">Warning</p>
+<p class="last">Additional configuration is required in Google to allow SMTP email to relay through their servers.
 See <a class="reference external" href="https://support.google.com/a/answer/2956491?hl=en">SMTP relay: Route outgoing non-Gmail messages through Google</a> for the required steps.</p>
 </div>
 </div>
 <div class="section" id="hotmail">
 <h3>Hotmail<a class="headerlink" href="#hotmail" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>Set <strong>SMTP Username</strong> to <strong>your_email&#64;hotmail.com</strong></p></li>
-<li><p>Set <strong>SMTP Password</strong> to <strong>your_password</strong></p></li>
-<li><p>Set <strong>SMTP Server</strong> to <strong>smtp-mail.outlook.com</strong></p></li>
-<li><p>Set <strong>SMTP Port</strong> to <strong>587</strong></p></li>
-<li><p>Set <strong>Connection Security</strong> to <strong>STARTTLS</strong></p></li>
+<li>Set <strong>SMTP Username</strong> to <strong>your_email&#64;hotmail.com</strong></li>
+<li>Set <strong>SMTP Password</strong> to <strong>your_password</strong></li>
+<li>Set <strong>SMTP Server</strong> to <strong>smtp-mail.outlook.com</strong></li>
+<li>Set <strong>SMTP Port</strong> to <strong>587</strong></li>
+<li>Set <strong>Connection Security</strong> to <strong>STARTTLS</strong></li>
 </ul>
 </div>
 <div class="section" id="office365-outlook">
 <h3>Office365 / Outlook<a class="headerlink" href="#office365-outlook" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>Set <strong>SMTP Username</strong> to <strong>your_email&#64;hotmail.com</strong></p></li>
-<li><p>Set <strong>SMTP Password</strong> to <strong>your_password</strong></p></li>
-<li><p>Set <strong>SMTP Server Name</strong> to <strong>smtp.office365.com</strong></p></li>
-<li><p>Set <strong>SMTP Port</strong> to <strong>587</strong></p></li>
-<li><p>Set <strong>Connection Security</strong> to <strong>STARTTLS</strong></p></li>
+<li>Set <strong>SMTP Username</strong> to <strong>your_email&#64;hotmail.com</strong></li>
+<li>Set <strong>SMTP Password</strong> to <strong>your_password</strong></li>
+<li>Set <strong>SMTP Server Name</strong> to <strong>smtp.office365.com</strong></li>
+<li>Set <strong>SMTP Port</strong> to <strong>587</strong></li>
+<li>Set <strong>Connection Security</strong> to <strong>STARTTLS</strong></li>
 </ul>
 </div>
 </div>
@@ -435,11 +418,13 @@ SMTP and error codes can hint at how to make the proper adjustments.</p>
 <div class="section" id="checking-your-smtp-server-is-reachable">
 <h3>Checking your SMTP server is reachable<a class="headerlink" href="#checking-your-smtp-server-is-reachable" title="Permalink to this headline">¶</a></h3>
 <ul>
-<li><p>Attempt to telnet to the email service to make sure the server is
-reachable.</p></li>
-<li><p>You must run the following commands from the same machine or virtual
-instance where <code class="docutils literal notranslate"><span class="pre">mattermost/bin/mattermost</span></code> is located.</p></li>
-<li><p>Telnet to the email server with <code class="docutils literal notranslate"><span class="pre">telnet</span> <span class="pre">mail.example.com</span> <span class="pre">25</span></code>. If
+<li><p class="first">Attempt to telnet to the email service to make sure the server is
+reachable.</p>
+</li>
+<li><p class="first">You must run the following commands from the same machine or virtual
+instance where <code class="docutils literal notranslate"><span class="pre">mattermost/bin/mattermost</span></code> is located.</p>
+</li>
+<li><p class="first">Telnet to the email server with <code class="docutils literal notranslate"><span class="pre">telnet</span> <span class="pre">mail.example.com</span> <span class="pre">25</span></code>. If
 the command works you should see something like</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Trying</span> <span class="mf">24.121</span><span class="o">.</span><span class="mf">12.143</span><span class="o">...</span>
 <span class="n">Connected</span> <span class="n">to</span> <span class="n">mail</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span><span class="o">.</span>
@@ -447,7 +432,7 @@ the command works you should see something like</p>
 </pre></div>
 </div>
 </li>
-<li><p>Then type something like <code class="docutils literal notranslate"><span class="pre">HELO</span> <span class="pre">&lt;your</span> <span class="pre">mail</span> <span class="pre">server</span> <span class="pre">domain&gt;</span></code>. If the
+<li><p class="first">Then type something like <code class="docutils literal notranslate"><span class="pre">HELO</span> <span class="pre">&lt;your</span> <span class="pre">mail</span> <span class="pre">server</span> <span class="pre">domain&gt;</span></code>. If the
 command works you should see something like</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">250</span><span class="o">-</span><span class="n">mail</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span> <span class="n">NO</span> <span class="n">UCE</span>
 <span class="mi">250</span><span class="o">-</span><span class="n">STARTTLS</span>
@@ -458,12 +443,12 @@ command works you should see something like</p>
 </li>
 </ul>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>As we’re not installing telnet by default on the official docker images you either need to use <code class="docutils literal notranslate"><span class="pre">ping</span></code> on those or install telnet yourself either directly or by modifying the Dockerfile.</p>
+<p class="first admonition-title">Note</p>
+<p class="last">As we’re not installing telnet by default on the official docker images you either need to use <code class="docutils literal notranslate"><span class="pre">ping</span></code> on those or install telnet yourself either directly or by modifying the Dockerfile.</p>
 </div>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>For further assistance, review the <a class="reference external" href="https://forum.mattermost.org/c/trouble-shoot">Troubleshooting forum</a> for previously reported errors, or <a class="reference external" href="https://mattermost.com/pl/default-ask-mattermost-community/">join the Mattermost user community for troubleshooting help</a>. To submit an improvement or correction to this page, click <strong>Edit</strong> in the top-right corner of the page.</p>
+<p class="first admonition-title">Note</p>
+<p class="last">For further assistance, review the <a class="reference external" href="https://forum.mattermost.org/c/trouble-shoot">Troubleshooting forum</a> for previously reported errors, or <a class="reference external" href="https://mattermost.com/pl/default-ask-mattermost-community/">join the Mattermost user community for troubleshooting help</a>. To submit an improvement or correction to this page, click <strong>Edit</strong> in the top-right corner of the page.</p>
 </div>
 </div>
 </div>
@@ -474,29 +459,29 @@ command works you should see something like</p>
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="install-mmte-helm-gitlab-helm.html" class="btn btn-neutral float-right" title="How to install Mattermost Team Edition Helm Chart in a GitLab Helm Chart deployment" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="docker-local-machine.html" class="btn btn-neutral float-left" title="Local Machine Setup using Docker" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="install-mmte-helm-gitlab-helm.html" class="btn btn-neutral float-right" title="How to install Mattermost Team Edition Helm Chart in a GitLab Helm Chart deployment" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="docker-local-machine.html" class="btn btn-neutral" title="Local Machine Setup using Docker" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2015-2020 Mattermost.
+        &copy; Copyright 2015-2020 Mattermost
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -530,16 +515,27 @@ command works you should see something like</p>
 </div>
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
 	<header>
 	<div class="header__container">
 		<div class="search__icon">

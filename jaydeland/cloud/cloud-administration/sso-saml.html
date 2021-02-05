@@ -2,46 +2,34 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>SAML Single Sign-On &mdash; Mattermost 5.30 documentation</title>
+  <title>SAML Single Sign-On &mdash; Mattermost 5.31 documentation</title>
   
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
   
-
   
   
 
   
-    <link rel="canonical" href="https://docs.mattermost.com/cloud/cloud-administration/sso-saml.html" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
   
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/myscript.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-    
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="SAML Single-Sign-On: Technical Documentation" href="saml-technical.html" />
     <link rel="prev" title="Multi-Factor Authentication" href="authentication.html" />
@@ -53,16 +41,21 @@
 	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
 	<!-- End Google Tag Manager -->
 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -76,7 +69,7 @@
             
             
               <div class="version">
-                5.30
+                5.31
               </div>
             
           
@@ -93,7 +86,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -115,7 +107,10 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="saml-technical.html">SAML Single-Sign-On: Technical Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-ldap.html">Active Directory/LDAP Setup</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-gitlab.html">GitLab Single Sign-On</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-google.html">Google Single Sign-On</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-office.html">Office 365 Single Sign-On</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#integrations">Integrations</a></li>
@@ -133,7 +128,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -183,21 +177,21 @@
 <p>Single sign-on (SSO) is a way for users to log into multiple applications with a single user ID and password without having to re-enter their credentials. The SAML standard allows identity providers to pass credentials to service providers. Mattermost can be configured to act as a SAML 2.0 Service Provider.</p>
 <p>Mattermost can be configured to act as a SAML 2.0 Service Provider. The SAML Single sign-on integration offers the following benefits:</p>
 <ul class="simple">
-<li><p><strong>Single sign-on.</strong> Users can sign-in to Mattermost with their SAML credentials.</p></li>
-<li><p><strong>Centralized identity management.</strong> Mattermost accounts automatically pull user attributes from SAML upon login, such as full name, email, and username.</p></li>
-<li><p><strong>Automatic account provisioning.</strong> Mattermost user accounts are automatically created the first time a user signs in with their SAML credentials on the Mattermost server.</p></li>
-<li><p><strong>Sync groups to predefined roles in Mattermost.</strong> Assign team and channel roles to groups via LDAP Group Sync.</p></li>
-<li><p><strong>Compliance alignment with administrator management.</strong> Manage Administrator access to Mattermost in the System Console using SAML attributes.</p></li>
+<li><strong>Single sign-on.</strong> Users can sign-in to Mattermost with their SAML credentials.</li>
+<li><strong>Centralized identity management.</strong> Mattermost accounts automatically pull user attributes from SAML upon login, such as full name, email, and username.</li>
+<li><strong>Automatic account provisioning.</strong> Mattermost user accounts are automatically created the first time a user signs in with their SAML credentials on the Mattermost server.</li>
+<li><strong>Sync groups to predefined roles in Mattermost.</strong> Assign team and channel roles to groups via LDAP Group Sync.</li>
+<li><strong>Compliance alignment with administrator management.</strong> Manage Administrator access to Mattermost in the System Console using SAML attributes.</li>
 </ul>
 <p>SAML Single sign-on itself does not support periodic updates of user attributes nor automatic deprovisioning. However, SAML with AD/LDAP sync can be configured to support these use cases.</p>
 <p>For more information about SAML, see <a class="reference external" href="https://www.varonis.com/blog/what-is-saml/">this article from Varonis</a>, and <a class="reference external" href="https://duo.com/blog/the-beer-drinkers-guide-to-saml">this conceptual example from DUO</a>.</p>
 <p>Mattermost officially supports Okta, OneLogin, and Microsoft ADFS as the identity providers (IDPs), please see links below for more details on how to configure SAML with these providers.</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml-okta.html">Okta SAML Configuration</a></p></li>
-<li><p><a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml-onelogin.html">OneLogin SAML Configuration</a></p></li>
-<li><p><a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml-adfs.html#configure-saml-with-microsoft-adfs-for-windows-server-2012">Microsoft ADFS SAML Configuration for Windows Server 2012</a></p></li>
-<li><p><a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml-adfs-msws2016.html">Microsoft ADFS SAML Configuration for Windows Server 2016</a></p></li>
+<li><a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml-okta.html">Okta SAML Configuration</a></li>
+<li><a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml-onelogin.html">OneLogin SAML Configuration</a></li>
+<li><a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml-adfs.html#configure-saml-with-microsoft-adfs-for-windows-server-2012">Microsoft ADFS SAML Configuration for Windows Server 2012</a></li>
+<li><a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml-adfs-msws2016.html">Microsoft ADFS SAML Configuration for Windows Server 2016</a></li>
 </ul>
 </div></blockquote>
 <p>In addition to the officially supported identity providers, you can also configure SAML for a custom IdP. For instance, customers have successfully set up Azure AD, DUO, PingFederate, Keycloak, and SimpleSAMLphp as a custom IdPs. Because we do not test against these identity providers, it is important that you test new versions of Mattermost in a staging environment to confirm it will work with your identity provider. You can also set up MFA on top of your SAML provider for additional security.</p>
@@ -208,9 +202,9 @@
 <h3>Username Attribute<a class="headerlink" href="#username-attribute" title="Permalink to this headline">¶</a></h3>
 <p>(Optional) Enter a SAML assertion filter to use when searching for users.</p>
 <ol class="arabic simple">
-<li><p>Navigate to <strong>System Console &gt; Authentication &gt; SAML 2.0</strong>.</p></li>
-<li><p>Complete the <strong>Username Attribute</strong> field.</p></li>
-<li><p>Choose <strong>Save</strong>.</p></li>
+<li>Navigate to <strong>System Console &gt; Authentication &gt; SAML 2.0</strong>.</li>
+<li>Complete the <strong>Username Attribute</strong> field.</li>
+<li>Choose <strong>Save</strong>.</li>
 </ol>
 <p>When the user accesses the Mattermost URL, they log in with same username and password that they use for organizational logins.</p>
 </div>
@@ -219,10 +213,10 @@
 <p>When enabled, the Guest Attribute in Mattermost identifies external users whose SAML assertion is guest and who are invited to join your Mattermost server. These users will have the Guest role applied immediately upon first sign-in instead of the default member user role. This eliminates having to manually assign the role in the System Console.</p>
 <p>If a Mattermost Guest user has the guest role removed in the SAML system, the synchronization processes will not automatically promote them to a member user role. This is done manually via <strong>System Console &gt; User Management</strong>. If a member user has the Guest Attribute added, the synchronization processes will automatically demote the member user to the guest role.</p>
 <ol class="arabic simple">
-<li><p>Enable Guest Access via <strong>System Console &gt; SAML 2.0</strong>.</p></li>
-<li><p>Navigate to <strong>System Console &gt; Authentication &gt; SAML 2.0</strong>.</p></li>
-<li><p>Complete the Guest Attribute field.</p></li>
-<li><p>Choose <strong>Save</strong>.</p></li>
+<li>Enable Guest Access via <strong>System Console &gt; SAML 2.0</strong>.</li>
+<li>Navigate to <strong>System Console &gt; Authentication &gt; SAML 2.0</strong>.</li>
+<li>Complete the Guest Attribute field.</li>
+<li>Choose <strong>Save</strong>.</li>
 </ol>
 <p>When a guest logs in for the first time they are presented with a default landing page until they are added to channels.</p>
 <p>See the <a class="reference external" href="https://docs.mattermost.com/deployment/guest-accounts.html">Guest Accounts documentation</a> for more information about this feature.</p>
@@ -232,10 +226,10 @@
 <p>(Optional) The attribute in the SAML Assertion for designating System Admins. The users selected by the query will have access to your Mattermost server as System Admins. By default, System Admins have complete access to the Mattermost System Console.</p>
 <p>Existing members that are identified by this attribute will be promoted from member to System Admin upon next login. The next login is based upon Session lengths set in <strong>System Console &gt; Session Lengths</strong>. It is recommended that users are manually demoted to members in <strong>System Console &gt; User Management</strong> to ensure access is restricted immediately.</p>
 <ol class="arabic simple">
-<li><p>Navigate to <strong>System Console &gt; Authentication &gt; SAML 2.0</strong>.</p></li>
-<li><p>Set <strong>Enable Admin Attribute</strong> to <strong>true</strong>.</p></li>
-<li><p>Complete the <strong>Admin Attribute</strong> field.</p></li>
-<li><p>Choose <strong>Save</strong>.</p></li>
+<li>Navigate to <strong>System Console &gt; Authentication &gt; SAML 2.0</strong>.</li>
+<li>Set <strong>Enable Admin Attribute</strong> to <strong>true</strong>.</li>
+<li>Complete the <strong>Admin Attribute</strong> field.</li>
+<li>Choose <strong>Save</strong>.</li>
 </ol>
 <p><strong>Note:</strong> If the Admin Attribute is set to <code class="docutils literal notranslate"><span class="pre">false</span></code> the member’s role as System Admin is retained. However, if the attribute is removed/changed, System Admins that were promoted via the attribute will be demoted to members and will not retain access to the System Console. When this attribute is not in use, System Admins can be manually promoted/demoted in <strong>System Console &gt; User Management</strong>.</p>
 </div>
@@ -254,29 +248,29 @@
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="saml-technical.html" class="btn btn-neutral float-right" title="SAML Single-Sign-On: Technical Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="authentication.html" class="btn btn-neutral float-left" title="Multi-Factor Authentication" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="saml-technical.html" class="btn btn-neutral float-right" title="SAML Single-Sign-On: Technical Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="authentication.html" class="btn btn-neutral" title="Multi-Factor Authentication" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2015-2020 Mattermost.
+        &copy; Copyright 2015-2020 Mattermost
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -310,16 +304,27 @@
 </div>
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
 	<header>
 	<div class="header__container">
 		<div class="search__icon">

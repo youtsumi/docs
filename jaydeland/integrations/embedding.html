@@ -2,49 +2,37 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Embedding Mattermost in Other Applications &mdash; Mattermost 5.30 documentation</title>
+  <title>Embedding Mattermost in Other Applications &mdash; Mattermost 5.31 documentation</title>
   
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
-
   
   
 
   
-    <link rel="canonical" href="https://docs.mattermost.com/integrations/embedding.html" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
   
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/myscript.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-    
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Using Mattermost with Webhook" href="webhook.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="../developer/integration-faq.html" />
+    <link rel="prev" title="Integrations FAQ" href="../developer/integration-faq.html" />
 	<!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -53,16 +41,21 @@
 	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
 	<!-- End Google Tag Manager -->
 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -76,7 +69,7 @@
             
             
               <div class="version">
-                5.30
+                5.31
               </div>
             
           
@@ -93,7 +86,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -121,6 +113,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../developer/bot-accounts.html">Bot Accounts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../developer/personal-access-tokens.html">Personal Access Tokens</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../developer/oauth-2-0-applications.html">OAuth 2.0 Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer/integration-faq.html">Integrations FAQ</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Embedding Mattermost in Other Applications</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#launching-mattermost-from-a-button-click">Launching Mattermost From a Button Click</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#mattermost-launch-button-example-in-html">Mattermost Launch Button Example in HTML</a></li>
@@ -143,7 +136,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -192,20 +184,17 @@
 <h1><a class="toc-backref" href="#contents">Embedding Mattermost in Other Applications</a><a class="headerlink" href="#embedding-mattermost-in-other-applications" title="Permalink to this headline">¶</a></h1>
 <p>This guide discusses how to embed Mattermost into other applications in different ways.</p>
 <div class="contents topic" id="contents">
-<p class="topic-title">Contents</p>
+<p class="topic-title first">Contents</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#embedding-mattermost-in-other-applications" id="id1">Embedding Mattermost in Other Applications</a></p>
-<ul>
-<li><p><a class="reference internal" href="#launching-mattermost-from-a-button-click" id="id2">Launching Mattermost From a Button Click</a></p>
-<ul>
-<li><p><a class="reference internal" href="#mattermost-launch-button-example-in-html" id="id3">Mattermost Launch Button Example in HTML</a></p></li>
+<li><a class="reference internal" href="#embedding-mattermost-in-other-applications" id="id1">Embedding Mattermost in Other Applications</a><ul>
+<li><a class="reference internal" href="#launching-mattermost-from-a-button-click" id="id2">Launching Mattermost From a Button Click</a><ul>
+<li><a class="reference internal" href="#mattermost-launch-button-example-in-html" id="id3">Mattermost Launch Button Example in HTML</a></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#embedding-mattermost-in-web-applications-using-an-iframe" id="id4">Embedding Mattermost in Web Applications Using an iframe</a></p></li>
-<li><p><a class="reference internal" href="#embedding-mattermost-in-mobile-applications" id="id5">Embedding Mattermost in Mobile Applications</a></p>
-<ul>
-<li><p><a class="reference internal" href="#mobile-applications-offering-mattermost-as-a-web-view" id="id6">Mobile Applications Offering Mattermost as a Web View</a></p></li>
-<li><p><a class="reference internal" href="#mobile-applications-offering-mattermost-with-react-native-components" id="id7">Mobile Applications Offering Mattermost with React Native Components</a></p></li>
+<li><a class="reference internal" href="#embedding-mattermost-in-web-applications-using-an-iframe" id="id4">Embedding Mattermost in Web Applications Using an iframe</a></li>
+<li><a class="reference internal" href="#embedding-mattermost-in-mobile-applications" id="id5">Embedding Mattermost in Mobile Applications</a><ul>
+<li><a class="reference internal" href="#mobile-applications-offering-mattermost-as-a-web-view" id="id6">Mobile Applications Offering Mattermost as a Web View</a></li>
+<li><a class="reference internal" href="#mobile-applications-offering-mattermost-with-react-native-components" id="id7">Mobile Applications Offering Mattermost with React Native Components</a></li>
 </ul>
 </li>
 </ul>
@@ -223,32 +212,33 @@
 <div><p>&lt;script&gt;</p>
 <blockquote>
 <div><p>var myWindow = null;</p>
-<dl class="simple">
-<dt>function openMMWindow() {</dt><dd><p>myWindow = window.open(“<a class="reference external" href="https://community.mattermost.com/core/channels/developer">https://community.mattermost.com/core/channels/developer</a>”, “Mattermost”, “top=0,left=0,width=400,height=600,status=no,toolbar=no,location=no,menubar=no,titlebar=no”);</p>
-</dd>
+<dl class="docutils">
+<dt>function openMMWindow() {</dt>
+<dd>myWindow = window.open(“<a class="reference external" href="https://community.mattermost.com/core/channels/developer">https://community.mattermost.com/core/channels/developer</a>”, “Mattermost”, “top=0,left=0,width=400,height=600,status=no,toolbar=no,location=no,menubar=no,titlebar=no”);</dd>
 </dl>
 <p>}</p>
-<dl>
-<dt>function closeMMWindow() {</dt><dd><dl class="simple">
-<dt>if (myWindow) {</dt><dd><p>myWindow.close();</p>
-</dd>
+<dl class="docutils">
+<dt>function closeMMWindow() {</dt>
+<dd><dl class="first docutils">
+<dt>if (myWindow) {</dt>
+<dd>myWindow.close();</dd>
 </dl>
-<p>}</p>
+<p class="last">}</p>
 </dd>
 </dl>
 <p>}</p>
 </div></blockquote>
 <p>&lt;/script&gt;</p>
-<dl class="simple">
-<dt>&lt;html&gt;</dt><dd><p>&lt;br/&gt;
+<dl class="docutils">
+<dt>&lt;html&gt;</dt>
+<dd>&lt;br/&gt;
 &lt;br/&gt;
 &lt;button onclick=”openMMWindow()”&gt;Open Developer Channel&lt;/button&gt;
 &lt;br/&gt;
 &lt;br/&gt;
 &lt;button onclick=”closeMMWindow()”&gt;Close Developer Channel&lt;/button&gt;
 &lt;br/&gt;
-&lt;br/&gt;</p>
-</dd>
+&lt;br/&gt;</dd>
 </dl>
 <p>&lt;/html&gt;</p>
 </div></blockquote>
@@ -266,8 +256,8 @@
 <div class="section" id="mobile-applications-offering-mattermost-as-a-web-view">
 <h3><a class="toc-backref" href="#contents">Mobile Applications Offering Mattermost as a Web View</a><a class="headerlink" href="#mobile-applications-offering-mattermost-as-a-web-view" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p><a class="reference external" href="https://github.com/mattermost/ios">https://github.com/mattermost/ios</a></p></li>
-<li><p><a class="reference external" href="https://github.com/mattermost/android">https://github.com/mattermost/android</a></p></li>
+<li><a class="reference external" href="https://github.com/mattermost/ios">https://github.com/mattermost/ios</a></li>
+<li><a class="reference external" href="https://github.com/mattermost/android">https://github.com/mattermost/android</a></li>
 </ul>
 </div>
 <div class="section" id="mobile-applications-offering-mattermost-with-react-native-components">
@@ -282,29 +272,29 @@
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="webhook.html" class="btn btn-neutral float-right" title="Using Mattermost with Webhook" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../developer/integration-faq.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="webhook.html" class="btn btn-neutral float-right" title="Using Mattermost with Webhook" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../developer/integration-faq.html" class="btn btn-neutral" title="Integrations FAQ" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2015-2020 Mattermost.
+        &copy; Copyright 2015-2020 Mattermost
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -338,16 +328,27 @@
 </div>
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
 	<header>
 	<div class="header__container">
 		<div class="search__icon">

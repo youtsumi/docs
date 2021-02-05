@@ -2,46 +2,34 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Cloud Administrator’s Guide &mdash; Mattermost 5.30 documentation</title>
+  <title>Cloud Administrator’s Guide &mdash; Mattermost 5.31 documentation</title>
   
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
-
   
   
 
   
-    <link rel="canonical" href="https://docs.mattermost.com/guides/cloud-admin-guide.html" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
   
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/myscript.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-    
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Mattermost Cloud Billing" href="../cloud/cloud-billing/cloud-billing.html" />
     <link rel="prev" title="Frequently Asked Questions (FAQ)" href="../overview/faq.html" />
@@ -53,16 +41,21 @@
 	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
 	<!-- End Google Tag Manager -->
 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -76,7 +69,7 @@
             
             
               <div class="version">
-                5.30
+                5.31
               </div>
             
           
@@ -93,7 +86,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -107,6 +99,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#system-administration">System Administration</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../cloud/cloud-billing/cloud-billing.html">Mattermost Cloud Billing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../cloud/cloud-reporting.html">Statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cloud/cloud-administration/cloud-changelog.html">Mattermost Cloud Changelog</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#user-management">User Management</a><ul>
@@ -126,7 +119,10 @@
 <li class="toctree-l3"><a class="reference internal" href="../cloud/cloud-administration/authentication.html">Multi-Factor Authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../cloud/cloud-administration/sso-saml.html">SAML Single Sign-On</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../cloud/cloud-administration/saml-technical.html">SAML Single-Sign-On: Technical Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cloud/cloud-administration/sso-ldap.html">Active Directory/LDAP Setup</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../cloud/cloud-administration/sso-gitlab.html">GitLab Single Sign-On</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cloud/cloud-administration/sso-google.html">Google Single Sign-On</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cloud/cloud-administration/sso-office.html">Office 365 Single Sign-On</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#integrations">Integrations</a><ul>
@@ -135,6 +131,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../cloud/cloud-integrations/cloud-slash-commands.html">Slash Commands</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../cloud/cloud-integrations/cloud-bot-accounts.html">Bot Accounts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../cloud/cloud-integrations/cloud-personal-access-tokens.html">Personal Access Tokens</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cloud/cloud-integrations/integrations-faq.html">Integrations FAQ</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../cloud/cloud-integrations/embedding.html">Embedding Mattermost in Other Applications</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../cloud/cloud-integrations/webhook.html">Using Mattermost with Webhook</a></li>
 </ul>
@@ -154,7 +151,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#incident-management">Incident Management</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../administration/devops-command-center.html">Mattermost Incident Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administration/devops-command-center.html">Mattermost Incident Collaboration</a></li>
 </ul>
 </li>
 </ul>
@@ -168,7 +165,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -229,6 +225,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../cloud/cloud-reporting.html#troubleshooting">Troubleshooting</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../cloud/cloud-administration/cloud-changelog.html">Mattermost Cloud Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cloud/cloud-administration/cloud-changelog.html#release-2021-01-26">Release 2021-01-26</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cloud/cloud-administration/cloud-changelog.html#release-2021-01-12">Release 2021-01-12</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cloud/cloud-administration/cloud-changelog.html#release-2020-12-18">Release 2020-12-18</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cloud/cloud-administration/cloud-changelog.html#release-2020-12-09">Release 2020-12-09</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cloud/cloud-administration/cloud-changelog.html#release-2020-12-03">Release 2020-12-03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cloud/cloud-administration/cloud-changelog.html#release-2020-11-24">Release 2020-11-24</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -271,7 +276,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../cloud/cloud-administration/authentication.html">Multi-Factor Authentication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cloud/cloud-administration/sso-saml.html">SAML Single Sign-On</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cloud/cloud-administration/saml-technical.html">SAML Single-Sign-On: Technical Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cloud/cloud-administration/sso-ldap.html">Active Directory/LDAP Setup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cloud/cloud-administration/sso-gitlab.html">GitLab Single Sign-On</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cloud/cloud-administration/sso-google.html">Google Single Sign-On</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cloud/cloud-administration/sso-office.html">Office 365 Single Sign-On</a></li>
 </ul>
 </div>
 </div>
@@ -284,6 +292,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../cloud/cloud-integrations/cloud-slash-commands.html">Slash Commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cloud/cloud-integrations/cloud-bot-accounts.html">Bot Accounts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cloud/cloud-integrations/cloud-personal-access-tokens.html">Personal Access Tokens</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cloud/cloud-integrations/integrations-faq.html">Integrations FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cloud/cloud-integrations/embedding.html">Embedding Mattermost in Other Applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cloud/cloud-integrations/webhook.html">Using Mattermost with Webhook</a></li>
 </ul>
@@ -315,7 +324,7 @@
 <h2>Incident Management<a class="headerlink" href="#incident-management" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../administration/devops-command-center.html">Mattermost Incident Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../administration/devops-command-center.html">Mattermost Incident Collaboration</a></li>
 </ul>
 </div>
 </div>
@@ -326,29 +335,29 @@
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../cloud/cloud-billing/cloud-billing.html" class="btn btn-neutral float-right" title="Mattermost Cloud Billing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../overview/faq.html" class="btn btn-neutral float-left" title="Frequently Asked Questions (FAQ)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="../cloud/cloud-billing/cloud-billing.html" class="btn btn-neutral float-right" title="Mattermost Cloud Billing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../overview/faq.html" class="btn btn-neutral" title="Frequently Asked Questions (FAQ)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2015-2020 Mattermost.
+        &copy; Copyright 2015-2020 Mattermost
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -382,16 +391,27 @@
 </div>
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
 	<header>
 	<div class="header__container">
 		<div class="search__icon">

@@ -2,46 +2,34 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Bot Accounts &mdash; Mattermost 5.30 documentation</title>
+  <title>Bot Accounts &mdash; Mattermost 5.31 documentation</title>
   
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
   
-
   
   
 
   
-    <link rel="canonical" href="https://docs.mattermost.com/cloud/cloud-integrations/cloud-bot-accounts.html" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
   
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/myscript.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-    
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Personal Access Tokens" href="cloud-personal-access-tokens.html" />
     <link rel="prev" title="Slash Commands" href="cloud-slash-commands.html" />
@@ -53,16 +41,21 @@
 	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
 	<!-- End Google Tag Manager -->
 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -76,7 +69,7 @@
             
             
               <div class="version">
-                5.30
+                5.31
               </div>
             
           
@@ -93,7 +86,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -119,6 +111,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="cloud-personal-access-tokens.html">Personal Access Tokens</a></li>
+<li class="toctree-l3"><a class="reference internal" href="integrations-faq.html">Integrations FAQ</a></li>
 <li class="toctree-l3"><a class="reference internal" href="embedding.html">Embedding Mattermost in Other Applications</a></li>
 <li class="toctree-l3"><a class="reference internal" href="webhook.html">Using Mattermost with Webhook</a></li>
 </ul>
@@ -137,7 +130,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -188,43 +180,43 @@
 <p>Bot accounts are just like user accounts, except they:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Cannot be logged into.</p></li>
-<li><p>Cannot be used to create other bot accounts.</p></li>
-<li><p>Do not count as a registered user and therefore do not count towards your subscription.</p></li>
+<li>Cannot be logged into.</li>
+<li>Cannot be used to create other bot accounts.</li>
+<li>Do not count as a registered user and therefore do not count towards your subscription.</li>
 </ul>
 </div></blockquote>
 <p>Additional benefits include:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Bot accounts can be enabled to post to any channel in the system by System Admins, including a private team, Pprivate channel, or Direct Messages.</p></li>
-<li><p>Integrations created by a user and tied to a bot account no longer break if the user leaves the company.</p></li>
-<li><p>Once created, bot accounts behave just like regular user accounts and can be added to teams and channels similar to users.</p></li>
-<li><p>Bot accounts are a safe way to integrate with Mattermost through the RESTful API and Plugin API because there is no need to manage shared logins with these accounts.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">BOT</span></code> tag is used everywhere in the user interface where bot accounts are referenced, including messages and user lists.</p></li>
+<li>Bot accounts can be enabled to post to any channel in the system by System Admins, including a private team, Pprivate channel, or Direct Messages.</li>
+<li>Integrations created by a user and tied to a bot account no longer break if the user leaves the company.</li>
+<li>Once created, bot accounts behave just like regular user accounts and can be added to teams and channels similar to users.</li>
+<li>Bot accounts are a safe way to integrate with Mattermost through the RESTful API and Plugin API because there is no need to manage shared logins with these accounts.</li>
+<li><code class="docutils literal notranslate"><span class="pre">BOT</span></code> tag is used everywhere in the user interface where bot accounts are referenced, including messages and user lists.</li>
 </ul>
 </div></blockquote>
 <p>Note that currently:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Bot accounts can only be created or managed by plugins or System Admins.</p></li>
-<li><p>Bot accounts cannot be assigned to webhooks or slash commands. These must still be created by a user account.</p></li>
-<li><p>Service accounts without an email address pulled from LDAP or SAML systems is not yet supported.</p></li>
+<li>Bot accounts can only be created or managed by plugins or System Admins.</li>
+<li>Bot accounts cannot be assigned to webhooks or slash commands. These must still be created by a user account.</li>
+<li>Service accounts without an email address pulled from LDAP or SAML systems is not yet supported.</li>
 </ul>
 </div></blockquote>
 <p>If you would like to see improvements to bot accounts, <a class="reference external" href="https://mattermost.uservoice.com">let us know in the Feature Proposal Forum</a>.</p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#configuration-settings" id="id2">Configuration Settings</a></p></li>
-<li><p><a class="reference internal" href="#bot-account-creation" id="id3">Bot Account Creation</a></p></li>
-<li><p><a class="reference internal" href="#frequently-asked-questions" id="id4">Frequently Asked Questions</a></p></li>
+<li><a class="reference internal" href="#configuration-settings" id="id2">Configuration Settings</a></li>
+<li><a class="reference internal" href="#bot-account-creation" id="id3">Bot Account Creation</a></li>
+<li><a class="reference internal" href="#frequently-asked-questions" id="id4">Frequently Asked Questions</a></li>
 </ul>
 </div>
 <div class="section" id="configuration-settings">
 <h2><a class="toc-backref" href="#contents">Configuration Settings</a><a class="headerlink" href="#configuration-settings" title="Permalink to this headline">¶</a></h2>
 <p>By default, plugins can create and manage bot accounts. To enable bot account creation through the user interface or the RESTful API:</p>
 <ol class="arabic simple">
-<li><p>Go to <strong>System Console &gt; Integrations &gt; Bot Accounts</strong>.</p></li>
-<li><p>Set <strong>Enable Bot Account Creation</strong> to <strong>true</strong>.</p></li>
+<li>Go to <strong>System Console &gt; Integrations &gt; Bot Accounts</strong>.</li>
+<li>Set <strong>Enable Bot Account Creation</strong> to <strong>true</strong>.</li>
 </ol>
 <p>Once set, System Administrators can create bot accounts for integrations using the <strong>Integrations &gt; Bot Accounts</strong> link in the description provided.</p>
 </div>
@@ -232,19 +224,19 @@
 <h2><a class="toc-backref" href="#contents">Bot Account Creation</a><a class="headerlink" href="#bot-account-creation" title="Permalink to this headline">¶</a></h2>
 <p>Below are different ways to create bot accounts. After the bot account is created, make sure to:</p>
 <ol class="arabic simple">
-<li><p>Copy the generated bot access token for your integration.</p></li>
-<li><p>Add the bot account to teams and channels you want it to interact in.</p></li>
+<li>Copy the generated bot access token for your integration.</li>
+<li>Add the bot account to teams and channels you want it to interact in.</li>
 </ol>
 <div class="section" id="user-interface-ui">
 <h3>User Interface (UI)<a class="headerlink" href="#user-interface-ui" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
-<li><p>Go to <strong>Main Menu &gt; Integrations &gt; Bot Accounts</strong>.</p></li>
-<li><p>Click <strong>Add Bot Account</strong>.</p></li>
-<li><p>Set the <strong>Username</strong> of the bot. The username must begin with a letter, and contain between 3 and 22 lowercase characters made up of numbers, letters, and the symbols “.”, “-“, and “_”.</p></li>
-<li><p>(Optional) Upload an image for the <strong>Bot Icon</strong>. This will be used as the profile image of the bot throughout the Mattermost user interface.</p></li>
-<li><p>(Optional) Set a <strong>Display Name</strong> and <strong>Description</strong>.</p></li>
-<li><p>(Optional) Choose what role the bot should have. Defaults to <strong>Member</strong>. If you assign <strong>System Admin</strong>, the bot will have access to write in and read any public channels, private channels and direct messages.</p></li>
-<li><p>(Optional) Select additional permissions for the account. Enable the bot to post to all Mattermost channels, or all Mattermost Public channels.</p></li>
+<li>Go to <strong>Main Menu &gt; Integrations &gt; Bot Accounts</strong>.</li>
+<li>Click <strong>Add Bot Account</strong>.</li>
+<li>Set the <strong>Username</strong> of the bot. The username must begin with a letter, and contain between 3 and 22 lowercase characters made up of numbers, letters, and the symbols “.”, “-“, and “_”.</li>
+<li>(Optional) Upload an image for the <strong>Bot Icon</strong>. This will be used as the profile image of the bot throughout the Mattermost user interface.</li>
+<li>(Optional) Set a <strong>Display Name</strong> and <strong>Description</strong>.</li>
+<li>(Optional) Choose what role the bot should have. Defaults to <strong>Member</strong>. If you assign <strong>System Admin</strong>, the bot will have access to write in and read any public channels, private channels and direct messages.</li>
+<li>(Optional) Select additional permissions for the account. Enable the bot to post to all Mattermost channels, or all Mattermost Public channels.</li>
 </ol>
 </div>
 <div class="section" id="restful-api">
@@ -281,9 +273,9 @@
 </div>
 <p>replacing the following parameters:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">&lt;channel-id&gt;</span></code> with the channel you added the bot to</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&lt;bot-access-token&gt;</span></code> with the bot access token generated when you created the bot account</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&lt;mattermost-url&gt;</span></code> with your Mattermost domain, e.g. <code class="docutils literal notranslate"><span class="pre">https://example.mattermost.com</span></code></p></li>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;channel-id&gt;</span></code> with the channel you added the bot to</li>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;bot-access-token&gt;</span></code> with the bot access token generated when you created the bot account</li>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;mattermost-url&gt;</span></code> with your Mattermost domain, e.g. <code class="docutils literal notranslate"><span class="pre">https://example.mattermost.com</span></code></li>
 </ul>
 </div>
 <div class="section" id="do-bot-access-tokens-expire">
@@ -296,8 +288,8 @@
 <p>Possibly yes. Currently a System Admin can disable overriding the profile picture and the username from integrations to help prevent impersonation, but this is not the case for bot accounts.</p>
 <p>Mitigations:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">BOT</span></code> tag is used everywhere in the UI where bot accounts are referenced, including messages and user lists.</p></li>
-<li><p>For Direct Message channels, the channel header distinguishes the bot from a regular user account with a <code class="docutils literal notranslate"><span class="pre">BOT</span></code> tag.</p></li>
+<li><code class="docutils literal notranslate"><span class="pre">BOT</span></code> tag is used everywhere in the UI where bot accounts are referenced, including messages and user lists.</li>
+<li>For Direct Message channels, the channel header distinguishes the bot from a regular user account with a <code class="docutils literal notranslate"><span class="pre">BOT</span></code> tag.</li>
 </ul>
 </div>
 <div class="section" id="what-happens-when-a-user-who-owns-bot-accounts-is-disabled">
@@ -330,29 +322,29 @@
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="cloud-personal-access-tokens.html" class="btn btn-neutral float-right" title="Personal Access Tokens" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="cloud-slash-commands.html" class="btn btn-neutral float-left" title="Slash Commands" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="cloud-personal-access-tokens.html" class="btn btn-neutral float-right" title="Personal Access Tokens" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="cloud-slash-commands.html" class="btn btn-neutral" title="Slash Commands" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2015-2020 Mattermost.
+        &copy; Copyright 2015-2020 Mattermost
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -386,16 +378,27 @@
 </div>
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
 	<header>
 	<div class="header__container">
 		<div class="search__icon">

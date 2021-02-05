@@ -2,46 +2,34 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Client-side Data Storage FAQ &mdash; Mattermost 5.30 documentation</title>
+  <title>Client-side Data Storage FAQ &mdash; Mattermost 5.31 documentation</title>
   
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
-
   
   
 
   
-    <link rel="canonical" href="https://docs.mattermost.com/deployment/client-side-data.html" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
   
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/myscript.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-    
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Backup and Disaster Recovery" href="../administration/backup.html" />
     <link rel="prev" title="Encryption Options" href="../administration/encryption.html" />
@@ -53,16 +41,21 @@
 	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
 	<!-- End Google Tag Manager -->
 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -76,7 +69,7 @@
             
             
               <div class="version">
-                5.30
+                5.31
               </div>
             
           
@@ -93,7 +86,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -106,9 +98,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="deployment.html">Deployment Overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="desktop-app-deployment.html">Desktop App Deployment Guide</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../mobile/mobile-appconfig.html">AppConfig for EMM Solutions with Mattermost Mobile Apps</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../administration/image-proxy.html">Image Proxy</a></li>
@@ -123,7 +117,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-collaboration">Incident Collaboration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
@@ -143,7 +137,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -192,13 +185,13 @@
 <h1>Client-side Data Storage FAQ<a class="headerlink" href="#client-side-data-storage-faq" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="mobile-web-experience">
 <h2>Mobile Web Experience<a class="headerlink" href="#mobile-web-experience" title="Permalink to this headline">¶</a></h2>
-<dl class="simple">
-<dt><strong>1. What data is stored?</strong></dt><dd><p>Similar to a desktop web browser, data may be stored in the mobile web browser cache which resides on the storage system of the device operating system which is protected by security measures in the physical device and its operating system.</p>
-</dd>
-<dt><strong>2. How is the data protected?</strong></dt><dd><p>Security for mobile web experience is similar to the security for a desktop web experience.</p>
-</dd>
-<dt><strong>3. When is the data deleted?</strong></dt><dd><p>If you log out or your account is deactivated, the data in the browser cache may reside until the cache expires or the temporary file system store on the operating system is cleared, depending on your operating system.</p>
-</dd>
+<dl class="docutils">
+<dt><strong>1. What data is stored?</strong></dt>
+<dd>Similar to a desktop web browser, data may be stored in the mobile web browser cache which resides on the storage system of the device operating system which is protected by security measures in the physical device and its operating system.</dd>
+<dt><strong>2. How is the data protected?</strong></dt>
+<dd>Security for mobile web experience is similar to the security for a desktop web experience.</dd>
+<dt><strong>3. When is the data deleted?</strong></dt>
+<dd>If you log out or your account is deactivated, the data in the browser cache may reside until the cache expires or the temporary file system store on the operating system is cleared, depending on your operating system.</dd>
 </dl>
 </div>
 <div class="section" id="mobile-app-experience">
@@ -208,51 +201,48 @@
 <blockquote>
 <div><p>The data that can be found on the device depends solely on whether or not the user is logged in to the Mattermost server, and is independent of the state of the device’s connection or the state of the app. While logged in, anything that the user is normally allowed to see is eligible for storage on the device, which includes the following content:</p>
 <ul class="simple">
-<li><p>messages</p></li>
-<li><p>files and images that are attached to messages</p></li>
-<li><p>avatars, usernames, and email addresses of people in the currently open channel</p></li>
+<li>messages</li>
+<li>files and images that are attached to messages</li>
+<li>avatars, usernames, and email addresses of people in the currently open channel</li>
 </ul>
 <p>In addition, metadata that the app uses for keeping track of its operations is also cached. The metadata includes user IDs, channel IDs, team IDs, and message IDs.</p>
 <p>Currently, cache cannot be reset remotely on connected mobile devices.</p>
 </div></blockquote>
-<dl>
-<dt><strong>2. What about push notifications?</strong></dt><dd><p>Push notification storage is managed by the operating system on the device. Mattermost can be configured to send limited amounts of information that does not include the message text or channel name, and it can also be configured to not send push notifications at all.</p>
-</dd>
-<dt><strong>3. Where is the data stored and how is that data protected?</strong></dt><dd><p>The data is stored in the app’s local storage. It is protected by the security measures that a device normally provides to the apps that are installed on it.</p>
-</dd>
-<dt><strong>4. How long is the data stored?</strong></dt><dd><p>Data is stored until the user logs out, or until it is purged during normal cache management. Deactivating a user account forces a logout and subsequent purging of data from the device.</p>
-</dd>
-<dt><strong>5. Are messages pre-loaded?</strong></dt><dd><p>No. Messages are sent to the device on demand. They are not pre-loaded in anticipation of users scrolling up or switching channels.</p>
-</dd>
-<dt><strong>6. What happens to messages that are deleted on the server after a user has seen them?</strong></dt><dd><p>The messages are deleted from the client.</p>
-</dd>
-<dt><strong>7. What data is stored on a mobile device after an account is deactivated in the following cases:</strong></dt><dd><ol class="arabic simple">
-<li><p><em>The mobile device is connected with app running.</em></p></li>
+<dl class="docutils">
+<dt><strong>2. What about push notifications?</strong></dt>
+<dd>Push notification storage is managed by the operating system on the device. Mattermost can be configured to send limited amounts of information that does not include the message text or channel name, and it can also be configured to not send push notifications at all.</dd>
+<dt><strong>3. Where is the data stored and how is that data protected?</strong></dt>
+<dd>The data is stored in the app’s local storage. It is protected by the security measures that a device normally provides to the apps that are installed on it.</dd>
+<dt><strong>4. How long is the data stored?</strong></dt>
+<dd>Data is stored until the user logs out, or until it is purged during normal cache management. Deactivating a user account forces a logout and subsequent purging of data from the device.</dd>
+<dt><strong>5. Are messages pre-loaded?</strong></dt>
+<dd>No. Messages are sent to the device on demand. They are not pre-loaded in anticipation of users scrolling up or switching channels.</dd>
+<dt><strong>6. What happens to messages that are deleted on the server after a user has seen them?</strong></dt>
+<dd>The messages are deleted from the client.</dd>
+<dt><strong>7. What data is stored on a mobile device after an account is deactivated in the following cases:</strong></dt>
+<dd><ol class="first arabic simple">
+<li><em>The mobile device is connected with app running.</em></li>
 </ol>
 <blockquote>
-<div><p>All the data listed in Questions 1 and 2, but within 60 seconds after an account is deactivated on the server, all app data is deleted from the cache.</p>
-</div></blockquote>
+<div>All the data listed in Questions 1 and 2, but within 60 seconds after an account is deactivated on the server, all app data is deleted from the cache.</div></blockquote>
 <ol class="arabic simple" start="2">
-<li><p><em>The mobile device is disconnected with app running.</em></p></li>
+<li><em>The mobile device is disconnected with app running.</em></li>
 </ol>
 <blockquote>
-<div><p>All the data listed in Questions 1 and 2, but within 60 seconds after the device reconnects, all app data is deleted from the cache.</p>
-</div></blockquote>
+<div>All the data listed in Questions 1 and 2, but within 60 seconds after the device reconnects, all app data is deleted from the cache.</div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p><em>The mobile device is connected with the app not running.</em></p></li>
+<li><em>The mobile device is connected with the app not running.</em></li>
 </ol>
 <blockquote>
-<div><p>All the data listed in Questions 1 and 2, but within 60 seconds after the app is started, all app data is deleted from the cache.</p>
-</div></blockquote>
+<div>All the data listed in Questions 1 and 2, but within 60 seconds after the app is started, all app data is deleted from the cache.</div></blockquote>
 <ol class="arabic simple" start="4">
-<li><p><em>The mobile device is disconnected and app is not running.</em></p></li>
+<li><em>The mobile device is disconnected and app is not running.</em></li>
 </ol>
-<blockquote>
-<div><p>All the data listed in Questions 1 and 2, but within 60 seconds after the device reconnects and the app is started, all app data is deleted from the cache.</p>
-</div></blockquote>
+<blockquote class="last">
+<div>All the data listed in Questions 1 and 2, but within 60 seconds after the device reconnects and the app is started, all app data is deleted from the cache.</div></blockquote>
 </dd>
-<dt><strong>8. What data might be on the device after a user account is deactivated and all data is deleted from the cache?</strong></dt><dd><p>If file attachments are enabled on the server, users can download files that are attached to messages and store them on their local file system. After they are downloaded, the files are outside the control of the app and can remain on the device indefinitely.</p>
-</dd>
+<dt><strong>8. What data might be on the device after a user account is deactivated and all data is deleted from the cache?</strong></dt>
+<dd>If file attachments are enabled on the server, users can download files that are attached to messages and store them on their local file system. After they are downloaded, the files are outside the control of the app and can remain on the device indefinitely.</dd>
 </dl>
 </div>
 </div>
@@ -262,29 +252,29 @@
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../administration/backup.html" class="btn btn-neutral float-right" title="Backup and Disaster Recovery" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../administration/encryption.html" class="btn btn-neutral float-left" title="Encryption Options" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="../administration/backup.html" class="btn btn-neutral float-right" title="Backup and Disaster Recovery" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../administration/encryption.html" class="btn btn-neutral" title="Encryption Options" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2015-2020 Mattermost.
+        &copy; Copyright 2015-2020 Mattermost
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -318,16 +308,27 @@
 </div>
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
 	<header>
 	<div class="header__container">
 		<div class="search__icon">

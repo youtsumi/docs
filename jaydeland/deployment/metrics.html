@@ -2,46 +2,34 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Performance Monitoring (E20) &mdash; Mattermost 5.30 documentation</title>
+  <title>Performance Monitoring (E20) &mdash; Mattermost 5.31 documentation</title>
   
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
-
   
   
 
   
-    <link rel="canonical" href="https://docs.mattermost.com/deployment/metrics.html" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
   
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/myscript.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-    
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Mattermost Performance Alerting Guide" href="../administration/performance-alerting-guide.html" />
     <link rel="prev" title="Elasticsearch (E20)" href="elasticsearch.html" />
@@ -53,16 +41,21 @@
 	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
 	<!-- End Google Tag Manager -->
 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -76,7 +69,7 @@
             
             
               <div class="version">
-                5.30
+                5.31
               </div>
             
           
@@ -93,7 +86,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -106,11 +98,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-collaboration">Incident Collaboration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
@@ -144,7 +137,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -195,26 +187,22 @@
 <p>Performance monitoring support enables a Mattermost server to track system health for large Enterprise deployments through integrations with <a class="reference external" href="https://prometheus.io/">Prometheus</a> and <a class="reference external" href="https://grafana.org/">Grafana</a>.</p>
 <p>The integration supports data collection from several Mattermost servers, particularly useful if you’re running Mattermost <a class="reference external" href="https://docs.mattermost.com/deployment/cluster.html">in high availability mode</a>.</p>
 <div class="contents topic" id="contents">
-<p class="topic-title">Contents</p>
+<p class="topic-title first">Contents</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#performance-monitoring-e20" id="id1">Performance Monitoring (E20)</a></p>
-<ul>
-<li><p><a class="reference internal" href="#deployment-guide" id="id2">Deployment Guide</a></p>
-<ul>
-<li><p><a class="reference internal" href="#installing-prometheus" id="id3">Installing Prometheus</a></p></li>
-<li><p><a class="reference internal" href="#installing-grafana" id="id4">Installing Grafana</a></p></li>
+<li><a class="reference internal" href="#performance-monitoring-e20" id="id1">Performance Monitoring (E20)</a><ul>
+<li><a class="reference internal" href="#deployment-guide" id="id2">Deployment Guide</a><ul>
+<li><a class="reference internal" href="#installing-prometheus" id="id3">Installing Prometheus</a></li>
+<li><a class="reference internal" href="#installing-grafana" id="id4">Installing Grafana</a></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#getting-started" id="id5">Getting Started</a></p></li>
-<li><p><a class="reference internal" href="#statistics" id="id6">Statistics</a></p>
-<ul>
-<li><p><a class="reference internal" href="#custom-mattermost-metrics" id="id7">Custom Mattermost Metrics</a></p></li>
-<li><p><a class="reference internal" href="#standard-go-metrics" id="id8">Standard GO Metrics</a></p></li>
+<li><a class="reference internal" href="#getting-started" id="id5">Getting Started</a></li>
+<li><a class="reference internal" href="#statistics" id="id6">Statistics</a><ul>
+<li><a class="reference internal" href="#custom-mattermost-metrics" id="id7">Custom Mattermost Metrics</a></li>
+<li><a class="reference internal" href="#standard-go-metrics" id="id8">Standard GO Metrics</a></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#frequently-asked-questions" id="id9">Frequently Asked Questions</a></p>
-<ul>
-<li><p><a class="reference internal" href="#why-are-chart-labels-difficult-to-distinguish" id="id10">Why Are Chart Labels Difficult To Distinguish?</a></p></li>
+<li><a class="reference internal" href="#frequently-asked-questions" id="id9">Frequently Asked Questions</a><ul>
+<li><a class="reference internal" href="#why-are-chart-labels-difficult-to-distinguish" id="id10">Why Are Chart Labels Difficult To Distinguish?</a></li>
 </ul>
 </li>
 </ul>
@@ -229,27 +217,27 @@
 <p>1 - <a class="reference external" href="https://prometheus.io/download/">Download a precompiled binary for Prometheus</a>. Binaries are provided for many popular distributions, including Darwin, Linux and Windows.</p>
 <p>For install instructions, see <a class="reference external" href="https://prometheus.io/docs/introduction/getting_started/">Prometheus install guides</a>.</p>
 <p>2 - The following settings are recommended in the Prometheus configuration file named <code class="docutils literal notranslate"><span class="pre">prometheus.yml</span></code>:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># my global config</span>
-<span class="nt">global</span><span class="p">:</span>
-  <span class="nt">scrape_interval</span><span class="p">:</span>     <span class="l l-Scalar l-Scalar-Plain">60s</span> <span class="c1"># By default, scrape targets every 15 seconds.</span>
-  <span class="nt">evaluation_interval</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">60s</span> <span class="c1"># By default, scrape targets every 15 seconds.</span>
+<div class="code yaml highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># my global config</span>
+<span class="k">global</span><span class="p">:</span>
+  <span class="n">scrape_interval</span><span class="p">:</span>     <span class="mi">60</span><span class="n">s</span> <span class="c1"># By default, scrape targets every 15 seconds.</span>
+  <span class="n">evaluation_interval</span><span class="p">:</span> <span class="mi">60</span><span class="n">s</span> <span class="c1"># By default, scrape targets every 15 seconds.</span>
   <span class="c1"># scrape_timeout is set to the global default (10s).</span>
 
   <span class="c1"># Attach these labels to any time series or alerts when communicating with</span>
   <span class="c1"># external systems (federation, remote storage, Alertmanager).</span>
-  <span class="nt">external_labels</span><span class="p">:</span>
-      <span class="nt">monitor</span><span class="p">:</span> <span class="s">&#39;mattermost-monitor&#39;</span>
+  <span class="n">external_labels</span><span class="p">:</span>
+      <span class="n">monitor</span><span class="p">:</span> <span class="s1">&#39;mattermost-monitor&#39;</span>
 
 <span class="c1"># Load rules once and periodically evaluate them according to the global &#39;evaluation_interval&#39;.</span>
-<span class="nt">rule_files</span><span class="p">:</span>
+<span class="n">rule_files</span><span class="p">:</span>
   <span class="c1"># - &quot;first.rules&quot;</span>
   <span class="c1"># - &quot;second.rules&quot;</span>
 
 <span class="c1"># A scrape configuration containing exactly one endpoint to scrape:</span>
 <span class="c1"># Here it&#39;s Prometheus itself.</span>
-<span class="nt">scrape_configs</span><span class="p">:</span>
+<span class="n">scrape_configs</span><span class="p">:</span>
   <span class="c1"># The job name is added as a label `job=&lt;job_name&gt;` to any timeseries scraped from this config.</span>
-  <span class="p p-Indicator">-</span> <span class="nt">job_name</span><span class="p">:</span> <span class="s">&#39;prometheus&#39;</span>
+  <span class="o">-</span> <span class="n">job_name</span><span class="p">:</span> <span class="s1">&#39;prometheus&#39;</span>
 
     <span class="c1"># Override the global default and scrape targets from this job every 5 seconds.</span>
     <span class="c1"># scrape_interval: 5s</span>
@@ -257,8 +245,8 @@
     <span class="c1"># metrics_path defaults to &#39;/metrics&#39;</span>
     <span class="c1"># scheme defaults to &#39;http&#39;.</span>
 
-    <span class="nt">static_configs</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="nt">targets</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&quot;&lt;hostname1&gt;:&lt;port&gt;&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;&lt;hostname2&gt;:&lt;port&gt;&quot;</span><span class="p p-Indicator">]</span>
+    <span class="n">static_configs</span><span class="p">:</span>
+      <span class="o">-</span> <span class="n">targets</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;&lt;hostname1&gt;:&lt;port&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;hostname2&gt;:&lt;port&gt;&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">&lt;hostname1&gt;:&lt;port&gt;</span></code> parameter has to be replaced with your Mattermost host ip address and port to scrape the data. It connects to <code class="docutils literal notranslate"><span class="pre">/metrics</span></code> using http.</p>
@@ -270,8 +258,8 @@
 <p>6 - Once the service has started, you can access the data in <code class="docutils literal notranslate"><span class="pre">&lt;localhost&gt;:&lt;port&gt;/graph</span></code>.</p>
 <p>While you can use the Prometheus service to create graphs, we’ll focus on creating metric and analytics dashboards in Grafana.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>For troubleshooting advice, check the <a class="reference external" href="https://prometheus.io/docs/introduction/faq/">Prometheus FAQ page</a>.</p>
+<p class="first admonition-title">Note</p>
+<p class="last">For troubleshooting advice, check the <a class="reference external" href="https://prometheus.io/docs/introduction/faq/">Prometheus FAQ page</a>.</p>
 </div>
 </div>
 <div class="section" id="installing-grafana">
@@ -283,8 +271,8 @@
 <p>4 - A Mattermost data source should be added, with settings defined in the screenshot below.</p>
 <img alt="../_images/mattermost_datasource.png" src="../_images/mattermost_datasource.png" />
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>For troubleshooting advice, check the <a class="reference external" href="https://docs.grafana.org/installation/troubleshooting/">Grafana Troubleshooting page</a>.</p>
+<p class="first admonition-title">Note</p>
+<p class="last">For troubleshooting advice, check the <a class="reference external" href="https://docs.grafana.org/installation/troubleshooting/">Grafana Troubleshooting page</a>.</p>
 </div>
 <p>For user guides and tutorials, check the <a class="reference external" href="https://docs.grafana.org/guides/basic_concepts/">Grafana documentation to learn more</a>.</p>
 </div>
@@ -294,9 +282,9 @@
 <p>To help you get started, you can download three sample dashboards shared in Grafana:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><a class="reference external" href="https://grafana.com/dashboards/2539">Mattermost Performance KPI Metrics</a>, which contains key metrics for monitoring performance and system health.</p></li>
-<li><p><a class="reference external" href="https://grafana.com/dashboards/2542">Mattermost Performance Monitoring</a>, which contains detailed charts for performance monitoring.</p></li>
-<li><p><a class="reference external" href="https://grafana.com/dashboards/2545">Mattermost Performance Monitoring (Bonus Metrics)</a>, which contains additional metrics such as emails sent or files uploaded, which may be important to monitor in some deployments.</p></li>
+<li><a class="reference external" href="https://grafana.com/dashboards/2539">Mattermost Performance KPI Metrics</a>, which contains key metrics for monitoring performance and system health.</li>
+<li><a class="reference external" href="https://grafana.com/dashboards/2542">Mattermost Performance Monitoring</a>, which contains detailed charts for performance monitoring.</li>
+<li><a class="reference external" href="https://grafana.com/dashboards/2545">Mattermost Performance Monitoring (Bonus Metrics)</a>, which contains additional metrics such as emails sent or files uploaded, which may be important to monitor in some deployments.</li>
 </ul>
 </div></blockquote>
 <p>See <a class="reference external" href="https://docs.grafana.org/reference/export_import/">this guide</a> to learn how to import Grafana dashboards either from the UI or from the HTTP API.</p>
@@ -310,17 +298,17 @@
 <p>API Metrics:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_api_time</span></code>: The total time in seconds to execute a given API handler.</p></li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_api_time</span></code>: The total time in seconds to execute a given API handler.</li>
 </ul>
 </div></blockquote>
 <p>Caching Metrics:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_cache_etag_hit_total</span></code>: The total number of ETag cache hits for a specific cache.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_cache_etag_miss_total</span></code>: The total number of ETag cache misses for an API call.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_cache_mem_hit_total</span></code>: The total number of memory cache hits for a specific cache.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_cache_mem_invalidation_total</span></code>: The total number of memory cache invalidations for a specific cache.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_cache_mem_miss_total</span></code>: The total number of cache misses for a specific cache.</p></li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_cache_etag_hit_total</span></code>: The total number of ETag cache hits for a specific cache.</li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_cache_etag_miss_total</span></code>: The total number of ETag cache misses for an API call.</li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_cache_mem_hit_total</span></code>: The total number of memory cache hits for a specific cache.</li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_cache_mem_invalidation_total</span></code>: The total number of memory cache invalidations for a specific cache.</li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_cache_mem_miss_total</span></code>: The total number of cache misses for a specific cache.</li>
 </ul>
 </div></blockquote>
 <p>The above metrics can be used to calculate ETag and memory cache hit rates over time.</p>
@@ -328,82 +316,82 @@
 <p>Cluster Metrics:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_cluster_cluster_request_duration_seconds</span></code>:  The total duration in seconds of the inter-node cluster requests.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_cluster_cluster_requests_total</span></code>: The total number of inter-node requests.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_cluster_event_type_totals</span></code>: The total number of cluster requests sent for any type.</p></li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_cluster_cluster_request_duration_seconds</span></code>:  The total duration in seconds of the inter-node cluster requests.</li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_cluster_cluster_requests_total</span></code>: The total number of inter-node requests.</li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_cluster_event_type_totals</span></code>: The total number of cluster requests sent for any type.</li>
 </ul>
 </div></blockquote>
 <p>Database Metrics:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_db_master_connections_total</span></code>: The total number of connections to the master database.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_db_read_replica_connections_total</span></code>: The total number of connections to all the read replica databases.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_db_search_replica_connections_total</span></code>: The total number of connections to all the search replica databases.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_db_store_time</span></code>: The total time in seconds to execute a given database store method.</p></li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_db_master_connections_total</span></code>: The total number of connections to the master database.</li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_db_read_replica_connections_total</span></code>: The total number of connections to all the read replica databases.</li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_db_search_replica_connections_total</span></code>: The total number of connections to all the search replica databases.</li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_db_store_time</span></code>: The total time in seconds to execute a given database store method.</li>
 </ul>
 </div></blockquote>
 <p>HTTP Metrics:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_http_errors_total</span></code>: The total number of http API errors.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_http_request_duration_seconds</span></code>: The total duration in seconds of the http API requests.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_http_requests_total</span></code>: The total number of http API requests.</p></li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_http_errors_total</span></code>: The total number of http API errors.</li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_http_request_duration_seconds</span></code>: The total duration in seconds of the http API requests.</li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_http_requests_total</span></code>: The total number of http API requests.</li>
 </ul>
 </div></blockquote>
 <img alt="../_images/perf_monitoring_http_metrics.png" src="../_images/perf_monitoring_http_metrics.png" />
 <p>Login and Session Metrics:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_http_websockets_total</span></code> The total number of WebSocket connections to the server.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_login_logins_fail_total</span></code>: The total number of failed logins.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_login_logins_total</span></code>: The total number of successful logins.</p></li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_http_websockets_total</span></code> The total number of WebSocket connections to the server.</li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_login_logins_fail_total</span></code>: The total number of failed logins.</li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_login_logins_total</span></code>: The total number of successful logins.</li>
 </ul>
 </div></blockquote>
 <p>Messaging Metrics:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_post_broadcasts_total</span></code>: The total number of WebSocket broadcasts sent because a post was created.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_post_emails_sent_total</span></code>: The total number of emails sent because a post was created.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_post_file_attachments_total</span></code>: The total number of file attachments created because a post was created.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_post_pushes_sent_total</span></code>: The total number of mobile push notifications sent because a post was created.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_post_total</span></code>: The total number of posts created.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_post_webhooks_totals</span></code>: The total number of webhook posts created.</p></li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_post_broadcasts_total</span></code>: The total number of WebSocket broadcasts sent because a post was created.</li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_post_emails_sent_total</span></code>: The total number of emails sent because a post was created.</li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_post_file_attachments_total</span></code>: The total number of file attachments created because a post was created.</li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_post_pushes_sent_total</span></code>: The total number of mobile push notifications sent because a post was created.</li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_post_total</span></code>: The total number of posts created.</li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_post_webhooks_totals</span></code>: The total number of webhook posts created.</li>
 </ul>
 </div></blockquote>
 <img alt="../_images/perf_monitoring_messaging_metrics.png" src="../_images/perf_monitoring_messaging_metrics.png" />
 <p>Process Metrics:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_process_cpu_seconds_total</span></code>: Total user and system CPU time spent in seconds.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_process_max_fds</span></code>: Maximum number of open file descriptors.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_process_open_fds</span></code>: Number of open file descriptors.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_process_resident_memory_bytes</span></code>: Resident memory size in bytes.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_process_start_time_seconds</span></code>: Start time of the process since unix epoch in seconds.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_process_virtual_memory_bytes</span></code>: Virtual memory size in bytes.</p></li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_process_cpu_seconds_total</span></code>: Total user and system CPU time spent in seconds.</li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_process_max_fds</span></code>: Maximum number of open file descriptors.</li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_process_open_fds</span></code>: Number of open file descriptors.</li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_process_resident_memory_bytes</span></code>: Resident memory size in bytes.</li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_process_start_time_seconds</span></code>: Start time of the process since unix epoch in seconds.</li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_process_virtual_memory_bytes</span></code>: Virtual memory size in bytes.</li>
 </ul>
 </div></blockquote>
 <p>Search Metrics:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_search_posts_searches_duration_seconds_sum</span></code>: The total duration, in seconds, of search query requests.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_search_posts_searches_duration_seconds_count</span></code>: The total number of search query requests.</p></li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_search_posts_searches_duration_seconds_sum</span></code>: The total duration, in seconds, of search query requests.</li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_search_posts_searches_duration_seconds_count</span></code>: The total number of search query requests.</li>
 </ul>
 </div></blockquote>
 <p>WebSocket Metrics:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_websocket_broadcasts_total</span></code>: The total number of WebSocket broadcasts sent by type.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mattermost_websocket_event_total</span></code>: The total number of WebSocket events sent by type.</p></li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_websocket_broadcasts_total</span></code>: The total number of WebSocket broadcasts sent by type.</li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermost_websocket_event_total</span></code>: The total number of WebSocket events sent by type.</li>
 </ul>
 </div></blockquote>
 <p>Logging Metrics:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">logger_queue_used</span></code>: Current logging queue level(s).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">logger_logged_total</span></code>: The total number of logging records emitted.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">logger_error_total</span></code>: The total number of logging errors.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">logger_dropped_total</span></code>: The total number of logging records dropped.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">logger_blocked_total</span></code>: The total number of logging records blocked.</p></li>
+<li><code class="docutils literal notranslate"><span class="pre">logger_queue_used</span></code>: Current logging queue level(s).</li>
+<li><code class="docutils literal notranslate"><span class="pre">logger_logged_total</span></code>: The total number of logging records emitted.</li>
+<li><code class="docutils literal notranslate"><span class="pre">logger_error_total</span></code>: The total number of logging errors.</li>
+<li><code class="docutils literal notranslate"><span class="pre">logger_dropped_total</span></code>: The total number of logging records dropped.</li>
+<li><code class="docutils literal notranslate"><span class="pre">logger_blocked_total</span></code>: The total number of logging records blocked.</li>
 </ul>
 </div></blockquote>
 </div>
@@ -412,27 +400,26 @@
 <p>The Prometheus integration also provides standard GO metrics for HTTP server runtime profiling data and system monitoring, such as:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">go_memstats_alloc_bytes</span></code> for memory usage</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">go_goroutines</span></code> for GO routines</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">go_gc_duration_seconds</span></code> for garbage collection duration</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">go_memstats_heap_objects</span></code> for object tracking on the heap</p></li>
+<li><code class="docutils literal notranslate"><span class="pre">go_memstats_alloc_bytes</span></code> for memory usage</li>
+<li><code class="docutils literal notranslate"><span class="pre">go_goroutines</span></code> for GO routines</li>
+<li><code class="docutils literal notranslate"><span class="pre">go_gc_duration_seconds</span></code> for garbage collection duration</li>
+<li><code class="docutils literal notranslate"><span class="pre">go_memstats_heap_objects</span></code> for object tracking on the heap</li>
 </ul>
 </div></blockquote>
 <p>To learn how to set up runtime profiling, see the <a class="reference external" href="https://golang.org/pkg/net/http/pprof/">pprof package GO documentation</a>.  You can also visit the <code class="docutils literal notranslate"><span class="pre">ip:port/metrics</span></code> page for a complete list of metrics with descriptions.</p>
 <p>If enabled, you can run the profiler by</p>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">go</span> <span class="pre">tool</span> <span class="pre">pprof</span> <span class="pre">channel</span> <span class="pre">http://localhost:&lt;port&gt;/debug/pprof/profile</span></code></p>
-</div></blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">go</span> <span class="pre">tool</span> <span class="pre">pprof</span> <span class="pre">channel</span> <span class="pre">http://localhost:&lt;port&gt;/debug/pprof/profile</span></code></div></blockquote>
 <p>where you can replace <code class="docutils literal notranslate"><span class="pre">localhost</span></code> with the server name. The profiling reports are available at <code class="docutils literal notranslate"><span class="pre">&lt;ip&gt;:&lt;port&gt;</span></code>, which include:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">/debug/pprof/</span></code> for CPU profiling</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">/debug/pprof/cmdline/</span></code> for command line profiling</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">/debug/pprof/symbol/</span></code> for symbol profiling</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">/debug/pprof/goroutine/</span></code> for GO routine profiling</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">/debug/pprof/heap/</span></code> for heap profiling</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">/debug/pprof/threadcreate/</span></code> for threads profiling</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">/debug/pprof/block/</span></code> for block profiling</p></li>
+<li><code class="docutils literal notranslate"><span class="pre">/debug/pprof/</span></code> for CPU profiling</li>
+<li><code class="docutils literal notranslate"><span class="pre">/debug/pprof/cmdline/</span></code> for command line profiling</li>
+<li><code class="docutils literal notranslate"><span class="pre">/debug/pprof/symbol/</span></code> for symbol profiling</li>
+<li><code class="docutils literal notranslate"><span class="pre">/debug/pprof/goroutine/</span></code> for GO routine profiling</li>
+<li><code class="docutils literal notranslate"><span class="pre">/debug/pprof/heap/</span></code> for heap profiling</li>
+<li><code class="docutils literal notranslate"><span class="pre">/debug/pprof/threadcreate/</span></code> for threads profiling</li>
+<li><code class="docutils literal notranslate"><span class="pre">/debug/pprof/block/</span></code> for block profiling</li>
 </ul>
 </div></blockquote>
 <img alt="../_images/perf_monitoring_go_metrics.png" src="../_images/perf_monitoring_go_metrics.png" />
@@ -453,29 +440,29 @@
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../administration/performance-alerting-guide.html" class="btn btn-neutral float-right" title="Mattermost Performance Alerting Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="elasticsearch.html" class="btn btn-neutral float-left" title="Elasticsearch (E20)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="../administration/performance-alerting-guide.html" class="btn btn-neutral float-right" title="Mattermost Performance Alerting Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="elasticsearch.html" class="btn btn-neutral" title="Elasticsearch (E20)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2015-2020 Mattermost.
+        &copy; Copyright 2015-2020 Mattermost
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -509,16 +496,27 @@
 </div>
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
 	<header>
 	<div class="header__container">
 		<div class="search__icon">

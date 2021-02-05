@@ -2,46 +2,34 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installing MySQL Database Server &mdash; Mattermost 5.30 documentation</title>
+  <title>Installing MySQL Database Server &mdash; Mattermost 5.31 documentation</title>
   
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
-
   
   
 
   
-    <link rel="canonical" href="https://docs.mattermost.com/install/install-debian-mysql.html" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
   
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/myscript.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-    
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../search.html" />
 	<!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -51,16 +39,21 @@
 	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
 	<!-- End Google Tag Manager -->
 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -74,7 +67,7 @@
             
             
               <div class="version">
-                5.30
+                5.31
               </div>
             
           
@@ -91,7 +84,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -111,7 +103,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -159,73 +150,67 @@
 <p>Install and set up the database for use by the Mattermost server. You can install either MySQL or PostgreSQL.</p>
 <p><strong>To install MySQL on Debian Buster:</strong></p>
 <ol class="arabic simple">
-<li><p>Log into the server that will host the database, and open a terminal window.</p></li>
-<li><p>Download the MySQL repository package.</p></li>
+<li>Log into the server that will host the database, and open a terminal window.</li>
+<li>Download the MySQL repository package.</li>
 </ol>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">wget</span> <span class="pre">https://dev.mysql.com/get/mysql-apt-config_0.8.13-1_all.deb</span></code></p>
-</div></blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">wget</span> <span class="pre">https://dev.mysql.com/get/mysql-apt-config_0.8.13-1_all.deb</span></code></div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p>Install the repository</p></li>
+<li>Install the repository</li>
 </ol>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">dpkg</span> <span class="pre">-i</span> <span class="pre">mysql-apt-config*</span></code></p>
-</div></blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">dpkg</span> <span class="pre">-i</span> <span class="pre">mysql-apt-config*</span></code></div></blockquote>
 <ol class="arabic simple" start="4">
-<li><p>Update your local package list.</p></li>
+<li>Update your local package list.</li>
 </ol>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">update</span></code></p>
-</div></blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">update</span></code></div></blockquote>
 <ol class="arabic simple" start="5">
-<li><p>Add the MySQL repo MySQL.</p></li>
+<li>Add the MySQL repo MySQL.</li>
 </ol>
 <blockquote>
 <div><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">mysql-server</span></code></p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>During the install, you’ll be prompted to create a password for the MySQL root user. Make a note of the password because you’ll need it in the next step.</p>
+<p class="first admonition-title">Note</p>
+<p class="last">During the install, you’ll be prompted to create a password for the MySQL root user. Make a note of the password because you’ll need it in the next step.</p>
 </div>
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li><p>Log in to MySQL as root.</p></li>
+<li>Log in to MySQL as root.</li>
 </ol>
 <blockquote>
 <div><p><code class="docutils literal notranslate"><span class="pre">mysql</span> <span class="pre">-u</span> <span class="pre">root</span> <span class="pre">-p</span></code></p>
 <p>When prompted, enter the root password that you created when installing MySQL.</p>
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li><p>Create the Mattermost user ‘mmuser’.</p></li>
+<li>Create the Mattermost user ‘mmuser’.</li>
 </ol>
 <blockquote>
 <div><p><code class="docutils literal notranslate"><span class="pre">mysql&gt;</span> <span class="pre">create</span> <span class="pre">user</span> <span class="pre">'mmuser'&#64;'%'</span> <span class="pre">identified</span> <span class="pre">by</span> <span class="pre">'mmuser-password';</span></code></p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<ol class="arabic simple">
-<li><p>Use a password that is more secure than ‘mmuser-password’.</p></li>
-<li><p>The ‘%’ means that mmuser can connect from any machine on the network. However, it’s more secure to use the IP address of the machine that hosts Mattermost. For example, if you install Mattermost on the machine with IP address 10.10.10.2, then use the following command:</p></li>
+<p class="first admonition-title">Note</p>
+<ol class="last arabic simple">
+<li>Use a password that is more secure than ‘mmuser-password’.</li>
+<li>The ‘%’ means that mmuser can connect from any machine on the network. However, it’s more secure to use the IP address of the machine that hosts Mattermost. For example, if you install Mattermost on the machine with IP address 10.10.10.2, then use the following command:</li>
 </ol>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">mysql&gt;</span> <span class="pre">create</span> <span class="pre">user</span> <span class="pre">'mmuser'&#64;'10.10.10.2'</span> <span class="pre">identified</span> <span class="pre">by</span> <span class="pre">'mmuser-password';</span></code></p>
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li><p>Create the Mattermost database.</p></li>
+<li>Create the Mattermost database.</li>
 </ol>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">mysql&gt;</span> <span class="pre">create</span> <span class="pre">database</span> <span class="pre">mattermost;</span></code></p>
-</div></blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">mysql&gt;</span> <span class="pre">create</span> <span class="pre">database</span> <span class="pre">mattermost;</span></code></div></blockquote>
 <ol class="arabic simple" start="9">
-<li><p>Grant access privileges to the user ‘mmuser’.</p></li>
+<li>Grant access privileges to the user ‘mmuser’.</li>
 </ol>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">mysql&gt;</span> <span class="pre">grant</span> <span class="pre">all</span> <span class="pre">privileges</span> <span class="pre">on</span> <span class="pre">mattermost.*</span> <span class="pre">to</span> <span class="pre">'mmuser'&#64;'%';</span></code></p>
-</div></blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">mysql&gt;</span> <span class="pre">grant</span> <span class="pre">all</span> <span class="pre">privileges</span> <span class="pre">on</span> <span class="pre">mattermost.*</span> <span class="pre">to</span> <span class="pre">'mmuser'&#64;'%';</span></code></div></blockquote>
 <ol class="arabic simple" start="10">
-<li><p>Log out of MySQL.</p></li>
+<li>Log out of MySQL.</li>
 </ol>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">mysql&gt;</span> <span class="pre">exit</span></code></p>
-</div></blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">mysql&gt;</span> <span class="pre">exit</span></code></div></blockquote>
 <p>With the database installed and the initial setup complete, you can now install the Mattermost server.</p>
 </div>
 
@@ -234,25 +219,20 @@
            
           </div>
           <footer>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2015-2020 Mattermost.
+        &copy; Copyright 2015-2020 Mattermost
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -286,16 +266,27 @@
 </div>
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
 	<header>
 	<div class="header__container">
 		<div class="search__icon">

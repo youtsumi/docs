@@ -2,46 +2,34 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mmctl Command Line Tool (Beta) &mdash; Mattermost 5.30 documentation</title>
+  <title>mmctl Command Line Tool (Beta) &mdash; Mattermost 5.31 documentation</title>
   
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
-
   
   
 
   
-    <link rel="canonical" href="https://docs.mattermost.com/administration/mmctl-cli-tool.html" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
   
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/myscript.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-    
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Scripts" href="scripts.html" />
     <link rel="prev" title="Command Line Tools" href="command-line-tools.html" />
@@ -53,16 +41,21 @@
 	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
 	<!-- End Google Tag Manager -->
 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -76,7 +69,7 @@
             
             
               <div class="version">
-                5.30
+                5.31
               </div>
             
           
@@ -93,7 +86,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -106,11 +98,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-collaboration">Incident Collaboration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a><ul class="current">
@@ -175,7 +168,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -227,35 +219,36 @@
 <p>This feature was developed to a large extent by community contributions and we’d like to extend our gratitude to the contributors who have worked on this project. We are currently accepting pull requests for Help Wanted issues in the <a class="reference external" href="https://github.com/mattermost/mattermost-server/issues?q=is%3Aissue+is%3Aopen+label%3A%22Help+Wanted%22+label%3AArea%2Fmmctl">mattermost-server</a> repo. You can learn more about the unit test coverage campaign for mmctl in the <a class="reference external" href="https://mattermost.com/blog/unit-testing-mmctl-commands/">Unit testing mmctl commands</a> blog post.</p>
 <p><strong>Notes</strong></p>
 <ul class="simple">
-<li><p>Parameters in CLI commands are order-specific.</p></li>
-<li><p>If special characters (<code class="docutils literal notranslate"><span class="pre">!</span></code>, <code class="docutils literal notranslate"><span class="pre">|</span></code>, <code class="docutils literal notranslate"><span class="pre">(</span></code>, <code class="docutils literal notranslate"><span class="pre">)</span></code>, <code class="docutils literal notranslate"><span class="pre">\</span></code>, <code class="docutils literal notranslate"><span class="pre">'</span></code>, and <code class="docutils literal notranslate"><span class="pre">&quot;</span></code>) are used, the entire argument needs to be surrounded by single quotes (e.g. <code class="docutils literal notranslate"><span class="pre">-password</span> <span class="pre">'mypassword!'</span></code>, or the individual characters need to be escaped out (e.g. <code class="docutils literal notranslate"><span class="pre">password</span> <span class="pre">mypassword\!</span></code>).</p></li>
-<li><p>Team name and channel name refer to the handles, not the display names. So in the URL <code class="docutils literal notranslate"><span class="pre">https://community.mattermost.com/core/channels/town-square</span></code> team name would be <code class="docutils literal notranslate"><span class="pre">core</span></code> and channel name would be <code class="docutils literal notranslate"><span class="pre">town-square</span></code>.</p></li>
+<li>Parameters in CLI commands are order-specific.</li>
+<li>If special characters (<code class="docutils literal notranslate"><span class="pre">!</span></code>, <code class="docutils literal notranslate"><span class="pre">|</span></code>, <code class="docutils literal notranslate"><span class="pre">(</span></code>, <code class="docutils literal notranslate"><span class="pre">)</span></code>, <code class="docutils literal notranslate"><span class="pre">\</span></code>, <code class="docutils literal notranslate"><span class="pre">'</span></code>, and <code class="docutils literal notranslate"><span class="pre">&quot;</span></code>) are used, the entire argument needs to be surrounded by single quotes (e.g. <code class="docutils literal notranslate"><span class="pre">-password</span> <span class="pre">'mypassword!'</span></code>, or the individual characters need to be escaped out (e.g. <code class="docutils literal notranslate"><span class="pre">password</span> <span class="pre">mypassword\!</span></code>).</li>
+<li>Team name and channel name refer to the handles, not the display names. So in the URL <code class="docutils literal notranslate"><span class="pre">https://community.mattermost.com/core/channels/town-square</span></code> team name would be <code class="docutils literal notranslate"><span class="pre">core</span></code> and channel name would be <code class="docutils literal notranslate"><span class="pre">town-square</span></code>.</li>
 </ul>
-<dl class="simple">
-<dt><strong>Commands</strong></dt><dd><ul class="simple">
-<li><p><a class="reference internal" href="#mmctl-auth">mmctl auth</a> - Authentication Management</p></li>
-<li><p><a class="reference internal" href="#mmctl-bot">mmctl bot</a> - Bot Management</p></li>
-<li><p><a class="reference internal" href="#mmctl-channel">mmctl channel</a> - Channel Management</p></li>
-<li><p><a class="reference internal" href="#mmctl-command">mmctl command</a> - Command Management</p></li>
-<li><p><a class="reference internal" href="#mmctl-completion">mmctl completion</a> - Generates autocompletion scripts for bash and zsh</p></li>
-<li><p><a class="reference internal" href="#mmctl-config">mmctl config</a> - Configuration Management</p></li>
-<li><p><a class="reference internal" href="#mmctl-docs">mmctl docs</a> - Generates mmctl documentation</p></li>
-<li><p><a class="reference internal" href="#mmctl-group">mmctl group</a> - Group Management</p></li>
-<li><p><a class="reference internal" href="#mmctl-integrity">mmctl integrity</a> - Database record integrity</p></li>
-<li><p><a class="reference internal" href="#mmctl-ldap">mmctl ldap</a> - LDAP Management</p></li>
-<li><p><a class="reference internal" href="#mmctl-license">mmctl license</a> - License Management</p></li>
-<li><p><a class="reference internal" href="#mmctl-logs">mmctl logs</a> - Log Management</p></li>
-<li><p><a class="reference internal" href="#mmctl-permissions">mmctl permissions</a> - Permissions Management</p></li>
-<li><p><a class="reference internal" href="#mmctl-plugin">mmctl plugin</a> - Plugin Management</p></li>
-<li><p><a class="reference internal" href="#mmctl-post">mmctl post</a> - Post Management</p></li>
-<li><p><a class="reference internal" href="#mmctl-roles">mmctl roles</a> - Roles Management</p></li>
-<li><p><a class="reference internal" href="#mmctl-system">mmctl system</a> - System Management</p></li>
-<li><p><a class="reference internal" href="#mmctl-team">mmctl team</a> - Team Management</p></li>
-<li><p><a class="reference internal" href="#mmctl-token">mmctl token</a> - Token Management</p></li>
-<li><p><a class="reference internal" href="#mmctl-user">mmctl user</a> - User Management</p></li>
-<li><p><a class="reference internal" href="#mmctl-version">mmctl version</a> - Version Management</p></li>
-<li><p><a class="reference internal" href="#mmctl-webhook">mmctl webhook</a> - Webhook Management</p></li>
-<li><p><a class="reference internal" href="#mmctl-websocket">mmctl websocket</a> - Websocket Management</p></li>
+<dl class="docutils">
+<dt><strong>Commands</strong></dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="#mmctl-auth">mmctl auth</a> - Authentication Management</li>
+<li><a class="reference internal" href="#mmctl-bot">mmctl bot</a> - Bot Management</li>
+<li><a class="reference internal" href="#mmctl-channel">mmctl channel</a> - Channel Management</li>
+<li><a class="reference internal" href="#mmctl-command">mmctl command</a> - Command Management</li>
+<li><a class="reference internal" href="#mmctl-completion">mmctl completion</a> - Generates autocompletion scripts for bash and zsh</li>
+<li><a class="reference internal" href="#mmctl-config">mmctl config</a> - Configuration Management</li>
+<li><a class="reference internal" href="#mmctl-docs">mmctl docs</a> - Generates mmctl documentation</li>
+<li><a class="reference internal" href="#mmctl-group">mmctl group</a> - Group Management</li>
+<li><a class="reference internal" href="#mmctl-integrity">mmctl integrity</a> - Database record integrity</li>
+<li><a class="reference internal" href="#mmctl-ldap">mmctl ldap</a> - LDAP Management</li>
+<li><a class="reference internal" href="#mmctl-license">mmctl license</a> - License Management</li>
+<li><a class="reference internal" href="#mmctl-logs">mmctl logs</a> - Log Management</li>
+<li><a class="reference internal" href="#mmctl-permissions">mmctl permissions</a> - Permissions Management</li>
+<li><a class="reference internal" href="#mmctl-plugin">mmctl plugin</a> - Plugin Management</li>
+<li><a class="reference internal" href="#mmctl-post">mmctl post</a> - Post Management</li>
+<li><a class="reference internal" href="#mmctl-roles">mmctl roles</a> - Roles Management</li>
+<li><a class="reference internal" href="#mmctl-system">mmctl system</a> - System Management</li>
+<li><a class="reference internal" href="#mmctl-team">mmctl team</a> - Team Management</li>
+<li><a class="reference internal" href="#mmctl-token">mmctl token</a> - Token Management</li>
+<li><a class="reference internal" href="#mmctl-user">mmctl user</a> - User Management</li>
+<li><a class="reference internal" href="#mmctl-version">mmctl version</a> - Version Management</li>
+<li><a class="reference internal" href="#mmctl-webhook">mmctl webhook</a> - Webhook Management</li>
+<li><a class="reference internal" href="#mmctl-websocket">mmctl websocket</a> - Websocket Management</li>
 </ul>
 </dd>
 </dl>
@@ -315,8 +308,8 @@
 <p>To run the end to end test suite, you need to have a Mattermost server instance running. Check the <a class="reference external" href="https://developers.mattermost.com/contribute/server/developer-setup/">Developer Setup guide</a> for instructions around how to configure a local test server instance.</p>
 <p>Once the development server is set up, cd into the <code class="docutils literal notranslate"><span class="pre">mattermost-server</span> <span class="pre">directory</span></code>:</p>
 <ul class="simple">
-<li><p>Start it with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run</span></code>. To confirm that the instance is running correctly, you can access the web interface at <code class="docutils literal notranslate"><span class="pre">http://localhost:8065</span></code>.</p></li>
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test-data</span></code> to preload your server instance with initial seed data. Generated data such as users are typically used for logging, etc.</p></li>
+<li>Start it with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run</span></code>. To confirm that the instance is running correctly, you can access the web interface at <code class="docutils literal notranslate"><span class="pre">http://localhost:8065</span></code>.</li>
+<li>Run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test-data</span></code> to preload your server instance with initial seed data. Generated data such as users are typically used for logging, etc.</li>
 </ul>
 <p>Change your directory to <code class="docutils literal notranslate"><span class="pre">mmctl</span></code> and run the end to end test suite with:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>make test-e2e
@@ -329,15 +322,15 @@
 <h3>mmctl auth<a class="headerlink" href="#mmctl-auth" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Manages the credentials and authentication methods of the remote Mattermost instances.</p>
+<div><p>Manage the credentials and authentication methods of remote Mattermost instances.</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#mmctl-auth-clean">mmctl auth clean</a> - Clean credentials</p></li>
-<li><p><a class="reference internal" href="#mmctl-auth-current">mmctl auth current</a> - Display current credentials</p></li>
-<li><p><a class="reference internal" href="#mmctl-auth-delete">mmctl auth delete</a> - Delete authentication details</p></li>
-<li><p><a class="reference internal" href="#mmctl-auth-list">mmctl auth list</a> - List registered credentials</p></li>
-<li><p><a class="reference internal" href="#mmctl-auth-login">mmctl auth login</a> - Log into Mattermost instance</p></li>
-<li><p><a class="reference internal" href="#mmctl-auth-renew">mmctl auth renew</a> - Renew login credentials</p></li>
-<li><p><a class="reference internal" href="#mmctl-auth-set">mmctl auth set</a> - Set login credentials</p></li>
+<li><a class="reference internal" href="#mmctl-auth-clean">mmctl auth clean</a> - Clean credentials</li>
+<li><a class="reference internal" href="#mmctl-auth-current">mmctl auth current</a> - Display current credentials</li>
+<li><a class="reference internal" href="#mmctl-auth-delete">mmctl auth delete</a> - Delete authentication details</li>
+<li><a class="reference internal" href="#mmctl-auth-list">mmctl auth list</a> - List registered credentials</li>
+<li><a class="reference internal" href="#mmctl-auth-login">mmctl auth login</a> - Log into Mattermost instance</li>
+<li><a class="reference internal" href="#mmctl-auth-renew">mmctl auth renew</a> - Renew login credentials</li>
+<li><a class="reference internal" href="#mmctl-auth-set">mmctl auth set</a> - Set login credentials</li>
 </ul>
 </div></blockquote>
 <p><strong>Options</strong></p>
@@ -349,8 +342,7 @@
 <h3>mmctl auth clean<a class="headerlink" href="#mmctl-auth-clean" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Clean the credentials associated with a Mattermost instance.</p>
-</div></blockquote>
+<div>Clean the credentials associated with a Mattermost instance.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl auth clean <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -375,8 +367,7 @@
 <h3>mmctl auth current<a class="headerlink" href="#mmctl-auth-current" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Show the currently stored user credentials.</p>
-</div></blockquote>
+<div>Show the currently stored user credentials.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl auth current <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -401,8 +392,7 @@
 <h3>mmctl auth delete<a class="headerlink" href="#mmctl-auth-delete" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Delete a named credential.</p>
-</div></blockquote>
+<div>Delete a named credential.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl auth delete <span class="o">[</span>server name<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -427,8 +417,7 @@
 <h3>mmctl auth list<a class="headerlink" href="#mmctl-auth-list" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Print a list of registered credentials.</p>
-</div></blockquote>
+<div>Print a list of registered credentials.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl auth list <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -453,8 +442,7 @@
 <h3>mmctl auth login<a class="headerlink" href="#mmctl-auth-login" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Log in to an instance and store credentials.</p>
-</div></blockquote>
+<div>Log in to an instance and store credentials.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl auth login <span class="o">[</span>instance url<span class="o">]</span> --name <span class="o">[</span>server name<span class="o">]</span> --username <span class="o">[</span>username<span class="o">]</span> --password <span class="o">[</span>password<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -488,8 +476,7 @@ auth login https://mattermost.example.com --name local-server --access-token mya
 <h3>mmctl auth renew<a class="headerlink" href="#mmctl-auth-renew" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Renew the credentials for a given server.</p>
-</div></blockquote>
+<div>Renew the credentials for a given server.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl auth renew <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -517,8 +504,7 @@ auth login https://mattermost.example.com --name local-server --access-token mya
 <h3>mmctl auth set<a class="headerlink" href="#mmctl-auth-set" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Set credentials to use in the following commands.</p>
-</div></blockquote>
+<div>Set credentials to use in the following commands.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl auth <span class="nb">set</span> <span class="o">[</span>server name<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -604,14 +590,15 @@ auth_service:
 <h2>mmctl bot<a class="headerlink" href="#mmctl-bot" title="Permalink to this headline">¶</a></h2>
 <p>Management of bots.</p>
 <blockquote>
-<div><dl class="simple">
-<dt>Child Commands</dt><dd><ul class="simple">
-<li><p><a class="reference internal" href="#mmctl-bot-assign">mmctl bot assign</a> - Assign bot ownership</p></li>
-<li><p><a class="reference internal" href="#mmctl-bot-create">mmctl bot create</a> - Create a new bot</p></li>
-<li><p><a class="reference internal" href="#mmctl-bot-disable">mmctl bot disable</a> - Disable a bot</p></li>
-<li><p><a class="reference internal" href="#mmctl-bot-enable">mmctl bot enable</a> - Enable a bot</p></li>
-<li><p><a class="reference internal" href="#mmctl-bot-list">mmctl bot list</a> - List all bots</p></li>
-<li><p><a class="reference internal" href="#mmctl-bot-update">mmctl bot update</a> - Update bot configuration</p></li>
+<div><dl class="docutils">
+<dt>Child Commands</dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="#mmctl-bot-assign">mmctl bot assign</a> - Assign bot ownership</li>
+<li><a class="reference internal" href="#mmctl-bot-create">mmctl bot create</a> - Create a new bot</li>
+<li><a class="reference internal" href="#mmctl-bot-disable">mmctl bot disable</a> - Disable a bot</li>
+<li><a class="reference internal" href="#mmctl-bot-enable">mmctl bot enable</a> - Enable a bot</li>
+<li><a class="reference internal" href="#mmctl-bot-list">mmctl bot list</a> - List all bots</li>
+<li><a class="reference internal" href="#mmctl-bot-update">mmctl bot update</a> - Update bot configuration</li>
 </ul>
 </dd>
 </dl>
@@ -624,8 +611,7 @@ auth_service:
 <h3>mmctl bot assign<a class="headerlink" href="#mmctl-bot-assign" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Assign the ownership of a bot to another user.</p>
-</div></blockquote>
+<div>Assign the ownership of a bot to another user.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl bot assign <span class="o">[</span>bot-username<span class="o">]</span> <span class="o">[</span>new-owner-username<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -652,8 +638,7 @@ auth_service:
 <h3>mmctl bot create<a class="headerlink" href="#mmctl-bot-create" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Create a bot.</p>
-</div></blockquote>
+<div>Create a bot.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl bot create <span class="o">[</span>username<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -682,8 +667,7 @@ auth_service:
 <h3>mmctl bot disable<a class="headerlink" href="#mmctl-bot-disable" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Disable an enabled bot.</p>
-</div></blockquote>
+<div>Disable an enabled bot.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl bot disable <span class="o">[</span>username<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -710,8 +694,7 @@ auth_service:
 <h3>mmctl bot enable<a class="headerlink" href="#mmctl-bot-enable" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Enable a disabled bot.</p>
-</div></blockquote>
+<div>Enable a disabled bot.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl bot <span class="nb">enable</span> <span class="o">[</span>username<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -738,8 +721,7 @@ auth_service:
 <h3>mmctl bot list<a class="headerlink" href="#mmctl-bot-list" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>List the bot’s users.</p>
-</div></blockquote>
+<div>List the bot’s users.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl bot list <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -768,8 +750,7 @@ auth_service:
 <h3>mmctl bot update<a class="headerlink" href="#mmctl-bot-update" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Update bot information.</p>
-</div></blockquote>
+<div>Update bot information.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl bot update <span class="o">[</span>username<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -800,19 +781,23 @@ auth_service:
 <h2>mmctl channel<a class="headerlink" href="#mmctl-channel" title="Permalink to this headline">¶</a></h2>
 <p>Commands for channel management.</p>
 <blockquote>
-<div><dl class="simple">
-<dt>Child Commands</dt><dd><ul class="simple">
-<li><p><a class="reference internal" href="#mmctl-channel-add">mmctl channel add</a> - Add a channel</p></li>
-<li><p><a class="reference internal" href="#mmctl-channel-archive">mmctl channel archive</a> - Archive a channel</p></li>
-<li><p><a class="reference internal" href="#mmctl-channel-create">mmctl channel create</a> - Create a channel</p></li>
-<li><p><a class="reference internal" href="#mmctl-channel-list">mmctl channel list</a> - List all channels on specified teams</p></li>
-<li><p><a class="reference internal" href="#mmctl-channel-make-private">mmctl channel make_private</a> - Set a channel’s type to “private”</p></li>
-<li><p><a class="reference internal" href="#mmctl-channel-modify">mmctl channel modify</a> - Modify a channel’s type (private/public)</p></li>
-<li><p><a class="reference internal" href="#mmctl-channel-move">mmctl channel move</a> - Moves channels to the specified team</p></li>
-<li><p><a class="reference internal" href="#mmctl-channel-remove">mmctl channel remove</a> - Remove users from a channel</p></li>
-<li><p><a class="reference internal" href="#mmctl-channel-rename">mmctl channel rename</a> - Rename a channel</p></li>
-<li><p><a class="reference internal" href="#mmctl-channel-restore">mmctl channel restore</a> - Restore a channel from the archive</p></li>
-<li><p><a class="reference internal" href="#mmctl-channel-search">mmctl channel search</a> - Search a channel by name</p></li>
+<div><dl class="docutils">
+<dt>Child Commands</dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="#mmctl-channel-archive">mmctl channel archive</a> - Archive a channel</li>
+<li><a class="reference internal" href="#mmctl-channel-create">mmctl channel create</a> - Create a channel</li>
+<li><a class="reference internal" href="#mmctl-channel-delete">mmctl channel delete</a> - Delete a channel</li>
+<li><a class="reference internal" href="#mmctl-channel-list">mmctl channel list</a> - List all channels on specified teams</li>
+<li><a class="reference internal" href="#mmctl-channel-make-private">mmctl channel make_private</a> - Set a channel’s type to “private”</li>
+<li><a class="reference internal" href="#mmctl-channel-modify">mmctl channel modify</a> - Modify a channel’s type (private/public)</li>
+<li><a class="reference internal" href="#mmctl-channel-move">mmctl channel move</a> - Move channels to the specified team</li>
+<li><a class="reference internal" href="#mmctl-channel-rename">mmctl channel rename</a> - Rename a channel</li>
+<li><a class="reference internal" href="#mmctl-channel-restore">mmctl channel restore</a> - (Deprecated) Restore a channel from the archive</li>
+<li><a class="reference internal" href="#mmctl-channel-search">mmctl channel search</a> - Search a channel by name</li>
+<li><a class="reference internal" href="#mmctl-channel-unarchive">mmctl channel unarchive</a> - Unarchive a channel</li>
+<li><a class="reference internal" href="#mmctl-channel-users">mmctl channel users</a> - Manage channel users</li>
+<li><a class="reference internal" href="#mmctl-channel-users-add">mmctl channel users add</a> - Add a user to a channel</li>
+<li><a class="reference internal" href="#mmctl-channel-users-remove">mmctl channel users remove</a> - Remove a user from a channel</li>
 </ul>
 </dd>
 </dl>
@@ -821,40 +806,11 @@ auth_service:
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help   <span class="nb">help</span> <span class="k">for</span> channel
 </pre></div>
 </div>
-<div class="section" id="mmctl-channel-add">
-<h3>mmctl channel add<a class="headerlink" href="#mmctl-channel-add" title="Permalink to this headline">¶</a></h3>
-<p><strong>Description</strong></p>
-<blockquote>
-<div><p>Add users to a channel. If adding multiple users, use a space-separated list.</p>
-</div></blockquote>
-<p><strong>Format</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl channel add <span class="o">[</span>channel<span class="o">]</span> <span class="o">[</span>users<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
-</pre></div>
-</div>
-<p><strong>Examples</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>channel add myteam:mychannel user@example.com username
-</pre></div>
-</div>
-<p><strong>Options</strong></p>
-<blockquote>
-<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help   <span class="nb">help</span> <span class="k">for</span> add
-</pre></div>
-</div>
-</div></blockquote>
-<p><strong>Options inherited from parent commands</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
---insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
---local                       allows communicating with the server through a unix socket
---strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
-</pre></div>
-</div>
-</div>
 <div class="section" id="mmctl-channel-archive">
 <h3>mmctl channel archive<a class="headerlink" href="#mmctl-channel-archive" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Archive one or multiple channels along with all related information including posts from the database. Channels can be specified by <code class="docutils literal notranslate"><span class="pre">[team]:[channel]</span></code> (i.e., myteam:mychannel) or by channel ID).</p>
-</div></blockquote>
+<div>Archive one or multiple channels along with all related information including posts from the database. Channels can be specified by <code class="docutils literal notranslate"><span class="pre">[team]:[channel]</span></code> (i.e., myteam:mychannel) or by channel ID.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl channel archive <span class="o">[</span>channels<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -868,7 +824,8 @@ auth_service:
 </pre></div>
 </div>
 <p><strong>Options inherited from parent commands</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string         path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
+--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
 --insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
 --local                       allows communicating with the server through a unix socket
 --strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
@@ -879,8 +836,7 @@ auth_service:
 <h3>mmctl channel create<a class="headerlink" href="#mmctl-channel-create" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Create a channel.</p>
-</div></blockquote>
+<div>Create a channel.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl channel create <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -901,10 +857,38 @@ channel create --team myteam --name mynewprivatechannel --display_name <span cla
 </pre></div>
 </div>
 <p><strong>Options inherited from parent commands</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string          path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
+--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
 --insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
 --local                       allows communicating with the server through a unix socket
 --strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
+<div class="section" id="mmctl-channel-delete">
+<h3>mmctl channel delete<a class="headerlink" href="#mmctl-channel-delete" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<blockquote>
+<div>Permanently delete one or multiple channels along with all related information including posts from the database.</div></blockquote>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl channel delete <span class="o">[</span>channels<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>channel delete myteam:mychannel
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--confirm       Confirm you really want to delete the channel and a DB backup has been performed.
+-h, --help      <span class="nb">help</span> <span class="k">for</span> delete
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string           path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
+--format string                the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate   allows to use insecure TLS protocols, such as SHA-1
+--local                        allows communicating with the server through a unix socket
+--strict                       will only run commands <span class="k">if</span> the mmctl version matches the server one
 </pre></div>
 </div>
 </div>
@@ -912,8 +896,7 @@ channel create --team myteam --name mynewprivatechannel --display_name <span cla
 <h3>mmctl channel list<a class="headerlink" href="#mmctl-channel-list" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>List all public and archived channels on specified teams. Archived channels are appended with ‘(archived)’.</p>
-</div></blockquote>
+<div>List all public and archived channels on specified teams. Archived channels are appended with <code class="docutils literal notranslate"><span class="pre">(archived)</span></code>. Private channels the user is a member of or has access to are appended with <code class="docutils literal notranslate"><span class="pre">(private)</span></code>.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl channel list <span class="o">[</span>teams<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -927,7 +910,8 @@ channel create --team myteam --name mynewprivatechannel --display_name <span cla
 </pre></div>
 </div>
 <p><strong>Options inherited from parent commands</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string          path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
+--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
 --insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
 --local                       allows communicating with the server through a unix socket
 --strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
@@ -938,8 +922,7 @@ channel create --team myteam --name mynewprivatechannel --display_name <span cla
 <h3>mmctl channel make_private<a class="headerlink" href="#mmctl-channel-make-private" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Set the type of a channel from public to private. Channel can be specified by <code class="docutils literal notranslate"><span class="pre">[team]:[channel]</span></code> (i.e., myteam:mychannel) or by channel ID.</p>
-</div></blockquote>
+<div>Set the type of a channel from public to private. Channel can be specified by <code class="docutils literal notranslate"><span class="pre">[team]:[channel]</span></code> (i.e., myteam:mychannel) or by channel ID.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl channel make_private <span class="o">[</span>channel<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -953,7 +936,8 @@ channel create --team myteam --name mynewprivatechannel --display_name <span cla
 </pre></div>
 </div>
 <p><strong>Options inherited from parent commands</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string          path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
+--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
 --insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
 --local                       allows communicating with the server through a unix socket
 --strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
@@ -964,8 +948,7 @@ channel create --team myteam --name mynewprivatechannel --display_name <span cla
 <h3>mmctl channel modify<a class="headerlink" href="#mmctl-channel-modify" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Change the public/private type of a channel. Channel can be specified by <code class="docutils literal notranslate"><span class="pre">[team]:[channel]</span></code> (i.e., myteam:mychannel) or by channel ID.</p>
-</div></blockquote>
+<div>Change the public/private type of a channel. Channel can be specified by <code class="docutils literal notranslate"><span class="pre">[team]:[channel]</span></code> (i.e., myteam:mychannel) or by channel ID.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl channel modify <span class="o">[</span>channel<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -982,7 +965,8 @@ channel modify channelId --public
 </pre></div>
 </div>
 <p><strong>Options inherited from parent commands</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string          path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
+--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
 --insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
 --local                       allows communicating with the server through a unix socket
 --strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
@@ -993,8 +977,7 @@ channel modify channelId --public
 <h3>mmctl channel move<a class="headerlink" href="#mmctl-channel-move" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Moves the provided channels to the specified team. Validates that all users in the channel belong to the target team. Incoming/Outgoing webhooks are moved     along with the channel. Channels can be specified by [team]:[channel]. ie. myteam:mychannel or by channel ID.</p>
-</div></blockquote>
+<div>Move the provided channels to the specified team. Validate that all users in the channel belong to the target team. Incoming/outgoing webhooks are moved along with the channel. Channels can be specified by <code class="docutils literal notranslate"><span class="pre">[team]:[channel]</span></code> (e.g., myteam:mychannel) or by channel ID.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl channel move <span class="o">[</span>team<span class="o">]</span> <span class="o">[</span>channels<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -1009,35 +992,8 @@ channel modify channelId --public
 </pre></div>
 </div>
 <p><strong>Options inherited from parent commands</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
---insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
---local                       allows communicating with the server through a unix socket
---strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
-</pre></div>
-</div>
-</div>
-<div class="section" id="mmctl-channel-remove">
-<h3>mmctl channel remove<a class="headerlink" href="#mmctl-channel-remove" title="Permalink to this headline">¶</a></h3>
-<p><strong>Description</strong></p>
-<blockquote>
-<div><p>Remove specified users from a channel.</p>
-</div></blockquote>
-<p><strong>Format</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl channel remove <span class="o">[</span>channel<span class="o">]</span> <span class="o">[</span>users<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
-</pre></div>
-</div>
-<p><strong>Examples</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>channel remove myteam:mychannel user@example.com username
-channel remove myteam:mychannel --all-users
-</pre></div>
-</div>
-<p><strong>Options</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--all-users   Remove all users from the indicated channel
--h, --help    <span class="nb">help</span> <span class="k">for</span> remove
-</pre></div>
-</div>
-<p><strong>Options inherited from parent commands</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string          path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
+--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
 --insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
 --local                       allows communicating with the server through a unix socket
 --strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
@@ -1048,23 +1004,27 @@ channel remove myteam:mychannel --all-users
 <h3>mmctl channel rename<a class="headerlink" href="#mmctl-channel-rename" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Rename a channel.</p>
-</div></blockquote>
+<div>Rename an existing channel.</div></blockquote>
 <p><strong>Format</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl channel rename <span class="o">[</span>flags<span class="o">]</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl channel rename <span class="o">[</span>channel<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
 </div>
 <p><strong>Examples</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>channel rename myteam:mychannel newchannelname --display_name <span class="s2">&quot;New Display Name&quot;</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>channel rename myteam:oldchannel --name <span class="s1">&#39;new-channel&#39;</span> --display_name <span class="s1">&#39;New Display Name&#39;</span>
+channel rename myteam:oldchannel --name <span class="s1">&#39;new-channel&#39;</span>
+channel rename myteam:oldchannel --display_name <span class="s1">&#39;New Display Name&#39;</span>
 </pre></div>
 </div>
 <p><strong>Options</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--display_name string   Channel Display Name
--h, --help              <span class="nb">help</span> <span class="k">for</span> rename
+-h, --help                  <span class="nb">help</span> <span class="k">for</span> rename
+--name string           Channel Name
 </pre></div>
 </div>
 <p><strong>Options inherited from parent commands</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string          path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
+--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
 --insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
 --local                       allows communicating with the server through a unix socket
 --strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
@@ -1073,10 +1033,10 @@ channel remove myteam:mychannel --all-users
 </div>
 <div class="section" id="mmctl-channel-restore">
 <h3>mmctl channel restore<a class="headerlink" href="#mmctl-channel-restore" title="Permalink to this headline">¶</a></h3>
+<p>Deprecated in favor of <a class="reference internal" href="#mmctl-channel-unarchive">mmctl channel unarchive</a>. Not used in Mattermost Server version v5.26 and later.</p>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Restore a previously deleted channel. Channels can be specified by <code class="docutils literal notranslate"><span class="pre">[team]:[channel]</span></code> (e.g., myteam:mychannel) or by channel ID.</p>
-</div></blockquote>
+<div>Restore a previously deleted channel. Channels can be specified by <code class="docutils literal notranslate"><span class="pre">[team]:[channel]</span></code> (e.g., myteam:mychannel) or by channel ID.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl channel restore <span class="o">[</span>channels<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -1101,8 +1061,7 @@ channel remove myteam:mychannel --all-users
 <h3>mmctl channel search<a class="headerlink" href="#mmctl-channel-search" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Search a channel by channel name. Channel can be specified by team (e.g., <code class="docutils literal notranslate"><span class="pre">--team</span> <span class="pre">myTeam</span> <span class="pre">myChannel`</span></code>) or by team ID.</p>
-</div></blockquote>
+<div>Search a channel by channel name. Channel can be specified by team (e.g., <code class="docutils literal notranslate"><span class="pre">--team</span> <span class="pre">myTeam</span> <span class="pre">myChannel</span></code>) or by team ID.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl channel search <span class="o">[</span>channel<span class="o">]</span>
 mmctl search --team <span class="o">[</span>team<span class="o">]</span> <span class="o">[</span>channel<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
@@ -1119,10 +1078,109 @@ channel search --team myTeam myChannel
 </pre></div>
 </div>
 <p><strong>Options inherited from parent commands</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string          path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
+--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
 --insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
 --local                       allows communicating with the server through a unix socket
 --strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
+<div class="section" id="mmctl-channel-unarchive">
+<h3>mmctl channel unarchive<a class="headerlink" href="#mmctl-channel-unarchive" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<blockquote>
+<div>Unarchive a previously archived channel. Channels can be specified by <code class="docutils literal notranslate"><span class="pre">[team]:[channel]</span></code>. (e.g., myteam:mychannel) or by channel ID.</div></blockquote>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl channel unarchive <span class="o">[</span>channels<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>channel unarchive myteam:mychannel
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help   <span class="nb">help</span> <span class="k">for</span> unarchive
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string           path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
+--format string                the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate   allows to use insecure TLS protocols, such as SHA-1
+--local                        allows communicating with the server through a unix socket
+--strict                       will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
+<div class="section" id="mmctl-channel-users">
+<h3>mmctl channel users<a class="headerlink" href="#mmctl-channel-users" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<blockquote>
+<div>Manage channel users.</div></blockquote>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help   <span class="nb">help</span> <span class="k">for</span> users
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string           path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
+--format string                the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate   allows to use insecure TLS protocols, such as SHA-1
+--local                        allows communicating with the server through a unix socket
+--strict                       will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
+<div class="section" id="mmctl-channel-users-add">
+<h3>mmctl channel users add<a class="headerlink" href="#mmctl-channel-users-add" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<blockquote>
+<div>Add one or multiple users to a channel.</div></blockquote>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl channel users add <span class="o">[</span>channel<span class="o">]</span> <span class="o">[</span>users<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>channel users add myteam:mychannel user@example.com username
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help   <span class="nb">help</span> <span class="k">for</span> add
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string           path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
+--format string                the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate   allows to use insecure TLS protocols, such as SHA-1
+--local                        allows communicating with the server through a unix socket
+--strict                       will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
+<div class="section" id="mmctl-channel-users-remove">
+<h3>mmctl channel users remove<a class="headerlink" href="#mmctl-channel-users-remove" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<blockquote>
+<div>Remove one or multiple users from a channel.</div></blockquote>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl channel users remove <span class="o">[</span>channel<span class="o">]</span> <span class="o">[</span>users<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>channel users remove myteam:mychannel user@example.com username
+channel users remove myteam:mychannel --all-users
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--all-users   Remove all users from the indicated channel
+-h, --help   <span class="nb">help</span> <span class="k">for</span> remove
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string           path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
+--format string                the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate   allows to use insecure TLS protocols, such as SHA-1
+--local                        allows communicating with the server through a unix socket
+--strict                       will only run commands <span class="k">if</span> the mmctl version matches the server one
 </pre></div>
 </div>
 </div>
@@ -1131,15 +1189,16 @@ channel search --team myTeam myChannel
 <h2>mmctl command<a class="headerlink" href="#mmctl-command" title="Permalink to this headline">¶</a></h2>
 <p>Management of slash commands.</p>
 <blockquote>
-<div><dl class="simple">
-<dt>Child Commands</dt><dd><ul class="simple">
-<li><p><a class="reference internal" href="#mmctl-command-archive">mmctl command archive</a> - Archive a slash command</p></li>
-<li><p><a class="reference internal" href="#mmctl-command-create">mmctl command create</a> - Create a custom command</p></li>
-<li><p><a class="reference internal" href="#mmctl-command-delete">mmctl command delete</a> - Delete a specified slash command</p></li>
-<li><p><a class="reference internal" href="#mmctl-command-list">mmctl command list</a> - List slash commands on specified teams</p></li>
-<li><p><a class="reference internal" href="#mmctl-command-modify">mmctl command modify</a> - Modify a slash command</p></li>
-<li><p><a class="reference internal" href="#mmctl-command-move">mmctl command move</a> - Move a slash command to a different team</p></li>
-<li><p><a class="reference internal" href="#mmctl-command-show">mmctl command show</a> - Show a custom slash command</p></li>
+<div><dl class="docutils">
+<dt>Child Commands</dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="#mmctl-command-archive">mmctl command archive</a> - Archive a slash command</li>
+<li><a class="reference internal" href="#mmctl-command-create">mmctl command create</a> - Create a custom command</li>
+<li><a class="reference internal" href="#mmctl-command-delete">mmctl command delete</a> - Delete a specified slash command</li>
+<li><a class="reference internal" href="#mmctl-command-list">mmctl command list</a> - List slash commands on specified teams</li>
+<li><a class="reference internal" href="#mmctl-command-modify">mmctl command modify</a> - Modify a slash command</li>
+<li><a class="reference internal" href="#mmctl-command-move">mmctl command move</a> - Move a slash command to a different team</li>
+<li><a class="reference internal" href="#mmctl-command-show">mmctl command show</a> - Show a custom slash command</li>
 </ul>
 </dd>
 </dl>
@@ -1150,10 +1209,9 @@ channel search --team myTeam myChannel
 </div>
 <div class="section" id="mmctl-command-archive">
 <h3>mmctl command archive<a class="headerlink" href="#mmctl-command-archive" title="Permalink to this headline">¶</a></h3>
-<p><strong>Dscription</strong></p>
+<p><strong>Description</strong></p>
 <blockquote>
-<div><p>Archive a slash command. Commands can be specified by command ID.</p>
-</div></blockquote>
+<div>Archive a slash command. Commands can be specified by command ID.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl <span class="nb">command</span> archive <span class="o">[</span>commandID<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -1178,8 +1236,7 @@ channel search --team myTeam myChannel
 <h3>mmctl command create<a class="headerlink" href="#mmctl-command-create" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Create a custom slash command for the specified team.</p>
-</div></blockquote>
+<div>Create a custom slash command for the specified team.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl <span class="nb">command</span> create <span class="o">[</span>team<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -1215,8 +1272,7 @@ channel search --team myTeam myChannel
 <h3>mmctl command delete<a class="headerlink" href="#mmctl-command-delete" title="Permalink to this headline">¶</a></h3>
 <p><strong>Dscription</strong></p>
 <blockquote>
-<div><p>Delete a slash command. Commands can be specified by command ID.</p>
-</div></blockquote>
+<div>Delete a slash command. Commands can be specified by command ID.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl <span class="nb">command</span> delete <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -1241,8 +1297,7 @@ channel search --team myTeam myChannel
 <h3>mmctl command list<a class="headerlink" href="#mmctl-command-list" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>List all commands on specified teams.</p>
-</div></blockquote>
+<div>List all commands on specified teams.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl <span class="nb">command</span> list <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -1267,8 +1322,7 @@ channel search --team myTeam myChannel
 <h3>mmctl command modify<a class="headerlink" href="#mmctl-command-modify" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Modify a slash command. Commands can be specified by command ID.</p>
-</div></blockquote>
+<div>Modify a slash command. Commands can be specified by command ID.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl <span class="nb">command</span> modify <span class="o">[</span>commandID<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -1304,8 +1358,7 @@ channel search --team myTeam myChannel
 <h3>mmctl command move<a class="headerlink" href="#mmctl-command-move" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Move a slash command to a different team. Commands can be specified by command ID.</p>
-</div></blockquote>
+<div>Move a slash command to a different team. Commands can be specified by command ID.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl <span class="nb">command</span> move <span class="o">[</span>team<span class="o">]</span> <span class="o">[</span>commandID<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -1330,8 +1383,7 @@ channel search --team myTeam myChannel
 <h3>mmctl command show<a class="headerlink" href="#mmctl-command-show" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Show a custom slash command. Commands can be specified by command ID. Returns command ID, team ID, trigger word, display name, and creator username.</p>
-</div></blockquote>
+<div>Show a custom slash command. Commands can be specified by command ID. Returns command ID, team ID, trigger word, display name, and creator username.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl <span class="nb">command</span> <span class="o">[</span>commandID<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -1357,10 +1409,11 @@ channel search --team myTeam myChannel
 <h2>mmctl completion<a class="headerlink" href="#mmctl-completion" title="Permalink to this headline">¶</a></h2>
 <p>Generates autocompletion scripts for bash and zsh.</p>
 <blockquote>
-<div><dl class="simple">
-<dt>Child Commands</dt><dd><ul class="simple">
-<li><p><a class="reference internal" href="#mmctl-completion-bash">mmctl completion bash</a> - Edit the configuration settings</p></li>
-<li><p><a class="reference internal" href="#mmctl-completion-zsh">mmctl completion zsh</a> - Get the value of a configuration setting</p></li>
+<div><dl class="docutils">
+<dt>Child Commands</dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="#mmctl-completion-bash">mmctl completion bash</a> - Edit the configuration settings</li>
+<li><a class="reference internal" href="#mmctl-completion-zsh">mmctl completion zsh</a> - Get the value of a configuration setting</li>
 </ul>
 </dd>
 </dl>
@@ -1430,14 +1483,17 @@ To configure your zsh shell to load completions <span class="k">for</span> each 
 <h2>mmctl config<a class="headerlink" href="#mmctl-config" title="Permalink to this headline">¶</a></h2>
 <p>Configuration settings.</p>
 <blockquote>
-<div><dl class="simple">
-<dt>Child Commands</dt><dd><ul class="simple">
-<li><p><a class="reference internal" href="#mmctl-config-edit">mmctl config edit</a> - Edit the configuration settings</p></li>
-<li><p><a class="reference internal" href="#mmctl-config-get">mmctl config get</a> - Get the value of a configuration setting</p></li>
-<li><p><a class="reference internal" href="#mmctl-config-reset">mmctl config reset</a> - Reset the configuration</p></li>
-<li><p><a class="reference internal" href="#mmctl-config-set">mmctl config set</a> - Set the value of a configuration</p></li>
-<li><p><a class="reference internal" href="#mmctl-config-show">mmctl config show</a> - Writes the server configuration to STDOUT</p></li>
-<li><p><a class="reference internal" href="#mmctl-config-subpath">mmctl config subpath</a> - Update client asset loading to use the configured subpath</p></li>
+<div><dl class="docutils">
+<dt>Child Commands</dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="#mmctl-config-edit">mmctl config edit</a> - Edit the configuration settings</li>
+<li><a class="reference internal" href="#mmctl-config-get">mmctl config get</a> - Get the value of a configuration setting</li>
+<li><a class="reference internal" href="#mmctl-config-migrate">mmctl config migrate</a> - Migrate existing configuration between backends</li>
+<li><a class="reference internal" href="#mmctl-config-reload">mmctl config reload</a> - Reload the server configuration</li>
+<li><a class="reference internal" href="#mmctl-config-reset">mmctl config reset</a> - Reset the configuration</li>
+<li><a class="reference internal" href="#mmctl-config-set">mmctl config set</a> - Set the value of a configuration</li>
+<li><a class="reference internal" href="#mmctl-config-show">mmctl config show</a> - Write the server configuration to STDOUT</li>
+<li><a class="reference internal" href="#mmctl-config-subpath">mmctl config subpath</a> - Update client asset loading to use the configured subpath</li>
 </ul>
 </dd>
 </dl>
@@ -1450,8 +1506,7 @@ To configure your zsh shell to load completions <span class="k">for</span> each 
 <h3>mmctl config edit<a class="headerlink" href="#mmctl-config-edit" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Opens the editor defined in the EDITOR environment variable to modify the server’s configuration and then uploads it.</p>
-</div></blockquote>
+<div>Open the editor defined in the EDITOR environment variable to modify the server’s configuration. Once complete, save the file, then upload it to your server.”</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl config edit <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -1476,8 +1531,7 @@ To configure your zsh shell to load completions <span class="k">for</span> each 
 <h3>mmctl config get<a class="headerlink" href="#mmctl-config-get" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Gets the value of a config setting by its name in dot notation.</p>
-</div></blockquote>
+<div>Get the value of a configuration setting by its name in dot notation.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl config get <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -1498,12 +1552,64 @@ To configure your zsh shell to load completions <span class="k">for</span> each 
 </pre></div>
 </div>
 </div>
+<div class="section" id="mmctl-config-migrate">
+<h3>mmctl config migrate<a class="headerlink" href="#mmctl-config-migrate" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<p>Migrates a file-based configuration to (or from) a database-based configuration. Point the Mattermost server at the target configuration to start using it. This command only migrates the configuration data from one type to another.</p>
+<p><strong>Note:</strong></p>
+<blockquote>
+<div>To change the store type to use the database, a System Admin needs to set a <code class="docutils literal notranslate"><span class="pre">MM_CONFIG</span></code> <a class="reference external" href="https://docs.mattermost.com/administration/config-in-database.html#create-an-environment-file">environment variable</a> and restart the Mattermost server.</div></blockquote>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl config migrate <span class="o">[</span>from_config<span class="o">]</span> <span class="o">[</span>to_config<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>config migrate path/to/config.json <span class="s2">&quot;postgres://mmuser:mostest@localhost:5432/mattermost_test?sslmode=disable&amp;connect_timeout=10&quot;</span>
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help   <span class="nb">help</span> <span class="k">for</span> migrate
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string           path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
+--format string                the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate   allows to use insecure TLS protocols, such as SHA-1
+--local                        allows communicating with the server through a unix socket
+--strict                       will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
+<div class="section" id="mmctl-config-reload">
+<h3>mmctl config reload<a class="headerlink" href="#mmctl-config-reload" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<p>Reloads the server configuration and applies new settings.</p>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl config reload <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>config reload
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help   <span class="nb">help</span> <span class="k">for</span> reload
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string           path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
+--format string                the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate   allows to use insecure TLS protocols, such as SHA-1
+--local                        allows communicating with the server through a unix socket
+--strict                       will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
 <div class="section" id="mmctl-config-reset">
 <h3>mmctl config reset<a class="headerlink" href="#mmctl-config-reset" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Resets the value of a config setting by its name in dot notation or a setting section. Accepts multiple values for array settings.</p>
-</div></blockquote>
+<div>Reset the value of a configuration setting by its name in dot notation or a setting section. Accepts multiple values for array settings.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl config reset <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -1529,8 +1635,7 @@ To configure your zsh shell to load completions <span class="k">for</span> each 
 <h3>mmctl config set<a class="headerlink" href="#mmctl-config-set" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Sets the value of a config setting by its name in dot notation. Accepts multiple values for array settings.</p>
-</div></blockquote>
+<div>Set the value of a config setting by its name in dot notation. Accepts multiple values for array settings.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl config <span class="nb">set</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -1555,8 +1660,7 @@ To configure your zsh shell to load completions <span class="k">for</span> each 
 <h3>mmctl config show<a class="headerlink" href="#mmctl-config-show" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Prints the server configuration and writes to STDOUT in JSON format.</p>
-</div></blockquote>
+<div>Print the server configuration and writes to STDOUT in JSON format.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl config show <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -1581,8 +1685,7 @@ To configure your zsh shell to load completions <span class="k">for</span> each 
 <h3>mmctl config subpath<a class="headerlink" href="#mmctl-config-subpath" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Update the hard-coded production client asset paths to take into account Mattermost running on a subpath. This command needs access to the Mattermost assets directory to be able to rewrite the paths.</p>
-</div></blockquote>
+<div>Update the hard-coded production client asset paths to take into account Mattermost running on a subpath. This command needs access to the Mattermost assets directory to be able to rewrite the paths.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl config subpath <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -1599,7 +1702,7 @@ mmctl config subpath --assets-dir /opt/mattermost/client --path /
 </pre></div>
 </div>
 <p><strong>Options</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-a, --assets-dir string   directory of the Mattermost assets <span class="k">in</span> the <span class="nb">local</span> filesystem
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-a, --assets-dir string   directory of the Mattermost assets in the <span class="nb">local</span> filesystem
 -h, --help                <span class="nb">help</span> <span class="k">for</span> subpath
 -p, --path string         path to update the assets with
 </pre></div>
@@ -1617,14 +1720,13 @@ mmctl config subpath --assets-dir /opt/mattermost/client --path /
 <h2>mmctl docs<a class="headerlink" href="#mmctl-docs" title="Permalink to this headline">¶</a></h2>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Generates mmctl documentation.</p>
-</div></blockquote>
+<div>Generates mmctl documentation.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl docs <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
 </div>
 <p><strong>Options</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-d, --directory string   The directory where the docs would be generated <span class="k">in</span>. <span class="o">(</span>default <span class="s2">&quot;docs&quot;</span><span class="o">)</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-d, --directory string   The directory where the docs would be generated in. <span class="o">(</span>default <span class="s2">&quot;docs&quot;</span><span class="o">)</span>
 -h, --help               <span class="nb">help</span> <span class="k">for</span> docs
 </pre></div>
 </div>
@@ -1639,11 +1741,12 @@ mmctl config subpath --assets-dir /opt/mattermost/client --path /
 <div class="section" id="mmctl-group">
 <h2>mmctl group<a class="headerlink" href="#mmctl-group" title="Permalink to this headline">¶</a></h2>
 <p>Management of groups (channel and teams).</p>
-<dl class="simple">
-<dt>Child Commands</dt><dd><ul class="simple">
-<li><p><a class="reference internal" href="#mmctl-group-channel">mmctl group channel</a> - Manage channel groups</p></li>
-<li><p><a class="reference internal" href="#mmctl-group-list-ldap">mmctl group list-ldap</a> - List LDAP groups</p></li>
-<li><p><a class="reference internal" href="#mmctl-group-team">mmctl group team</a> - Manage team groups</p></li>
+<dl class="docutils">
+<dt>Child Commands</dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="#mmctl-group-channel">mmctl group channel</a> - Manage channel groups</li>
+<li><a class="reference internal" href="#mmctl-group-list-ldap">mmctl group list-ldap</a> - List LDAP groups</li>
+<li><a class="reference internal" href="#mmctl-group-team">mmctl group team</a> - Manage team groups</li>
 </ul>
 </dd>
 </dl>
@@ -1651,12 +1754,13 @@ mmctl config subpath --assets-dir /opt/mattermost/client --path /
 <div class="section" id="mmctl-group-channel">
 <h2>mmctl group channel<a class="headerlink" href="#mmctl-group-channel" title="Permalink to this headline">¶</a></h2>
 <p>Management of channel groups</p>
-<dl class="simple">
-<dt>Child Commands</dt><dd><ul class="simple">
-<li><p><a class="reference internal" href="#mmctl-group-channel-disable">mmctl group channel disable</a> - Disable group channel constrains</p></li>
-<li><p><a class="reference internal" href="#mmctl-group-channel-enable">mmctl group channel enable</a> - Enable group channel constrains</p></li>
-<li><p><a class="reference internal" href="#mmctl-group-channel-list">mmctl group channel list</a> - List channel groups</p></li>
-<li><p><a class="reference internal" href="#mmctl-group-channel-status">mmctl group channel status</a> - Check group status</p></li>
+<dl class="docutils">
+<dt>Child Commands</dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="#mmctl-group-channel-disable">mmctl group channel disable</a> - Disable group channel constrains</li>
+<li><a class="reference internal" href="#mmctl-group-channel-enable">mmctl group channel enable</a> - Enable group channel constrains</li>
+<li><a class="reference internal" href="#mmctl-group-channel-list">mmctl group channel list</a> - List channel groups</li>
+<li><a class="reference internal" href="#mmctl-group-channel-status">mmctl group channel status</a> - Check group status</li>
 </ul>
 </dd>
 </dl>
@@ -1668,8 +1772,7 @@ mmctl config subpath --assets-dir /opt/mattermost/client --path /
 <h3>mmctl group channel disable<a class="headerlink" href="#mmctl-group-channel-disable" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Disables group constrains in the specified channel.</p>
-</div></blockquote>
+<div>Disable group constrains in the specified channel.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl group channel disable <span class="o">[</span>team<span class="o">]</span>:<span class="o">[</span>channel<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -1694,8 +1797,7 @@ mmctl config subpath --assets-dir /opt/mattermost/client --path /
 <h3>mmctl group channel enable<a class="headerlink" href="#mmctl-group-channel-enable" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Enables group constrains in the specified channel.</p>
-</div></blockquote>
+<div>Enable group constrains in the specified channel.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl group channel <span class="nb">enable</span> <span class="o">[</span>team<span class="o">]</span>:<span class="o">[</span>channel<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -1720,8 +1822,7 @@ mmctl config subpath --assets-dir /opt/mattermost/client --path /
 <h3>mmctl group channel list<a class="headerlink" href="#mmctl-group-channel-list" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>List the groups associated with a channel.</p>
-</div></blockquote>
+<div>List the groups associated with a channel.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl group channel list <span class="o">[</span>team<span class="o">]</span>:<span class="o">[</span>channel<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -1746,8 +1847,7 @@ mmctl config subpath --assets-dir /opt/mattermost/client --path /
 <h3>mmctl group channel status<a class="headerlink" href="#mmctl-group-channel-status" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Shows the group constrain status for the specified channel.</p>
-</div></blockquote>
+<div>Show the group constrain status for the specified channel.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl group channel status <span class="o">[</span>team<span class="o">]</span>:<span class="o">[</span>channel<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -1772,8 +1872,7 @@ mmctl config subpath --assets-dir /opt/mattermost/client --path /
 <h3>mmctl group list-ldap<a class="headerlink" href="#mmctl-group-list-ldap" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>List LDAP groups.</p>
-</div></blockquote>
+<div>List LDAP groups.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl group list-ldap <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -1798,12 +1897,13 @@ mmctl config subpath --assets-dir /opt/mattermost/client --path /
 <div class="section" id="mmctl-group-team">
 <h2>mmctl group team<a class="headerlink" href="#mmctl-group-team" title="Permalink to this headline">¶</a></h2>
 <p>Management of team groups.</p>
-<dl class="simple">
-<dt>Child Commands</dt><dd><ul class="simple">
-<li><p><a class="reference internal" href="#mmctl-group-team-disable">mmctl group team disable</a> - Disable group team constrains</p></li>
-<li><p><a class="reference internal" href="#mmctl-group-team-enable">mmctl group team enable</a> - Enable group team constrains</p></li>
-<li><p><a class="reference internal" href="#mmctl-group-team-list">mmctl group team list</a> - List team groups</p></li>
-<li><p><a class="reference internal" href="#mmctl-group-team-status">mmctl group team status</a> - Check group constrain status</p></li>
+<dl class="docutils">
+<dt>Child Commands</dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="#mmctl-group-team-disable">mmctl group team disable</a> - Disable group team constrains</li>
+<li><a class="reference internal" href="#mmctl-group-team-enable">mmctl group team enable</a> - Enable group team constrains</li>
+<li><a class="reference internal" href="#mmctl-group-team-list">mmctl group team list</a> - List team groups</li>
+<li><a class="reference internal" href="#mmctl-group-team-status">mmctl group team status</a> - Check group constrain status</li>
 </ul>
 </dd>
 </dl>
@@ -1815,8 +1915,7 @@ mmctl config subpath --assets-dir /opt/mattermost/client --path /
 <h3>mmctl group team disable<a class="headerlink" href="#mmctl-group-team-disable" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Disables group constrains in the specified team.</p>
-</div></blockquote>
+<div>Disable group constrains in the specified team.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl group team disable <span class="o">[</span>team<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -1841,8 +1940,7 @@ mmctl config subpath --assets-dir /opt/mattermost/client --path /
 <h3>mmctl group team enable<a class="headerlink" href="#mmctl-group-team-enable" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Enables group constrains in the specified team.</p>
-</div></blockquote>
+<div>Enable group constrains in the specified team.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl group team <span class="nb">enable</span> <span class="o">[</span>team<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -1867,8 +1965,7 @@ mmctl config subpath --assets-dir /opt/mattermost/client --path /
 <h3>mmctl group team list<a class="headerlink" href="#mmctl-group-team-list" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>List the groups associated with a team.</p>
-</div></blockquote>
+<div>List the groups associated with a team.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl group team list <span class="o">[</span>team<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -1893,8 +1990,7 @@ mmctl config subpath --assets-dir /opt/mattermost/client --path /
 <h3>mmctl group team status<a class="headerlink" href="#mmctl-group-team-status" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Shows the group constrain status for the specified team.</p>
-</div></blockquote>
+<div>Show the group constrain status for the specified team.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl group team status <span class="o">[</span>team<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -1945,9 +2041,10 @@ mmctl config subpath --assets-dir /opt/mattermost/client --path /
 <div class="section" id="mmctl-ldap">
 <h2>mmctl ldap<a class="headerlink" href="#mmctl-ldap" title="Permalink to this headline">¶</a></h2>
 <p>LDAP-related utilities.</p>
-<dl class="simple">
-<dt>Child Commands</dt><dd><ul class="simple">
-<li><p><a class="reference internal" href="#mmctl-ldap-sync">mmctl ldap sync</a> - Sync all LDAP users and groups</p></li>
+<dl class="docutils">
+<dt>Child Commands</dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="#mmctl-ldap-sync">mmctl ldap sync</a> - Sync all LDAP users and groups</li>
 </ul>
 </dd>
 </dl>
@@ -1959,8 +2056,7 @@ mmctl config subpath --assets-dir /opt/mattermost/client --path /
 <h3>mmctl ldap sync<a class="headerlink" href="#mmctl-ldap-sync" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Synchronize all LDAP users and groups now.</p>
-</div></blockquote>
+<div>Synchronize all LDAP users and groups now.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl ldap sync <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -1985,10 +2081,11 @@ mmctl config subpath --assets-dir /opt/mattermost/client --path /
 <div class="section" id="mmctl-license">
 <h2>mmctl license<a class="headerlink" href="#mmctl-license" title="Permalink to this headline">¶</a></h2>
 <p>Licensing management commands.</p>
-<dl class="simple">
-<dt>Child Commands</dt><dd><ul class="simple">
-<li><p><a class="reference internal" href="#mmctl-license-remove">mmctl license remove</a> - Remove current license</p></li>
-<li><p><a class="reference internal" href="#mmctl-license-upload">mmctl license upload</a> - Upload a new license</p></li>
+<dl class="docutils">
+<dt>Child Commands</dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="#mmctl-license-remove">mmctl license remove</a> - Remove the current license</li>
+<li><a class="reference internal" href="#mmctl-license-upload">mmctl license upload</a> - Upload a new license</li>
 </ul>
 </dd>
 </dl>
@@ -2000,8 +2097,7 @@ mmctl config subpath --assets-dir /opt/mattermost/client --path /
 <h3>mmctl license remove<a class="headerlink" href="#mmctl-license-remove" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Remove the current license and use Mattermost in Team Edition.</p>
-</div></blockquote>
+<div>Remove the current license and use Mattermost in Team Edition.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl license remove <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -2026,8 +2122,7 @@ mmctl config subpath --assets-dir /opt/mattermost/client --path /
 <h3>mmctl license upload<a class="headerlink" href="#mmctl-license-upload" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Upload a license. Replaces current license.</p>
-</div></blockquote>
+<div>Upload a license. Replaces current license.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl license upload <span class="o">[</span>license<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -2053,8 +2148,7 @@ mmctl config subpath --assets-dir /opt/mattermost/client --path /
 <h2>mmctl logs<a class="headerlink" href="#mmctl-logs" title="Permalink to this headline">¶</a></h2>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Display logs in a human-readable format.</p>
-</div></blockquote>
+<div>Display logs in a human-readable format.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl logs <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -2076,13 +2170,15 @@ mmctl config subpath --assets-dir /opt/mattermost/client --path /
 <div class="section" id="mmctl-permissions">
 <h2>mmctl permissions<a class="headerlink" href="#mmctl-permissions" title="Permalink to this headline">¶</a></h2>
 <p>Management of permissions and roles.</p>
-<dl class="simple">
-<dt>Child Commands</dt><dd><ul class="simple">
-<li><p><a class="reference internal" href="#mmctl-permissions-add">mmctl permissions add</a> - Add permissions to a role</p></li>
-<li><p><a class="reference internal" href="#mmctl-permissions-role-assign">mmctl permissions role assign</a> - Assign users to role</p></li>
-<li><p><a class="reference internal" href="#mmctl-permissions-remove">mmctl permissions remove</a> - Remove permissions from a role</p></li>
-<li><p><a class="reference internal" href="#mmctl-permissions-show">mmctl permissions show</a> - Show the role information</p></li>
-<li><p><a class="reference internal" href="#mmctl-permissions-role-unassign">mmctl permissions role unassign</a> - Unassign users from a role</p></li>
+<dl class="docutils">
+<dt>Child Commands</dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="#mmctl-permissions-add">mmctl permissions add</a> - Add permissions to a role</li>
+<li><a class="reference internal" href="#mmctl-permissions-remove">mmctl permissions remove</a> - Remove permissions from a role</li>
+<li><a class="reference internal" href="#mmctl-permissions-reset">mmctl permissions reset</a> - Reset default permissions for a role</li>
+<li><a class="reference internal" href="#mmctl-permissions-role-assign">mmctl permissions role assign</a> - Assign users to role</li>
+<li><a class="reference internal" href="#mmctl-permissions-show">mmctl permissions show</a> - Show the role information</li>
+<li><a class="reference internal" href="#mmctl-permissions-role-unassign">mmctl permissions role unassign</a> - Unassign users from a role</li>
 </ul>
 </dd>
 </dl>
@@ -2094,8 +2190,7 @@ mmctl config subpath --assets-dir /opt/mattermost/client --path /
 <h3>mmctl permissions add<a class="headerlink" href="#mmctl-permissions-add" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Add one or more permissions to an existing role (only available in E10 and E20).</p>
-</div></blockquote>
+<div>Add one or more permissions to an existing role (only available in E10 and E20).</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl permissions add <span class="o">[</span>role_name<span class="o">]</span> <span class="o">[</span>permission...<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -2116,10 +2211,61 @@ mmctl config subpath --assets-dir /opt/mattermost/client --path /
 </pre></div>
 </div>
 </div>
+<div class="section" id="mmctl-permissions-remove">
+<h3>mmctl permissions remove<a class="headerlink" href="#mmctl-permissions-remove" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<blockquote>
+<div>Remove one or more permissions from an existing role (available in Enterprise Edition E10 and E20).</div></blockquote>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl permissions remove <span class="o">[</span>role_name<span class="o">]</span> <span class="o">[</span>permission...<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>permissions remove system_user list_open_teams
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help   <span class="nb">help</span> <span class="k">for</span> remove
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
+--local                       allows communicating with the server through a unix socket
+--strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
+<div class="section" id="mmctl-permissions-reset">
+<h3>mmctl permissions reset<a class="headerlink" href="#mmctl-permissions-reset" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<p>Reset the given role’s permissions to the default settings and overwrite custom settings (available in Enterprise Edition E10 and E20).</p>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl permissions reset <span class="o">[</span>role_name<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reset the permissions of the &#39;system_read_only_admin&#39; role.</span>
+$ mmctl permissions reset system_read_only_admin
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help   <span class="nb">help</span> <span class="k">for</span> reset
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string           path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
+--format string                the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate   allows to use insecure TLS protocols, such as SHA-1
+--local                        allows communicating with the server through a unix socket
+--strict                       will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
 <div class="section" id="mmctl-permissions-role-assign">
 <h3>mmctl permissions role assign<a class="headerlink" href="#mmctl-permissions-role-assign" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
-<p>Assign users to a role by username (only available in Enterprise Edition E10 and E20).</p>
+<p>Assign users to a role by username (available in Enterprise Edition E10 and E20).</p>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl permissions role assign <span class="o">[</span>role_name<span class="o">]</span> <span class="o">[</span>username...<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -2147,38 +2293,11 @@ permissions assign system_read_only_admin john.doe jane.doe
 </pre></div>
 </div>
 </div>
-<div class="section" id="mmctl-permissions-remove">
-<h3>mmctl permissions remove<a class="headerlink" href="#mmctl-permissions-remove" title="Permalink to this headline">¶</a></h3>
-<p><strong>Description</strong></p>
-<blockquote>
-<div><p>Remove one or more permissions from an existing role (only available in E10 and E20).</p>
-</div></blockquote>
-<p><strong>Format</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl permissions remove <span class="o">[</span>role_name<span class="o">]</span> <span class="o">[</span>permission...<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
-</pre></div>
-</div>
-<p><strong>Examples</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>permissions remove system_user list_open_teams
-</pre></div>
-</div>
-<p><strong>Options</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help   <span class="nb">help</span> <span class="k">for</span> remove
-</pre></div>
-</div>
-<p><strong>Options inherited from parent commands</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
---insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
---local                       allows communicating with the server through a unix socket
---strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
-</pre></div>
-</div>
-</div>
 <div class="section" id="mmctl-permissions-show">
 <h3>mmctl permissions show<a class="headerlink" href="#mmctl-permissions-show" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Show all the information about a role.</p>
-</div></blockquote>
+<div>Show all the information about a role.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl permissions show <span class="o">[</span>role_name<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -2202,7 +2321,8 @@ permissions assign system_read_only_admin john.doe jane.doe
 <div class="section" id="mmctl-permissions-role-unassign">
 <h3>mmctl permissions role unassign<a class="headerlink" href="#mmctl-permissions-role-unassign" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
-<p>Unassign users from a role by username (only available in Enterprise Edition E10 and E20).</p>
+<blockquote>
+<div>Unassign users from a role by username (only available in Enterprise Edition E10 and E20).</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl permissions role unassign <span class="o">[</span>role_name<span class="o">]</span> <span class="o">[</span>username...<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -2234,17 +2354,18 @@ permissions unassign system_read_only_admin john.doe jane.doe
 <div class="section" id="mmctl-plugin">
 <h2>mmctl plugin<a class="headerlink" href="#mmctl-plugin" title="Permalink to this headline">¶</a></h2>
 <p>Management of plugins.</p>
-<dl class="simple">
-<dt>Child Commands</dt><dd><ul class="simple">
-<li><p><a class="reference internal" href="#mmctl-plugin-add">mmctl plugin add</a> - Add plugins</p></li>
-<li><p><a class="reference internal" href="#mmctl-plugin-delete">mmctl plugin delete</a> - Remove plugins</p></li>
-<li><p><a class="reference internal" href="#mmctl-plugin-disable">mmctl plugin disable</a> - Disable plugins</p></li>
-<li><p><a class="reference internal" href="#mmctl-plugin-enable">mmctl plugin enable</a> - Enable plugins</p></li>
-<li><p><a class="reference internal" href="#mmctl-plugin-install-url">mmctl plugin install-url</a> - Install plugin from URL</p></li>
-<li><p><a class="reference internal" href="#mmctl-plugin-list">mmctl plugin list</a> - List plugins</p></li>
-<li><p><a class="reference internal" href="#mmctl-plugin-marketplace">mmctl plugin marketplace</a> - Management of Plugin Marketplace plugins</p></li>
-<li><p><a class="reference internal" href="#mmctl-plugin-marketplace-install">mmctl plugin marketplace install</a> - Install a plugin from the Plugin Marketplace</p></li>
-<li><p><a class="reference internal" href="#mmctl-plugin-marketplace-list">mmctl plugin marketplace list</a> - List Plugin Marketplace plugins</p></li>
+<dl class="docutils">
+<dt>Child Commands</dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="#mmctl-plugin-add">mmctl plugin add</a> - Add plugins</li>
+<li><a class="reference internal" href="#mmctl-plugin-delete">mmctl plugin delete</a> - Remove plugins</li>
+<li><a class="reference internal" href="#mmctl-plugin-disable">mmctl plugin disable</a> - Disable plugins</li>
+<li><a class="reference internal" href="#mmctl-plugin-enable">mmctl plugin enable</a> - Enable plugins</li>
+<li><a class="reference internal" href="#mmctl-plugin-install-url">mmctl plugin install-url</a> - Install plugin from URL</li>
+<li><a class="reference internal" href="#mmctl-plugin-list">mmctl plugin list</a> - List plugins</li>
+<li><a class="reference internal" href="#mmctl-plugin-marketplace">mmctl plugin marketplace</a> - Management of Plugin Marketplace plugins</li>
+<li><a class="reference internal" href="#mmctl-plugin-marketplace-install">mmctl plugin marketplace install</a> - Install a plugin from the Plugin Marketplace</li>
+<li><a class="reference internal" href="#mmctl-plugin-marketplace-list">mmctl plugin marketplace list</a> - List Plugin Marketplace plugins</li>
 </ul>
 </dd>
 </dl>
@@ -2256,8 +2377,7 @@ permissions unassign system_read_only_admin john.doe jane.doe
 <h3>mmctl plugin add<a class="headerlink" href="#mmctl-plugin-add" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Add plugins to your Mattermost server.</p>
-</div></blockquote>
+<div>Add plugins to your Mattermost server.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl plugin add <span class="o">[</span>plugins<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -2282,8 +2402,7 @@ permissions unassign system_read_only_admin john.doe jane.doe
 <h3>mmctl plugin delete<a class="headerlink" href="#mmctl-plugin-delete" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Delete previously uploaded plugins from your Mattermost server.</p>
-</div></blockquote>
+<div>Delete previously uploaded plugins from your Mattermost server.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl plugin delete <span class="o">[</span>plugins<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -2308,8 +2427,7 @@ permissions unassign system_read_only_admin john.doe jane.doe
 <h3>mmctl plugin disable<a class="headerlink" href="#mmctl-plugin-disable" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Disable plugins. Disabled plugins are immediately removed from the user interface and logged out of all sessions.</p>
-</div></blockquote>
+<div>Disable plugins. Disabled plugins are immediately removed from the user interface and logged out of all sessions.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl plugin disable <span class="o">[</span>plugins<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -2334,8 +2452,7 @@ permissions unassign system_read_only_admin john.doe jane.doe
 <h3>mmctl plugin enable<a class="headerlink" href="#mmctl-plugin-enable" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Enable plugins for use on your Mattermost server.</p>
-</div></blockquote>
+<div>Enable plugins for use on your Mattermost server.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl plugin <span class="nb">enable</span> <span class="o">[</span>plugins<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -2360,8 +2477,7 @@ permissions unassign system_read_only_admin john.doe jane.doe
 <h3>mmctl plugin install-url<a class="headerlink" href="#mmctl-plugin-install-url" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Supply one or multiple URLs to plugins compressed in a <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code> file. Plugins must be enabled in the server’s config settings.</p>
-</div></blockquote>
+<div>Supply one or multiple URLs to plugins compressed in a <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code> file. Plugins must be enabled in the server’s config settings.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl plugin install-url &lt;url&gt;... <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -2391,8 +2507,7 @@ $ mmctl plugin install-url https://example.com/mattermost-plugin-one.tar.gz http
 <h3>mmctl plugin list<a class="headerlink" href="#mmctl-plugin-list" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>List all active and inactive plugins installed on your Mattermost server.</p>
-</div></blockquote>
+<div>List all active and inactive plugins installed on your Mattermost server.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl plugin list <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -2417,10 +2532,11 @@ $ mmctl plugin install-url https://example.com/mattermost-plugin-one.tar.gz http
 <div class="section" id="mmctl-plugin-marketplace">
 <h2>mmctl plugin marketplace<a class="headerlink" href="#mmctl-plugin-marketplace" title="Permalink to this headline">¶</a></h2>
 <p>Management of Plugin Marketplace plugins.</p>
-<dl class="simple">
-<dt>Child Commands</dt><dd><ul class="simple">
-<li><p><a class="reference internal" href="#mmctl-plugin-marketplace-install">mmctl plugin marketplace install</a> - Install a plugin from the Plugin Marketplace</p></li>
-<li><p><a class="reference internal" href="#mmctl-plugin-marketplace-list">mmctl plugin marketplace list</a> - List plugins on the Plugin Marketplace</p></li>
+<dl class="docutils">
+<dt>Child Commands</dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="#mmctl-plugin-marketplace-install">mmctl plugin marketplace install</a> - Install a plugin from the Plugin Marketplace</li>
+<li><a class="reference internal" href="#mmctl-plugin-marketplace-list">mmctl plugin marketplace list</a> - List plugins on the Plugin Marketplace</li>
 </ul>
 </dd>
 </dl>
@@ -2439,8 +2555,7 @@ $ mmctl plugin install-url https://example.com/mattermost-plugin-one.tar.gz http
 <h3>mmctl plugin marketplace install<a class="headerlink" href="#mmctl-plugin-marketplace-install" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Installs a plugin listed on the Plugin Marketplace server.</p>
-</div></blockquote>
+<div>Install a plugin listed on the Plugin Marketplace server.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl plugin marketplace install &lt;id&gt; <span class="o">[</span>version<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -2469,8 +2584,7 @@ $ mmctl plugin marketplace install jitsi
 <h3>mmctl plugin marketplace list<a class="headerlink" href="#mmctl-plugin-marketplace-list" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Gets all plugins from the Plugin Marketplace server, merging data from locally installed plugins as well as prepackaged plugins shipped with the server.</p>
-</div></blockquote>
+<div>Get all plugins from the Plugin Marketplace server, merging data from locally installed plugins as well as prepackaged plugins shipped with the server.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl plugin marketplace list <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -2510,10 +2624,11 @@ $ mmctl plugin marketplace list --local-only
 <div class="section" id="mmctl-post">
 <h2>mmctl post<a class="headerlink" href="#mmctl-post" title="Permalink to this headline">¶</a></h2>
 <p>Management of posts.</p>
-<dl class="simple">
-<dt>Child Commands</dt><dd><ul class="simple">
-<li><p><a class="reference internal" href="#mmctl-post-create">mmctl post create</a> - Create a post</p></li>
-<li><p><a class="reference internal" href="#mmctl-post-list">mmctl post list</a> - List posts</p></li>
+<dl class="docutils">
+<dt>Child Commands</dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="#mmctl-post-create">mmctl post create</a> - Create a post</li>
+<li><a class="reference internal" href="#mmctl-post-list">mmctl post list</a> - List posts</li>
 </ul>
 </dd>
 </dl>
@@ -2525,8 +2640,7 @@ $ mmctl plugin marketplace list --local-only
 <h3>mmctl post create<a class="headerlink" href="#mmctl-post-create" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Create a post.</p>
-</div></blockquote>
+<div>Create a post.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl post create <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -2553,8 +2667,7 @@ $ mmctl plugin marketplace list --local-only
 <h3>mmctl post list<a class="headerlink" href="#mmctl-post-list" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>List posts for a channel.</p>
-</div></blockquote>
+<div>List posts for a channel.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl post list <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -2587,13 +2700,14 @@ post list myteam:mychannel --number <span class="m">20</span>
 <div class="section" id="mmctl-system">
 <h2>mmctl system<a class="headerlink" href="#mmctl-system" title="Permalink to this headline">¶</a></h2>
 <p>System management commands for interacting with the server state and configuration.</p>
-<dl class="simple">
-<dt>Child Commands</dt><dd><ul class="simple">
-<li><p><a class="reference internal" href="#mmctl-system-clearbusy">mmctl system clearbusy</a> - Clears the busy state</p></li>
-<li><p><a class="reference internal" href="#mmctl-system-getbusy">mmctl system getbusy</a> - Get the current busy state</p></li>
-<li><p><a class="reference internal" href="#mmctl-system-setbusy">mmctl system setbusy</a> - Set the busy state to <code class="docutils literal notranslate"><span class="pre">true</span></code></p></li>
-<li><p><a class="reference internal" href="#mmctl-system-status">mmctl system status</a> - Prints the status of the server</p></li>
-<li><p><a class="reference internal" href="#mmctl-system-version">mmctl system version</a> - Prints the remote server version</p></li>
+<dl class="docutils">
+<dt>Child Commands</dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="#mmctl-system-clearbusy">mmctl system clearbusy</a> - Clear the busy state</li>
+<li><a class="reference internal" href="#mmctl-system-getbusy">mmctl system getbusy</a> - Get the current busy state</li>
+<li><a class="reference internal" href="#mmctl-system-setbusy">mmctl system setbusy</a> - Set the busy state to <code class="docutils literal notranslate"><span class="pre">true</span></code></li>
+<li><a class="reference internal" href="#mmctl-system-status">mmctl system status</a> - Print the status of the server</li>
+<li><a class="reference internal" href="#mmctl-system-version">mmctl system version</a> - Print the remote server version</li>
 </ul>
 </dd>
 </dl>
@@ -2612,8 +2726,7 @@ post list myteam:mychannel --number <span class="m">20</span>
 <h3>mmctl system clearbusy<a class="headerlink" href="#mmctl-system-clearbusy" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Clear the busy state which re-enables non-critical services.</p>
-</div></blockquote>
+<div>Clear the busy state which re-enables non-critical services.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl system clearbusy <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -2638,8 +2751,7 @@ post list myteam:mychannel --number <span class="m">20</span>
 <h3>mmctl system getbusy<a class="headerlink" href="#mmctl-system-getbusy" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Gets the server busy state (high load) and timestamp corresponding to when the server busy flag will be automatically cleared.</p>
-</div></blockquote>
+<div>Get the server busy state (high load) and timestamp corresponding to when the server busy flag will be automatically cleared.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl system getbusy <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -2664,8 +2776,7 @@ post list myteam:mychannel --number <span class="m">20</span>
 <h3>mmctl system setbusy<a class="headerlink" href="#mmctl-system-setbusy" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Set the busy state to <code class="docutils literal notranslate"><span class="pre">true</span></code> for the specified number of seconds, which disables non-critical services.</p>
-</div></blockquote>
+<div>Set the busy state to <code class="docutils literal notranslate"><span class="pre">true</span></code> for the specified number of seconds, which disables non-critical services.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl system setbusy -s <span class="o">[</span>seconds<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -2691,8 +2802,7 @@ post list myteam:mychannel --number <span class="m">20</span>
 <h3>mmctl system status<a class="headerlink" href="#mmctl-system-status" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Prints the server status calculated using several basic server healthchecks.</p>
-</div></blockquote>
+<div>Print the server status calculated using several basic server healthchecks.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl system status <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -2717,8 +2827,7 @@ post list myteam:mychannel --number <span class="m">20</span>
 <h3>mmctl system version<a class="headerlink" href="#mmctl-system-version" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Prints the server version of the currently connected Mattermost instance.</p>
-</div></blockquote>
+<div>Print the server version of the currently connected Mattermost instance.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl system version <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -2743,17 +2852,18 @@ post list myteam:mychannel --number <span class="m">20</span>
 <div class="section" id="mmctl-team">
 <h2>mmctl team<a class="headerlink" href="#mmctl-team" title="Permalink to this headline">¶</a></h2>
 <p>Management of teams.</p>
-<dl class="simple">
-<dt>Child Commands</dt><dd><ul class="simple">
-<li><p><a class="reference internal" href="#mmctl-team-archive">mmctl team archive</a> - Archive some teams</p></li>
-<li><p><a class="reference internal" href="#mmctl-team-create">mmctl team create</a> - Create teams</p></li>
-<li><p><a class="reference internal" href="#mmctl-team-delete">mmctl team delete</a> - Delete teams</p></li>
-<li><p><a class="reference internal" href="#mmctl-team-list">mmctl team list</a> - List teams</p></li>
-<li><p><a class="reference internal" href="#mmctl-team-modify">mmctl team modify</a> - Modify teams</p></li>
-<li><p><a class="reference internal" href="#mmctl-team-rename">mmctl team rename</a> - Rename teams</p></li>
-<li><p><a class="reference internal" href="#mmctl-team-restore">mmctl team restore</a> - Restore teams</p></li>
-<li><p><a class="reference internal" href="#mmctl-team-search">mmctl team search</a> - Search teams</p></li>
-<li><p><a class="reference internal" href="#mmctl-team-users">mmctl team users</a> - Manage team users</p></li>
+<dl class="docutils">
+<dt>Child Commands</dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="#mmctl-team-archive">mmctl team archive</a> - Archive some teams</li>
+<li><a class="reference internal" href="#mmctl-team-create">mmctl team create</a> - Create teams</li>
+<li><a class="reference internal" href="#mmctl-team-delete">mmctl team delete</a> - Delete teams</li>
+<li><a class="reference internal" href="#mmctl-team-list">mmctl team list</a> - List teams</li>
+<li><a class="reference internal" href="#mmctl-team-modify">mmctl team modify</a> - Modify teams</li>
+<li><a class="reference internal" href="#mmctl-team-rename">mmctl team rename</a> - Rename teams</li>
+<li><a class="reference internal" href="#mmctl-team-restore">mmctl team restore</a> - Restore teams</li>
+<li><a class="reference internal" href="#mmctl-team-search">mmctl team search</a> - Search teams</li>
+<li><a class="reference internal" href="#mmctl-team-users">mmctl team users</a> - Manage team users</li>
 </ul>
 </dd>
 </dl>
@@ -2765,8 +2875,7 @@ post list myteam:mychannel --number <span class="m">20</span>
 <h3>mmctl team archive<a class="headerlink" href="#mmctl-team-archive" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Archives a team along with all related information including posts from the database.</p>
-</div></blockquote>
+<div>Archive a team along with all related information including posts from the database.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl team archive <span class="o">[</span>teams<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -2792,8 +2901,7 @@ post list myteam:mychannel --number <span class="m">20</span>
 <h3>mmctl team create<a class="headerlink" href="#mmctl-team-create" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Create a team.</p>
-</div></blockquote>
+<div>Create a team.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl team create <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -2823,8 +2931,7 @@ team create --name private --display_name <span class="s2">&quot;My New Private 
 <h3>mmctl team delete<a class="headerlink" href="#mmctl-team-delete" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Permanently deletes a team along with all related information including posts from the database.</p>
-</div></blockquote>
+<div>Permanently delete a team along with all related information including posts from the database.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl team delete <span class="o">[</span>teams<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -2850,8 +2957,7 @@ team create --name private --display_name <span class="s2">&quot;My New Private 
 <h3>mmctl team list<a class="headerlink" href="#mmctl-team-list" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>List all teams on the server.</p>
-</div></blockquote>
+<div>List all teams on the server.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl team list <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -2876,8 +2982,7 @@ team create --name private --display_name <span class="s2">&quot;My New Private 
 <h3>mmctl team modify<a class="headerlink" href="#mmctl-team-modify" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Modify team’s privacy setting to public or private.</p>
-</div></blockquote>
+<div>Modify team’s privacy setting to public or private.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl team modify <span class="o">[</span>teams<span class="o">]</span> <span class="o">[</span>flag<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -2904,8 +3009,7 @@ team create --name private --display_name <span class="s2">&quot;My New Private 
 <h3>mmctl team rename<a class="headerlink" href="#mmctl-team-rename" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Rename an existing team.</p>
-</div></blockquote>
+<div>Rename an existing team.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl team rename <span class="o">[</span>team<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -2931,8 +3035,7 @@ team create --name private --display_name <span class="s2">&quot;My New Private 
 <h3>mmctl team restore<a class="headerlink" href="#mmctl-team-restore" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Restores archived teams.</p>
-</div></blockquote>
+<div>Restore archived teams.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl team restore <span class="o">[</span>teams<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -2957,8 +3060,7 @@ team create --name private --display_name <span class="s2">&quot;My New Private 
 <h3>mmctl team search<a class="headerlink" href="#mmctl-team-search" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Search for teams based on name.</p>
-</div></blockquote>
+<div>Search for teams based on name.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl team search <span class="o">[</span>teams<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -2981,10 +3083,11 @@ team create --name private --display_name <span class="s2">&quot;My New Private 
 </div>
 <div class="section" id="mmctl-team-users">
 <h3>mmctl team users<a class="headerlink" href="#mmctl-team-users" title="Permalink to this headline">¶</a></h3>
-<dl class="simple">
-<dt>Child Commands</dt><dd><ul class="simple">
-<li><p><a class="reference internal" href="#mmctl-team-users-add">mmctl team users add</a> - Add users to a team</p></li>
-<li><p><a class="reference internal" href="#mmctl-team-users-remove">mmctl team users remove</a> - Remove users from a team</p></li>
+<dl class="docutils">
+<dt>Child Commands</dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="#mmctl-team-users-add">mmctl team users add</a> - Add users to a team</li>
+<li><a class="reference internal" href="#mmctl-team-users-remove">mmctl team users remove</a> - Remove users from a team</li>
 </ul>
 </dd>
 </dl>
@@ -2992,8 +3095,7 @@ team create --name private --display_name <span class="s2">&quot;My New Private 
 <h4>mmctl team users add<a class="headerlink" href="#mmctl-team-users-add" title="Permalink to this headline">¶</a></h4>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Add specified users to a team.</p>
-</div></blockquote>
+<div>Add specified users to a team.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl team users add <span class="o">[</span>team<span class="o">]</span> <span class="o">[</span>users<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -3018,8 +3120,7 @@ team create --name private --display_name <span class="s2">&quot;My New Private 
 <h4>mmctl team users remove<a class="headerlink" href="#mmctl-team-users-remove" title="Permalink to this headline">¶</a></h4>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Remove some users from a team.</p>
-</div></blockquote>
+<div>Remove some users from a team.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl team users remove <span class="o">[</span>team<span class="o">]</span> <span class="o">[</span>users<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -3045,11 +3146,12 @@ team create --name private --display_name <span class="s2">&quot;My New Private 
 <div class="section" id="mmctl-token">
 <h2>mmctl token<a class="headerlink" href="#mmctl-token" title="Permalink to this headline">¶</a></h2>
 <p>Management of users’ access tokens.</p>
-<dl class="simple">
-<dt>Child Commands</dt><dd><ul class="simple">
-<li><p><a class="reference internal" href="#mmctl-token-generate">mmctl token generate</a> - Generate token for a user</p></li>
-<li><p><a class="reference internal" href="#mmctl-token-list">mmctl token list</a> - List users’ tokens</p></li>
-<li><p><a class="reference internal" href="#mmctl-token-revoke">mmctl token revoke</a> - Revoke tokens for a user</p></li>
+<dl class="docutils">
+<dt>Child Commands</dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="#mmctl-token-generate">mmctl token generate</a> - Generate token for a user</li>
+<li><a class="reference internal" href="#mmctl-token-list">mmctl token list</a> - List users’ tokens</li>
+<li><a class="reference internal" href="#mmctl-token-revoke">mmctl token revoke</a> - Revoke tokens for a user</li>
 </ul>
 </dd>
 </dl>
@@ -3061,8 +3163,7 @@ team create --name private --display_name <span class="s2">&quot;My New Private 
 <h3>mmctl token generate<a class="headerlink" href="#mmctl-token-generate" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Generate token for a user.</p>
-</div></blockquote>
+<div>Generate token for a user.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl token generate <span class="o">[</span>user<span class="o">]</span> <span class="o">[</span>description<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -3087,8 +3188,7 @@ team create --name private --display_name <span class="s2">&quot;My New Private 
 <h3>mmctl token list<a class="headerlink" href="#mmctl-token-list" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>List the tokens belonging to a user.</p>
-</div></blockquote>
+<div>List the tokens belonging to a user.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl token list <span class="o">[</span>user<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -3118,8 +3218,7 @@ team create --name private --display_name <span class="s2">&quot;My New Private 
 <h3>mmctl token revoke<a class="headerlink" href="#mmctl-token-revoke" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Revoke tokens for a user.</p>
-</div></blockquote>
+<div>Revoke tokens for a user.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl token revoke <span class="o">[</span>token-ids<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -3144,19 +3243,20 @@ team create --name private --display_name <span class="s2">&quot;My New Private 
 <div class="section" id="mmctl-user">
 <h2>mmctl user<a class="headerlink" href="#mmctl-user" title="Permalink to this headline">¶</a></h2>
 <p>Management of users.</p>
-<dl class="simple">
-<dt>Child Commands</dt><dd><ul class="simple">
-<li><p><a class="reference internal" href="#mmctl-user-activate">mmctl user activate</a> - Activate a user</p></li>
-<li><p><a class="reference internal" href="#mmctl-user-create">mmctl user create</a> - Create user</p></li>
-<li><p><a class="reference internal" href="#mmctl-user-deactivate">mmctl user deactivate</a> - Deactivate user</p></li>
-<li><p><a class="reference internal" href="#mmctl-user-delete">mmctl user delete</a> - Delete users</p></li>
-<li><p><a class="reference internal" href="#mmctl-user-deleteall">mmctl user deleteall</a> - Delete all users and all posts (local command only)</p></li>
-<li><p><a class="reference internal" href="#mmctl-user-email">mmctl user email</a> - Set user email</p></li>
-<li><p><a class="reference internal" href="#mmctl-user-invite">mmctl user invite</a> - Invite user</p></li>
-<li><p><a class="reference internal" href="#mmctl-user-list">mmctl user list</a> - List users</p></li>
-<li><p><a class="reference internal" href="#mmctl-user-reset-password">mmctl user reset_password</a> - Reset user password</p></li>
-<li><p><a class="reference internal" href="#mmctl-user-resetmfa">mmctl user resetmfa</a> - Reset a user’s MFA token</p></li>
-<li><p><a class="reference internal" href="#mmctl-user-search">mmctl user search</a> - Search for a user</p></li>
+<dl class="docutils">
+<dt>Child Commands</dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="#mmctl-user-activate">mmctl user activate</a> - Activate a user</li>
+<li><a class="reference internal" href="#mmctl-user-create">mmctl user create</a> - Create user</li>
+<li><a class="reference internal" href="#mmctl-user-deactivate">mmctl user deactivate</a> - Deactivate user</li>
+<li><a class="reference internal" href="#mmctl-user-delete">mmctl user delete</a> - Delete users</li>
+<li><a class="reference internal" href="#mmctl-user-deleteall">mmctl user deleteall</a> - Delete all users and all posts (local command only)</li>
+<li><a class="reference internal" href="#mmctl-user-email">mmctl user email</a> - Set user email</li>
+<li><a class="reference internal" href="#mmctl-user-invite">mmctl user invite</a> - Invite user</li>
+<li><a class="reference internal" href="#mmctl-user-list">mmctl user list</a> - List users</li>
+<li><a class="reference internal" href="#mmctl-user-reset-password">mmctl user reset_password</a> - Reset user password</li>
+<li><a class="reference internal" href="#mmctl-user-resetmfa">mmctl user resetmfa</a> - Reset a user’s MFA token</li>
+<li><a class="reference internal" href="#mmctl-user-search">mmctl user search</a> - Search for a user</li>
 </ul>
 </dd>
 </dl>
@@ -3168,8 +3268,7 @@ team create --name private --display_name <span class="s2">&quot;My New Private 
 <h3>mmctl user activate<a class="headerlink" href="#mmctl-user-activate" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Activate users that have been deactivated.</p>
-</div></blockquote>
+<div>Activate users that have been deactivated.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl user activate <span class="o">[</span>emails, usernames, userIds<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -3195,8 +3294,7 @@ user activate username
 <h3>mmctl user create<a class="headerlink" href="#mmctl-user-create" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Create a user.</p>
-</div></blockquote>
+<div>Create a user.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl user create <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -3229,8 +3327,7 @@ user activate username
 <h3>mmctl user deactivate<a class="headerlink" href="#mmctl-user-deactivate" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Deactivate users. Deactivated users are immediately logged out of all sessions and are unable to log back in.</p>
-</div></blockquote>
+<div>Deactivate users. Deactivated users are immediately logged out of all sessions and are unable to log back in.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl user deactivate <span class="o">[</span>emails, usernames, userIds<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -3256,8 +3353,7 @@ user deactivate username
 <h3>mmctl user delete<a class="headerlink" href="#mmctl-user-delete" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Permanently delete some users. Permanently deletes one or multiple users along with all related information including posts from the database.</p>
-</div></blockquote>
+<div>Permanently delete one or multiple users along with all related information including posts from the database.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl user delete <span class="o">[</span>users<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -3312,8 +3408,7 @@ user deactivate username
 <h3>mmctl user email<a class="headerlink" href="#mmctl-user-email" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Change the email address associated with a user.</p>
-</div></blockquote>
+<div>Change the email address associated with a user.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl user email <span class="o">[</span>user<span class="o">]</span> <span class="o">[</span>new email<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -3339,8 +3434,7 @@ user activate username
 <h3>mmctl user invite<a class="headerlink" href="#mmctl-user-invite" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Send an email invite to a user, to join a team. You can invite a user to multiple teams by listing them. You can specify teams by name or ID.</p>
-</div></blockquote>
+<div>Send an email invite to a user, to join a team. You can invite a user to multiple teams by listing them. You can specify teams by name or ID.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl user invite <span class="o">[</span>email<span class="o">]</span> <span class="o">[</span>teams<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -3366,8 +3460,7 @@ user invite user@example.com myteam1 myteam2
 <h3>mmctl user list<a class="headerlink" href="#mmctl-user-list" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>List all users.</p>
-</div></blockquote>
+<div>List all users.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl user list <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -3395,8 +3488,7 @@ user invite user@example.com myteam1 myteam2
 <h3>mmctl user reset_password<a class="headerlink" href="#mmctl-user-reset-password" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Send users an email to reset their password.</p>
-</div></blockquote>
+<div>Send users an email to reset their password.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl user reset_password <span class="o">[</span>users<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -3421,8 +3513,7 @@ user invite user@example.com myteam1 myteam2
 <h3>mmctl user resetmfa<a class="headerlink" href="#mmctl-user-resetmfa" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Turn off multi-factor authentication for a user. If MFA enforcement is enabled, the user will be forced to re-enable MFA as soon as they login.</p>
-</div></blockquote>
+<div>Turn off multi-factor authentication for a user. If MFA enforcement is enabled, the user will be forced to re-enable MFA as soon as they login.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl user resetmfa <span class="o">[</span>users<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -3447,8 +3538,7 @@ user invite user@example.com myteam1 myteam2
 <h3>mmctl user search<a class="headerlink" href="#mmctl-user-search" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Search for users based on username, email, or user ID.</p>
-</div></blockquote>
+<div>Search for users based on username, email, or user ID.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl user search <span class="o">[</span>users<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -3474,8 +3564,7 @@ user invite user@example.com myteam1 myteam2
 <h2>mmctl version<a class="headerlink" href="#mmctl-version" title="Permalink to this headline">¶</a></h2>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Prints the version of mmctl.</p>
-</div></blockquote>
+<div>Print the version of mmctl.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl version <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -3495,16 +3584,17 @@ user invite user@example.com myteam1 myteam2
 <div class="section" id="mmctl-webhook">
 <h2>mmctl webhook<a class="headerlink" href="#mmctl-webhook" title="Permalink to this headline">¶</a></h2>
 <p><strong>Description</strong></p>
-<p>Management of webhooks.</p>
-<dl class="simple">
-<dt>Child Commands</dt><dd><ul class="simple">
-<li><p><a class="reference internal" href="#mmctl-webhook-create-incoming">mmctl webhook create-incoming</a> - Create an incoming webhook</p></li>
-<li><p><a class="reference internal" href="#mmctl-webhook-create-outgoing">mmctl webhook create-outgoing</a> - Create an outgoing webhook</p></li>
-<li><p><a class="reference internal" href="#mmctl-webhook-delete">mmctl webhook delete</a> - Delete webhooks</p></li>
-<li><p><a class="reference internal" href="#mmctl-webhook-list">mmctl webhook list</a> - List webhooks</p></li>
-<li><p><a class="reference internal" href="#mmctl-webhook-modify-incoming">mmctl webhook modify-incoming</a> - Modify an incoming webhook</p></li>
-<li><p><a class="reference internal" href="#mmctl-webhook-modify-outgoing">mmctl webhook modify-outgoing</a> - Modify an outgoing webhook</p></li>
-<li><p><a class="reference internal" href="#mmctl-webhook-show">mmctl webhook show</a> - Show a webhook</p></li>
+<p>Manage webhooks.</p>
+<dl class="docutils">
+<dt>Child Commands</dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="#mmctl-webhook-create-incoming">mmctl webhook create-incoming</a> - Create an incoming webhook</li>
+<li><a class="reference internal" href="#mmctl-webhook-create-outgoing">mmctl webhook create-outgoing</a> - Create an outgoing webhook</li>
+<li><a class="reference internal" href="#mmctl-webhook-delete">mmctl webhook delete</a> - Delete webhooks</li>
+<li><a class="reference internal" href="#mmctl-webhook-list">mmctl webhook list</a> - List webhooks</li>
+<li><a class="reference internal" href="#mmctl-webhook-modify-incoming">mmctl webhook modify-incoming</a> - Modify an incoming webhook</li>
+<li><a class="reference internal" href="#mmctl-webhook-modify-outgoing">mmctl webhook modify-outgoing</a> - Modify an outgoing webhook</li>
+<li><a class="reference internal" href="#mmctl-webhook-show">mmctl webhook show</a> - Show a webhook</li>
 </ul>
 </dd>
 </dl>
@@ -3734,8 +3824,7 @@ user invite user@example.com myteam1 myteam2
 <h2>mmctl websocket<a class="headerlink" href="#mmctl-websocket" title="Permalink to this headline">¶</a></h2>
 <p><strong>Description</strong></p>
 <blockquote>
-<div><p>Display websocket in a human-readable format.</p>
-</div></blockquote>
+<div>Display websocket in a human-readable format.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl websocket <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
@@ -3759,29 +3848,29 @@ user invite user@example.com myteam1 myteam2
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="scripts.html" class="btn btn-neutral float-right" title="Scripts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="command-line-tools.html" class="btn btn-neutral float-left" title="Command Line Tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="scripts.html" class="btn btn-neutral float-right" title="Scripts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="command-line-tools.html" class="btn btn-neutral" title="Command Line Tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2015-2020 Mattermost.
+        &copy; Copyright 2015-2020 Mattermost
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -3815,16 +3904,27 @@ user invite user@example.com myteam1 myteam2
 </div>
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
 	<header>
 	<div class="header__container">
 		<div class="search__icon">

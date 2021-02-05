@@ -2,46 +2,34 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installing PostgreSQL Database &mdash; Mattermost 5.30 documentation</title>
+  <title>Installing PostgreSQL Database &mdash; Mattermost 5.31 documentation</title>
   
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
-
   
   
 
   
-    <link rel="canonical" href="https://docs.mattermost.com/install/install-rhel-7-postgresql.html" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
   
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/myscript.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-    
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../search.html" />
 	<!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -51,16 +39,21 @@
 	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
 	<!-- End Google Tag Manager -->
 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -74,7 +67,7 @@
             
             
               <div class="version">
-                5.30
+                5.31
               </div>
             
           
@@ -91,7 +84,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -111,7 +103,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -157,137 +148,123 @@
   <div class="section" id="installing-postgresql-database">
 <span id="install-rhel-7-postgresql"></span><h1>Installing PostgreSQL Database<a class="headerlink" href="#installing-postgresql-database" title="Permalink to this headline">¶</a></h1>
 <ol class="arabic simple">
-<li><p>Log in to the server that will host the database, and open a terminal window.</p></li>
-<li><p>Download the PostgreSQL 9.4 Yum repository.</p></li>
+<li>Log in to the server that will host the database, and open a terminal window.</li>
+<li>Download the PostgreSQL 9.4 Yum repository.</li>
 </ol>
 <blockquote>
-<div><dl class="simple">
-<dt>For RHEL 7</dt><dd><p><code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">-O</span> <span class="pre">https://download.postgresql.org/pub/repos/yum/9.4/redhat/rhel-7-x86_64/pgdg-redhat94-9.4-3.noarch.rpm</span></code></p>
-</dd>
-<dt>For CentOS 7</dt><dd><p><code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">-O</span> <span class="pre">https://download.postgresql.org/pub/repos/yum/9.4/redhat/rhel-7-x86_64/pgdg-centos94-9.4-3.noarch.rpm</span></code></p>
-</dd>
-<dt>For Scientific Linux</dt><dd><p><code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">-O</span> <span class="pre">https://download.postgresql.org/pub/repos/yum/9.4/redhat/rhel-7-x86_64/pgdg-sl94-9.4-3.noarch.rpm</span></code></p>
-</dd>
-<dt>For Oracle</dt><dd><p><code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">-O</span> <span class="pre">https://download.postgresql.org/pub/repos/yum/9.4/redhat/rhel-7-x86_64/pgdg-oraclelinux-9.4-3.noarch.rpm</span></code></p>
-</dd>
+<div><dl class="docutils">
+<dt>For RHEL 7</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">-O</span> <span class="pre">https://download.postgresql.org/pub/repos/yum/9.4/redhat/rhel-7-x86_64/pgdg-redhat94-9.4-3.noarch.rpm</span></code></dd>
+<dt>For CentOS 7</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">-O</span> <span class="pre">https://download.postgresql.org/pub/repos/yum/9.4/redhat/rhel-7-x86_64/pgdg-centos94-9.4-3.noarch.rpm</span></code></dd>
+<dt>For Scientific Linux</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">-O</span> <span class="pre">https://download.postgresql.org/pub/repos/yum/9.4/redhat/rhel-7-x86_64/pgdg-sl94-9.4-3.noarch.rpm</span></code></dd>
+<dt>For Oracle</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">-O</span> <span class="pre">https://download.postgresql.org/pub/repos/yum/9.4/redhat/rhel-7-x86_64/pgdg-oraclelinux-9.4-3.noarch.rpm</span></code></dd>
 </dl>
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p>Install the Yum repository from the file that you downloaded.</p></li>
+<li>Install the Yum repository from the file that you downloaded.</li>
 </ol>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">yum</span> <span class="pre">localinstall</span> <span class="pre">pgdg-*-9.4-3.noarch.rpm</span></code></p>
-</div></blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">yum</span> <span class="pre">localinstall</span> <span class="pre">pgdg-*-9.4-3.noarch.rpm</span></code></div></blockquote>
 <ol class="arabic simple" start="4">
-<li><p>Install PostgreSQL.</p></li>
+<li>Install PostgreSQL.</li>
 </ol>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">yum</span> <span class="pre">install</span> <span class="pre">postgresql94-server</span> <span class="pre">postgresql94-contrib</span></code></p>
-</div></blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">yum</span> <span class="pre">install</span> <span class="pre">postgresql94-server</span> <span class="pre">postgresql94-contrib</span></code></div></blockquote>
 <ol class="arabic simple" start="5">
-<li><p>Initialize the database.</p></li>
+<li>Initialize the database.</li>
 </ol>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">/usr/pgsql-9.4/bin/postgresql94-setup</span> <span class="pre">initdb</span></code></p>
-</div></blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">/usr/pgsql-9.4/bin/postgresql94-setup</span> <span class="pre">initdb</span></code></div></blockquote>
 <ol class="arabic simple" start="6">
-<li><p>Set PostgreSQL to start on boot.</p></li>
+<li>Set PostgreSQL to start on boot.</li>
 </ol>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">enable</span> <span class="pre">postgresql-9.4</span></code></p>
-</div></blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">enable</span> <span class="pre">postgresql-9.4</span></code></div></blockquote>
 <ol class="arabic simple" start="7">
-<li><p>Start the PostgreSQL server.</p></li>
+<li>Start the PostgreSQL server.</li>
 </ol>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">start</span> <span class="pre">postgresql-9.4</span></code></p>
-</div></blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">start</span> <span class="pre">postgresql-9.4</span></code></div></blockquote>
 <ol class="arabic simple" start="8">
-<li><p>Switch to the <em>postgres</em> Linux user account that was created during the installation.</p></li>
+<li>Switch to the <em>postgres</em> Linux user account that was created during the installation.</li>
 </ol>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">-iu</span> <span class="pre">postgres</span></code></p>
-</div></blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">-iu</span> <span class="pre">postgres</span></code></div></blockquote>
 <ol class="arabic simple" start="9">
-<li><p>Start the PostgreSQL interactive terminal.</p></li>
+<li>Start the PostgreSQL interactive terminal.</li>
 </ol>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">psql</span></code></p>
-</div></blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">psql</span></code></div></blockquote>
 <ol class="arabic simple" start="10">
-<li><p>Create the Mattermost database.</p></li>
+<li>Create the Mattermost database.</li>
 </ol>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">postgres=#</span> <span class="pre">CREATE</span> <span class="pre">DATABASE</span> <span class="pre">mattermost</span> <span class="pre">WITH</span> <span class="pre">ENCODING</span> <span class="pre">'UTF8'</span> <span class="pre">LC_COLLATE='en_US.UTF-8'</span> <span class="pre">LC_CTYPE='en_US.UTF-8'</span> <span class="pre">TEMPLATE=template0;</span></code></p>
-</div></blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">postgres=#</span> <span class="pre">CREATE</span> <span class="pre">DATABASE</span> <span class="pre">mattermost</span> <span class="pre">WITH</span> <span class="pre">ENCODING</span> <span class="pre">'UTF8'</span> <span class="pre">LC_COLLATE='en_US.UTF-8'</span> <span class="pre">LC_CTYPE='en_US.UTF-8'</span> <span class="pre">TEMPLATE=template0;</span></code></div></blockquote>
 <ol class="arabic simple" start="11">
-<li><p>Create the Mattermost user ‘mmuser’.</p></li>
+<li>Create the Mattermost user ‘mmuser’.</li>
 </ol>
 <blockquote>
 <div><p><code class="docutils literal notranslate"><span class="pre">postgres=#</span> <span class="pre">CREATE</span> <span class="pre">USER</span> <span class="pre">mmuser</span> <span class="pre">WITH</span> <span class="pre">PASSWORD</span> <span class="pre">'mmuser-password';</span></code></p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Use a password that is more secure than ‘mmuser-password’.</p>
+<p class="first admonition-title">Note</p>
+<p class="last">Use a password that is more secure than ‘mmuser-password’.</p>
 </div>
 </div></blockquote>
 <ol class="arabic simple" start="12">
-<li><p>Grant the user access to the Mattermost database.</p></li>
+<li>Grant the user access to the Mattermost database.</li>
 </ol>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">postgres=#</span> <span class="pre">GRANT</span> <span class="pre">ALL</span> <span class="pre">PRIVILEGES</span> <span class="pre">ON</span> <span class="pre">DATABASE</span> <span class="pre">mattermost</span> <span class="pre">to</span> <span class="pre">mmuser;</span></code></p>
-</div></blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">postgres=#</span> <span class="pre">GRANT</span> <span class="pre">ALL</span> <span class="pre">PRIVILEGES</span> <span class="pre">ON</span> <span class="pre">DATABASE</span> <span class="pre">mattermost</span> <span class="pre">to</span> <span class="pre">mmuser;</span></code></div></blockquote>
 <ol class="arabic simple" start="13">
-<li><p>Exit the PostgreSQL interactive terminal.</p></li>
+<li>Exit the PostgreSQL interactive terminal.</li>
 </ol>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">postgres=#</span> <span class="pre">\q</span></code></p>
-</div></blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">postgres=#</span> <span class="pre">\q</span></code></div></blockquote>
 <ol class="arabic simple" start="14">
-<li><p>Log out of the <em>postgres</em> account.</p></li>
+<li>Log out of the <em>postgres</em> account.</li>
 </ol>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">exit</span></code></p>
-</div></blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">exit</span></code></div></blockquote>
 <ol class="arabic simple" start="15">
-<li><p>(Optional) If you use a different server for your database and the Mattermost app server, you may allow PostgreSQL to listen on all assigned IP Addresses. To do so, open <code class="docutils literal notranslate"><span class="pre">/etc/postgresql/9.5/main/postgresql.conf</span></code> as root in a text editor. As a best practice, ensure that only the Mattermost server is able to connect to the PostgreSQL port using a firewall.</p></li>
+<li>(Optional) If you use a different server for your database and the Mattermost app server, you may allow PostgreSQL to listen on all assigned IP Addresses. To do so, open <code class="docutils literal notranslate"><span class="pre">/etc/postgresql/9.5/main/postgresql.conf</span></code> as root in a text editor. As a best practice, ensure that only the Mattermost server is able to connect to the PostgreSQL port using a firewall.</li>
 </ol>
 <blockquote>
 <div><ol class="loweralpha simple">
-<li><p>Open <code class="docutils literal notranslate"><span class="pre">/var/lib/pgsql/9.4/data/postgresql.conf</span></code> as root in a text editor.</p></li>
-<li><p>Find the following line:</p></li>
+<li>Open <code class="docutils literal notranslate"><span class="pre">/var/lib/pgsql/9.4/data/postgresql.conf</span></code> as root in a text editor.</li>
+<li>Find the following line:</li>
 </ol>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">#listen_addresses</span> <span class="pre">=</span> <span class="pre">'localhost'</span></code></p>
-</div></blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">#listen_addresses</span> <span class="pre">=</span> <span class="pre">'localhost'</span></code></div></blockquote>
 <ol class="loweralpha simple" start="3">
-<li><p>Uncomment the line and change <code class="docutils literal notranslate"><span class="pre">localhost</span></code> to <code class="docutils literal notranslate"><span class="pre">*</span></code>:</p></li>
+<li>Uncomment the line and change <code class="docutils literal notranslate"><span class="pre">localhost</span></code> to <code class="docutils literal notranslate"><span class="pre">*</span></code>:</li>
 </ol>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">listen_addresses</span> <span class="pre">=</span> <span class="pre">'*'</span></code></p>
-</div></blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">listen_addresses</span> <span class="pre">=</span> <span class="pre">'*'</span></code></div></blockquote>
 <ol class="loweralpha simple" start="4">
-<li><p>Restart PostgreSQL for the change to take effect:</p></li>
+<li>Restart PostgreSQL for the change to take effect:</li>
 </ol>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">restart</span> <span class="pre">postgresql-9.4</span></code></p>
-</div></blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">restart</span> <span class="pre">postgresql-9.4</span></code></div></blockquote>
 </div></blockquote>
 <ol class="arabic simple" start="16">
-<li><p>Modify the file <code class="docutils literal notranslate"><span class="pre">pg_hba.conf</span></code> to allow the Mattermost server to communicate with the database.</p></li>
+<li>Modify the file <code class="docutils literal notranslate"><span class="pre">pg_hba.conf</span></code> to allow the Mattermost server to communicate with the database.</li>
 </ol>
 <blockquote>
 <div><p><strong>If the Mattermost server and the database are on the same machine</strong>:</p>
 <blockquote>
 <div><ol class="loweralpha simple">
-<li><p>Open <code class="docutils literal notranslate"><span class="pre">/var/lib/pgsql/9.4/data/pg_hba.conf</span></code> as root in a text editor.</p></li>
-<li><p>Find the following lines:</p></li>
+<li>Open <code class="docutils literal notranslate"><span class="pre">/var/lib/pgsql/9.4/data/pg_hba.conf</span></code> as root in a text editor.</li>
+<li>Find the following lines:</li>
 </ol>
 <blockquote>
 <div><p><code class="docutils literal notranslate"><span class="pre">local</span>&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">peer</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">host</span>&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">::1/128</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">ident</span></code></p>
 </div></blockquote>
 <ol class="loweralpha simple" start="3">
-<li><p>Change <code class="docutils literal notranslate"><span class="pre">peer</span></code> and <code class="docutils literal notranslate"><span class="pre">ident</span></code> to <code class="docutils literal notranslate"><span class="pre">trust</span></code>:</p></li>
+<li>Change <code class="docutils literal notranslate"><span class="pre">peer</span></code> and <code class="docutils literal notranslate"><span class="pre">ident</span></code> to <code class="docutils literal notranslate"><span class="pre">trust</span></code>:</li>
 </ol>
 <blockquote>
 <div><p><code class="docutils literal notranslate"><span class="pre">local</span>&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">all</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">trust</span></code></p>
@@ -297,38 +274,35 @@
 <p><strong>If the Mattermost server and the database are on different machines</strong>:</p>
 <blockquote>
 <div><ol class="loweralpha simple">
-<li><p>Open <code class="docutils literal notranslate"><span class="pre">/var/lib/pgsql/9.4/data/pg_hba.conf</span></code> as root in a text editor.</p></li>
-<li><p>Add the following line to the end of the file, where <em>{mattermost-server-IP}</em> is the IP address of the machine that contains the Mattermost server.</p></li>
+<li>Open <code class="docutils literal notranslate"><span class="pre">/var/lib/pgsql/9.4/data/pg_hba.conf</span></code> as root in a text editor.</li>
+<li>Add the following line to the end of the file, where <em>{mattermost-server-IP}</em> is the IP address of the machine that contains the Mattermost server.</li>
 </ol>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">host</span> <span class="pre">all</span> <span class="pre">all</span> <span class="pre">{mattermost-server-IP}/32</span> <span class="pre">md5</span></code></p>
-</div></blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">host</span> <span class="pre">all</span> <span class="pre">all</span> <span class="pre">{mattermost-server-IP}/32</span> <span class="pre">md5</span></code></div></blockquote>
 </div></blockquote>
 </div></blockquote>
 <ol class="arabic simple" start="17">
-<li><p>Reload PostgreSQL:</p></li>
+<li>Reload PostgreSQL:</li>
 </ol>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">reload</span> <span class="pre">postgresql-9.4</span></code></p>
-</div></blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">reload</span> <span class="pre">postgresql-9.4</span></code></div></blockquote>
 <ol class="arabic simple" start="18">
-<li><p>Verify that you can connect with the user <em>mmuser</em>.</p></li>
+<li>Verify that you can connect with the user <em>mmuser</em>.</li>
 </ol>
 <blockquote>
 <div><ol class="loweralpha simple">
-<li><p>If the Mattermost server and the database are on the same machine, use the following command:</p></li>
+<li>If the Mattermost server and the database are on the same machine, use the following command:</li>
 </ol>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">psql</span> <span class="pre">--dbname=mattermost</span> <span class="pre">--username=mmuser</span> <span class="pre">--password</span></code></p>
-</div></blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">psql</span> <span class="pre">--dbname=mattermost</span> <span class="pre">--username=mmuser</span> <span class="pre">--password</span></code></div></blockquote>
 <ol class="loweralpha simple" start="2">
-<li><p>If the Mattermost server is on a different machine, log into that machine and use the following command:</p></li>
+<li>If the Mattermost server is on a different machine, log into that machine and use the following command:</li>
 </ol>
 <blockquote>
 <div><p><code class="docutils literal notranslate"><span class="pre">psql</span> <span class="pre">--host={postgres-server-IP}</span> <span class="pre">--dbname=mattermost</span> <span class="pre">--username=mmuser</span> <span class="pre">--password</span></code></p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>You might have to install the PostgreSQL client software to use the command.</p>
+<p class="first admonition-title">Note</p>
+<p class="last">You might have to install the PostgreSQL client software to use the command.</p>
 </div>
 </div></blockquote>
 <p>The PostgreSQL interactive terminal starts. To exit the PostgreSQL interactive terminal, type <code class="docutils literal notranslate"><span class="pre">\q</span></code> and press <strong>Enter</strong>.</p>
@@ -341,25 +315,20 @@
            
           </div>
           <footer>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2015-2020 Mattermost.
+        &copy; Copyright 2015-2020 Mattermost
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -393,16 +362,27 @@
 </div>
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
 	<header>
 	<div class="header__container">
 		<div class="search__icon">

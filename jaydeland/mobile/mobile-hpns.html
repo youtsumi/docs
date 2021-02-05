@@ -2,46 +2,34 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Hosted Push Notification Service &mdash; Mattermost 5.30 documentation</title>
+  <title>Hosted Push Notification Service &mdash; Mattermost 5.31 documentation</title>
   
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
-
   
   
 
   
-    <link rel="canonical" href="https://docs.mattermost.com/mobile/mobile-hpns.html" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
   
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/myscript.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-    
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Mobile Apps FAQ" href="mobile-faq.html" />
     <link rel="prev" title="Mobile Applications Guide" href="mobile-overview.html" />
@@ -53,16 +41,21 @@
 	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
 	<!-- End Google Tag Manager -->
 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -76,7 +69,7 @@
             
             
               <div class="version">
-                5.30
+                5.31
               </div>
             
           
@@ -93,7 +86,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -106,11 +98,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-collaboration">Incident Collaboration</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="mobile-overview.html">Mobile Applications Guide</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mobile-appconfig.html">AppConfig for EMM Solutions with Mattermost Mobile Apps</a></li>
@@ -141,7 +134,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -194,15 +186,15 @@
 <p>Our Hosted Push Notification Service offers:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Access to a publicly-hosted Mattermost Push Notification Service (MPNS) offering an explicit <a class="reference external" href="https://mattermost.com/data-processing-addendum/">privacy policy</a> where the contents of unencrypted messages are not examined or stored</p></li>
-<li><p>Encrypted TLS connections between HPNS and Apple Push Notification Services, HPNS and Google’s Firebase Cloud Messaging service, and HPNS and your Mattermost server</p></li>
-<li><p>Production-level uptime expectation</p></li>
+<li>Access to a publicly-hosted Mattermost Push Notification Service (MPNS) offering an explicit <a class="reference external" href="https://mattermost.com/data-processing-addendum/">privacy policy</a> where the contents of unencrypted messages are not examined or stored</li>
+<li>Encrypted TLS connections between HPNS and Apple Push Notification Services, HPNS and Google’s Firebase Cloud Messaging service, and HPNS and your Mattermost server</li>
+<li>Production-level uptime expectation</li>
 </ul>
 </div></blockquote>
 <p>After purchasing a subscription to Mattermost E10 or higher from Mattermost, Inc. follow the instructions below to set up and test your system.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Both TPNS and HPNS only work with the Mattermost Apple App Store and Google Play apps. If you have compiled the apps yourselves, you must also host your own Mattermost push proxy server. See our FAQ on <a class="reference internal" href="mobile-faq.html#push-faq"><span class="std std-ref">how push notifications work</span></a> for more details. Our push proxy server is <a class="reference external" href="https://github.com/mattermost/mattermost-push-proxy">available on Github.</a></p>
+<p class="first admonition-title">Note</p>
+<p class="last">Both TPNS and HPNS only work with the Mattermost Apple App Store and Google Play apps. If you have compiled the apps yourselves, you must also host your own Mattermost push proxy server. See our FAQ on <a class="reference internal" href="mobile-faq.html#push-faq"><span class="std std-ref">how push notifications work</span></a> for more details. Our push proxy server is <a class="reference external" href="https://github.com/mattermost/mattermost-push-proxy">available on Github.</a></p>
 </div>
 <p>If you use HPNS you need to ensure that the push proxy can be reached on port 443 from the Mattermost server, for TPNS it is port 80. If you host your own proxy server the default port is 8086.</p>
 <p>Mattermost, Inc. also offers a free basic hosted service for testing setups called the Test Push Notification Service (TPNS). It does not offer a production-level uptime service level agreements (SLAs).</p>
@@ -211,20 +203,20 @@
 <h2>Setting up HPNS push notifications in Enterprise Edition<a class="headerlink" href="#setting-up-hpns-push-notifications-in-enterprise-edition" title="Permalink to this headline">¶</a></h2>
 <p>Follow these steps to set up HPNS:</p>
 <ol class="arabic simple">
-<li><p>Follow the instructions to <a class="reference external" href="https://docs.mattermost.com/install/ee-install.html">install or upgrade to Enterprise Edition</a></p></li>
-<li><p>Go to <strong>System Console</strong> &gt; <strong>Notifications</strong> &gt; <strong>Mobile Push</strong> &gt; <strong>Send Push Notifications</strong> in prior versions or <strong>System Console &gt; Environment &gt; Push Notification Server</strong> in versions after 5.12</p></li>
-<li><p>Select “Use encrypted, production-quality HPNS connection to iOS and Android apps” (this option appears only in Enterprise Edition)</p></li>
+<li>Follow the instructions to <a class="reference external" href="https://docs.mattermost.com/install/ee-install.html">install or upgrade to Enterprise Edition</a></li>
+<li>Go to <strong>System Console</strong> &gt; <strong>Notifications</strong> &gt; <strong>Mobile Push</strong> &gt; <strong>Send Push Notifications</strong> in prior versions or <strong>System Console &gt; Environment &gt; Push Notification Server</strong> in versions after 5.12</li>
+<li>Select “Use encrypted, production-quality HPNS connection to iOS and Android apps” (this option appears only in Enterprise Edition)</li>
 </ol>
 <img alt="../_images/mobile_hpns.png" src="../_images/mobile_hpns.png" />
 <ol class="arabic simple" start="4">
-<li><p>Check the box “I understand and accept the Mattermost Hosted Push Notification Service Terms of Service and Privacy Policy” after reading the documents referenced</p></li>
+<li>Check the box “I understand and accept the Mattermost Hosted Push Notification Service Terms of Service and Privacy Policy” after reading the documents referenced</li>
 </ol>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The default <strong>Push Notification Server</strong> address is <a class="reference external" href="https://push.mattermost.com">https://push.mattermost.com</a> and the server is hosted inside the United States. Mattermost also offers a push notification server hosted in Germany. If you wish to use that server, please update the <strong>Push Notification Server</strong> address to <a class="reference external" href="https://hpns-de.mattermost.com/">https://hpns-de.mattermost.com/</a>.</p>
+<p class="first admonition-title">Note</p>
+<p class="last">The default <strong>Push Notification Server</strong> address is <a class="reference external" href="https://push.mattermost.com">https://push.mattermost.com</a> and the server is hosted inside the United States. Mattermost also offers a push notification server hosted in Germany. If you wish to use that server, please update the <strong>Push Notification Server</strong> address to <a class="reference external" href="https://hpns-de.mattermost.com/">https://hpns-de.mattermost.com/</a>.</p>
 </div>
 <ol class="arabic simple" start="5">
-<li><p>Click <strong>Save</strong></p></li>
+<li>Click <strong>Save</strong></li>
 </ol>
 <p>After setup, <a class="reference internal" href="mobile-testing-notifications.html"><span class="doc">test push notifications</span></a> to confirm they are working.</p>
 </div>
@@ -235,29 +227,29 @@
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="mobile-faq.html" class="btn btn-neutral float-right" title="Mobile Apps FAQ" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="mobile-overview.html" class="btn btn-neutral float-left" title="Mobile Applications Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="mobile-faq.html" class="btn btn-neutral float-right" title="Mobile Apps FAQ" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mobile-overview.html" class="btn btn-neutral" title="Mobile Applications Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2015-2020 Mattermost.
+        &copy; Copyright 2015-2020 Mattermost
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -291,16 +283,27 @@
 </div>
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
 	<header>
 	<div class="header__container">
 		<div class="search__icon">

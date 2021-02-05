@@ -2,46 +2,34 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Upgrading to version 2.0 &mdash; Mattermost 5.30 documentation</title>
+  <title>Upgrading to version 2.0 &mdash; Mattermost 5.31 documentation</title>
   
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
-
   
   
 
   
-    <link rel="canonical" href="https://docs.mattermost.com/administration/upgrading-to-2.0.html" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
   
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/myscript.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-    
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../search.html" />
 	<!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -51,16 +39,21 @@
 	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
 	<!-- End Google Tag Manager -->
 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -74,7 +67,7 @@
             
             
               <div class="version">
-                5.30
+                5.31
               </div>
             
           
@@ -91,7 +84,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -111,7 +103,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -159,103 +150,99 @@
 <p>To upgrade an early edition of Mattermost to the latest edition, you must first upgrade in a specific sequence until you get to version 2.0.0. After that, you must upgrade to version 3.0.3, and from there you can upgrade directly to the latest Mattermost version.</p>
 <p>Read these instructions carefully from start to finish. Make sure that you understand each step before starting the upgrade. If you have questions or concerns, you can ask on the Mattermost forum at <a class="reference external" href="https://forum.mattermost.org/">https://forum.mattermost.org/</a>.</p>
 <p>You should gather the following information before starting the upgrade:</p>
-<dl class="simple">
-<dt>Existing install directory - <em>{install-path}</em></dt><dd><p>If you don’t know where Mattermost Server is installed, use the <code class="docutils literal notranslate"><span class="pre">whereis</span> <span class="pre">platform</span></code> command. The output should be similar to <em>/opt/mattermost/bin/platform</em>. The install directory is everything before the last occurrence of the string <em>/mattermost</em>. In this example, the <em>{install-path}</em> is <code class="docutils literal notranslate"><span class="pre">/opt</span></code>.</p>
-</dd>
-<dt>Location of your local storage directory</dt><dd><p>The local storage directory contains all the files that users have attached to their messages. If you don’t know its location, open the System Console and go to <strong>Files &gt; Storage</strong> and read the value in <strong>Local Storage Directory</strong>. Relative paths are relative to the <code class="docutils literal notranslate"><span class="pre">mattermost</span></code> directory. For example, if the local storage directory is <code class="docutils literal notranslate"><span class="pre">./data/</span></code> then the absolute path is <code class="docutils literal notranslate"><span class="pre">{install-path}/mattermost/data</span></code>.</p>
-</dd>
-<dt>Owner and group of the install directory - <em>{owner}</em> and <em>{group}</em></dt><dd><p>Use the <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-l</span> <span class="pre">{install-path}/mattermost/bin/platform</span></code> command to get the owner and group.</p>
-</dd>
+<dl class="docutils">
+<dt>Existing install directory - <em>{install-path}</em></dt>
+<dd>If you don’t know where Mattermost Server is installed, use the <code class="docutils literal notranslate"><span class="pre">whereis</span> <span class="pre">platform</span></code> command. The output should be similar to <em>/opt/mattermost/bin/platform</em>. The install directory is everything before the last occurrence of the string <em>/mattermost</em>. In this example, the <em>{install-path}</em> is <code class="docutils literal notranslate"><span class="pre">/opt</span></code>.</dd>
+<dt>Location of your local storage directory</dt>
+<dd>The local storage directory contains all the files that users have attached to their messages. If you don’t know its location, open the System Console and go to <strong>Files &gt; Storage</strong> and read the value in <strong>Local Storage Directory</strong>. Relative paths are relative to the <code class="docutils literal notranslate"><span class="pre">mattermost</span></code> directory. For example, if the local storage directory is <code class="docutils literal notranslate"><span class="pre">./data/</span></code> then the absolute path is <code class="docutils literal notranslate"><span class="pre">{install-path}/mattermost/data</span></code>.</dd>
+<dt>Owner and group of the install directory - <em>{owner}</em> and <em>{group}</em></dt>
+<dd>Use the <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-l</span> <span class="pre">{install-path}/mattermost/bin/platform</span></code> command to get the owner and group.</dd>
 </dl>
 <p><strong>To upgrade to version 2.0</strong>:</p>
 <ol class="arabic simple">
-<li><p>In a terminal window on the server that hosts Mattermost Server, change to your home directory. If any, delete files and directories that might still exist from a previous download.</p></li>
+<li>In a terminal window on the server that hosts Mattermost Server, change to your home directory. If any, delete files and directories that might still exist from a previous download.</li>
 </ol>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~</span></code></p>
-</div></blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~</span></code></div></blockquote>
 <ol class="arabic simple" start="2">
-<li><p>Download the appropriate version for the upgrade:</p></li>
+<li>Download the appropriate version for the upgrade:</li>
 </ol>
 <blockquote>
 <div><ol class="loweralpha simple">
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">./platform</span> <span class="pre">-version</span></code> to check the current version.</p></li>
-<li><p>Use the following table to determine the appropriate version to download:</p></li>
+<li>Run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">./platform</span> <span class="pre">-version</span></code> to check the current version.</li>
+<li>Use the following table to determine the appropriate version to download:</li>
 </ol>
 <blockquote>
-<div><table class="colwidths-auto docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>From</p></th>
-<th class="head"><p>To</p></th>
-<th class="head"><p>Download command</p></th>
+<div><table border="1" class="colwidths-auto docutils">
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">From</th>
+<th class="head">To</th>
+<th class="head">Download command</th>
 </tr>
 </thead>
-<tbody>
-<tr class="row-even"><td><p>1.4.0</p></td>
-<td><p>2.0.0</p></td>
-<td><p>wget <a class="reference external" href="https://releases.mattermost.com/2.0.0/mattermost-team-2.0.0-linux-amd64.tar.gz">https://releases.mattermost.com/2.0.0/mattermost-team-2.0.0-linux-amd64.tar.gz</a></p></td>
+<tbody valign="top">
+<tr class="row-even"><td>1.4.0</td>
+<td>2.0.0</td>
+<td>wget <a class="reference external" href="https://releases.mattermost.com/2.0.0/mattermost-team-2.0.0-linux-amd64.tar.gz">https://releases.mattermost.com/2.0.0/mattermost-team-2.0.0-linux-amd64.tar.gz</a></td>
 </tr>
-<tr class="row-odd"><td><p>1.3.0</p></td>
-<td><p>1.4.0</p></td>
-<td><p>wget <a class="reference external" href="https://releases.mattermost.com/1.4.0/mattermost-team-1.4.0-linux-amd64.tar.gz">https://releases.mattermost.com/1.4.0/mattermost-team-1.4.0-linux-amd64.tar.gz</a></p></td>
+<tr class="row-odd"><td>1.3.0</td>
+<td>1.4.0</td>
+<td>wget <a class="reference external" href="https://releases.mattermost.com/1.4.0/mattermost-team-1.4.0-linux-amd64.tar.gz">https://releases.mattermost.com/1.4.0/mattermost-team-1.4.0-linux-amd64.tar.gz</a></td>
 </tr>
-<tr class="row-even"><td><p>1.2.1</p></td>
-<td><p>1.3.0</p></td>
-<td><p>wget <a class="reference external" href="https://releases.mattermost.com/1.3.0/mattermost-team-1.3.0-linux-amd64.tar.gz">https://releases.mattermost.com/1.3.0/mattermost-team-1.3.0-linux-amd64.tar.gz</a></p></td>
+<tr class="row-even"><td>1.2.1</td>
+<td>1.3.0</td>
+<td>wget <a class="reference external" href="https://releases.mattermost.com/1.3.0/mattermost-team-1.3.0-linux-amd64.tar.gz">https://releases.mattermost.com/1.3.0/mattermost-team-1.3.0-linux-amd64.tar.gz</a></td>
 </tr>
-<tr class="row-odd"><td><p>1.2.0</p></td>
-<td><p>1.3.0</p></td>
-<td><p>wget <a class="reference external" href="https://releases.mattermost.com/1.3.0/mattermost-team-1.3.0-linux-amd64.tar.gz">https://releases.mattermost.com/1.3.0/mattermost-team-1.3.0-linux-amd64.tar.gz</a></p></td>
+<tr class="row-odd"><td>1.2.0</td>
+<td>1.3.0</td>
+<td>wget <a class="reference external" href="https://releases.mattermost.com/1.3.0/mattermost-team-1.3.0-linux-amd64.tar.gz">https://releases.mattermost.com/1.3.0/mattermost-team-1.3.0-linux-amd64.tar.gz</a></td>
 </tr>
-<tr class="row-even"><td><p>1.1.1</p></td>
-<td><p>1.2.1</p></td>
-<td><p>wget <a class="reference external" href="https://releases.mattermost.com/1.2.1/mattermost-team-1.2.1-linux-amd64.tar.gz">https://releases.mattermost.com/1.2.1/mattermost-team-1.2.1-linux-amd64.tar.gz</a></p></td>
+<tr class="row-even"><td>1.1.1</td>
+<td>1.2.1</td>
+<td>wget <a class="reference external" href="https://releases.mattermost.com/1.2.1/mattermost-team-1.2.1-linux-amd64.tar.gz">https://releases.mattermost.com/1.2.1/mattermost-team-1.2.1-linux-amd64.tar.gz</a></td>
 </tr>
-<tr class="row-odd"><td><p>1.1.0</p></td>
-<td><p>1.2.1</p></td>
-<td><p>wget <a class="reference external" href="https://releases.mattermost.com/1.2.1/mattermost-team-1.2.1-linux-amd64.tar.gz">https://releases.mattermost.com/1.2.1/mattermost-team-1.2.1-linux-amd64.tar.gz</a></p></td>
+<tr class="row-odd"><td>1.1.0</td>
+<td>1.2.1</td>
+<td>wget <a class="reference external" href="https://releases.mattermost.com/1.2.1/mattermost-team-1.2.1-linux-amd64.tar.gz">https://releases.mattermost.com/1.2.1/mattermost-team-1.2.1-linux-amd64.tar.gz</a></td>
 </tr>
-<tr class="row-even"><td><p>1.0.0</p></td>
-<td><p>1.2.1</p></td>
-<td><p>wget <a class="reference external" href="https://releases.mattermost.com/1.2.1/mattermost-team-1.2.1-linux-amd64.tar.gz">https://releases.mattermost.com/1.2.1/mattermost-team-1.2.1-linux-amd64.tar.gz</a></p></td>
+<tr class="row-even"><td>1.0.0</td>
+<td>1.2.1</td>
+<td>wget <a class="reference external" href="https://releases.mattermost.com/1.2.1/mattermost-team-1.2.1-linux-amd64.tar.gz">https://releases.mattermost.com/1.2.1/mattermost-team-1.2.1-linux-amd64.tar.gz</a></td>
 </tr>
 </tbody>
 </table>
 </div></blockquote>
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p>When the download is complete, extract the Mattermost Server files.</p></li>
+<li>When the download is complete, extract the Mattermost Server files.</li>
 </ol>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">tar</span> <span class="pre">-xzf</span> <span class="pre">mattermost*.gz</span></code></p>
-</div></blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">tar</span> <span class="pre">-xzf</span> <span class="pre">mattermost*.gz</span></code></div></blockquote>
 <ol class="arabic simple" start="4">
-<li><p>Stop Mattermost Server.</p></li>
+<li>Stop Mattermost Server.</li>
 </ol>
 <blockquote>
 <div><p>On Ubuntu 14.04 and RHEL 6: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">service</span> <span class="pre">mattermost</span> <span class="pre">stop</span></code></p>
 <p>On Ubuntu 16.04 and RHEL 7: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">stop</span> <span class="pre">mattermost</span></code></p>
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li><p>Back up your data and application.</p></li>
+<li>Back up your data and application.</li>
 </ol>
 <blockquote>
 <div><ol class="loweralpha simple">
-<li><p>Back up your database using your organization’s standard procedures for backing up MySQL or PostgreSQL.</p></li>
-<li><p>Back up your application by moving into your archive folder (e.g. <code class="docutils literal notranslate"><span class="pre">mattermost-back-YYYY-MM-DD</span></code>).</p></li>
+<li>Back up your database using your organization’s standard procedures for backing up MySQL or PostgreSQL.</li>
+<li>Back up your application by moving into your archive folder (e.g. <code class="docutils literal notranslate"><span class="pre">mattermost-back-YYYY-MM-DD</span></code>).</li>
 </ol>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">mv</span> <span class="pre">{install-path}/mattermost</span> <span class="pre">{install-path}/{mattermost-back-YYYY-MM-DD}</span></code></p>
-</div></blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">mv</span> <span class="pre">{install-path}/mattermost</span> <span class="pre">{install-path}/{mattermost-back-YYYY-MM-DD}</span></code></div></blockquote>
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li><p>Copy the files that you extracted earlier to the install directory.</p></li>
+<li>Copy the files that you extracted earlier to the install directory.</li>
 </ol>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">cp</span> <span class="pre">-r</span> <span class="pre">mattermost</span> <span class="pre">{install-path}</span></code></p>
-</div></blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">cp</span> <span class="pre">-r</span> <span class="pre">mattermost</span> <span class="pre">{install-path}</span></code></div></blockquote>
 <ol class="arabic simple" start="7">
-<li><p>Restore your configuration, local file storage and logs.</p></li>
+<li>Restore your configuration, local file storage and logs.</li>
 </ol>
 <blockquote>
 <div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sudo cp -r {install-path}/{mattermost-back-YYYY-MM-DD}/config {install-path}/mattermost
@@ -265,14 +252,13 @@ sudo cp -r {install-path}/{mattermost-back-YYYY-MM-DD}/logs {install-path}/matte
 </div>
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li><p>Change ownership of the new files.</p></li>
+<li>Change ownership of the new files.</li>
 </ol>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">chown</span> <span class="pre">-R</span> <span class="pre">{owner}:{group}</span> <span class="pre">{install-path}/mattermost</span></code></p>
-</div></blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">chown</span> <span class="pre">-R</span> <span class="pre">{owner}:{group}</span> <span class="pre">{install-path}/mattermost</span></code></div></blockquote>
 <ol class="arabic simple" start="9">
-<li><p>Upgrade your <code class="docutils literal notranslate"><span class="pre">config.json</span></code> schema: Open the System Console and make a change and then save the change. Your current settings are preserved, and new settings are added with default values.</p></li>
-<li><p>If you have TLS set up on your Mattermost server, you must activate the CAP_NET_BIND_SERVICE capability to allow the new Mattermost binary to bind to low ports.</p></li>
+<li>Upgrade your <code class="docutils literal notranslate"><span class="pre">config.json</span></code> schema: Open the System Console and make a change and then save the change. Your current settings are preserved, and new settings are added with default values.</li>
+<li>If you have TLS set up on your Mattermost server, you must activate the CAP_NET_BIND_SERVICE capability to allow the new Mattermost binary to bind to low ports.</li>
 </ol>
 <blockquote>
 <div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cd {install-path}
@@ -281,7 +267,7 @@ sudo setcap cap_net_bind_service=+ep ./bin/platform
 </div>
 </div></blockquote>
 <ol class="arabic simple" start="11">
-<li><p>Make sure the system is working, then repeat the steps 1 to 10 until version 2.0 is installed and running.</p></li>
+<li>Make sure the system is working, then repeat the steps 1 to 10 until version 2.0 is installed and running.</li>
 </ol>
 </div>
 
@@ -290,25 +276,20 @@ sudo setcap cap_net_bind_service=+ep ./bin/platform
            
           </div>
           <footer>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2015-2020 Mattermost.
+        &copy; Copyright 2015-2020 Mattermost
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -342,16 +323,27 @@ sudo setcap cap_net_bind_service=+ep ./bin/platform
 </div>
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
 	<header>
 	<div class="header__container">
 		<div class="search__icon">

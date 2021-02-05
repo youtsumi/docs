@@ -2,46 +2,34 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Compliance Export Beta (E20) &mdash; Mattermost 5.30 documentation</title>
+  <title>Compliance Export Beta (E20) &mdash; Mattermost 5.31 documentation</title>
   
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
-
   
   
 
   
-    <link rel="canonical" href="https://docs.mattermost.com/administration/compliance-export.html" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
   
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/myscript.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-    
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Audit Log v2 (Experimental) (E20)" href="audit-log.html" />
     <link rel="prev" title="Compliance Reporting and Oversight (E20)" href="compliance.html" />
@@ -53,16 +41,21 @@
 	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
 	<!-- End Google Tag Manager -->
 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -76,7 +69,7 @@
             
             
               <div class="version">
-                5.30
+                5.31
               </div>
             
           
@@ -93,7 +86,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -106,11 +98,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/deployment.html">Deployment Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-collaboration">Incident Collaboration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
@@ -142,7 +135,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -192,18 +184,18 @@
 <p>Available in <a class="reference external" href="https://mattermost.com/pricing-self-managed/">Enterprise Edition E20</a>.</p>
 <p>This feature enables compliance exports to be produced from the System Console, containing all messages including:</p>
 <ul class="simple">
-<li><p>Those made in direct message channels</p></li>
-<li><p>File uploads</p></li>
-<li><p>Posts from plugins</p></li>
-<li><p>Posts from bots/webhooks</p></li>
+<li>Those made in direct message channels</li>
+<li>File uploads</li>
+<li>Posts from plugins</li>
+<li>Posts from bots/webhooks</li>
 </ul>
 <p>The exports include information on channel member history at the time the message was posted.</p>
 <p>From Mattermost 5.18, entries for deleted messages and files are included in CSV and Actiance reports. The deleted content is included in the compliance export. Global Relay reports include file deletion entries but message deletion entries are excluded.</p>
 <p>By default, Mattermost stores all message history providing an unlimited search history to admins and end users. In Enterprise Edition E20, you may set a <a class="reference external" href="https://docs.mattermost.com/administration/data-retention.html">custom data retention policy</a> for how long messages and file uploads are kept in Mattermost channels and direct messages.</p>
 <p>Enterprise deployments with a requirement to archive history beyond the data retention period can enable this add-on to export compliance reports to third-party systems. Integration with Actiance Vantage and Global Relay are currently supported, with integrations with other systems in the roadmap.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This feature will replace the existing <a class="reference internal" href="compliance.html"><span class="doc">Compliance feature</span></a> in a future release. Compliance exports to CSV will continue to be available in Enterprise Edition E20.</p>
+<p class="first admonition-title">Note</p>
+<p class="last">This feature will replace the existing <a class="reference internal" href="compliance.html"><span class="doc">Compliance feature</span></a> in a future release. Compliance exports to CSV will continue to be available in Enterprise Edition E20.</p>
 </div>
 <div class="toctree-wrapper compound">
 </div>
@@ -211,17 +203,17 @@
 <h2>Set Up Guide<a class="headerlink" href="#set-up-guide" title="Permalink to this headline">¶</a></h2>
 <p>Use the following guides to configure exports for CSV, Actiance XML, or Global Relay EML. Compliance exports are written to the <code class="docutils literal notranslate"><span class="pre">exports</span></code> subdirectory of the configured <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#storage">Local Storage directory</a> in the chosen format. If you have configured Mattermost to use S3 storage, the exports are written to the <code class="docutils literal notranslate"><span class="pre">exports</span></code> directory in the Mattermost bucket.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The compliance exports do not contain posts sent before the feature was enabled, but you can export past history via the <code class="docutils literal notranslate"><span class="pre">export</span></code> <a class="reference internal" href="command-line-tools.html"><span class="doc">command line tool</span></a>. Posts made prior to upgrading to Mattermost v4.5 will have less accurate channel member history information.</p>
+<p class="first admonition-title">Note</p>
+<p class="last">The compliance exports do not contain posts sent before the feature was enabled, but you can export past history via the <code class="docutils literal notranslate"><span class="pre">export</span></code> <a class="reference internal" href="command-line-tools.html"><span class="doc">command line tool</span></a>. Posts made prior to upgrading to Mattermost v4.5 will have less accurate channel member history information.</p>
 </div>
 <div class="section" id="csv">
 <h3>CSV<a class="headerlink" href="#csv" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
-<li><p>Go to <strong>System Console &gt; Compliance &gt; Compliance Export (Beta)</strong> (or <strong>System Console &gt; Advanced &gt; Compliance Export (Beta)</strong> in versions prior to 5.12).</p></li>
-<li><p>Set <strong>Enable Compliance Exports</strong> to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
-<li><p>Set the <strong>Compliance Export time</strong>. This is the start time of the daily scheduled compliance export job and must be a 24-hour time stamp in the form HH:MM. Choose a time when fewer people are using your system.</p></li>
-<li><p>Set the export file format to <strong>CSV</strong>.</p></li>
-<li><p>Choose <strong>Save</strong>.</p></li>
+<li>Go to <strong>System Console &gt; Compliance &gt; Compliance Export (Beta)</strong> (or <strong>System Console &gt; Advanced &gt; Compliance Export (Beta)</strong> in versions prior to 5.12).</li>
+<li>Set <strong>Enable Compliance Exports</strong> to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</li>
+<li>Set the <strong>Compliance Export time</strong>. This is the start time of the daily scheduled compliance export job and must be a 24-hour time stamp in the form HH:MM. Choose a time when fewer people are using your system.</li>
+<li>Set the export file format to <strong>CSV</strong>.</li>
+<li>Choose <strong>Save</strong>.</li>
 </ol>
 <p>The daily compliance export job creates a zip file with a unique job identifier of all messages posted in the last 24 hours. You can unzip the file to easily transform the default CSV format into a desired format for your third-party archive system.</p>
 <p>For a sample CSV output, <a class="reference external" href="https://github.com/mattermost/docs/blob/master/source/samples/csv_export.zip">download a CSV export file here</a>.</p>
@@ -229,33 +221,33 @@
 <div class="section" id="actiance-xml">
 <h3>Actiance XML<a class="headerlink" href="#actiance-xml" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
-<li><p>Go to <strong>System Console &gt; Compliance &gt; Compliance Export (Beta)</strong> (or <strong>System Console &gt; Advanced &gt; Compliance Export (Beta)</strong> in versions prior to 5.12).</p></li>
-<li><p>Set <strong>Enable Compliance Exports</strong> to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
-<li><p>Set the <strong>Compliance Export time</strong>. This is the start time of the daily scheduled compliance export job and must be a 24-hour time stamp in the form HH:MM. Choose a time when fewer people are using your system.</p></li>
-<li><p>Set the export file format to <strong>Actiance XML</strong>.</p></li>
-<li><p>Choose <strong>Save</strong>.</p></li>
+<li>Go to <strong>System Console &gt; Compliance &gt; Compliance Export (Beta)</strong> (or <strong>System Console &gt; Advanced &gt; Compliance Export (Beta)</strong> in versions prior to 5.12).</li>
+<li>Set <strong>Enable Compliance Exports</strong> to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</li>
+<li>Set the <strong>Compliance Export time</strong>. This is the start time of the daily scheduled compliance export job and must be a 24-hour time stamp in the form HH:MM. Choose a time when fewer people are using your system.</li>
+<li>Set the export file format to <strong>Actiance XML</strong>.</li>
+<li>Choose <strong>Save</strong>.</li>
 </ol>
 <p>The daily compliance export job creates a zip file with a unique job identifier of all messages posted in the last 24 hours. Once you’ve selected Actiance XML as your file format, you can set up an integration with Actiance Vantage archive system. For more information, see <a class="reference external" href="https://www.actiance.com/products/vantage/">their homepage</a>. For a sample Actiance output, <a class="reference external" href="https://github.com/mattermost/docs/blob/master/source/samples/actiance_export.xml">download an Actiance XML export file here</a>.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>In Actiance XML exports, channel type is prepended to the channel names.</p>
+<p class="first admonition-title">Note</p>
+<p class="last">In Actiance XML exports, channel type is prepended to the channel names.</p>
 </div>
 </div>
 <div class="section" id="global-relay-eml">
 <h3>Global Relay EML<a class="headerlink" href="#global-relay-eml" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
-<li><p>Go to <strong>System Console &gt; Compliance &gt; Compliance Export (Beta)</strong> (or <strong>System Console &gt; Advanced &gt; Compliance Export (Beta)</strong> in versions prior to 5.12).</p></li>
-<li><p>Set <strong>Enable Compliance Exports</strong> to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
-<li><p>Set the <strong>Compliance Export time</strong>. This is the start time of the daily scheduled compliance export job and must be a 24-hour time stamp in the form HH:MM. Choose a time when fewer people are using your system.</p></li>
-<li><p>Set the export file format to <strong>GlobalRelay EML</strong>.</p></li>
-<li><p>Select <cite>A9/Type 9</cite> or <cite>A10/Type 10</cite> for the <strong>Global Relay Customer Account</strong>. This is the type of Global Relay customer account your organization has.</p></li>
-<li><p>Set the <strong>Global Relay SMTP username</strong>, <strong>Global Relay SMTP password</strong>, and <strong>Global Relay SMTP email address</strong>, as provided by Global Relay.</p></li>
-<li><p>Choose <strong>Save</strong>.</p></li>
+<li>Go to <strong>System Console &gt; Compliance &gt; Compliance Export (Beta)</strong> (or <strong>System Console &gt; Advanced &gt; Compliance Export (Beta)</strong> in versions prior to 5.12).</li>
+<li>Set <strong>Enable Compliance Exports</strong> to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</li>
+<li>Set the <strong>Compliance Export time</strong>. This is the start time of the daily scheduled compliance export job and must be a 24-hour time stamp in the form HH:MM. Choose a time when fewer people are using your system.</li>
+<li>Set the export file format to <strong>GlobalRelay EML</strong>.</li>
+<li>Select <cite>A9/Type 9</cite> or <cite>A10/Type 10</cite> for the <strong>Global Relay Customer Account</strong>. This is the type of Global Relay customer account your organization has.</li>
+<li>Set the <strong>Global Relay SMTP username</strong>, <strong>Global Relay SMTP password</strong>, and <strong>Global Relay SMTP email address</strong>, as provided by Global Relay.</li>
+<li>Choose <strong>Save</strong>.</li>
 </ol>
 <p>Once you have selected Global Relay EML as your file format, you can set up an integration with Global Relay archive system. For more information, see <a class="reference external" href="https://www.globalrelay.com/gr-services/archive">Global Relay Archive</a>.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Messages larger than 250 MB will have their attachments removed because they are too large to send to Global Relay. An error is added to the server logs with id <code class="docutils literal notranslate"><span class="pre">global_relay_attachments_removed</span></code>. It includes the post ID the attachments were removed from, as well as the attachment IDs. A <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-10038">ticket is queued to better handle large messages</a>.</p>
+<p class="first admonition-title">Note</p>
+<p class="last">Messages larger than 250 MB will have their attachments removed because they are too large to send to Global Relay. An error is added to the server logs with id <code class="docutils literal notranslate"><span class="pre">global_relay_attachments_removed</span></code>. It includes the post ID the attachments were removed from, as well as the attachment IDs. A <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-10038">ticket is queued to better handle large messages</a>.</p>
 </div>
 <p>For more information on Global Relay archive system, see <a class="reference external" href="https://www.globalrelay.com/">their homepage</a>.</p>
 </div>
@@ -276,10 +268,10 @@ If the <code class="docutils literal notranslate"><span class="pre">--exportFrom
 <h3>Why are compliance exports beta?<a class="headerlink" href="#why-are-compliance-exports-beta" title="Permalink to this headline">¶</a></h3>
 <p>This feature is labelled as beta for the following reasons:</p>
 <ol class="arabic simple">
-<li><p>The job to carry out a compliance export has not been tested on a system with 10,000s of concurrent active users.</p></li>
-<li><p>Exports do not yet include messages with special types, namely system messages, webhook message attachments, and custom plugin messages.</p></li>
-<li><p>There isn’t yet a way to distinguish who edited or deleted a message, nor which message is a reply or an edit of another message.</p></li>
-<li><p>The QA process is still in progress.</p></li>
+<li>The job to carry out a compliance export has not been tested on a system with 10,000s of concurrent active users.</li>
+<li>Exports do not yet include messages with special types, namely system messages, webhook message attachments, and custom plugin messages.</li>
+<li>There isn’t yet a way to distinguish who edited or deleted a message, nor which message is a reply or an edit of another message.</li>
+<li>The QA process is still in progress.</li>
 </ol>
 </div>
 <div class="section" id="how-do-i-know-if-a-compliance-export-job-fails">
@@ -295,29 +287,29 @@ If the <code class="docutils literal notranslate"><span class="pre">--exportFrom
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="audit-log.html" class="btn btn-neutral float-right" title="Audit Log v2 (Experimental) (E20)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="compliance.html" class="btn btn-neutral float-left" title="Compliance Reporting and Oversight (E20)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="audit-log.html" class="btn btn-neutral float-right" title="Audit Log v2 (Experimental) (E20)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="compliance.html" class="btn btn-neutral" title="Compliance Reporting and Oversight (E20)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2015-2020 Mattermost.
+        &copy; Copyright 2015-2020 Mattermost
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -351,16 +343,27 @@ If the <code class="docutils literal notranslate"><span class="pre">--exportFrom
 </div>
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
 	<header>
 	<div class="header__container">
 		<div class="search__icon">
