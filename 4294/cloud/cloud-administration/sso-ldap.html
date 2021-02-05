@@ -1,0 +1,526 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Active Directory/LDAP Setup &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="GitLab Single Sign-On" href="sso-gitlab.html" />
+    <link rel="prev" title="SAML Single-Sign-On: Technical Documentation" href="saml-technical.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview/index.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#system-administration">System Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#user-management">User Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#configuration">Configuration</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../guides/cloud-admin-guide.html#authentication">Authentication</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="authentication.html">Multi-Factor Authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-saml.html">SAML Single Sign-On</a></li>
+<li class="toctree-l3"><a class="reference internal" href="saml-technical.html">SAML Single-Sign-On: Technical Documentation</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Active Directory/LDAP Setup</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pre-installation-notes">Pre-installation Notes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getting-started">Getting Started</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#troubleshooting-faq">Troubleshooting/FAQ</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sso-gitlab.html">GitLab Single Sign-On</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-google.html">Google Single Sign-On</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-office.html">Office 365 Single Sign-On</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#integrations">Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#compliance">Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#mobile">Mobile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#incident-management">Incident Management</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/administrator.html">Self-Managed Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../../guides/cloud-admin-guide.html">Cloud Administrator’s Guide</a> &raquo;</li>
+    
+    <li>Active Directory/LDAP Setup</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/cloud/cloud-administration/sso-ldap.md" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="active-directory-ldap-setup">
+<h1>Active Directory/LDAP Setup<a class="headerlink" href="#active-directory-ldap-setup" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Active Directory (AD) is a service that stores authentication and authorization details of users on your organization’s network. When you integrate your AD/LDAP system with Mattermost, users can log into Mattermost without having to create new credentials. User accounts are managed in AD/LDAP, and changes are synced with Mattermost.</p>
+<p>Benefits of integrating AD/LDAP with Mattermost include:</p>
+<ul class="simple">
+<li><strong>Single sign-on.</strong> Users can sign in to Mattermost with their AD/LDAP credentials.</li>
+<li><strong>Centralized identity management.</strong> Mattermost accounts can display user information from AD/LDAP, such as first and last name, email, and username.</li>
+<li><strong>Automatic account provisioning.</strong> A Mattermost user account is automatically created the first time a user signs in with their AD/LDAP credentials.</li>
+<li><strong>Sync groups to predefined roles in Mattermost.</strong> Assign team and channel roles to groups via LDAP Group Sync.</li>
+<li><strong>Compliance alignment with administrator management.</strong> Manage Administrator access to Mattermost in the System Console using LDAP filters.</li>
+</ul>
+</div>
+<div class="section" id="pre-installation-notes">
+<h2>Pre-installation Notes<a class="headerlink" href="#pre-installation-notes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>If you’re using Active Directory with <strong>nested security groups</strong> you need to write a PowerShell script, or similar, to flatten and aggregate the tree into a single security group to map into Mattermost.</li>
+</ul>
+</div>
+<div class="section" id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<p>There are two ways to set up AD/LDAP:</p>
+<ol class="simple">
+<li><strong>Configure AD/LDAP using the System Console user interface</strong><ul>
+<li>Log in to your workspace and create a new account using email and password. This is assigned the System Admin role as the first user created.</li>
+<li>Next, configure AD/LDAP and then convert your System Admin account to use the AD/LDAP sign in method.</li>
+</ul>
+</li>
+<li><strong>Configure AD/LDAP by editing <code class="docutils literal notranslate"><span class="pre">config.json</span></code></strong><ul>
+<li>Edit <code class="docutils literal notranslate"><span class="pre">config.json</span></code> to enable AD/LDAP based on the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#ad-ldap">AD/LDAP settings documentation</a>. When you log in to Mattermost the first user to log in with valid AD/LDAP credentials will be assigned the System Admin role.</li>
+</ul>
+</li>
+</ol>
+<div class="section" id="configure-ad-ldap-sign-in">
+<h3>Configure AD/LDAP Sign In<a class="headerlink" href="#configure-ad-ldap-sign-in" title="Permalink to this headline">¶</a></h3>
+<ol class="simple">
+<li><strong>Create a System Admin account using email authentication.</strong><ul>
+<li>Create a new workspace and create an account using email and password, which is automatically assigned the <strong>System Administrator</strong> role since it is the first account created. You may also assign the role to another account.</li>
+</ul>
+</li>
+<li><strong>Configure AD/LDAP.</strong><ul>
+<li>Go to <strong>System Console &gt; Authentication &gt; AD/LDAP</strong> and fill in AD/LDAP settings based on the <a class="reference external" href="http://docs.mattermost.com/administration/config-settings.html#ad-ldap">configuration settings documentation</a>.</li>
+</ul>
+</li>
+<li><strong>Confirm that AD/LDAP sign-on is enabled.</strong>&lt;<ul>
+<li>After AD/LDAP has been enabled, confirm that users can sign in using AD/LDAP credentials.</li>
+</ul>
+</li>
+<li><strong>Switch your System Admin account from email to AD/LDAP authentication.</strong><ul>
+<li>Navigate to <strong>Account Settings &gt; Security &gt; Sign-in Method &gt; Switch to AD/LDAP</strong> and sign in with your AD/LDAP credentials to complete the switch.</li>
+</ul>
+</li>
+<li><strong>(Optional) Restrict authentication to AD/LDAP.</strong><ul>
+<li>Go to <strong>System Console &gt; Authentication &gt; Email</strong> and set <strong>Enable sign-in with email</strong> to <strong>false</strong> and <strong>Enable sign-in with username</strong> to <strong>false</strong>.</li>
+<li>Then choose <strong>Save</strong> to save the changes. This should leave Active Directory/LDAP as the only sign in option.</li>
+</ul>
+</li>
+<li><strong>(Optional) If you configured <code class="docutils literal notranslate"><span class="pre">First</span> <span class="pre">Name</span> <span class="pre">Attribute</span></code> and <code class="docutils literal notranslate"><span class="pre">Last</span> <span class="pre">Name</span> <span class="pre">Attribute</span></code> in the System Console.</strong><ul>
+<li>Navigate to <strong>System Console &gt; Site Configuration &gt; Users and Teams</strong> and set <strong>Teammate Name Display</strong> to <strong>Show first and last name</strong>. This is recommended for a better user experience.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Note:</strong> If you’ve made a mistake and lock yourself out of the system somehow, you can <a class="reference external" href="http://docs.mattermost.com/deployment/on-boarding.html#common-tasks">set an existing account to System Administrator using the command line tool</a>.</p>
+</div>
+<div class="section" id="configure-ad-ldap-synchronization">
+<h3>Configure AD/LDAP Synchronization<a class="headerlink" href="#configure-ad-ldap-synchronization" title="Permalink to this headline">¶</a></h3>
+<p>In addition to configuring AD/LDAP sign-in, you can also configure AD/LDAP synchronization. When synchronizing, Mattermost queries AD/LDAP for relevant account information and updates Mattermost accounts based on changes to attributes (first name, last name, and nickname). When accounts are disabled in AD/LDAP users are made inactive in Mattermost, and their active sessions are revoked once Mattermost synchronizes the updated attributes.</p>
+<p><strong>Note:</strong> The AD/LDAP sync depends on email. Make sure all users on your AD/LDAP server have an email address or that their account is deactivated in Mattermost.</p>
+<p>To configure AD/LDAP synchronization with AD/LDAP sign-in:</p>
+<ol class="simple">
+<li>Go to <strong>System Console &gt; Authentication &gt; AD/LDAP</strong> and set <strong>Enable Synchronization with AD/LDAP</strong> to <strong>true</strong>.</li>
+<li>Scroll down to <strong>Synchronization Interval (minutes)</strong> to specify how often Mattermost accounts synchronize attributes with AD/LDAP. The default setting is 60 minutes. The profile picture attribute is only synchronized when the user logs in.<ul>
+<li>If you want to synchronize immediately after disabling an account, use the <strong>AD/LDAP Synchronize Now</strong> button in <strong>System Console &gt; AD/LDAP</strong>.</li>
+<li>To configure AD/LDAP synchronization with SAML sign-in, see the <a class="reference external" href="https://about.mattermost.com/default-saml-ldap-sync">SAML documentation</a>.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Note:</strong> Make sure that at least one LDAP user is in Mattermost or the sync will not complete.</p>
+</div>
+<div class="section" id="configure-ad-ldap-sign-in-using-filters">
+<h3>Configure AD/LDAP Sign-in Using Filters<a class="headerlink" href="#configure-ad-ldap-sign-in-using-filters" title="Permalink to this headline">¶</a></h3>
+<p>Using filters assigns roles to specified users on login. To access AD/LDAP filter settings navigate to <strong>System Console &gt; AD/LDAP</strong>.</p>
+<div class="section" id="user-filter">
+<h4>User Filter<a class="headerlink" href="#user-filter" title="Permalink to this headline">¶</a></h4>
+<p>(Optional) Enter an AD/LDAP filter to use when searching for user objects. Only the users selected by the query will be able to access Mattermost. For Active Directory, the query to filter out disabled users is <code class="docutils literal notranslate"><span class="pre">(&amp;(objectCategory=Person)(!(UserAccountControl:1.2.840.113556.1.4.803:=2)))</span></code>.</p>
+<ol class="simple">
+<li>Navigate to <strong>System Console &gt; Authentication &gt; AD/LDAP</strong>.</li>
+<li>Complete the <strong>User Filter</strong> field.</li>
+<li>Choose <strong>Save</strong>.</li>
+</ol>
+<p>When the user accesses Mattermost, they log in with same username and password that they use for organizational logins.</p>
+<p>Filters can also be used for excluding users who belong to certain groups. For Active Directory, the query to filter out groups is <code class="docutils literal notranslate"><span class="pre">(&amp;(memberof=cn=ACME_ALL,ou=Users,dc=sademo,dc=com)(!(memberof=cn=DEV_OPS,ou=Users,dc=sademo,dc=com)))</span></code>.</p>
+</div>
+<div class="section" id="guest-filter">
+<h4>Guest Filter<a class="headerlink" href="#guest-filter" title="Permalink to this headline">¶</a></h4>
+<p>(Optional) When enabled, the Guest Filter in Mattermost identifies external users whose AD/LDAP role is guest and who are invited to join your Mattermost server. These users will have the Guest role applied immediately upon first sign-in instead of the default member user role. This eliminates having to manually assign the role in the System Console.</p>
+<p>If this filter is removed/changed, active guests will not be promoted to a member and will retain their Guest role. Guests can be promoted in <strong>System Console &gt; User Management</strong>.</p>
+<ol class="simple">
+<li>Navigate to <strong>System Console &gt; Authentication &gt; Guest Access (Beta)</strong> and set Guest Access to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</li>
+<li>Navigate to <strong>System Console &gt; Authentication &gt; AD/LDAP</strong>.</li>
+<li>Complete the <strong>Guest Filter</strong> field.</li>
+<li>Choose <strong>Save</strong>.</li>
+</ol>
+<p>When a guest logs in for the first time they are presented with a default landing page until they are added to channels.</p>
+<p>See the <a class="reference external" href="https://docs.mattermost.com/cloud/cloud-guest-accounts.html">Guest Accounts documentation</a> for more information about this feature.</p>
+</div>
+<div class="section" id="admin-filter">
+<h4>Admin Filter<a class="headerlink" href="#admin-filter" title="Permalink to this headline">¶</a></h4>
+<p>(Optional) Enter an AD/LDAP filter to use for designating System Admins. The users selected by the query will have access to your Mattermost workspace as System Admins. By default, System Admins have complete access to the Mattermost System Console. Existing members that are identified by this attribute will be promoted from member to System Admin upon next login.</p>
+<p>The next login is based upon Session lengths set in <strong>System Console &gt; Session Lengths</strong>. It is recommended that users are demoted to members manually in <strong>System Console &gt; User Management</strong> to ensure access is restricted immediately.</p>
+<ol class="simple">
+<li>Navigate to <strong>System Console &gt; Authentication &gt; AD/LDAP</strong>.</li>
+<li>Set <strong>Admin Filter</strong> to <strong>true</strong>.</li>
+<li>Complete the <strong>Admin Filter</strong> field.</li>
+<li>Choose <strong>Save</strong>.</li>
+</ol>
+<p><strong>Note:</strong> If the Admin Filter is set to <code class="docutils literal notranslate"><span class="pre">false</span></code> the member’s role as System Admin is retained. However if this filter is removed/changed, System Admins that were promoted via this filter will be demoted to members and will not retain access to the System Console.</p>
+<p>When this filter isn’t in use, members can be manually promoted/demoted via <strong>System Console &gt; User Management</strong>.</p>
+</div>
+</div>
+<div class="section" id="configure-ad-ldap-deployments-with-multiple-domains">
+<h3>Configure AD/LDAP Deployments with Multiple Domains<a class="headerlink" href="#configure-ad-ldap-deployments-with-multiple-domains" title="Permalink to this headline">¶</a></h3>
+<p>Organizations using multiple domains can integrate with Mattermost using a “Forest” configuration to bring together multiple domains. Please see <a class="reference external" href="https://technet.microsoft.com/en-us/library/cc759073%28v=ws.10%29.aspx?f=255&amp;MSPPError=-2147217396">Forests as Collections of Domain Controllers that Trust Each Other</a> for more information.</p>
+<p>For forest configurations that contain multiple domains which do NOT share a common root, you can search across all of the domains using the Global Catalog. To do so, update your <code class="docutils literal notranslate"><span class="pre">config.json</span></code> as follows:</p>
+<ul class="simple">
+<li>Set the LdapPort to 3268 (instead of 389)</li>
+<li>Set the BaseDN to “ “ (A single space character)</li>
+</ul>
+<p>See <a class="reference external" href="https://technet.microsoft.com/en-us/library/cc978012.aspx">Global Catalog and LDAP Searches</a> for additional details.</p>
+</div>
+</div>
+<div class="section" id="troubleshooting-faq">
+<h2>Troubleshooting/FAQ<a class="headerlink" href="#troubleshooting-faq" title="Permalink to this headline">¶</a></h2>
+<p>The following are frequently asked questions and troubleshooting suggestions on common error messages and issues. It is recommended that you check your logs for errors as they can provide an idea of what the issue is.</p>
+<div class="section" id="if-the-ad-ldap-test-button-fails-how-can-i-troubleshoot-the-connection">
+<h3>If the <strong>AD/LDAP Test</strong> button fails, how can I troubleshoot the connection?<a class="headerlink" href="#if-the-ad-ldap-test-button-fails-how-can-i-troubleshoot-the-connection" title="Permalink to this headline">¶</a></h3>
+<p>Check that your AD/LDAP connection settings are correct by running an AD/LDAP user query in an external system. See <a class="reference external" href="http://ldaptool.sourceforge.net">LDAP Connection Test Example</a>. If the AD/LDAP connection is verified to be working outside of Mattermost, try the following:</p>
+<ul class="simple">
+<li>Check your AD/LDAP system to verify your <code class="docutils literal notranslate"><span class="pre">Bind</span> <span class="pre">Username</span></code> format.</li>
+<li>Check your <strong>AD/LDAP Port</strong> and <strong>Connection Security</strong> settings in the System Console. (<strong>AD/LDAP Port</strong> set to 389 typically uses <strong>Connection Security</strong> set to <code class="docutils literal notranslate"><span class="pre">None</span></code>. <strong>AD/LDAP Port</strong> set to 636 typically ties to <strong>Connection Security</strong> set to <strong>TLS</strong>).</li>
+<li>If you’re seeing <code class="docutils literal notranslate"><span class="pre">x509:</span> <span class="pre">certificate</span> <span class="pre">signed</span> <span class="pre">by</span> <span class="pre">unknown</span> <span class="pre">authority</span></code> in your logs, try installing an intermediate SSL certificate or have your LDAP server send the complete certificate chain.</li>
+</ul>
+<p>If these options don’t work, please contact Mattermost support via the email address that came with your license key.</p>
+</div>
+<div class="section" id="when-i-first-set-up-and-synchronize-ad-ldap-are-the-users-automatically-created-in-mattermost">
+<h3>When I first set up and synchronize AD/LDAP, are the users automatically created in Mattermost?<a class="headerlink" href="#when-i-first-set-up-and-synchronize-ad-ldap-are-the-users-automatically-created-in-mattermost" title="Permalink to this headline">¶</a></h3>
+<p>No, each user is created on their first login.</p>
+</div>
+<div class="section" id="when-i-try-to-synchronize-ad-ldap-why-does-the-status-show-as-pending-and-not-complete">
+<h3>When I try to synchronize AD/LDAP, why does the Status show as <code class="docutils literal notranslate"><span class="pre">Pending</span></code> and not complete?<a class="headerlink" href="#when-i-try-to-synchronize-ad-ldap-why-does-the-status-show-as-pending-and-not-complete" title="Permalink to this headline">¶</a></h3>
+<p>Go to <strong>System Console &gt; AD/LDAP</strong> and make sure that the <strong>Enable Synchronization with AD/LDAP</strong> setting is set to <strong>true</strong>.</p>
+<p>If the issue persists, try performing a sync with the <strong>User Filter</strong> field blank. If the sync completes in this scenario, then the general syntax was formatted incorrectly. Refer to this <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#user-filter">document</a> for guidance on setting a correct syntax format.</p>
+<p>Make sure that you also have at least one LDAP user in Mattermost or the sync will not complete.</p>
+</div>
+<div class="section" id="what-is-the-difference-between-the-username-attribute-id-attribute-and-login-id-attribute">
+<h3>What is the difference between the Username Attribute, ID Attribute, and Login ID Attribute?<a class="headerlink" href="#what-is-the-difference-between-the-username-attribute-id-attribute-and-login-id-attribute" title="Permalink to this headline">¶</a></h3>
+<p>There are three AD/LDAP attributes that apear to be similar but serve a different purpose:</p>
+<ol class="simple">
+<li><strong>Username Attribute:</strong> Used within the Mattermost user interface to identify and mention users. For example, if <strong>Username Attribute</strong> is set to <code class="docutils literal notranslate"><span class="pre">john.smith</span></code>, a user typing <code class="docutils literal notranslate"><span class="pre">&#64;john</span></code> will see <code class="docutils literal notranslate"><span class="pre">&#64;john.smith</span></code> in their autocomplete options and posting a message with <code class="docutils literal notranslate"><span class="pre">&#64;john.smith</span></code> will send a notification to that user that they’ve been mentioned.</li>
+<li><strong>ID Attribute:</strong> Used as the unique identifier in Mattermost. It should be an AD/LDAP attribute with a value that does not change, such as <code class="docutils literal notranslate"><span class="pre">ObjectGUID</span></code>. If a user’s ID attribute changes, it will create a new Mattermost account unassociated with their old one. If you need to change this field after users have already logged in, use the <a class="reference external" href="https://docs.mattermost.com/administration/command-line-tools.html#mattermost-ldap-idmigrate">mattermost ldap idmigrate CLI tool</a>.</li>
+<li><strong>Login ID Attribute:</strong> The attribute in the AD/LDAP server used to log in to Mattermost. Normally this attribute is the same as the <strong>Username Attribute</strong> field above, or another field that users can easily remember.</li>
+</ol>
+</div>
+<div class="section" id="how-do-i-deactivate-users">
+<h3>How do I deactivate users?<a class="headerlink" href="#how-do-i-deactivate-users" title="Permalink to this headline">¶</a></h3>
+<p>When AD/LDAP authentication is used in Mattermost, user deactivation must be done via the AD/LDAP server.</p>
+<p>There are two main ways to do this:</p>
+<ol class="simple">
+<li><strong>User deletion:</strong> If the user is completely removed from the AD/LDAP server, they will be deactivated in Mattermost on the next synchronization.</li>
+<li><strong>User filter:</strong> Set the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#user-filter">user filter</a> to only select the subset of AD/LDAP users you want to have access to Mattermost. When someone is removed from the selected group, they will be deactivated in Mattermost on the next synchronization.</li>
+</ol>
+<p>For Active Directory, to filter out deactivated users you must set the user filter to:</p>
+<p><code class="docutils literal notranslate"><span class="pre">(&amp;(objectCategory=Person)(!(UserAccountControl:1.2.840.113556.1.4.803:=2)))</span></code></p>
+<p>Filters can also be used for excluding users who belong to certain groups. For Active Directory, the query to filter out groups is:</p>
+<p><code class="docutils literal notranslate"><span class="pre">(&amp;(memberof=cn=ACME_ALL,ou=Users,dc=sademo,dc=com)</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">(!(memberof=cn=DEV_OPS,ou=Users,dc=sademo,dc=com)))</span></code></p>
+<p>When a user is deactivated in Mattermost, all the user’s current sessions are revoked and they will be unable to log in or access Mattermost.</p>
+</div>
+<div class="section" id="can-i-connect-to-multiple-active-directory-servers">
+<h3>Can I connect to multiple Active Directory servers?<a class="headerlink" href="#can-i-connect-to-multiple-active-directory-servers" title="Permalink to this headline">¶</a></h3>
+<p>There is currently no built-in way to connect to multiple AD servers. You will need to connect the instances in a forest before connecting to Mattermost. Consider upvoting the <a class="reference external" href="https://mattermost.uservoice.com/forums/306457-general/suggestions/13589904-add-the-abilitiry">feature request</a> on our forum.</p>
+</div>
+<div class="section" id="when-trying-to-sign-in-i-see-the-error-ad-ldap-not-available-on-this-server">
+<h3>When trying to sign in, I see the error <code class="docutils literal notranslate"><span class="pre">AD/LDAP</span> <span class="pre">not</span> <span class="pre">available</span> <span class="pre">on</span> <span class="pre">this</span> <span class="pre">server</span></code>.<a class="headerlink" href="#when-trying-to-sign-in-i-see-the-error-ad-ldap-not-available-on-this-server" title="Permalink to this headline">¶</a></h3>
+<p>This indicates that there is a problem somewhere with your configuration. We recommend that you check your Mattermost configuration settings to ensure that AD/LDAP is enabled, and the settings are correct.</p>
+<p>If you’re still having issues, you can <a class="reference external" href="https://mattermost.com/support/">contact support</a> for additional troubleshooting.</p>
+</div>
+<div class="section" id="i-see-the-error-user-not-registered-on-ad-ldap-server">
+<h3>I see the error <code class="docutils literal notranslate"><span class="pre">User</span> <span class="pre">not</span> <span class="pre">registered</span> <span class="pre">on</span> <span class="pre">AD/LDAP</span> <span class="pre">server</span></code>.<a class="headerlink" href="#i-see-the-error-user-not-registered-on-ad-ldap-server" title="Permalink to this headline">¶</a></h3>
+<p>This means the query sent back to the AD/LDAP server returned no results. We recommend that you:</p>
+<ol class="simple">
+<li>Check that the user credentials were entered properly - you should log in with the field set as the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#id-attribute"><code class="docutils literal notranslate"><span class="pre">ID</span> <span class="pre">Attribute</span></code></a>.</li>
+<li>Check that the user account exists in the AD/LDAP server.</li>
+<li>Check the AD/LDAP configuration settings are correct.</li>
+</ol>
+<p>If you’re still having issues, you can <a class="reference external" href="https://mattermost.com/support/">contact support</a> for additional troubleshooting.</p>
+</div>
+<div class="section" id="i-updated-a-user-account-in-ad-ldap-and-they-can-no-longer-log-in-to-mattermost">
+<h3>I updated a user account in AD/LDAP, and they can no longer log in to Mattermost.<a class="headerlink" href="#i-updated-a-user-account-in-ad-ldap-and-they-can-no-longer-log-in-to-mattermost" title="Permalink to this headline">¶</a></h3>
+<p>If the user can no longer log in to Mattermost with their AD/LDAP credentials - for example, they get an error message <code class="docutils literal notranslate"><span class="pre">An</span> <span class="pre">account</span> <span class="pre">with</span> <span class="pre">that</span> <span class="pre">email</span> <span class="pre">already</span> <span class="pre">exists</span></code>, or a new Mattermost account is created when they try to log in - this means the <strong>ID Attribute</strong> for their account has changed.</p>
+<p>The issue can be fixed by changing the value of the field used for the <strong>ID Attribute</strong> back to the old value. If you’re currently using a field that sometimes changes for an <strong>ID Attribute</strong> (e.g. username, email that changes when someone gets married), we recommend you switch to using a non-changing field such as a GUID.</p>
+<p>To do this, you can set the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#login-id-attribute"><strong>Login ID Attribute</strong></a> to whatever you would like users to log in with (e.g. username or email).</p>
+<p><strong>Note:</strong> Currently the value is case sensitive. If the <strong>ID Attribute</strong> is set to the username and the username changes from <code class="docutils literal notranslate"><span class="pre">John.Smith</span></code> to <code class="docutils literal notranslate"><span class="pre">john.smith</span></code>, the user will experience problems logging in.</p>
+</div>
+<div class="section" id="i-see-the-log-error-ldap-result-code-4-size-limit-exceeded">
+<h3>I see the log error <code class="docutils literal notranslate"><span class="pre">LDAP</span> <span class="pre">Result</span> <span class="pre">Code</span> <span class="pre">4</span> <span class="pre">&quot;Size</span> <span class="pre">Limit</span> <span class="pre">Exceeded&quot;</span></code>.<a class="headerlink" href="#i-see-the-log-error-ldap-result-code-4-size-limit-exceeded" title="Permalink to this headline">¶</a></h3>
+<p>This indicates your AD/LDAP server configuration has a maximum page size set and the query coming from Mattermost is returning a result set in excess of that limit.</p>
+<p>To address this issue you can set the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#maximum-page-size">max page size</a> in your Mattermost configuration to match the limit on your AD/LDAP server. This will return a sequence of result sets that do not exceed the max page size, rather than returning all results in a single query. A max page size setting of 1500 is recommended.</p>
+<p>If the error is still occurring, it is likely that no AD/LDAP users have logged into Mattermost yet. Ensure that at least one AD/LDAP user has logged into Mattermost and re-run the sync. The error should disappear at that point.</p>
+</div>
+<div class="section" id="can-the-ad-ldap-user-filter-read-security-groups">
+<h3>Can the AD/LDAP User Filter read security groups?<a class="headerlink" href="#can-the-ad-ldap-user-filter-read-security-groups" title="Permalink to this headline">¶</a></h3>
+<p>Yes it can, but make sure that:</p>
+<ul class="simple">
+<li>Permissions are correctly configured on the service account you are using.</li>
+<li>Each user object is a direct member of the security group.</li>
+</ul>
+</div>
+<div class="section" id="how-do-i-know-if-an-ad-ldap-sync-job-fails">
+<h3>How do I know if an AD/LDAP sync job fails?<a class="headerlink" href="#how-do-i-know-if-an-ad-ldap-sync-job-fails" title="Permalink to this headline">¶</a></h3>
+<p>Mattermost provides the status of each AD/LDAP sync job in <strong>System Console &gt; Authentication &gt; AD/LDAP</strong>. Here you can see the number of users updated and if the job succeeded or failed.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sso-gitlab.html" class="btn btn-neutral float-right" title="GitLab Single Sign-On" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="saml-technical.html" class="btn btn-neutral" title="SAML Single-Sign-On: Technical Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/cloud/cloud-administration/sso-ldap.md"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>
