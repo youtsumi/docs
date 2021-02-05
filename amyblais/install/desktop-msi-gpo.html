@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Desktop MSI Installer and Group Policy Installation Guides (Beta) &mdash; Mattermost 5.32 documentation</title>
+  <title>Desktop MSI Installer and Group Policy Installation Guides (Beta) &mdash; Mattermost 5.31 documentation</title>
   
 
   
@@ -69,7 +69,7 @@
             
             
               <div class="version">
-                5.32
+                5.31
               </div>
             
           
@@ -121,13 +121,14 @@
 <li class="toctree-l3"><a class="reference internal" href="desktop-managed-resources.html">Desktop Managed Resources</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Desktop MSI Installer and Group Policy Installation Guides (Beta)</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#installation-guide">Installation Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#silent-installation-guide">Silent Installation Guide</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-collaboration">Incident Collaboration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
@@ -193,7 +194,7 @@
             
   <div class="section" id="desktop-msi-installer-and-group-policy-installation-guides-beta">
 <span id="desktop-msi-gpo"></span><h1><a class="toc-backref" href="#contents">Desktop MSI Installer and Group Policy Installation Guides (Beta)</a><a class="headerlink" href="#desktop-msi-installer-and-group-policy-installation-guides-beta" title="Permalink to this headline">¶</a></h1>
-<p>This guide provides steps to install the MSI and use Group Policies in Windows Pro or Enterprise. The MSI installer package can be downloaded <a class="reference external" href="https://github.com/mattermost/desktop/releases/tag/v4.6.1">here</a>.</p>
+<p>This guide provides steps to install the MSI and use Group Policies in Windows Pro or Enterprise. The MSI installer package can be downloaded <a class="reference external" href="https://github.com/mattermost/desktop/releases/tag/v4.6.2">here</a>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>The Mattermost MSI installer and Group Policy (GPO) definitions are in Beta. Before installing this Beta, please ensure you have reviewed the following known issues:</p>
@@ -216,6 +217,7 @@
 <li><a class="reference internal" href="#verify-group-policy-settings-in-the-installed-desktop-app" id="id9">Verify Group Policy settings in the installed Desktop app</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#silent-installation-guide" id="id10">Silent Installation Guide</a></li>
 </ul>
 </li>
 </ul>
@@ -231,9 +233,9 @@
 <li><p class="first">Navigate to the <a class="reference external" href="https://github.com/mattermost/desktop">Mattermost Desktop</a> repo on <a class="reference external" href="https://github.com/">Github.com</a>.</p>
 <img alt="../_images/msi_gpo_installation_test_00002.png" src="../_images/msi_gpo_installation_test_00002.png" />
 </li>
-<li><p class="first">Navigate to the release page for <a class="reference external" href="https://github.com/mattermost/desktop/releases/tag/v4.6.1">version v4.6.1</a> and download the appropriate installer for your version of Windows (32bit vs. 64bit).</p>
+<li><p class="first">Navigate to the release page for <a class="reference external" href="https://github.com/mattermost/desktop/releases/tag/v4.6.2">version v4.6.2</a> and download the appropriate installer for your version of Windows (32bit vs. 64bit).</p>
 </li>
-<li><p class="first">Download the <a class="reference external" href="https://github.com/mattermost/desktop/archive/v4.6.1.zip">source.zip</a> file as well to extract group policy files.</p>
+<li><p class="first">Download the <a class="reference external" href="https://github.com/mattermost/desktop/archive/v4.6.2.zip">source.zip</a> file as well to extract group policy files.</p>
 <img alt="../_images/msi_gpo_installation_test_00003.png" src="../_images/msi_gpo_installation_test_00003.png" />
 </li>
 </ol>
@@ -241,10 +243,10 @@
 <div class="section" id="installing-group-policy-files-locally">
 <h3><a class="toc-backref" href="#contents">Installing Group Policy files locally</a><a class="headerlink" href="#installing-group-policy-files-locally" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic">
-<li><p class="first">Browse to the folder the above files were downloaded to and unzip the <code class="docutils literal notranslate"><span class="pre">desktop-4.6.1.zip</span></code> file in place.</p>
+<li><p class="first">Browse to the folder the above files were downloaded to and unzip the <code class="docutils literal notranslate"><span class="pre">desktop-4.6.2.zip</span></code> file in place.</p>
 <img alt="../_images/msi_gpo_installation_test_00004.png" src="../_images/msi_gpo_installation_test_00004.png" />
 </li>
-<li><p class="first">Navigate to the unzipped <code class="docutils literal notranslate"><span class="pre">desktop-4.6.1\resources\windows\gpo</span></code> folder and copy the contents.</p>
+<li><p class="first">Navigate to the unzipped <code class="docutils literal notranslate"><span class="pre">desktop-4.6.2\resources\windows\gpo</span></code> folder and copy the contents.</p>
 <img alt="../_images/msi_gpo_installation_test_00005.png" src="../_images/msi_gpo_installation_test_00005.png" />
 </li>
 <li><p class="first">Navigate to the <code class="docutils literal notranslate"><span class="pre">C:\Windows\PolicyDefinitions</span></code> folder and paste the files copied in the last step.</p>
@@ -319,6 +321,12 @@
 </li>
 </ol>
 </div>
+</div>
+<div class="section" id="silent-installation-guide">
+<h2><a class="toc-backref" href="#contents">Silent Installation Guide</a><a class="headerlink" href="#silent-installation-guide" title="Permalink to this headline">¶</a></h2>
+<p>Perform a silent installation of MSI by running the following command:</p>
+<p><code class="docutils literal notranslate"><span class="pre">msiexec</span> <span class="pre">/i</span> <span class="pre">mattermost-desktop-v4.6.2-x64.msi</span> <span class="pre">/qn</span></code></p>
+<p>Note: Current version is 4.6.2. In the future, you may need to change this command accordingly.</p>
 </div>
 </div>
 
