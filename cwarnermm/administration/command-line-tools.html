@@ -103,7 +103,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-collaboration">Incident Collaboration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a><ul class="current">
@@ -261,115 +261,116 @@ recommended before use)</li>
 <li><a class="reference internal" href="#mattermost-config-validate" id="id33">mattermost config validate</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#mattermost-export" id="id34">mattermost export</a><ul>
-<li><a class="reference internal" href="#mattermost-export-actiance" id="id35">mattermost export actiance</a></li>
-<li><a class="reference internal" href="#mattermost-export-bulk" id="id36">mattermost export bulk</a></li>
-<li><a class="reference internal" href="#mattermost-export-csv" id="id37">mattermost export csv</a></li>
-<li><a class="reference internal" href="#mattermost-export-global-relay-zip" id="id38">mattermost export global-relay-zip</a></li>
-<li><a class="reference internal" href="#mattermost-export-schedule" id="id39">mattermost export schedule</a></li>
+<li><a class="reference internal" href="#mattermost-db-init" id="id34">mattermost db init</a></li>
+<li><a class="reference internal" href="#mattermost-export" id="id35">mattermost export</a><ul>
+<li><a class="reference internal" href="#mattermost-export-actiance" id="id36">mattermost export actiance</a></li>
+<li><a class="reference internal" href="#mattermost-export-bulk" id="id37">mattermost export bulk</a></li>
+<li><a class="reference internal" href="#mattermost-export-csv" id="id38">mattermost export csv</a></li>
+<li><a class="reference internal" href="#mattermost-export-global-relay-zip" id="id39">mattermost export global-relay-zip</a></li>
+<li><a class="reference internal" href="#mattermost-export-schedule" id="id40">mattermost export schedule</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#mattermost-group" id="id40">mattermost group</a></li>
-<li><a class="reference internal" href="#mattermost-group-channel" id="id41">mattermost group channel</a><ul>
-<li><a class="reference internal" href="#mattermost-group-channel-enable" id="id42">mattermost group channel enable</a></li>
-<li><a class="reference internal" href="#mattermost-group-channel-disable" id="id43">mattermost group channel disable</a></li>
-<li><a class="reference internal" href="#mattermost-group-channel-list" id="id44">mattermost group channel list</a></li>
-<li><a class="reference internal" href="#mattermost-group-channel-status" id="id45">mattermost group channel status</a></li>
+<li><a class="reference internal" href="#mattermost-group" id="id41">mattermost group</a></li>
+<li><a class="reference internal" href="#mattermost-group-channel" id="id42">mattermost group channel</a><ul>
+<li><a class="reference internal" href="#mattermost-group-channel-enable" id="id43">mattermost group channel enable</a></li>
+<li><a class="reference internal" href="#mattermost-group-channel-disable" id="id44">mattermost group channel disable</a></li>
+<li><a class="reference internal" href="#mattermost-group-channel-list" id="id45">mattermost group channel list</a></li>
+<li><a class="reference internal" href="#mattermost-group-channel-status" id="id46">mattermost group channel status</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#mattermost-group-team" id="id46">mattermost group team</a><ul>
-<li><a class="reference internal" href="#mattermost-group-team-enable" id="id47">mattermost group team enable</a></li>
-<li><a class="reference internal" href="#mattermost-group-team-disable" id="id48">mattermost group team disable</a></li>
-<li><a class="reference internal" href="#mattermost-group-team-list" id="id49">mattermost group team list</a></li>
-<li><a class="reference internal" href="#mattermost-group-team-status" id="id50">mattermost group team status</a></li>
+<li><a class="reference internal" href="#mattermost-group-team" id="id47">mattermost group team</a><ul>
+<li><a class="reference internal" href="#mattermost-group-team-enable" id="id48">mattermost group team enable</a></li>
+<li><a class="reference internal" href="#mattermost-group-team-disable" id="id49">mattermost group team disable</a></li>
+<li><a class="reference internal" href="#mattermost-group-team-list" id="id50">mattermost group team list</a></li>
+<li><a class="reference internal" href="#mattermost-group-team-status" id="id51">mattermost group team status</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#mattermost-help" id="id51">mattermost help</a></li>
-<li><a class="reference internal" href="#mattermost-import" id="id52">mattermost import</a><ul>
-<li><a class="reference internal" href="#mattermost-import-bulk" id="id53">mattermost import bulk</a></li>
-<li><a class="reference internal" href="#mattermost-import-slack" id="id54">mattermost import slack</a></li>
+<li><a class="reference internal" href="#mattermost-help" id="id52">mattermost help</a></li>
+<li><a class="reference internal" href="#mattermost-import" id="id53">mattermost import</a><ul>
+<li><a class="reference internal" href="#mattermost-import-bulk" id="id54">mattermost import bulk</a></li>
+<li><a class="reference internal" href="#mattermost-import-slack" id="id55">mattermost import slack</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#mattermost-integrity" id="id55">mattermost integrity</a></li>
-<li><a class="reference internal" href="#mattermost-jobserver" id="id56">mattermost jobserver</a></li>
-<li><a class="reference internal" href="#mattermost-ldap" id="id57">mattermost ldap</a><ul>
-<li><a class="reference internal" href="#mattermost-ldap-idmigrate" id="id58">mattermost ldap idmigrate</a></li>
-<li><a class="reference internal" href="#mattermost-ldap-sync" id="id59">mattermost ldap sync</a></li>
+<li><a class="reference internal" href="#mattermost-integrity" id="id56">mattermost integrity</a></li>
+<li><a class="reference internal" href="#mattermost-jobserver" id="id57">mattermost jobserver</a></li>
+<li><a class="reference internal" href="#mattermost-ldap" id="id58">mattermost ldap</a><ul>
+<li><a class="reference internal" href="#mattermost-ldap-idmigrate" id="id59">mattermost ldap idmigrate</a></li>
+<li><a class="reference internal" href="#mattermost-ldap-sync" id="id60">mattermost ldap sync</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#mattermost-license" id="id60">mattermost license</a><ul>
-<li><a class="reference internal" href="#mattermost-license-upload" id="id61">mattermost license upload</a></li>
+<li><a class="reference internal" href="#mattermost-license" id="id61">mattermost license</a><ul>
+<li><a class="reference internal" href="#mattermost-license-upload" id="id62">mattermost license upload</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#mattermost-logs" id="id62">mattermost logs</a></li>
-<li><a class="reference internal" href="#mattermost-permissions" id="id63">mattermost permissions</a><ul>
-<li><a class="reference internal" href="#mattermost-permissions-export" id="id64">mattermost permissions export</a></li>
-<li><a class="reference internal" href="#mattermost-permissions-import" id="id65">mattermost permissions import</a></li>
-<li><a class="reference internal" href="#mattermost-permissions-reset" id="id66">mattermost permissions reset</a></li>
+<li><a class="reference internal" href="#mattermost-logs" id="id63">mattermost logs</a></li>
+<li><a class="reference internal" href="#mattermost-permissions" id="id64">mattermost permissions</a><ul>
+<li><a class="reference internal" href="#mattermost-permissions-export" id="id65">mattermost permissions export</a></li>
+<li><a class="reference internal" href="#mattermost-permissions-import" id="id66">mattermost permissions import</a></li>
+<li><a class="reference internal" href="#mattermost-permissions-reset" id="id67">mattermost permissions reset</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#mattermost-plugin" id="id67">mattermost plugin</a><ul>
-<li><a class="reference internal" href="#mattermost-plugin-add" id="id68">mattermost plugin add</a></li>
-<li><a class="reference internal" href="#mattermost-plugin-delete" id="id69">mattermost plugin delete</a></li>
-<li><a class="reference internal" href="#mattermost-plugin-disable" id="id70">mattermost plugin disable</a></li>
-<li><a class="reference internal" href="#mattermost-plugin-enable" id="id71">mattermost plugin enable</a></li>
-<li><a class="reference internal" href="#mattermost-plugin-list" id="id72">mattermost plugin list</a></li>
+<li><a class="reference internal" href="#mattermost-plugin" id="id68">mattermost plugin</a><ul>
+<li><a class="reference internal" href="#mattermost-plugin-add" id="id69">mattermost plugin add</a></li>
+<li><a class="reference internal" href="#mattermost-plugin-delete" id="id70">mattermost plugin delete</a></li>
+<li><a class="reference internal" href="#mattermost-plugin-disable" id="id71">mattermost plugin disable</a></li>
+<li><a class="reference internal" href="#mattermost-plugin-enable" id="id72">mattermost plugin enable</a></li>
+<li><a class="reference internal" href="#mattermost-plugin-list" id="id73">mattermost plugin list</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#mattermost-reset" id="id73">mattermost reset</a></li>
-<li><a class="reference internal" href="#mattermost-roles" id="id74">mattermost roles</a><ul>
-<li><a class="reference internal" href="#mattermost-roles-member" id="id75">mattermost roles member</a></li>
-<li><a class="reference internal" href="#mattermost-roles-system-admin" id="id76">mattermost roles system_admin</a></li>
+<li><a class="reference internal" href="#mattermost-reset" id="id74">mattermost reset</a></li>
+<li><a class="reference internal" href="#mattermost-roles" id="id75">mattermost roles</a><ul>
+<li><a class="reference internal" href="#mattermost-roles-member" id="id76">mattermost roles member</a></li>
+<li><a class="reference internal" href="#mattermost-roles-system-admin" id="id77">mattermost roles system_admin</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#mattermost-sampledata" id="id77">mattermost sampledata</a></li>
-<li><a class="reference internal" href="#mattermost-server" id="id78">mattermost server</a></li>
-<li><a class="reference internal" href="#mattermost-team" id="id79">mattermost team</a><ul>
-<li><a class="reference internal" href="#mattermost-team-add" id="id80">mattermost team add</a></li>
-<li><a class="reference internal" href="#mattermost-team-archive" id="id81">mattermost team archive</a></li>
-<li><a class="reference internal" href="#mattermost-team-create" id="id82">mattermost team create</a></li>
-<li><a class="reference internal" href="#mattermost-team-delete" id="id83">mattermost team delete</a></li>
-<li><a class="reference internal" href="#mattermost-team-list" id="id84">mattermost team list</a></li>
-<li><a class="reference internal" href="#mattermost-team-modify" id="id85">mattermost team modify</a></li>
-<li><a class="reference internal" href="#mattermost-team-remove" id="id86">mattermost team remove</a></li>
-<li><a class="reference internal" href="#mattermost-team-rename" id="id87">mattermost team rename</a></li>
-<li><a class="reference internal" href="#mattermost-team-restore" id="id88">mattermost team restore</a></li>
-<li><a class="reference internal" href="#mattermost-team-search" id="id89">mattermost team search</a></li>
+<li><a class="reference internal" href="#mattermost-sampledata" id="id78">mattermost sampledata</a></li>
+<li><a class="reference internal" href="#mattermost-server" id="id79">mattermost server</a></li>
+<li><a class="reference internal" href="#mattermost-team" id="id80">mattermost team</a><ul>
+<li><a class="reference internal" href="#mattermost-team-add" id="id81">mattermost team add</a></li>
+<li><a class="reference internal" href="#mattermost-team-archive" id="id82">mattermost team archive</a></li>
+<li><a class="reference internal" href="#mattermost-team-create" id="id83">mattermost team create</a></li>
+<li><a class="reference internal" href="#mattermost-team-delete" id="id84">mattermost team delete</a></li>
+<li><a class="reference internal" href="#mattermost-team-list" id="id85">mattermost team list</a></li>
+<li><a class="reference internal" href="#mattermost-team-modify" id="id86">mattermost team modify</a></li>
+<li><a class="reference internal" href="#mattermost-team-remove" id="id87">mattermost team remove</a></li>
+<li><a class="reference internal" href="#mattermost-team-rename" id="id88">mattermost team rename</a></li>
+<li><a class="reference internal" href="#mattermost-team-restore" id="id89">mattermost team restore</a></li>
+<li><a class="reference internal" href="#mattermost-team-search" id="id90">mattermost team search</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#mattermost-user" id="id90">mattermost user</a><ul>
-<li><a class="reference internal" href="#mattermost-user-activate" id="id91">mattermost user activate</a></li>
-<li><a class="reference internal" href="#mattermost-user-convert" id="id92">mattermost user convert</a></li>
-<li><a class="reference internal" href="#mattermost-user-create" id="id93">mattermost user create</a></li>
-<li><a class="reference internal" href="#mattermost-user-deactivate" id="id94">mattermost user deactivate</a></li>
-<li><a class="reference internal" href="#mattermost-user-delete" id="id95">mattermost user delete</a></li>
-<li><a class="reference internal" href="#mattermost-user-deleteall" id="id96">mattermost user deleteall</a></li>
-<li><a class="reference internal" href="#mattermost-user-email" id="id97">mattermost user email</a></li>
-<li><a class="reference internal" href="#mattermost-user-invite" id="id98">mattermost user invite</a></li>
-<li><a class="reference internal" href="#mattermost-user-migrate-auth" id="id99">mattermost user migrate_auth</a></li>
-<li><a class="reference internal" href="#mattermost-user-password" id="id100">mattermost user password</a></li>
-<li><a class="reference internal" href="#mattermost-user-resetmfa" id="id101">mattermost user resetmfa</a></li>
-<li><a class="reference internal" href="#mattermost-user-search" id="id102">mattermost user search</a></li>
-<li><a class="reference internal" href="#mattermost-user-verify" id="id103">mattermost user verify</a></li>
+<li><a class="reference internal" href="#mattermost-user" id="id91">mattermost user</a><ul>
+<li><a class="reference internal" href="#mattermost-user-activate" id="id92">mattermost user activate</a></li>
+<li><a class="reference internal" href="#mattermost-user-convert" id="id93">mattermost user convert</a></li>
+<li><a class="reference internal" href="#mattermost-user-create" id="id94">mattermost user create</a></li>
+<li><a class="reference internal" href="#mattermost-user-deactivate" id="id95">mattermost user deactivate</a></li>
+<li><a class="reference internal" href="#mattermost-user-delete" id="id96">mattermost user delete</a></li>
+<li><a class="reference internal" href="#mattermost-user-deleteall" id="id97">mattermost user deleteall</a></li>
+<li><a class="reference internal" href="#mattermost-user-email" id="id98">mattermost user email</a></li>
+<li><a class="reference internal" href="#mattermost-user-invite" id="id99">mattermost user invite</a></li>
+<li><a class="reference internal" href="#mattermost-user-migrate-auth" id="id100">mattermost user migrate_auth</a></li>
+<li><a class="reference internal" href="#mattermost-user-password" id="id101">mattermost user password</a></li>
+<li><a class="reference internal" href="#mattermost-user-resetmfa" id="id102">mattermost user resetmfa</a></li>
+<li><a class="reference internal" href="#mattermost-user-search" id="id103">mattermost user search</a></li>
+<li><a class="reference internal" href="#mattermost-user-verify" id="id104">mattermost user verify</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#mattermost-version" id="id104">mattermost version</a></li>
-<li><a class="reference internal" href="#mattermost-webhook" id="id105">mattermost webhook</a><ul>
-<li><a class="reference internal" href="#mattermost-webhook-create-incoming" id="id106">mattermost webhook create-incoming</a></li>
-<li><a class="reference internal" href="#mattermost-webhook-create-outgoing" id="id107">mattermost webhook create-outgoing</a></li>
-<li><a class="reference internal" href="#mattermost-webhook-delete" id="id108">mattermost webhook delete</a></li>
-<li><a class="reference internal" href="#mattermost-webhook-list" id="id109">mattermost webhook list</a></li>
-<li><a class="reference internal" href="#mattermost-webhook-modify-incoming" id="id110">mattermost webhook modify-incoming</a></li>
-<li><a class="reference internal" href="#mattermost-webhook-modify-outgoing" id="id111">mattermost webhook modify-outgoing</a></li>
-<li><a class="reference internal" href="#mattermost-webhook-move-outgoing" id="id112">mattermost webhook move-outgoing</a></li>
-<li><a class="reference internal" href="#mattermost-webhook-show" id="id113">mattermost webhook show</a></li>
+<li><a class="reference internal" href="#mattermost-version" id="id105">mattermost version</a></li>
+<li><a class="reference internal" href="#mattermost-webhook" id="id106">mattermost webhook</a><ul>
+<li><a class="reference internal" href="#mattermost-webhook-create-incoming" id="id107">mattermost webhook create-incoming</a></li>
+<li><a class="reference internal" href="#mattermost-webhook-create-outgoing" id="id108">mattermost webhook create-outgoing</a></li>
+<li><a class="reference internal" href="#mattermost-webhook-delete" id="id109">mattermost webhook delete</a></li>
+<li><a class="reference internal" href="#mattermost-webhook-list" id="id110">mattermost webhook list</a></li>
+<li><a class="reference internal" href="#mattermost-webhook-modify-incoming" id="id111">mattermost webhook modify-incoming</a></li>
+<li><a class="reference internal" href="#mattermost-webhook-modify-outgoing" id="id112">mattermost webhook modify-outgoing</a></li>
+<li><a class="reference internal" href="#mattermost-webhook-move-outgoing" id="id113">mattermost webhook move-outgoing</a></li>
+<li><a class="reference internal" href="#mattermost-webhook-show" id="id114">mattermost webhook show</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#mattermost-3-5-and-earlier" id="id114">Mattermost 3.5 and earlier</a></li>
-<li><a class="reference internal" href="#troubleshooting" id="id115">Troubleshooting</a><ul>
-<li><a class="reference internal" href="#executing-a-command-hangs-and-doesn-t-complete" id="id116">Executing a command hangs and doesn’t complete</a></li>
+<li><a class="reference internal" href="#mattermost-3-5-and-earlier" id="id115">Mattermost 3.5 and earlier</a></li>
+<li><a class="reference internal" href="#troubleshooting" id="id116">Troubleshooting</a><ul>
+<li><a class="reference internal" href="#executing-a-command-hangs-and-doesn-t-complete" id="id117">Executing a command hangs and doesn’t complete</a></li>
 </ul>
 </li>
 </ul>
@@ -1195,6 +1196,35 @@ bin/mattermost command move newteam o8soyabwthjnf9qibfztje5a36h
 </dl>
 </div></blockquote>
 </div>
+</div>
+<div class="section" id="mattermost-db-init">
+<h3><a class="toc-backref" href="#contents">mattermost db init</a><a class="headerlink" href="#mattermost-db-init" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="docutils">
+<dt>Description</dt>
+<dd>Initializes the database for a given data source name (DSN), executes migrations, and loads custom defaults when specified.</dd>
+<dt>Format</dt>
+<dd><div class="first last highlight-none notranslate"><div class="highlight"><pre><span></span>mattermost db init
+</pre></div>
+</div>
+</dd>
+</dl>
+<p>Examples</p>
+<blockquote>
+<div><p>Use the <code class="docutils literal notranslate"><span class="pre">config</span></code> flag to pass the DSN:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>mattermost db init --config postgres://localhost/mattermost
+</pre></div>
+</div>
+<p>Run this command to use the <code class="docutils literal notranslate"><span class="pre">MM_CONFIG</span></code> environment variable:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>MM_CONFIG=postgres://localhost/mattermost mattermost db init
+</pre></div>
+</div>
+<p>Run this command to set a custom defaults file to be loaded into the database:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>MM_CUSTOM_DEFAULTS_PATH=custom.json MM_CONFIG=postgres://localhost/mattermost mattermost db init
+</pre></div>
+</div>
+</div></blockquote>
+</div></blockquote>
 </div>
 <div class="section" id="mattermost-export">
 <h3><a class="toc-backref" href="#contents">mattermost export</a><a class="headerlink" href="#mattermost-export" title="Permalink to this headline">¶</a></h3>

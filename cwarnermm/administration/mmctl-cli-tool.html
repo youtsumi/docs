@@ -103,7 +103,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-management">Incident Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-collaboration">Incident Collaboration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a><ul class="current">
@@ -1488,6 +1488,8 @@ To configure your zsh shell to load completions <span class="k">for</span> each 
 <dd><ul class="first last simple">
 <li><a class="reference internal" href="#mmctl-config-edit">mmctl config edit</a> - Edit the configuration settings</li>
 <li><a class="reference internal" href="#mmctl-config-get">mmctl config get</a> - Get the value of a configuration setting</li>
+<li><a class="reference internal" href="#mmctl-config-migrate">mmctl config migrate</a> - Migrate existing configuration between backends</li>
+<li><a class="reference internal" href="#mmctl-config-reload">mmctl config reload</a> - Reload the server configuration</li>
 <li><a class="reference internal" href="#mmctl-config-reset">mmctl config reset</a> - Reset the configuration</li>
 <li><a class="reference internal" href="#mmctl-config-set">mmctl config set</a> - Set the value of a configuration</li>
 <li><a class="reference internal" href="#mmctl-config-show">mmctl config show</a> - Write the server configuration to STDOUT</li>
@@ -1547,6 +1549,59 @@ To configure your zsh shell to load completions <span class="k">for</span> each 
 --insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
 --local                       allows communicating with the server through a unix socket
 --strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
+<div class="section" id="mmctl-config-migrate">
+<h3>mmctl config migrate<a class="headerlink" href="#mmctl-config-migrate" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<p>Migrates a file-based configuration to (or from) a database-based configuration. Point the Mattermost server at the target configuration to start using it. This command only migrates the configuration data from one type to another.</p>
+<p><strong>Note:</strong></p>
+<blockquote>
+<div>To change the store type to use the database, a System Admin needs to set a <code class="docutils literal notranslate"><span class="pre">MM_CONFIG</span></code> <a class="reference external" href="https://docs.mattermost.com/administration/config-in-database.html#create-an-environment-file">environment variable</a> and restart the Mattermost server.</div></blockquote>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl config migrate <span class="o">[</span>from_config<span class="o">]</span> <span class="o">[</span>to_config<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>config migrate path/to/config.json <span class="s2">&quot;postgres://mmuser:mostest@localhost:5432/mattermost_test?sslmode=disable&amp;connect_timeout=10&quot;</span>
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help   <span class="nb">help</span> <span class="k">for</span> migrate
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string           path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
+--format string                the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate   allows to use insecure TLS protocols, such as SHA-1
+--local                        allows communicating with the server through a unix socket
+--strict                       will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
+<div class="section" id="mmctl-config-reload">
+<h3>mmctl config reload<a class="headerlink" href="#mmctl-config-reload" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<p>Reloads the server configuration and applies new settings.</p>
+<p><strong>Format</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl config reload <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>config reload
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help   <span class="nb">help</span> <span class="k">for</span> reload
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string           path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
+--format string                the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate   allows to use insecure TLS protocols, such as SHA-1
+--local                        allows communicating with the server through a unix socket
+--strict                       will only run commands <span class="k">if</span> the mmctl version matches the server one
 </pre></div>
 </div>
 </div>
