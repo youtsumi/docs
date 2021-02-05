@@ -1,0 +1,558 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Mattermost Cloud Changelog &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Managing Members" href="../cloud-user-management/user-management.html" />
+    <link rel="prev" title="Statistics" href="../cloud-reporting.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview/index.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../guides/cloud-admin-guide.html#system-administration">System Administration</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../cloud-billing/cloud-billing.html">Mattermost Cloud Billing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cloud-reporting.html">Statistics</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Mattermost Cloud Changelog</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#release-2021-01-26">Release 2021-01-26</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-2021-01-12">Release 2021-01-12</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-2020-12-18">Release 2020-12-18</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-2020-12-09">Release 2020-12-09</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-2020-12-03">Release 2020-12-03</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-2020-11-24">Release 2020-11-24</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#user-management">User Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#authentication">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#integrations">Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#compliance">Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#mobile">Mobile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#incident-management">Incident Management</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/administrator.html">Self-Managed Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../../guides/cloud-admin-guide.html">Cloud Administrator’s Guide</a> &raquo;</li>
+    
+    <li>Mattermost Cloud Changelog</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/cloud/cloud-administration/cloud-changelog.md" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mattermost-cloud-changelog">
+<h1>Mattermost Cloud Changelog<a class="headerlink" href="#mattermost-cloud-changelog" title="Permalink to this headline">¶</a></h1>
+<p>This changelog summarizes updates to <a class="reference external" href="https://mattermost.com/get-started/">Mattermost Cloud</a>, an enterprise-grade SaaS offering hosted by Mattermost.</p>
+<div class="section" id="release-2021-01-26">
+<h2>Release 2021-01-26<a class="headerlink" href="#release-2021-01-26" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="highlights">
+<h3>Highlights<a class="headerlink" href="#highlights" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="channel-sidebar-improvements">
+<h4>Channel Sidebar Improvements<a class="headerlink" href="#channel-sidebar-improvements" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>New channel sidebar improvements include a configurable <strong>Unreads</strong> category as well as the ability to sort categories by recent activity or alphabetically in addition to manually.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="improvements">
+<h3>Improvements<a class="headerlink" href="#improvements" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="user-interface-ui">
+<h4>User Interface (UI)<a class="headerlink" href="#user-interface-ui" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Added new languages, Bulgarian and Swedish.</li>
+<li>Moved the header icons to the left of the header beside the channel description.</li>
+<li>The Database search using PostgreSQL now supports searching for terms that contain underscores.</li>
+</ul>
+</div>
+<div class="section" id="plugins">
+<h4>Plugins<a class="headerlink" href="#plugins" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Enabled experimental support for ARM64 plugins by allowing any matching <code class="docutils literal notranslate"><span class="pre">GOOS-GOOARCH</span></code> combination in the plugin manifest.</li>
+</ul>
+</div>
+<div class="section" id="administration">
+<h4>Administration<a class="headerlink" href="#administration" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>The <code class="docutils literal notranslate"><span class="pre">UseExperimentalGossip</span></code> field under ClusterSettings is now <code class="docutils literal notranslate"><span class="pre">true</span></code> by default. This means that new installations will use the Gossip protocol for cluster communication. There will be no changes to existing installations. The Gossip protocol is now considered to be in General Availability and is the recommended clustering mode.</li>
+<li><code class="docutils literal notranslate"><span class="pre">AnalyticsPostCount</span></code> now avoids unnecessary table scans during various background jobs.</li>
+<li>Added a <code class="docutils literal notranslate"><span class="pre">CollapsedThreads</span></code> feature flag.</li>
+<li>The Help text for the Rate Limiting setting was updated to explain the purpose of rate limiting.</li>
+<li>Removed the word “experimental” from the Gossip setting in the System Console.</li>
+<li>Deprecated the <code class="docutils literal notranslate"><span class="pre">ExperimentalChannelSidebarOrganization</span></code> setting and added a new <code class="docutils literal notranslate"><span class="pre">EnableLegacySidebar</span></code> setting. The new channel sidebar will be enabled system-wide by default.</li>
+</ul>
+</div>
+<div class="section" id="bug-fixes">
+<h4>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Fixed an issue where the Admin Filter option was not disabled in the AD/LDAP page for Admin roles with a <code class="docutils literal notranslate"><span class="pre">sysconsole_write_authentication</span></code> permission.</li>
+<li>Fixed an issue where channels would sometimes be removed from custom categories when a user left a team.</li>
+<li>Fixed an issue where the error text was missing when the team name was left blank on the Team Create page.</li>
+<li>Fixed an issue where the System Manager was able to download the Compliance Export files.</li>
+<li>Fixed an issue where themed button colours in interactive message attachments in Mattermost’s default dark theme were mismatched.</li>
+<li>Fixed an issue where bold and italics shortcuts triggered with CTRL+B on Mac.</li>
+<li>Fixed an issue where a “Your license does not support cloud requests” log error appeared on self-hosted servers.</li>
+</ul>
+</div>
+<div class="section" id="known-issues">
+<h4>Known Issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Setting changes do not get saved on <strong>System Console &gt; Site Configuration &gt; Public Links</strong>.</li>
+<li>Alignment of team icons are off on <strong>System Console &gt; User Management &gt;Teams Page</strong>.</li>
+<li>Alignment of channel header text “This channel has guests” is off.</li>
+<li>Sometimes an “Unable to get role” error appears when changing a channel member role on <strong>User Management &gt; Channel</strong>.</li>
+<li><strong>Cloud &gt; “Tips &amp; Next Steps”</strong> should not show an “Explore channels” section for guest users.</li>
+<li>System Roles shows <strong>License</strong> and <strong>Environment</strong> as possible permissions, but they are always hidden in Cloud.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="release-2021-01-12">
+<h2>Release 2021-01-12<a class="headerlink" href="#release-2021-01-12" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Highlights<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Pre-packaged and pre-installed Mattermost Incident Management v1.2.0.</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h3>Improvements<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h4>User Interface (UI)<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Changed the number of file attachments allowed per post, from 5 to 10.</li>
+<li>Added support to move multi-selected groups of channels to another category via the <strong>More options</strong> menu.</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h4>Administration<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Updated the Go version to v1.15.5.</li>
+<li>Added support for automatic installation and enablement of plugins using feature flags.</li>
+<li>Added <code class="docutils literal notranslate"><span class="pre">webhook</span> <span class="pre">create</span></code> endpoints to local mode and the ability to create webhooks for other users.</li>
+<li>Added a Mattermost CLI command to initialize the database.</li>
+<li>Enabled <code class="docutils literal notranslate"><span class="pre">ExperimentalDataPrefetch</span></code> for all servers and removed the corresponding setting.</li>
+<li>Added support for processing import files through the API.</li>
+<li>Added support for protocol-relative URLs while using the Image Proxy.</li>
+<li>Added shared channels and <code class="docutils literal notranslate"><span class="pre">remote_cluster_service</span></code> under a license check.</li>
+<li>A Striped LRU cache is now used by default.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id5">
+<h3>Bug Fixes<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Fixed an issue where the permissions of a System Admin role got deleted when changing the access level to any permission.</li>
+<li>Fixed an issue where editing a <code class="docutils literal notranslate"><span class="pre">/me</span></code> post behaved differently within the Mattermost Web App and the Mobile App.</li>
+<li>Fixed an issue where the hover state on category headers did not span the whole width of the left-hand navigation.</li>
+<li>Fixed an issue where plugins on the left-hand side of the System Console were sorted differently than the ones in the Plugin Management page.</li>
+<li>Fixed an issue where 15-character team names were truncated when the experimental channel sidebar was enabled.</li>
+<li>Fixed an issue where the sidebar menus weren’t styled correctly in mobile browser view.</li>
+<li>Fixed an issue where jumping into an archive channel and clicking the link to jump to recent messages sent the user out of the archived channel.</li>
+<li>Fixed an issue where the tooltip text for copying an incoming webhook URL was unclear.</li>
+</ul>
+</div>
+<div class="section" id="id6">
+<h3>Known Issues<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Cloud &gt; “Tips &amp; Next Steps” should not show an “Explore channels” section for guest users.</li>
+<li>System Roles shows License and Environment as possible permissions but they are always hidden in Cloud.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="release-2020-12-18">
+<h2>Release 2020-12-18<a class="headerlink" href="#release-2020-12-18" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id7">
+<h3>Bug Fixes<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Fixed a performance issue related to typing lag.</li>
+<li>Fixed an issue where YouTube previews did not display sometimes.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="release-2020-12-09">
+<h2>Release 2020-12-09<a class="headerlink" href="#release-2020-12-09" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id8">
+<h3>Improvements<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id9">
+<h4>User Interface (UI)<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Added the ability to mute categories with the experimental sidebar feature.</li>
+<li>Added support for multi-selection of channels when dragging and dropping between channels in the experimental sidebar feature.</li>
+<li>Group messages are now returned in the channel switcher when only first names are typed.</li>
+<li>Issuing /dnd consecutively no longer unexpectedly toggles the user status between “Do Not Disturb” and “Online” and will only set the user’s status to “Do Not Disturb”.</li>
+</ul>
+</div>
+<div class="section" id="id10">
+<h4>Administration<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Added a new <code class="docutils literal notranslate"><span class="pre">manage_remote_clusters</span></code> permission.</li>
+<li>Enabled goSAML2 library as the only supported SAML library.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id11">
+<h3>Bug Fixes<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Cleaned up the config store on server initialization errors.</li>
+<li>Fixed an issue where permissions did not grant read and/or write access to the Global Relay configuration settings.</li>
+<li>Fixed an issue where the site configuration ‘’Read only’’ permission did not make the “Notice” section as read-only for the System Manager.</li>
+<li>Fixed an issue where importing Client4 in a node server caused an exception due to rudder modules.</li>
+<li>Fixed an issue where LDAP ‘’FirstLoginSync’’ didn’t close the LDAP session.</li>
+</ul>
+</div>
+<div class="section" id="id12">
+<h3>Known Issues<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>System Managers do not have access to the Billing section and see a blank screen.</li>
+<li>Cloud &gt; “Tips &amp; Next Steps” should not show an “Explore channels” section for guest users.</li>
+<li>System Roles shows License and Environment as possible permissions but they are always hidden in Cloud.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="release-2020-12-03">
+<h2>Release 2020-12-03<a class="headerlink" href="#release-2020-12-03" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id13">
+<h3>Bug Fixes<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Disabled the xmlsec1-based SAML library in favor of the re-enabled and improved SAML library.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="release-2020-11-24">
+<h2>Release 2020-11-24<a class="headerlink" href="#release-2020-11-24" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id14">
+<h3>Highlights<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="modify-new-admin-roles-permissions-in-the-system-console-beta">
+<h4>Modify new Admin roles permissions in the System Console (Beta)<a class="headerlink" href="#modify-new-admin-roles-permissions-in-the-system-console-beta" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Added a user interface for the existing new system roles functionality including new permissions to read and write system roles.</li>
+</ul>
+</div>
+<div class="section" id="pre-package-and-enable-incident-management-v1-1-1">
+<h4>Pre-package and enable incident management v1.1.1<a class="headerlink" href="#pre-package-and-enable-incident-management-v1-1-1" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+<div class="section" id="id15">
+<h3>Improvements<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="user-interface">
+<h4>User Interface<a class="headerlink" href="#user-interface" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>&#64;-autocomplete results are now prioritized based on recency and thread activity.</li>
+<li>File attachments below the size of 10 (KB, MB, GB, TB, etc.) now allow showing fractions.</li>
+<li>The formatting of the channel header change message was improved.</li>
+<li>Team invite workflow now shows BOT tags when the search returns Bot users.</li>
+<li>Added the ability to zoom in and out of PDF files.</li>
+<li>Added support for 16x16 base64 encoded mini images to use with progressive rendering.</li>
+</ul>
+</div>
+<div class="section" id="notifications">
+<h4>Notifications<a class="headerlink" href="#notifications" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Channel-wide mentions are now automatically disabled when a user mutes a channel.</li>
+</ul>
+</div>
+<div class="section" id="integrations">
+<h4>Integrations<a class="headerlink" href="#integrations" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Updated icon_emoji field in incoming webhooks to allow emojis to be specified with surrounding colons.</li>
+<li>Dynamic auto-completion is now supported for built-in slash commands.</li>
+<li>Added plugin hooks for ReationHasBeenAdded and ReactionHasBeenRemoved.</li>
+</ul>
+</div>
+<div class="section" id="id16">
+<h4>Administration<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Added the ability to load a set of custom configuration defaults from a MM_CUSTOM_DEFAULTS_PATH environment variable.</li>
+<li>Added AWS metering service support.</li>
+<li>Added the ability to retrieve compliance files from the System Console.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id17">
+<h3>Bug Fixes<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Fixed an issue with broken link previews for Twitter links.</li>
+<li>Fixed an issue where editing a post did not submit with CMD+ENTER.</li>
+<li>Fixed an issue where users were able to create or edit slash commands to contain more than two slashes in the URL.</li>
+<li>Fixed an issue where resized emojis were being overwritten with original data.</li>
+<li>Fixed an issue where the sidebar category “More” menu was not shown when hovering over a long category name.</li>
+<li>Fixed an issue where a received direct message did not show up on the sidebar if the direct message channel was newly created.</li>
+<li>Fixed an issue where a search using <code class="docutils literal notranslate"><span class="pre">from:</span></code> failed to auto-load more results on the right-hand side when Elasticsearch was enabled.</li>
+<li>Fixed an issue where an s3 file backend TestFileConnection failed due to permissions if S3PathPrefix was in use.</li>
+<li>Fixed an issue where an id was missing for a Tooltip in PostInfo.</li>
+</ul>
+<div class="section" id="api-changes">
+<h4>API Changes<a class="headerlink" href="#api-changes" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Added new local API endpoints for getting, updating, and deleting incoming and outgoing webhooks.</li>
+<li>Added new API endpoints to work with experimental collapsed threads.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id18">
+<h3>Known Issues<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>System Managers do not have access to the Billing section and see a blank screen.</li>
+<li>Cloud &gt; “Tips &amp; Next Steps” should not show an “Explore channels” section for guest users.</li>
+<li>System Roles shows License and Environment as possible permissions but they are always hidden in Cloud.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../cloud-user-management/user-management.html" class="btn btn-neutral float-right" title="Managing Members" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../cloud-reporting.html" class="btn btn-neutral" title="Statistics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/cloud/cloud-administration/cloud-changelog.md"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>
