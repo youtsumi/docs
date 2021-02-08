@@ -1,0 +1,615 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Plugins (Beta) &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Message Attachments" href="../developer/message-attachments.html" />
+    <link rel="prev" title="Slash Commands" href="../developer/slash-commands.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/integration.html">Integration Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../integrations/jira.html">Jira Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../integrations/zoom.html">Zoom Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../integrations/zapier.html">Zapier Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer/api.html">API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer/webhooks-incoming.html">Incoming Webhooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer/webhooks-outgoing.html">Outgoing Webhooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer/slash-commands.html">Slash Commands</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Plugins (Beta)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#plugin-marketplace">Plugin Marketplace</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#plugin-labels">Plugin labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#installing-a-plugin">Installing a plugin</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuring-and-enabling-a-plugin">Configuring and enabling a plugin</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#upgrading-plugins">Upgrading plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#upgrading-plugins-prior-to-v5-18">Upgrading plugins (prior to v5.18)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#marketplace-server">Marketplace server</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mattermost-marketplace">Mattermost Marketplace</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#mattermost-integration-directory">Mattermost integration directory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#about-plugins">About plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#security">Security</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#plugin-signing">Plugin signing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#key-generation">Key generation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#exporting-the-private-key">Exporting the private key</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#exporting-the-public-key">Exporting the public key</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#importing-the-key">Importing the key</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implementation">Implementation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#set-up-guide">Set up guide</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pre-packaged-plugins">Pre-packaged plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#custom-plugins">Custom plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#plugin-uploads-in-high-availability-mode">Plugin uploads in High Availability mode</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#frequently-asked-questions-faqs">Frequently Asked Questions (FAQs)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#where-can-i-share-feedback-on-plugins">Where can I share feedback on plugins?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#plugin-uploads-fail-even-though-uploads-are-enabled">Plugin uploads fail even though uploads are enabled</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#x509-certificate-signed-by-unknown-authority"><code class="docutils literal notranslate"><span class="pre">x509:</span> <span class="pre">certificate</span> <span class="pre">signed</span> <span class="pre">by</span> <span class="pre">unknown</span> <span class="pre">authority</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developer/message-attachments.html">Message Attachments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer/interactive-messages.html">Interactive Messages: Buttons and Menus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer/interactive-dialogs.html">Interactive Dialogs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer/bot-accounts.html">Bot Accounts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer/personal-access-tokens.html">Personal Access Tokens</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer/oauth-2-0-applications.html">OAuth 2.0 Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer/integration-faq.html">Integrations FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../integrations/embedding.html">Embedding Mattermost in Other Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../integrations/webhook.html">Using Mattermost with Webhook</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/integration.html">Mattermost Integration Guide</a> &raquo;</li>
+    
+    <li>Plugins (Beta)</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/administration/plugins.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="plugins-beta">
+<h1>Plugins (Beta)<a class="headerlink" href="#plugins-beta" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This is the admin documentation for plugins. If you’re a developer looking to build a plugin, see <a class="reference external" href="https://developers.mattermost.com/extend/plugins/">our developer documentation</a>.</p>
+</div>
+<p>Mattermost supports plugins to customize and extend the platform. See our <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-demo">demo plugin</a> that illustrates the potential for a Mattermost plugin. To start writing your own plugin, consult our <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-starter-template">starter template</a>.</p>
+<p>Consider using a plugin in the following scenarios:</p>
+<blockquote>
+<div><ul class="simple">
+<li>When you want to customize the Mattermost user interface.</li>
+<li>When you want to extend Mattermost functionality to meet a specific, complex requirement.</li>
+<li>When you want to build integrations that are managed by your Mattermost server.</li>
+</ul>
+</div></blockquote>
+<p>Plugins are fully supported in both Team Edition and Enterprise Edition.</p>
+<div class="section" id="plugin-marketplace">
+<h2>Plugin Marketplace<a class="headerlink" href="#plugin-marketplace" title="Permalink to this headline">¶</a></h2>
+<p>The Plugin Marketplace is a collection of plugins that can greatly increase the value and capabilities of your Mattermost deployment. End users can see increased productivity through quick access to systems such as Jira, Zoom, Webex, and GitHub. Mattermost Admins can discover new plugins and quickly deploy them to their servers, including High Availability clusters.</p>
+<p>The Plugin Marketplace is available from v5.16 and is accessed via <strong>Main Menu &gt; Plugin Marketplace</strong>. More listings will be added as we add new features and plugins that our customers request.</p>
+<img alt="https://user-images.githubusercontent.com/915956/66891467-1b18eb80-ef9e-11e9-9de3-37a3c5899bd8.png" src="https://user-images.githubusercontent.com/915956/66891467-1b18eb80-ef9e-11e9-9de3-37a3c5899bd8.png" />
+<div class="section" id="plugin-labels">
+<h3>Plugin labels<a class="headerlink" href="#plugin-labels" title="Permalink to this headline">¶</a></h3>
+<p>Plugins in the Plugin Marketplace are labeled to make it easier for administrators to choose plugins that fit their company’s security and risk policies if they do not allow for community plugins to be used.</p>
+<p><strong>Community Plugins</strong></p>
+<p>Plugins identified as “Community” are produced by the open-source community or partners and the features/roadmap are not controlled directly by Mattermost. Prior to being listed on the Plugin Marketplace, they are reviewed by the Mattermost development team and code-signed to ensure the code Mattermost reviewed, is delivered. Mattermost does not directly support these plugins in production environments.</p>
+<p><strong>Beta Plugins</strong></p>
+<p>Plugins may be labeled as “Beta” if they’re released to the Plugin Marketplace early for customer previews. We do not recommend running Beta plugins on production servers.</p>
+</div>
+<div class="section" id="installing-a-plugin">
+<h3>Installing a plugin<a class="headerlink" href="#installing-a-plugin" title="Permalink to this headline">¶</a></h3>
+<p>When a new plugin becomes available on the Plugin Marketplace, it’s listed with an option to <strong>Install</strong>. Select <strong>Install</strong> to download and install the latest plugin binary from its respective GitHub repository. If there’s a cluster present, the plugin will be distributed to each server automatically.</p>
+</div>
+<div class="section" id="configuring-and-enabling-a-plugin">
+<h3>Configuring and enabling a plugin<a class="headerlink" href="#configuring-and-enabling-a-plugin" title="Permalink to this headline">¶</a></h3>
+<p>Once a plugin is installed (or pre-installed if shipped with Mattermost binary release):</p>
+<ol class="arabic simple">
+<li>Select <strong>Configure</strong> to open the <strong>Settings</strong> menu.</li>
+<li>Enter the plugin settings as required.</li>
+<li>Set <strong>Enable Plugin</strong> setting to <code class="docutils literal notranslate"><span class="pre">True</span></code>. If this flag is not enabled, the plugin will not become active.</li>
+<li>Test out the plugin as needed.</li>
+</ol>
+</div>
+<div class="section" id="upgrading-plugins">
+<h3>Upgrading plugins<a class="headerlink" href="#upgrading-plugins" title="Permalink to this headline">¶</a></h3>
+<p>Upgrade a plugin on demand when a new version becomes available. New versions of plugins that you have already installed will display a link to easily install the upgraded plugins. Some plugin versions may have breaking changes; please check the release notes if you are performing a major version change.</p>
+</div>
+<div class="section" id="upgrading-plugins-prior-to-v5-18">
+<h3>Upgrading plugins (prior to v5.18)<a class="headerlink" href="#upgrading-plugins-prior-to-v5-18" title="Permalink to this headline">¶</a></h3>
+<p>In v5.16 and v5.17 the Plugin Marketplace only supports the installation of new plugins. To upgrade a plugin, you need to manually update it by downloading the binary file from the GitHub repository and then upload it in <strong>System Console &gt; Plugin Management</strong>.</p>
+</div>
+</div>
+<div class="section" id="marketplace-server">
+<h2>Marketplace server<a class="headerlink" href="#marketplace-server" title="Permalink to this headline">¶</a></h2>
+<p>There are two settings in <strong>System Console &gt; Plugin Management</strong>:</p>
+<img alt="https://user-images.githubusercontent.com/915956/66892854-94660d80-efa1-11e9-805c-a85223d43a07.png" src="https://user-images.githubusercontent.com/915956/66892854-94660d80-efa1-11e9-805c-a85223d43a07.png" />
+<ul class="simple">
+<li><strong>Enable Marketplace:</strong> Turns the Plugin Marketplace user interface on or off for System Administrators (end users cannot see the Plugin Marketplace).</li>
+<li><strong>Marketplace URL:</strong> The location of the Marketplace server to query for new plugins. Mattermost hosts a Plugin Marketplace for the community and this is the default value for this field. You can also set up your own Marketplace server.</li>
+</ul>
+<p>When you first access the Marketplace, your Mattermost server will attempt to contact the Mattermost Plugin Marketplace server and return a list of available plugins that are appropriate based on the server version that is currently running. Only your server version and search query is passed over to the Mattermost Plugin Marketplace; we retain an anonymized record for product analytics whenever a new plugin is installed, unless you have opted out of <a class="reference external" href="https://docs.mattermost.com/administration/telemetry.html">Telemetry</a>.</p>
+<p>The <a class="reference external" href="https://github.com/mattermost/mattermost-marketplace">Plugin Marketplace server code</a> is available as an open source project and can be used to set up your own private Marketplace if desired.</p>
+<div class="section" id="mattermost-marketplace">
+<h3>Mattermost Marketplace<a class="headerlink" href="#mattermost-marketplace" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference external" href="https://github.com/mattermost/mattermost-marketplace">Mattermost Plugin Marketplace</a> is a service run by Mattermost that contains listings of plugins that we have reviewed and, in many cases, built. In the future, we plan to include community-developed plugins that will be labeled separately to Mattermost-developed plugins. as well as settings that would restrict which types of plugins you can install. Comments in our forum are welcome as we develop this feature further.</p>
+</div>
+</div>
+<div class="section" id="mattermost-integration-directory">
+<h2>Mattermost integration directory<a class="headerlink" href="#mattermost-integration-directory" title="Permalink to this headline">¶</a></h2>
+<p>There are many ways to integrate Mattermost aside from plugins, and we have created a directory of integration “recipes”, some of which are scripts, plugins, or instructions on how to connect Mattermost with your Enterprise systems. Many are sourced from our community of customers. You can browse the directory at <a class="reference external" href="https://integrations.mattermost.com/">https://integrations.mattermost.com/</a>.</p>
+</div>
+<div class="section" id="about-plugins">
+<h2>About plugins<a class="headerlink" href="#about-plugins" title="Permalink to this headline">¶</a></h2>
+<p>Plugins may have one or both of the following parts:</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>Web App plugins:</strong> Customize the Mattermost user interface by adding buttons to the channel header, overriding the <code class="docutils literal notranslate"><span class="pre">RHS</span></code>, or even rendering a custom post type within the center channel. All this is possible without having to fork the source code and rebase on every Mattermost release. For a sample plugin, see <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-zoom">our Zoom plugin</a>.</li>
+<li><strong>Server plugins:</strong> Run a Go process alongside the server, filtering messages, or integrating with third-party systems such as Jira, GitLab, or Jenkins. For a sample plugin, see <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-jira">our Jira plugin</a>.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="security">
+<h2>Security<a class="headerlink" href="#security" title="Permalink to this headline">¶</a></h2>
+<p>Plugins are intentionally powerful and not artificially sandboxed in any way and effectively become part of the Mattermost server. Server plugins can execute arbitrary code alongside your server and webapp plugins can deploy arbitrary code in client browsers.</p>
+<p>While this power enables deep customization and integration, it can be abused in the wrong hands. Plugins have full access to your server configuration and thus also to your Mattermost database. Plugins can read any message in any channel, or perform any action on behalf of any user in the Web App.</p>
+<p>You should only install custom plugins from sources you trust to avoid compromising the security of your installation.</p>
+</div>
+<div class="section" id="plugin-signing">
+<h2>Plugin signing<a class="headerlink" href="#plugin-signing" title="Permalink to this headline">¶</a></h2>
+<p>The Plugin Marketplace allows system administrators to download and install plugins from a central repository. Plugins installed via the Plugin Marketplace must be signed by a public key certificate trusted by the local Mattermost server.</p>
+<p>While the server ships with a default certificate used to verify plugins from the default Mattermost Plugin Marketplace, the server can be configured to trust different certificates and point at a different plugin marketplace. This document outlines the steps for generating a public key certificate and signing plugins for use with a custom plugin marketplace. It assumes access to the <a class="reference external" href="https://gnupg.org">GNU Privacy Guard (GPG)</a> tool.</p>
+<div class="section" id="configuration">
+<h3>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h3>
+<p>Configuring plugin signatures allows finer control over the verification process:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>PluginSettings.RequirePluginSignature <span class="o">=</span> <span class="nb">true</span>
+</pre></div>
+</div>
+<p>This is used to enforce plugin signature verification. With flag on, only Marketplace plugins will be installed and verified. With flag off, customers will be able to install plugins manually without signature verification.</p>
+<p>Note that the Marketplace plugins will still be verified even if the flag is off.</p>
+</div>
+<div class="section" id="key-generation">
+<h3>Key generation<a class="headerlink" href="#key-generation" title="Permalink to this headline">¶</a></h3>
+<p>Public and private key pairs are needed to sign and verify plugins. The private key is used for signing and should be kept in a secure location. The public key is used for verification and can be distributed freely. To generate a key pair, run the following command:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>gpg --full-generate-key
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Please select what kind of key you want:
+  (1) RSA and RSA (default)
+  (2) DSA and Elgamal
+  (3) DSA (sign only)
+  (4) RSA (sign only)
+Your selection? 1
+
+RSA keys may be between 1024 and 4096 bits long.
+What keysize do you want? (2048) 3072
+
+Requested keysize is 3072 bits
+
+Please specify how long the key should be valid.
+      0 = key does not expire
+      &lt;n&gt;  = key expires in n days
+      &lt;n&gt;w = key expires in n weeks
+      &lt;n&gt;m = key expires in n months
+      &lt;n&gt;y = key expires in n years
+Key is valid for? (0) 0
+
+Key expires at ...
+
+Is this correct? (y/N) y
+
+GnuPG needs to construct a user ID to identify your key.
+Real name: Mattermost Inc
+
+Email address: info@mattermost.com
+Comment:
+
+You selected this USER-ID:
+    &quot;Mattermost Inc &lt;info@mattermost.com&gt;&quot;
+Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit? O
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Key size should be at least 3072 bits.</p>
+</div>
+</div>
+<div class="section" id="exporting-the-private-key">
+<h3>Exporting the private key<a class="headerlink" href="#exporting-the-private-key" title="Permalink to this headline">¶</a></h3>
+<p>Find the ID of your private key first. The ID is a hexadecimal number.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>gpg --list-secret-keys
+</pre></div>
+</div>
+<p>This is your private key and should be kept secret. Your hexadecimal key ID will, of course, be different.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>gpg --export-secret-keys F3FACE45E0DE642C8BD6A8E64C7C6562C192CC1F &gt; ./my-priv-key
+</pre></div>
+</div>
+</div>
+<div class="section" id="exporting-the-public-key">
+<h3>Exporting the public key<a class="headerlink" href="#exporting-the-public-key" title="Permalink to this headline">¶</a></h3>
+<p>Find the ID of your public key first. The ID is a hexadecimal number.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>gpg --list-keys
+</pre></div>
+</div>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>gpg --export F3FACE45E0DE642C8BD6A8E64C7C6562C192CC1F &gt; ./my-pub-key
+</pre></div>
+</div>
+</div>
+<div class="section" id="importing-the-key">
+<h3>Importing the key<a class="headerlink" href="#importing-the-key" title="Permalink to this headline">¶</a></h3>
+<p>If you already have a public and private key pair, you can import them to the GPG.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>gpg --import ./my-priv-gpg-key
+
+gpg --import ./my-pub-gpg-key
+</pre></div>
+</div>
+<div class="section" id="running-plugin-signing">
+<h4>Running plugin signing<a class="headerlink" href="#running-plugin-signing" title="Permalink to this headline">¶</a></h4>
+<p>For plugin signing, you have to know the hexadecimal ID of the private key. Let’s assume you want to sign <code class="docutils literal notranslate"><span class="pre">com.mattermost.demo-plugin-0.1.0.tar.gz</span></code> file, run:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>gpg -u F3FACE45E0DE642C8BD6A8E64C7C6562C192CC1F --verbose --personal-digest-preferences SHA256 --detach-sign com.mattermost.demo-plugin-0.1.0.tar.gz
+</pre></div>
+</div>
+<p>This command will generate <code class="docutils literal notranslate"><span class="pre">com.mattermost.demo-plugin-0.1.0.tar.gz.sig</span></code>, which is the signature of your plugin.</p>
+</div>
+<div class="section" id="plugin-verification">
+<h4>Plugin verification<a class="headerlink" href="#plugin-verification" title="Permalink to this headline">¶</a></h4>
+<p>Mattermost server will verify plugin signatures downloaded from the Plugin Marketplace. To add custom public keys, run the following command on the Mattermost server:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mattermost plugin add key my-pub-key
+</pre></div>
+</div>
+<p>Multiple public keys can be added to the Mattermost server:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mattermost plugin add key my-pk-file1 my-pk-file2
+</pre></div>
+</div>
+<p>To list the names of all public keys installed on your Mattermost server, use:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mattermost plugin keys
+</pre></div>
+</div>
+<p>To delete public key(s) from your Mattermost server, use:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mattermost plugin delete key my-pk-file1 my-pk-file2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="implementation">
+<h3>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h3>
+<p>See the <a class="reference external" href="https://docs.google.com/document/d/1qABE7VEx4k_ZAeh6Ydn4pGbu6BQfZt65x68i2s65MOQ">implementation document</a> for more information.</p>
+</div>
+</div>
+<div class="section" id="set-up-guide">
+<h2>Set up guide<a class="headerlink" href="#set-up-guide" title="Permalink to this headline">¶</a></h2>
+<p>To manage plugins, go to <strong>System Console &gt; Plugins &gt; Plugin Management</strong>. From here, you can:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Enable or disable pre-packaged plugins.</li>
+<li>Install and manage custom plugins.</li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In versions prior to 5.16, go to <strong>System Console &gt; Plugins (Beta) &gt; Configuration</strong>.</p>
+</div>
+<div class="section" id="pre-packaged-plugins">
+<h3>Pre-packaged plugins<a class="headerlink" href="#pre-packaged-plugins" title="Permalink to this headline">¶</a></h3>
+<p>Mattermost ships with a number of pre-packaged plugins written and maintained by Mattermost. Instead of building these features directly into the product, you can selectively enable the functionality your installation requires. Install pre-packaged plugins from the Plugin Marketplace, even if your system cannot directly connect to the internet.</p>
+<p>Prior to v5.20, pre-packaged plugins were installed by default and could not be uninstalled without manually modifying the <code class="docutils literal notranslate"><span class="pre">prepackaged_plugins</span></code> directory. Any pre-packaged plugins installed prior to v5.20 and left enabled on upgrade will remain installed, but can now be uninstalled.</p>
+</div>
+<div class="section" id="custom-plugins">
+<h3>Custom plugins<a class="headerlink" href="#custom-plugins" title="Permalink to this headline">¶</a></h3>
+<p>Installing a custom plugin introduces some risk. As a result, plugin uploads are disabled by default and cannot be enabled via the System Console or REST API.</p>
+<p>To enable plugin uploads, manually set <code class="docutils literal notranslate"><span class="pre">PluginSettings</span> <span class="pre">&gt;</span> <span class="pre">EnableUploads</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code> in your <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file and restart your server. You can disable plugin uploads at any time without affecting previously uploaded plugins.</p>
+<p>With plugin uploads enabled, navigate to <strong>System Console &gt; Plugins &gt; Management</strong> and upload a plugin bundle. Plugin bundles are <code class="docutils literal notranslate"><span class="pre">*.tar.gz</span></code> files containing the server executables and web app resources for the plugin. You can also specify a URL to install a plugin bundle from a remote source.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When <code class="docutils literal notranslate"><span class="pre">RequirePluginSignature</span></code> is <code class="docutils literal notranslate"><span class="pre">true</span></code>, plugin uploads cannot be enabled, and may only be installed via the Plugin Marketplace (which verifies Plugin Code Signatures).</p>
+</div>
+<p>Custom plugins may also be installed via the <a class="reference external" href="https://docs.mattermost.com/administration/command-line-tools.html#mattermost-plugin">command line interface</a>.</p>
+<p>While no longer recommended, plugins may also be installed manually by unpacking the plugin bundle inside the <code class="docutils literal notranslate"><span class="pre">plugins</span></code> directory of a Mattermost installation.</p>
+</div>
+<div class="section" id="plugin-uploads-in-high-availability-mode">
+<h3>Plugin uploads in High Availability mode<a class="headerlink" href="#plugin-uploads-in-high-availability-mode" title="Permalink to this headline">¶</a></h3>
+<p>Prior to Mattermost 5.14, Mattermost servers configured for <a class="reference external" href="https://docs.mattermost.com/deployment/cluster.html">High Availability mode</a> required plugins to be installed manually. As of Mattermost 5.14, plugins uploaded via the System Console or the command line interface are persisted to the configured file store and automatically installed on all servers that join the cluster.</p>
+<p>Manually installed plugins remain supported, but must be individually installed on each server in the cluster.</p>
+</div>
+</div>
+<div class="section" id="frequently-asked-questions-faqs">
+<h2>Frequently Asked Questions (FAQs)<a class="headerlink" href="#frequently-asked-questions-faqs" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="where-can-i-share-feedback-on-plugins">
+<h3>Where can I share feedback on plugins?<a class="headerlink" href="#where-can-i-share-feedback-on-plugins" title="Permalink to this headline">¶</a></h3>
+<p>Join our community server discussion in the <a class="reference external" href="https://community.mattermost.com/core/channels/developer-toolkit">Toolkit channel</a>.</p>
+</div>
+</div>
+<div class="section" id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<p>Please see common questions below. For further assistance, review the <a class="reference external" href="https://forum.mattermost.org/c/trouble-shoot">Troubleshooting forum</a> for previously reported errors, or <a class="reference external" href="https://mattermost.com/pl/default-ask-mattermost-community/">join the Mattermost user community for troubleshooting help</a>.</p>
+<div class="section" id="plugin-uploads-fail-even-though-uploads-are-enabled">
+<h3>Plugin uploads fail even though uploads are enabled<a class="headerlink" href="#plugin-uploads-fail-even-though-uploads-are-enabled" title="Permalink to this headline">¶</a></h3>
+<p>If plugin uploads fail and you see <code class="docutils literal notranslate"><span class="pre">permission</span> <span class="pre">denied</span></code> errors in <strong>System Console &gt; Logs</strong> such as:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[2017/11/13 20:42:18 UTC] [EROR] failed to start up plugins: mkdir /home/ubuntu/mattermost/client/plugins: permission denied
+</pre></div>
+</div>
+<p>It’s likely that the Mattermost server doesn’t have the necessary permissions for uploading plugins. Ensure the Mattermost server has write access to the <code class="docutils literal notranslate"><span class="pre">mattermost/client</span></code> directory.</p>
+<p>It may also be that the working directory for the service running Mattermost is not correct. On Ubuntu you might see:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[2018/01/03 08:34:47 EST] [EROR] failed to start up plugins: mkdir ./client/plugins: no such file or directory
+</pre></div>
+</div>
+<p>This can be fixed on Ubuntu 16.04 and RHEL by opening the service configuration file and setting <code class="docutils literal notranslate"><span class="pre">WorkingDirectory</span></code> to the path to Mattermost (generally it’s <code class="docutils literal notranslate"><span class="pre">/opt/mattermost</span></code>).</p>
+<p>A similar problem can occur on Windows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[EROR] failed to start up plugins: mkdir ./client/plugins: The system cannot find the path specified.
+</pre></div>
+</div>
+<p>To fix this, set the <code class="docutils literal notranslate"><span class="pre">AppDirectory</span></code> of your service using <code class="docutils literal notranslate"><span class="pre">nssm</span> <span class="pre">set</span> <span class="pre">mattermost</span> <span class="pre">AppDirectory</span> <span class="pre">c:\mattermost</span></code>.</p>
+</div>
+<div class="section" id="x509-certificate-signed-by-unknown-authority">
+<h3><code class="docutils literal notranslate"><span class="pre">x509:</span> <span class="pre">certificate</span> <span class="pre">signed</span> <span class="pre">by</span> <span class="pre">unknown</span> <span class="pre">authority</span></code><a class="headerlink" href="#x509-certificate-signed-by-unknown-authority" title="Permalink to this headline">¶</a></h3>
+<p>If you’re seeing <code class="docutils literal notranslate"><span class="pre">x509:</span> <span class="pre">certificate</span> <span class="pre">signed</span> <span class="pre">by</span> <span class="pre">unknown</span> <span class="pre">authority</span></code> in your server logs, it usually means that the CA for a self-signed certificate for a server your plugin is trying to access has not been added to your local trust store of the machine the Mattermost server is running on.</p>
+<p>You can add one in Linux <a class="reference external" href="https://unix.stackexchange.com/questions/90450/adding-a-self-signed-certificate-to-the-trusted-list">following instructions in this StackExchange article</a>, or set up a load balancer like NGINX per <span class="xref std std-doc">production install guide</span> to resolve the issue.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../developer/message-attachments.html" class="btn btn-neutral float-right" title="Message Attachments" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../developer/slash-commands.html" class="btn btn-neutral" title="Slash Commands" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/administration/plugins.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

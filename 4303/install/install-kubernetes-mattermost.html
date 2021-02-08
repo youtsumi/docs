@@ -1,0 +1,618 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Deploying a Mattermost Installation &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+    <li>Deploying a Mattermost Installation</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/install/install-kubernetes-mattermost.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="deploying-a-mattermost-installation">
+<span id="install-kubernetes-mattermost"></span><h1>Deploying a Mattermost Installation<a class="headerlink" href="#deploying-a-mattermost-installation" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>If you used the Mattermost Operator in version prior to v1.12.x or are still using <code class="docutils literal notranslate"><span class="pre">ClusterInstallation</span></code> Custom Resource
+check out <a class="reference external" href="https://github.com/mattermost/mattermost-operator/blob/master/docs/migration.md">this guide</a> to see how to migrate to new <code class="docutils literal notranslate"><span class="pre">Mattermost</span></code> resource.</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">ClusterInstallation</span></code> is deprecated and will be removed in version v2.0.</p>
+</div>
+<p>This guide describes deploying a complete Mattermost installation in Kubernetes.</p>
+<p>Manifest files contain the configurations needed for the Operator to properly set up the Mattermost installation.
+Create the manifest files locally in a text editor, copy and paste the contents, and save the file. Recommended file names are provided, but your naming conventions may differ.
+Manifests are applied with <code class="docutils literal notranslate"><span class="pre">kubectl</span></code>. Before running the commands make sure you are connected to your Kubernetes cluster.</p>
+<p><strong>1. (Enterprise only) Create a Mattermost license secret</strong></p>
+<p>Open a text editor and create a secret manifest containing the Mattermost license.</p>
+<p>Make sure to replace <code class="docutils literal notranslate"><span class="pre">[LICENSE_FILE_CONTENTS]</span></code> with the contents of your Mattermost license file.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Secret</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mattermost-license</span>
+<span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Opaque</span>
+<span class="nt">stringData</span><span class="p">:</span>
+  <span class="nt">license</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">LICENSE_FILE_CONTENTS</span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+<p>Save the file as <code class="docutils literal notranslate"><span class="pre">mattermost-license-secret.yaml</span></code>.</p>
+<p><strong>2. Create an installation manifest file</strong></p>
+<p>The Mattermost installation manifest contains fields which must be adjusted for your configuration and environment requirements.</p>
+<p>Some of the most commonly-used fields are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field</th>
+<th class="head">Description</th>
+<th class="head">Must Edit</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>metadata.name</td>
+<td>The name of your Mattermost as it will be shown in Kubernetes. The shorter the better.</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>spec.size</td>
+<td>The size of your installation. This can be ‘100users’, ‘1000users, ‘5000users’, ‘10000users’, or ‘25000users’.</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>spec.ingressName</td>
+<td>The DNS for your Mattermost installation.</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>spec.version</td>
+<td>The Mattermost version.</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td>spec.licenseSecret</td>
+<td>The name of the Kubernetes secret containing your license (e.g. mattermost-license). Required for Enterprise deployments.</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>spec.mattermostEnv</td>
+<td>List of custom environment variables for the Mattermost instance.</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p>More fields are documented <a class="reference external" href="https://github.com/mattermost/mattermost-operator/blob/master/docs/examples/mattermost_full.yaml">in the example</a>.
+If you have previous experience with Kubernetes Custom Resources you can also check the <a class="reference external" href="https://github.com/mattermost/mattermost-operator/blob/master/config/crd/bases/installation.mattermost.com_mattermosts.yaml">Custom Resource Definition</a>.</p>
+<p>Open a text editor and create a Mattermost installation manifest:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">installation.mattermost.com/v1beta1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Mattermost</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mm-example-full</span>                         <span class="c1"># Chose the desired name</span>
+<span class="nt">spec</span><span class="p">:</span>
+  <span class="nt">size</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5000users</span>                               <span class="c1"># Adjust to your requirements</span>
+  <span class="nt">ingressName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">example.mattermost-example.com</span>   <span class="c1"># Adjust to your domain</span>
+  <span class="nt">ingressAnnotations</span><span class="p">:</span>
+    <span class="nt">kubernetes.io/ingress.class</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx</span>
+  <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5.31.0</span>
+  <span class="nt">licenseSecret</span><span class="p">:</span> <span class="s">&quot;&quot;</span>                             <span class="c1"># If you have created secret in step 1, put its name here</span>
+</pre></div>
+</div>
+<p>Save the file as <code class="docutils literal notranslate"><span class="pre">mattermost-installation.yaml</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Steps 3 to 5 cover configuring Mattermost with external database and filestore which is recommended installation configuration.</p>
+<p class="last">When using MySQL and MinIO operators these steps can be skipped.
+It requires both Operators to be installed on the cluster and it is <strong>not recomended for production usage</strong>.</p>
+</div>
+<p><strong>3. Create external database secret</strong></p>
+<p>The database secret needs to be created in the namespace that will hold the Mattermost installation. The secret should contain the following data:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">Description</th>
+<th class="head">Required</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>DB_CONNECTION_STRING</td>
+<td>Connection string to the database.</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>MM_SQLSETTINGS_DATASOURCEREPLICAS</td>
+<td>Connection string to read replicas of the database.</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td>DB_CONNECTION_CHECK_URL</td>
+<td>The URL used for checking that the database is accessible.</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p>Example secret for AWS Aurora compatible with PostgreSQL:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">data</span><span class="p">:</span>
+  <span class="nt">DB_CONNECTION_CHECK_URL</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">cG9zdGdyZXM6Ly91c2VyOnN1cGVyX3NlY3JldF9wYXNzd29yZEBteS1kYXRhYmFzZS5jbHVzdGVyLWFiY2QudXMtZWFzdC0xLnJkcy5hbWF6b25hd3MuY29tOjU0MzIvbWF0dGVybW9zdD9jb25uZWN0X3RpbWVvdXQ9MTAK</span>
+  <span class="nt">DB_CONNECTION_STRING</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">cG9zdGdyZXM6Ly91c2VyOnN1cGVyX3NlY3JldF9wYXNzd29yZEBteS1kYXRhYmFzZS5jbHVzdGVyLWFiY2QudXMtZWFzdC0xLnJkcy5hbWF6b25hd3MuY29tOjU0MzIvbWF0dGVybW9zdD9jb25uZWN0X3RpbWVvdXQ9MTAK</span>
+  <span class="nt">MM_SQLSETTINGS_DATASOURCEREPLICAS</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">cG9zdGdyZXM6Ly91c2VyOnN1cGVyX3NlY3JldF9wYXNzd29yZEBteS1kYXRhYmFzZS5jbHVzdGVyLXJvLWFiY2QudXMtZWFzdC0xLnJkcy5hbWF6b25hd3MuY29tOjU0MzIvbWF0dGVybW9zdD9jb25uZWN0X3RpbWVvdXQ9MTAK</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Secret</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-postgres-connection</span>
+<span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Opaque</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For PostgreSQL the connection is checked with <a class="reference external" href="https://www.postgresql.org/docs/9.3/app-pg-isready.html">pg_isready</a> so the <code class="docutils literal notranslate"><span class="pre">DB_CONNECTION_CHECK_URL</span></code> is the same as connection string.
+For MySQL the check is performed via HTTP call therefore <code class="docutils literal notranslate"><span class="pre">DB_CONNECTION_CHECK_URL</span></code> should be an HTTP URL.</p>
+</div>
+<p><strong>4. Create external filestore secret</strong></p>
+<p>The filestore secret needs to be created in the namespace that will hold the Mattermost installation. The secret should contain the following data:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">Description</th>
+<th class="head">Required</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>accesskey</td>
+<td>Filestore access key.</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>secretkey</td>
+<td>Filestore secret key.</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>Example secret for AWS S3:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">data</span><span class="p">:</span>
+  <span class="nt">accesskey</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QUNDRVNTX0tFWQo=</span>
+  <span class="nt">secretkey</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">U1VQRVJfU0VDUkVUX0tFWQo=</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Secret</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-s3-iam-access-key</span>
+<span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Opaque</span>
+</pre></div>
+</div>
+<p><strong>5. Adjust installation manifest</strong></p>
+<p>To instruct Mattermost Operator to use the external database, modify Mattermost manifest by adding the following fields:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">spec</span><span class="p">:</span>
+<span class="nn">...</span>
+  <span class="nt">database</span><span class="p">:</span>
+    <span class="nt">external</span><span class="p">:</span>
+      <span class="nt">secret</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-postgres-connection</span>
+</pre></div>
+</div>
+<p>To instruct Mattermost Operator to use the external filestore, modify Mattermost manifest by adding the following fields:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">spec</span><span class="p">:</span>
+<span class="nn">...</span>
+  <span class="nt">fileStore</span><span class="p">:</span>
+    <span class="nt">external</span><span class="p">:</span>
+      <span class="nt">url</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">s3.amazonaws.com</span>
+      <span class="nt">bucket</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-s3-bucket</span>
+      <span class="nt">secret</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-s3-iam-access-key</span>
+</pre></div>
+</div>
+<p>Additionally when using Amazon S3, set the <code class="docutils literal notranslate"><span class="pre">MM_FILESETTINGS_AMAZONS3SSE</span></code> and <code class="docutils literal notranslate"><span class="pre">MM_FILESETTINGS_AMAZONS3SSL</span></code> environment variables to <code class="docutils literal notranslate"><span class="pre">true</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">spec</span><span class="p">:</span>
+<span class="nn">...</span>
+  <span class="nt">mattermostEnv</span><span class="p">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">...</span>
+    <span class="l l-Scalar l-Scalar-Plain">- name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">MM_FILESETTINGS_AMAZONS3SSE</span>
+      <span class="l l-Scalar l-Scalar-Plain">value</span><span class="p p-Indicator">:</span> <span class="s">&quot;true&quot;</span>
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MM_FILESETTINGS_AMAZONS3SSL</span>
+      <span class="nt">value</span><span class="p">:</span> <span class="s">&quot;true&quot;</span>
+</pre></div>
+</div>
+<p>Example Mattermost manifest configured with both external databases and filestore:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">installation.mattermost.com/v1beta1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Mattermost</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mm-example-external-db</span>
+<span class="nt">spec</span><span class="p">:</span>
+  <span class="nt">size</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5000users</span>
+  <span class="nt">ingressName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">example.mattermost-example.com</span>
+  <span class="nt">ingressAnnotations</span><span class="p">:</span>
+    <span class="nt">kubernetes.io/ingress.class</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx</span>
+  <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5.31.0</span>
+  <span class="nt">licenseSecret</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
+  <span class="nt">database</span><span class="p">:</span>
+    <span class="nt">external</span><span class="p">:</span>
+      <span class="nt">secret</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-postgres-connection</span>
+  <span class="nt">fileStore</span><span class="p">:</span>
+    <span class="nt">external</span><span class="p">:</span>
+      <span class="nt">url</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">s3.amazonaws.com</span>
+      <span class="nt">bucket</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-s3-bucket</span>
+      <span class="nt">secret</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-s3-iam-access-key</span>
+  <span class="nt">mattermostEnv</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MM_FILESETTINGS_AMAZONS3SSE</span>
+    <span class="nt">value</span><span class="p">:</span> <span class="s">&quot;true&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MM_FILESETTINGS_AMAZONS3SSL</span>
+    <span class="nt">value</span><span class="p">:</span> <span class="s">&quot;true&quot;</span>
+</pre></div>
+</div>
+<p><strong>6. Apply the installation manifest file</strong></p>
+<p>First, create the Mattermost namespace:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ kubectl create ns mattermost
+</pre></div>
+</div>
+<p>If you’re deploying Mattermost Enterprise Edition, apply the license file by specifying the path to the file you created in step 1:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ kubectl apply -n mattermost -f <span class="o">[</span>PATH_TO_LICENCE_SECRET_MANIFEST<span class="o">]</span>
+</pre></div>
+</div>
+<p>Finally, apply the installation file, specifying path to file you created in step 2:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ kubectl apply -n mattermost -f <span class="o">[</span>PATH_TO_MATTERMOST_MANIFEST<span class="o">]</span>
+</pre></div>
+</div>
+<p>The deployment process can be monitored in the Kubernetes user interface or in command line by running:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ kubectl -n mattermost get mm -w
+</pre></div>
+</div>
+<p>The installation should be deployed successfuly, when the Custom Resource reaches the <code class="docutils literal notranslate"><span class="pre">stable</span></code> state.</p>
+<p><strong>7. Configure DNS and use Mattermost</strong></p>
+<p>When the deployment is complete, obtain the hostname or IP address of your Mattermost deployment using the following command:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ kubectl -n mattermost get ingress
+</pre></div>
+</div>
+<p>Copy the resulting hostname or IP address from the <code class="docutils literal notranslate"><span class="pre">ADDRESS</span></code> column, open your browser, and connect to Mattermost.</p>
+<p>Use your domain registration service to create a canonical name or IP address record for the <code class="docutils literal notranslate"><span class="pre">ingressName</span></code> in your manifest, pointing to the address you just copied. For example, on AWS you would do this within a hosted zone in Route53.</p>
+<p>Navigate to the <code class="docutils literal notranslate"><span class="pre">ingressName</span></code> URL in your browser and use Mattermost.</p>
+<p>If you just want to try it out on your local machine without configuring the domain, run:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ kubectl -n mattermost port-forward svc/<span class="o">[</span>YOUR_MATTERMOST_NAME<span class="o">]</span> <span class="m">8065</span>:8065
+</pre></div>
+</div>
+<p>And navigate to <a class="reference external" href="http://localhost:8065">http://localhost:8065</a>.</p>
+<div class="section" id="restoring-an-existing-mattermost-mysql-database">
+<h2>Restoring an Existing Mattermost MySQL Database<a class="headerlink" href="#restoring-an-existing-mattermost-mysql-database" title="Permalink to this headline">¶</a></h2>
+<p>The Mattermost Operator can be used in a backup and restore scenario to apply an existing Mattermost MySQL database to a new Mattermost installation, in its own namespace. This can also be helpful in the event that you need to revert your Mattermost instance’s database to the most recent backup point, on your existing installation. In both cases, you will need a backup of your database.</p>
+<p>The steps you follow to create and upload your backup depends on the provider you’re using and your use case. It’s recommended that you consult the relevant documentation or, if your deployment is managed in a different way, consult your Administrator.</p>
+<p>It is important to note that this process requires the creation of a new Mattermost installation - editing the existing <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> files is not recommended and can result in data loss.</p>
+<p>The process described below needs to be completed prior to proceeding with the Mattermost deployment.</p>
+<ol class="arabic simple">
+<li>Create a backup of your database (e.g. using <em>mysqldump</em>).</li>
+<li>Deploy a new server (e.g. an AWS instance).</li>
+<li>Install a backup program and back up the database on the new server/instance.</li>
+<li>Upload the backed up database to your cloud storage provider (e.g. Amazon S3).</li>
+<li>Create a <code class="docutils literal notranslate"><span class="pre">secret.yaml</span></code> file:</li>
+</ol>
+<p>Open a text editor and create a text file containing your credentials which will be used to access the uploaded database.</p>
+<p>Save the file as <code class="docutils literal notranslate"><span class="pre">secret.yaml</span></code>. The example below is for AWS/S3.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Secret</span>
+<span class="nt">metadata</span><span class="p">:</span>
+ <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">test-restore</span>
+<span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Opaque</span>
+<span class="nt">stringData</span><span class="p">:</span>
+ <span class="nt">AWS_ACCESS_KEY_ID</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">XXXXXXXXXXXX</span>
+ <span class="nt">AWS_SECRET_ACCESS_KEY</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">XXXXXXXXXXXX/XXXXXXXXXXXX</span>
+ <span class="nt">AWS_REGION</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">us-east-1</span>
+ <span class="nt">S3_PROVIDER</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">AWS</span>
+</pre></div>
+</div>
+<p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">name</span></code>: The name of this manifest which is referenced in the installation manifest.</li>
+</ul>
+<ol class="arabic simple" start="6">
+<li>Create a Mattermost cluster installation manifest:</li>
+</ol>
+<p>Open a text editor and create a text file with the following details. Save the file as <code class="docutils literal notranslate"><span class="pre">mattermost-installation.yaml</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mattermost.com/v1alpha1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterInstallation</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mm-example-full</span>
+<span class="nt">spec</span><span class="p">:</span>
+  <span class="nt">size</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
+  <span class="nt">ingressName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">example.mattermost-example.com</span>
+  <span class="nt">ingressAnnotations</span><span class="p">:</span>
+    <span class="nt">kubernetes.io/ingress.class</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx</span>
+  <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5.14.0</span>
+  <span class="nt">mattermostLicenseSecret</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
+  <span class="nt">database</span><span class="p">:</span>
+    <span class="nt">storageSize</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">50Gi</span>
+  <span class="nt">minio</span><span class="p">:</span>
+    <span class="nt">storageSize</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">50Gi</span>
+  <span class="nt">elasticSearch</span><span class="p">:</span>
+    <span class="nt">host</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
+    <span class="nt">username</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
+    <span class="nt">password</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
+</pre></div>
+</div>
+<p>The Mattermost installation manifest contains fields which must be edited in line with your configuration and environment requirements.</p>
+<ol class="arabic simple" start="7">
+<li>Create a restore manifest:</li>
+</ol>
+<p>Open a text editor and create a text file with the following details. Save the file as <code class="docutils literal notranslate"><span class="pre">restore.yaml</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mattermost.com/v1alpha1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MattermostRestoreDB</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">example-mattermostrestoredb</span>
+<span class="nt">spec</span><span class="p">:</span>
+  <span class="nt">initBucketURL</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">s3://my-sample/my-backup.gz</span>
+  <span class="nt">mattermostClusterName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">example-clusterinstallation</span>
+  <span class="nt">mattermostDBName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mattermostdb</span>
+  <span class="nt">mattermostDBPassword</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">supersecure</span>
+  <span class="nt">mattermostDBUser</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
+  <span class="nt">restoreSecret</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
+</pre></div>
+</div>
+<p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">mattermostClusterName</span></code>: The ClusterInstallation file name.</li>
+<li><code class="docutils literal notranslate"><span class="pre">restoreSecret</span></code>: The location of the backup file.</li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermostDBPassword</span></code>: The password used to access the database.</li>
+<li><code class="docutils literal notranslate"><span class="pre">mattermostDBUser</span></code>: The username required to access the database.</li>
+<li><code class="docutils literal notranslate"><span class="pre">initBucketURL</span></code>: The URL of the storage instance/server where the backed up DB is stored.</li>
+</ul>
+<ol class="arabic simple" start="8">
+<li>To initiate deployment, apply the file and specify the path where the newly-created files have been saved:</li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ kubectl create ns mattermost
+$ kubectl apply -n mattermost -f /path/to/secret.yaml
+$ kubectl apply -n mattermost -f /path/to/mattermost-installation.yaml
+$ kubectl apply -n mattermost -f /path/to/restore.yaml
+</pre></div>
+</div>
+<p>The deployment process can be monitored in the Kubernetes user interface. If errors or issues are experienced, review the Mattermost, Operator, and MySQL logs for guidance including error messages. If remediation is not successful, contact Mattermost customer support for assistance.</p>
+<p>Once complete, access your Mattermost instance and confirm that the database has been restored.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/install/install-kubernetes-mattermost.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>
