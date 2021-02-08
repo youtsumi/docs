@@ -1,0 +1,370 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Data Retention Policy &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Custom Terms of Service (Beta)" href="custom-terms-of-service.html" />
+    <link rel="prev" title="Compliance Export Beta" href="compliance-export.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview/index.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#system-administration">System Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#user-management">User Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#authentication">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#integrations">Integrations</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../guides/cloud-admin-guide.html#compliance">Compliance</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cloud-compliance.html">Compliance Reporting and Oversight</a></li>
+<li class="toctree-l3"><a class="reference internal" href="compliance-export.html">Compliance Export Beta</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Data Retention Policy</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#configuring-a-data-retention-policy">Configuring a Data Retention Policy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#frequently-asked-questions-faqs">Frequently Asked Questions (FAQs)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="custom-terms-of-service.html">Custom Terms of Service (Beta)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#mobile">Mobile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#incident-management">Incident Management</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/administrator.html">Self-Managed Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../../guides/cloud-admin-guide.html">Cloud Administrator’s Guide</a> &raquo;</li>
+    
+    <li>Data Retention Policy</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/cloud/cloud-administration/data-retention-policy.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="data-retention-policy">
+<h1>Data Retention Policy<a class="headerlink" href="#data-retention-policy" title="Permalink to this headline">¶</a></h1>
+<p>By default, Mattermost stores all message history providing an unlimited search history to admins and end users.</p>
+<p>With a data retention policy, you can set a custom policy to manage how long messages and file uploads are kept in Mattermost channels and direct messages.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Once a message or a file is deleted, the action is irreversible. Please be careful when setting up a custom data retention policy.</p>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="configuring-a-data-retention-policy">
+<h2>Configuring a Data Retention Policy<a class="headerlink" href="#configuring-a-data-retention-policy" title="Permalink to this headline">¶</a></h2>
+<p>To set a custom data retention policy:</p>
+<ol class="arabic simple">
+<li>Go to <strong>System Console &gt; Compliance &gt; Data Retention Policy</strong>.</li>
+<li>Select a <strong>Message Retention</strong> option. When a time is specified, messages, including file attachments, older than the duration you set will be deleted at the specified time. The minimum retention period is one day.</li>
+<li>Select a <strong>File Retention</strong> option. When a time is specified uploaded files which are older than the duration you set will be deleted will be deleted at the specified time. The minimum retention period is one day.</li>
+<li>Set the start time of the daily scheduled data retention job. Choose a time when fewer people are using your system. Must be a 24-hour time stamp in the form HH:MM.</li>
+</ol>
+<p>Save the settings and restart your server. Messages and files older than the duration you set will be deleted at the specified server time, if applicable.</p>
+<p>You can also run the deletion job manually at any time by clicking <strong>Run Deletion Job Now</strong> in <strong>System Console &gt; Compliance &gt; Data Retention Policy</strong>.</p>
+</div>
+<div class="section" id="frequently-asked-questions-faqs">
+<h2>Frequently Asked Questions (FAQs)<a class="headerlink" href="#frequently-asked-questions-faqs" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="what-happens-when-a-message-is-deleted">
+<h3>What happens when a message is deleted?<a class="headerlink" href="#what-happens-when-a-message-is-deleted" title="Permalink to this headline">¶</a></h3>
+<p>The message is removed from the Mattermost user interface and permanently deleted from the database. The message is no longer searchable and cannot be retrieved in pinned posts or flagged posts lists.</p>
+<p>Replies that did not exceed the message duration are still displayed in the user interface. However, further replies are no longer possible.</p>
+</div>
+<div class="section" id="what-happens-when-a-file-is-deleted">
+<h3>What happens when a file is deleted?<a class="headerlink" href="#what-happens-when-a-file-is-deleted" title="Permalink to this headline">¶</a></h3>
+<p>The file attachment is removed from the Mattermost user interface and permanently deleted.</p>
+</div>
+<div class="section" id="why-didn-t-an-old-file-get-deleted-after-running-the-deletion-job">
+<h3>Why didn’t an old file get deleted after running the deletion job?<a class="headerlink" href="#why-didn-t-an-old-file-get-deleted-after-running-the-deletion-job" title="Permalink to this headline">¶</a></h3>
+<p>First, check the data deletion was successful in the deletion job table in <strong>System Console &gt; Compliance &gt; Data Retention Policy</strong>.</p>
+</div>
+<div class="section" id="why-do-i-see-pending-in-the-deletion-job-table-with-no-details">
+<h3>Why do I see <code class="docutils literal notranslate"><span class="pre">Pending</span></code> in the deletion job table with no details?<a class="headerlink" href="#why-do-i-see-pending-in-the-deletion-job-table-with-no-details" title="Permalink to this headline">¶</a></h3>
+<p>This usually means another data retention job is in progress. You can verify this in the deletion job table in  <strong>System Console &gt; Compliance &gt; Data Retention Policy</strong>.</p>
+<p>If no jobs are in progress and the job has stayed <code class="docutils literal notranslate"><span class="pre">Pending</span></code> for more than an hour, please contact support</p>
+</div>
+<div class="section" id="how-do-i-set-a-custom-policy-per-team-or-channel">
+<h3>How do I set a custom policy per team or channel?<a class="headerlink" href="#how-do-i-set-a-custom-policy-per-team-or-channel" title="Permalink to this headline">¶</a></h3>
+<p>Setting custom policies for each team and channel are in the roadmap but not yet supported.</p>
+<p>If you are interested in this feature, consider upvoting the <a class="reference external" href="https://mattermost.uservoice.com/forums/306457-general/suggestions/31731844-ee-data-retention-policy-for-individual-teams-and">existing feature proposal</a> and share your feedback in the comments.</p>
+</div>
+<div class="section" id="how-is-data-retention-handled-in-the-mobile-apps">
+<h3>How is data retention handled in the mobile apps?<a class="headerlink" href="#how-is-data-retention-handled-in-the-mobile-apps" title="Permalink to this headline">¶</a></h3>
+<p>When messages or files are deleted, they are no longer searchable in the Mattermost mobile apps.</p>
+</div>
+<div class="section" id="how-do-i-know-if-a-data-retention-job-fails">
+<h3>How do I know if a data retention job fails?<a class="headerlink" href="#how-do-i-know-if-a-data-retention-job-fails" title="Permalink to this headline">¶</a></h3>
+<p>Mattermost provides the status of each data retention job in <strong>System Console</strong> &gt; <strong>Compliance</strong> &gt; <strong>Data Retention Policy</strong>. Here, you can see if the job succeeded or failed, including the details of the error.</p>
+</div>
+<div class="section" id="what-happens-when-the-data-retention-period-is-changed">
+<h3>What happens when the data retention period is changed?<a class="headerlink" href="#what-happens-when-the-data-retention-period-is-changed" title="Permalink to this headline">¶</a></h3>
+<p>Data retention runs once a day at the time specified in the settings. Changing the retention period does not automatically schedule any additional run of the data retention job - it only updates how long data is kept in Mattermost.</p>
+</div>
+<div class="section" id="does-the-system-administrator-get-any-notification-when-the-data-retention-period-is-changed">
+<h3>Does the System Administrator get any notification when the data retention period is changed?<a class="headerlink" href="#does-the-system-administrator-get-any-notification-when-the-data-retention-period-is-changed" title="Permalink to this headline">¶</a></h3>
+<p>No, the setting is updated, but the System Admin does not receive any feedback on what the effects will be (e.g. reporting of how many messages are to be deleted).</p>
+</div>
+<div class="section" id="does-the-data-retention-job-include-archived-channels">
+<h3>Does the data retention job include archived channels?<a class="headerlink" href="#does-the-data-retention-job-include-archived-channels" title="Permalink to this headline">¶</a></h3>
+<p>Posts and attachments in archived channels are affected by the data retention job. If a post exceeds the age configured for the data retention job it will be deleted from the database.</p>
+</div>
+<div class="section" id="how-long-does-it-take-to-run-a-deletion-query-and-does-it-affect-server-performance">
+<h3>How long does it take to run a deletion query and does it affect server performance?<a class="headerlink" href="#how-long-does-it-take-to-run-a-deletion-query-and-does-it-affect-server-performance" title="Permalink to this headline">¶</a></h3>
+<p>Data retention runs the actual deletion query in batches, deleting data in blocks of 1,000 records per query. This is so the database won’t be locked up for extended periods of time with long-running queries. Keeping to this limit keeps the query down to a few milliseconds’ execution time on the database itself.</p>
+<p>Each batch of data is deleted based on indexes - making the queries quick to execute on small batches. This helps the server remain fully responsive while the process is running.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="custom-terms-of-service.html" class="btn btn-neutral float-right" title="Custom Terms of Service (Beta)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="compliance-export.html" class="btn btn-neutral" title="Compliance Export Beta" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/cloud/cloud-administration/data-retention-policy.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>
