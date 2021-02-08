@@ -1,0 +1,380 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Configuring Notifications &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Organizing Conversations" href="organizing-conversations.html" />
+    <link rel="prev" title="Messaging Basics" href="messaging-basics.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/administrator.html">Self-Managed Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../guides/user.html">User's Guide</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../guides/user.html#getting-started">Getting Started</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="welcome-to-mattermost.html">Welcome to Mattermost!</a></li>
+<li class="toctree-l3"><a class="reference internal" href="signing-in.html">Signing in</a></li>
+<li class="toctree-l3"><a class="reference internal" href="messaging-basics.html">Messaging Basics</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Configuring Notifications</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#desktop-notifications">Desktop Notifications</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#email-notifications">Email Notifications</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mobile-push-notifications">Mobile Push Notifications</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#browser-tab-notifications">Browser Tab Notifications</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#muting-a-channel">Muting a Channel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ignoring-mentions">Ignoring Mentions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="organizing-conversations.html">Organizing Conversations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="searching.html">Searching</a></li>
+<li class="toctree-l3"><a class="reference internal" href="creating-teams.html">Creating Teams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="managing-members.html">Managing Members</a></li>
+<li class="toctree-l3"><a class="reference internal" href="organizing.html">Organizing Mattermost</a></li>
+<li class="toctree-l3"><a class="reference internal" href="accessibility.html">Keyboard Accessibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../apps/desktop-guide.html">Using Mattermost Desktop App</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/user.html#messaging">Messaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/user.html#settings">Settings</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../../guides/user.html">Mattermost User’s Guide</a> &raquo;</li>
+    
+    <li>Configuring Notifications</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/help/getting-started/configuring-notifications.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="configuring-notifications">
+<h1>Configuring Notifications<a class="headerlink" href="#configuring-notifications" title="Permalink to this headline">¶</a></h1>
+<p>Desktop, email, and mobile push notifications notify you of activity in Mattermost. When you join a team, Mattermost will notify you of messages directed at you, including when someone:</p>
+<ul class="simple">
+<li>Mentions you specifically with <cite>&#64;username</cite></li>
+<li>Sends you a Direct Message</li>
+<li>Mentions your username or first name in a channel</li>
+<li>Notifies a channel you’re in using &#64;channel or &#64;all</li>
+<li>Uses any <a class="reference external" href="https://docs.mattermost.com/help/settings/account-settings.html#words-that-trigger-mentions">keywords you’ve configured</a></li>
+</ul>
+<div class="section" id="desktop-notifications">
+<h2>Desktop Notifications<a class="headerlink" href="#desktop-notifications" title="Permalink to this headline">¶</a></h2>
+<p>Desktop notifications are pop-ups that appear in the corner of your main monitor when using Chrome, Firefox, Edge, Safari, or the <a class="reference external" href="https://mattermost.com/download/#mattermostApps">Mattermost Desktop Apps</a>. You can change the default preference to trigger desktop notifications for all messages sent in channels you’re a member of, or turn them off entirely. You can also choose what sound plays when a desktop notification is triggered on supported browsers and the Mattermost Desktop Apps.</p>
+<img alt="../../_images/desktop_notification.png" src="../../_images/desktop_notification.png" />
+<ul class="simple">
+<li>Configure desktop notifications in <strong>Account Settings &gt; Notifications &gt; Desktop Notifications &gt; Send desktop notifications</strong> and choose your sound selection.</li>
+<li>Configure desktop notifications in specific channels in the channel menu via <strong>Notification Preferences &gt; Send desktop notifications</strong>.</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>By default, all channels use the global setting configured in <strong>Account Settings</strong>.</li>
+</ul>
+</div></blockquote>
+<p><strong>Not getting a desktop notification?</strong> See our <a class="reference external" href="https://docs.mattermost.com/overview/faq.html?#what-determines-if-a-desktop-notification-should-be-triggered">FAQ to view the desktop notification flow chart</a> and see what other factors influence if a notification should be triggered.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Configure desktop notification sounds in <strong>Account Settings &gt; Notifications &gt; Desktop notifications &gt; Notification sounds</strong>.</p>
+</div>
+</div>
+<div class="section" id="email-notifications">
+<h2>Email Notifications<a class="headerlink" href="#email-notifications" title="Permalink to this headline">¶</a></h2>
+<p>By default, you’ll get email notifications if you’re not actively using Mattermost. You can change the default preference for email notifications to turn them off entirely.</p>
+<img alt="../../_images/email_notification.png" src="../../_images/email_notification.png" />
+<ul class="simple">
+<li>Configure email notifications in <strong>Account Settings &gt; Notifications &gt; Email notifications</strong>.</li>
+<li>Configure the email address where notifications are sent in <strong>Account Settings &gt; General &gt; Email</strong>.</li>
+</ul>
+<p>Messages in email notifications can be opened in the Mattermost Desktop App, Mobile App or in your browser:</p>
+<img alt="../../_images/deep_linking.png" src="../../_images/deep_linking.png" />
+<p><strong>Not getting an email notification?</strong> See our <a class="reference external" href="https://docs.mattermost.com/overview/faq.html?#what-determines-if-an-email-notification-should-be-triggered">FAQ to view the email notification flow chart</a> and see what other factors influence if a notification should be triggered.</p>
+</div>
+<div class="section" id="mobile-push-notifications">
+<h2>Mobile Push Notifications<a class="headerlink" href="#mobile-push-notifications" title="Permalink to this headline">¶</a></h2>
+<p>Mobile push notifications appear on the lock screen of your mobile device if the Mattermost Android or iOS app is installed. By default, these notifications are triggered when you’re not actively using Mattermost, but this is configurable. You can also change the default preference to trigger push notifications for all messages sent in channels you’re a member of, or turn them off entirely.</p>
+<img alt="../../_images/push_notification.png" src="../../_images/push_notification.png" />
+<ul class="simple">
+<li>Configure push notifications in <strong>Account Settings &gt; Notifications &gt; Mobile push notifications &gt; Send mobile push notifications</strong>.</li>
+<li>Configure when push notifications are sent depending on your status in <strong>Account Settings &gt; Notifications &gt; Mobile push notifications &gt; Trigger push notifications when</strong>.</li>
+</ul>
+<p><strong>Not getting a push notification?</strong> See our <a class="reference external" href="https://docs.mattermost.com/overview/faq.html?#what-determines-if-a-mobile-push-notification-should-be-triggered">FAQ to view the email notification flow chart</a> and see what other factors influence if a notification should be triggered.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Learn more about how Mattermost detects your status as <strong>Online</strong>, <strong>Away</strong> or <strong>Offline</strong> <a class="reference external" href="https://docs.mattermost.com/help/getting-started/signing-in.html#setting-your-status">here</a>.</p>
+</div>
+</div>
+<div class="section" id="browser-tab-notifications">
+<h2>Browser Tab Notifications<a class="headerlink" href="#browser-tab-notifications" title="Permalink to this headline">¶</a></h2>
+<p>If Mattermost is open in a browser tab, the favicon updates to notify you of unread messages (*) and a count of mentions or Direct Messages. Browser tab notifications are available on Chrome, Edge, Firefox, Safari.</p>
+<img alt="../../_images/browser_notification.png" src="../../_images/browser_notification.png" />
+</div>
+<div class="section" id="muting-a-channel">
+<h2>Muting a Channel<a class="headerlink" href="#muting-a-channel" title="Permalink to this headline">¶</a></h2>
+<p>Channels in the sidebar are <strong>bold</strong> when there are unread messages in the channel and show a badge count if you are mentioned specifically.</p>
+<p>When you mute a channel, you do not receive any notifications (desktop, email, or push) for any mentions (whether they are channel-wide or directed at you). However, if you are mentioned while the channel is muted, the mention badge will be displayed in the sidebar with the channel displaying at reduced opacity.</p>
+<p>To mute a channel, click on the channel name and select <strong>Mute Channel</strong>. To unmute it, click on the channel name and select <strong>Unmute Channel</strong>.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Mentions are triggered by <a class="reference external" href="https://docs.mattermost.com/help/settings/account-settings.html#words-that-trigger-mentions">selected keywords</a>. Learn more about <a class="reference external" href="https://docs.mattermost.com/help/messaging/mentioning-teammates.html">mentioning teammates</a>.</p>
+</div>
+</div>
+<div class="section" id="ignoring-mentions">
+<h2>Ignoring Mentions<a class="headerlink" href="#ignoring-mentions" title="Permalink to this headline">¶</a></h2>
+<p>To turn off notifications for channel-wide mentions for &#64;channel, &#64;here, and &#64;all, navigate to <strong>Notification Preferences &gt; Ignore mentions for &#64;channel, &#64;here and &#64;all</strong>. Choose <strong>Edit</strong>, select <strong>On</strong>, and then select <strong>Save</strong>.</p>
+<p>When this setting is on you will still receive notifications for direct mentions.</p>
+<p><strong>Note:</strong> If you have muted a channel and also enabled <strong>Ignore mentions for &#64;channel, &#64;here and &#64;all</strong> then you will not receive any notifications (whether they’re direct or channel-wide). However, if you are directly mentioned in the muted channel a badge counter will be displayed in the sidebar.</p>
+<p>You can also view the <a class="reference external" href="https://docs.mattermost.com/overview/faq.html?#notifications">notifications flow charts</a> for more information about notification behavior in Mattermost.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="organizing-conversations.html" class="btn btn-neutral float-right" title="Organizing Conversations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="messaging-basics.html" class="btn btn-neutral" title="Messaging Basics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/help/getting-started/configuring-notifications.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>
