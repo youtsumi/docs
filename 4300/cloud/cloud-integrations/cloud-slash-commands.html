@@ -1,0 +1,575 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Slash Commands &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Bot Accounts" href="cloud-bot-accounts.html" />
+    <link rel="prev" title="Outgoing Webhooks" href="cloud-outgoing-webhooks.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview/index.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#system-administration">System Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#user-management">User Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#authentication">Authentication</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../guides/cloud-admin-guide.html#integrations">Integrations</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cloud-incoming-webhooks.html">Incoming Webhooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-outgoing-webhooks.html">Outgoing Webhooks</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Slash Commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#built-in-commands">Built-in Commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#custom-slash-command">Custom Slash Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tips-and-best-practices">Tips and Best Practices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#share-your-integration">Share Your Integration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slack-compatibility">Slack Compatibility</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-bot-accounts.html">Bot Accounts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-personal-access-tokens.html">Personal Access Tokens</a></li>
+<li class="toctree-l3"><a class="reference internal" href="integrations-faq.html">Integrations FAQ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="embedding.html">Embedding Mattermost in Other Applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="webhook.html">Using Mattermost with Webhook</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#compliance">Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#mobile">Mobile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#incident-management">Incident Management</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/administrator.html">Self-Managed Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../../guides/cloud-admin-guide.html">Cloud Administrator’s Guide</a> &raquo;</li>
+    
+    <li>Slash Commands</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/cloud/cloud-integrations/cloud-slash-commands.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="slash-commands">
+<h1>Slash Commands<a class="headerlink" href="#slash-commands" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This is the admin documentation for slash commands. If you’re a developer looking to build an integration, see <a class="reference external" href="https://developers.mattermost.com/integrate/getting-started/">our developer documentation</a>.</p>
+</div>
+<p>Mattermost supports slash commands to easily integrate external applications into the server. They function similarly to <a class="reference external" href="https://docs.mattermost.com/cloud/cloud-integrations/cloud-outgoing-webhooks.html">outgoing webhooks</a>, except they can be used in any channel - including Private channels and Direct Messages.</p>
+<p>Messages that begin with <code class="docutils literal notranslate"><span class="pre">/</span></code> are interpreted as slash commands. The commands will send an HTTP POST request to a web service, and process a response back to Mattermost. Mattermost supports both <a class="reference external" href="https://docs.mattermost.com/cloud/cloud-integrations/cloud-slash-commands.html#built-in-commands">built-in</a> and <a class="reference external" href="https://docs.mattermost.com/cloud/cloud-integrations/cloud-slash-commands.html">custom slash commands</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">To prevent malicious users from trying to perform <a class="reference external" href="https://en.wikipedia.org/wiki/Phishing">phishing attacks</a>, a <em>BOT</em> indicator appears next to posts coming from webhooks regardless of what username is specified.</p>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="built-in-commands">
+<h2>Built-in Commands<a class="headerlink" href="#built-in-commands" title="Permalink to this headline">¶</a></h2>
+<p>Each Mattermost installation comes with some built-in slash commands that are ready to use:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Command</th>
+<th class="head">Description</th>
+<th class="head">Example</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>/away</td>
+<td>Set your status away</td>
+<td>/away</td>
+</tr>
+<tr class="row-odd"><td>/offline</td>
+<td>Set your status offline</td>
+<td>/offline</td>
+</tr>
+<tr class="row-even"><td>/online</td>
+<td>Set your status online</td>
+<td>/online</td>
+</tr>
+<tr class="row-odd"><td>/dnd</td>
+<td>Set your status to Do Not Disturb</td>
+<td>/dnd</td>
+</tr>
+<tr class="row-even"><td>/code <em>{text}</em></td>
+<td>Display text as a code block</td>
+<td>/code File bugs</td>
+</tr>
+<tr class="row-odd"><td>/collapse</td>
+<td>Turn on auto-collapsing of image previews</td>
+<td>/collapse</td>
+</tr>
+<tr class="row-even"><td>/expand</td>
+<td>Turn off auto-collapsing of image previews</td>
+<td>/expand</td>
+</tr>
+<tr class="row-odd"><td>/echo <em>{message}</em> <em>{delay in seconds}</em></td>
+<td>Echo back text from your account</td>
+<td>/echo Hello World 5</td>
+</tr>
+<tr class="row-even"><td>/header <em>{text}</em></td>
+<td>Edit the channel header</td>
+<td>/header File bugs here</td>
+</tr>
+<tr class="row-odd"><td>/invite <em>&#64;{user}</em> <em>~{channel-name}</em></td>
+<td>Invite user to the channel</td>
+<td>/invite &#64;john ~sampleChannel</td>
+</tr>
+<tr class="row-even"><td>/purpose <em>{text}</em></td>
+<td>Edit the channel purpose</td>
+<td>/purpose A channel to discuss bugs</td>
+</tr>
+<tr class="row-odd"><td>/rename <em>{text}</em></td>
+<td>Rename the channel</td>
+<td>/rename Developers</td>
+</tr>
+<tr class="row-even"><td>/help</td>
+<td>Open the Mattermost help page</td>
+<td>/help</td>
+</tr>
+<tr class="row-odd"><td>/invite <em>&#64;{user}</em> <em>~{channel-name}</em></td>
+<td>Invite user to the channel</td>
+<td>/invite &#64;john ~sampleChannel</td>
+</tr>
+<tr class="row-even"><td>/invite_people <em>{name&#64;domain.com …}</em></td>
+<td>Send an email invite to your Mattermost team</td>
+<td>/invite_people <a class="reference external" href="mailto:john&#37;&#52;&#48;example&#46;com">john<span>&#64;</span>example<span>&#46;</span>com</a></td>
+</tr>
+<tr class="row-odd"><td>/kick (or /remove) <em>{&#64;username}</em></td>
+<td>Remove a member from a public or private channel</td>
+<td>/kick &#64;alice</td>
+</tr>
+<tr class="row-even"><td>/join (or /open) <em>{channel-name}</em></td>
+<td>Join the given channel</td>
+<td>/join off-topic</td>
+</tr>
+<tr class="row-odd"><td>/leave</td>
+<td>Leave the current channel</td>
+<td>/leave</td>
+</tr>
+<tr class="row-even"><td>/mute</td>
+<td>Turns off desktop, email and push notifications for the current channel or the [channel] specified</td>
+<td>/mute ~[channel]</td>
+</tr>
+<tr class="row-odd"><td>/logout</td>
+<td>Log out of Mattermost</td>
+<td>/logout</td>
+</tr>
+<tr class="row-even"><td>/me <em>{message}</em></td>
+<td>Do an action</td>
+<td>/me Hello World</td>
+</tr>
+<tr class="row-odd"><td>/msg <em>{&#64;username}</em> <em>{message}</em></td>
+<td>Send a Direct Message to a user</td>
+<td>/msg &#64;alice hello</td>
+</tr>
+<tr class="row-even"><td>/groupmsg <em>{&#64;username1, &#64;username2, …}</em> <em>{message}</em></td>
+<td>Sends a Group Message to the specified users</td>
+<td>/groupmsg &#64;alice, &#64;bob hello</td>
+</tr>
+<tr class="row-odd"><td>/search <em>{text}</em></td>
+<td>Search text in messages</td>
+<td>/search meeting</td>
+</tr>
+<tr class="row-even"><td>/settings</td>
+<td>Open the Account Settings dialog</td>
+<td>/settings</td>
+</tr>
+<tr class="row-odd"><td>/shortcuts</td>
+<td>Display a list of keyboard shortcuts</td>
+<td>/shortcuts</td>
+</tr>
+<tr class="row-even"><td>/shrug <em>{message}</em></td>
+<td>Add <code class="docutils literal notranslate"><span class="pre">¯\_(ツ)_/¯</span></code> to your message</td>
+<td>/shrug oh well</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="custom-slash-command">
+<h2>Custom Slash Command<a class="headerlink" href="#custom-slash-command" title="Permalink to this headline">¶</a></h2>
+<p>Suppose you want to write an external application that is able to check the weather for certain cities. By creating a custom slash command, and setting up the application to handle the HTTP POST or GET from the command, you can let your users check the weather in their city using your command, say <code class="docutils literal notranslate"><span class="pre">/weather</span> <span class="pre">toronto</span> <span class="pre">week</span></code>.</p>
+<p>You can follow these general guidelines to set up a custom Mattermost slash command for your application.</p>
+<ol class="arabic simple">
+<li>Open <strong>Main Menu &gt; Integrations &gt; Slash Commands</strong>. If you don’t have the <strong>Integrations</strong> option in your Main Menu, slash commands may not be enabled or may be disabled for non-admins. Enable them from <strong>System Console &gt; Integrations &gt; Integration Management</strong> or ask your Mattermost System Admin to do so.</li>
+<li>Click <strong>Add Slash Command</strong> and add name and description for the command.</li>
+<li>Set the <strong>Command Trigger Word</strong>. The trigger word must be unique and cannot begin with a slash or contain any spaces. It also cannot be one of the <a class="reference external" href="https://docs.mattermost.com/cloud/cloud-integrations/cloud-slash-commands.html#built-in-commands">built-in commands</a>.</li>
+<li>Set the <strong>Request URL</strong> and <strong>Request Method</strong>. The request URL is the endpoint that Mattermost hits to reach your application, and the request method is either POST or GET and specifies the type of request sent to the request URL.</li>
+<li>(Optional) Set the response username and icon the command will post messages as in Mattermost. If not set, the command will use your username and profile picture.</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-integrations-to-override-usernames">Enable integrations to override usernames</a> must be set to <code class="docutils literal notranslate"><span class="pre">true</span></code> in <code class="docutils literal notranslate"><span class="pre">config.json</span></code> to override usernames, and <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-integrations-to-override-profile-picture-icons">similarly for profile picture icons</a>. Enable them from <strong>System Console &gt; Integrations &gt; Integration Management</strong> or ask your Mattermost System Admin.</p>
+</div>
+<ol class="arabic simple" start="6">
+<li>(Optional) Include the slash command in the command autocomplete list, displayed when typing <code class="docutils literal notranslate"><span class="pre">/</span></code> in an empty input box. Use it to make your command easier to discover by your teammates. You can also provide a hint listing the arguments of your command and a short description displayed in the autocomplete list.</li>
+<li>Choose <strong>Save</strong>. On the next page, copy the <strong>Token</strong> value. This will be used in a later step.</li>
+</ol>
+<a class="reference internal image-reference" href="../../_images/slash_commands_token.png"><img alt="../../_images/slash_commands_token.png" src="../../_images/slash_commands_token.png" style="width: 500px;" /></a>
+<ol class="arabic simple" start="8">
+<li>Next, write your external application. Include a function which receives HTTP POST or HTTP GET requests from Mattermost. The request will look something like this:</li>
+</ol>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>POST /slash-command HTTP/1.1
+Host: example.com
+User-Agent: Go-http-client/1.1
+Content-Length: 313
+Accept: application/json
+Authorization: Token okwexkjpe7ygb8eq1ww58t483w
+Content-Type: application/x-www-form-urlencoded
+Accept-Encoding: gzip
+
+channel_id=jux16pkewjrkfj3ehep1psxyxc&amp;
+channel_name=town-square&amp;
+command=%2Ftest&amp;
+response_url=http%3A%2F%2Flocalhost%3A8065%2Fhooks%2Fcommands%2Fxbrkb8p393gjpq5cawei7npije&amp;
+team_domain=test&amp;
+team_id=carya1qs77bemjup96ff538snh&amp;
+text=asd&amp;
+token=okwexkjpe7ygb8eq1ww58t483w&amp;
+user_id=aoa1agao6t8fmx3ikt1j9w5ybw&amp;
+user_name=somename
+channel_mentions=[&quot;saepe-5&quot;, &quot;aut-8&quot;]
+channel_mentions_ids=[&quot;r3j6sby343fpfdxcbwqg95rfsa&quot;, &quot;ehjj46yk7ifptr5bpfb966s6mc&quot;]
+user_mentions=[&quot;aaron.peterson&quot;, &quot;aaron.medina&quot;]
+user_mentions_ids=[&quot;q5s3b7xzgprp5eid8h66j9epsy&quot;, &quot;czwmumrmw7dfxecww7qibkkoor&quot;]
+</pre></div>
+</div>
+<p>If your integration sends back a JSON response, make sure it returns the <code class="docutils literal notranslate"><span class="pre">application/json</span></code> content-type.</p>
+<ol class="arabic simple" start="9">
+<li>Add a configurable <em>MATTERMOST_TOKEN</em> variable to your application and set it to the <strong>Token</strong> value from step 7. This value will be used by your application to confirm the HTTP POST or GET request came from Mattermost.</li>
+<li>To have your application post a message back to <code class="docutils literal notranslate"><span class="pre">town-square</span></code>, it can respond to the HTTP POST request with a JSON response such as:</li>
+</ol>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{&quot;response_type&quot;: &quot;in_channel&quot;, &quot;text&quot;: &quot;
+---
+#### Weather in Toronto, Ontario for the Week of February 16th, 2016
+
+| Day                 | Description                      | High   | Low    |
+|:--------------------|:---------------------------------|:-------|:-------|
+| Monday, Feb. 15     | Cloudy with a chance of flurries | 3 °C   | -12 °C |
+| Tuesday, Feb. 16    | Sunny                            | 4 °C   | -8 °C  |
+| Wednesday, Feb. 17  | Partly cloudly                   | 4 °C   | -14 °C |
+| Thursday, Feb. 18   | Cloudy with a chance of rain     | 2 °C   | -13 °C |
+| Friday, Feb. 19     | Overcast                         | 5 °C   | -7 °C  |
+| Saturday, Feb. 20   | Sunny with cloudy patches        | 7 °C   | -4 °C  |
+| Sunday, Feb. 21     | Partly cloudy                    | 6 °C   | -9 °C  |
+---
+&quot;}
+</pre></div>
+</div>
+<p>which would render in Mattermost as:</p>
+<img alt="../../_images/weatherBot.PNG" src="../../_images/weatherBot.PNG" />
+<ol class="arabic simple" start="11">
+<li>You’re all set! See <a class="reference external" href="https://developers.mattermost.com/integrate/slash-commands/">developer documentation</a> for details on what parameters are supported by slash commands. For instance, you can override the username and profile picture the messages post as, or specify a custom post type when sending a webhook message for use by <a class="reference external" href="https://about.mattermost.com/default-plugins">plugins</a>.</li>
+</ol>
+<p>Messages with advanced formatting can be created by including an <a class="reference external" href="https://docs.mattermost.com/developer/message-attachments.html">attachment array</a> and <a class="reference external" href="https://docs.mattermost.com/developer/interactive-messages.html">interactive message buttons</a> in the JSON payload.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-integrations-to-override-usernames">Enable integrations to override usernames</a> must be set to <code class="docutils literal notranslate"><span class="pre">true</span></code> in <code class="docutils literal notranslate"><span class="pre">config.json</span></code> to override usernames. Enable them from <strong>System Console &gt; Integrations &gt; Integration Management</strong> or ask your Mattermost System Admin. If not enabled, the username is set to <code class="docutils literal notranslate"><span class="pre">webhook</span></code>.</p>
+<p class="last">Similarly, <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-integrations-to-override-profile-picture-icons">Enable integrations to override profile picture icons</a> must be set to <code class="docutils literal notranslate"><span class="pre">true</span></code> in <code class="docutils literal notranslate"><span class="pre">config.json</span></code> to override usernames. Enable them from <strong>System Console &gt; Integrations &gt; Integration Management</strong> or ask your Mattermost System Admin. If not enabled, the icon of the creator of the webhook URL is used to post messages.</p>
+</div>
+</div>
+<div class="section" id="tips-and-best-practices">
+<h2>Tips and Best Practices<a class="headerlink" href="#tips-and-best-practices" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Slash commands are designed to easily allow you to post messages. For other actions such as channel creation, you must also use the <a class="reference external" href="https://api.mattermost.com">Mattermost APIs</a>.</li>
+<li>You can restrict who can create slash commands in <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#restrict-managing-integrations-to-admins">System Console &gt; Integrations &gt; Integration Management</a>.</li>
+<li>Mattermost outgoing webhooks are Slack-compatible. You can copy-and-paste code used for a Slack outgoing webhook to create Mattermost integrations. Mattermost <a class="reference external" href="https://docs.mattermost.com/cloud/cloud-integrations/cloud-slash-commands.html#translate-slack-s-data-format-to-mattermost">automatically translates Slack’s JSON format</a>.</li>
+<li>The external application may be written in any programming language. It needs to provide a URL which receives the request sent by your Mattermost server and responds with in the required JSON format.</li>
+</ol>
+</div>
+<div class="section" id="share-your-integration">
+<h2>Share Your Integration<a class="headerlink" href="#share-your-integration" title="Permalink to this headline">¶</a></h2>
+<p>If you’ve built an integration for Mattermost, please consider <a class="reference external" href="https://mattermost.org/share-your-mattermost-projects/">sharing your work</a> in our <a class="reference external" href="https://integrations.mattermost.com/">app directory</a>.</p>
+<p>The <a class="reference external" href="https://integrations.mattermost.com/">app directory</a> lists open source integrations developed by the Mattermost community and are available for download, customization and deployment to your private cloud or self-managed infrastructure.</p>
+</div>
+<div class="section" id="slack-compatibility">
+<h2>Slack Compatibility<a class="headerlink" href="#slack-compatibility" title="Permalink to this headline">¶</a></h2>
+<p>Mattermost makes it easy to migrate integrations written for Slack to Mattermost.</p>
+<div class="section" id="translate-slack-s-data-format-to-mattermost">
+<h3>Translate Slack’s data format to Mattermost<a class="headerlink" href="#translate-slack-s-data-format-to-mattermost" title="Permalink to this headline">¶</a></h3>
+<p>Mattermost automatically translates the data coming from Slack:</p>
+<ol class="arabic simple">
+<li>JSON responses written for Slack, that contain the following, are translated to Mattermost Markdown and rendered equivalently to Slack:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;&gt;</span></code> to denote a URL link, such as <code class="docutils literal notranslate"><span class="pre">{&quot;text&quot;:</span> <span class="pre">&quot;&lt;https://mattermost.com/&gt;&quot;}</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">|</span></code> within a <code class="docutils literal notranslate"><span class="pre">&lt;&gt;</span></code> to define linked text, such as <code class="docutils literal notranslate"><span class="pre">{&quot;text&quot;:</span> <span class="pre">&quot;Click</span> <span class="pre">&lt;https://mattermost.com/|here&gt;</span> <span class="pre">for</span> <span class="pre">a</span> <span class="pre">link.&quot;}</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;userid&gt;</span></code>  to trigger a mention to a user, such as <code class="docutils literal notranslate"><span class="pre">{&quot;text&quot;:</span> <span class="pre">&quot;&lt;5fb5f7iw8tfrfcwssd1xmx3j7y&gt;</span> <span class="pre">this</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">notification.&quot;}</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;!channel&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;!here&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;!all&gt;</span></code> to trigger a mention to a channel, such as <code class="docutils literal notranslate"><span class="pre">{&quot;text&quot;:</span> <span class="pre">&quot;&lt;!channel&gt;</span> <span class="pre">this</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">notification.&quot;}</span></code></li>
+</ul>
+</li>
+<li>Both the HTTP POST and GET request bodies sent to a web service are formatted the same as Slack’s. This means your Slack integration’s receiving function does not need change to be compatible with Mattermost.</li>
+</ol>
+</div>
+<div class="section" id="known-slack-compatibility-issues">
+<h3>Known Slack compatibility issues<a class="headerlink" href="#known-slack-compatibility-issues" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Using <code class="docutils literal notranslate"><span class="pre">icon_emoji</span></code> to override the username is not supported.</li>
+<li>Referencing  channels using <code class="docutils literal notranslate"><span class="pre">&lt;#CHANNEL_ID&gt;</span></code> does not link to the channel.</li>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;!everyone&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;!group&gt;</span></code> are not supported.</li>
+<li>Parameters “mrkdwn”, “parse”, and “link_names” are not supported (Mattermost always converts markdown and automatically links &#64;mentions).</li>
+<li>Bold formatting supplied as <code class="docutils literal notranslate"><span class="pre">*bold*</span></code> is not supported (must be done as <code class="docutils literal notranslate"><span class="pre">**bold**</span></code>).</li>
+<li>Slack assumes default values for some fields if they are not specified by the integration, while Mattermost does not.</li>
+</ol>
+</div>
+</div>
+<div class="section" id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<p>See <a class="reference external" href="https://developers.mattermost.com/integrate/slash-commands/">developer documentation</a> for troubleshooting, or <a class="reference external" href="https://mattermost.com/pl/default-ask-mattermost-community/">join the Mattermost user community for help</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="cloud-bot-accounts.html" class="btn btn-neutral float-right" title="Bot Accounts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="cloud-outgoing-webhooks.html" class="btn btn-neutral" title="Outgoing Webhooks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/cloud/cloud-integrations/cloud-slash-commands.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>
