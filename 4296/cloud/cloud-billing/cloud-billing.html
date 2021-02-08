@@ -1,0 +1,372 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Mattermost Cloud Billing &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Statistics" href="../cloud-reporting.html" />
+    <link rel="prev" title="Cloud Administrator’s Guide" href="../../guides/cloud-admin-guide.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview/index.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../guides/cloud-admin-guide.html#system-administration">System Administration</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Mattermost Cloud Billing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#billing-period">Billing Period</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#viewing-and-managing-billing-details">Viewing and Managing Billing Details</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../cloud-reporting.html">Statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cloud-administration/cloud-changelog.html">Mattermost Cloud Changelog</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#user-management">User Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#authentication">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#integrations">Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#compliance">Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#mobile">Mobile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#incident-management">Incident Management</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/administrator.html">Self-Managed Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../../guides/cloud-admin-guide.html">Cloud Administrator’s Guide</a> &raquo;</li>
+    
+    <li>Mattermost Cloud Billing</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/cloud/cloud-billing/cloud-billing.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mattermost-cloud-billing">
+<h1>Mattermost Cloud Billing<a class="headerlink" href="#mattermost-cloud-billing" title="Permalink to this headline">¶</a></h1>
+<p>Mattermost Cloud is offered as a pay-as-you-go subscription service.</p>
+<p>You will be billed for registered users in your workspace. A registered user is a user who has an account in a workspace and does not show as <em>Inactive</em> in <strong>System Console &gt; Users</strong>. Registered users will count towards your monthly invoice each day as long as they are not deactivated in the billing period.</p>
+<p>Mattermost is available free of charge for all workspaces that have 10 or fewer registered users. Your subscription will be upgraded to a per-user pricing model once you reach 11 or more registered users.</p>
+<div class="section" id="billing-period">
+<h2>Billing Period<a class="headerlink" href="#billing-period" title="Permalink to this headline">¶</a></h2>
+<p>After you begin your Mattermost Cloud paid subscription, your first charge will happen at the end of the calendar month. Subsequent billing periods will begin at 12 AM UTC on the first day of each calendar month and end at 11:59 PM UTC on the final day of the same calendar month. Per-user pricing for each billing period will be based on the number of registered users.</p>
+<div class="section" id="adding-and-removing-users-in-the-middle-of-a-billing-period">
+<h3>Adding and removing users in the middle of a billing period<a class="headerlink" href="#adding-and-removing-users-in-the-middle-of-a-billing-period" title="Permalink to this headline">¶</a></h3>
+<p>If you add new users in the middle of a billing cycle, you’ll only be charged for the days that the user is registered.</p>
+<p>Here’s an example:</p>
+<p>Your organization has a Mattermost Cloud workspace and you’re on a monthly subscription at the rate of $10 USD per user per month. You add a new user on the 11th day of a 30-day billing period and that user remains registered for the remainder of the billing period.</p>
+<p>The prorated subscription cost for this user is determined by multiplying the monthly amount ($10 USD) by the number of days they are actively registered in the billing period (20) and dividing by the number of days in the month (30).</p>
+<p>The prorated subscription cost for the user added on day 11 is $6.67 USD.</p>
+<p>Similarly, if you make a registered user inactive in the middle of a billing cycle, we will calculate the prorated amount using the formula above to determine the prorated charge.</p>
+</div>
+</div>
+<div class="section" id="viewing-and-managing-billing-details">
+<h2>Viewing and Managing Billing Details<a class="headerlink" href="#viewing-and-managing-billing-details" title="Permalink to this headline">¶</a></h2>
+<p>You can view your billing details in <strong>System Console &gt; Billing &amp; Account</strong>.</p>
+<div class="section" id="subscription">
+<h3>Subscription<a class="headerlink" href="#subscription" title="Permalink to this headline">¶</a></h3>
+<p>The subscription screen outlines the details of your Mattermost Cloud plan, including the cost per user per month and the number of users currently registered in your workspace. You can also find a summary of your last invoice in the same page.</p>
+</div>
+<div class="section" id="billing-history">
+<h3>Billing History<a class="headerlink" href="#billing-history" title="Permalink to this headline">¶</a></h3>
+<p>The Billing History screen contains a list of all your monthly invoices and payments. Invoices appear immediately after the billing period ends.</p>
+<p>Billing periods begin at 12 AM UTC on the first day of each calendar month and end at 11:59 PM UTC on the final day of the same calendar month, at which time subscription costs are calculated and a credit card charge is automatically attempted. It may take up to a day for our billing systems to calculate, charge your credit card, and issue your invoice. Once charges are completed, the invoice will show as <em>Paid</em>. The invoice is a downloadable PDF file.</p>
+<p>If you have a payment failure, your invoice will show <em>Payment Failed</em>. Please review the accuracy of your credit card information in <strong>Payment Information</strong>. Unresolved failed payments may result in a delinquency and an interruption to your subscription.</p>
+</div>
+<div class="section" id="company-information">
+<h3>Company information<a class="headerlink" href="#company-information" title="Permalink to this headline">¶</a></h3>
+<p>The <strong>Company Information</strong> screen contains an area to add your company address where you are physically located. The company address will appear on your invoice if specified. Otherwise the billing address associated with the credit card on file will be used.</p>
+</div>
+<div class="section" id="payment-information">
+<h3>Payment information<a class="headerlink" href="#payment-information" title="Permalink to this headline">¶</a></h3>
+<p>Credit cards are the only form of payment for customers on a monthly billing cycle. All major credit cards are accepted.</p>
+<p>Mattermost has engaged third party payments processor Stripe to safely collect and store your credit card information. You may only store information pertaining to one credit card.</p>
+<p>We offer pricing and billing only in U.S. Dollars (USD) at this time. Payment will be made in USD converted using the exchange rate from at the time of the transaction.</p>
+</div>
+<div class="section" id="sales-tax-and-vat">
+<h3>Sales tax and VAT<a class="headerlink" href="#sales-tax-and-vat" title="Permalink to this headline">¶</a></h3>
+<p>Mattermost reserves the right to assess applicable taxes as required by local law. Depending on location, you may be charged transaction taxes when purchasing our product. Prices on our website are exclusive of sales tax or VAT.</p>
+</div>
+<div class="section" id="failed-or-late-payments">
+<h3>Failed or late payments<a class="headerlink" href="#failed-or-late-payments" title="Permalink to this headline">¶</a></h3>
+<p>You will be notified immediately of failed payments both in-product with a banner and via email. The notifications provide directions on how to update payment information. Once payment information is updated, you will be charged right away for the amount owing from the previous billing period. If payment information is not updated and the account remains in arrears, here’s what to expect:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Time in arrears</th>
+<th class="head">Action taken</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>7 days</td>
+<td>An email is sent to the workspace Administrator with directions to update payment information.</td>
+</tr>
+<tr class="row-odd"><td>14 days</td>
+<td>Another email is sent to the workspace Administrator with directions to update payment information.</td>
+</tr>
+<tr class="row-even"><td>30 days</td>
+<td>An email is sent to the workspace Administrator indicating that the workspace will be suspended in a further 60 days.</td>
+</tr>
+<tr class="row-odd"><td>90 days</td>
+<td>The workspace will be suspended, preventing access by all users and Administrators.</td>
+</tr>
+</tbody>
+</table>
+<p>Suspended workspaces can be reactivated by contacting Mattermost Customer Support at <a class="reference external" href="https://customers.mattermost.com/cloud/contactus">https://customers.mattermost.com/cloud/contactus</a>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../cloud-reporting.html" class="btn btn-neutral float-right" title="Statistics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../guides/cloud-admin-guide.html" class="btn btn-neutral" title="Cloud Administrator’s Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/cloud/cloud-billing/cloud-billing.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

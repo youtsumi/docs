@@ -1,0 +1,425 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Config for EMM Solutions with Mattermost Mobile Apps &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Mobile Apps FAQ" href="mobile-apps-faq.html" />
+    <link rel="prev" title="Mobile Applications Guide" href="cloud-mobile-apps.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview/index.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#system-administration">System Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#user-management">User Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#authentication">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#integrations">Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#compliance">Compliance</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../guides/cloud-admin-guide.html#mobile">Mobile</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cloud-mobile-apps.html">Mobile Applications Guide</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Config for EMM Solutions with Mattermost Mobile Apps</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#what-is-appconfig">What is AppConfig?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mattermost-appconfig-values">Mattermost AppConfig Values</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#other-appconfig-settings">Other AppConfig Settings</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mobile-apps-faq.html">Mobile Apps FAQ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting-mobile.html">Troubleshooting Mobile Applications</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/cloud-admin-guide.html#incident-management">Incident Management</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/administrator.html">Self-Managed Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../../guides/cloud-admin-guide.html">Cloud Administrator’s Guide</a> &raquo;</li>
+    
+    <li>Config for EMM Solutions with Mattermost Mobile Apps</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/cloud/cloud-mobile/cloud-app-config.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="config-for-emm-solutions-with-mattermost-mobile-apps">
+<h1>Config for EMM Solutions with Mattermost Mobile Apps<a class="headerlink" href="#config-for-emm-solutions-with-mattermost-mobile-apps" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-appconfig">
+<h2>What is AppConfig?<a class="headerlink" href="#what-is-appconfig" title="Permalink to this headline">¶</a></h2>
+<p>AppConfig is a standard approach for app configuration and management introduced by the AppConfig Community, a group of leading EMM providers and app developers who have come together to make it easier for developers and customers to drive mobility in business. The community’s mission is to streamline the adoption and deployment of mobile enterprise applications by providing a standard approach to app configuration and management, building upon the extensive app security and configuration frameworks available in the OS.</p>
+<p>AppConfig provides an easy way to configure enterprise mobile applications with any of the EMM providers listed on the <a class="reference external" href="https://www.appconfig.org/members/">AppConfig website</a>.</p>
+<p>Mattermost mobile apps can be configured in your EMM solution using AppConfig with the apps on the public app stores (Google Play and Apple App Store), or as an “in-house app” you compile yourself.</p>
+<p>For example set up instructions, see our documentation on <span class="xref std std-doc">MobileIron</span> and <span class="xref std std-doc">Blackberry UEM</span>.</p>
+</div>
+<div class="section" id="mattermost-appconfig-values">
+<span id="appconfig-table"></span><h2>Mattermost AppConfig Values<a class="headerlink" href="#mattermost-appconfig-values" title="Permalink to this headline">¶</a></h2>
+<p>The following table shows all the configuration options that can be sent from the EMM provider of your choice to the Mattermost mobile apps. You can also <code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">an</span> <span class="pre">XML</span> <span class="pre">template</span></code> of the configuration file for use with your EMM provider.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="67%" />
+<col width="3%" />
+<col width="5%" />
+<col width="6%" />
+<col width="4%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">Description</th>
+<th class="head">Type</th>
+<th class="head">Default Value</th>
+<th class="head">Valid Values</th>
+<th class="head">iOS Support</th>
+<th class="head">Android for Work Support</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>inAppPinCode</td>
+<td>Require users to authenticate as the owner of the phone before using the app. Prompts for fingerprint or passcode when the app first opens and when the app has been in the background for more than 5 minutes.</td>
+<td>String</td>
+<td><code class="docutils literal notranslate"><span class="pre">false</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">true</span> <span class="pre">|</span> <span class="pre">false</span></code></td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>blurApplicationScreen</td>
+<td>Blur the app when it’s set to background to protect any confidential on-screen information. On Android, it also prevents taking screenshots of the app.</td>
+<td>String</td>
+<td><code class="docutils literal notranslate"><span class="pre">false</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">true</span> <span class="pre">|</span> <span class="pre">false</span></code></td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>jailbreakDetection</td>
+<td>Disable app launch on jailbroken or rooted devices.</td>
+<td>String</td>
+<td><code class="docutils literal notranslate"><span class="pre">false</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">true</span> <span class="pre">|</span> <span class="pre">false</span></code></td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>copyAndPasteProtection</td>
+<td>Disable the ability to copy from or paste into any text inputs in the app.</td>
+<td>String</td>
+<td><code class="docutils literal notranslate"><span class="pre">false</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">true</span> <span class="pre">|</span> <span class="pre">false</span></code></td>
+<td>Yes</td>
+<td>Yes (since v1.24.0)</td>
+</tr>
+<tr class="row-even"><td>serverUrl</td>
+<td>Set a default Mattermost server URL.</td>
+<td>String</td>
+<td>&#160;</td>
+<td>URL</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>allowOtherServers</td>
+<td>Allow the user to change the above server URL.</td>
+<td>String</td>
+<td><code class="docutils literal notranslate"><span class="pre">true</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">true</span> <span class="pre">|</span> <span class="pre">false</span></code></td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>username</td>
+<td>Set the username or email address to use to authenticate against the Mattermost Server.</td>
+<td>String</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>useVPN</td>
+<td>Enable connection to the Mattermost Server to use a per-app VPN or VPN on-demand.</td>
+<td>String</td>
+<td><code class="docutils literal notranslate"><span class="pre">false</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">true</span> <span class="pre">|</span> <span class="pre">false</span></code></td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td>timeoutVPN</td>
+<td>Set how long the request waits (in seconds) for an initial VPN connection to establish before timeout.</td>
+<td>String</td>
+<td>30</td>
+<td>&#160;</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>vendor</td>
+<td>Name of the EMM vendor or company deploying the app. Used in help text when prompting for passcodes so users are aware why the app is being protected.</td>
+<td>String</td>
+<td>Mattermost</td>
+<td>&#160;</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="other-appconfig-settings">
+<h2>Other AppConfig Settings<a class="headerlink" href="#other-appconfig-settings" title="Permalink to this headline">¶</a></h2>
+<p>As part of AppConfig, EMM administrators can set the following additional configuration options for the Mattermost mobile apps:</p>
+<ol class="arabic simple">
+<li><strong>App Tunnel:</strong> Leverage the “Per-app VPN” capabilities in most commercial VPN solutions.</li>
+<li><strong>Prevent App Backup:</strong> Prevent users from backing up app data.</li>
+<li><strong>Enforce App Encryption:</strong> Set security policies such as requiring encryption.</li>
+<li><strong>Remotely Wipe App:</strong> Use the EMM tool to distribute the app to devices as a managed application so it can be remotely wiped. If the app was previously installed, mark it so the EMM converts the app to a managed app.</li>
+</ol>
+<p>Other configurations may be available depending on your EMM provider.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mobile-apps-faq.html" class="btn btn-neutral float-right" title="Mobile Apps FAQ" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="cloud-mobile-apps.html" class="btn btn-neutral" title="Mobile Applications Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/cloud/cloud-mobile/cloud-app-config.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>
