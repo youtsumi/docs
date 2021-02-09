@@ -106,7 +106,7 @@
 <li class="toctree-l3"><a class="reference internal" href="sso-ldap.html">Active Directory/LDAP Setup</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-gitlab.html">GitLab Single Sign-On</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Google Single Sign-On</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#migrating-oauth-2-0-configuration-to-openid-connect">Migrating OAuth 2.0 configuration to OpenID Connect</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#migrating-from-oauth-2-0-to-openid-connect">Migrating from OAuth 2.0 to OpenID Connect</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#configuring-google-apps-as-a-single-sign-on-sso-service">Configuring Google Apps as a Single Sign-On (SSO) service</a></li>
 </ul>
 </li>
@@ -174,14 +174,14 @@
             
   <div class="section" id="google-single-sign-on">
 <h1>Google Single Sign-On<a class="headerlink" href="#google-single-sign-on" title="Permalink to this headline">¶</a></h1>
-<p>Follow these steps to configure Mattermost to use Google as a Single Sign-on (SSO) service for team creation, account creation, and sign-in.</p>
-<p><strong>Note:</strong> The <a class="reference external" href="https://developers.google.com/people">Google People API</a> has replaced the Google+ API, which was deprecated by Google as of March 7th, 2019 <a class="reference external" href="https://developers.google.com/+/api-shutdown">per their notice</a>.</p>
-<div class="section" id="migrating-oauth-2-0-configuration-to-openid-connect">
-<h2>Migrating OAuth 2.0 configuration to OpenID Connect<a class="headerlink" href="#migrating-oauth-2-0-configuration-to-openid-connect" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="migrating-from-oauth-2-0-to-openid-connect">
+<h2>Migrating from OAuth 2.0 to OpenID Connect<a class="headerlink" href="#migrating-from-oauth-2-0-to-openid-connect" title="Permalink to this headline">¶</a></h2>
 <p>OAuth 2.0 is being deprecated and replaced by OpenID Connect. Refer to the product documentation to [convert your existing OAuth configuration] for Google Apps to the new OpenID Connect standard.</p>
 </div>
 <div class="section" id="configuring-google-apps-as-a-single-sign-on-sso-service">
 <h2>Configuring Google Apps as a Single Sign-On (SSO) service<a class="headerlink" href="#configuring-google-apps-as-a-single-sign-on-sso-service" title="Permalink to this headline">¶</a></h2>
+<p>Follow these steps to configure Mattermost to use Google as a Single Sign-on (SSO) service for team creation, account creation, and sign-in.</p>
+<p><strong>Note:</strong> The <a class="reference external" href="https://developers.google.com/people">Google People API</a> has replaced the Google+ API, which was deprecated by Google as of March 7th, 2019 <a class="reference external" href="https://developers.google.com/+/api-shutdown">per their notice</a>.</p>
 <div class="section" id="step-1-create-an-openid-connect-project-in-google-api-manager">
 <h3>Step 1: Create an OpenID Connect project in Google API Manager<a class="headerlink" href="#step-1-create-an-openid-connect-project-in-google-api-manager" title="Permalink to this headline">¶</a></h3>
 <ol class="simple">
@@ -234,7 +234,6 @@
 <li><code class="docutils literal notranslate"><span class="pre">Scope</span></code>: <code class="docutils literal notranslate"><span class="pre">profile</span> <span class="pre">email</span></code></li>
 <li><code class="docutils literal notranslate"><span class="pre">AuthEndpoint</span></code>: <code class="docutils literal notranslate"><span class="pre">https://accounts.google.com/o/oauth2/v2/auth</span></code></li>
 <li><code class="docutils literal notranslate"><span class="pre">TokenEndpoint</span></code>: <code class="docutils literal notranslate"><span class="pre">https://www.googleapis.com/oauth2/v4/token</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">UserApiEndpoint</span></code>: <code class="docutils literal notranslate"><span class="pre">https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses,nicknames,metadata</span></code></li>
 </ul>
 </li>
 </ul>
