@@ -1,0 +1,495 @@
+
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Design Process &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="https://docs.mattermost.com/process/design-process.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/myscript.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="search" title="Search" href="../search.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+    <li>Design Process</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/process/design-process.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="design-process">
+<h1>Design Process<a class="headerlink" href="#design-process" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="goal">
+<h2>Goal<a class="headerlink" href="#goal" title="Permalink to this headline">¶</a></h2>
+<p>The goal of this design process is to increase Mattermost popularity by improving overall product quality, through a consistent design process that ensures we are designing the right features at the highest quality level possible.</p>
+</div>
+<div class="section" id="principles">
+<h2>Principles<a class="headerlink" href="#principles" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Every feature should have a convincing reason for why it should be built</p></li>
+<li><p>Every design should start with a story</p></li>
+<li><p>Make time for exploration - it’s okay to explore a design that doesn’t work and throw it away, as long as we learn from it</p></li>
+</ol>
+</div>
+<div class="section" id="process">
+<h2>Process<a class="headerlink" href="#process" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p><strong>Define the “Why”</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Research customer/user requirements</p></li>
+<li><p>Write the user stories (potentially for different personas) based on the requirements</p></li>
+<li><p>Write the goal statement</p></li>
+<li><p>Justify why the feature should be built</p>
+<ul>
+<li><p>Link back to customer and user data / feedback</p></li>
+<li><p>Link back to company objectives</p></li>
+<li><p>Explain why it is important and the expected impact</p></li>
+</ul>
+</li>
+<li><p>Before continuing with design work, queue a discussion with Product Managers to review the feature proposal and evaluate whether the feature should be added to the roadmap</p></li>
+<li><p><em>Questions this stage should address:</em></p>
+<ul>
+<li><p>Who is this for? What do we know about them?</p></li>
+<li><p>What are we trying to build?</p></li>
+<li><p>Why are we building it?</p></li>
+<li><p>Should we build this, or should we not?</p></li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Brainstorm</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Research a variety of existing solutions</p></li>
+<li><p>Brainstorm different design concepts</p>
+<ul>
+<li><p>Consider pair brainstorm</p></li>
+<li><p>Do not go into depth on any one design, the goal is to identify various approaches to evaluate later</p></li>
+</ul>
+</li>
+<li><p><em>Questions this stage should address:</em></p>
+<ul>
+<li><p>What are the design options for the given scenarios?</p></li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Evaluate options</strong></p>
+<blockquote>
+<div><ul>
+<li><p>Identify the most promising design concepts</p>
+<ul class="simple">
+<li><p>Wireframe/develop concepts as needed</p></li>
+</ul>
+</li>
+<li><p>List pros/cons for each option</p></li>
+<li><p>Evaluate each option based on:</p>
+<ul class="simple">
+<li><p>How well each design addresses user stories</p></li>
+<li><p>Principles for this plan</p></li>
+<li><p>Mattermost design principles</p></li>
+</ul>
+</li>
+<li><p>Have pair or group discussions as needed</p>
+<ul class="simple">
+<li><p>Invite developers into the discussion early</p></li>
+<li><p>Set the context for meetings, so people understand this is exploratory design</p></li>
+</ul>
+</li>
+<li><p><em>Questions this stage should address:</em></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Is this design concept the right approach to the problem?</p></li>
+<li><p>How well does this design work for the given scenarios?</p></li>
+<li><p>What are the constraints we need to consider?</p></li>
+<li><p>How does this design compare to existing solutions?</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Develop prototype</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Summarize context for the design (preferably in Google Slides), including:</p>
+<ul>
+<li><p>Goal/“Why”</p></li>
+<li><p>User Stories</p></li>
+<li><p>Success Metrics</p>
+<ul>
+<li><p>Define how the success of the feature will be measured</p></li>
+</ul>
+</li>
+<li><p>Designs Considered</p>
+<ul>
+<li><p>Link back to the various designs considered, and the evaluation</p></li>
+</ul>
+</li>
+<li><p>Out of Scope</p>
+<ul>
+<li><p>List things that are purposefully left out, to be addressed at another time</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Work on prototype/mockups for the selected design</p>
+<ul>
+<li><p>Consider pair design</p></li>
+<li><p>Use mockups (preferably in slideshow or prototyping software), with text that supports the design</p></li>
+<li><p>Include flow of screens, so transitions are clear</p></li>
+<li><p>Make sure to think about:</p>
+<ul>
+<li><p>Mobile apps (mobile view and tablet view)</p></li>
+<li><p>Notifications (desktop, email, and push)</p></li>
+<li><p>Both single and multiple team cases</p></li>
+<li><p>Potential performance issues</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Add Questions</p>
+<ul>
+<li><p>List out any questions about the design that still need to be answered</p></li>
+</ul>
+</li>
+<li><p><em>Questions this stage should address:</em></p>
+<ul>
+<li><p>How is the information structured? What is important to see, and when?</p></li>
+<li><p>What is the layout like?</p></li>
+<li><p>What does the text say?</p></li>
+<li><p>What does the UI look like?</p></li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Review, test, and iterate</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Pair review with someone</p></li>
+<li><p>Share with team</p>
+<ul>
+<li><p>Post draft with &#64;channel in Spec Review channel, asking to review and add comments</p></li>
+<li><p>Set the context for what stage the design is at, and what they should be reviewing</p></li>
+</ul>
+</li>
+<li><p>Share with interested customers and users</p></li>
+<li><p>Test the prototype/mockups</p>
+<ul>
+<li><p>If possible, find someone to test the design on</p></li>
+<li><p>Give tasks based on the already defined user stories</p></li>
+<li><p>Observe and have them think aloud</p></li>
+</ul>
+</li>
+<li><p>Iterate based on feedback</p></li>
+</ul>
+</div></blockquote>
+<ul>
+<li><p><em>Questions this stage should answer:</em></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Are there any potential issues with the design?</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</li>
+<li><p><strong>Final review</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Identify people who should sign off on the design before implementation (include UX Design, PM, Dev, and Test)</p></li>
+<li><p>Hold a meeting to review the design</p>
+<ul>
+<li><p>Set the context that this is a final review, and people should look for any potential issues</p></li>
+<li><p>Ask people to review the design and add comments/questions beforehand</p></li>
+<li><p>Define example areas that should be covered (different people may focus on different things):</p>
+<ul>
+<li><p>How well does the design address the listed scenarios?</p></li>
+<li><p>Are there any technical concerns?</p></li>
+<li><p>Potential usability issues?</p></li>
+<li><p>Is the product text clear?</p></li>
+<li><p>Does the design follow UX guidelines?</p></li>
+<li><p>Is it consistent with the rest of the product?</p></li>
+<li><p>How could this design be used in the future?</p></li>
+<li><p>Are all corner cases addressed? Check for:</p>
+<ul>
+<li><p>Mobile apps (mobile view and tablet view)</p></li>
+<li><p>Notifications (desktop, email, and push)</p></li>
+<li><p>Both single and multiple team cases</p></li>
+<li><p>Potential performance issues</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Update design based on feedback until everyone signs off</p></li>
+<li><p><em>Questions this stage should answer:</em></p>
+<ul>
+<li><p>Is this design ready to be implemented?</p></li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Break into tickets</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Dev breaks the spec into tickets, and reviews with PM so everyone is on the same page about the plan</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2015-2020 Mattermost.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/process/design-process.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>
