@@ -1,0 +1,454 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Enterprise Deployment Guide &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+    <li>Enterprise Deployment Guide</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/deployment/enterprise-deployment-guide.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="enterprise-deployment-guide">
+<h1>Enterprise Deployment Guide<a class="headerlink" href="#enterprise-deployment-guide" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="about-this-guide">
+<h2>About This Guide<a class="headerlink" href="#about-this-guide" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="audience">
+<h3>Audience<a class="headerlink" href="#audience" title="Permalink to this headline">¶</a></h3>
+<p>IT Leaders, System Administrators, and/or Project Managers</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Some features described in this guide are only available to Enterprise Edition E10 and/or E20. We will highlight specific licenses needed whenever applicable.</p>
+</div>
+</div>
+<div class="section" id="learning-objectives">
+<h3>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">¶</a></h3>
+<p>This guide provides foundational information necessary when developing a plan for a proof of concept and/or production-level enterprise deployment of Mattermost.</p>
+<p>It will not dive into the technical implementation, but will reference any relevant documentation.</p>
+<p>By the end of this guide you should have an understanding of the high-level requirements for a successful Mattermost Enterprise deployment.</p>
+<p>This includes:</p>
+<ul class="simple">
+<li>Choosing how to deploy the Mattermost Server application.</li>
+<li>Migrating from other ChatOps platforms.</li>
+<li>Integrating Mattermost with existing Single sign-on (SSO) providers.</li>
+<li>First steps/best practices for onboarding users.</li>
+</ul>
+</div>
+<div class="section" id="support">
+<h3>Support<a class="headerlink" href="#support" title="Permalink to this headline">¶</a></h3>
+<p>If at any point you need additional help, we are ready to assist, just reach out using any of these methods:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://community.mattermost.com/">Community</a> - Our entire organization uses Mattermost, plus you’ll have the support of one of the best open source communities around.</li>
+<li>Documentation - We link to many parts of our <a class="reference external" href="https://docs.mattermost.com/guides/administrator.html">Administrator documentation</a> in this guide but encourage you to take a look at <a class="reference external" href="https://docs.mattermost.com">all our documentation</a>.</li>
+<li>Enterprise Support  - If you are an Enterprise Edition subscriber, you may open a support ticket in the Enterprise Edition Support portal.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="before-you-begin-your-deployment">
+<h2>Before You Begin Your Deployment<a class="headerlink" href="#before-you-begin-your-deployment" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="what-makes-mattermost-different">
+<h3>What Makes Mattermost Different?<a class="headerlink" href="#what-makes-mattermost-different" title="Permalink to this headline">¶</a></h3>
+<p>Mattermost is a high-trust messaging platform for enterprise use. As enterprises come in all shapes and sizes, Mattermost has been built to provide an optimal experience for all customers.</p>
+<p>The emergence of <a class="reference external" href="https://mattermost.com/chatops">ChatOps</a> means Mattermost is no longer a tool predominantly used by developers. In fact, it has the ability to enhance communication for many kinds of teams through a multitude of <a class="reference external" href="https://integrations.mattermost.com">integrations</a>, extensions, and customization.</p>
+<p>Here is a sample of the types of integrations our customers are deploying:</p>
+<ul class="simple">
+<li>Confluence</li>
+<li>Docker</li>
+<li>GitHub/GitLab</li>
+<li>Jira</li>
+<li>Outlook</li>
+<li>Trello</li>
+</ul>
+<p>Taking this further, because Mattermost is an open source application, it can be customized, in many ways, to suit your organizational needs.</p>
+</div>
+<div class="section" id="further-reading">
+<h3>Further Reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="mattermost-scaling">
+<h4>Mattermost Scaling<a class="headerlink" href="#mattermost-scaling" title="Permalink to this headline">¶</a></h4>
+<p>Growing your Mattermost installation from supporting a team to supporting an enterprise requires two types of <a class="reference external" href="https://docs.mattermost.com/deployment/scaling.html">scaling</a>.</p>
+<p><strong>Technical Scaling:</strong> Whether used for teams or enterprises, the Mattermost server is designed to support tens of thousands of users on a single server with appropriate hardware. We officially support running Mattermost Server on multiple <a class="reference external" href="https://docs.mattermost.com/guides/administrator.html#installing-mattermost">Linux distributions and on-premises cloud solutions</a>.</p>
+<p><strong>Functional Scaling:</strong> Scaling from a team to an enterprise is like going from a “virtual office” to a “virtual campus”. Advanced features like enterprise authentication, granular permissions, compliance and auditing, and advanced reporting become increasingly important as organizations grow beyond teams.</p>
+</div>
+<div class="section" id="mattermost-licensing">
+<h4>Mattermost Licensing<a class="headerlink" href="#mattermost-licensing" title="Permalink to this headline">¶</a></h4>
+<p>Mattermost Enterprise Edition comes with two licensing options: Enterprise E10 and Enterprise E20.</p>
+<p>The E10 license suits smaller organizations with less need for automation and compliance, while the E20 license offers features like AD/LDAP, SAML 2.0, automated compliance export, and team-specific permissions. You can find a full comparison <a class="reference external" href="https://mattermost.com/pricing-feature-comparison">here</a>.</p>
+<p>Once you have installed and deployed Mattermost, activate your Enterprise E20 trial license via <strong>Main Menu &gt; System Console &gt; Edition and License</strong> and select <strong>Start trial</strong>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can purchase and manage your Mattermost Enterprise subscriptions with our <a class="reference external" href="https://customers.mattermost.com/login">Customer Portal</a> or reach out to our Sales team by contacting <a class="reference external" href="mailto:sales&#37;&#52;&#48;mattermost&#46;com">sales<span>&#64;</span>mattermost<span>&#46;</span>com</a>.</p>
+</div>
+</div>
+<div class="section" id="client-usage">
+<h4>Client Usage<a class="headerlink" href="#client-usage" title="Permalink to this headline">¶</a></h4>
+<p>Depending on your environment and your users, you have several options when deploying Mattermost: web browser, <a class="reference external" href="https://docs.mattermost.com/install/desktop.html">desktop</a>, <a class="reference external" href="https://docs.mattermost.com/mobile/mobile-overview.html">mobile</a>, or all three. We <a class="reference external" href="https://mattermost.com/download/#mattermostApps">provide binaries</a> for MS Windows, macOS, Linux, iOS, and Android. However, depending on your organization policies deployment on these platforms can vary.</p>
+</div>
+</div>
+</div>
+<div class="section" id="deployment-first-steps">
+<h2>Deployment First Steps<a class="headerlink" href="#deployment-first-steps" title="Permalink to this headline">¶</a></h2>
+<p>Deploying Mattermost with an enterprise environment is not a small project. Depending on your use case multiple physical machines have to be set up with Mattermost server, a proxy, and a database while thousands of users need to be imported through AD/LDAP. While we strive to make this as easy as possible it will take time and iteration.</p>
+<div class="section" id="determine-your-use-case">
+<h3>Determine Your Use Case<a class="headerlink" href="#determine-your-use-case" title="Permalink to this headline">¶</a></h3>
+<p>As mentioned above it is essential for a successful deployment to know your specific use case. To get started try answering the following questions:</p>
+<ul class="simple">
+<li>How many users will use Mattermost on initial deployment and is this number going to increase dramatically in the near future?</li>
+<li>What clients will be in use?</li>
+<li>Are you migrating from an existing ChatOps or different communications platform?</li>
+<li>Are you using an identity provider for Single sign-on and if yes which one?</li>
+<li>What compliance requirements do you need to meet?</li>
+<li>What are your organization’s security requirements?</li>
+</ul>
+</div>
+<div class="section" id="planning-your-deployment">
+<h3>Planning Your Deployment<a class="headerlink" href="#planning-your-deployment" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="technical-requirements">
+<h4>Technical Requirements<a class="headerlink" href="#technical-requirements" title="Permalink to this headline">¶</a></h4>
+<p>The hardware requirements for the Mattermost server and database <a class="reference external" href="https://docs.mattermost.com/install/requirements.html">grow based on the number of users</a>.</p>
+<p>Depending on which clients your users will work with additional reading can be necessary:
+- You are going to use the web app - no further reading required.
+- You are going to use the desktop app - please also read <a class="reference external" href="https://docs.mattermost.com/install/desktop.html">Desktop Application Install Guides</a>.
+- You are going to use the mobile app - please also read <a class="reference external" href="https://docs.mattermost.com/deployment/mobile-app-deployment.html">Mobile App Deployment Guide</a>.</p>
+</div>
+<div class="section" id="migration">
+<h4>Migration<a class="headerlink" href="#migration" title="Permalink to this headline">¶</a></h4>
+<p>When migrating from an existing solution it is important to plan ahead. We recommend starting with a small dataset - limited users and content - to reduce the time spent debugging and ensuring all fields are imported correctly, before taking on a major import.</p>
+<p>We provide our customers with easy to use migration solutions for many scenarios:</p>
+<ul class="simple">
+<li>Mattermost - Migrating from Mattermost Team Edition is common and only requires you to <a class="reference external" href="https://docs.mattermost.com/administration/upgrade.html#upgrading-team-edition-to-enterprise-edition">upgrade to the most recent Enterprise Edition</a> and add your license key.</li>
+<li><dl class="first docutils">
+<dt>Slack - There is support for two methods of importing data from Slack.</dt>
+<dd><ul class="first last">
+<li>For small datasets with few users and without post attachments the <a class="reference external" href="https://docs.mattermost.com/administration/migrating.html?highlight=slack#migrating-from-slack-using-the-mattermost-web-app">Mattermost web app can be used</a>.</li>
+<li>If at all possible we recommend the use of <a class="reference external" href="https://docs.mattermost.com/administration/migrating.html?highlight=slack#migrating-from-slack-using-the-mattermost-cli">Mattermost CLI for the migration process</a>.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>HipChat - We recommend using <a class="reference external" href="https://docs.mattermost.com/administration/hipchat-migration-guidelines.html">Group Export Dashboard</a> to export your data in combination with the <a class="reference external" href="https://docs.mattermost.com/deployment/bulk-loading.html">Mattermost Bulk Load Tool</a>.</li>
+<li>Jabber - You can use <a class="reference external" href="https://github.com/Brightscout/mattermost-etl">BrightScout’s Extract, Transform and Load (ETL)</a> tool to migrate from Jabber.</li>
+<li>Bespoke Messaging Solutions - Mattermost is designed to replace bespoke messaging solutions and provide additional <a class="reference external" href="https://docs.mattermost.com/overview/security.html">security features</a>, but migrating from bespoke messengers can prove to be challenging, because the data format of such tools is unpredictable. Nonetheless we provide <a class="reference external" href="https://docs.mattermost.com/administration/migrating.html?highlight=slack#bringing-data-from-bespoke-solutions-into-mattermost">multiple tools</a> to attempt migration and have had many successful migrations with our customers.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If your data in the bespoke messenger is not vital we recommend a hard switch after a period of running both systems in parallel.</p>
+</div>
+</div>
+<div class="section" id="single-sign-on">
+<h4>Single Sign-On<a class="headerlink" href="#single-sign-on" title="Permalink to this headline">¶</a></h4>
+<p>Mattermost can act as a <a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml.html">SAML 2.0</a> provider so setting up Single sign-on is a straightforward matter.</p>
+<p>We support these SSO services:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml-onelogin.html">OneLogin</a></li>
+<li><a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml-okta.html">Okta</a></li>
+<li><a class="reference external" href="https://docs.mattermost.com/deployment/sso-gitlab.html">GitLab</a></li>
+<li><a class="reference external" href="https://docs.mattermost.com/deployment/sso-google.html">Google People API</a></li>
+<li><a class="reference external" href="https://docs.mattermost.com/deployment/sso-ldap.html">AD/LDAP</a></li>
+<li><a class="reference external" href="https://docs.mattermost.com/deployment/sso-office.html">Azure Active Directory and Office 365</a></li>
+<li><a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml-adfs-msws2016.html">Microsoft ADFS</a></li>
+</ul>
+</div>
+<div class="section" id="compliance">
+<h4>Compliance<a class="headerlink" href="#compliance" title="Permalink to this headline">¶</a></h4>
+<p>When you have to meet compliance requirements - especially when working with proxies - make sure to plan ahead to avoid infrastructure redesign while deploying Mattermost. Here is how Mattermost supports your compliance needs:</p>
+<ul class="simple">
+<li>Outbound Proxy - In some scenarios, like monitoring outbound traffic or controlling which websites can appear in link previews, you may wish to <a class="reference external" href="https://docs.mattermost.com/install/outbound-proxy.html">use Mattermost behind a proxy</a>.</li>
+<li>Electronic Discovery - Electronic Discovery (eDiscovery) is the process of searching electronic data to be used as evidence in a legal case. We have put together the <a class="reference external" href="https://docs.mattermost.com/administration/ediscovery.html">eDiscovery documentation</a> to help.</li>
+<li>Compliance Export - This feature enables <a class="reference external" href="https://docs.mattermost.com/administration/compliance-export.html">Compliance Exports</a> to be produced from the System Console, containing all messages.</li>
+<li>Data Retention - By default, Mattermost provides unlimited search history storing all messages without an expiration date. These defaults can be <a class="reference external" href="https://docs.mattermost.com/administration/data-retention.html">changed by setting Message Retention and File Retention</a> to a specific duration in the System Console.</li>
+<li>Custom Terms of Service - If your organization requires the use of <a class="reference external" href="https://docs.mattermost.com/administration/custom-terms-of-service.html">custom ToS</a>, this can be done in the System Console.</li>
+</ul>
+</div>
+<div class="section" id="security">
+<h4>Security<a class="headerlink" href="#security" title="Permalink to this headline">¶</a></h4>
+<p>Security is a major concern with regard to selecting the right tools. Mattermost software is continually reviewed for security by developers, IT administrators, and security researchers. In contrast to SaaS solutions Mattermost can be deployed on-premises in your private cloud giving you full control of not only the software but the hardware side as well. Here is a non-exhaustive list of our security features:</p>
+<ul class="simple">
+<li>Private cloud deployment</li>
+<li>Secure mobile apps</li>
+<li>Transmission security</li>
+<li>Integrity and audit controls</li>
+<li>Authentication safeguards</li>
+<li>Access Control Policy</li>
+<li>More details on this topic are available at the <a class="reference external" href="https://docs.mattermost.com/overview/security.html">Mattermost security</a> section in our documentation.</li>
+<li>HIPAA und FINRA - Mattermost can be deployed <a class="reference external" href="https://docs.mattermost.com/overview/security.html#hipaa-compliance">Health Insurance Portability and Accountability Act - HIPAA</a> and <a class="reference external" href="https://docs.mattermost.com/overview/security.html#finra-compliance">Financial Industry Regulatory Authority - FINRA</a> compliant.</li>
+<li>Certificate-Based Authentication - <a class="reference external" href="https://docs.mattermost.com/deployment/certificate-based-authentication.html">Certificate-Based Authentication</a> is available as an experimental feature.</li>
+<li>Multi-factor Authentication - Mattermost supports <a class="reference external" href="https://docs.mattermost.com/deployment/auth.html">multi factor authentication</a>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="user-onboarding-and-adoption">
+<h2>User Onboarding and Adoption<a class="headerlink" href="#user-onboarding-and-adoption" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="integrations-and-plugins">
+<h3>Integrations and Plugins<a class="headerlink" href="#integrations-and-plugins" title="Permalink to this headline">¶</a></h3>
+<p>On the first look considering <a class="reference external" href="https://integrations.mattermost.com">integrations</a> and <a class="reference external" href="https://docs.mattermost.com/administration/plugins.html">plugins</a> as part of the deployment might seem counterintuitive. But they are essential parts of the adoption process, empowering your organization to better understand the tools used by each department.</p>
+<p>When choosing integrations and plugins for your deployment, focus on those bringing value to the organization. For example, if your organization is mostly working remotely the Zoom plugin might be essential, whereas a single office organization might not need it but heavily relies on Outlook integration.</p>
+</div>
+<div class="section" id="notifications">
+<h3>Notifications<a class="headerlink" href="#notifications" title="Permalink to this headline">¶</a></h3>
+<p>Notifications have gained importance in our daily lives. Modern operating systems all have a way to point the user’s attention towards important events from specific apps. There are three different types of notifications in Mattermost: desktop, email, and mobile push notifications. Mattermost will notify you of messages with any of these characteristics:</p>
+<ul class="simple">
+<li>Direct Messages.</li>
+<li>Your username or first name is mentioned in a channel.</li>
+<li>A channel you’re in is notified with &#64;channel, &#64;here, or &#64;all.</li>
+<li>Any of <a class="reference external" href="https://docs.mattermost.com/help/settings/account-settings.html#words-that-trigger-mentions">your configured keywords</a> are used.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All notification behavior can be controlled globally or individually by channel. Desktop, email, and mobile push notifications have separate settings.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/deployment/enterprise-deployment-guide.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,337 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Configuring TLS on Mattermost Server &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+    <li>Configuring TLS on Mattermost Server</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/install/config-tls-mattermost.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="configuring-tls-on-mattermost-server">
+<h1>Configuring TLS on Mattermost Server<a class="headerlink" href="#configuring-tls-on-mattermost-server" title="Permalink to this headline">¶</a></h1>
+<p>You have two options if you want users to connect with HTTPS:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Set up TLS on Mattermost Server.</li>
+<li>Install a proxy such as NGINX and set up TLS on the proxy.</li>
+</ol>
+</div></blockquote>
+<p>The easiest option is to set up TLS on the Mattermost Server, but if you expect to have more than 200 users, use a proxy for better performance. A proxy server also provides standard HTTP request logs.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Your Mattermost server must be accessible from the Let’s Encrypt CA in order to verify your domain name and issue the certificate. Be sure to open your firewall and configure any reverse proxies to forward traffic to ports 80 and 443. More information can be found <a class="reference external" href="https://letsencrypt.org/how-it-works/">at Let’s Encrypt</a>.</p>
+</div>
+<p><strong>Configure TLS on the Mattermost Server</strong>:</p>
+<ol class="arabic simple">
+<li>In <strong>System Console &gt; Environment &gt; Web Server</strong> (or <strong>System Console &gt; General &gt; Configuration</strong> in versions prior to 5.12).</li>
+</ol>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li>Change the <strong>Listen Address</strong> setting to <code class="docutils literal notranslate"><span class="pre">:443</span></code>.</li>
+<li>Change the <strong>Connection Security</strong> setting to <code class="docutils literal notranslate"><span class="pre">TLS</span></code>.</li>
+<li>Change the <strong>Forward port 80 to 443</strong> setting to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</li>
+</ol>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li>Activate the <code class="docutils literal notranslate"><span class="pre">CAP_NET_BIND_SERVICE</span></code> capability to allow Mattermost to bind to low ports.</li>
+</ol>
+<blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">setcap</span> <span class="pre">cap_net_bind_service=+ep</span> <span class="pre">/opt/mattermost/bin/mattermost</span></code></div></blockquote>
+<ol class="arabic simple" start="3">
+<li>Install the security certificate. You can use <a class="reference external" href="https://letsencrypt.org/">Let’s Encrypt</a> to automatically install and setup the certificate, or you can specify your own certificate.</li>
+</ol>
+<p><strong>To use a Let’s Encrypt certificate</strong>:</p>
+<p>The certificate is retrieved the first time that a client tries to connect to the Mattermost server. Certificates are retrieved for any hostname a client tries to reach the server at.</p>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li>Change the <strong>Use Let’s Encrypt</strong> setting to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</li>
+<li>Restart the Mattermost server for these changes to take effect.</li>
+</ol>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If Let’s Encrypt is enabled, forward port 80 through a firewall, with <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#forward-port-80-to-443">Forward80To443</a> <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting set to <code class="docutils literal notranslate"><span class="pre">true</span></code> to complete the Let’s Encrypt certification.</p>
+</div>
+<p><strong>To use your own certificate</strong>:</p>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li>Change the <strong>Use Let’s Encrypt</strong> setting to <code class="docutils literal notranslate"><span class="pre">false</span></code>.</li>
+<li>Change the <strong>TLS Certificate File</strong> setting to the location of the certificate file.</li>
+<li>Change the <strong>TLS Key File</strong> setting to the location of the private key file.</li>
+<li>Restart the Mattermost server for these changes to take effect.</li>
+</ol>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Password-protected certificates are not supported.</p>
+</div>
+<p><strong>Using TLS on NGINX (as a proxy)</strong></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Do not set up TLS on Mattermost before before doing so for NGINX. It breaks the connection as the TLS prevents it from successfully communicating with the Mattermost server.</p>
+</div>
+<ul class="simple">
+<li>NGINX will act as a forward proxy to encrypt the traffic between the client and Mattermost server. After installing the SSL certificate, the incoming traffic will be handled via NGINX on port 443 exposed to the internet, proxy to the Mattermost server running on port 80.</li>
+<li>(Optional) Upstream encryption between NGINX to Mattermost server is allowed.</li>
+<li>Follow <a class="reference external" href="https://docs.nginx.com/nginx/admin-guide/security-controls/terminating-ssl-tcp/">NGINX’s guide on setting up SSL Termination for TCP Upstream Servers</a>.</li>
+</ul>
+<p>Other helpful resources:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://www.nginx.com/blog/nginx-ssl/">NGINX’s SSL blog</a></li>
+<li><a class="reference external" href="https://docs.nginx.com/nginx/admin-guide/security-controls/terminating-ssl-http/">NGINX’s SSLguide</a></li>
+</ul>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/install/config-tls-mattermost.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>
