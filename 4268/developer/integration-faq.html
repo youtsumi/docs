@@ -1,0 +1,461 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Integrations FAQ &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Embedding Mattermost in Other Applications" href="../integrations/embedding.html" />
+    <link rel="prev" title="OAuth 2.0 Applications" href="oauth-2-0-applications.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/integration.html">Integration Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../integrations/jira.html">Jira Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../integrations/zoom.html">Zoom Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../integrations/zapier.html">Zapier Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="webhooks-incoming.html">Incoming Webhooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="webhooks-outgoing.html">Outgoing Webhooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slash-commands.html">Slash Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/plugins.html">Plugins (Beta)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="message-attachments.html">Message Attachments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-messages.html">Interactive Messages: Buttons and Menus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-dialogs.html">Interactive Dialogs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bot-accounts.html">Bot Accounts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="personal-access-tokens.html">Personal Access Tokens</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oauth-2-0-applications.html">OAuth 2.0 Applications</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Integrations FAQ</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-s-the-difference-between-incoming-and-outgoing-webhooks">What’s the difference between incoming and outgoing webhooks?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#what-is-a-slash-command">What is a slash command?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#what-does-slack-compatible-mean">What does Slack-compatible mean?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#what-if-i-have-a-webhook-from-somewhere-other-than-slack">What if I have a webhook from somewhere other than Slack?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#what-are-attachments">What are attachments?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#where-can-i-find-existing-integrations">Where can I find existing integrations?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#where-should-i-install-my-integrations">Where should I install my integrations?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-do-i-create-a-bot-account-with-personal-access-tokens">How do I create a bot account with personal access tokens?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-do-i-create-a-bot-account-without-personal-access-tokens-or-webhooks">How do I create a bot account without personal access tokens or webhooks?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-should-i-automate-the-install-and-upgrade-of-mattermost-when-included-in-another-application">How should I automate the install and upgrade of Mattermost when included in another application?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../integrations/embedding.html">Embedding Mattermost in Other Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../integrations/webhook.html">Using Mattermost with Webhook</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/integration.html">Mattermost Integration Guide</a> &raquo;</li>
+    
+    <li>Integrations FAQ</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/developer/integration-faq.md" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="integrations-faq">
+<h1>Integrations FAQ<a class="headerlink" href="#integrations-faq" title="Permalink to this headline">¶</a></h1>
+<hr class="docutils" />
+<p>Come <a class="reference external" href="https://community.mattermost.com/core/channels/tickets">join our Contributors community channel</a> on our daily build server, where you can discuss questions with community members and the Mattermost core team. Join our <a class="reference external" href="https://community.mattermost.com/core/channels/developers">Developers channel</a> for technical discussions and our <a class="reference external" href="https://community.mattermost.com/core/channels/integrations">Integrations channel</a> for all integrations and plugins discussions.</p>
+<div class="section" id="what-s-the-difference-between-incoming-and-outgoing-webhooks">
+<h2>What’s the difference between incoming and outgoing webhooks?<a class="headerlink" href="#what-s-the-difference-between-incoming-and-outgoing-webhooks" title="Permalink to this headline">¶</a></h2>
+<p>A webhook is a way for one app to send real-time data to another app.</p>
+<p>In Mattermost, incoming webhooks receive data from external applications and make a post in a specified channel. They’re great for setting up notifications when something happens in an external application.</p>
+<p>Outgoing webhooks take data from Mattermost, and send it to an external application. Then the outgoing webhook can post a response back in Mattermost. They’re great for listening in on channels, and then notifying external applications when a trigger word is used.</p>
+</div>
+<div class="section" id="what-is-a-slash-command">
+<h2>What is a slash command?<a class="headerlink" href="#what-is-a-slash-command" title="Permalink to this headline">¶</a></h2>
+<p>A slash command is similar to an outgoing webhook, but instead of listening to a channel it is used as a command tool. This means if you type in a slash command it will not be posted to a channel, whereas an outgoing webhook is only triggered by posted messages.</p>
+</div>
+<div class="section" id="what-does-slack-compatible-mean">
+<h2>What does Slack-compatible mean?<a class="headerlink" href="#what-does-slack-compatible-mean" title="Permalink to this headline">¶</a></h2>
+<p>Slack compatible means that Mattermost accepts integrations that have a payload in the same format as Slack.</p>
+<p>If you have a Slack integration, you should be able to set it up in Mattermost without changing the format.</p>
+</div>
+<div class="section" id="what-if-i-have-a-webhook-from-somewhere-other-than-slack">
+<h2>What if I have a webhook from somewhere other than Slack?<a class="headerlink" href="#what-if-i-have-a-webhook-from-somewhere-other-than-slack" title="Permalink to this headline">¶</a></h2>
+<p>If you have an integration that outputs a payload in a different format you need to write an intermediate application to act as a translation layer to change it to the format Mattermost uses. Since there’s currently no general standard for webhook formatting, this is unavoidable and just a part of how webhooks work.</p>
+<p>If there’s no translation layer, Mattermost won’t understand the data you’re sending.</p>
+</div>
+<div class="section" id="what-are-attachments">
+<h2>What are attachments?<a class="headerlink" href="#what-are-attachments" title="Permalink to this headline">¶</a></h2>
+<p>When “attachments” are mentioned in the integrations documentation, it refers to Slack’s Message Attachments. These “attachments” can be optionally added as an array in the data sent by an integration, and are used to customize the formatting of the message.</p>
+<p>We currently don’t support the ability to attach files to a post made by an integration.</p>
+</div>
+<div class="section" id="where-can-i-find-existing-integrations">
+<h2>Where can I find existing integrations?<a class="headerlink" href="#where-can-i-find-existing-integrations" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://about.mattermost.com/default-app-directory/">Visit our app directory</a> for dozens of open source integrations to common tools like Jira, Jenkins, GitLab, Trac, Redmine, and Bitbucket, along with interactive bot applications (Hubot, mattermost-bot), and other communication tools (Email, IRC, XMPP, Threema) that are freely available for use and customization.</p>
+</div>
+<div class="section" id="where-should-i-install-my-integrations">
+<h2>Where should I install my integrations?<a class="headerlink" href="#where-should-i-install-my-integrations" title="Permalink to this headline">¶</a></h2>
+<p>For self-hosted deployments in small setups you might host integrations on the same server on which Mattermost is installed. For larger deployments you can setup a separate server for integrations, or add them to the server on which the external application is hosted - for example, if you’re self-hosting a Jira server you could deploy a Jira integration on the Jira server itself.</p>
+<p>When self-hosting restrictions are less strict, AWS, Heroku, and other public cloud options could also be used.</p>
+</div>
+<div class="section" id="how-do-i-create-a-bot-account-with-personal-access-tokens">
+<h2>How do I create a bot account with personal access tokens?<a class="headerlink" href="#how-do-i-create-a-bot-account-with-personal-access-tokens" title="Permalink to this headline">¶</a></h2>
+<p>See <a class="reference external" href="https://docs.mattermost.com/developer/bot-accounts.html">bot accounts documentation</a> to learn more about how to create and manage bot accounts in Mattermost.</p>
+<p>In version 5.11 and earlier, follow these steps to create a bot account with personal access tokens:</p>
+<ol>
+<li><p class="first">Create a bot account using any authentication method, including email and password, AD/LDAP, or SAML.</p>
+</li>
+<li><p class="first">Create a personal access token for the account <a class="reference external" href="https://docs.mattermost.com/developer/personal-access-tokens.html#creating-a-personal-access-token">using the steps here</a>.</p>
+<ul class="simple">
+<li>The steps also outline how to give the account permissions to post to any channel in your Mattermost server, including direct messages, or to any public channel.</li>
+</ul>
+</li>
+<li><p class="first">Include the personal access token from step 2 as part of the <code class="docutils literal notranslate"><span class="pre">Authorization</span></code> header on API requests from your integration.</p>
+<ul>
+<li><p class="first">To confirm the token works, you can have your bot make a simple <code class="docutils literal notranslate"><span class="pre">GET</span></code> request to <code class="docutils literal notranslate"><span class="pre">/api/v4/users/me</span></code> with the <code class="docutils literal notranslate"><span class="pre">Authorization:</span> <span class="pre">bearer</span> <span class="pre">&lt;yourtokenhere&gt;</span></code> in the header. If it returns a <code class="docutils literal notranslate"><span class="pre">200</span></code> with the bot’s user object in the response, the API request was made successfully.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">GET</span> <span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v4</span><span class="o">/</span><span class="n">users</span><span class="o">/</span><span class="n">me</span> <span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span>
+<span class="n">Authorization</span><span class="p">:</span> <span class="n">bearer</span> <span class="o">&lt;</span><span class="n">yourtokenhere</span><span class="o">&gt;</span>
+<span class="n">Host</span><span class="p">:</span> <span class="n">your</span><span class="o">-</span><span class="n">mattermost</span><span class="o">-</span><span class="n">url</span><span class="o">.</span><span class="n">com</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="how-do-i-create-a-bot-account-without-personal-access-tokens-or-webhooks">
+<h2>How do I create a bot account without personal access tokens or webhooks?<a class="headerlink" href="#how-do-i-create-a-bot-account-without-personal-access-tokens-or-webhooks" title="Permalink to this headline">¶</a></h2>
+<p>Deployments that cannot create bot accounts via webhooks due to security reasons and do not want to use <a class="reference external" href="https://docs.mattermost.com/developer/personal-access-tokens.html">personal access tokens</a> with no expiry time, can use the following approach:</p>
+<ol>
+<li><p class="first">Create a bot account using a secure email and strong password.</p>
+</li>
+<li><p class="first">Manually add the account to all teams and channels it needs access to. If your deployment has a lot of teams or channels, you may create a CLI script to automate the process.</p>
+<ul class="simple">
+<li>In a testing environment, you may also make the bot account a System Admin, giving the bot permissions to post to any channel. Not recommended in production due to potential security vulnerabilities.</li>
+</ul>
+</li>
+<li><p class="first">Provide the email and password to your integration, and store it in a secure location with restricted access.</p>
+</li>
+<li><p class="first">Have your integration use the email and password with an <a class="reference external" href="https://api.mattermost.com/v4/#tag/authentication"><code class="docutils literal notranslate"><span class="pre">/api/v4/login</span></code></a> endpoint to retrieve a session token. The session token is used to authenticate to the Mattermost system.</p>
+<ul>
+<li><p class="first">Set up your bot to make an HTTP POST to <code class="docutils literal notranslate"><span class="pre">your-mattermost-url.com/api/v4/users/login</span></code> with a JSON body, including the bot account’s email and password.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">POST</span> <span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v4</span><span class="o">/</span><span class="n">users</span><span class="o">/</span><span class="n">login</span> <span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span>
+<span class="n">Host</span><span class="p">:</span> <span class="n">your</span><span class="o">-</span><span class="n">mattermost</span><span class="o">-</span><span class="n">url</span><span class="o">.</span><span class="n">com</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Length</span><span class="p">:</span> <span class="mi">66</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="p">:</span> <span class="n">application</span><span class="o">/</span><span class="n">json</span>
+
+<span class="p">{</span><span class="s2">&quot;login_id&quot;</span><span class="p">:</span><span class="s2">&quot;someone@nowhere.com&quot;</span><span class="p">,</span><span class="s2">&quot;password&quot;</span><span class="p">:</span><span class="s2">&quot;thisisabadpassword&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>where we assume there is a Mattermost instance running at http://localhost:8065.</p>
+</li>
+<li><p class="first">If successful, the response will contain a <code class="docutils literal notranslate"><span class="pre">Token</span></code> header and a user object in the body:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span> <span class="mi">200</span> <span class="n">OK</span>
+<span class="n">Set</span><span class="o">-</span><span class="n">Cookie</span><span class="p">:</span> <span class="n">MMSID</span><span class="o">=</span><span class="n">hyr5dmb1mbb49c44qmx4whniso</span><span class="p">;</span> <span class="n">Path</span><span class="o">=/</span><span class="p">;</span> <span class="n">Max</span><span class="o">-</span><span class="n">Age</span><span class="o">=</span><span class="mi">2592000</span><span class="p">;</span> <span class="n">HttpOnly</span>
+<span class="n">Token</span><span class="p">:</span> <span class="n">hyr5dmb1mbb49c44qmx4whniso</span>
+<span class="n">X</span><span class="o">-</span><span class="n">Ratelimit</span><span class="o">-</span><span class="n">Limit</span><span class="p">:</span> <span class="mi">10</span>
+<span class="n">X</span><span class="o">-</span><span class="n">Ratelimit</span><span class="o">-</span><span class="n">Remaining</span><span class="p">:</span> <span class="mi">9</span>
+<span class="n">X</span><span class="o">-</span><span class="n">Ratelimit</span><span class="o">-</span><span class="n">Reset</span><span class="p">:</span> <span class="mi">1</span>
+<span class="n">X</span><span class="o">-</span><span class="n">Request</span><span class="o">-</span><span class="n">Id</span><span class="p">:</span> <span class="n">smda55ckcfy89b6tia58shk5fh</span>
+<span class="n">X</span><span class="o">-</span><span class="n">Version</span><span class="o">-</span><span class="n">Id</span><span class="p">:</span> <span class="n">developer</span>
+<span class="n">Date</span><span class="p">:</span> <span class="n">Fri</span><span class="p">,</span> <span class="mi">11</span> <span class="n">Sep</span> <span class="mi">2015</span> <span class="mi">13</span><span class="p">:</span><span class="mi">21</span><span class="p">:</span><span class="mi">14</span> <span class="n">GMT</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Length</span><span class="p">:</span> <span class="mi">657</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="p">:</span> <span class="n">application</span><span class="o">/</span><span class="n">json</span><span class="p">;</span> <span class="n">charset</span><span class="o">=</span><span class="n">utf</span><span class="o">-</span><span class="mi">8</span>
+
+<span class="p">{{</span><span class="n">user</span> <span class="nb">object</span> <span class="k">as</span> <span class="n">json</span><span class="p">}}</span>
+</pre></div>
+</div>
+<p>The bot should retrieve the session token from the <code class="docutils literal notranslate"><span class="pre">Token</span></code> header and store it in memory for use with future requests.</p>
+</li>
+</ul>
+<p><strong>Note:</strong> Each session token has an expiry time, set depending on the server’s configuration. If the session token your bot is using expires, it will receive a <code class="docutils literal notranslate"><span class="pre">401</span> <span class="pre">Unauthorized</span></code> response from requests using that token. When your bot receives this response, it should reapply the login logic (using the above steps) to get another session token. Then resend the request that received the <code class="docutils literal notranslate"><span class="pre">401</span></code> status code.</p>
+</li>
+<li><p class="first">Include the <code class="docutils literal notranslate"><span class="pre">Token</span></code> as part of the <code class="docutils literal notranslate"><span class="pre">Authorization</span></code> header on API requests from your integration.</p>
+<ul>
+<li><p class="first">To confirm the token works, you can have your bot make a simple <code class="docutils literal notranslate"><span class="pre">GET</span></code> request to <code class="docutils literal notranslate"><span class="pre">/api/v4/users/me</span></code> with the <code class="docutils literal notranslate"><span class="pre">Authorization:</span> <span class="pre">bearer</span> <span class="pre">&lt;yourtokenhere&gt;</span></code> in the header. If it returns a <code class="docutils literal notranslate"><span class="pre">200</span></code> with the bot’s user object in the response, the API request was made successfully.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">GET</span> <span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v4</span><span class="o">/</span><span class="n">users</span><span class="o">/</span><span class="n">me</span> <span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span>
+<span class="n">Authorization</span><span class="p">:</span> <span class="n">bearer</span> <span class="o">&lt;</span><span class="n">yourtokenhere</span><span class="o">&gt;</span>
+<span class="n">Host</span><span class="p">:</span> <span class="n">your</span><span class="o">-</span><span class="n">mattermost</span><span class="o">-</span><span class="n">url</span><span class="o">.</span><span class="n">com</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>Note:</strong> The Mattermost development team is also working on an <a class="reference external" href="https://docs.google.com/document/d/1ey4eNQmwK410pNTvlnmMWTa1fqtj8MV4d9XkCumI384">API developer token</a>, which allows you to authenticate the bot account via the API token rather than retrieving a session token from a user account.</p>
+</div>
+<div class="section" id="how-should-i-automate-the-install-and-upgrade-of-mattermost-when-included-in-another-application">
+<h2>How should I automate the install and upgrade of Mattermost when included in another application?<a class="headerlink" href="#how-should-i-automate-the-install-and-upgrade-of-mattermost-when-included-in-another-application" title="Permalink to this headline">¶</a></h2>
+<p>Automating Mattermost installation within another application:</p>
+<ol class="simple">
+<li>Review the <a class="reference external" href="https://docs.mattermost.com/guides/administrator.html#installing-mattermost">Mattermost installation guides</a> to understand configuration steps of the production deployment.</li>
+<li>Install Mattermost files to a dedicated <code class="docutils literal notranslate"><span class="pre">/opt/mattermost</span></code> directory by decompressing the <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file of the latest release for your target platform (for example <code class="docutils literal notranslate"><span class="pre">linux-amd64</span></code>).</li>
+<li>Review <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html">Configuration Settings</a> in <code class="docutils literal notranslate"><span class="pre">config.json</span></code> and set your automation to customize your Mattermost deployment based on your requirements.</li>
+<li>For directory locations defined in <code class="docutils literal notranslate"><span class="pre">config.json</span></code>, such as the location of the local file storage directory (<code class="docutils literal notranslate"><span class="pre">./data/</span></code>) or logs directory (<code class="docutils literal notranslate"><span class="pre">./logs</span></code>), you can redefine those locations in your <code class="docutils literal notranslate"><span class="pre">config.json</span></code> settings and move the directories.<ul>
+<li>All other directories should remain as they are in <code class="docutils literal notranslate"><span class="pre">/mattermost</span></code>.</li>
+</ul>
+</li>
+<li>Test that your Mattermost server is running with your new configuration.</li>
+<li>Also, from the command line run <code class="docutils literal notranslate"><span class="pre">./bin/mattermost</span> <span class="pre">-version</span></code> to test that the command line interface is functioning properly.</li>
+</ol>
+<p>Automating Mattermost upgrade within another application:</p>
+<ol class="simple">
+<li>Review the <a class="reference external" href="https://docs.mattermost.com/administration/upgrade.html">upgrade guide</a> for an overview of the upgrade procedure.</li>
+<li>Create automation to upgrade to the next Mattermost versions:<ul>
+<li>Back up the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file to preserve any settings a user may have made.</li>
+<li>Back up the <code class="docutils literal notranslate"><span class="pre">./data</span></code> directory if local storage is used for files.</li>
+<li>Replace the contents of <code class="docutils literal notranslate"><span class="pre">/mattermost</span></code> directory with the decompressed contents of the latest release.</li>
+<li>Restore <code class="docutils literal notranslate"><span class="pre">config.json</span></code> and <code class="docutils literal notranslate"><span class="pre">./data</span></code> to their previous locations (which may have been overwritten).</li>
+<li>If you need to overwrite any <code class="docutils literal notranslate"><span class="pre">config.json</span></code> parameters use a <a class="reference external" href="https://stackoverflow.com/questions/20568515/how-to-use-sed-to-replace-a-config-files-variable"><code class="docutils literal notranslate"><span class="pre">sed</span></code> command</a> or similar tool to update <code class="docutils literal notranslate"><span class="pre">config.json</span></code></li>
+<li>Starting the Mattermost server to upgrade the database, <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file, and <code class="docutils literal notranslate"><span class="pre">./data</span></code> as necessary.</li>
+</ul>
+</li>
+<li>Optionally the upgrade procedure can be chained so users can upgrade across an arbitrary number of Mattermost versions rather than to just the latest release.</li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../integrations/embedding.html" class="btn btn-neutral float-right" title="Embedding Mattermost in Other Applications" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="oauth-2-0-applications.html" class="btn btn-neutral" title="OAuth 2.0 Applications" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/developer/integration-faq.md"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>
