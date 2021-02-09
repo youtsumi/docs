@@ -107,8 +107,8 @@
 <li class="toctree-l3"><a class="reference internal" href="sso-gitlab.html">GitLab Single Sign-On</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-google.html">Google Single Sign-On</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Office 365 Single Sign-On</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#migrating-an-existing-connection">Migrating an existing connection</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#creating-a-new-connection">Creating a new connection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#migrating-oauth-2-0-configuration-to-openid-connect">Migrating OAuth 2.0 configuration to OpenID Connect</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuring-office-365-as-a-single-sign-on-sso-service">Configuring Office 365 as a Single Sign-On (SSO) service</a></li>
 </ul>
 </li>
 </ul>
@@ -177,15 +177,14 @@
 <hr class="docutils" />
 <p>Follow these steps to configure Mattermost to use your Office 365 logon credentials and Azure Active Directory account as a Single Sign-on (SSO) service for team creation, account creation, and sign-in.</p>
 <p><strong>Note:</strong> The system must be using SSL for use with Office365 as Microsoft only allows OAuth redirect URIs that are SSL enabled.</p>
-<div class="section" id="migrating-an-existing-connection">
-<h2>Migrating an existing connection<a class="headerlink" href="#migrating-an-existing-connection" title="Permalink to this headline">¶</a></h2>
-<p>To migrate an existing Office 365 OAuth connection to OpenID:</p>
-<p>[TBD]</p>
+<div class="section" id="migrating-oauth-2-0-configuration-to-openid-connect">
+<h2>Migrating OAuth 2.0 configuration to OpenID Connect<a class="headerlink" href="#migrating-oauth-2-0-configuration-to-openid-connect" title="Permalink to this headline">¶</a></h2>
+<p>OAuth 2.0 is being deprecated and replaced by OpenID Connect. Refer to the product documentation to [convert your existing OAuth configuration] for Office 365 to the new OpenID Connect standard.</p>
 </div>
-<div class="section" id="creating-a-new-connection">
-<h2>Creating a new connection<a class="headerlink" href="#creating-a-new-connection" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="step-1-creating-new-app-registration-in-azure-portal">
-<h3>Step 1: Creating new app registration in Azure Portal<a class="headerlink" href="#step-1-creating-new-app-registration-in-azure-portal" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="configuring-office-365-as-a-single-sign-on-sso-service">
+<h2>Configuring Office 365 as a Single Sign-On (SSO) service<a class="headerlink" href="#configuring-office-365-as-a-single-sign-on-sso-service" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-1-register-an-application-in-azure-portal">
+<h3>Step 1: Register an application in Azure Portal<a class="headerlink" href="#step-1-register-an-application-in-azure-portal" title="Permalink to this headline">¶</a></h3>
 <ol>
 <li><p class="first">Log in to your <a class="reference external" href="https://portal.azure.com/">Azure Portal</a> with the account that relates to the Azure Active Directory tenant where you want to register the application. You can confirm the tenant in the top right corner of the portal.</p>
 </li>
@@ -202,8 +201,8 @@
 </ol>
 <p>Once the App Registration has been created, you can configure it further. The standard Azure AD documentation is <a class="reference external" href="https://docs.microsoft.com/en-gb/azure/active-directory/develop/quickstart-register-app">here</a> for reference.</p>
 </div>
-<div class="section" id="step-2-generating-a-new-client-secret-in-azure-portal">
-<h3>Step 2: Generating a new client secret in Azure Portal<a class="headerlink" href="#step-2-generating-a-new-client-secret-in-azure-portal" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="step-2-generate-a-new-client-secret-in-azure-portal">
+<h3>Step 2: Generate a new client secret in Azure Portal<a class="headerlink" href="#step-2-generate-a-new-client-secret-in-azure-portal" title="Permalink to this headline">¶</a></h3>
 <ol>
 <li><p class="first">In the Azure Portal, select <strong>Certificates and Secrets</strong> from the menu, then select the button to generate a <strong>New Client secret</strong>.</p>
 </li>
@@ -211,41 +210,39 @@
 <p><img alt="../../_images/AzureApp_Client_Secret_Expiry.png" src="../../_images/AzureApp_Client_Secret_Expiry.png" /></p>
 </li>
 </ol>
-<p>You are provided with the <em>client secret value</em>. Copy and paste it to a temporary location. You will enter this value as a <strong>Client Secret</strong> in the Mattermost System Console.</p>
-</div>
-<div class="section" id="step-3-copying-values-for-mattermost-configuration">
-<h3>Step 3: Copying values for Mattermost configuration<a class="headerlink" href="#step-3-copying-values-for-mattermost-configuration" title="Permalink to this headline">¶</a></h3>
 <p>In Azure Portal, select <strong>Overview</strong> from the menu, then copy and paste both the <em>Application (client) ID</em> and the <em>Directory (tenant) ID</em> to a temporary location. You will enter these values as an <strong>Application ID</strong> and as part of an <strong>Auth Endpoint</strong> and <strong>Token Endpoint</strong> URL in the Mattermost System Console.</p>
 <p><img alt="../../_images/AzureApp_App_Directory_IDsv2.png" src="../../_images/AzureApp_App_Directory_IDsv2.png" /></p>
 </div>
-<div class="section" id="step-4-configuring-mattermost-for-office-365-sso">
-<h3>Step 4: Configuring Mattermost for Office 365 SSO<a class="headerlink" href="#step-4-configuring-mattermost-for-office-365-sso" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="step-3-configure-mattermost-for-office-365-sso">
+<h3>Step 3: Configure Mattermost for Office 365 SSO<a class="headerlink" href="#step-3-configure-mattermost-for-office-365-sso" title="Permalink to this headline">¶</a></h3>
 <ol class="simple">
 <li>Log in to Mattermost, then go to the <strong>System Console &gt; Authentication &gt; OpenID Connect</strong>.</li>
 <li>Select <strong>Office 365</strong> as the service provider.</li>
-<li>Paste in <em>client secret value</em> as the <strong>Client Secret</strong>.</li>
-<li>Paste in the <em>Application (client) ID</em> as the <strong>Client ID</strong></li>
-<li>Paste in the <em>Directory (tenant) ID</em> as the <strong>Directory (tenant) ID</strong>.</li>
+<li>Paste in the <em>Directory (tenant) ID</em> from Azure Portal as the <strong>Directory (tenant) ID</strong> in Mattermost.</li>
+<li>The <strong>Discovery Endpoint</strong> for OpenID Connect with Office 365 is prepopulated with <code class="docutils literal notranslate"><span class="pre">https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration</span></code>.</li>
+<li>Paste in the <em>Application (client) ID</em> from Azure Portal as the <strong>Client ID</strong> in Mattermost.</li>
+<li>Paste in the <em>client secret value</em> from Azure Portal as the <strong>Client Secret</strong> in Mattermost.</li>
 <li>Open the Mattermost <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file.</li>
-<li>In the <code class="docutils literal notranslate"><span class="pre">Office365Settings</span></code> section of <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file, update the following default values:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">AuthEndpoint:</span> <span class="pre">https://login.microsoftonline.com/common/oauth2/v2.0/authorize</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">TokenEndpoint:</span> <span class="pre">https://login.microsoftonline.com/common/oauth2/v2.0/token</span></code></li>
-</ul>
-</li>
+<li>In the <code class="docutils literal notranslate"><span class="pre">Office365Settings</span></code> section of the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file, update the default configuration values to include the <em>Directory (tenant) ID</em> value. For example:</li>
 </ol>
-<p>to include the <em>Directory (tenant) ID</em> value, for example:</p>
-<ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">AuthEndpoint:</span> <span class="pre">https://login.microsoftonline.com/3dfccc41-d360-488a-a6ff-e9e565b3xbf1/oauth2/v2.0/authorize</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">TokenEndpoint:</span> <span class="pre">https://login.microsoftonline.com/3dfcc41-d360-488a-a6ff-e9e565b3xbf1/oauth2/v2.0/token</span></code></li>
-</ul>
-<p>Restart your Mattermost server to see the changes take effect.</p>
+<p>.. code-block:: none</p>
+<p><code class="docutils literal notranslate"><span class="pre">AuthEndpoint:</span> <span class="pre">https://login.microsoftonline.com/common/oauth2/v2.0/authorize</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">TokenEndpoint:</span> <span class="pre">https://login.microsoftonline.com/common/oauth2/v2.0/token</span></code></p>
+<p>would change to:</p>
+<p>.. code-block:: none</p>
+<p><code class="docutils literal notranslate"><span class="pre">AuthEndpoint:</span> <span class="pre">https://login.microsoftonline.com/3dfccc41-d360-488a-a6ff-e9e565b3xbf1/oauth2/v2.0/authorize</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">TokenEndpoint:</span> <span class="pre">https://login.microsoftonline.com/3dfcc41-d360-488a-a6ff-e9e565b3xbf1/oauth2/v2.0/token</span></code></p>
+<ol class="simple">
+<li>Select <strong>Save</strong>.</li>
+<li>Restart your Mattermost server to see the changes take effect.</li>
+</ol>
 </div>
 <div class="section" id="note-about-microsoft-active-directory-tenants">
 <h3>Note about Microsoft Active Directory Tenants<a class="headerlink" href="#note-about-microsoft-active-directory-tenants" title="Permalink to this headline">¶</a></h3>
 <p>A Microsoft Active Directory (AD) tenant is a dedicated instance of Azure Active Directory (Azure AD) that you own and would have received when signing up for a Microsoft cloud service such as Azure or Office 365. Tenants are commonly used by organizations who want to store information about their users such as passwords, user profile data and permissions. You can learn more about <a class="reference external" href="https://docs.microsoft.com/en-us/azure/active-directory/active-directory-howto-tenant">getting an Azure AD tenant here</a>.</p>
 <p>To allow your Azure AD users to sign in to Mattermost using Office 365 SSO, you must register Mattermost in the Microsoft Azure AD tenant that contains the users’ information. The registration can be done from the <a class="reference external" href="https://manage.windowsazure.com/">Microsoft Azure portal</a>. The steps to register the Mattermost account in the tenant should be similar to those provided above, and you can find more information about <a class="reference external" href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-integrating-applications/">integrating apps with Azure AD here</a>.</p>
 <p>If you don’t register Mattermost in the Microsoft Azure AD tenant your organization uses, Office 365 SSO will likely fail for your users.</p>
-<p>Note that if you do not use Azure Active Directory, you may simply register Mattermost with your Office 365 or Azure account (either your personal, work or school account) and set up Office 365 SSO with Mattermost using the steps provided above.</p>
+<p><strong>Note:</strong> If you do not use Azure Active Directory, you may register Mattermost with your Office 365 or Azure account (a personal, work, or school account), then set up Office 365 SSO with Mattermost using the steps provided above.</p>
 </div>
 </div>
 </div>
