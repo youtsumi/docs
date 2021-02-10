@@ -104,7 +104,7 @@
 <li class="toctree-l3"><a class="reference internal" href="sso-saml.html">SAML Single Sign-On</a></li>
 <li class="toctree-l3"><a class="reference internal" href="saml-technical.html">SAML Single-Sign-On: Technical Documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-ldap.html">Active Directory/LDAP Setup</a></li>
-<li class="toctree-l3"><a class="reference internal" href="converting-oauth-2.0-to-openid-connect.html">Converting OAuth 2.0 Configuration to OpenID Connect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="converting-oauth-2.0-to-openid-connect.html">Converting OAuth 2.0 to OpenID Connect</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-openid-connect.html">OpenID Connect Single Sign-On</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">GitLab Single Sign-On</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#migrating-from-oauth-2-0-to-openid-connect">Migrating from OAuth 2.0 to OpenID Connect</a></li>
@@ -178,7 +178,7 @@
 <h1>GitLab Single Sign-On<a class="headerlink" href="#gitlab-single-sign-on" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="migrating-from-oauth-2-0-to-openid-connect">
 <h2>Migrating from OAuth 2.0 to OpenID Connect<a class="headerlink" href="#migrating-from-oauth-2-0-to-openid-connect" title="Permalink to this headline">¶</a></h2>
-<p>OAuth 2.0 is being deprecated and replaced by OpenID Connect. Refer to product documentation to [convert your existing OAuth configuration] for GitLab to the new OpenID Connect standard.</p>
+<p>OAuth 2.0 is being deprecated and replaced by OpenID Connect. Refer to product documentation to <a class="reference external" href="https://docs.mattermost.com/cloud/cloud-administration/converting-oauth-2.0-to-openid-connect">convert your existing OAuth configuration</a> for GitLab to the new OpenID Connect standard.</p>
 </div>
 <div class="section" id="configuring-gitlab-as-a-single-sign-on-sso-service">
 <h2>Configuring GitLab as a Single Sign-On (SSO) service<a class="headerlink" href="#configuring-gitlab-as-a-single-sign-on-sso-service" title="Permalink to this headline">¶</a></h2>
@@ -190,12 +190,12 @@
 <div class="section" id="step-1-add-an-openid-connect-application-to-your-gitlab-account">
 <h3>Step 1: Add an OpenID Connect application to your GitLab account<a class="headerlink" href="#step-1-add-an-openid-connect-application-to-your-gitlab-account" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
-<li>Sign in to your GitLab account, then go to <code class="docutils literal notranslate"><span class="pre">https://{gitlab-site-name}/profile/applications</span></code>. For <em>{gitlab-site-name}</em> use the name of your GitLab instance. If you’re using GitLab itself as your service provider, use <em>gitlab.com</em>.</li>
+<li>Sign in to your GitLab account, then go to <code class="docutils literal notranslate"><span class="pre">https://{gitlab-site-name}/profile/applications</span></code>. For <em>{gitlab-site-name}</em> use the name of your GitLab instance. If you’re using GitLab itself as your service provider, use <code class="docutils literal notranslate"><span class="pre">gitlab.com</span></code>.</li>
 <li>Add a new application:</li>
 </ol>
 <blockquote>
 <div><ol class="loweralpha simple">
-<li>In the <strong>Name</strong> field, type <em>Mattermost</em>.</li>
+<li>In the <strong>Name</strong> field, type <code class="docutils literal notranslate"><span class="pre">Mattermost</span></code>.</li>
 <li>In the <strong>Redirect URI</strong> field, add the following two lines using your own value for <em>{mattermost-site-name}</em>.</li>
 </ol>
 <blockquote>
@@ -219,7 +219,7 @@ https://{mattermost-site-name}/signup/gitlab/complete
 <div class="section" id="step-2-configure-mattermost-for-gitlab-sso">
 <h3>Step 2: Configure Mattermost for GitLab SSO<a class="headerlink" href="#step-2-configure-mattermost-for-gitlab-sso" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
-<li>Log in to Mattermost, then go to the <strong>System Console &gt; Authentication &gt; OpenID Connect</strong>.</li>
+<li>Log in to Mattermost, then go to <strong>System Console &gt; Authentication &gt; OpenID Connect</strong>.</li>
 <li>Select <strong>GitLab</strong> as the service provider.</li>
 <li>Enter the <strong>Gitlab Site URL</strong> of your GitLab instance. If your GitLab instance is not set up to use SSL, start the URL with <code class="docutils literal notranslate"><span class="pre">http://</span></code> instead of <code class="docutils literal notranslate"><span class="pre">https://</span></code>. If you are using GitLab itself as your provider, use <code class="docutils literal notranslate"><span class="pre">gitlab.com</span></code>.</li>
 <li>The <strong>Discovery Endpoint</strong> for OpenID Connect with GitLab is prepopulated with <code class="docutils literal notranslate"><span class="pre">https://gitlab.com/.well-known/openid-configuration</span></code>.</li>
