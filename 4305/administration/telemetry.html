@@ -1,0 +1,507 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Telemetry &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+    <li>Telemetry</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/administration/telemetry.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="telemetry">
+<span id="id1"></span><h1>Telemetry<a class="headerlink" href="#telemetry" title="Permalink to this headline">¶</a></h1>
+<p>As described in the privacy policy in each Mattermost server, telemetry data optionally shared from your Mattermost servers is used to identify security and reliability issues, to analyze and fix software problems, to help improve the quality of Mattermost software and related services, and to make design decisions for future releases.</p>
+<p>Telemetry data is encrypted in transit, does not include personally identifiable information or message contents, and details of how the information is used and processed is available in our <a class="reference external" href="https://about.mattermost.com/default-privacy-policy/">Privacy Policy</a>.</p>
+<p>We use the data for the following purposes:</p>
+<blockquote>
+<div><ul class="simple">
+<li>To identify security and reliability issues.</li>
+<li>To analyze and fix software problems.</li>
+<li>To help improve the quality of Mattermost software and related services.</li>
+<li>To make design decisions for future releases.</li>
+</ul>
+</div></blockquote>
+<div class="section" id="security-update-check-feature">
+<h2>Security Update Check Feature<a class="headerlink" href="#security-update-check-feature" title="Permalink to this headline">¶</a></h2>
+<p>New threats to system security constantly arise. To alert you of relevant, high priority security updates, Mattermost servers are configured to share diagnostic information with Mattermost Inc. so that we can provide appropriate alerts.</p>
+<dl class="docutils">
+<dt>The following data is collected once every 24 hours:</dt>
+<dd><ul class="first last simple">
+<li>Mattermost server build number and version</li>
+<li>Type of build (Enterprise Edition or Team Edition)</li>
+<li>Server operating system</li>
+<li>The server diagnostic ID (same as the ID accessing the push notification proxy, and is used to prevent double-counting of telemetry data)</li>
+<li>Database type</li>
+<li>Database version</li>
+<li>Number of teams</li>
+<li>Number of users</li>
+<li>Number of active users</li>
+<li>Whether or not the unit tests have been run</li>
+<li>Date and time of the last check for security updates</li>
+<li>The location of the Amazon Cloudfront server used for telemetry data</li>
+</ul>
+</dd>
+</dl>
+<p>To opt out, disable the feature in <strong>System Console &gt; Environment &gt; SMTP</strong> (or <strong>System Console &gt; Notifications &gt; Email &gt; Enable Security Alerts</strong> in versions prior to 5.12). When the feature is disabled, you will not receive any security alerts.</p>
+</div>
+<div class="section" id="error-and-diagnostics-reporting-feature">
+<h2>Error and Diagnostics Reporting Feature<a class="headerlink" href="#error-and-diagnostics-reporting-feature" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>Mattermost error and diagnostic data is collected for the following purposes:</dt>
+<dd><ul class="first last simple">
+<li>To add improvements that are specific to your usage and deployment patterns, including identifying security and reliability issues.</li>
+<li>To analyze and fix software problems.</li>
+<li>To help improve the quality of Mattermost software and related services.</li>
+<li>To make design decisions for future releases.</li>
+</ul>
+</dd>
+</dl>
+<p>Error and diagnostic reporting is sent by the client to the endpoint <code class="docutils literal notranslate"><span class="pre">api.segment.io</span></code>. From Mattermost version 5.23 the segment endpoint is being deprecated in favor of <code class="docutils literal notranslate"><span class="pre">https://pdat.matterlytics.com</span></code>, a custom Rudder domain. To opt out, you can disable the feature in <strong>System Console &gt; Environment &gt; Logging</strong> (or <strong>System Console &gt; General &gt; Logging &gt; Enable Error and Diagnostics Reporting</strong> in versions prior to 5.12). Starting in Mattermost version 5.26, when this feature is enabled, any 500 errors will be automatically sent to the Mattermost-hosted <a class="reference external" href="https://sentry.io/welcome/">Sentry</a> endpoint.</p>
+<div class="section" id="deployment-and-server-configuration-data">
+<h3>Deployment and Server Configuration Data<a class="headerlink" href="#deployment-and-server-configuration-data" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>Reporting Frequency</dt>
+<dd><ul class="first last simple">
+<li>When starting the server for the first time: Every 10 minutes for the first hour, then every hour for the first 12 hours.</li>
+<li>At the 24 hour mark and every 24 hours thereafter.</li>
+</ul>
+</dd>
+<dt>Deployment Configuration Information</dt>
+<dd>Basic information including Mattermost server version, database and operating system type and version, and count of System Administrator accounts.</dd>
+<dt>Deployment Type</dt>
+<dd><ul class="first last simple">
+<li>Manual install (includes <code class="docutils literal notranslate"><span class="pre">wget</span></code> installs)</li>
+<li>Docker</li>
+<li>Mattermost Omnibus</li>
+<li>Kubernetes operator</li>
+<li>GitLab Omnibus</li>
+</ul>
+</dd>
+<dt>Server Configuration Settings</dt>
+<dd><p class="first">Non-personally identifiable data from configuration settings file (<code class="docutils literal notranslate"><span class="pre">config.json</span></code>) in the form of <code class="docutils literal notranslate"><span class="pre">type</span></code> (“enumerated integer” or “enumerated boolean”) values, <code class="docutils literal notranslate"><span class="pre">true/false</span></code> (“boolean”), and <code class="docutils literal notranslate"><span class="pre">count</span></code> (“integer”). Specifically these include:</p>
+<p><strong>Type values (enumerated integer and enumerated boolean)</strong></p>
+<p><strong>ServiceSettings</strong>: enum WebserverMode, bool EnableSecurityFixAlert, bool EnableInsecureOutgoingConnections, bool EnableIncomingWebhooks, bool EnableOutgoingWebhooks, bool EnableCommands, bool EnableOnlyAdminIntegrations, bool EnablePostUsernameOverride, bool EnablePostIconOverride, bool EnableCustomEmoji, enum RestrictCustomEmojiCreation, bool EnableTesting, bool EnableDeveloper, bool EnableMultifactorAuthentication, bool EnableOAuthServiceProvider, enum ConnectionSecurity, bool UseLetsEncrypt, bool Forward80To443, enum ConnectionSecurity, bool TLSStrictTransport, bool EnforceMultifactorAuthentication, enum RestrictPostDelete, bool AllowEditPost, bool EnableUserTypingMessages, bool EnablePostSearch, bool EnableUserStatuses, bool EnableChannelViewMessages, bool EnableEmojiPicker, bool EnableGifPicker, bool xEnableAuthenticationTransfer, enum TeammateNameDisplay, bool EnableUserAccessTokens, enum MaximumLoginAttempts, bool ExtendSessionLengthWithActivity, enum SessionLengthWebInDays, enum SessionLengthMobileInDays, int SessionCacheInMinutes, enum SessionIdleTimeoutInMinutes, enum PostEditTimeLimit, enum TimeBetweenUserTypingUpdatesMilliseconds, enum ClusterLogTimeoutMilliseconds, bool CloseUnusedDirectMessages, bool EnablePreviewFeatures, bool EnableTutorial, bool ExperimentalEnableDefaultChannelLeaveJoinMessages, bool ExperimentalGroupUnreadChannels, bool AllowCookiesForSubdomains, bool EnableAPITeamDeletion, bool EnableAPIUserDeletion, bool EnableAPIChannelDeletion, bool ExperimentalEnableHardenedMode, bool DisableLegacyMFA, bool ExperimentalStrictCSRFEnforcement, bool EnableEmailInvitations, bool ExperimentalChannelOrganization, bool ExperimentalChannelSidebarOrganization, bool CorsAllowCredentials, bool CorsDebug, bool DisableBotsWhenOwnerIsDeactivated, bool EnableBotAccountCreation, bool EnableSVGs, bool EnableLatex, bool EnableOpenTracing, bool ExperimentalDataPrefetch, bool EnableLocalMode; <strong>TeamSettings</strong>: bool EnableUserCreation, bool EnableTeamCreation, bool RestrictTeamNames, enum RestrictTeamInvite, enum RestrictPublicChannelManagement, enum RestrictPrivateChannelManagement, enum RestrictPublicChannelCreation, enum RestrictPrivateChannelCreation, enum RestrictPublicChannelDeletion, enum RestrictPrivateChannelDeletion, enum RestrictPrivateChannelManageMembers, bool EnableOpenServer, bool EnableUserDeactivation, bool EnableCustomBrand, bool RestrictDirectMessage, enum MaxNotificationsPerChannel, bool EnableConfirmNotificationsToChannel; enum MaxUsersPerTeam, enum MaxChannelsPerTeam, bool ExperimentalTownSquareIsReadOnly, bool ExperimentalHideTownSquareinLHS, bool EnableXToLeaveChannelsFromLHS, bool ExperimentalEnableAutomaticReplies, bool ExperimentalViewArchivedChannels, bool LockTeammateNameDisplay; <strong>ClientRequirementSettings</strong>: enum AndroidLatestVersion, enum AndroidMinVersion, enum DesktopLatestVersion, enum DesktopMinVersion, enum IosLatestVersion, enum IosMinVersion; <strong>DisplaySettings</strong>: bool ExperimentalTimezone; <strong>GuestAccountsSettings</strong>: bool Enable, bool AllowEmailAccounts, bool EnforceMultifactorAuthentication; <strong>SqlSettings</strong>: enum DriverName, bool Trace, enum MaxIdleConns, bool ConnMaxLifetimeMilliseconds; enum MaxOpenC onns, enum QueryTimeout, bool DisableDatabaseSearch; <strong>LogSettings</strong>: bool EnableConsole, enum ConsoleLevel, bool ConsoleJson, bool EnableFile, enum FileLevel, bool FileJson, bool EnableWebhookDebugging; <strong>NotificationLogSettings</strong>: bool EnableConsole, bool ConsoleLevel, bool ConsoleJson, bool EnableFile, bool FileLevel, bool FileJson <strong>PasswordSettings</strong>: bool Lowercase, bool Number, bool Uppercase, bool Symbol, enum MinimumLength; <strong>FileSettings</strong>: bool EnablePublicLink, enum DriverName, bool AmazonS3SSL, bool AmazonS3SignV2, bool AmazonS3SSE, bool AmazonS3Trace, bool EnableFileAttachments, bool EnableMobileUpload, bool EnableMobileDownload; <strong>EmailSettings</strong>: bool EnableSignUpWithEmail, bool EnableSignInWithEmail, bool EnableSignInWithUsername, bool RequireEmailVerification, bool SendEmailNotifications, bool UseChannelInEmailNotifications, bool EmailNotificationContentsType, bool EnableSMTPAuth, enum ConnectionSecurity, bool SendPushNotifications, enum PushNotificationContents, bool EnableEmailBatching, bool SkipServerCertificateVerification, enum EmailBatchingBufferSize, enum EmailBatchingInterval, bool EnablePreviewModeBanner, enum SMTPServerTimeout; <strong>MessageExportSettings</strong>: bool DownloadExportResults; <strong>RateLimitSettings</strong>: bool EnableRateLimiter, bool VaryByRemoteAddr,  bool VaryByUser, enum PerSec, enum MaxBurst, enum MemoryStoreSize; <strong>PrivacySettings</strong>: bool ShowEmailAddress, bool ShowFullName; <strong>ThemeSettings</strong>: bool EnableThemeSelection, bool AllowCustomThemes; <strong>GitLabSettings</strong>: bool Enable; <strong>GoogleSettings</strong>: bool Enable; <strong>Office365Settings</strong>: bool Enable; <strong>SupportSettings</strong>: bool CustomTermsOfServiceEnabled; enum CustomTermsOfServiceReAcceptancePeriod; <strong>LdapSettings</strong>: bool Enable, bool EnableSync, enum ConnectionSecurity, bool SkipCertificateVerification, enum SyncIntervalMinutes, enum QueryTimeout, enum MaxPageSize, bool EnableAdminFilter; <strong>ComplianceSettings</strong>: bool Enable, bool EnableDaily; <strong>LocalizationSettings</strong>: enum DefaultServerLocale, enum DefaultClientLocale, enum AvailableLocales; <strong>SamlSettings</strong>: bool Enable, bool EnableSyncWithLdap, bool IgnoreGuestsLdapSync, bool EnableSyncWithLdapIncludeAuth, bool Verify, bool Encrypt, bool SignRequest, bool EnableAdminFilter; <strong>ClusterSettings</strong>: bool Enable, bool UseIpAddress, bool UseExperimentalGossip, bool ReadOnlyConfig, bool EnableExperimentalGossipEncryption; <strong>MetricsSettings</strong>: bool Enable, enum BlockProfileRate; <strong>WebrtcSettings</strong> (only in v5.5 and earlier): bool Enable; <strong>ExperimentalSettings</strong> bool ClientSideCertEnable, bool EnablePostMetadata, bool LinkMetadataTimeoutMilliseconds, bool EnableClickToReply, bool RestrictSystemAdmin, bool UseNewSAMLLibrary, bool CloudBilling, bool CloudUserLimit, bool RemoteClusters, bool EnableSharedChannels; <strong>AnnouncementSettings</strong>: bool EnableBanner, bool AllowBannerDismissal, bool AdminNoticesEnabled, bool UserNoticesEnabled; <strong>ElasticsearchSettings</strong>: bool EnableIndexing, bool EnableSearching, bool Sniff, enum PostIndexReplicas, enum PostIndexShards, enum LiveIndexingBatchSize, enum BulkIndexingTimeWindowSeconds, enum RequestTimeoutSeconds, bool SkipTLSVerification, bool Trace; <strong>PluginSettings</strong>: bool Enable, bool EnableUploads, bool EnableHealthCheck, bool EnableMarketplace, bool EnableRemoteMarketplace, bool AutomaticPrepackagedPlugins, bool RequirePluginSignature; <strong>DataRetentionSettings</strong>: bool EnableMessageDeletion, bool MessageRetentionDays, bool AllowInsecureDownloadUrl, bool EnableFileDeletion, bool FileRetentionDays, enum DeletionJobStartTime; <strong>MessageExportSettings</strong>: bool EnableExport, enum ExportFormat, enum DailyRunTime, enum ExportFromTimestamp, enum BatchSize, enum GlobalRelaySettings.CustomerType; <strong>ExperimentalAuditSettings</strong>: bool SysLogEnabled, bool SysLogInsecure, enum SysLogMaxQueueSize, bool FileEnabled, enum FileMaxSizeMB, enum FileMaxAgeDays, bool FileMaxBackups, bool FileCompress, enum FileMaxQueueSize; <strong>BleveSettings</strong>: bool EnableIndexing, bool EnableSearching, bool EnableAutocomplete, enum BulkIndexingTimeWindowSeconds;</p>
+<p><strong>Counts (integer)</strong></p>
+<blockquote>
+<div><strong>SqlSettings</strong>: int DataSourceReplicas, int DataSourceSearchReplicas; <strong>ThemeSettings</strong>: int AllowedThemes; <strong>PluginSettings</strong>: int SignaturePublicKeyFiles</div></blockquote>
+<p><strong>True/false (boolean)</strong> value whether setting remains default (true) or non-default (false). <strong>NOTE: No input data is used</strong>:</p>
+<blockquote class="last">
+<div><strong>ServiceSettings</strong>: bool SiteURL, bool WebsocketURL, bool TLSCertFile, bool TLSKeyFile, bool ReadTimeout, bool WriteTimeout,bool IdleTimeout, bool GoogleDeveloperKey, bool AllowCorsFrom, bool CorsExposedHeaders, bool AllowedUntrustedInternalConnections, bool GfycatApiKey, bool GfycatApiSecret, bool ManagedResourcePaths; <strong>TeamSettings</strong>: bool SiteName, bool CustomBrandText, bool CustomDescriptionText, bool UserStatusAwayTimeout, bool ExperimentalPrimaryTeam; <strong>DisplaySettings</strong>: bool CustomUrlSchemes; <strong>GuestAccountSettings</strong>: bool RestrictCreationToDomains; <strong>LogSettings</strong>: bool FileLocation; <strong>NotificationLogSettings</strong>: bool FileLocation; <strong>EmailSettings</strong>: bool FeedbackName, bool FeedbackEmail, bool FeedbackOrganization, bool LoginButtonColor, bool LoginButtonBorderColor, bool LoginButtonTextColor, bool ImageProxyType, bool ImageProxyURL, bool ImageProxyOptions; <strong>RateLimitSettings</strong>: bool VaryByHeader; <strong>SupportSettings</strong>: bool TermsOfServiceLink, bool PrivacyPolicyLink, bool AboutLink, bool HelpLink, bool ReportAProblemLink, bool SupportEmail; <strong>ThemeSettings</strong>: bool DefaultTheme; <strong>TimeZoneSettings</strong>: bool SupportedTimezonesPath; <strong>LdapSettings</strong>: bool FirstNameAttribute, bool LastNameAttribute, bool EmailAttribute, bool UserNameAttribute, bool NicknameAttribute, bool IdAttribute, bool PositionAttribute, bool LoginFieldName, bool LoginButtonColor, bool LoginButtonBorderColor, bool LoginButtonTextColor, bool GroupFilter, bool GroupDisplayNameAttribute, bool GroupIdAttribute, bool GuestFilter, bool AdminFilter; <strong>SamlSettings</strong>: bool SignatureAlgorithm, bool CanonicalAlgorithm, bool ScopingIDPProviderId, bool ScopingIDPName, bool IdAttribute, bool GuestAttribute, bool FirstNameAttribute, bool LastNameAttribute, bool EmailAttribute, bool UserNameAttribute, bool NicknameAttribute, bool LocaleAttribute, bool PositionAttribute, bool LoginIdAttribute, bool LoginButtonText, bool LoginButtonColor, bool LoginButtonBorderColor, bool LoginButtonTextColor, bool AdminFilter; <strong>NativeAppSettings</strong>: bool AppDownloadLink, bool  AndroidAppDownloadLink, bool IosAppDownloadLink; <strong>WebrtcSettings</strong> (only in v5.5 and earlier): bool StunURI, bool TurnURI; <strong>ClusterSettings</strong>: bool NetworkInterface, bool BindAddress, bool AdvertiseAddress; <strong>MetricsSettings</strong>: bool BlockProfileRate; <strong>AnalyticsSettings</strong>: bool MaxUsersForStatistics; <strong>ExperimentalSettings</strong> bool ClientSideCertCheck; <strong>AnnouncementSettings</strong>: bool BannerColor, bool BannerTextColor; <strong>ElasticsearchSettings</strong>: bool ConnectionUrl, bool Username, bool Password, bool IndexPrefix; <strong>PluginSettings</strong>: bool MarketplaceUrl, bool SignaturePublicKeyFiles; <strong>MessageExportSettings</strong>: bool GlobalRelaySettings.SmtpUsername, bool GlobalRelaySettings.SmtpPassword, bool GlobalRelaySettings.EmailAddress</div></blockquote>
+</dd>
+<dt>Commercial License Information (Enterprise Edition Only)</dt>
+<dd>Information about commercial license key purchased or trial license key used for Enterprise Edition servers: Company ID, license ID, license issue date, license start date, license expiry date, number of licensed users, license short name (E10 vs E20), list of unlocked Enterprise features.</dd>
+<dt>Channel Moderation Configuration Information (Enterprise Edition Only)</dt>
+<dd>Information related to channel moderation, including number of channel schemes, number of channels with posting messages disabled for users or guests, number of channels with emoji reactions disabled for users or guests, number of channels with managing members disabled, number of channels with channel mentions disabled for users or guests.</dd>
+<dt>Channel Member Management Information (Enterprise Edition Only)</dt>
+<dd>Information related to bulk user management and team and channel filtering, including number of users added, number of users removed, number of users promoted, number of users demoted, number of times archive and unarchive is used from any channel configuration page, and number of times channel search or team search filters are used.</dd>
+<dt>Groups Configuration Information (Enterprise Edition Only)</dt>
+<dd>Information related to AD/LDAP groups, including number of groups synced to Mattermost, teams and channels associated to groups, teams and channels synced with groups, and number of group members.</dd>
+<dt>Plugin Configuration Information</dt>
+<dd>Basic information including number of active and inactive plugins, which are using webapp or backend portions, and which <a class="reference external" href="https://github.com/mattermost/mattermost-server/blob/master/app/diagnostics.go#L668">Mattermost plugins</a> are enabled along with their versions. Some plugins may send summary data such as number of authenticated users of the plugin. From version 5.26, the list of plugins is obtained from the Marketplace. If the Marketplace can’t be reached, the list of known plugins is used instead.</dd>
+<dt>Permissions Configuration Information (Enterprise Edition Only)</dt>
+<dd>Permissions configured for each role for the System Scheme and each Team Override Scheme created in the system. Scheme ID; Team Admin Permissions; Team User Permissions; Channel Admin Permissions; Channel User Permissions; Number of teams the scheme is associated with; Number of users assigned to each admin role; Number of admin roles not using default privileges; Changes to default privileges of each admin role.</dd>
+<dt>Aggregated Usage Statistics</dt>
+<dd>Non-personally identifiable summations of basic usage statistics: Number of enabled and disabled accounts, number of user logins in the last 24 hours and the last 30 days, number of users active in the last day/month, whether APIv3 endpoints were used in the last 24 hours, number of posts, channels, teams, guest accounts, and bots.</dd>
+</dl>
+</div>
+<div class="section" id="event-data">
+<h3>Event data<a class="headerlink" href="#event-data" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>Reporting Frequency</dt>
+<dd><ul class="first last simple">
+<li>Immediately after the specific event occurs.</li>
+</ul>
+</dd>
+</dl>
+<p>The majority of these events have been disabled since Mattermost v5.8. Refer to the source file for the <a class="reference external" href="https://github.com/mattermost/mattermost-redux/blob/master/src/client/client4.ts#L3069">current list of events sent via telemetry</a>.</p>
+<dl class="docutils">
+<dt>Non-personally Identifiable Error Information, distinguished by end users and System Admins</dt>
+<dd><p class="first">Boolean when the following events occur:</p>
+<ul class="simple">
+<li><em>Sign-in Error</em>: Email login error, AD/LDAP login error, SAML login error</li>
+</ul>
+<p>Boolean when the following events occur, including the error message, recently dispatched Redux actions, and non-identifiable information of the device, operating system, and the app:</p>
+<ul class="last simple">
+<li><em>Mobile App Errors</em>: App crashes caused by type errors, exceptions, and failed logins</li>
+</ul>
+</dd>
+<dt>Non-personally Identifiable Diagnostic Information, distinguished by end users and System Admins</dt>
+<dd><p class="first">Boolean when the following events occur:</p>
+<ul class="last simple">
+<li><em>Team and Account Setup Diagnostics:</em> Account creation via email, invite or UI, account creation page view, account creation completion; tutorial step and tip completion or opt out, team creation page view, team name and URL entry, team creation completion, clicks on all form elements, buttons, textboxes and links on sign up page, team selection page and team creation pages</li>
+<li><em>Sign-in Diagnostics:</em> Login succeeded or failed for email, LDAP, or SAML/SSO; logout succeeded; switched authentication method from email to LDAP or SAML/SSO or vice versa; reset password; updated password</li>
+<li><em>Navigation Discovery Diagnostics:</em> Joined a channel from the “More” list, through an invite or by clicking a public link; created a channel, direct, or group direct message conversation; renamed, joined, left or deleted an existing channel; updated header or purpose; added or removed members; updated channel notification preferences; loaded more messages in a channel; switched a channel or a team; opened the “More” modal for channels or direct message conversations; updated team name; invited members; updated account settings</li>
+<li><em>Core Feature Discovery Diagnostics:</em> Created, edited or deleted a message; posted a message containing a hashtag, link, mention or file attachment; searched for a term; searched for flagged posts or recent mentions</li>
+<li><em>Advanced Feature Discovery Diagnostics:</em> Reacted to a message; favorited or un-favorited a channel; flagged or un-flagged a message; pinned or un-pinned a message; replied to a message; expanded the right-hand sidebar; started or finished a WebRTC video call (only in v5.5 and earlier); created or deleted a personal access token; added or removed post:all or post:channels permission; created a category in the sidebar</li>
+<li><em>Integration Discovery Diagnostics:</em> Created or triggered a webhook or slash command; created, authroized or deleted an OAuth 2.0 app; created, posted, or deleted a custom emoji</li>
+<li><em>Plugin Discovery Diagnostics:</em> Number of installed plugins containing either server or webapp portions, or both; number of those plugins being activated</li>
+<li><em>Plugin Marketplace Diagnostics:</em> Plugin id, current version, and target version for all install and update events. Only sent when the default Marketplace is configured</li>
+<li><em>Commercial License Diagnostics (Enterprise Edition Only):</em> Uploaded an Enterprise license key to the server</li>
+<li><em>Mobile Performance Diagnostics:</em> Load times for starting the app, switching channels, and switching teams</li>
+<li><em>Permissions Discovery Diagnostics (Enterprise Edition Only):</em> Provides all the permissions configured for each role for the System Scheme and each Team Override Scheme created in the system. Scheme ID; Team Admin Permissions; Team User Permissions; Channel Admin Permissions; Channel User Permissions; Number of teams the scheme is associated with</li>
+<li><em>Group Discovery Diagnostics (Enterprise Edition Only):</em> Provides information related to AD/LDAP groups, including number of groups synced to Mattermost, teams and channels associated to groups, teams and channels synced with groups, and number of group members</li>
+<li><em>System Console Menu Discovery Diagnostics:</em> Clicks on the hamburger menu items of the System Console, including Administrator’s Guide, Troubleshooting Forum, Commercial Support, About Mattermost, and clicks on the left-hand side navigation menu items</li>
+<li><em>In Product Notices Diagnostics:</em> Notices viewed, and the notices on which an action button was clicked.</li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="incident-management-telemetry">
+<h2>Incident Management Telemetry<a class="headerlink" href="#incident-management-telemetry" title="Permalink to this headline">¶</a></h2>
+<p>The following list details the types of Incident Management metadata we collect:</p>
+<p><strong>Data collected for all event types</strong></p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">PluginVersion</span></code>: Version of the plugin.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ServerVersion</span></code>: Version of the server the plugin is running on.</li>
+<li><code class="docutils literal notranslate"><span class="pre">UserID</span></code>: Unique identifier of the server.</li>
+<li><code class="docutils literal notranslate"><span class="pre">Event</span></code>: Type of the event. There are three event types that are tracked: <code class="docutils literal notranslate"><span class="pre">incident</span></code>, <code class="docutils literal notranslate"><span class="pre">tasks</span></code>, <code class="docutils literal notranslate"><span class="pre">playbook</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">UserActualID</span></code>: Unique identifier of the user who initiated the action.</li>
+</ul>
+<p><strong>Data collected in incident events</strong></p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">IncidentID</span></code>: Unique identifier of the incident.</li>
+<li><code class="docutils literal notranslate"><span class="pre">IsActive</span></code>: Boolean value indicating if the incident is active.</li>
+<li><code class="docutils literal notranslate"><span class="pre">CommanderUserID</span></code>: Unique identifier of the commander of the incident.</li>
+<li><code class="docutils literal notranslate"><span class="pre">TeamID</span></code>: Unique identifier of the team where the incident channel is created.</li>
+<li><code class="docutils literal notranslate"><span class="pre">CreatedAt</span></code>: Timestamp of the incident creation.</li>
+<li><code class="docutils literal notranslate"><span class="pre">PostID</span></code>: Unique identifier of the post from which the incident was created (if relevant).</li>
+<li><code class="docutils literal notranslate"><span class="pre">NumChecklists</span></code>: Number of stages in this incident.</li>
+<li><code class="docutils literal notranslate"><span class="pre">TotalChecklistItems</span></code>: Number of tasks in this incident.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ActiveStage</span></code>: A number indicating the stage of the incident (0-based).</li>
+<li><code class="docutils literal notranslate"><span class="pre">Action</span></code>: The type of action performed against the incident: <code class="docutils literal notranslate"><span class="pre">create</span></code>, <code class="docutils literal notranslate"><span class="pre">end</span></code>, <code class="docutils literal notranslate"><span class="pre">restart</span></code>, <code class="docutils literal notranslate"><span class="pre">change_stage</span></code>, <code class="docutils literal notranslate"><span class="pre">change_commander</span></code>, <code class="docutils literal notranslate"><span class="pre">update_status</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">Public</span></code>: When creating an incident, <code class="docutils literal notranslate"><span class="pre">true</span></code> if it is public, and <code class="docutils literal notranslate"><span class="pre">false</span></code> if it is private.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ReminderTimerSeconds</span></code>: The next timer for the reminder to update the status, in seconds. It’s tracked only when <code class="docutils literal notranslate"><span class="pre">Action</span></code> equals <code class="docutils literal notranslate"><span class="pre">update_status</span></code>.</li>
+</ul>
+<p><strong>Data collected in tasks events</strong></p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">IncidentID</span></code>: Unique identifier of the incident.</li>
+<li><code class="docutils literal notranslate"><span class="pre">NewState</span></code>: <code class="docutils literal notranslate"><span class="pre">null</span></code> if the task is uncompleted, <code class="docutils literal notranslate"><span class="pre">done</span></code> if the task was marked completed.</li>
+<li><code class="docutils literal notranslate"><span class="pre">Action</span></code>: The type of action performed against the task: <code class="docutils literal notranslate"><span class="pre">add_task</span></code>, <code class="docutils literal notranslate"><span class="pre">remove_task</span></code>, <code class="docutils literal notranslate"><span class="pre">rename_task</span></code>, <code class="docutils literal notranslate"><span class="pre">modify_task_state</span></code>, <code class="docutils literal notranslate"><span class="pre">move_task</span></code>, <code class="docutils literal notranslate"><span class="pre">set_assignee_for_task</span></code>, <code class="docutils literal notranslate"><span class="pre">run_task_slash_command</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">NewState</span></code>: When modifying a task state, <code class="docutils literal notranslate"><span class="pre">true</span></code> if the task is now checked, <code class="docutils literal notranslate"><span class="pre">false</span></code> if the task is now unchecked.</li>
+<li><code class="docutils literal notranslate"><span class="pre">WasCommander</span></code>: When modifying a task state, <code class="docutils literal notranslate"><span class="pre">true</span></code> if the userId who initiated the event was also the commander of the event, and <code class="docutils literal notranslate"><span class="pre">false</span></code> otherwise.</li>
+<li><code class="docutils literal notranslate"><span class="pre">WasAssignee</span></code>: When modifying a task state, <code class="docutils literal notranslate"><span class="pre">true</span></code> if the userId who initiated the event was also the assignee of the event, and <code class="docutils literal notranslate"><span class="pre">false</span></code> otherwise.</li>
+</ul>
+<p><strong>Data collected in playbook events</strong></p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">PlaybookID</span></code>: Unique identifier of the playbook.</li>
+<li><code class="docutils literal notranslate"><span class="pre">TeamID</span></code>: Unique identifier of the team associated with this playbook.</li>
+<li><code class="docutils literal notranslate"><span class="pre">NumChecklists</span></code>: Number of stages in this playbook.</li>
+<li><code class="docutils literal notranslate"><span class="pre">TotalChecklistItems</span></code>: Number of tasks in this incident.</li>
+<li><code class="docutils literal notranslate"><span class="pre">IsPublic</span></code>: <code class="docutils literal notranslate"><span class="pre">true</span></code> if the playbook is public, <code class="docutils literal notranslate"><span class="pre">false</span></code> if it is private.</li>
+<li><code class="docutils literal notranslate"><span class="pre">NumMembers</span></code>: The number of members with access to this playbook.</li>
+<li><code class="docutils literal notranslate"><span class="pre">NumSlashCommands</span></code>: The number of tasks with slash commands in this playbook.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ReminderTimerDefaultSeconds</span></code>: The default timer for the reminder to update the status, in seconds.</li>
+<li><code class="docutils literal notranslate"><span class="pre">BroadcastChannelID</span></code>: Unique identifier of the channel where the status updates will be broadcasted.</li>
+<li><code class="docutils literal notranslate"><span class="pre">UsesReminderMessageTemplate</span></code>: <code class="docutils literal notranslate"><span class="pre">true</span></code> if the playbook has a template for the reminder message, <code class="docutils literal notranslate"><span class="pre">false</span></code> otherwise.</li>
+<li><code class="docutils literal notranslate"><span class="pre">Action</span></code>: The type of action performed against this playbook: <code class="docutils literal notranslate"><span class="pre">create</span></code>, <code class="docutils literal notranslate"><span class="pre">update</span></code>, <code class="docutils literal notranslate"><span class="pre">delete</span></code>.</li>
+</ul>
+<p>Error and diagnostic reporting is sent by the client to the endpoint <code class="docutils literal notranslate"><span class="pre">api.segment.io</span></code>. To opt out, disable the feature in <strong>System Console &gt; Environment &gt; Logging</strong> (or <strong>System Console &gt; General &gt; Logging &gt; Enable Error and Diagnostics Reporting</strong> in versions prior to 5.12).</p>
+</div>
+<div class="section" id="android-mobile-app-performance-monitoring">
+<h2>Android Mobile App Performance Monitoring<a class="headerlink" href="#android-mobile-app-performance-monitoring" title="Permalink to this headline">¶</a></h2>
+<p>To improve Android app performance, we are collecting trace events and device information, collectively known as metrics, to identify slow performing key areas. Those metrics will be sent only from users using Android app beta build starting in version v1.20, who are logged in to servers that allow sending <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-diagnostics-and-error-reporting">diagnostic information</a>.</p>
+<dl class="docutils">
+<dt>Trace events</dt>
+<dd><p class="first">Includes duration on how long the action took place like startup, team/channel switch, posts loading/update and channel drawer open/close. The naming convention is interpreted as <code class="docutils literal notranslate"><span class="pre">[start</span> <span class="pre">observation]:[end</span> <span class="pre">observation]</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">start:overall</span></code> as from app start until fully rendered or <code class="docutils literal notranslate"><span class="pre">post_list:thread</span></code> as on press of post at post list until thread is opened.
+Complete list of trace events are the following:</p>
+<ul class="last simple">
+<li>start:overall</li>
+<li>start:process_packages</li>
+<li>start:content_appeared</li>
+<li>start:select_server_screen</li>
+<li>start:channel_screen</li>
+<li>team:switch</li>
+<li>channel:loading</li>
+<li>channel:switch_loaded</li>
+<li>channel:switch_initial</li>
+<li>channel:close_drawer</li>
+<li>channel:open_drawer</li>
+<li>posts:loading</li>
+<li>post_list:thread</li>
+<li>post_list:permalink</li>
+</ul>
+</dd>
+<dt>Device information</dt>
+<dd><p class="first">The information being collected is non-personally identifiable. Except for system_version, device information is based from <a class="reference external" href="https://github.com/mattermost/react-native-device-info#react-native-device-info">react-native-device-info</a> library.  Refer to the linked documentation to learn more.
+Complete list of device information are the following:</p>
+<ul class="last simple">
+<li>api_level</li>
+<li>build_number</li>
+<li>bundle_id</li>
+<li>brand</li>
+<li>country</li>
+<li>device_id</li>
+<li>device_locale</li>
+<li>device_type</li>
+<li>device_unique_id</li>
+<li>height</li>
+<li>is_emulator</li>
+<li>is_tablet</li>
+<li>manufacturer</li>
+<li>max_memory</li>
+<li>model</li>
+<li>server_version</li>
+<li>system_name</li>
+<li>system_version</li>
+<li>timezone</li>
+<li>version</li>
+<li>width</li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/administration/telemetry.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>
