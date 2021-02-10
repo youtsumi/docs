@@ -1,0 +1,972 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Interactive Dialogs &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Bot Accounts" href="bot-accounts.html" />
+    <link rel="prev" title="Interactive Messages: Buttons and Menus" href="interactive-messages.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/integration.html">Integration Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../integrations/jira.html">Jira Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../integrations/zoom.html">Zoom Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../integrations/zapier.html">Zapier Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="webhooks-incoming.html">Incoming Webhooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="webhooks-outgoing.html">Outgoing Webhooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slash-commands.html">Slash Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/plugins.html">Plugins (Beta)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="message-attachments.html">Message Attachments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-messages.html">Interactive Messages: Buttons and Menus</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Interactive Dialogs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#opening-a-dialog">Opening a Dialog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#elements">Elements</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#text-elements">Text elements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#textarea-elements">Textarea elements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#select-elements">Select elements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#checkbox-element">Checkbox element</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#radio-element">Radio element</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#dialog-submission">Dialog submission</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#share-your-integration">Share your integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slack-compatibility">Slack compatibility</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="bot-accounts.html">Bot Accounts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="personal-access-tokens.html">Personal Access Tokens</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oauth-2-0-applications.html">OAuth 2.0 Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integration-faq.html">Integrations FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../integrations/embedding.html">Embedding Mattermost in Other Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../integrations/webhook.html">Using Mattermost with Webhook</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/integration.html">Mattermost Integration Guide</a> &raquo;</li>
+    
+    <li>Interactive Dialogs</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/developer/interactive-dialogs.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="interactive-dialogs">
+<span id="id1"></span><h1>Interactive Dialogs<a class="headerlink" href="#interactive-dialogs" title="Permalink to this headline">¶</a></h1>
+<p>Interactive dialogs are used by applications that integrate with the Mattermost server. They are a method for integrations to receive some form-styled input from users and have that input submitted back to the integration. Use them to gather structured information from the end user to perform an action or a request.</p>
+<p>Integrations open dialogs by sending an <code class="docutils literal notranslate"><span class="pre">HTTP</span> <span class="pre">POST</span></code>, containing some data in the request body, to an endpoint on the Mattermost server. Integrations can use this endpoint to open dialogs when users <a class="reference internal" href="interactive-messages.html"><span class="doc">click message buttons or select an option from a menu</span></a>, or use a <a class="reference internal" href="slash-commands.html"><span class="doc">custom slash command</span></a>.</p>
+<p>Moreover, <a class="reference internal" href="../administration/plugins.html"><span class="doc">plugins</span></a> can trigger a dialog based on user actions. For instance, if a plugin adds a button in the channel header, clicking that button may open a dialog.</p>
+<p>Here is an example of what a dialog looks like for creating a Jira issue within the Mattermost user interface:</p>
+<img alt="../_images/interactive-dialog-example.png" src="../_images/interactive-dialog-example.png" />
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#opening-a-dialog" id="id2">Opening a Dialog</a></li>
+<li><a class="reference internal" href="#parameters" id="id3">Parameters</a></li>
+<li><a class="reference internal" href="#elements" id="id4">Elements</a></li>
+<li><a class="reference internal" href="#dialog-submission" id="id5">Dialog submission</a></li>
+<li><a class="reference internal" href="#example" id="id6">Example</a></li>
+<li><a class="reference internal" href="#share-your-integration" id="id7">Share your integration</a></li>
+<li><a class="reference internal" href="#slack-compatibility" id="id8">Slack compatibility</a></li>
+</ul>
+</div>
+<div class="section" id="opening-a-dialog">
+<h2><a class="toc-backref" href="#contents">Opening a Dialog</a><a class="headerlink" href="#opening-a-dialog" title="Permalink to this headline">¶</a></h2>
+<p>To open a dialog, your integration must first receive an HTTP request from the Mattermost server. This request will be triggered by a slash command or an interactive message. It will include a trigger ID.</p>
+<p>Once you have the trigger ID you can use it to open the interactive dialog by sending an <code class="docutils literal notranslate"><span class="pre">HTTP</span> <span class="pre">POST</span></code> request to <code class="docutils literal notranslate"><span class="pre">https://&lt;your-mattermost-url&gt;/api/v4/actions/dialogs/open</span></code>. See the below section for what to include in the body of that HTTP request.</p>
+</div>
+<div class="section" id="parameters">
+<h2><a class="toc-backref" href="#contents">Parameters</a><a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<p>Interactive dialogs support the following parameters:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">title</span></code></td>
+<td>String</td>
+<td>Title of the dialog. Maximum 24 characters.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">introduction_text</span></code></td>
+<td>string</td>
+<td>Markdown-formatted introduction text which is displayed above the dialog <code class="docutils literal notranslate"><span class="pre">elements</span></code>.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">elements</span></code></td>
+<td>Array</td>
+<td>Up to 5 elements allowed per dialog. See below for more details on elements. If none are supplied the dialog box acts as a simple confirmation.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">url</span></code></td>
+<td>String</td>
+<td>The URL to send the submitted dialog payload to.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">icon_url</span></code></td>
+<td>String</td>
+<td>(Optional) The URL of the icon used for your dialog. If none specified, no icon is displayed.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">submit_label</span></code></td>
+<td>String</td>
+<td>(Optional) Label of the button to complete the dialog. Default is <code class="docutils literal notranslate"><span class="pre">Submit</span></code>.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">notify_on_cancel</span></code></td>
+<td>Boolean</td>
+<td>(Optional) When <code class="docutils literal notranslate"><span class="pre">true</span></code>, sends an event back to the integration whenever there’s a user-induced dialog cancellation. No other data is sent back with the event. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">state</span></code></td>
+<td>String</td>
+<td>(Optional) String provided by the integration that will be echoed back with dialog submission. Default is the empty string.</td>
+</tr>
+</tbody>
+</table>
+<p>Sample JSON is given below. Form submissions are sent back to the URL defined by the integration. You must also include the trigger ID you received from the slash command or interactive message.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;trigger_id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;unique ID generated by the server&gt;&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;URL to send the submitted request to&gt;&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;dialog&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;callback_id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;ID specified by the integration to identify the request&gt;&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;title of the dialog&gt;&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;introduction_text&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;Text describing the dialog box content&gt;&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;elements&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;&lt;Array of UI elements to display in the dialog&gt;&quot;</span><span class="p">],</span>
+        <span class="nt">&quot;submit_label&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;label of the button to complete the dialog&gt;&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;notify_on_cancel&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;state&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;string provided by the integration that will be echoed back with dialog submission&gt;&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="elements">
+<h2><a class="toc-backref" href="#contents">Elements</a><a class="headerlink" href="#elements" title="Permalink to this headline">¶</a></h2>
+<p>Each dialog supports elements for users to enter information.</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">text</span></code>: Single-line plain text field. Use this for inputs such as names, email addresses, or phone numbers.</li>
+<li><code class="docutils literal notranslate"><span class="pre">textarea</span></code>: Multi-line plain text field. Use this field when the answer is expected to be longer than 150 characters.</li>
+<li><code class="docutils literal notranslate"><span class="pre">select</span></code>: Message menu. Use this for pre-selected choices. Can either be static menus or dynamic menus generated from users and Public channels of the system. For more information on message menus, see <a class="reference internal" href="interactive-messages.html"><span class="doc">the documentation</span></a>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">bool</span></code>: Checkbox option. Use this for binary selection.</li>
+<li><code class="docutils literal notranslate"><span class="pre">radio</span></code>: Radio button option. Use this to quickly select an option from pre-selected choices.</li>
+</ul>
+<p>Each element is required by default, otherwise the client will return an error as shown below. Note that the error message will appear below the help text, if one is specified. To make an element optional, set the field <code class="docutils literal notranslate"><span class="pre">&quot;optional&quot;:</span> <span class="pre">&quot;true&quot;</span></code>.</p>
+<img alt="../_images/interactive-dialog-error.png" src="../_images/interactive-dialog-error.png" />
+<div class="section" id="text-elements">
+<h3>Text elements<a class="headerlink" href="#text-elements" title="Permalink to this headline">¶</a></h3>
+<p>Text elements are single-line plain text fields. Below is an example of a <code class="docutils literal notranslate"><span class="pre">text</span></code> element that asks for an email address.</p>
+<img alt="../_images/interactive-dialog-text.png" src="../_images/interactive-dialog-text.png" />
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Email&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;email&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;subtype&quot;</span><span class="p">:</span> <span class="s2">&quot;email&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;placeholder&quot;</span><span class="p">:</span> <span class="s2">&quot;placeholder@example.com&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>There is an optional <code class="docutils literal notranslate"><span class="pre">&quot;subtype&quot;:</span> <span class="pre">&quot;email&quot;</span></code> field in the above example, which specifies the keyboard layout used on mobile. For this example, the email keypad is shown to the user given the subtype is set to <code class="docutils literal notranslate"><span class="pre">email</span></code>.</p>
+<p>The full list of supported fields is included below:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">display_name</span></code></td>
+<td>String</td>
+<td>Display name of the field shown to the user in the dialog. Maximum 24 characters.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">name</span></code></td>
+<td>String</td>
+<td>Name of the field element used by the integration. Maximum 300 characters. You should use unique <code class="docutils literal notranslate"><span class="pre">name</span></code> fields in the same dialog.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">type</span></code></td>
+<td>String</td>
+<td>Set this value to <code class="docutils literal notranslate"><span class="pre">text</span></code> for a text element.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">subtype</span></code></td>
+<td>String</td>
+<td>(Optional) One of <code class="docutils literal notranslate"><span class="pre">text</span></code>, <code class="docutils literal notranslate"><span class="pre">email</span></code>, <code class="docutils literal notranslate"><span class="pre">number</span></code>, <code class="docutils literal notranslate"><span class="pre">password</span></code> (as of v5.14), <code class="docutils literal notranslate"><span class="pre">tel</span></code>, or <code class="docutils literal notranslate"><span class="pre">url</span></code>. Default is <code class="docutils literal notranslate"><span class="pre">text</span></code>. Use this to set which keypad is presented to users on mobile when entering the field.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">min_length</span></code></td>
+<td>Integer</td>
+<td>(Optional) Minimum input length allowed for an element. Default is 0.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">max_length</span></code></td>
+<td>Integer</td>
+<td>(Optional) Maximum input length allowed for an element. Default is 150. If you expect the input to be greater 150 characters, consider using a <code class="docutils literal notranslate"><span class="pre">textarea</span></code> type element instead.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">optional</span></code></td>
+<td>Boolean</td>
+<td>(Optional) Set to <code class="docutils literal notranslate"><span class="pre">true</span></code> if this form element is not required. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">help_text</span></code></td>
+<td>String</td>
+<td>(Optional) Set help text for this form element. Maximum 150 characters.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">default</span></code></td>
+<td>String</td>
+<td>(Optional) Set a default value for this form element. Maximum 150 characters.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">placeholder</span></code></td>
+<td>String</td>
+<td>(Optional) A string displayed to help guide users in completing the element. Maximum 150 characters.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="textarea-elements">
+<h3>Textarea elements<a class="headerlink" href="#textarea-elements" title="Permalink to this headline">¶</a></h3>
+<p>Textarea elements are multi-line plain text fields. A sample JSON is provided below:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Ticket Description&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ticket_description&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;textarea&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;help_text&quot;</span><span class="p">:</span> <span class="s2">&quot;Provide description for your ticket.&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The maximum length for a <code class="docutils literal notranslate"><span class="pre">textarea</span></code> is 3,000 characters.</p>
+<p>The list of supported fields is the same as for the <code class="docutils literal notranslate"><span class="pre">textarea</span></code> type element.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">display_name</span></code></td>
+<td>String</td>
+<td>Display name of the field shown to the user in the dialog. Maximum 24 characters.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">name</span></code></td>
+<td>String</td>
+<td>Name of the field element used by the integration. Maximum 300 characters. You should use unique <code class="docutils literal notranslate"><span class="pre">name</span></code> fields in the same dialog.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">type</span></code></td>
+<td>String</td>
+<td>Set this value to <code class="docutils literal notranslate"><span class="pre">textarea</span></code> for a textarea element.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">subtype</span></code></td>
+<td>String</td>
+<td>(Optional) One of <code class="docutils literal notranslate"><span class="pre">text</span></code>, <code class="docutils literal notranslate"><span class="pre">email</span></code>, <code class="docutils literal notranslate"><span class="pre">number</span></code>, <code class="docutils literal notranslate"><span class="pre">tel</span></code>, or <code class="docutils literal notranslate"><span class="pre">url</span></code>. Default is <code class="docutils literal notranslate"><span class="pre">text</span></code>. Use this to set which keypad is presented to users on mobile when entering the field.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">min_length</span></code></td>
+<td>Integer</td>
+<td>(Optional) Minimum input length allowed for an element. Default is 0.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">max_length</span></code></td>
+<td>Integer</td>
+<td>(Optional) Maximum input length allowed for an element. Default is 3,000.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">optional</span></code></td>
+<td>Boolean</td>
+<td>(Optional) Set to <code class="docutils literal notranslate"><span class="pre">true</span></code> if this form element is not required. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">help_text</span></code></td>
+<td>String</td>
+<td>(Optional) Set help text for this form element. Maximum 150 characters.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">default</span></code></td>
+<td>String</td>
+<td>(Optional) Set a default value for this form element. Maximum 3,000 characters.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">placeholder</span></code></td>
+<td>String</td>
+<td>(Optional) A string displayed to help guide users in completing the element. Maximum 3,000 characters.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="select-elements">
+<h3>Select elements<a class="headerlink" href="#select-elements" title="Permalink to this headline">¶</a></h3>
+<p>Select elements are message menus that allow users to select one predefined option from a list. Below is an example of a <code class="docutils literal notranslate"><span class="pre">select</span></code> element that asks for one of three different options.</p>
+<img alt="../_images/interactive-dialog-select.png" src="../_images/interactive-dialog-select.png" />
+<img alt="../_images/interactive-dialog-select-menu.png" src="../_images/interactive-dialog-select-menu.png" />
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Option Selector&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;options&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;select&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;options&quot;</span><span class="p">:</span> <span class="p">[</span>
+     <span class="p">{</span>
+       <span class="nt">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Option1&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;opt1&quot;</span>
+     <span class="p">},</span>
+     <span class="p">{</span>
+       <span class="nt">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Option2&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;opt2&quot;</span>
+     <span class="p">},</span>
+     <span class="p">{</span>
+       <span class="nt">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Option3&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;opt3&quot;</span>
+     <span class="p">}</span>
+   <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Note that the JSON payload for <code class="docutils literal notranslate"><span class="pre">select</span></code> type elements matches <a class="reference internal" href="interactive-messages.html"><span class="doc">interactive message menus</span></a>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">select</span></code> element can also be generated dynamically from users and channels of the system.</p>
+<p>For users, use:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Assignee&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;assignee&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;select&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;data_source&quot;</span><span class="p">:</span> <span class="s2">&quot;users&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>and for Public channels, use:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Post this message to&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;channel&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;select&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;data_source&quot;</span><span class="p">:</span> <span class="s2">&quot;channels&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The list of supported fields for the <code class="docutils literal notranslate"><span class="pre">select</span></code> type element is included below:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">display_name</span></code></td>
+<td>String</td>
+<td>Display name of the field shown to the user in the dialog. Maximum 24 characters.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">name</span></code></td>
+<td>String</td>
+<td>Name of the field element used by the integration. Maximum 300 characters. You should use unique <code class="docutils literal notranslate"><span class="pre">name</span></code> fields in the same dialog.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">type</span></code></td>
+<td>String</td>
+<td>Set this value to <code class="docutils literal notranslate"><span class="pre">select</span></code> for a <code class="docutils literal notranslate"><span class="pre">select</span></code> element.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">data_source</span></code></td>
+<td>String</td>
+<td>(Optional) One of <code class="docutils literal notranslate"><span class="pre">users</span></code>, or <code class="docutils literal notranslate"><span class="pre">channels</span></code>. If none specified, assumes a manual list of options is provided by the integration.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">options</span></code></td>
+<td>Array</td>
+<td>(Optional) An array of options for the select element. Not applicable for <code class="docutils literal notranslate"><span class="pre">users</span></code> or <code class="docutils literal notranslate"><span class="pre">channels</span></code> data sources.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">optional</span></code></td>
+<td>Boolean</td>
+<td>(Optional) Set to <code class="docutils literal notranslate"><span class="pre">true</span></code> if this form element is not required. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">help_text</span></code></td>
+<td>String</td>
+<td>(Optional) Set help text for this form element. Maximum 150 characters.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">default</span></code></td>
+<td>String</td>
+<td>(Optional) Set a default value for this form element. Maximum 3,000 characters.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">placeholder</span></code></td>
+<td>String</td>
+<td>(Optional) A string displayed to help guide users in completing the element. Maximum 3,000 characters.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="checkbox-element">
+<h3>Checkbox element<a class="headerlink" href="#checkbox-element" title="Permalink to this headline">¶</a></h3>
+<p>From Mattermost v5.16 you can use <code class="docutils literal notranslate"><span class="pre">checkbox</span></code> elements. It looks like a plain text field with a checkbox to be selected. Below is an example of a <code class="docutils literal notranslate"><span class="pre">checkbox</span></code> element that asks for meeting feedback.</p>
+<img alt="../_images/interactive-dialog-bool.png" src="../_images/interactive-dialog-bool.png" />
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Can you please select below&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;placeholder&quot;</span><span class="p">:</span> <span class="s2">&quot;The meeting was helpful.&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;meeting_input&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;bool&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The full list of supported fields is included below:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">display_name</span></code></td>
+<td>String</td>
+<td>Display name of the field shown to the user in the dialog. Maximum 24 characters.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">name</span></code></td>
+<td>String</td>
+<td>Name of the field element used by the integration. Maximum 300 characters. You should use unique <code class="docutils literal notranslate"><span class="pre">name</span></code> fields in the same dialog.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">type</span></code></td>
+<td>String</td>
+<td>Set this value to <code class="docutils literal notranslate"><span class="pre">bool</span></code> for a checkbox element.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">optional</span></code></td>
+<td>Boolean</td>
+<td>(Optional) Set to <code class="docutils literal notranslate"><span class="pre">true</span></code> if this form element is not required. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">help_text</span></code></td>
+<td>String</td>
+<td>(Optional) Set help text for this form element. Maximum 150 characters.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">default</span></code></td>
+<td>String</td>
+<td>(Optional) Set a default value for this form element. <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">placeholder</span></code></td>
+<td>String</td>
+<td>(Optional) A string displayed to include a label besides the checkbox. Maximum 150 characters.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="radio-element">
+<h3>Radio element<a class="headerlink" href="#radio-element" title="Permalink to this headline">¶</a></h3>
+<p>From Mattermost v5.16 you can use <code class="docutils literal notranslate"><span class="pre">radio</span></code> elements. It looks like a plain text field with a radio button to be selected. Below is an example of a <code class="docutils literal notranslate"><span class="pre">radio</span></code> element that asks for a department.</p>
+<img alt="../_images/interactive-dialog-radio.png" src="../_images/interactive-dialog-radio.png" />
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Which department do you work in?&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;department&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;radio&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;options&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Engineering&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;engineering&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Sales&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;sales&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Administration&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;administration&quot;</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="nt">&quot;help_text&quot;</span><span class="p">:</span> <span class="s2">&quot;Please indicate your department as of January 1.&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;default&quot;</span><span class="p">:</span> <span class="s2">&quot;engineering&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The full list of supported fields are included below:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">display_name</span></code></td>
+<td>String</td>
+<td>Display name of the field shown to the user in the dialog. Maximum 24 characters.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">name</span></code></td>
+<td>String</td>
+<td>Name of the field element used by the integration. Maximum 300 characters. You should use unique <code class="docutils literal notranslate"><span class="pre">name</span></code> fields in the same dialog.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">type</span></code></td>
+<td>String</td>
+<td>Set this value to <code class="docutils literal notranslate"><span class="pre">radio</span></code> for a radio element.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">options</span></code></td>
+<td>Array</td>
+<td>(Optional) An array of options for the radio element.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">help_text</span></code></td>
+<td>String</td>
+<td>(Optional) Set help text for this form element. Maximum 150 characters.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">default</span></code></td>
+<td>String</td>
+<td>(Optional) Set a default value for this form element.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="dialog-submission">
+<h2><a class="toc-backref" href="#contents">Dialog submission</a><a class="headerlink" href="#dialog-submission" title="Permalink to this headline">¶</a></h2>
+<p>When a user submits a dialog, Mattermost will perform client-side input validation to make sure:</p>
+<blockquote>
+<div><ul class="simple">
+<li>All required fields are filled.</li>
+<li>All formats are correct (e.g. email, telephone number, etc.).</li>
+</ul>
+</div></blockquote>
+<p>The submission payload sent to the integration is:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;dialog_submission&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;callback_id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;callback ID provided by the integration&gt;&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;state&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;state provided by the integration&gt;&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;user_id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;user ID of the user who submitted the dialog&gt;&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;channel_id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;channel ID the user was in when submitting the dialog&gt;&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;team_id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;team ID the user was on when submitting the dialog&gt;&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;submission&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;some_element_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;value of that element&gt;&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;some_other_element&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;value of some other element&gt;&quot;</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;cancelled&quot;</span><span class="p">:</span> <span class="kc">false</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Optionally, the dialog can send an event back to the integration if <code class="docutils literal notranslate"><span class="pre">notify_on_cancel</span></code> parameter is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>. If this happens, <code class="docutils literal notranslate"><span class="pre">cancelled</span></code> will be set to <code class="docutils literal notranslate"><span class="pre">true</span></code> on the above payload, and <code class="docutils literal notranslate"><span class="pre">submission</span></code> will be empty.</p>
+<p>Moreover, Mattermost also allows the integration itself to perform input validation. This can be done by responding to the dialog submission request with a JSON body containing an <code class="docutils literal notranslate"><span class="pre">errors</span></code> field. The <code class="docutils literal notranslate"><span class="pre">errors</span></code> field can contain a JSON object, mapping input field names to string error messages you would like to display to the user. For example, if you have a field named <code class="docutils literal notranslate"><span class="pre">num_between_0_and_10</span></code>, you can enforce the user to enter a number between 0 and 10 by returning the following response body if the condition isn’t satisfied:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;errors&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;num_between_0_and_10&quot;</span><span class="p">:</span> <span class="s2">&quot;Enter a number between 0 and 10.&quot;</span><span class="p">}}</span>
+</pre></div>
+</div>
+<p>The integration may also return a generic error message to the user that is not attached to a specific field. This can be done by responding to the dialog submission request with a JSON body containing an <code class="docutils literal notranslate"><span class="pre">error</span></code> field. The <code class="docutils literal notranslate"><span class="pre">error</span></code> field should contain a string with the error message to display to the user. For example, if a server-side error occurs, you can return a message explaining it:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Failed to fetch additional data. Please try again.&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Support for generic error messages was added in Mattermost v5.18.</p>
+<p>Finally, once the request is submitted, we recommend that the integration responds with a system message or an ephemeral message confirming the submission. This should be a separate request back to Mattermost once the service has received and responded to a submission request from a dialog. This can be done either via <a class="reference external" href="https://api.mattermost.com/#tag/posts%2Fpaths%2F~1posts~1ephemeral%2Fpost">the REST API</a>, or via the <a class="reference external" href="https://developers.mattermost.com/extend/plugins/server/reference/#API.SendEphemeralPost">Plugin API</a> if you’re developing a plugin.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If the dialog is closed by clicking <strong>Cancel</strong> or <strong>X</strong>, no data will be submitted. If a user clicks away from the dialog, the dialog won’t close. This is to prevent accidentally losing any answers they’ve made to an unsubmitted dialog.</p>
+</div>
+</div>
+<div class="section" id="example">
+<h2><a class="toc-backref" href="#contents">Example</a><a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>Below is a full example of a JSON payload that creates an interactive dialog in Mattermost:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+   <span class="nt">&quot;trigger_id&quot;</span><span class="p">:</span><span class="s2">&quot;nbt1dxzqwpn6by14sfs66ganhc&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="s2">&quot;http://localhost:5000/dialog_submit&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;dialog&quot;</span><span class="p">:{</span>
+      <span class="nt">&quot;callback_id&quot;</span><span class="p">:</span><span class="s2">&quot;somecallbackid&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Test Title&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;icon_url&quot;</span><span class="p">:</span><span class="s2">&quot;https://mattermost.org/wp-content/uploads/2016/04/icon.png&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;elements&quot;</span><span class="p">:[</span>
+         <span class="p">{</span>
+            <span class="nt">&quot;display_name&quot;</span><span class="p">:</span><span class="s2">&quot;Display Name&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;realname&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;text&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;subtype&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="s2">&quot;default text&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;placeholder&quot;</span><span class="p">:</span><span class="s2">&quot;placeholder&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;help_text&quot;</span><span class="p">:</span><span class="s2">&quot;This a regular input in an interactive dialog triggered by a test integration.&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;optional&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
+            <span class="nt">&quot;min_length&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+            <span class="nt">&quot;max_length&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+            <span class="nt">&quot;data_source&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;options&quot;</span><span class="p">:</span><span class="kc">null</span>
+         <span class="p">},</span>
+         <span class="p">{</span>
+            <span class="nt">&quot;display_name&quot;</span><span class="p">:</span><span class="s2">&quot;Email&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;someemail&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;text&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;subtype&quot;</span><span class="p">:</span><span class="s2">&quot;email&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;placeholder&quot;</span><span class="p">:</span><span class="s2">&quot;placeholder@bladekick.com&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;help_text&quot;</span><span class="p">:</span><span class="s2">&quot;This a regular email input in an interactive dialog triggered by a test integration.&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;optional&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
+            <span class="nt">&quot;min_length&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+            <span class="nt">&quot;max_length&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+            <span class="nt">&quot;data_source&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;options&quot;</span><span class="p">:</span><span class="kc">null</span>
+         <span class="p">},</span>
+         <span class="p">{</span>
+            <span class="nt">&quot;display_name&quot;</span><span class="p">:</span><span class="s2">&quot;Number&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;somenumber&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;text&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;subtype&quot;</span><span class="p">:</span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;placeholder&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;help_text&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;optional&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
+            <span class="nt">&quot;min_length&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+            <span class="nt">&quot;max_length&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+            <span class="nt">&quot;data_source&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;options&quot;</span><span class="p">:</span><span class="kc">null</span>
+         <span class="p">},</span>
+         <span class="p">{</span>
+            <span class="nt">&quot;display_name&quot;</span><span class="p">:</span><span class="s2">&quot;Display Name Long Text Area&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;realnametextarea&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;textarea&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;subtype&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;placeholder&quot;</span><span class="p">:</span><span class="s2">&quot;placeholder&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;help_text&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;optional&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+            <span class="nt">&quot;min_length&quot;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span>
+            <span class="nt">&quot;max_length&quot;</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span>
+            <span class="nt">&quot;data_source&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;options&quot;</span><span class="p">:</span><span class="kc">null</span>
+         <span class="p">},</span>
+         <span class="p">{</span>
+            <span class="nt">&quot;display_name&quot;</span><span class="p">:</span><span class="s2">&quot;User Selector&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;someuserselector&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;select&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;subtype&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;placeholder&quot;</span><span class="p">:</span><span class="s2">&quot;Select a user...&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;help_text&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;optional&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
+            <span class="nt">&quot;min_length&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+            <span class="nt">&quot;max_length&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+            <span class="nt">&quot;data_source&quot;</span><span class="p">:</span><span class="s2">&quot;users&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;options&quot;</span><span class="p">:</span><span class="kc">null</span>
+         <span class="p">},</span>
+         <span class="p">{</span>
+            <span class="nt">&quot;display_name&quot;</span><span class="p">:</span><span class="s2">&quot;Channel Selector&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;somechannelselector&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;select&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;subtype&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;placeholder&quot;</span><span class="p">:</span><span class="s2">&quot;Select a channel...&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;help_text&quot;</span><span class="p">:</span><span class="s2">&quot;Choose a channel from the list.&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;optional&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+            <span class="nt">&quot;min_length&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+            <span class="nt">&quot;max_length&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+            <span class="nt">&quot;data_source&quot;</span><span class="p">:</span><span class="s2">&quot;channels&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;options&quot;</span><span class="p">:</span><span class="kc">null</span>
+         <span class="p">},</span>
+         <span class="p">{</span>
+            <span class="nt">&quot;display_name&quot;</span><span class="p">:</span><span class="s2">&quot;Option Selector&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;someoptionselector&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;select&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;subtype&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;placeholder&quot;</span><span class="p">:</span><span class="s2">&quot;Select an option...&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;help_text&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;optional&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
+            <span class="nt">&quot;min_length&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+            <span class="nt">&quot;max_length&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+            <span class="nt">&quot;data_source&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;options&quot;</span><span class="p">:[</span>
+               <span class="p">{</span>
+                  <span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="s2">&quot;Option1&quot;</span><span class="p">,</span>
+                  <span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;opt1&quot;</span>
+               <span class="p">},</span>
+               <span class="p">{</span>
+                  <span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="s2">&quot;Option2&quot;</span><span class="p">,</span>
+                  <span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;opt2&quot;</span>
+               <span class="p">},</span>
+               <span class="p">{</span>
+                  <span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="s2">&quot;Option3&quot;</span><span class="p">,</span>
+                  <span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;opt3&quot;</span>
+               <span class="p">}</span>
+            <span class="p">]</span>
+         <span class="p">}</span>
+      <span class="p">],</span>
+      <span class="nt">&quot;submit_label&quot;</span><span class="p">:</span><span class="s2">&quot;Submit&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;notify_on_cancel&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+      <span class="nt">&quot;state&quot;</span><span class="p">:</span><span class="s2">&quot;somestate&quot;</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<img alt="../_images/interactive-dialog-complete-example.png" src="../_images/interactive-dialog-complete-example.png" />
+</div>
+<div class="section" id="share-your-integration">
+<h2><a class="toc-backref" href="#contents">Share your integration</a><a class="headerlink" href="#share-your-integration" title="Permalink to this headline">¶</a></h2>
+<p>If you’ve built an integration for Mattermost, please consider <a class="reference external" href="https://mattermost.org/share-your-mattermost-projects/">sharing your work</a> in our <a class="reference external" href="https://integrations.mattermost.com/">app directory</a>.</p>
+<p>The <a class="reference external" href="https://integrations.mattermost.com/">app directory</a> lists open source integrations developed by the Mattermost community and are available for download, customization and deployment to your private cloud or self-managed infrastructure.</p>
+</div>
+<div class="section" id="slack-compatibility">
+<h2><a class="toc-backref" href="#contents">Slack compatibility</a><a class="headerlink" href="#slack-compatibility" title="Permalink to this headline">¶</a></h2>
+<p>Like Slack, dialogs are triggered by an interactive message menu or button, or by a custom slash command. Additionally, Mattermost can trigger dialogs via plugins.</p>
+<p>The schema for these objects is the same as Slack’s, except for the following differences:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">url</span></code> field must be specified for Mattermost dialogs, which specifies where the request is sent to. In Slack, this is handled by specifying the URL within the Slack app that uses the dialog.</li>
+<li><code class="docutils literal notranslate"><span class="pre">icon_url</span></code> is an optional field to set the icon for Mattermost dialogs. In Slack, the dialogs use the icon set for the app that uses the dialog.</li>
+<li><code class="docutils literal notranslate"><span class="pre">label</span></code> in Slack dialogs is <code class="docutils literal notranslate"><span class="pre">display_name</span></code> in Mattermost dialogs for a more consistent naming convention with other integration types.</li>
+<li><code class="docutils literal notranslate"><span class="pre">hint</span></code> in Slack dialogs is <code class="docutils literal notranslate"><span class="pre">help_text</span></code> in Mattermost dialogs for a more consistent naming convention with other integration types.</li>
+<li><code class="docutils literal notranslate"><span class="pre">value</span></code> in Slack dialogs is <code class="docutils literal notranslate"><span class="pre">default</span></code> in Mattermost dialogs for a more consistent naming convention with other integration types.</li>
+</ul>
+</div></blockquote>
+<p>Moreover, the JSON payload for <code class="docutils literal notranslate"><span class="pre">select</span></code> type elements matches <a class="reference internal" href="interactive-messages.html"><span class="doc">interactive message menus</span></a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="bot-accounts.html" class="btn btn-neutral float-right" title="Bot Accounts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="interactive-messages.html" class="btn btn-neutral" title="Interactive Messages: Buttons and Menus" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/developer/interactive-dialogs.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>

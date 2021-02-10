@@ -1,0 +1,477 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Message Attachments &mdash; Mattermost 5.31 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Interactive Messages: Buttons and Menus" href="interactive-messages.html" />
+    <link rel="prev" title="Plugins (Beta)" href="../administration/plugins.html" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/integration.html">Integration Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../integrations/jira.html">Jira Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../integrations/zoom.html">Zoom Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../integrations/zapier.html">Zapier Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="webhooks-incoming.html">Incoming Webhooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="webhooks-outgoing.html">Outgoing Webhooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slash-commands.html">Slash Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../administration/plugins.html">Plugins (Beta)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Message Attachments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#attachment-options">Attachment Options</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#author-details">Author Details</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#titles">Titles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fields">Fields</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#images">Images</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#example-message-attachment">Example Message Attachment</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#footer">Footer</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#known-issues">Known Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#frequently-asked-questions">Frequently Asked Questions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#can-i-send-a-message-attachment-via-the-api">Can I send a message attachment via the API?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-messages.html">Interactive Messages: Buttons and Menus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-dialogs.html">Interactive Dialogs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bot-accounts.html">Bot Accounts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="personal-access-tokens.html">Personal Access Tokens</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oauth-2-0-applications.html">OAuth 2.0 Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integration-faq.html">Integrations FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../integrations/embedding.html">Embedding Mattermost in Other Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../integrations/webhook.html">Using Mattermost with Webhook</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/integration.html">Mattermost Integration Guide</a> &raquo;</li>
+    
+    <li>Message Attachments</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/developer/message-attachments.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="message-attachments">
+<h1>Message Attachments<a class="headerlink" href="#message-attachments" title="Permalink to this headline">¶</a></h1>
+<p>A wide range of rich text formatting options, including bold, italic, headings, in-line images, and tables, can be used in integrations. For more information about formatting, see <a class="reference internal" href="../help/messaging/formatting-text.html"><span class="doc">Formatting Text</span></a>.</p>
+<p>For additional formatting options, and for compatibility with Slack non-markdown integrations, an <code class="docutils literal notranslate"><span class="pre">attachments</span></code> array can be sent by integrations and rendered by Mattermost.</p>
+<p>You can also add interactive message buttons as part of attachments. They help make your integrations richer by completing common tasks inside Mattermost conversations, increasing user engagement and productivity. For more information, see <a class="reference internal" href="interactive-messages.html"><span class="doc">documentation</span></a>.</p>
+<div class="section" id="attachment-options">
+<h2>Attachment Options<a class="headerlink" href="#attachment-options" title="Permalink to this headline">¶</a></h2>
+<p>When sending an attachment, you can use any of the following to format how you want the posted message to look.</p>
+<p><code class="docutils literal notranslate"><span class="pre">fallback</span></code>: A required plain-text summary of the attachment. This is used in notifications, and in clients that don’t support formatted text (e.g. IRC).</p>
+<p><code class="docutils literal notranslate"><span class="pre">color</span></code>: A hex color code that will be used as the left border color for the attachment. If not specified, it will default to match the left hand sidebar header background color.</p>
+<img alt="../_images/attachments-color.png" src="../_images/attachments-color.png" />
+<p><code class="docutils literal notranslate"><span class="pre">pretext</span></code>: An optional line of text that will be shown above the attachment.</p>
+<img alt="../_images/attachments-pretext.png" src="../_images/attachments-pretext.png" />
+<p><code class="docutils literal notranslate"><span class="pre">text</span></code>: The text to be included in the attachment. It can be formatted using <a class="reference internal" href="../help/messaging/formatting-text.html"><span class="doc">Markdown</span></a>. For long texts, the message is collapsed and a “Show More” link is added to expand the message.</p>
+<img alt="../_images/attachments-text.png" src="../_images/attachments-text.png" />
+<div class="section" id="author-details">
+<h3>Author Details<a class="headerlink" href="#author-details" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">author_name</span></code>: An optional name used to identify the author. It will be included in a small section at the top of the attachment.</p>
+<p><code class="docutils literal notranslate"><span class="pre">author_link</span></code>: An optional URL used to hyperlink the <code class="docutils literal notranslate"><span class="pre">author_name</span></code>. If no <code class="docutils literal notranslate"><span class="pre">author_name</span></code> is specified, this field does nothing.</p>
+<p><code class="docutils literal notranslate"><span class="pre">author_icon</span></code>: An optional URL used to display a 16x16 pixel icon beside the <code class="docutils literal notranslate"><span class="pre">author_name</span></code>.</p>
+<img alt="../_images/attachments-author.png" src="../_images/attachments-author.png" />
+</div>
+<div class="section" id="titles">
+<h3>Titles<a class="headerlink" href="#titles" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">title</span></code>: An optional title displayed below the author information in the attachment.</p>
+<p><code class="docutils literal notranslate"><span class="pre">title_link</span></code>: An optional URL used to hyperlink the <code class="docutils literal notranslate"><span class="pre">title</span></code>. If no <code class="docutils literal notranslate"><span class="pre">title</span></code> is specified, this field does nothing.</p>
+<img alt="../_images/attachments-titles.png" src="../_images/attachments-titles.png" />
+</div>
+<div class="section" id="fields">
+<h3>Fields<a class="headerlink" href="#fields" title="Permalink to this headline">¶</a></h3>
+<p>Fields can be included as an optional array within <code class="docutils literal notranslate"><span class="pre">attachments</span></code>, and are used to display information in a table format inside the attachment.</p>
+<p><code class="docutils literal notranslate"><span class="pre">title</span></code>: A title shown in the table above the <code class="docutils literal notranslate"><span class="pre">value</span></code>.  As of v5.14 a title will render emojis properly.</p>
+<p><code class="docutils literal notranslate"><span class="pre">value</span></code>: The text value of the field. It can be formatted using <a class="reference internal" href="../help/messaging/formatting-text.html"><span class="doc">Markdown</span></a>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">short</span></code>: Optionally set to true or false (boolean) to indicate whether the <code class="docutils literal notranslate"><span class="pre">value</span></code> is short enough to be displayed beside other values.</p>
+<img alt="../_images/attachments-fields.png" src="../_images/attachments-fields.png" />
+</div>
+<div class="section" id="images">
+<h3>Images<a class="headerlink" href="#images" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">image_url</span></code>: An optional URL to an image file (GIF, JPEG, PNG, BMP, or SVG) that is displayed inside a message attachment.</p>
+<p>Large images are resized to a maximum width of 400px or a maximum height of 300px, while still maintaining the original aspect ratio.</p>
+<img alt="../_images/attachments-image.png" src="../_images/attachments-image.png" />
+<p><code class="docutils literal notranslate"><span class="pre">thumb_url</span></code>: An optional URL to an image file (GIF, JPEG, PNG, BMP, or SVG)  that is displayed as a 75x75 pixel thumbnail on the right side of an attachment. We recommend using an image that is already 75x75 pixels, but larger images will be scaled down with the aspect ratio maintained.</p>
+<img alt="../_images/attachments-thumb.png" src="../_images/attachments-thumb.png" />
+</div>
+</div>
+<div class="section" id="example-message-attachment">
+<h2>Example Message Attachment<a class="headerlink" href="#example-message-attachment" title="Permalink to this headline">¶</a></h2>
+<p>Here is an example message attachment:</p>
+<div class="highlight-JSON notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;attachments&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;fallback&quot;</span><span class="p">:</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#FF8000&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;pretext&quot;</span><span class="p">:</span> <span class="s2">&quot;This is optional pretext that shows above the attachment.&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;This is the text of the attachment. It should appear just above an image of the Mattermost logo. The left border of the attachment should be colored orange, and below the image it should include additional fields that are formatted in columns. At the top of the attachment, there should be an author name followed by a bolded title. Both the author name and the title should be hyperlinks.&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;author_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Mattermost&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;author_icon&quot;</span><span class="p">:</span> <span class="s2">&quot;https://mattermost.org/wp-content/uploads/2016/04/icon_WS.png&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;author_link&quot;</span><span class="p">:</span> <span class="s2">&quot;https://mattermost.org/&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Example Attachment&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;title_link&quot;</span><span class="p">:</span> <span class="s2">&quot;https://docs.mattermost.com/developer/message-attachments.html&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;fields&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;short&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
+          <span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Long Field&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;Testing with a very long piece of text that will take up the whole width of the table. And then some more text to make it extra long.&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;short&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+          <span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Column One&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;Testing&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;short&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+          <span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Column Two&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;Testing&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;short&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
+          <span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Another Field&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;Testing&quot;</span>
+        <span class="p">}</span>
+      <span class="p">],</span>
+      <span class="nt">&quot;image_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://mattermost.org/wp-content/uploads/2016/03/logoHorizontal_WS.png&quot;</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>And here is how it renders in Mattermost:</p>
+<img alt="../_images/attachments-example.png" src="../_images/attachments-example.png" />
+<div class="section" id="footer">
+<h3>Footer<a class="headerlink" href="#footer" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">footer</span></code>: An optional line of text that will be displayed at the bottom of the attachment. Footers with more than 300 characters will be truncated with an ellipsis (<code class="docutils literal notranslate"><span class="pre">…</span></code>).</p>
+<p><code class="docutils literal notranslate"><span class="pre">footer_icon</span></code>: An optional URL to an image file (GIF, JPEG, PNG, BMP, or SVG) that is displayed as a 16x16 pixel thumbnail before the footer text.</p>
+<img alt="../_images/attachments-footer.png" src="../_images/attachments-footer.png" />
+</div>
+</div>
+<div class="section" id="known-issues">
+<h2>Known Issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>The footer timestamp field (<code class="docutils literal notranslate"><span class="pre">ts</span></code>) is not yet supported</li>
+<li>Message Attachment contents do not show up in search</li>
+</ol>
+</div>
+<div class="section" id="frequently-asked-questions">
+<h2>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="can-i-send-a-message-attachment-via-the-api">
+<h3>Can I send a message attachment via the API?<a class="headerlink" href="#can-i-send-a-message-attachment-via-the-api" title="Permalink to this headline">¶</a></h3>
+<p>Yes, you can use the <a class="reference external" href="https://api.mattermost.com/#tag/posts%2Fpaths%2F~1posts%2Fpost">create post RESTful API</a>.</p>
+<p>You need to add an “attachment” key to the post’s props JSON field. The value is an array of message attachments you want attached to the post. See below for an example curl command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl -i -X POST -H <span class="s1">&#39;Content-Type: application/json&#39;</span> -d <span class="s1">&#39;{&quot;channel_id&quot;:&quot;qmd5oqtwoibz8cuzxzg5ekshgr&quot;, &quot;message&quot;:&quot;Test message #testing&quot;, &quot;props&quot;:{&quot;attachments&quot;: [{&quot;pretext&quot;: &quot;This is the attachment pretext.&quot;,&quot;text&quot;: &quot;This is the attachment text.&quot;}]}}&#39;</span> http://<span class="o">{</span>your-mattermost-site<span class="o">}</span>/posts
+</pre></div>
+</div>
+<p>Below is an example HTTP request:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/posts</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">{your-mattermost-site}</span>
+<span class="na">User-Agent</span><span class="o">:</span> <span class="l">curl/7.63.0</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">*/*</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+<span class="na">Content-Length</span><span class="o">:</span> <span class="l">192</span>
+
+<span class="p">{</span><span class="nt">&quot;channel_id&quot;</span><span class="p">:</span><span class="s2">&quot;qmd5oqtwoibz8cuzxzg5ekshgr&quot;</span><span class="p">,</span> <span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="s2">&quot;Test message #testing&quot;</span><span class="p">,</span> <span class="nt">&quot;props&quot;</span><span class="p">:{</span><span class="nt">&quot;attachments&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="nt">&quot;pretext&quot;</span><span class="p">:</span> <span class="s2">&quot;This is the attachment pretext.&quot;</span><span class="p">,</span><span class="nt">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;This is the attachment text.&quot;</span><span class="p">}]}}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="interactive-messages.html" class="btn btn-neutral float-right" title="Interactive Messages: Buttons and Menus" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../administration/plugins.html" class="btn btn-neutral" title="Plugins (Beta)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020 Mattermost
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/developer/message-attachments.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/myscript.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+	<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+	<script type="text/javascript">
+		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
+		   however, waiting a new release to the theme.  This fix should remain in place until that
+		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
+		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
+		 */
+        if(DOCUMENTATION_OPTIONS) {
+			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
+        }
+    </script>
+
+
+</body>
+</html>
