@@ -217,37 +217,15 @@
 </div>
 <div class="section" id="step-3-configure-mattermost-for-office-365-sso">
 <h3>Step 3: Configure Mattermost for Office 365 SSO<a class="headerlink" href="#step-3-configure-mattermost-for-office-365-sso" title="Permalink to this headline">¶</a></h3>
-<ol>
-<li><p class="first">Log in to Mattermost, then go to <strong>System Console &gt; Authentication &gt; OpenID Connect</strong>.</p>
-</li>
-<li><p class="first">Select <strong>Office 365</strong> as the service provider.</p>
-</li>
-<li><p class="first">Paste in the <em>Directory (tenant) ID</em> from Azure Portal as the <strong>Directory (tenant) ID</strong> in Mattermost.</p>
-</li>
-<li><p class="first">The <strong>Discovery Endpoint</strong> for OpenID Connect with Office 365 is prepopulated with <code class="docutils literal notranslate"><span class="pre">https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration</span></code>.</p>
-</li>
-<li><p class="first">Paste in the <em>Application (client) ID</em> from Azure Portal as the <strong>Client ID</strong> in Mattermost.</p>
-</li>
-<li><p class="first">Paste in the <em>client secret value</em> from Azure Portal as the <strong>Client Secret</strong> in Mattermost.</p>
-</li>
-<li><p class="first">Open the Mattermost <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file.</p>
-</li>
-<li><p class="first">In the <code class="docutils literal notranslate"><span class="pre">Office365Settings</span></code> section of the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file, update the default configuration values to include the <em>Directory (tenant) ID</em> value.</p>
-<p>For example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AuthEndpoint</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">login</span><span class="o">.</span><span class="n">microsoftonline</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">common</span><span class="o">/</span><span class="n">oauth2</span><span class="o">/</span><span class="n">v2</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">authorize</span>
-<span class="n">TokenEndpoint</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">login</span><span class="o">.</span><span class="n">microsoftonline</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">common</span><span class="o">/</span><span class="n">oauth2</span><span class="o">/</span><span class="n">v2</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">token</span>
-</pre></div>
-</div>
-<p>would change to:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AuthEndpoint</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">login</span><span class="o">.</span><span class="n">microsoftonline</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="mi">3</span><span class="n">dfccc41</span><span class="o">-</span><span class="n">d360</span><span class="o">-</span><span class="mi">488</span><span class="n">a</span><span class="o">-</span><span class="n">a6ff</span><span class="o">-</span><span class="n">e9e565b3xbf1</span><span class="o">/</span><span class="n">oauth2</span><span class="o">/</span><span class="n">v2</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">authorize</span>
-<span class="n">TokenEndpoint</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">login</span><span class="o">.</span><span class="n">microsoftonline</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="mi">3</span><span class="n">dfcc41</span><span class="o">-</span><span class="n">d360</span><span class="o">-</span><span class="mi">488</span><span class="n">a</span><span class="o">-</span><span class="n">a6ff</span><span class="o">-</span><span class="n">e9e565b3xbf1</span><span class="o">/</span><span class="n">oauth2</span><span class="o">/</span><span class="n">v2</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">token</span>
-</pre></div>
-</div>
-</li>
-<li><p class="first">Select <strong>Save</strong>.</p>
-</li>
-<li><p class="first">Restart your Mattermost server to see the changes take effect.</p>
-</li>
+<ol class="simple">
+<li>Log in to Mattermost, then go to <strong>System Console &gt; Authentication &gt; OpenID Connect</strong>.</li>
+<li>Select <strong>Office 365</strong> as the service provider.</li>
+<li>Paste in the <em>Directory (tenant) ID</em> from Azure Portal as the <strong>Directory (tenant) ID</strong> in Mattermost.</li>
+<li>The <strong>Discovery Endpoint</strong> for OpenID Connect with Office 365 is prepopulated with <code class="docutils literal notranslate"><span class="pre">https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration</span></code>.</li>
+<li>Paste in the <em>Application (client) ID</em> from Azure Portal as the <strong>Client ID</strong> in Mattermost.</li>
+<li>Paste in the <em>client secret value</em> from Azure Portal as the <strong>Client Secret</strong> in Mattermost.</li>
+<li>Select <strong>Save</strong>.</li>
+<li>Restart your Mattermost server to see the changes take effect.</li>
 </ol>
 </div>
 <div class="section" id="note-about-microsoft-active-directory-tenants">
