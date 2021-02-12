@@ -2197,6 +2197,20 @@
 </tbody>
 </table>
 </div>
+<div class="section" id="app-custom-url-schemes">
+<h4>App Custom URL Schemes<a class="headerlink" href="#app-custom-url-schemes" title="Permalink to this headline">¶</a></h4>
+<p>Define valid custom URL schemes for redirect links provided by custom-built mobile Mattermost apps. This ensures users are redirected to the custom-built mobile app and not Mattermost’s mobile client.</p>
+<p>When configured, after OAuth or SAML user authentication is complete, custom URL schemes sent by mobile clients are validated to ensure they don’t include default schemes such as <code class="docutils literal notranslate"><span class="pre">http</span></code> or <code class="docutils literal notranslate"><span class="pre">https</span></code>. Mobile users are then redirected back to the mobile app using the custom scheme URL provided by the mobile client. We recommend that you update your mobile client values as well with valid custom URL schemes.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>This feature’s <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is <code class="docutils literal notranslate"><span class="pre">&quot;NativeAppSettings.AppCustomURLSchemes&quot;</span></code> with an array of strings as input. For example: <code class="docutils literal notranslate"><span class="pre">[custom-app://,</span> <span class="pre">some-app://]</span></code>.</td>
+</tr>
+</tbody>
+</table>
+</div>
 <div class="section" id="mattermost-apps-download-page-link">
 <h4>Mattermost Apps Download Page Link<a class="headerlink" href="#mattermost-apps-download-page-link" title="Permalink to this headline">¶</a></h4>
 <p>Configurable link to a download page for Mattermost Apps. When a link is present, an option to <strong>Download Apps</strong> will be added in the Main Menu so users can find the download page. Leave this field blank to hide the option from the Main Menu. Defaults to a page on about.mattermost.com where users can download the iOS, Android, and Desktop clients. If you are using an <a class="reference external" href="https://docs.mattermost.com/deployment/push.html?highlight=enterprise%20app#push-notifications-and-mobile-devices">Enterprise App Store</a> for your mobile apps, change this link to point to a customized download page where users can find the correct apps.</p>
