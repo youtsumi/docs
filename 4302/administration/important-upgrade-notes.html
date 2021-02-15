@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Important Upgrade Notes &mdash; Mattermost 5.31 documentation</title>
+  <title>Important Upgrade Notes &mdash; Mattermost 5.32 documentation</title>
   
 
   
@@ -76,7 +76,7 @@
             
             
               <div class="version">
-                5.31
+                5.32
               </div>
             
           
@@ -198,7 +198,7 @@
 </div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>TLS versions 1.0 and 1.1 have been deprecated by browser vendors. In Mattermost Server v5.32 (February 16), mmctl will return an error when connected to Mattermost servers deployed with these TLS versions and System Admins will need to explicitly add a flag in their commands to continue to use them. We recommend upgrading to TLS version 1.2 or higher.</p>
+<p>TLS versions 1.0 and 1.1 have been deprecated by browser vendors. Starting in Mattermost Server v5.32 (February 16), mmctl returns an error when connected to Mattermost servers deployed with these TLS versions and System Admins will need to explicitly add a flag in their commands to continue to use them. We recommend upgrading to TLS version 1.2 or higher.</p>
 </div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
@@ -216,6 +216,16 @@
 </tr>
 </thead>
 <tbody>
+<tr class="row-even"><td rowspan="2"><p>v5.32.0</p></td>
+<td colspan="2"><p><code class="docutils literal notranslate"><span class="pre">ExperimentalChannelOrganization</span></code>, <code class="docutils literal notranslate"><span class="pre">EnableXToLeaveChannelsFromLHS</span></code>, <code class="docutils literal notranslate"><span class="pre">CloseUnusedDirectMessages</span></code>, and <code class="docutils literal notranslate"><span class="pre">ExperimentalHideTownSquareinLHS</span></code> settings are only
+functional if the Legacy Sidebar (<code class="docutils literal notranslate"><span class="pre">EnableLegacySidebar</span></code>) is enabled since they are not compatible with the new sidebar experience.
+<code class="docutils literal notranslate"><span class="pre">ExperimentalChannelSidebarOrganization</span></code> has been deprecated, since the
+<a class="reference external" href="https://mattermost.com/blog/custom-collapsible-channel-categories/">new sidebar is now enabled for all users</a>.</p></td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p>Breaking changes to the Golang client API were introduced: <code class="docutils literal notranslate"><span class="pre">GetPostThread</span></code>, <code class="docutils literal notranslate"><span class="pre">GetPostsForChannel</span></code>, <code class="docutils literal notranslate"><span class="pre">GetPostsSince</span></code>, <code class="docutils literal notranslate"><span class="pre">GetPostsAfter</span></code>, <code class="docutils literal notranslate"><span class="pre">GetPostsBefore</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">GetPostsAroundLastUnread</span></code> now require an additional collapsedThreads parameter to be passed. Any client making use of these functions will need to update
+them when upgrading its dependencies.</p></td>
+</tr>
 <tr class="row-even"><td rowspan="2"><p>v5.29.0</p></td>
 <td colspan="2"><p>A new configuration setting <code class="docutils literal notranslate"><span class="pre">ThreadAutoFollow</span></code> has been added to support <a class="reference external" href="https://docs.google.com/presentation/d/1QSrPws3N8AMSjVyOKp15FKT7O0fGMSx8YidjSDS4Wng/edit#slide=id.g2f0aecc189_0_245">Collapsed Reply Threads</a> releasing in beta in Q1 2021. This
 setting is enabled by default and may affect server performance. It is recommended to review our <a class="reference external" href="https://docs.mattermost.com/install/requirements.html#hardware-requirements">documentation on hardware requirements</a> to ensure your servers are appropriately scaled for the size of your user base.</p></td>

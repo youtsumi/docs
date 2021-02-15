@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>&lt;no title&gt; &mdash; Mattermost 5.31 documentation</title>
+  <title>&lt;no title&gt; &mdash; Mattermost 5.32 documentation</title>
   
 
   
@@ -76,7 +76,7 @@
             
             
               <div class="version">
-                5.31
+                5.32
               </div>
             
           
@@ -160,6 +160,55 @@
             
   <p># Mattermost Cloud Changelog</p>
 <p>This changelog summarizes updates to [Mattermost Cloud](<a class="reference external" href="https://mattermost.com/get-started/">https://mattermost.com/get-started/</a>), an enterprise-grade SaaS offering hosted by Mattermost.</p>
+<p>## Release 2021-02-10</p>
+<p>### Highlights</p>
+<dl class="simple">
+<dt>#### OpenID Connect (Cloud Professional &amp; Enterprise)</dt><dd><ul class="simple">
+<li><p>OpenID Connect enables authentication to Mattermost using any OAuth 2.0 provider that adheres to the OpenID Connect specification. <strong>This feature will be available for Mobile Apps in v1.40 (February 16th) release.</strong></p></li>
+</ul>
+</dd>
+</dl>
+<p>### Improvements</p>
+<dl class="simple">
+<dt>#### User Interface (UI)</dt><dd><ul class="simple">
+<li><p>Improved the <strong>Add Members</strong> modal user interface.</p></li>
+<li><p>Added formatting shortcut keys to the <strong>Shortcut</strong> modal.</p></li>
+<li><p>Added localization to the date picker used when searching for posts around a given date.</p></li>
+<li><p>The autocomplete popover is now positioned relative to the <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>, <code class="docutils literal notranslate"><span class="pre">~</span></code>, or <code class="docutils literal notranslate"><span class="pre">/</span></code> trigger in the post draft.</p></li>
+</ul>
+</dd>
+<dt>#### Notifications</dt><dd><ul class="simple">
+<li><p>Posts from OAuth 2.0 bots no longer trigger mentions for the user.</p></li>
+</ul>
+</dd>
+<dt>#### Administration</dt><dd><ul class="simple">
+<li><p>Added an <code class="docutils literal notranslate"><span class="pre">ImportDelete</span></code> job to periodically delete unused import files after a configurable retention period has passed.</p></li>
+<li><p>Introduced new <code class="docutils literal notranslate"><span class="pre">mattermost_system_server_start_time</span></code> and <code class="docutils literal notranslate"><span class="pre">mattermost_jobs_active</span></code> metrics for improved debugging with Grafana dashboards.</p></li>
+<li><p>Deleting a reaction is now a soft delete in the <code class="docutils literal notranslate"><span class="pre">Reactions</span></code> table. A schema update is required and may take up to 15 seconds on first run with large data sets.</p></li>
+<li><p>Changed default <code class="docutils literal notranslate"><span class="pre">MaxFileSize</span></code> from 50MB to 100MB.</p></li>
+<li><p>Updated Go dependencies to their latest minor version.</p></li>
+</ul>
+</dd>
+<dt>### Bug Fixes</dt><dd><ul class="simple">
+<li><p>Fixed an issue where <code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">config</span> <span class="pre">set</span> <span class="pre">PluginSettings.EnableUploads</span></code> did not change the configuration value.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">DownloadComplianceReport</span></code> function in the Golang driver has been fixed to be able to download a full report as a zip archive.</p></li>
+<li><p>Fixed Cache-Control headers to instruct that responses may only be cached on browsers.</p></li>
+<li><p>Fixed a bug with in-product notices where a date constraint sometimes failed to match, and would lead to the notice not being fetched.</p></li>
+<li><p>Fixed an issue where the channel switcher did not focus on the first list result after a backspace.</p></li>
+<li><p>Fixed an issue where the in-product instructions to search for users under <strong>System Console &gt; Reporting &gt; Server Logs</strong> were outdated.</p></li>
+<li><p>Fixed an issue where no error message was displayed when adding an LDAP Group Synchronized Team in <strong>System Console &gt; User Management &gt; Users</strong>.</p></li>
+</ul>
+</dd>
+<dt>### Known Issues</dt><dd><ul class="simple">
+<li><p>The slash command autocomplete options cover the input box on some reply threads on the right-hand side.</p></li>
+<li><p>Setting changes do not get saved in <strong>System Console &gt; Site Configuration &gt; Public Links</strong>.</p></li>
+<li><p>Channel header text “This channel has guests” is misaligned.</p></li>
+<li><p>Sometimes an “Unable to get role” error appears when changing a channel member role in <strong>System Console &gt; User Management &gt; Channel</strong>.</p></li>
+<li><p><strong>Cloud &gt; “Tips &amp; Next Steps”</strong> should not show an “Explore channels” section for guest users.</p></li>
+<li><p>System Roles shows <strong>License</strong> and <strong>Environment</strong> as possible permissions, but they are always hidden in Cloud.</p></li>
+</ul>
+</dd>
+</dl>
 <p>## Release 2021-01-26</p>
 <p>### Highlights</p>
 <dl class="simple">
