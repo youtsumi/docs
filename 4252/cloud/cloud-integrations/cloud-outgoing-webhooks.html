@@ -202,8 +202,8 @@
 <p>Suppose you want to write an external application, which executes software tests after someone posts a message starting with the word <code class="docutils literal notranslate"><span class="pre">#build</span></code> in the <code class="docutils literal notranslate"><span class="pre">town-square</span></code> channel.</p>
 <p>You can follow these general guidelines to set up a Mattermost outgoing webhook for your application.</p>
 <ol class="arabic simple">
-<li>First, go to <strong>Main Menu &gt; Integrations &gt; Outgoing Webhook</strong>. If you don’t have the <strong>Integrations</strong> option in your Main Menu, outgoing webhooks may not be enabled on your Mattermost server or may be disabled for non-admins. Enable them from <strong>System Console &gt; Integrations &gt; Integration Management</strong>.</li>
-<li>Click <strong>Add Outgoing Webhook</strong> and add name and description for the webhook. The description can be up to 500 characters.</li>
+<li>First, go to <strong>Main Menu &gt; Integrations &gt; Outgoing Webhooks</strong>. If you don’t have the <strong>Integrations</strong> option in your Main Menu, outgoing webhooks may not be enabled on your Mattermost server or may be disabled for non-admins. Enable them from <strong>System Console &gt; Integrations &gt; Integration Management</strong>.</li>
+<li>Select <strong>Add Outgoing Webhook</strong> and add a title and description for the webhook. The description can be up to 500 characters.</li>
 <li>Choose the content type by which the request will be sent.</li>
 </ol>
 <blockquote>
@@ -213,7 +213,7 @@
 </ul>
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li>Select the public channel to receive webhook responses, or specify one or more trigger words that send an HTTP POST request to your application. You may configure either the channel or the trigger words for the outgoing webhook, or both. If both are specified, then the message must match both values.</li>
+<li>Choose the public channel to receive webhook responses, or specify one or more trigger words that send an HTTP POST request to your application. You may configure either the channel or the trigger words for the outgoing webhook, or both. If both are specified, then the message must match both values.</li>
 </ol>
 <p>In our example, we would set the channel to <code class="docutils literal notranslate"><span class="pre">town-square</span></code> and specify <code class="docutils literal notranslate"><span class="pre">#build</span></code> as the trigger word.</p>
 <blockquote>
@@ -233,7 +233,7 @@
 </ul>
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li>Finally, set one or more callback URLs that HTTP POST requests will be sent to, and hit <strong>Save</strong>. If the URL is private, add it as a <a class="reference external" href="https://about.mattermost.com/default-allow-internal-connections-settings-documentation/">trusted internal connection</a>.</li>
+<li>Finally, set one or more callback URLs that HTTP POST requests will be sent to, and select <strong>Save</strong>. If the URL is private, add it as a <a class="reference external" href="https://about.mattermost.com/default-allow-internal-connections-settings-documentation/">trusted internal connection</a>.</li>
 <li>On the next page, copy the <strong>Token</strong> value. This will be used in a later step.</li>
 </ol>
 <a class="reference internal image-reference" href="../../_images/outgoing_webhooks_token.png"><img alt="../../_images/outgoing_webhooks_token.png" src="../../_images/outgoing_webhooks_token.png" style="width: 500px;" /></a>
@@ -284,15 +284,15 @@ user_name=somename
 <p>Messages with advanced formatting can be created by including an <a class="reference external" href="https://docs.mattermost.com/developer/message-attachments.html">attachment array</a> and <a class="reference external" href="https://docs.mattermost.com/developer/interactive-messages.html">interactive message buttons</a> in the JSON payload.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p><a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-integrations-to-override-usernames">Enable integrations to override usernames</a> must be set to <cite>true</cite> in <cite>config.json</cite> to override usernames. Enable them from <strong>System Console &gt; Integrations &gt; Integration Management</strong> or ask your System Administrator. If not enabled, the username is set to <cite>webhook</cite>.</p>
-<p class="last">Similarly, <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-integrations-to-override-profile-picture-icons">Enable integrations to override profile picture icons</a> must be set to <cite>true</cite> in <cite>config.json</cite> to override usernames. Enable them from <strong>System Console &gt; Integrations &gt; Integration Management</strong> or ask your System Administrator. If not enabled, the icon of the creator of the webhook URL is used to post messages.</p>
+<p><a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-integrations-to-override-usernames">Enable integrations to override usernames</a> must be set to <code class="docutils literal notranslate"><span class="pre">true</span></code> in <code class="docutils literal notranslate"><span class="pre">config.json</span></code> to override usernames. Enable them from <strong>System Console &gt; Integrations &gt; Integration Management</strong> or ask your System Admin to do so. If not enabled, the username is set to <code class="docutils literal notranslate"><span class="pre">webhook</span></code>.</p>
+<p class="last">Similarly, <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-integrations-to-override-profile-picture-icons">Enable integrations to override profile picture icons</a> must be set to <code class="docutils literal notranslate"><span class="pre">true</span></code> in <code class="docutils literal notranslate"><span class="pre">config.json</span></code> to override usernames. Enable them from <strong>System Console &gt; Integrations &gt; Integration Management</strong> or ask your System Admin to do so. If not enabled, the icon of the creator of the webhook URL is used to post messages.</p>
 </div>
 </div>
 <div class="section" id="tips-and-best-practices">
 <h2>Tips and Best Practices<a class="headerlink" href="#tips-and-best-practices" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li>Webhooks are designed to easily allow you to post messages. For other actions such as channel creation, you must also use the <a class="reference external" href="https://api.mattermost.com">Mattermost APIs</a>.</li>
-<li>Posts up to 16383 characters are supported. If the text in the JSON response is longer than the allowable character limit per post, the message is split into multiple consecutive posts, each within the character limit.</li>
+<li>If the text in the JSON response is longer than the allowable character limit per post, the message is split into multiple consecutive posts, each within the character limit. Posts up to 16383 characters are supported.</li>
 <li>Outgoing webhooks are supported in public channels only. If you need a trigger that works in a private channel or a direct message, consider using a <a class="reference external" href="https://docs.mattermost.com/developer/slash-commands.html">slash command</a> instead.</li>
 <li>You can restrict who can create outgoing webhooks in <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#restrict-managing-integrations-to-admins">System Console &gt; Integrations &gt; Integration Management</a>.</li>
 <li>Mattermost outgoing webhooks are Slack-compatible. You can copy-and-paste code used for a Slack outgoing webhook to create Mattermost integrations. Mattermost <a class="reference external" href="https://docs.mattermost.com/cloud/cloud-integrations/cloud-incoming-webhooks.html#translate-slack-s-data-format-to-mattermost">automatically translates the Slack’s proprietary JSON response format</a>.</li>
@@ -302,7 +302,7 @@ user_name=somename
 <div class="section" id="share-your-integration">
 <h2>Share Your Integration<a class="headerlink" href="#share-your-integration" title="Permalink to this headline">¶</a></h2>
 <p>If you’ve built an integration for Mattermost, please consider <a class="reference external" href="https://mattermost.org/share-your-mattermost-projects/">sharing your work</a> in our <a class="reference external" href="https://integrations.mattermost.com/">app directory</a>.</p>
-<p>The <a class="reference external" href="https://integrations.mattermost.com/">app directory</a> lists open source integrations developed by the Mattermost community and are available for download, customization and deployment to your private cloud or self-managed infrastructure.</p>
+<p>The <a class="reference external" href="https://integrations.mattermost.com/">app directory</a> lists open source integrations developed by the Mattermost community and are available for download, customization, and deployment to your private cloud or self-managed infrastructure.</p>
 </div>
 <div class="section" id="slack-compatibility">
 <h2>Slack Compatibility<a class="headerlink" href="#slack-compatibility" title="Permalink to this headline">¶</a></h2>
