@@ -276,7 +276,10 @@
 <li>You can obtain the path for the log files in <strong>System Console &gt; Environment &gt; Logging &gt; File Log Directory</strong>.</li>
 </ul>
 <p>The resulting server log file is called <code class="docutils literal notranslate"><span class="pre">mattermost.log</span></code> and can be opened with a standard text editor or shared directly.</p>
-<p>For a more complete log open <strong>System Console &gt; Environment &gt; Logging</strong> and set <strong>File Log Level</strong> to <strong>DEBUG</strong>, then replicate the issue to have it logged again. Make sure to revert to <strong>INFO</strong> after troubleshooting to save disk space.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For a more complete log open <strong>System Console &gt; Environment &gt; Logging</strong> and set <strong>File Log Level</strong> to <strong>DEBUG</strong>, then replicate the issue to have it logged again. Make sure to revert to <strong>INFO</strong> after troubleshooting to save disk space.</p>
+</div>
 <p>If filesystem access is not possible, navigate to <strong>System Console &gt; Reporting &gt; Server Logs</strong> to locate the current system logs which can be copied to a file.</p>
 <p>You can find more on logging settings <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#logging">here</a>.</p>
 <p><strong>Mattermost Desktop App</strong></p>
@@ -348,13 +351,11 @@
 <ol class="arabic simple">
 <li>Sign in to the server Mattermost is running on via <code class="docutils literal notranslate"><span class="pre">ssh</span></code>.</li>
 <li>Go to the directory of the Mattermost application. If you’ve followed our setup process this is <code class="docutils literal notranslate"><span class="pre">/opt/mattermost</span></code>.</li>
-<li>Run</li>
+<li>Run:</li>
 </ol>
-<blockquote>
-<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo -u mattermost bin/mattermost roles system_admin {username}
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo -u mattermost bin/mattermost roles system_admin {username}
 </pre></div>
 </div>
-</div></blockquote>
 <ol class="arabic simple" start="4">
 <li>Replace <code class="docutils literal notranslate"><span class="pre">{username}</span></code> with the name of the user you’d like to promote to System Admin.</li>
 </ol>
@@ -838,7 +839,7 @@
 <p>Configuration includes (but is not limited to):</p>
 <ul class="simple">
 <li>The Mattermost <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file.</li>
-<li>The configuration for the reverse proxy, e.g. Nginx, HAProxy, AWS.</li>
+<li>The configuration for the reverse proxy, e.g. NGINX, HAProxy, AWS.</li>
 <li>The database configuration.</li>
 <li>SAML configuration when the issue is regarding SAML authentication. The configuration for the Mattermost service is in the SAML IdP.</li>
 <li>Any other systems that Mattermost connects to or systems that exist between the user and the Mattermost server.</li>
@@ -852,7 +853,7 @@
 </pre></div>
 </div>
 <p><strong>Reverse Proxy configuration</strong></p>
-<p>Nginx usually splits its configuration into two parts: the main server configuration at <code class="docutils literal notranslate"><span class="pre">/etc/nginx/nginx.conf</span></code>, and a virtual server configuration. On Ubuntu, this is stored in <code class="docutils literal notranslate"><span class="pre">/etc/nginx/sites-available</span></code>. Providing both of these configuration files is helpful, but providing the latter is more important.</p>
+<p>NGINX usually splits its configuration into two parts: the main server configuration at <code class="docutils literal notranslate"><span class="pre">/etc/nginx/nginx.conf</span></code>, and a virtual server configuration. On Ubuntu, this is stored in <code class="docutils literal notranslate"><span class="pre">/etc/nginx/sites-available</span></code>. Providing both of these configuration files is helpful, but providing the latter is more important.</p>
 <p><strong>SAML configuration</strong></p>
 <p>If the issue you’re seeing is with SAML login, we will need to see the full configuration for the Mattermost service in the SAML provider. Providing screenshots similar to the ones in the setup documentation is sufficient because most SAML providers are configured using a web interface.</p>
 <p><strong>LDAP configuration</strong></p>
@@ -871,8 +872,8 @@
 </div>
 <div class="section" id="logs">
 <h2>Logs<a class="headerlink" href="#logs" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="why-we-need-it">
-<h3>Why we need it<a class="headerlink" href="#why-we-need-it" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="why-we-need-them">
+<h3>Why we need them<a class="headerlink" href="#why-we-need-them" title="Permalink to this headline">¶</a></h3>
 <p>Nearly all computer systems have logs of errors and application behavior that can show us what’s happening when an application is running. Error logs are invaluable when diagnosing a problem, but only if they’re as complete as possible.</p>
 </div>
 <div class="section" id="what-logs-are-available">
@@ -924,15 +925,15 @@ tar czf - /opt/mattermost/logs/mattermost.log | split -b 20m - mattermost.log.tg
 </div>
 <div class="section" id="users-affected">
 <h2>Users affected<a class="headerlink" href="#users-affected" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id4">
-<h3>Why we need it<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="why-we-need-it">
+<h3>Why we need it<a class="headerlink" href="#why-we-need-it" title="Permalink to this headline">¶</a></h3>
 <p>Mattermost servers are chaotic places. Thousands of posts, websocket actions, and webhook calls happen every second while users can be in dozens of channels across multiple teams. Knowing which users are affected by a problem can help us sift through all this information to find the root cause.</p>
 </div>
 <div class="section" id="what-information-to-include">
 <h3>What information to include<a class="headerlink" href="#what-information-to-include" title="Permalink to this headline">¶</a></h3>
 <p>This should be a detailed explanation of anything the end users who are reporting the unexpected behavior have in common. This includes (but is not limited to):</p>
 <ul class="simple">
-<li>Team and Channel memberships, including direct and group messages</li>
+<li>Team and Channel memberships, including Direct and Group Messages</li>
 <li>Authentication methods</li>
 <li>Client operating system and app versions</li>
 <li>How users connect to the Mattermost server</li>
@@ -943,59 +944,59 @@ tar czf - /opt/mattermost/logs/mattermost.log | split -b 20m - mattermost.log.tg
 <li>Customer Name</li>
 <li>Customer Contacts</li>
 <li>Customer License, e.g. E20/PS</li>
-<li>Customer Tier - Where to find this?</li>
+<li>Customer Tier</li>
 </ul>
 </div>
 </div>
 <div class="section" id="environment">
 <h2>Environment<a class="headerlink" href="#environment" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id5">
-<h3>What information to include<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id4">
+<h3>What information to include<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <p>Where the Mattermost server sits in your architecture has a lot of impact on potential issues. For example, a misconfigured proxy server can prevent users from connecting even if there’s nothing wrong with Mattermost.</p>
 <p>Because of this, having a complete picture of the servers and network that the Mattermost server operates in is key to solving problems. This includes (but is not limited to):</p>
 <ul class="simple">
-<li>Mattermost version - 5.28.0, 5.25.5</li>
-<li>Server OS and version - RHEL7, Ubuntu 18.04</li>
+<li>Mattermost version (e.g. 5.28.0, 5.25.5)</li>
+<li>Server OS and version (e.g. RHEL7, Ubuntu 18.04)</li>
 <li>Any orchestration/automation used like Docker or Kubernetes</li>
-<li>Reverse Proxy and version - Nginx 1.16</li>
-<li>Database type and version - MySQL 5.7, PostgreSQL 12.4</li>
-<li>SAML provider - Windows Server 2012 Active Directory, Okta, KeyCloak</li>
-<li>LDAP provider - Windows Server 2016 Active Directory, Okta, OpenLDAP</li>
+<li>Reverse Proxy and version (e.g. NGINX 1.16)</li>
+<li>Database type and version (e.g. MySQL 5.7, PostgreSQL 12.4)</li>
+<li>SAML provider (e.g. Windows Server 2012 Active Directory, Okta, KeyCloak)</li>
+<li>LDAP provider (e.g. Windows Server 2016 Active Directory, Okta, OpenLDAP)</li>
 <li>The type and version of any proxies or VPNs on the network that the Mattermost server is connecting through</li>
 </ul>
 <p>Be as specific as possible when describing the environment. If you are seeing errors like <strong>Connection Refused</strong> be sure to include any firewalls or filtering proxies that may be on your network, either inbound or outbound.</p>
 <p><strong>Examples</strong></p>
 <ul class="simple">
-<li>Mattermost Server</li>
-<li>External hostname: mattermost.example.com</li>
-<li>Internal hostname: mattermost.lan</li>
-<li>Mattermost v5.28.0</li>
-<li>Zoom plugin v1.4.1</li>
-<li>Nginx v1.18.0</li>
-<li>Database server</li>
-<li>Internal hostname: mysql.lan</li>
-<li>MySQL v5.7</li>
-<li>LDAP Provider - 192.168.1.102</li>
-<li>Internal hostname: ldap.lan</li>
-<li>OpenLDAP 2.4.54 (Docker container)</li>
-<li>Mattermost Servers</li>
-<li>Hostnames: mm1.local.lan, mm2.local.lan, mm3.local.lan, mm4.local.lan</li>
-<li>Mattermost server versions</li>
-<li>mm1-3: 5.25.4</li>
-<li>mm4: 5.21.0</li>
-<li>Proxy server</li>
-<li>External hostname: mattermost.example.com</li>
-<li>Internal hostname: proxy.local.lan</li>
-<li>Nginx v1.16.0</li>
-<li>Database Servers</li>
-<li>Hostnames: db1.local.lan, db2.local.lan, db3.local.lan</li>
-<li>Primary: db1.local.lan</li>
-<li>Read-Only: db2.local.lan, db3.local.lan</li>
-<li>MySQL v5.6</li>
-<li>Elasticsearch Server</li>
-<li>Hostname: elastic.local.lan</li>
-<li>Elasticsearch 7.9 with these plugins</li>
-<li>analysis-icu</li>
+<li>Mattermost server
+- External hostname: mattermost.example.com
+- Internal hostname: mattermost.lan
+- Mattermost v5.28.0
+- Zoom plugin v1.4.1
+- NGINX v1.18.0</li>
+<li>Database server
+- Internal hostname: mysql.lan
+- MySQL v5.7
+- LDAP Provider - 192.168.1.102
+- Internal hostname: ldap.lan
+- OpenLDAP 2.4.54 (Docker container)</li>
+<li>Mattermost servers
+- Hostnames: mm1.local.lan, mm2.local.lan, mm3.local.lan, mm4.local.lan</li>
+<li>Mattermost server versions
+- mm1-3: 5.25.4
+- mm4: 5.21.0</li>
+<li>Proxy server
+- External hostname: mattermost.example.com
+- Internal hostname: proxy.local.lan
+- NGINX v1.16.0</li>
+<li>Database servers
+- Hostnames: db1.local.lan, db2.local.lan, db3.local.lan
+- Primary: db1.local.lan
+- Read-Only: db2.local.lan, db3.local.lan
+- MySQL v5.6</li>
+<li>Elasticsearch server
+- Hostname: elastic.local.lan
+- Elasticsearch 7.9 with these plugins
+- analysis-icu</li>
 </ul>
 </div>
 </div>
