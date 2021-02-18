@@ -1,12 +1,14 @@
 
 
 
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>&lt;no title&gt; &mdash; Mattermost 5.32 documentation</title>
   
@@ -26,26 +28,11 @@
 
   
     <link rel="canonical" href="https://docs.mattermost.com/administration/changelog.html" />
-
-  
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/myscript.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Desktop Application Changelog" href="../help/apps/desktop-changelog.html" />
     <link rel="prev" title="Important Upgrade Notes" href="important-upgrade-notes.html" />
-	<!-- Google Tag Manager -->
+  
+  	<!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -53,9 +40,16 @@
 	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
 	<!-- End Google Tag Manager -->
 
+	
+    <script src="../_static/js/modernizr.min.js"></script>
 </head>
 
 <body class="wy-body-for-nav">
+
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K874RWM"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
 
    
   <div class="wy-grid-for-nav">
@@ -155,14 +149,19 @@
   </ul>
   <hr/>
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+          <article class="document" itemscope="itemscope" itemtype="https://schema.org/Article">
            <div itemprop="articleBody">
             
   <p># Mattermost Changelog</p>
 <p>This changelog summarizes updates to [Mattermost Team Edition](<a class="reference external" href="https://mattermost.org/">https://mattermost.org/</a>), an open source team messaging solution released monthly under an MIT license, and [Mattermost Enterprise Edition](<a class="reference external" href="https://mattermost.com/pricing-self-managed/">https://mattermost.com/pricing-self-managed/</a>), a commercial upgrade offering enterprise messaging for large organizations.</p>
 <p>Also see [changelog in progress](<a class="reference external" href="https://bit.ly/2nK3cVf">https://bit.ly/2nK3cVf</a>) for the next release.</p>
 <p>## Release v5.32 - [Feature Release](<a class="reference external" href="https://docs.mattermost.com/administration/release-definitions.html#feature-release">https://docs.mattermost.com/administration/release-definitions.html#feature-release</a>)</p>
-<p><strong>Release Day: 2021-02-16</strong></p>
+<ul class="simple">
+<li><p><strong>v5.32.1, release day TBD</strong>
+- Fixing an issue where any search containing an underscore fail on PostgreSQL databases. This will be fixed by reverting a v5.32.0 feature that added support for searching for terms on PostgreSQL that contain underscores.</p></li>
+<li><p><strong>v5.32.0, released 2021-02-16</strong>
+- Original 5.32.0 release</p></li>
+</ul>
 <p>Mattermost v5.32.0 contains low level security fixes. [Upgrading](<a class="reference external" href="https://docs.mattermost.com/administration/upgrade.html">https://docs.mattermost.com/administration/upgrade.html</a>) is recommended. Details will be posted on our [security updates page](<a class="reference external" href="https://mattermost.com/security-updates/">https://mattermost.com/security-updates/</a>) 30 days after release as per the [Mattermost Responsible Disclosure Policy](<a class="reference external" href="https://mattermost.org/responsible-disclosure-policy/">https://mattermost.org/responsible-disclosure-policy/</a>).</p>
 <dl class="simple">
 <dt>### Compatibility</dt><dd><ul class="simple">
@@ -196,6 +195,7 @@
 <dl class="simple">
 <dt>#### User Interface (UI)</dt><dd><ul class="simple">
 <li><p>Added new languages, Bulgarian and Swedish.</p></li>
+<li><p>Added team sidebar user interface and animation enhancements.</p></li>
 <li><p>Moved the header icons to the left of the header beside the channel description.</p></li>
 <li><p>Added support to move multi-selected groups of channels to another category via the <strong>More options</strong> menu.</p></li>
 </ul>
@@ -209,7 +209,6 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">AnalyticsPostCount</span></code> now avoids unnecessary table scans during various background jobs.</p></li>
 <li><p>The Help text for the Rate Limiting setting was updated to explain the purpose of rate limiting.</p></li>
 <li><p>Removed the word “experimental” from the Gossip setting in the System Console.</p></li>
-<li><p>The Database search using PostgreSQL now supports searching for terms that contain underscores.</p></li>
 <li><p>Updated the Go version to v1.15.5.</p></li>
 <li><p>Added support for automatic installation and enablement of plugins using feature flags.</p></li>
 <li><p>Added <code class="docutils literal notranslate"><span class="pre">webhook</span> <span class="pre">create</span></code> endpoints to local mode and the ability to create webhooks for other users.</p></li>
@@ -10753,7 +10752,7 @@ Changes from v1.4 to v2.0:</p>
 
            </div>
            
-          </div>
+          </article>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
         <a href="../help/apps/desktop-changelog.html" class="btn btn-neutral float-right" title="Desktop Application Changelog" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
@@ -10811,17 +10810,29 @@ Changes from v1.4 to v2.0:</p>
 </div>
 
 
-  <script type="text/javascript">
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script>
-
   
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
-  
-	<header>
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/myscript.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+	<script type="text/javascript">
+		jQuery(function () {
+			SphinxRtdTheme.Navigation.enable(true);
+		});
+	</script> 
+
+<header>
 	<div class="header__container">
 		<div class="search__icon">
 			<i class="fa fa-search"></i>
@@ -10849,17 +10860,6 @@ Changes from v1.4 to v2.0:</p>
 		</div>
 	</div>
 </header>
-	<script type="text/javascript">
-		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
-		   however, waiting a new release to the theme.  This fix should remain in place until that
-		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
-		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
-		 */
-        if(DOCUMENTATION_OPTIONS) {
-			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
-        }
-    </script>
-
 
 </body>
 </html>

@@ -1,12 +1,14 @@
 
 
 
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>&lt;no title&gt; &mdash; Mattermost 5.32 documentation</title>
   
@@ -26,26 +28,11 @@
 
   
     <link rel="canonical" href="https://docs.mattermost.com/cloud/cloud-administration/sso-google.html" />
-
-  
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/myscript.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="&lt;no title&gt;" href="sso-office.html" />
     <link rel="prev" title="GitLab Single Sign-On" href="sso-gitlab.html" />
-	<!-- Google Tag Manager -->
+  
+  	<!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -53,9 +40,16 @@
 	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
 	<!-- End Google Tag Manager -->
 
+	
+    <script src="../../_static/js/modernizr.min.js"></script>
 </head>
 
 <body class="wy-body-for-nav">
+
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K874RWM"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
 
    
   <div class="wy-grid-for-nav">
@@ -155,62 +149,67 @@
   </ul>
   <hr/>
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+          <article class="document" itemscope="itemscope" itemtype="https://schema.org/Article">
            <div itemprop="articleBody">
             
   <p># Google Single Sign-On</p>
+<p>## Migrating from OAuth 2.0 to OpenID Connect</p>
+<p>OAuth 2.0 is being deprecated and replaced by OpenID Connect. Refer to the product documentation to [convert your existing OAuth configuration](<a class="reference external" href="https://docs.mattermost.com/cloud/cloud-administration/converting-oauth-2.0-to-openid-connect.html">https://docs.mattermost.com/cloud/cloud-administration/converting-oauth-2.0-to-openid-connect.html</a>) for Google Apps to the OpenID Connect standard.</p>
+<p>## Configuring Google Apps as a Single Sign-On (SSO) service</p>
 <p>Follow these steps to configure Mattermost to use Google as a Single Sign-on (SSO) service for team creation, account creation, and sign-in.</p>
-<p><strong>Note:</strong>
-- Google SSO is not yet supported in the Mattermost Mobile app. If you want to use Google SSO on mobile, you’ll have to [build your own app](<a class="reference external" href="https://developers.mattermost.com/contribute/mobile/build-your-own/">https://developers.mattermost.com/contribute/mobile/build-your-own/</a>).
-- The Google People API has replaced the Google+ API, which was deprecated by Google as of March 7th, 2019 per their notice at <a class="reference external" href="https://developers.google.com/+/api-shutdown">https://developers.google.com/+/api-shutdown</a>.</p>
+<p><strong>Note:</strong> The [Google People API](<a class="reference external" href="https://developers.google.com/people">https://developers.google.com/people</a>) has replaced the Google+ API, which was deprecated by Google as of March 7th, 2019 [per their notice](<a class="reference external" href="https://developers.google.com/+/api-shutdown">https://developers.google.com/+/api-shutdown</a>).</p>
+<p>### Step 1: Create OpenID Connect project in Google API Manager</p>
 <ol class="arabic simple">
-<li><p>Go to [Google API Manager](<a class="reference external" href="https://console.developers.google.com">https://console.developers.google.com</a>), click <strong>Credentials</strong> in the left hand sidebar, click <strong>Create a project</strong> and enter “Mattermost - your-company-name” as the <strong>Project Name</strong>, then click <strong>Create</strong>.</p></li>
+<li><p>Go to [Google Cloud Platform](<a class="reference external" href="https://console.developers.google.com">https://console.developers.google.com</a>).</p></li>
+<li><p>Select <strong>Credentials</strong> in the left-hand sidebar.</p></li>
+<li><p>Select <strong>Create Credentials</strong>, then select <strong>OAuth client ID</strong>.</p></li>
+<li><p>Select the <strong>Web application</strong> as the application type.</p></li>
+<li><p>Enter <cite>Mattermost-&lt;your-company-name&gt;</cite> as the <strong>Name</strong>, replacing &lt;your-company-name&gt; with the name of your organization.</p></li>
+<li><p>Under <a href="#id1"><span class="problematic" id="id2">**</span></a>Authorized redirect URIs, select Add URL, then enter <cite>{your-mattermost-url}/signup/google/complete</cite>. For example: <cite>http://localhost:8065/signup/google/complete</cite>.</p></li>
+<li><p>Select <strong>Create</strong>.</p></li>
+<li><p>Copy and paste the <strong>Your Client ID</strong> and <strong>Your Client Secret</strong> values to a temporary location. You will enter these values in the Mattermost System Console.</p></li>
 </ol>
-<p>![](../../../source/images/google_1_credentials.png)</p>
-<ol class="arabic simple" start="2">
-<li><p>In the <strong>Dashboard</strong> click the option to <strong>ENABLE APIS AND SERVICES</strong>.</p></li>
-</ol>
-<p>![](../../../source/images/google_enable_api.png)</p>
-<p>Once in the API Library, scroll down to [Google People API](<a class="reference external" href="https://console.developers.google.com/apis/api/plus/overview">https://console.developers.google.com/apis/api/plus/overview</a>) and click <strong>Enable</strong> in the header. This might take a few minutes to propagate through Google’s systems.</p>
-<ol class="arabic simple" start="3">
-<li><p>Leave the Google+ API menu to return to the <strong>APIs &amp; Services menu</strong>. In the left hand sidebar select <strong>Credentials</strong>, click the <strong>OAuth consent screen</strong> header and enter “Mattermost” as the <strong>Application Name</strong>, then click <strong>Save</strong>.</p></li>
-</ol>
-<p>![](../../../source/images/google_3_oauth_consent_screen.png)</p>
-<p>Scroll further down to add your Mattermost instance to a list of authorized domains that can access the API. For example, if it is hosted on <cite>mattermost.yourdomain.com</cite> add <cite>yourdomain.com</cite>.</p>
-<p>![](../../../source/images/google_authorised_domains.png)</p>
-<ol class="arabic simple" start="4">
-<li><p>Select <strong>Credentials</strong> and click <strong>Create credentials</strong>, then choose <strong>OAuth client ID</strong> from the drop-down list.</p></li>
-</ol>
-<p>![](../../../source/images/google_3_oauth_client_id.png)</p>
-<ol class="arabic simple" start="5">
-<li><p>Select <strong>Web Application</strong> as the <strong>Application type</strong>, and choose a descriptive <strong>Name</strong> for the OAuth connection.</p></li>
-</ol>
-<p>Under <strong>Restrictions &gt; Authorized redirect URIs</strong>, enter <cite>your-mattermost-url/signup/google/complete</cite> (example: <cite>http://localhost:8065/signup/google/complete</cite>). Click <strong>Create</strong>.</p>
-<p>![](../../../source/images/google_4_web_app.png)</p>
-<ol class="arabic simple" start="6">
-<li><p>Copy the <strong>Client ID</strong> and <strong>Client Secret</strong>, which will be used to configure Google SSO for Mattermost.</p></li>
-</ol>
-<p>![](../../../source/images/google_5_client_id_secret.PNG)</p>
-<ol class="arabic simple" start="7">
-<li><p>In <strong>System Console &gt; OAuth 2.0 &gt; Select OAuth 2.0 service provider</strong>, choose <strong>Google Apps</strong> as the service provider and enter <strong>Client ID</strong> and <strong>Client Secret</strong> from step 6 in their respective fields.</p></li>
+<p>![](../../../source/images/create-google-sso-credentials.png)</p>
+<p>![](../../../source/images/select-google-sso-web-app.png)</p>
+<p>![](../../../source/images/google-sso-web-app-name.png)</p>
+<p>![](../../../source/images/google-sso-redirect-uri.png)</p>
+<p>![](../../../source/images/google-sso-credentials.png)</p>
+<p>### Step 2: Enable Google People API</p>
+<p>Go to the [Google People API](<a class="reference external" href="https://console.developers.google.com/apis/api/plus/overview">https://console.developers.google.com/apis/api/plus/overview</a>), then select <strong>Enable</strong> in the header. This might take a few minutes to propagate through Google’s systems.</p>
+<p>### Step 3: Configure Mattermost for Google Apps SSO</p>
+<ol class="arabic simple">
+<li><p>Log in to Mattermost, then go to <strong>System Console &gt; Authentication &gt; OpenID Connect</strong>.</p></li>
+<li><p>Select <strong>Google Apps</strong> as the service provider.</p></li>
+<li><p>The <strong>Discovery Endpoint</strong> for OpenID Connect with Google Apps is prepopulated with <code class="docutils literal notranslate"><span class="pre">https://accounts.google.com/.well-known/openid-configuration</span></code>.</p></li>
+<li><p>Paste in the <strong>Client ID</strong> from Google in Mattermost.</p></li>
+<li><p>Paste in the <strong>Client Secret</strong> from Google in Mattermost.</p></li>
+<li><p>Select <strong>Save</strong>.</p></li>
 <li><p>Restart your Mattermost server to see the changes take effect.</p></li>
 </ol>
 <p><strong>Note:</strong>
-- You may also enter <strong>Client ID</strong> and <strong>Client Secret</strong> fields from step 6 directly in <cite>GoogleSettings</cite> section of <cite>config/config.json</cite>.
-- The following default values in <cite>GoogleSettings</cite> section of <cite>config/config.json</cite> are recommended:</p>
+- Alternatively, you may enter <strong>Client ID</strong> and <strong>Client Secret</strong> values directly into the <cite>GoogleSettings</cite> section of the Mattermost <cite>config/config.json</cite> file.
+- The following default values are recommended:</p>
+<p><a href="#id3"><span class="problematic" id="id4">``</span></a>`
+“GoogleSettings”: {</p>
 <blockquote>
-<div><ul class="simple">
-<li><p><cite>Scope</cite>: <cite>profile email</cite></p></li>
-<li><p><cite>AuthEndpoint</cite>: <cite>https://accounts.google.com/o/oauth2/v2/auth</cite></p></li>
-<li><p><cite>TokenEndpoint</cite>: <cite>https://www.googleapis.com/oauth2/v4/token</cite></p></li>
-<li><p><cite>UserApiEndpoint</cite>: <cite>https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses,nicknames,metadata</cite></p></li>
-</ul>
+<div><blockquote>
+<div><p>“Enable”: false,
+“Secret”: “fake_secret”,
+“Id”: “fake_id”,
+“Scope”: “profile openid email”,
+“AuthEndpoint”: “”,
+“TokenEndpoint”: “”,
+“UserApiEndpoint”: “”,
+“DiscoveryEndpoint”: “<a class="reference external" href="https://accounts.google.com/.well-known/openid-configuration">https://accounts.google.com/.well-known/openid-configuration</a>”,
+“ButtonText”: “”,
+“ButtonColor”: “”</p>
+</div></blockquote>
 </div></blockquote>
 
 
            </div>
            
-          </div>
+          </article>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
         <a href="sso-office.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
@@ -268,17 +267,29 @@
 </div>
 
 
-  <script type="text/javascript">
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script>
-
   
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
-  
-	<header>
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/myscript.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+	<script type="text/javascript">
+		jQuery(function () {
+			SphinxRtdTheme.Navigation.enable(true);
+		});
+	</script> 
+
+<header>
 	<div class="header__container">
 		<div class="search__icon">
 			<i class="fa fa-search"></i>
@@ -306,17 +317,6 @@
 		</div>
 	</div>
 </header>
-	<script type="text/javascript">
-		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
-		   however, waiting a new release to the theme.  This fix should remain in place until that
-		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
-		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
-		 */
-        if(DOCUMENTATION_OPTIONS) {
-			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
-        }
-    </script>
-
 
 </body>
 </html>
