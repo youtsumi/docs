@@ -480,8 +480,8 @@ net.ipv4.tcp_max_syn_backlog = 8192
 <h5><a class="toc-backref" href="#contents">Loading a Multi-database Configuration onto an Active Server</a><a class="headerlink" href="#loading-a-multi-database-configuration-onto-an-active-server" title="Permalink to this headline">¶</a></h5>
 <p>After a multi-database configuration has been defined in <code class="docutils literal notranslate"><span class="pre">config.json</span></code>, the following procedure can be used to apply the settings without shutting down the Mattermost server:</p>
 <ol class="arabic simple">
-<li>Go to <strong>System Console &gt; Environment &gt; Web Server</strong> (or <strong>System Console &gt; Configuration</strong> in versions prior to 5.12) and click <strong>Reload Configuration from Disk</strong> to reload configuration settings for the Mattermost server from <code class="docutils literal notranslate"><span class="pre">config.json</span></code>.</li>
-<li>Go to <strong>System Console &gt; Environment &gt; Database</strong> (or <strong>System Console &gt; Database</strong> in versions prior to 5.12) and click <strong>Recycle Database Connections</strong> to take down existing database connections and set up new connections in the multi-database configuration.</li>
+<li>Go to <strong>System Console &gt; Environment &gt; Web Server</strong> (or <strong>System Console &gt; Configuration</strong> in versions prior to 5.12), then select <strong>Reload Configuration from Disk</strong> to reload configuration settings for the Mattermost server from <code class="docutils literal notranslate"><span class="pre">config.json</span></code>.</li>
+<li>Go to <strong>System Console &gt; Environment &gt; Database</strong> (or <strong>System Console &gt; Database</strong> in versions prior to 5.12), then select <strong>Recycle Database Connections</strong> to take down existing database connections and set up new connections in the multi-database configuration.</li>
 </ol>
 <p>While the connection settings are changing, there might be a brief moment when writes to the master database are unsuccessful. The process waits for all existing connections to finish and starts serving new requests with the new connections. End users attempting to send messages while the switch is happening will have an experience similar to losing connection to the Mattermost server.</p>
 </div>
@@ -490,8 +490,8 @@ net.ipv4.tcp_max_syn_backlog = 8192
 <p>If the need arises to switch from the current master database - for example, if it is running out of disk space, or requires maintenance updates, or for other reasons - you can switch Mattermost server to use one of its read replicas as a master database by updating <code class="docutils literal notranslate"><span class="pre">DataSource</span></code> in <code class="docutils literal notranslate"><span class="pre">config.json</span></code>.</p>
 <p>To apply the settings without shutting down the Mattermost server:</p>
 <ol class="arabic simple">
-<li>Go to <strong>System Console &gt; Environment &gt; Web Server</strong> (or <strong>System Console &gt; Configuration</strong> in versions prior to 5.12) and click <strong>Reload Configuration from Disk</strong> to reload configuration settings for the Mattermost server from <code class="docutils literal notranslate"><span class="pre">config.json</span></code>.</li>
-<li>Go to <strong>System Console &gt; Environment &gt; Database</strong> (or <strong>System Console &gt; Database</strong> in versions prior to 5.12) and click <strong>Recycle Database Connections</strong> to take down existing database connections and set up new connections in the multi-database configuration.</li>
+<li>Go to <strong>System Console &gt; Environment &gt; Web Server</strong> (or <strong>System Console &gt; Configuration</strong> in versions prior to 5.12), then select <strong>Reload Configuration from Disk</strong> to reload configuration settings for the Mattermost server from <code class="docutils literal notranslate"><span class="pre">config.json</span></code>.</li>
+<li>Go to <strong>System Console &gt; Environment &gt; Database</strong> (or <strong>System Console &gt; Database</strong> in versions prior to 5.12), then select <strong>Recycle Database Connections</strong> to take down existing database connections and set up new connections in the multi-database configuration.</li>
 </ol>
 <p>While the connection settings are changing, there might be a brief moment when writes to the master database are unsuccessful. The process waits for all existing connections to finish and starts serving new requests with the new connections. End users attempting to send messages while the switch is happening can have an experience similar to losing connection to the Mattermost server.</p>
 </div>
@@ -568,7 +568,7 @@ net.ipv4.tcp_max_syn_backlog = 8192
 <li>For one of the Mattermost servers, make the configuration changes to <code class="docutils literal notranslate"><span class="pre">config.json</span></code> and save the file. Do not reload the file yet.</li>
 <li>Copy the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file to the other servers.</li>
 <li>Shut down Mattermost on all but one server.</li>
-<li>Reload the configuration file on the server that is still running. Go to in prior versions or <strong>System Console &gt; Environment &gt; Web Server</strong> (or  <strong>System Console &gt; Configuration</strong> in versions prior to 5.12) and click <strong>Reload Configuration from Disk</strong>.</li>
+<li>Reload the configuration file on the server that is still running. Go to in prior versions or <strong>System Console &gt; Environment &gt; Web Server</strong> (or  <strong>System Console &gt; Configuration</strong> in versions prior to 5.12), then select <strong>Reload Configuration from Disk</strong>.</li>
 <li>Start the other servers.</li>
 </ol>
 </div>
