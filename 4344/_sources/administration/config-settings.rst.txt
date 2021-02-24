@@ -4577,6 +4577,32 @@ By default, in order to avoid leaking sensitive information, no method parameter
 | This feature's ``config.json`` setting is ``"EnableOpenTracing": false`` with options ``true`` and ``false``.                                                        |
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
+Import Settings Default Directory
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The directory where the imported files are stored. The path is relative to the ``FileSettings`` directory. By default, imports are stored under ``./data/import``.
+
+.. note::
+  
+  This configuration setting is available in Mattermost Cloud. It will be available in Mattermost Server v5.33 on March 16, 2021.
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| This feature's ``config.json`` setting is ``IMPORT_SETTINGS_DEFAULT_DIRECTORY: ./import`` with string input.                                                         |
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+Import Settings Default Retention Days
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The number of days to retain the imported files before deleting them.
+
+.. note::
+  
+  This configuration setting is available in Mattermost Cloud. It will be available in Mattermost Server v5.33 on March 16, 2021.
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| This feature's ``config.json`` setting is ``IMPORT_SETTINGS_DEFAULT_RETENTION_DAYS: 30`` with numerical input.                                                       |
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
 SQL Settings
 ~~~~~~~~~~~~
 
