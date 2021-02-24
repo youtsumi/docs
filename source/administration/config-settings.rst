@@ -4587,7 +4587,7 @@ The directory where the imported files are stored. The path is relative to the `
   This configuration setting is available in Mattermost Cloud. It will be available in Mattermost Server v5.33 on March 16, 2021.
 
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| This feature's ``config.json`` setting is ``IMPORT_SETTINGS_DEFAULT_DIRECTORY: ./import`` with string input.                                                         |
+| This feature's ``config.json`` setting is ``ImportSettingsDefaultDirectory: ./import`` with string input.                                                         |
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Import Settings Default Retention Days
