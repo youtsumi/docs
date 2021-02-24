@@ -261,14 +261,14 @@
 <div class="section" id="compatibility">
 <h3>Compatibility<a class="headerlink" href="#compatibility" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Deleting a reaction is now a soft delete in the <code class="docutils literal notranslate"><span class="pre">Reactions</span></code> table. A schema update is required and may take up to 15 seconds on first run with large data sets.</li>
-<li>Improved the websocket implementation by using epoll to manually read from a websocket connection. As a result, the number of goroutines is expected to go down by half. This implementation is only available on Linux and FreeBSD based distributions. If you are using nginx as a proxy to Mattermost, please ensure to have <code class="docutils literal notranslate"><span class="pre">proxy_http_version</span> <span class="pre">1.1;</span></code> in the block that handles the websocket path.</li>
+<li></li>
 </ul>
 </div>
 <div class="section" id="breaking-changes">
 <h3>Breaking Changes<a class="headerlink" href="#breaking-changes" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li></li>
+<li>Deleting a reaction is now a soft delete in the <code class="docutils literal notranslate"><span class="pre">Reactions</span></code> table. A schema update is required and may take up to 15 seconds on first run with large data sets.</li>
+<li>Improved the websocket implementation by using epoll to manually read from a websocket connection. As a result, the number of goroutines is expected to go down by half. This implementation is only available on Linux and FreeBSD based distributions. If you are using nginx as a proxy to Mattermost, please ensure to have <code class="docutils literal notranslate"><span class="pre">proxy_http_version</span> <span class="pre">1.1;</span></code> in the block that handles the websocket path.</li>
 </ul>
 <p><strong>IMPORTANT:</strong> If you upgrade from a release earlier than v5.32, please read the other <a class="reference external" href="https://docs.mattermost.com/administration/important-upgrade-notes.html">Important Upgrade Notes</a>.</p>
 </div>
@@ -288,6 +288,9 @@
 </div>
 <div class="section" id="updated-incident-collaboration-plugin-to-1-4-0">
 <h4>Updated Incident Collaboration plugin to 1.4.0<a class="headerlink" href="#updated-incident-collaboration-plugin-to-1-4-0" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li></li>
+</ul>
 </div>
 <div class="section" id="custom-status">
 <h4>Custom Status ?<a class="headerlink" href="#custom-status" title="Permalink to this headline">¶</a></h4>
@@ -298,14 +301,14 @@
 <div class="section" id="user-interface-ui">
 <h4>User Interface (UI)<a class="headerlink" href="#user-interface-ui" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li>Improved the Add Members to channel modal.</li>
-<li>Added Formatting Shortcut Keys to Shortcut modal.</li>
+<li>Improved the <strong>Add Members</strong> to channel modal.</li>
+<li>Added <strong>Formatting Shortcut Keys</strong> to <strong>Shortcut</strong> modal.</li>
 <li>Added localization to date picker used when searching for posts around a given date.</li>
 <li>The autocomplete popover is now positioned relative to the &#64;, ~, or / trigger in the post draft.</li>
 <li>Removed the 5-page limit on previewing PDFs.</li>
-<li>Added ‘files’ as a reserved team name.</li>
+<li>Added <code class="docutils literal notranslate"><span class="pre">files</span></code> as a reserved team name.</li>
 <li>Searching for a channel by URL now returns the channel.</li>
-<li>Users are now provided with feedback when creating a custom category name that exceeds the character limit</li>
+<li>Users are now provided with feedback when creating a custom category name that exceeds the character limit.</li>
 </ul>
 </div>
 <div class="section" id="notifications">
@@ -324,7 +327,7 @@
 <li>Updated Go dependencies to their latest minor version.</li>
 <li>Added support for compressed export files with attachments.</li>
 <li>Server crashes due to runtime panics are now captured as a log line.</li>
-<li>Optimized Direct Message creation by fetching all users involved in a single database call.</li>
+<li>Optimized <strong>Direct Message</strong> creation by fetching all users involved in a single database call.</li>
 <li>During the user import process, a change in a user’s <code class="docutils literal notranslate"><span class="pre">NotifyProps</span></code> will not send an email notification. This is done to make it consistent with other parts of the import process where a change in user’s attributes would also not send any notifications.</li>
 <li>Implemented a job to delete unused export files.</li>
 </ul>
@@ -333,20 +336,19 @@
 <div class="section" id="bug-fixes">
 <h3>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Fixed an issue where <code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">config</span> <span class="pre">set</span> <span class="pre">PluginSettings.EnableUploads</span></code> did not change configuration value.</li>
+<li>Fixed an issue where <code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">config</span> <span class="pre">set</span> <span class="pre">PluginSettings.EnableUploads</span></code> to try to change a configuration value did not return an error.</li>
 <li>The <code class="docutils literal notranslate"><span class="pre">DownloadComplianceReport</span></code> function in the golang driver has been fixed to download a full report as a zip archive.</li>
 <li>Fixed Cache-Control headers to instruct that responses may only be cached on browsers.</li>
 <li>Fixed a bug with in-product notices where a date constraint might fail to match, and would lead to the notice not being fetched.</li>
 <li>Fixed an issue where the channel switcher did not focus on the first list result after a backspace.</li>
-<li>Fixed an issue where the in-product instructions to search for users under System Console &gt; Reporting &gt; Server Logs were outdated.</li>
-<li>Fixed an issue where no error message was displayed when adding an LDAP Group Synchronized Team in System Console &gt; User Management &gt; Users.</li>
-<li>Fixed an issue where any search containing an underscore failed on PostgreSQL databases. This is fixed by reverting a feature that added support for searching for terms on PostgreSQL that contain underscores.</li>
+<li>Fixed an issue where the instructions to search for users in <strong>System Console &gt; Reporting &gt; Server Logs</strong> were not up-to-date.</li>
+<li>Fixed an issue where no error message was displayed when adding an LDAP Group Synchronized Team in <strong>System Console &gt; User Management &gt; Users</strong>.</li>
 <li>Fixed an issue where demoting a user to a guest would not take effect in an environment with read replicas.</li>
 <li>Fixed an issue where creation of a bot would fail due to replica lag.</li>
-<li>Fixed an issue where <code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">channel</span> <span class="pre">move</span></code> did not allow private channels to move.</li>
+<li>Fixed an issue where <code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">channel</span> <span class="pre">move</span></code> did not allow moving private channels.</li>
 <li>Fixed an issue where markdown tables did not wrap correctly.</li>
 <li>Fixed an issue where the search bar styling on dark themes was incorrect on mobile web view.</li>
-<li>Fixed an issue where the Main Menu on webapp appeared more left-aligned than previous releases.</li>
+<li>Fixed an issue where the <strong>Main Menu</strong> on webapp appeared more left-aligned than previous releases.</li>
 <li>Fixed an issue where sticky sidebar headings appeared under More Unreads.</li>
 <li>Fixed an issue where the group channel icon was misaligned in the channel switcher.</li>
 <li>Fixed an issue where line breaks were ignored when used with inline images.</li>
@@ -360,9 +362,8 @@
 <div class="section" id="changes-to-team-edition-and-enterprise-edition">
 <h4>Changes to Team Edition and Enterprise Edition:<a class="headerlink" href="#changes-to-team-edition-and-enterprise-edition" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li>Added a flag to disable compression in the Gossip protocol. By default the value of the flag is true, which is the existing default. This is done to maintain compatibility with old servers in a cluster. Once all servers in a cluster are upgraded, it is recommended to disable this flag for better performance.</li>
+<li>Added a flag <code class="docutils literal notranslate"><span class="pre">EnableGossipCompression</span></code> to disable compression in the Gossip protocol. By default the value of the flag is true, which is the existing default. This is done to maintain compatibility with old servers in a cluster. Once all servers in a cluster are upgraded, it is recommended to disable this flag for better performance.</li>
 <li>A new config field called <code class="docutils literal notranslate"><span class="pre">ConnMaxIdleTimeMilliseconds</span></code> was added to <code class="docutils literal notranslate"><span class="pre">DatabaseSettings</span></code> which allows to control the maximum time a database connection can remain idle. The default value is set to 5 minutes.</li>
-<li>Added a gossip compression flag to the System Console.</li>
 <li>Added a new config setting <code class="docutils literal notranslate"><span class="pre">TeamSettings.EnableCustomUserStatuses</span></code>. <strong>???</strong></li>
 </ul>
 </div>
@@ -376,15 +377,16 @@
 <div class="section" id="api-changes">
 <h3>API Changes<a class="headerlink" href="#api-changes" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>API method for retrieving single thread added: <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/{team_id}/threads/{thread_id}</span></code>.</li>
-<li>The /api/v4/users/me/auth API endpoint cannot be used to change password anymore. This was a hidden feature that was not documented, but was nevertheless possible. We are just removing the hidden feature.</li>
+<li>API method <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/{team_id}/threads/{thread_id}</span></code> was added for retrieving single threads.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">/api/v4/users/me/auth</span></code> API endpoint can no longer be used to change passwords. This was a hidden feature that was not documented, but was nevertheless possible. We are just removing the hidden feature.</li>
 <li>Updated <code class="docutils literal notranslate"><span class="pre">/users/{user_id}/teams/{team_id}/threads</span></code> API to support unread=true query parameter.</li>
 <li><code class="docutils literal notranslate"><span class="pre">/api/v4/users/{user_id}/teams/{team_id}/threads</span></code> now accepts “before” or “after” parameters instead of page index.</li>
+<li>Removed session required restriction from <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">api/v4/subscription/stats</span></code>.</li>
 <li>Added a new API endpoint <code class="docutils literal notranslate"><span class="pre">/users/{user_id}/teams/{team_id}/threads/mention_counts</span></code>.</li>
 <li>Added a new API endpoint <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/v4/cloud/subscription/stats</span></code>.</li>
 <li>Implemented <code class="docutils literal notranslate"><span class="pre">/exports</span></code> API endpoint to generate and manage export files.</li>
-<li>Added new API endpoints <code class="docutils literal notranslate"><span class="pre">PUT</span> <span class="pre">/api/v4/users/&lt;id&gt;/status/custom</span></code>, <code class="docutils literal notranslate"><span class="pre">DELETE</span> <span class="pre">/api/v4/users/&lt;id&gt;/status/custom</span></code>, and <code class="docutils literal notranslate"><span class="pre">DELETE</span> <span class="pre">/api/v4/users/&lt;id&gt;/status/custom/recent</span></code>.</li>
-<li>Added a new API endpoint GET <code class="docutils literal notranslate"><span class="pre">/api/v4/cloud/subscription/limitreached/invite</span></code> to add the ability to send an email to notify Admins that users are trying to invite others.</li>
+<li>Added new API endpoints <code class="docutils literal notranslate"><span class="pre">PUT</span> <span class="pre">/api/v4/users/&lt;id&gt;/status/custom</span></code>, <code class="docutils literal notranslate"><span class="pre">DELETE</span> <span class="pre">/api/v4/users/&lt;id&gt;/status/custom</span></code>, and <code class="docutils literal notranslate"><span class="pre">DELETE</span> <span class="pre">/api/v4/users/&lt;id&gt;/status/custom/recent</span></code>. <strong>???</strong></li>
+<li>Added a new API endpoint GET <code class="docutils literal notranslate"><span class="pre">/api/v4/cloud/subscription/limitreached/invite</span></code>.</li>
 </ul>
 </div>
 <div class="section" id="websocket-event-changes">
