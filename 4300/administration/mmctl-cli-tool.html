@@ -1,6 +1,7 @@
 
 
 
+
 <!DOCTYPE html>
 <!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
@@ -9,31 +10,29 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mmctl Command Line Tool (Beta) &mdash; Mattermost 5.31 documentation</title>
+  <title>mmctl Command Line Tool (Beta) &mdash; Mattermost 5.32 documentation</title>
   
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
+
   
   
 
   
-
-  
-  
-    
-
-  
-
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="canonical" href="https://docs.mattermost.com/administration/mmctl-cli-tool.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Scripts" href="scripts.html" />
     <link rel="prev" title="Command Line Tools" href="command-line-tools.html" />
-	<!-- Google Tag Manager -->
+  
+  	<!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -41,21 +40,23 @@
 	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
 	<!-- End Google Tag Manager -->
 
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
-
+	
+    <script src="../_static/js/modernizr.min.js"></script>
 </head>
 
 <body class="wy-body-for-nav">
 
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K874RWM"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -69,7 +70,7 @@
             
             
               <div class="version">
-                5.31
+                5.32
               </div>
             
           
@@ -86,6 +87,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -168,6 +170,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -209,7 +212,7 @@
   </ul>
   <hr/>
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+          <article class="document" itemscope="itemscope" itemtype="https://schema.org/Article">
            <div itemprop="articleBody">
             
   <div class="section" id="mmctl-command-line-tool-beta">
@@ -1061,20 +1064,20 @@ channel rename myteam:oldchannel --display_name <span class="s1">&#39;New Displa
 <h3>mmctl channel search<a class="headerlink" href="#mmctl-channel-search" title="Permalink to this headline">¶</a></h3>
 <p><strong>Description</strong></p>
 <blockquote>
-<div>Search a channel by channel name. Channel can be specified by team (e.g., <code class="docutils literal notranslate"><span class="pre">--team</span> <span class="pre">myTeam</span> <span class="pre">myChannel</span></code>) or by team ID.</div></blockquote>
+<div>Search a channel by channel name. Channel can be specified by team (e.g., <code class="docutils literal notranslate"><span class="pre">--team</span> <span class="pre">myteam</span> <span class="pre">mychannel</span></code>) or by team ID.</div></blockquote>
 <p><strong>Format</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl channel search <span class="o">[</span>channel<span class="o">]</span>
 mmctl search --team <span class="o">[</span>team<span class="o">]</span> <span class="o">[</span>channel<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
 </pre></div>
 </div>
 <p><strong>Examples</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>channel search myChannel
-channel search --team myTeam myChannel
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>channel search mychannel
+channel search --team myteam mychannel
 </pre></div>
 </div>
 <p><strong>Options</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help      <span class="nb">help</span> <span class="k">for</span> search
---team string   Team name or ID
+--team string   team name or ID
 </pre></div>
 </div>
 <p><strong>Options inherited from parent commands</strong></p>
@@ -2695,7 +2698,48 @@ post list myteam:mychannel --number <span class="m">20</span>
 </div>
 <div class="section" id="mmctl-roles">
 <h2>mmctl roles<a class="headerlink" href="#mmctl-roles" title="Permalink to this headline">¶</a></h2>
-<p>This command will be available in a future release.</p>
+<p><strong>Description</strong></p>
+<blockquote>
+<div>Promote users to the System Admin role, or remove System Admin privileges from users.</div></blockquote>
+<p><strong>Format</strong></p>
+<p>Promote users to the System Admin role:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl roles system_admin <span class="o">[</span>users<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p>Remove System Admin privileges:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl roles member <span class="o">[</span>users<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<p>Promote a user to the System Admin role:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl roles system_admin john_doe
+</pre></div>
+</div>
+<p>Promote multiple users to the System Admin role:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl roles system_admin john_doe jane_doe
+</pre></div>
+</div>
+<p>Remove System Admin privileges from a user:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl roles member john_doe
+</pre></div>
+</div>
+<p>Remove System Admin privileges from multiple users:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl roles member john_doe jane_doe
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help   <span class="nb">help</span> <span class="k">for</span> roles
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string           path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
+--format string                the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate   allows to use insecure TLS protocols, such as SHA-1
+--insecure-tls-version         allows to use TLS versions <span class="m">1</span>.0 and <span class="m">1</span>.1
+--local                        allows communicating with the server through a unix socket
+--strict                       will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
 </div>
 <div class="section" id="mmctl-system">
 <h2>mmctl system<a class="headerlink" href="#mmctl-system" title="Permalink to this headline">¶</a></h2>
@@ -3846,7 +3890,7 @@ user invite user@example.com myteam1 myteam2
 
            </div>
            
-          </div>
+          </article>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
@@ -3905,8 +3949,10 @@ user invite user@example.com myteam1 myteam2
 
 
   
-
-    
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script type="text/javascript" src="../_static/jquery.js"></script>
@@ -3915,17 +3961,17 @@ user invite user@example.com myteam1 myteam2
         <script type="text/javascript" src="../_static/language_data.js"></script>
         <script type="text/javascript" src="../_static/myscript.js"></script>
     
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
+    
 
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
+	<script type="text/javascript">
+		jQuery(function () {
+			SphinxRtdTheme.Navigation.enable(true);
+		});
+	</script> 
 
-  <script type="text/javascript">
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script>
-	<header>
+<header>
 	<div class="header__container">
 		<div class="search__icon">
 			<i class="fa fa-search"></i>
@@ -3953,17 +3999,6 @@ user invite user@example.com myteam1 myteam2
 		</div>
 	</div>
 </header>
-	<script type="text/javascript">
-		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
-		   however, waiting a new release to the theme.  This fix should remain in place until that
-		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
-		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
-		 */
-        if(DOCUMENTATION_OPTIONS) {
-			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
-        }
-    </script>
-
 
 </body>
 </html>
