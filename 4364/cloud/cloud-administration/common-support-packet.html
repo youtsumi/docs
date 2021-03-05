@@ -148,28 +148,33 @@
           <article class="document" itemscope="itemscope" itemtype="https://schema.org/Article">
            <div itemprop="articleBody">
             
-  <p>Use the System Console to generate a Mattermost Support Packet that includes configuration information, logs, and data on external dependencies. Confidential data, such as passwords, are automatically stripped.</p>
+  <p>Use the System Console to generate a Mattermost Support Packet that includes configuration information, logs, plugin details, and data on external dependencies. Confidential data, such as passwords, are automatically stripped.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">System Admins should always remove sensitive information before sending the support packet to Mattermost by email or via a support ticket.</p>
+<p class="last">When present, the following information is santized during packet generation: <code class="docutils literal notranslate"><span class="pre">LdapSettings.BindPassword</span></code>, <code class="docutils literal notranslate"><span class="pre">FileSettings.PublicLinkSalt</span></code>, <code class="docutils literal notranslate"><span class="pre">FileSettings.AmazonS3SecretAccessKey</span></code>, <code class="docutils literal notranslate"><span class="pre">EmailSettings.SMTPPassword</span></code>, <code class="docutils literal notranslate"><span class="pre">GitLabSettings.Secret</span></code>, <code class="docutils literal notranslate"><span class="pre">GoogleSettings.Secret</span></code>, <code class="docutils literal notranslate"><span class="pre">Office365Settings.Secret</span></code>, <code class="docutils literal notranslate"><span class="pre">OpenIdSettings.Secret</span></code>, <code class="docutils literal notranslate"><span class="pre">SqlSettings.DataSource</span></code>, <code class="docutils literal notranslate"><span class="pre">SqlSettings.AtRestEncryptKey</span></code>, <code class="docutils literal notranslate"><span class="pre">ElasticsearchSettings.Password</span></code>, <code class="docutils literal notranslate"><span class="pre">All</span> <span class="pre">SqlSettings.DataSourceReplicas</span></code>, <code class="docutils literal notranslate"><span class="pre">All</span> <span class="pre">SqlSettings.DataSourceSearchReplicas</span></code>, <code class="docutils literal notranslate"><span class="pre">MessageExportSettings.GlobalRelaySettings.SmtpPassword</span></code>, <code class="docutils literal notranslate"><span class="pre">ServiceSettings.GfycatApiSecret</span></code>, and <code class="docutils literal notranslate"><span class="pre">ServiceSettings.SplitKey</span></code>.</p>
 </div>
 <p>To generate a support packet:</p>
 <ol class="arabic simple">
 <li>Go to System Console, then select <strong>Commercial Support</strong> from the <strong>Main Menu</strong>.</li>
 <li>Select <strong>Download Support Packet</strong>. A zip file is downloaded to the local machine.</li>
 </ol>
-<p>A Mattermost Support Packet contains the following five files:</p>
+<p>A Mattermost Support Packet can contain up to five files:</p>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">mattermost.log</span></code></li>
 <li><code class="docutils literal notranslate"><span class="pre">plugins.json</span></code></li>
-<li>sanitized_config.json</li>
-<li>support_packet.yaml</li>
-<li>warning.txt</li>
+<li><code class="docutils literal notranslate"><span class="pre">sanitized_config.json</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">support_packet.yaml</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">warning.txt</span></code> - present when issues are encountered during packet generation</li>
 </ul>
-<p>You are notified if any packet files are unavailable during packet generation. See the <code class="docutils literal notranslate"><span class="pre">warning.txt</span></code> file for details.</p>
+<p>You’ll be notified if any packet files are unavailable during packet generation. See the <code class="docutils literal notranslate"><span class="pre">warning.txt</span></code> file for details.</p>
 <ol class="arabic simple" start="3">
-<li>Sanitize configuration and log files in the Support Packet files to remove usernames, passwords, and LDAP groups. Replace these details with example strings that contain the same special characters if possible, as special characters are common causes of configuration errors.</li>
+<li>Plugins are not sanitized during packet generation. Sanitize any confidential details in the <code class="docutils literal notranslate"><span class="pre">plugin.json</span></code> file before sending the support packet to Mattermost.</li>
 </ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>When sanitizing support packet data, replace details with example strings that contain the same special characters if possible, as special characters are common causes of configuration errors.</p>
+<p class="last">LDAP groups are not included during support packet generation. Only <code class="docutils literal notranslate"><span class="pre">LDAP</span> <span class="pre">Version</span></code> and <code class="docutils literal notranslate"><span class="pre">LDAP</span> <span class="pre">Vendor</span></code> are included when present. These values are included in the&nbsp;<code class="docutils literal notranslate"><span class="pre">support_packet.yaml</span></code> file.</p>
+</div>
 
 
            </div>
