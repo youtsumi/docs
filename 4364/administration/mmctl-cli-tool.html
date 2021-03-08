@@ -3304,6 +3304,7 @@ team create --name private --display_name <span class="s2">&quot;My New Private 
 <li><a class="reference internal" href="#mmctl-user-delete">mmctl user delete</a> - Delete users</li>
 <li><a class="reference internal" href="#mmctl-user-deleteall">mmctl user deleteall</a> - Delete all users and all posts (local command only)</li>
 <li><a class="reference internal" href="#mmctl-user-email">mmctl user email</a> - Set user email</li>
+<li><a class="reference internal" href="#mmctl-user-verify">mmctl user verify</a> - Verify the email address of a new user</li>
 <li><a class="reference internal" href="#mmctl-user-invite">mmctl user invite</a> - Invite user</li>
 <li><a class="reference internal" href="#mmctl-user-list">mmctl user list</a> - List users</li>
 <li><a class="reference internal" href="#mmctl-user-reset-password">mmctl user reset_password</a> - Reset user password</li>
@@ -3477,6 +3478,33 @@ user activate username
 <p><strong>Options inherited from parent commands</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
 --insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
+--local                       allows communicating with the server through a unix socket
+--strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
+<div class="section" id="mmctl-user-verify">
+<h3>mmctl user verify<a class="headerlink" href="#mmctl-user-verify" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<blockquote>
+<div>Verify the email address of a new user.</div></blockquote>
+<p><strong>Format</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>mmctl user verify [users] [flags]
+</pre></div>
+</div>
+<p><strong>Example</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>mmctl user verify user1
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help       <span class="nb">help</span> <span class="k">for</span> email
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>   --config-path string           path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
+--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
+--insecure-tls-version         allows to use TLS versions <span class="m">1</span>.0 and <span class="m">1</span>.1
 --local                       allows communicating with the server through a unix socket
 --strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
 </pre></div>
