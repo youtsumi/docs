@@ -1,0 +1,966 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Enterprise Roll Out Checklist &mdash; Mattermost 5.32 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="https://docs.mattermost.com/getting-started/enterprise-roll-out-checklist.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Administrator Tasks" href="../deployment/on-boarding.html" />
+    <link rel="prev" title="Light Install Guide" href="../help/getting-started/light-install.html" />
+  
+  	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
+	<!-- End Google Tag Manager -->
+
+	
+    <script src="../_static/js/modernizr.min.js"></script>
+</head>
+
+<body class="wy-body-for-nav">
+
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K874RWM"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mattermost
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.32
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../help/getting-started/light-install.html">Light Install Guide</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Enterprise Roll Out Checklist</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#checklist-overview">Checklist Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#checklist-details">Checklist Details</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/on-boarding.html">Administrator Tasks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="implementation_plan.html">Implementation Plan</a></li>
+<li class="toctree-l3"><a class="reference internal" href="welcome_email.html">Welcome Email to End Users</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-collaboration">Incident Collaboration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mattermost</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+  
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
+    
+    <li>Enterprise Roll Out Checklist</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/mattermost/docs/blob/master/source/getting-started/enterprise-roll-out-checklist.rst" class="fa fa-github"> Edit</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <article class="document" itemscope="itemscope" itemtype="https://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="enterprise-roll-out-checklist">
+<h1>Enterprise Roll Out Checklist<a class="headerlink" href="#enterprise-roll-out-checklist" title="Permalink to this headline">¶</a></h1>
+<p>This checklist is intended to serve as a guide to Enterprises who are rolling out Mattermost to thousands of users.</p>
+<div class="section" id="checklist-overview">
+<h2>Checklist Overview<a class="headerlink" href="#checklist-overview" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="#prepare-for-the-roll-out">Prepare for the Roll Out</a></p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="#define-the-roll-out-project">1. Define the Roll Out Project</a></p></li>
+<li><p><a class="reference internal" href="#validate-essential-security-and-compliance-requirements">2. Validate Essential Security and Compliance Requirements</a></p></li>
+<li><p><a class="reference internal" href="#create-development-staging-and-production-environments">3. Create Development, Staging, and Production Environments</a></p></li>
+<li><p><a class="reference internal" href="#configure-and-customize-your-mattermost-site">4. Configure and Customize Your Mattermost Site</a></p></li>
+<li><p><a class="reference internal" href="#test-production-performance-and-redundancy">5. Test Production Performance and Redundancy</a></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p><a class="reference internal" href="#roll-out-mattermost">Roll Out Mattermost</a></p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="#define-your-team-and-channel-strategy">1. Define Your Team and Channel Strategy</a></p></li>
+<li><p><a class="reference internal" href="#enable-key-integrations">2. Enable Key Integrations</a></p></li>
+<li><p><a class="reference internal" href="#prepare-for-user-onboarding">3. Prepare for User Onboarding</a></p></li>
+<li><p><a class="reference internal" href="#deploy-client-apps">4. Deploy Client Apps</a></p></li>
+<li><p><a class="reference internal" href="#roll-out-to-groups-of-users">5. Roll Out to Groups of Users</a></p></li>
+<li><p><a class="reference internal" href="#drive-adoption">6. Drive Adoption</a></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p><a class="reference internal" href="#review-the-roll-out">Review the Roll Out</a></p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="#review-project-charter-success-metrics">1. Review Project Charter Success Metrics</a></p></li>
+<li><p><a class="reference internal" href="#review-and-analyze-usage">2. Review and Analyze Usage</a></p></li>
+<li><p><a class="reference internal" href="#analyze-system-performance">3. Analyze System Performance</a></p></li>
+<li><p><a class="reference internal" href="#harden-security">4. Harden Security</a></p></li>
+<li><p><a class="reference internal" href="#perform-maintenance-tasks">5. Perform Maintenance Tasks</a></p></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+</div>
+<div class="section" id="checklist-details">
+<h2>Checklist Details<a class="headerlink" href="#checklist-details" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="prepare-for-the-roll-out">
+<h3>Prepare for the Roll Out<a class="headerlink" href="#prepare-for-the-roll-out" title="Permalink to this headline">¶</a></h3>
+<p>Much of the preparation work is focused on ensuring the environment is deployed and secured prior to onboarding users.</p>
+<div class="section" id="define-the-roll-out-project">
+<h4>1. Define the Roll Out Project<a class="headerlink" href="#define-the-roll-out-project" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>Define key stakeholders and project team members</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Example project team members: Project Manager, Network Administrator, Database Administrator, Corporate Directory Administrator, Security &amp; Compliance Administrator(s), User Support, User Champions, User Trainers</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Define use cases and requirements for teams, their workflows and their integrations</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://mattermost.com/blog/27-things-enterprises-can-learn-startups-increase-productivity/">https://mattermost.com/blog/27-things-enterprises-can-learn-startups-increase-productivity/</a></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Define success criteria, goals and metrics to measure success</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/getting-started/implementation_plan.html">https://docs.mattermost.com/getting-started/implementation_plan.html</a></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Create a Project Charter to document goals, tasks, deliverables, and decisions</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Get buy-in from project team members and key stakeholders on the project charter</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="validate-essential-security-and-compliance-requirements">
+<h4>2. Validate Essential Security and Compliance Requirements<a class="headerlink" href="#validate-essential-security-and-compliance-requirements" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>Review Mattermost security features</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/overview/security.html#security-features">https://docs.mattermost.com/overview/security.html#security-features</a></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Determine monitoring requirements</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Database, network, storage, log integrity</p></li>
+<li><p>Identify fields for log management tools (e.g. Splunk Enterprise event data)</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Determine environment access policies</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Network access, physical access, group controlled access</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Determine encryption policies</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/administration/encryption.html">https://docs.mattermost.com/administration/encryption.html</a></p></li>
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/install/transport-encryption/config.html">https://docs.mattermost.com/install/transport-encryption/config.html</a></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Determine System Administration access policies</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Identify list of users or groups who need administrative access for Mattermost System Console, Command Line Tools and API privileges</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Define and configure authentication policies</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/overview/auth.html">https://docs.mattermost.com/overview/auth.html</a></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Determine requirements for multi-factor authentication</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/deployment/auth.html">https://docs.mattermost.com/deployment/auth.html</a></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Configure and test SSO or Corporate Directory integration (SAML or AD/LDAP)</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/deployment/sso-saml.html">https://docs.mattermost.com/deployment/sso-saml.html</a></p></li>
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/deployment/sso-ldap.html">https://docs.mattermost.com/deployment/sso-ldap.html</a></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Define your mobile usage policy</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/mobile/mobile-overview.html">https://docs.mattermost.com/mobile/mobile-overview.html</a></p></li>
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/deployment/mobile-app-deployment.html">https://docs.mattermost.com/deployment/mobile-app-deployment.html</a></p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="create-development-staging-and-production-environments">
+<h4>3. Create Development, Staging, and Production Environments<a class="headerlink" href="#create-development-staging-and-production-environments" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>Finalize production environment design basing hardware on expected usage and requirements for high availability</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/overview/architecture.html">https://docs.mattermost.com/overview/architecture.html</a></p></li>
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/deployment/deployment.html">https://docs.mattermost.com/deployment/deployment.html</a></p></li>
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/deployment/scaling.html">https://docs.mattermost.com/deployment/scaling.html</a></p></li>
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/deployment/cluster.html">https://docs.mattermost.com/deployment/cluster.html</a></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Create development and staging environments</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Recommend using to test early configurations for database, authentication, file storage, Elasticsearch, prior to setting up high availability and load balancing</p></li>
+<li><p>Recommend configuring staging to be an identical replication of your production environment</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Create production environment</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Install Mattermost</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Install the number of nodes based on your high availability requirements outlined in your production environment design</p></li>
+<li><p>Recommendation: Use Kubernetes and the Mattermost Operator, with external supported external database and file storage solutions. This will also provide blue/green deployment, rolling upgrades, and canary builds</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/install/install-kubernetes.html">https://docs.mattermost.com/install/install-kubernetes.html</a></p></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<ul class="simple">
+<li><p>Install and configure database</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Install the number of read and search replicas based on your high availability requirements outlined in your production environment design</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/overview/architecture.html#database-with-vips">https://docs.mattermost.com/overview/architecture.html#database-with-vips</a></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>(Optional) Set up configuration management via the database instead of a config file for high available environments</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/administration/config-in-database.html">https://docs.mattermost.com/administration/config-in-database.html</a></p></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<ul class="simple">
+<li><p>Install and configure File Storage</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/deployment/deployment.html#file-store">https://docs.mattermost.com/deployment/deployment.html#file-store</a></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Install and configure proxy or load balancers</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Note: If running Kubernetes and the Mattermost Operator, proxies will be created automatically.</p></li>
+<li><p>Add SSL Cert</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/deployment/ssl-client-certificate.html">https://docs.mattermost.com/deployment/ssl-client-certificate.html</a></p></li>
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/deployment/cluster.html#proxy-server-configuration">https://docs.mattermost.com/deployment/cluster.html#proxy-server-configuration</a></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>(Optional) Set up certificate-based authentication (CBA) for user or device-based authentication with a digital certificate</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/deployment/certificate-based-authentication.html">https://docs.mattermost.com/deployment/certificate-based-authentication.html</a></p></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<ul class="simple">
+<li><p>Configure SMTP for email notifications</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/install/smtp-email-setup.html">https://docs.mattermost.com/install/smtp-email-setup.html</a></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Set up Elasticsearch (highly recommended if your organization anticipates over 2 million posts)</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/deployment/elasticsearch.html">https://docs.mattermost.com/deployment/elasticsearch.html</a></p></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<ul class="simple">
+<li><p>Document network configuration</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Example: <a class="reference external" href="https://docs.mattermost.com/overview/architecture.html#reference-architectures">https://docs.mattermost.com/overview/architecture.html#reference-architectures</a></p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="configure-and-customize-your-mattermost-site">
+<h4>4. Configure and Customize Your Mattermost Site<a class="headerlink" href="#configure-and-customize-your-mattermost-site" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>Login to Mattermost and access the System Console to connect your environment to Mattermost</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#environment">https://docs.mattermost.com/administration/config-settings.html#environment</a></p></li>
+<li><p>Upload your valid Enterprise License under Edition and License</p></li>
+<li><p>Ensure site URL is set appropriately for your production, dev and staging environments</p></li>
+<li><p>Add your database configuration to <strong>System Console &gt; Environment &gt; Database</strong></p></li>
+<li><p>Add your Elasticsearch configuration to <strong>System Console &gt; Environment &gt; Elasticsearch</strong></p></li>
+<li><p>Add your file storage system configuration to <strong>System Console &gt; Environment &gt; File Storage</strong></p></li>
+<li><p>Add your proxy configuration to <strong>System Console &gt; Environment &gt; Image Proxy</strong></p></li>
+<li><p>Add your SMTP configuration to <strong>System Console &gt; Environment &gt; SMTP</strong></p></li>
+<li><p>Enable Push Notifications by adding your server to <strong>System Console &gt; Environment &gt; Push Notification Server</strong></p></li>
+<li><p>Add your cluster configuration to <strong>System Console &gt; Environment &gt; High Availability</strong></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Configure your site within the System Console</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#site-configuration">https://docs.mattermost.com/administration/config-settings.html#site-configuration</a></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Set site access policies including permissions for roles and guest access</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Permissions Resource: <a class="reference external" href="https://docs.mattermost.com/deployment/advanced-permissions.html">https://docs.mattermost.com/deployment/advanced-permissions.html</a></p></li>
+<li><p>Guest Access Resource: <a class="reference external" href="https://docs.mattermost.com/deployment/guest-accounts.html">https://docs.mattermost.com/deployment/guest-accounts.html</a></p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="test-production-performance-and-redundancy">
+<h4>5. Test Production Performance and Redundancy<a class="headerlink" href="#test-production-performance-and-redundancy" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>Define and test disaster recovery policy and processes</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/install/install-kubernetes.html#using-mattermost-operator-functionality">https://docs.mattermost.com/install/install-kubernetes.html#using-mattermost-operator-functionality</a></p></li>
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/deployment/cluster.html#upgrade-guide">https://docs.mattermost.com/deployment/cluster.html#upgrade-guide</a></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Performance test production environment</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Load test production environment to verify that it will handle anticipated user load</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://github.com/mattermost/mattermost-load-test">https://github.com/mattermost/mattermost-load-test</a></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Set up Prometheus and Grafana to monitor performance</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/deployment/metrics.html">https://docs.mattermost.com/deployment/metrics.html</a></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Set up alerts in Grafana</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/administration/performance-alerting-guide.html">https://docs.mattermost.com/administration/performance-alerting-guide.html</a></p></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="roll-out-mattermost">
+<h3>Roll Out Mattermost<a class="headerlink" href="#roll-out-mattermost" title="Permalink to this headline">¶</a></h3>
+<p>Now that you have an environment in place, we recommend working through the following items in an iterative process. You may need to cycle through each of these topics multiple times to make adjustments to suit your organization as you onboard groups of users.</p>
+<div class="section" id="define-your-team-and-channel-strategy">
+<h4>1. Define Your Team and Channel Strategy<a class="headerlink" href="#define-your-team-and-channel-strategy" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>Determine and create team structure for your environment</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Recommendation: Start with fewer teams in your early roll out</p></li>
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/help/getting-started/organizing.html">https://docs.mattermost.com/help/getting-started/organizing.html</a></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Determine and create key channels to support your users. Town Square and Off-Topic are built in channels in every team</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Recommendation: Add a “Support” channel for your users to escalate questions</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>(Optional) Migrate messages and channels from legacy systems</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/administration/migrating.html">https://docs.mattermost.com/administration/migrating.html</a></p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="enable-key-integrations">
+<h4>2. Enable Key Integrations<a class="headerlink" href="#enable-key-integrations" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>Build list of key integrations and tools used by your teams</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/guides/administrator.html#mattermost-integrations">https://docs.mattermost.com/guides/administrator.html#mattermost-integrations</a></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Define use cases and requirements for plugins, bots, webhooks, slash commands</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/guides/integration.html">https://docs.mattermost.com/guides/integration.html</a></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Set up key integrations (or migrate from POC environments)</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://integrations.mattermost.com/">https://integrations.mattermost.com/</a></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Understand Mattermost API capabilities</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://api.mattermost.com/">https://api.mattermost.com/</a></p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="prepare-for-user-onboarding">
+<h4>3. Prepare for User Onboarding<a class="headerlink" href="#prepare-for-user-onboarding" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>Onboard champion users</p></li>
+<li><p>Onboard trainers and support team</p></li>
+<li><p>Create a training plan</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://academy.mattermost.com/">https://academy.mattermost.com/</a></p></li>
+<li><p>Resource: End User Guide <a class="reference external" href="https://docs.mattermost.com/guides/user.html">https://docs.mattermost.com/guides/user.html</a></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Define user escalation and support processes</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Ensure you have set the site’s support URL to your own support team under <strong>System Console &gt; Site Configuration &gt; Customization</strong></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Notify users in advance of roll out</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Sample email: <a class="reference external" href="https://docs.mattermost.com/getting-started/welcome_email.html">https://docs.mattermost.com/getting-started/welcome_email.html</a></p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="deploy-client-apps">
+<h4>4. Deploy Client Apps<a class="headerlink" href="#deploy-client-apps" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>Roll out Desktop App</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/install/desktop.html">https://docs.mattermost.com/install/desktop.html</a></p></li>
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/deployment/desktop-app-deployment.html">https://docs.mattermost.com/deployment/desktop-app-deployment.html</a></p></li>
+<li><p>(Optional) Use the MSI installer to install on Windows machines</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/install/desktop-msi-gpo.html">https://docs.mattermost.com/install/desktop-msi-gpo.html</a></p></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<ul class="simple">
+<li><p>Roll out Mobile App</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/deployment/mobile-app-deployment.html">https://docs.mattermost.com/deployment/mobile-app-deployment.html</a></p></li>
+<li><p>(Optional) Use an EMM provider</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/mobile/mobile-overview.html#use-an-emm-provider-with-managed-app-configuration">https://docs.mattermost.com/mobile/mobile-overview.html#use-an-emm-provider-with-managed-app-configuration</a></p></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+</div>
+<div class="section" id="roll-out-to-groups-of-users">
+<h4>5. Roll Out to Groups of Users<a class="headerlink" href="#roll-out-to-groups-of-users" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>Provision user accounts</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/administration/user-provisioning.html">https://docs.mattermost.com/administration/user-provisioning.html</a></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>(Optional) Bulk Load users</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/deployment/bulk-loading.html">https://docs.mattermost.com/deployment/bulk-loading.html</a></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Onboard users to teams and channels</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Recommendation: Use LDAP Group Sync to automate this process</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/deployment/ldap-group-sync.html">https://docs.mattermost.com/deployment/ldap-group-sync.html</a></p></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<ul class="simple">
+<li><p>Implement your training plan to end users on how to use Mattermost</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Train on using Mattermost</p></li>
+<li><p>Train on how to use integrations</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="drive-adoption">
+<h4>6. Drive Adoption<a class="headerlink" href="#drive-adoption" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>Incrementally roll out to additional user groups</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>See “Roll Out to Groups of Users”</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Manage support requests and product requests from your end users</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://mattermost.com/support/">https://mattermost.com/support/</a></p></li>
+<li><p>See process below for escalating to Mattermost</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Enable additional integrations and plugins to support user workflows</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://integrations.mattermost.com/">https://integrations.mattermost.com/</a></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Understand management tools available to support users</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Command Line Tools Resource: <a class="reference external" href="https://docs.mattermost.com/administration/command-line-tools.html">https://docs.mattermost.com/administration/command-line-tools.html</a></p></li>
+<li><p>Database Scripts Resource: <a class="reference external" href="https://docs.mattermost.com/administration/scripts.html">https://docs.mattermost.com/administration/scripts.html</a></p></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="review-the-roll-out">
+<h3>Review the Roll Out<a class="headerlink" href="#review-the-roll-out" title="Permalink to this headline">¶</a></h3>
+<p>We recommend that you review your roll out on a cadence that matches your iterative approach to rolling out to users.  Below are some areas to consider.</p>
+<div class="section" id="review-project-charter-success-metrics">
+<h4>1. Review Project Charter Success Metrics<a class="headerlink" href="#review-project-charter-success-metrics" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>Perform end-user surveys and measure satisfaction</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Optional resource within Mattermost: <a class="reference external" href="https://integrations.mattermost.com/matterpoll/">https://integrations.mattermost.com/matterpoll/</a></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Verify use case fulfillment from original requirements gathering</p></li>
+<li><p>Measure your response time and resolution rate for user support issues</p></li>
+<li><p>Identify usage gaps and address or create a plan for addressing</p></li>
+</ul>
+</div>
+<div class="section" id="review-and-analyze-usage">
+<h4>2. Review and Analyze Usage<a class="headerlink" href="#review-and-analyze-usage" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>Review Project Charter success metrics - identify usage gaps and address or create a plan for addressing</p></li>
+<li><p>Monitor site and team statistics</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/administration/statistics.html">https://docs.mattermost.com/administration/statistics.html</a></p></li>
+<li><p>Review: Total posts, total teams, total channels, total group chats, total direct chats, top channels, top teams</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Analyze usage by lines of business and peak usage times</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resources: <a class="reference external" href="https://docs.mattermost.com/administration/scripts.html">https://docs.mattermost.com/administration/scripts.html</a></p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="analyze-system-performance">
+<h4>3. Analyze System Performance<a class="headerlink" href="#analyze-system-performance" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>Monitor trends in CPU/memory usage</p></li>
+<li><p>Review trends in database connections</p></li>
+<li><p>Review trends in Go routines</p></li>
+<li><p>Review trends in concurrent sessions</p></li>
+</ul>
+</div>
+<div class="section" id="harden-security">
+<h4>4. Harden Security<a class="headerlink" href="#harden-security" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>Harden security controls around web, desktop and mobile security</p></li>
+<li><p>Harden configuration management</p></li>
+<li><p>Harden network security</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Identify additional tests and scans</p></li>
+<li><p>(Optional) Enable Compliance Reporting</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/administration/compliance-export.html">https://docs.mattermost.com/administration/compliance-export.html</a></p></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+</div>
+<div class="section" id="perform-maintenance-tasks">
+<h4>5. Perform Maintenance Tasks<a class="headerlink" href="#perform-maintenance-tasks" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>Monitor for security updates (or sign up for email updates)</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://mattermost.com/security-updates/">https://mattermost.com/security-updates/</a></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Perform first upgrade</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/administration/upgrade.html">https://docs.mattermost.com/administration/upgrade.html</a></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Determine upgrade schedule based on Mattermost release schedules and lifecycle</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Resource: <a class="reference external" href="https://docs.mattermost.com/administration/release-lifecycle.html">https://docs.mattermost.com/administration/release-lifecycle.html</a></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Run System checks and either address or set address-by date</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </article>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../deployment/on-boarding.html" class="btn btn-neutral float-right" title="Administrator Tasks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../help/getting-started/light-install.html" class="btn btn-neutral float-left" title="Light Install Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2015-2020 Mattermost.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-cog">&nbsp;&nbsp;Options</span>&nbsp;
+        <span class="fa fa-angle-up"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Contribute</dt>
+            <dd>
+                <a href="https://github.com/mattermost/docs/issues">Report a Problem</a>
+            </dd>
+            
+            <dd>
+                <a href="https://github.com/mattermost/docs/blob/master/source/getting-started/enterprise-roll-out-checklist.rst"> Edit on GitHub</a>
+            </dd>
+            
+        </dl>
+    </div>
+</div>
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/myscript.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+	<script type="text/javascript">
+		jQuery(function () {
+			SphinxRtdTheme.Navigation.enable(true);
+		});
+	</script> 
+
+<header>
+	<div class="header__container">
+		<div class="search__icon">
+			<i class="fa fa-search"></i>
+		</div>
+		<a href="https://docs.mattermost.com/" class="header__logo">
+			<img width="176" src="https://about.mattermost.com/wp-content/uploads/2017/08/Mattermost-Logo-Blue.svg">
+		</a>
+		<div class="links__icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<ul class="header__links">
+			<li><a href="https://developers.mattermost.com/">Developers</a></li>
+			<li><a href="https://mattermost.com/features/">Product</a></li>
+			<li><a href="https://mattermost.com/pricing/">Pricing</a></li>
+			<li><a href="https://mattermost.com/blog/">Blog</a></li>
+			<li><a href="https://mattermost.com/download/">Download</a></li>
+			<li><a href="https://mattermost.com/trial/">Trial</a></li>
+		</ul>
+		<div class="header__searchbar">
+			<form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                <input type="text" name="q" placeholder="Search by keyword" autofocus />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+		</div>
+	</div>
+</header>
+
+</body>
+</html>
