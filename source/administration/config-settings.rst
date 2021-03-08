@@ -4583,7 +4583,7 @@ Import Settings Default Directory
 The directory where the imported files are stored. The path is relative to the ``FileSettings`` directory. By default, imports are stored under ``./data/import``.
 
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| This feature's ``config.json`` setting is ``ImportSettingsDefaultDirectory: ./import`` with string input.                                                         |
+| This feature's ``config.json`` setting is ``ImportSettingsDefaultDirectory: ./import`` with string input.                                                            |
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Import Settings Default Retention Days
@@ -4592,7 +4592,7 @@ Import Settings Default Retention Days
 The number of days to retain the imported files before deleting them.
 
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| This feature's ``config.json`` setting is ``ImportSettingsDefaultRetentionDays: 30`` with numerical input.                                                       |
+| This feature's ``config.json`` setting is ``ImportSettingsDefaultRetentionDays: 30`` with numerical input.                                                           |
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 SQL Settings
