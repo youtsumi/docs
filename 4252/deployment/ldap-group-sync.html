@@ -1,6 +1,7 @@
 
 
 
+
 <!DOCTYPE html>
 <!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
@@ -13,27 +14,25 @@
   
 
   
-  
-    <link rel="shortcut icon" href="../_static/favicon.ico"/>
-  
-  
-  
-
-  
-
-  
-  
-    
-
-  
-
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="https://docs.mattermost.com/deployment/ldap-group-sync.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership" href="ldap-group-constrained-team-channel.html" />
     <link rel="prev" title="Multi-factor Authentication" href="auth.html" />
-	<!-- Google Tag Manager -->
+  
+  	<!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -41,21 +40,23 @@
 	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
 	<!-- End Google Tag Manager -->
 
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
-
+	
+    <script src="../_static/js/modernizr.min.js"></script>
 </head>
 
 <body class="wy-body-for-nav">
 
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K874RWM"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -86,6 +87,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -163,6 +165,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -204,7 +207,7 @@
   </ul>
   <hr/>
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+          <article class="document" itemscope="itemscope" itemtype="https://schema.org/Article">
            <div itemprop="articleBody">
             
   <div class="section" id="ad-ldap-groups-e20">
@@ -263,7 +266,7 @@
 <p>Groups that have been returned from the default filter or your AD/LDAP group filter will be available in a list view on the Groups page. The link action will create Mattermost groups corresponding to the AD/LDAP group. AD/LDAP groups that have been linked to a Mattermost group will display the <strong>Linked</strong> icon. AD/LDAP groups that have not been linked to a Mattermost group will display the <strong>Not Linked</strong> icon. An AD/LDAP group that is not linked does not create a Mattermost group.</p>
 <img alt="../_images/Groups_listing1.png" src="../_images/Groups_listing1.png" />
 <p>Groups can be linked individually by the inline <strong>Linked</strong> button. You can also use the checkbox next the group name to select multiple groups and choosing <strong>Link Selected Groups</strong>. When selecting multiple groups with a mix of <strong>Linked</strong> and <strong>Not Linked</strong> states, the bulk action of the button will be <strong>Link Selected Groups</strong> until all selected are marked <strong>Linked</strong>. Using the bulk action speeds the process of creating Mattermost groups from your AD/LDAP Groups.</p>
-<p>If you see a <strong>Link Failed</strong> message, either click on the message or check the box alongside the group name to expose the inline link message and try again.</p>
+<p>If you see a <strong>Link Failed</strong> message, either select the message, or check the box alongside the group name to expose the inline link message and try again.</p>
 <img alt="../_images/LinkFailed1.png" src="../_images/LinkFailed1.png" />
 </div>
 <div class="section" id="configuring-the-group">
@@ -299,7 +302,7 @@
 </div>
 <div class="section" id="removing-configured-teams-and-channels-from-a-group">
 <h2>Removing Configured Teams and Channels From a Group<a class="headerlink" href="#removing-configured-teams-and-channels-from-a-group" title="Permalink to this headline">¶</a></h2>
-<p>To remove a team or channel configured for a group, click <strong>Remove</strong> to the right of the team or channel name. Users already part of the team and channel will not be removed from that channel by this action.</p>
+<p>To remove a team or channel configured for a group, select <strong>Remove</strong> to the right of the team or channel name. Users already part of the team and channel will not be removed from that channel by this action.</p>
 </div>
 <div class="section" id="viewing-users-belonging-to-the-group">
 <h2>Viewing Users Belonging to The Group<a class="headerlink" href="#viewing-users-belonging-to-the-group" title="Permalink to this headline">¶</a></h2>
@@ -355,9 +358,9 @@
 <ol class="arabic simple">
 <li>Navigate to <strong>System Console &gt; User Management &gt; Teams</strong>. Select the team you want to manage with group synchronization.</li>
 <li>Under <strong>Team Management</strong>, enable <strong>Sync Group Members</strong>. If <strong>Anyone can join this team</strong> is enabled or if specific email domains are set, they will be disabled by the Sync Group Members feature.</li>
-<li>Add one or more groups to the team. If there are groups already associated to default users into the team, they will already be present.</li>
+<li>Add one or more groups to the team. If there are groups already associated with default users in the team, they’ll be listed.</li>
 <li>Review the notice in the footer of the screen for any users that are not part of groups who will be removed from the team on the next synchronization.</li>
-<li>Click <strong>Save</strong>. Members will be updated on the next scheduled AD/LDAP synchronization.</li>
+<li>Select <strong>Save</strong>. Members will be updated on the next scheduled AD/LDAP synchronization.</li>
 </ol>
 <p>Alternatively you can use the CLI tool to set the team to be managed by groups:</p>
 <ol class="arabic simple">
@@ -369,9 +372,9 @@
 <ol class="arabic simple">
 <li>Navigate to <strong>System Console &gt; User Management &gt; Channels</strong>. Select the channel you want to manage with group synchronization.</li>
 <li>Under <strong>Channel Management</strong>, enable <strong>Sync Group Members</strong>. Please ensure the channel is set to <code class="docutils literal notranslate"><span class="pre">private</span></code>.</li>
-<li>Add one or more groups to the channel. If there are groups already associated to default users into the channel, they will already be present.</li>
+<li>Add one or more groups to the channel. If there are groups already associated with default users in the team, they’ll be listed.</li>
 <li>Review the notice in the footer of the screen for any users that are not part of groups who will be removed from the channel on the next synchronization.</li>
-<li>Click save. Members will be updated on the next scheduled AD/LDAP synchronization.</li>
+<li>Select <strong>Save</strong>. Members will be updated on the next scheduled AD/LDAP synchronization.</li>
 </ol>
 <p>Alternatively you can use the CLI tool to set a private channel to be managed by groups:</p>
 <ol class="arabic simple">
@@ -404,10 +407,10 @@
 <li>Navigate to <strong>System Console &gt; User Management &gt; Channels</strong>.</li>
 <li>Select <strong>Edit</strong> next to the team you want to configure.</li>
 <li>Ensure that <strong>Sync Group Members</strong> is enabled.</li>
-<li>Choose <strong>Add Group</strong> to add one or more groups to the team. If there are groups already associated to default users into the team, they will already be present.</li>
+<li>Choose <strong>Add Group</strong> to add one or more groups to the team. If there are groups already associated with default users in the team, they’ll be listed.</li>
 <li>Select the arrow next to the current role in the <strong>Roles</strong> column to display and select the <strong>Channel Admin</strong> option.</li>
 <li>Repeat as needed for any other synced groups you have added.</li>
-<li>Choose <strong>Save</strong>.</li>
+<li>Select <strong>Save</strong>.</li>
 </ol>
 <p>Roles are updated on the next scheduled AD/LDAP synchronization.</p>
 <p><strong>Note:</strong>
@@ -443,6 +446,14 @@ Members who have been synced as part of a group cannot have their role changed v
 </div>
 <div class="section" id="frequently-asked-questions">
 <h2>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="why-do-my-ldap-users-and-groups-exist-in-mattermost-but-my-groups-have-no-members">
+<h3>Why do my LDAP users and groups exist in Mattermost, but my groups have no members?<a class="headerlink" href="#why-do-my-ldap-users-and-groups-exist-in-mattermost-but-my-groups-have-no-members" title="Permalink to this headline">¶</a></h3>
+<p>In order for Mattermost to detect group membership correctly, and to automatically add users to the group configured in the System Console, you must use one of the following AD/LDAP attributes to represent group members in Mattermost: <code class="docutils literal notranslate"><span class="pre">member</span></code> or <code class="docutils literal notranslate"><span class="pre">uniqueMember</span></code>. These attributes use a <code class="docutils literal notranslate"><span class="pre">Distinguished</span> <span class="pre">Name</span></code> as the value on groups.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">LDAP installations that use <code class="docutils literal notranslate"><span class="pre">memberUid</span></code> to indicate group membership are not supported because <code class="docutils literal notranslate"><span class="pre">memberUid</span></code> is an attribute of an object class <code class="docutils literal notranslate"><span class="pre">posixGroup</span></code> that does not use <code class="docutils literal notranslate"><span class="pre">Distinguished</span> <span class="pre">Names</span></code> as the value on groups.</p>
+</div>
+</div>
 <div class="section" id="why-can-t-my-existing-users-see-the-teams-and-channels-they-have-been-synced-to">
 <h3>Why can’t my existing users see the teams and channels they have been synced to?<a class="headerlink" href="#why-can-t-my-existing-users-see-the-teams-and-channels-they-have-been-synced-to" title="Permalink to this headline">¶</a></h3>
 <p>Existing Mattermost users that are members of linked Mattermost groups will be added to teams and channels on the next scheduled synchronization job that is run after teams and channels are added to the Mattermost group. You can manually initiate a synchronization from <strong>System Console &gt; Authentication &gt; AD/LDAP &gt; AD/LDAP Synchronize Now</strong>.</p>
@@ -480,7 +491,7 @@ Members who have been synced as part of a group cannot have their role changed v
 
            </div>
            
-          </div>
+          </article>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
@@ -539,8 +550,10 @@ Members who have been synced as part of a group cannot have their role changed v
 
 
   
-
-    
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script type="text/javascript" src="../_static/jquery.js"></script>
@@ -549,17 +562,17 @@ Members who have been synced as part of a group cannot have their role changed v
         <script type="text/javascript" src="../_static/language_data.js"></script>
         <script type="text/javascript" src="../_static/myscript.js"></script>
     
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
+    
 
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
+	<script type="text/javascript">
+		jQuery(function () {
+			SphinxRtdTheme.Navigation.enable(true);
+		});
+	</script> 
 
-  <script type="text/javascript">
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script>
-	<header>
+<header>
 	<div class="header__container">
 		<div class="search__icon">
 			<i class="fa fa-search"></i>
@@ -587,17 +600,6 @@ Members who have been synced as part of a group cannot have their role changed v
 		</div>
 	</div>
 </header>
-	<script type="text/javascript">
-		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
-		   however, waiting a new release to the theme.  This fix should remain in place until that
-		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
-		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
-		 */
-        if(DOCUMENTATION_OPTIONS) {
-			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
-        }
-    </script>
-
 
 </body>
 </html>

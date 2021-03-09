@@ -1,6 +1,7 @@
 
 
 
+
 <!DOCTYPE html>
 <!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
@@ -13,27 +14,25 @@
   
 
   
-  
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
-  
-  
-  
-
-  
-
-  
-  
-    
-
-  
-
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="https://docs.mattermost.com/cloud/cloud-integrations/cloud-slash-commands.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Bot Accounts" href="cloud-bot-accounts.html" />
     <link rel="prev" title="Outgoing Webhooks" href="cloud-outgoing-webhooks.html" />
-	<!-- Google Tag Manager -->
+  
+  	<!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -41,21 +40,23 @@
 	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
 	<!-- End Google Tag Manager -->
 
-
-  
-  <script src="../../_static/js/modernizr.min.js"></script>
-
+	
+    <script src="../../_static/js/modernizr.min.js"></script>
 </head>
 
 <body class="wy-body-for-nav">
 
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K874RWM"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -86,6 +87,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -133,6 +135,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -174,7 +177,7 @@
   </ul>
   <hr/>
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+          <article class="document" itemscope="itemscope" itemtype="https://schema.org/Article">
            <div itemprop="articleBody">
             
   <div class="section" id="slash-commands">
@@ -183,7 +186,7 @@
 <p class="first admonition-title">Note</p>
 <p class="last">This is the admin documentation for slash commands. If you’re a developer looking to build an integration, see <a class="reference external" href="https://developers.mattermost.com/integrate/getting-started/">our developer documentation</a>.</p>
 </div>
-<p>Mattermost supports slash commands to easily integrate external applications into the server. They function similarly to <a class="reference external" href="https://docs.mattermost.com/cloud/cloud-integrations/cloud-outgoing-webhooks.html">outgoing webhooks</a>, except they can be used in any channel - including Private channels and Direct Messages.</p>
+<p>Mattermost supports slash commands to easily integrate external applications into the workspace. They function similarly to <a class="reference external" href="https://docs.mattermost.com/cloud/cloud-integrations/cloud-outgoing-webhooks.html">outgoing webhooks</a>, except they can be used in any channel - including Private channels and Direct Messages.</p>
 <p>Messages that begin with <code class="docutils literal notranslate"><span class="pre">/</span></code> are interpreted as slash commands. The commands will send an HTTP POST request to a web service, and process a response back to Mattermost. Mattermost supports both <a class="reference external" href="https://docs.mattermost.com/cloud/cloud-integrations/cloud-slash-commands.html#built-in-commands">built-in</a> and <a class="reference external" href="https://docs.mattermost.com/cloud/cloud-integrations/cloud-slash-commands.html">custom slash commands</a>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -324,7 +327,7 @@
 <p>You can follow these general guidelines to set up a custom Mattermost slash command for your application.</p>
 <ol class="arabic simple">
 <li>Open <strong>Main Menu &gt; Integrations &gt; Slash Commands</strong>. If you don’t have the <strong>Integrations</strong> option in your Main Menu, slash commands may not be enabled or may be disabled for non-admins. Enable them from <strong>System Console &gt; Integrations &gt; Integration Management</strong> or ask your Mattermost System Admin to do so.</li>
-<li>Click <strong>Add Slash Command</strong> and add name and description for the command.</li>
+<li>Select <strong>Add Slash Command</strong>, then add a name and description for the command.</li>
 <li>Set the <strong>Command Trigger Word</strong>. The trigger word must be unique and cannot begin with a slash or contain any spaces. It also cannot be one of the <a class="reference external" href="https://docs.mattermost.com/cloud/cloud-integrations/cloud-slash-commands.html#built-in-commands">built-in commands</a>.</li>
 <li>Set the <strong>Request URL</strong> and <strong>Request Method</strong>. The request URL is the endpoint that Mattermost hits to reach your application, and the request method is either POST or GET and specifies the type of request sent to the request URL.</li>
 <li>(Optional) Set the response username and icon the command will post messages as in Mattermost. If not set, the command will use your username and profile picture.</li>
@@ -335,7 +338,7 @@
 </div>
 <ol class="arabic simple" start="6">
 <li>(Optional) Include the slash command in the command autocomplete list, displayed when typing <code class="docutils literal notranslate"><span class="pre">/</span></code> in an empty input box. Use it to make your command easier to discover by your teammates. You can also provide a hint listing the arguments of your command and a short description displayed in the autocomplete list.</li>
-<li>Choose <strong>Save</strong>. On the next page, copy the <strong>Token</strong> value. This will be used in a later step.</li>
+<li>Select <strong>Save</strong>. On the next page, copy the <strong>Token</strong> value. This will be used in a later step.</li>
 </ol>
 <a class="reference internal image-reference" href="../../_images/slash_commands_token.png"><img alt="../../_images/slash_commands_token.png" src="../../_images/slash_commands_token.png" style="width: 500px;" /></a>
 <ol class="arabic simple" start="8">
@@ -452,7 +455,7 @@ user_mentions_ids=[&quot;q5s3b7xzgprp5eid8h66j9epsy&quot;, &quot;czwmumrmw7dfxec
 
            </div>
            
-          </div>
+          </article>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
@@ -511,8 +514,10 @@ user_mentions_ids=[&quot;q5s3b7xzgprp5eid8h66j9epsy&quot;, &quot;czwmumrmw7dfxec
 
 
   
-
-    
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
         <script type="text/javascript" src="../../_static/jquery.js"></script>
@@ -521,17 +526,17 @@ user_mentions_ids=[&quot;q5s3b7xzgprp5eid8h66j9epsy&quot;, &quot;czwmumrmw7dfxec
         <script type="text/javascript" src="../../_static/language_data.js"></script>
         <script type="text/javascript" src="../../_static/myscript.js"></script>
     
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
+    
 
-  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+	<script type="text/javascript">
+		jQuery(function () {
+			SphinxRtdTheme.Navigation.enable(true);
+		});
+	</script> 
 
-  <script type="text/javascript">
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script>
-	<header>
+<header>
 	<div class="header__container">
 		<div class="search__icon">
 			<i class="fa fa-search"></i>
@@ -559,17 +564,6 @@ user_mentions_ids=[&quot;q5s3b7xzgprp5eid8h66j9epsy&quot;, &quot;czwmumrmw7dfxec
 		</div>
 	</div>
 </header>
-	<script type="text/javascript">
-		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
-		   however, waiting a new release to the theme.  This fix should remain in place until that
-		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
-		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
-		 */
-        if(DOCUMENTATION_OPTIONS) {
-			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
-        }
-    </script>
-
 
 </body>
 </html>

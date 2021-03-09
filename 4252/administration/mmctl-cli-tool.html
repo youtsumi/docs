@@ -1,6 +1,7 @@
 
 
 
+
 <!DOCTYPE html>
 <!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
@@ -13,27 +14,25 @@
   
 
   
-  
-    <link rel="shortcut icon" href="../_static/favicon.ico"/>
-  
-  
-  
-
-  
-
-  
-  
-    
-
-  
-
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="https://docs.mattermost.com/administration/mmctl-cli-tool.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Scripts" href="scripts.html" />
     <link rel="prev" title="Command Line Tools" href="command-line-tools.html" />
-	<!-- Google Tag Manager -->
+  
+  	<!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -41,21 +40,23 @@
 	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
 	<!-- End Google Tag Manager -->
 
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
-
+	
+    <script src="../_static/js/modernizr.min.js"></script>
 </head>
 
 <body class="wy-body-for-nav">
 
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K874RWM"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -86,6 +87,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -168,6 +170,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -209,16 +212,18 @@
   </ul>
   <hr/>
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+          <article class="document" itemscope="itemscope" itemtype="https://schema.org/Article">
            <div itemprop="articleBody">
             
   <div class="section" id="mmctl-command-line-tool-beta">
 <h1>mmctl Command Line Tool (Beta)<a class="headerlink" href="#mmctl-command-line-tool-beta" title="Permalink to this headline">¶</a></h1>
 <p>The mmctl tool is a remote CLI tool for Mattermost which is installed locally and uses the Mattermost API. Authentication is done with either login credentials or an authentication token.</p>
-<p>Being installed locally allows a System Admin to run CLI commands even in instances where there is no access to the server (e.g., via SSH). This tool is currently in beta and can be used alongside the Mattermost CLI tool. In the future, the Mattermost CLI tool will be deprecated.</p>
+<p>Being installed locally enables System Admins for both self-managed and Cloud Mattermost instances to run CLI commands even in instances where there is no access to the server (e.g., via SSH). This tool is currently in beta and can be used alongside the Mattermost CLI tool. In the future, the Mattermost CLI tool will be deprecated.</p>
 <p>This feature was developed to a large extent by community contributions and we’d like to extend our gratitude to the contributors who have worked on this project. We are currently accepting pull requests for Help Wanted issues in the <a class="reference external" href="https://github.com/mattermost/mattermost-server/issues?q=is%3Aissue+is%3Aopen+label%3A%22Help+Wanted%22+label%3AArea%2Fmmctl">mattermost-server</a> repo. You can learn more about the unit test coverage campaign for mmctl in the <a class="reference external" href="https://mattermost.com/blog/unit-testing-mmctl-commands/">Unit testing mmctl commands</a> blog post.</p>
 <p><strong>Notes</strong></p>
 <ul class="simple">
+<li>System Admins have two ways to run <cite>mmctl</cite> commands: by downloading <cite>mmctl</cite> from the repository, or by building it directly. See the <a class="reference external" href="https://github.com/mattermost/mmctl#install">mmctl readme</a> for details.</li>
+<li><cite>mmctl</cite> comes bundled with the Mattermost distribution, and is located in the <cite>bin</cite> folder of the installation, next to the <cite>CLI</cite>.</li>
 <li>Parameters in CLI commands are order-specific.</li>
 <li>If special characters (<code class="docutils literal notranslate"><span class="pre">!</span></code>, <code class="docutils literal notranslate"><span class="pre">|</span></code>, <code class="docutils literal notranslate"><span class="pre">(</span></code>, <code class="docutils literal notranslate"><span class="pre">)</span></code>, <code class="docutils literal notranslate"><span class="pre">\</span></code>, <code class="docutils literal notranslate"><span class="pre">'</span></code>, and <code class="docutils literal notranslate"><span class="pre">&quot;</span></code>) are used, the entire argument needs to be surrounded by single quotes (e.g. <code class="docutils literal notranslate"><span class="pre">-password</span> <span class="pre">'mypassword!'</span></code>, or the individual characters need to be escaped out (e.g. <code class="docutils literal notranslate"><span class="pre">password</span> <span class="pre">mypassword\!</span></code>).</li>
 <li>Team name and channel name refer to the handles, not the display names. So in the URL <code class="docutils literal notranslate"><span class="pre">https://community.mattermost.com/core/channels/town-square</span></code> team name would be <code class="docutils literal notranslate"><span class="pre">core</span></code> and channel name would be <code class="docutils literal notranslate"><span class="pre">town-square</span></code>.</li>
@@ -936,11 +941,12 @@ channel create --team myteam --name mynewprivatechannel --display_name <span cla
 </pre></div>
 </div>
 <p><strong>Options inherited from parent commands</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string          path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
---format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
---insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
---local                       allows communicating with the server through a unix socket
---strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string           path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
+--format string                the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate   allows to use insecure TLS protocols, such as SHA-1
+--insecure-tls-version         allows to use TLS versions <span class="m">1</span>.0 and <span class="m">1</span>.1
+--local                        allows communicating with the server through a unix socket
+--strict                       will only run commands <span class="k">if</span> the mmctl version matches the server one
 </pre></div>
 </div>
 </div>
@@ -2695,7 +2701,48 @@ post list myteam:mychannel --number <span class="m">20</span>
 </div>
 <div class="section" id="mmctl-roles">
 <h2>mmctl roles<a class="headerlink" href="#mmctl-roles" title="Permalink to this headline">¶</a></h2>
-<p>This command will be available in a future release.</p>
+<p><strong>Description</strong></p>
+<blockquote>
+<div>Promote users to the System Admin role, or remove System Admin privileges from users.</div></blockquote>
+<p><strong>Format</strong></p>
+<p>Promote users to the System Admin role:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl roles system_admin <span class="o">[</span>users<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p>Remove System Admin privileges:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl roles member <span class="o">[</span>users<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<p>Promote a user to the System Admin role:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl roles system_admin john_doe
+</pre></div>
+</div>
+<p>Promote multiple users to the System Admin role:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl roles system_admin john_doe jane_doe
+</pre></div>
+</div>
+<p>Remove System Admin privileges from a user:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl roles member john_doe
+</pre></div>
+</div>
+<p>Remove System Admin privileges from multiple users:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mmctl roles member john_doe jane_doe
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help   <span class="nb">help</span> <span class="k">for</span> roles
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string           path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
+--format string                the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate   allows to use insecure TLS protocols, such as SHA-1
+--insecure-tls-version         allows to use TLS versions <span class="m">1</span>.0 and <span class="m">1</span>.1
+--local                        allows communicating with the server through a unix socket
+--strict                       will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
 </div>
 <div class="section" id="mmctl-system">
 <h2>mmctl system<a class="headerlink" href="#mmctl-system" title="Permalink to this headline">¶</a></h2>
@@ -2998,10 +3045,12 @@ team create --name private --display_name <span class="s2">&quot;My New Private 
 </pre></div>
 </div>
 <p><strong>Options inherited from parent commands</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
---insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
---local                       allows communicating with the server through a unix socket
---strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string           path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
+--format string                the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate   allows to use insecure TLS protocols, such as SHA-1
+--insecure-tls-version         allows to use TLS versions <span class="m">1</span>.0 and <span class="m">1</span>.1
+--local                        allows communicating with the server through a unix socket
+--strict                       will only run commands <span class="k">if</span> the mmctl version matches the server one
 </pre></div>
 </div>
 </div>
@@ -3049,10 +3098,12 @@ team create --name private --display_name <span class="s2">&quot;My New Private 
 </pre></div>
 </div>
 <p><strong>Options inherited from parent commands</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
---insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
---local                       allows communicating with the server through a unix socket
---strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--config-path string           path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
+--format string                the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate   allows to use insecure TLS protocols, such as SHA-1
+--insecure-tls-version         allows to use TLS versions <span class="m">1</span>.0 and <span class="m">1</span>.1
+--local                        allows communicating with the server through a unix socket
+--strict                       will only run commands <span class="k">if</span> the mmctl version matches the server one
 </pre></div>
 </div>
 </div>
@@ -3252,6 +3303,7 @@ team create --name private --display_name <span class="s2">&quot;My New Private 
 <li><a class="reference internal" href="#mmctl-user-delete">mmctl user delete</a> - Delete users</li>
 <li><a class="reference internal" href="#mmctl-user-deleteall">mmctl user deleteall</a> - Delete all users and all posts (local command only)</li>
 <li><a class="reference internal" href="#mmctl-user-email">mmctl user email</a> - Set user email</li>
+<li><a class="reference internal" href="#mmctl-user-verify">mmctl user verify</a> - Verify the email address of a new user</li>
 <li><a class="reference internal" href="#mmctl-user-invite">mmctl user invite</a> - Invite user</li>
 <li><a class="reference internal" href="#mmctl-user-list">mmctl user list</a> - List users</li>
 <li><a class="reference internal" href="#mmctl-user-reset-password">mmctl user reset_password</a> - Reset user password</li>
@@ -3425,6 +3477,33 @@ user activate username
 <p><strong>Options inherited from parent commands</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
 --insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
+--local                       allows communicating with the server through a unix socket
+--strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
+</pre></div>
+</div>
+</div>
+<div class="section" id="mmctl-user-verify">
+<h3>mmctl user verify<a class="headerlink" href="#mmctl-user-verify" title="Permalink to this headline">¶</a></h3>
+<p><strong>Description</strong></p>
+<blockquote>
+<div>Verify the email address of a new user.</div></blockquote>
+<p><strong>Format</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>mmctl user verify [users] [flags]
+</pre></div>
+</div>
+<p><strong>Example</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>mmctl user verify user1
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-h, --help       <span class="nb">help</span> <span class="k">for</span> email
+</pre></div>
+</div>
+<p><strong>Options inherited from parent commands</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>   --config-path string           path to the configuration directory. If <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.mmctl&quot;</span> exists it will take precedence over the default value <span class="o">(</span>default <span class="s2">&quot;</span><span class="nv">$XDG_CONFIG_HOME</span><span class="s2">&quot;</span><span class="o">)</span>
+--format string               the format of the <span class="nb">command</span> output <span class="o">[</span>plain, json<span class="o">]</span> <span class="o">(</span>default <span class="s2">&quot;plain&quot;</span><span class="o">)</span>
+--insecure-sha1-intermediate  allows the use of insecure TLS protocols, such as SHA-1
+--insecure-tls-version         allows to use TLS versions <span class="m">1</span>.0 and <span class="m">1</span>.1
 --local                       allows communicating with the server through a unix socket
 --strict                      will only run commands <span class="k">if</span> the mmctl version matches the server one
 </pre></div>
@@ -3846,7 +3925,7 @@ user invite user@example.com myteam1 myteam2
 
            </div>
            
-          </div>
+          </article>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
@@ -3905,8 +3984,10 @@ user invite user@example.com myteam1 myteam2
 
 
   
-
-    
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script type="text/javascript" src="../_static/jquery.js"></script>
@@ -3915,17 +3996,17 @@ user invite user@example.com myteam1 myteam2
         <script type="text/javascript" src="../_static/language_data.js"></script>
         <script type="text/javascript" src="../_static/myscript.js"></script>
     
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
+    
 
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
+	<script type="text/javascript">
+		jQuery(function () {
+			SphinxRtdTheme.Navigation.enable(true);
+		});
+	</script> 
 
-  <script type="text/javascript">
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script>
-	<header>
+<header>
 	<div class="header__container">
 		<div class="search__icon">
 			<i class="fa fa-search"></i>
@@ -3953,17 +4034,6 @@ user invite user@example.com myteam1 myteam2
 		</div>
 	</div>
 </header>
-	<script type="text/javascript">
-		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
-		   however, waiting a new release to the theme.  This fix should remain in place until that
-		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
-		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
-		 */
-        if(DOCUMENTATION_OPTIONS) {
-			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
-        }
-    </script>
-
 
 </body>
 </html>

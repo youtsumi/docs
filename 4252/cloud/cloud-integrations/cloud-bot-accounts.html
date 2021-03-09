@@ -1,6 +1,7 @@
 
 
 
+
 <!DOCTYPE html>
 <!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
@@ -13,27 +14,25 @@
   
 
   
-  
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
-  
-  
-  
-
-  
-
-  
-  
-    
-
-  
-
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="https://docs.mattermost.com/cloud/cloud-integrations/cloud-bot-accounts.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Personal Access Tokens" href="cloud-personal-access-tokens.html" />
     <link rel="prev" title="Slash Commands" href="cloud-slash-commands.html" />
-	<!-- Google Tag Manager -->
+  
+  	<!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -41,21 +40,23 @@
 	})(window,document,'script','dataLayer','GTM-K874RWM');</script>
 	<!-- End Google Tag Manager -->
 
-
-  
-  <script src="../../_static/js/modernizr.min.js"></script>
-
+	
+    <script src="../../_static/js/modernizr.min.js"></script>
 </head>
 
 <body class="wy-body-for-nav">
 
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K874RWM"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -86,6 +87,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -130,6 +132,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -171,7 +174,7 @@
   </ul>
   <hr/>
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+          <article class="document" itemscope="itemscope" itemtype="https://schema.org/Article">
            <div itemprop="articleBody">
             
   <div class="section" id="bot-accounts">
@@ -188,17 +191,17 @@
 <p>Additional benefits include:</p>
 <blockquote>
 <div><ul class="simple">
-<li>Bot accounts can be enabled to post to any channel in the system by System Admins, including a private team, Pprivate channel, or Direct Messages.</li>
+<li>Bot accounts can be enabled to post to any channel in the system by System Administrators, including private teams, Private Channels, or Direct Messages.</li>
 <li>Integrations created by a user and tied to a bot account no longer break if the user leaves the company.</li>
 <li>Once created, bot accounts behave just like regular user accounts and can be added to teams and channels similar to users.</li>
 <li>Bot accounts are a safe way to integrate with Mattermost through the RESTful API and Plugin API because there is no need to manage shared logins with these accounts.</li>
-<li><code class="docutils literal notranslate"><span class="pre">BOT</span></code> tag is used everywhere in the user interface where bot accounts are referenced, including messages and user lists.</li>
+<li>A <code class="docutils literal notranslate"><span class="pre">BOT</span></code> tag is used everywhere in the user interface where bot accounts are referenced, including Direct Messages and user lists.</li>
 </ul>
 </div></blockquote>
 <p>Note that currently:</p>
 <blockquote>
 <div><ul class="simple">
-<li>Bot accounts can only be created or managed by plugins or System Admins.</li>
+<li>Bot accounts can only be created or managed by plugins or System Administrators.</li>
 <li>Bot accounts cannot be assigned to webhooks or slash commands. These must still be created by a user account.</li>
 <li>Service accounts without an email address pulled from LDAP or SAML systems is not yet supported.</li>
 </ul>
@@ -231,7 +234,7 @@
 <h3>User Interface (UI)<a class="headerlink" href="#user-interface-ui" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
 <li>Go to <strong>Main Menu &gt; Integrations &gt; Bot Accounts</strong>.</li>
-<li>Click <strong>Add Bot Account</strong>.</li>
+<li>Select <strong>Add Bot Account</strong>.</li>
 <li>Set the <strong>Username</strong> of the bot. The username must begin with a letter, and contain between 3 and 22 lowercase characters made up of numbers, letters, and the symbols “.”, “-“, and “_”.</li>
 <li>(Optional) Upload an image for the <strong>Bot Icon</strong>. This will be used as the profile image of the bot throughout the Mattermost user interface.</li>
 <li>(Optional) Set a <strong>Display Name</strong> and <strong>Description</strong>.</li>
@@ -262,8 +265,15 @@
 <div class="section" id="what-happens-if-a-plugin-is-using-a-bot-account-that-already-exists-as-a-user-account">
 <h3>What happens if a plugin is using a bot account that already exists as a user account?<a class="headerlink" href="#what-happens-if-a-plugin-is-using-a-bot-account-that-already-exists-as-a-user-account" title="Permalink to this headline">¶</a></h3>
 <p>For a concrete example, suppose you enable the <a class="reference external" href="https://github.com/mattermost/mattermost-plugin-github">Mattermost GitHub plugin</a>, which uses a <code class="docutils literal notranslate"><span class="pre">github</span></code> bot account, while an existing <code class="docutils literal notranslate"><span class="pre">github</span></code> user account was created for webhook integrations.</p>
-<p>Once the plugin is enabled, the plugin posts as the <code class="docutils literal notranslate"><span class="pre">github</span></code> account but without a <cite>BOT</cite> tag. An error message is logged to the server logs recommending the System Admin to convert the <code class="docutils literal notranslate"><span class="pre">github</span></code> user to a bot account by running <code class="docutils literal notranslate"><span class="pre">mattermost</span> <span class="pre">user</span> <span class="pre">convert</span> <span class="pre">&lt;username&gt;</span> <span class="pre">--bot</span></code> in the CLI.</p>
-<p>If the user is an existing user account you want to preserve, change its username and restart the Mattermost server, after which the plugin will create a bot account with the name <code class="docutils literal notranslate"><span class="pre">github</span></code>.</p>
+<p>Once the plugin is enabled, the plugin posts as the <code class="docutils literal notranslate"><span class="pre">github</span></code> account but without a <cite>BOT</cite> tag. A System Administrator can convert the <code class="docutils literal notranslate"><span class="pre">github</span></code> user to a bot account by using <code class="docutils literal notranslate"><span class="pre">mmctl</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>mmctl user convert (--bot [emails] [usernames] [userIds] | --user &lt;username&gt; --password PASSWORD [--email EMAIL]) [flags]
+</pre></div>
+</div>
+<p>If the user is an existing user account you want to preserve, change its username. The plugin will create a bot account with the name <code class="docutils literal notranslate"><span class="pre">github</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A bot account and a user account cannot share the same username in the same Mattermost instance.</p>
+</div>
 </div>
 <div class="section" id="how-can-i-quickly-test-if-my-bot-account-is-working">
 <h3>How can I quickly test if my bot account is working?<a class="headerlink" href="#how-can-i-quickly-test-if-my-bot-account-is-working" title="Permalink to this headline">¶</a></h3>
@@ -285,7 +295,7 @@
 </div>
 <div class="section" id="do-bot-accounts-make-it-easier-to-impersonate-someone-else-such-as-the-ceo-or-an-hr-coordinator">
 <h3>Do bot accounts make it easier to impersonate someone else such as the CEO or an HR coordinator?<a class="headerlink" href="#do-bot-accounts-make-it-easier-to-impersonate-someone-else-such-as-the-ceo-or-an-hr-coordinator" title="Permalink to this headline">¶</a></h3>
-<p>Possibly yes. Currently a System Admin can disable overriding the profile picture and the username from integrations to help prevent impersonation, but this is not the case for bot accounts.</p>
+<p>Possibly yes. Currently a System Administrator can disable overriding the profile picture and the username from integrations to help prevent impersonation, but this is not the case for bot accounts.</p>
 <p>Mitigations:</p>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">BOT</span></code> tag is used everywhere in the UI where bot accounts are referenced, including messages and user lists.</li>
@@ -303,7 +313,7 @@
 <p>If you find yourself unable to edit posts as a bot, check the following:
 1. Instead of using a slash command to respond directly, use an an API call for the initial interaction with a user to enable message edits.
 2. If your system is using <a class="reference external" href="https://docs.mattermost.com/cloud/cloud-user-management/advanced-permissions.html">advanced permissions</a>, then post edits could be disabled for users.</p>
-<p>If neither of the above help resolve your concern, you also have the option to choose what role the bot account has. If System Admin is chosen, then they can update any posts in the system, along with other System Admin permissions. Note that giving the System Admin role to a bot account enables them with other System Admin privileges so this should be done with care.</p>
+<p>If neither of the above help resolve your concern, you also have the option to choose what role the bot account has. If the <strong>System Admin</strong> role is chosen, then they can update any posts in the system, along with other System Admin permissions. Note that giving the <strong>System Admin</strong> role to a bot account enables them with other System Admin privileges so this should be done with care.</p>
 </div>
 <div class="section" id="if-ad-ldap-or-saml-sync-is-enabled-do-bot-accounts-need-to-have-an-associated-email-address-in-ad-ldap-or-saml">
 <h3>If AD/LDAP or SAML sync is enabled, do bot accounts need to have an associated email address in AD/LDAP or SAML?<a class="headerlink" href="#if-ad-ldap-or-saml-sync-is-enabled-do-bot-accounts-need-to-have-an-associated-email-address-in-ad-ldap-or-saml" title="Permalink to this headline">¶</a></h3>
@@ -320,7 +330,7 @@
 
            </div>
            
-          </div>
+          </article>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
@@ -379,8 +389,10 @@
 
 
   
-
-    
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
         <script type="text/javascript" src="../../_static/jquery.js"></script>
@@ -389,17 +401,17 @@
         <script type="text/javascript" src="../../_static/language_data.js"></script>
         <script type="text/javascript" src="../../_static/myscript.js"></script>
     
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
+    
 
-  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+	<script type="text/javascript">
+		jQuery(function () {
+			SphinxRtdTheme.Navigation.enable(true);
+		});
+	</script> 
 
-  <script type="text/javascript">
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script>
-	<header>
+<header>
 	<div class="header__container">
 		<div class="search__icon">
 			<i class="fa fa-search"></i>
@@ -427,17 +439,6 @@
 		</div>
 	</div>
 </header>
-	<script type="text/javascript">
-		/* Temporary fix for the search capability. Fix has been committed to the theme's master;
-		   however, waiting a new release to the theme.  This fix should remain in place until that
-		   time.  sphinx_rtd_theme is current v0.1.10a0. Commit for the fix in the
-		   theme can be found at: https://github.com/snide/sphinx_rtd_theme/commit/a5e0e304
-		 */
-        if(DOCUMENTATION_OPTIONS) {
-			DOCUMENTATION_OPTIONS.SOURCELINK_SUFFIX = '.txt'
-        }
-    </script>
-
 
 </body>
 </html>
