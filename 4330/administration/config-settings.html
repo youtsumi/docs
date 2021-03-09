@@ -609,6 +609,23 @@
 </tbody>
 </table>
 </div>
+<div class="section" id="maximum-connection-idle-timeout">
+<h4>Maximum Connection Idle Timeout<a class="headerlink" href="#maximum-connection-idle-timeout" title="Permalink to this headline">¶</a></h4>
+<p>Maximum time a database connection can remain idle.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This configuration setting is available in Mattermost Cloud, and will be available in Mattermost Server v5.33 on March 16, 2021.</p>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>This feature’s <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is <code class="docutils literal notranslate"><span class="pre">&quot;ConnMaxIdleTimeMilliseconds&quot;:</span> <span class="pre">5</span></code> with numerical input.</td>
+</tr>
+</tbody>
+</table>
+</div>
 <div class="section" id="maximum-open-connections">
 <h4>Maximum Open Connections<a class="headerlink" href="#maximum-open-connections" title="Permalink to this headline">¶</a></h4>
 <p>Maximum number of open connections held open to the database.</p>
@@ -1387,7 +1404,7 @@
 <col width="100%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td>This feature’s <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is <code class="docutils literal notranslate"><span class="pre">&quot;UseGossip&quot;:</span> <span class="pre">true</span></code> with options <code class="docutils literal notranslate"><span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">false</span></code>.</td>
+<tr class="row-odd"><td>This feature’s <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is <code class="docutils literal notranslate"><span class="pre">&quot;UseExperimentalGossip&quot;:</span> <span class="pre">true</span></code> with options <code class="docutils literal notranslate"><span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">false</span></code>.</td>
 </tr>
 </tbody>
 </table>
@@ -1403,6 +1420,24 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td>This feature’s <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is <code class="docutils literal notranslate"><span class="pre">&quot;EnableExperimentalGossipEncryption&quot;:</span> <span class="pre">false</span></code> with options <code class="docutils literal notranslate"><span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">false</span></code>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="enable-gossip-compression">
+<h4>Enable Gossip Compression<a class="headerlink" href="#enable-gossip-compression" title="Permalink to this headline">¶</a></h4>
+<p><strong>True</strong>: All communication through the cluster uses gossip compression. This is set to <code class="docutils literal notranslate"><span class="pre">true</span></code> by default to maintain compatibility with older servers.</p>
+<p><strong>False</strong>: All communication using the gossip protocol remains uncompressed. Once all servers in a cluster are upgraded to Mattermost v5.33 or later, we recommend that you disable this configuration setting for better performance.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This configuration setting is available in Mattermost Cloud. It will be available in Mattermost Server v5.33 on March 16, 2021.</p>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>This feature’s <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is <code class="docutils literal notranslate"><span class="pre">&quot;EnableGossipCompression&quot;:</span> <span class="pre">true</span></code> with options <code class="docutils literal notranslate"><span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">false</span></code>.</td>
 </tr>
 </tbody>
 </table>
@@ -1898,15 +1933,15 @@
 <p>Some examples of when you may want to modify this setting include:</p>
 <ul class="simple">
 <li>When installing a plugin that includes its own images, such as <a class="reference external" href="https://github.com/matterpoll/matterpoll">Matterpoll</a>, you will need to add the Mattermost server’s domain name to this list.</li>
-<li>When running a bot or webhook-based integration on your local network, you will need to add the hostname of the bot/integration to this list.</li>
-<li>If your network is configured in such a way that publicly accessible web pages or images are accessed by the Mattermost server using their internal IP address, the hostnames for those servers must be added to this list.</li>
+<li>When running a bot or webhook-based integration on your local network, you’ll need to add the hostname of the bot/integration to this list.</li>
+<li>If your network is configured in such a way that publicly-accessible web pages or images are accessed by the Mattermost server using their internal IP address, the hostnames for those servers must be added to this list.</li>
 </ul>
-<p>This setting is a whitelist of local network addresses that can be requested by the Mattermost server. It is configured as a whitespace separated list of hostnames, IP addresses and CIDR ranges that can be accessed such as <code class="docutils literal notranslate"><span class="pre">webhooks.internal.example.com</span> <span class="pre">127.0.0.1</span> <span class="pre">10.0.16.0/28</span></code>. Since v5.9 the public IP of the Mattermost application server itself is also considered a reserved IP.</p>
+<p>This setting is a whitelist of local network addresses that can be requested by the Mattermost server. It’s configured as a whitespace-separated list of hostnames, IP addresses, and CIDR ranges that can be accessed (such as <code class="docutils literal notranslate"><span class="pre">webhooks.internal.example.com</span> <span class="pre">127.0.0.1</span> <span class="pre">10.0.16.0/28</span></code>). Since v5.9, the public IP of the Mattermost application server itself is also considered a reserved IP.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Use whitespaces instead of commas to list the hostnames, IP addresses, or CIDR ranges. For example: <code class="docutils literal notranslate"><span class="pre">webhooks.internal.example.com</span> <span class="pre">127.0.0.1</span> <span class="pre">10.0.16.0/28</span></code>.</p>
 </div>
-<p>IP address and domain name rules are applied before host resolution. CIDR rules are applied after host resolution. For example, if the domain “webhooks.internal.example.com” resolves to the IP address <code class="docutils literal notranslate"><span class="pre">10.0.16.20</span></code>, a webhook with the URL “<a class="reference external" href="https://webhooks.internal.example.com/webhook">https://webhooks.internal.example.com/webhook</a>” can be whitelisted using <code class="docutils literal notranslate"><span class="pre">webhooks.internal.example.com</span></code> or <code class="docutils literal notranslate"><span class="pre">10.0.16.16/28</span></code>, but not <code class="docutils literal notranslate"><span class="pre">10.0.16.20</span></code>.</p>
+<p>IP address and domain name rules are applied before host resolution. CIDR rules are applied after host resolution, and only CIDR rules require DNS resolution. We try to match IP addresses and hostnames without even resolving. If that fails, we resolve using the local resolver (by reading the <code class="docutils literal notranslate"><span class="pre">/etc/hosts</span></code> file first), then check for matching CIDR rules. For example, if the domain “webhooks.internal.example.com” resolves to the IP address <code class="docutils literal notranslate"><span class="pre">10.0.16.20</span></code>, a webhook with the URL “<a class="reference external" href="https://webhooks.internal.example.com/webhook">https://webhooks.internal.example.com/webhook</a>” can be whitelisted using <code class="docutils literal notranslate"><span class="pre">webhooks.internal.example.com</span></code> or <code class="docutils literal notranslate"><span class="pre">10.0.16.16/28</span></code>, but not <code class="docutils literal notranslate"><span class="pre">10.0.16.20</span></code>.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="100%" />
@@ -2318,12 +2353,8 @@
 </div>
 <div class="section" id="enable-custom-user-statuses">
 <h4>Enable Custom User Statuses<a class="headerlink" href="#enable-custom-user-statuses" title="Permalink to this headline">¶</a></h4>
-<p><strong>True</strong>: Users can set descriptive status messages and optional status emoji that are visible to all users.</p>
+<p><strong>True</strong>: Users can set descriptive status messages and optional status emojis that are visible to all users.</p>
 <p><strong>False</strong>: Users are unable to set custom user statuses.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This configuration setting is available in Mattermost Cloud, and will be available in Mattermost Server v5.33 on March 16, 2021.</p>
-</div>
 <table border="1" class="docutils">
 <colgroup>
 <col width="100%" />
