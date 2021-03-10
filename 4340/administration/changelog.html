@@ -262,7 +262,7 @@
 <h3>Breaking Changes<a class="headerlink" href="#breaking-changes" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Deleting a reaction is now a soft delete in the <code class="docutils literal notranslate"><span class="pre">Reactions</span></code> table. A schema update is required and may take up to 15 seconds on first run with large data sets.</li>
-<li>Improved the websocket implementation by using epoll to manually read from a websocket connection. As a result, the number of goroutines is expected to go down by half. This implementation is only available on Linux and FreeBSD-based distributions. If you are using NGINX as a proxy to Mattermost, please ensure to have <code class="docutils literal notranslate"><span class="pre">proxy_http_version</span> <span class="pre">1.1;</span></code> in the block that handles the websocket path.</li>
+<li>A new websocket implementation requires the HTTP version to be 1.1. If you are using NGINX as a proxy to Mattermost, please ensure to have <code class="docutils literal notranslate"><span class="pre">proxy_http_version</span> <span class="pre">1.1;</span></code> in the block that handles the websocket path.</li>
 </ul>
 <p><strong>IMPORTANT:</strong> If you upgrade from a release earlier than v5.32, please read the other <a class="reference external" href="https://docs.mattermost.com/administration/important-upgrade-notes.html">Important Upgrade Notes</a>.</p>
 </div>
@@ -283,7 +283,7 @@
 <div class="section" id="updated-incident-collaboration-plugin-to-1-4-0-e20-edition">
 <h4>Updated Incident Collaboration plugin to 1.4.0 (E20 Edition)<a class="headerlink" href="#updated-incident-collaboration-plugin-to-1-4-0-e20-edition" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li>Added an Incident Timeline, to add support for status updates and other key events to be shown in the right-hand sidebar in a chronological order, allowing users to easily gather information for post-incident reports.</li>
+<li>Added an Incident Timeline to add support for status updates and other key events to be shown in the right-hand sidebar in a chronological order. The timeline enables users to easily gather information for post-incident reports.</li>
 </ul>
 </div>
 <div class="section" id="custom-statuses">
@@ -404,6 +404,7 @@
 <div class="section" id="websocket-event-changes">
 <h3>Websocket Event Changes<a class="headerlink" href="#websocket-event-changes" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
+<li>Improved the websocket implementation by using epoll to manually read from a websocket connection. As a result, the number of goroutines is expected to go down by half. This implementation is only available on Linux and FreeBSD-based distributions.</li>
 <li><code class="docutils literal notranslate"><span class="pre">UserUpdate</span></code> WebSocket Event is now broadcast by two more APIs, <code class="docutils literal notranslate"><span class="pre">plugin.UpdateUser</span></code> and <code class="docutils literal notranslate"><span class="pre">ConvertBotToUser</span></code>.</li>
 </ul>
 </div>
