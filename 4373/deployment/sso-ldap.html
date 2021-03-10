@@ -313,85 +313,81 @@
 <li><p>Complete the <strong>Admin Filter</strong> field.</p></li>
 <li><p>Choose <strong>Save</strong>.</p></li>
 </ol>
-<p><strong>Note:</strong> If the Admin Filter is set to <cite>false</cite> the member’s role as System Admin is retained. However if this filter is removed/changed, System Admins that were promoted via this filter will be demoted to members and will not retain access to the System Console.</p>
+<p><strong>Note:</strong> If the Admin Filter is set to <code class="docutils literal notranslate"><span class="pre">false</span></code> the member’s role as System Admin is retained. However if this filter is removed/changed, System Admins that were promoted via this filter will be demoted to members and will not retain access to the System Console.</p>
 <p>When this filter isn’t in use, members can be manually promoted/demoted via <strong>System Console &gt; User Management</strong>.</p>
-<p>#### Configure AD/LDAP Deployments with Multiple Domains</p>
-<p>Organizations using multiple domains can integrate with Mattermost using a “Forest” configuration to bring together multiple domains. Please see [Forests as Collections of Domain Controllers that Trust Each Other](<a class="reference external" href="https://technet.microsoft.com/en-us/library/cc759073%28v=ws.10%29.aspx?f=255&amp;MSPPError=-2147217396">https://technet.microsoft.com/en-us/library/cc759073%28v=ws.10%29.aspx?f=255&amp;MSPPError=-2147217396</a>) for more information.</p>
-<p>For forest configurations that contain multiple domains which do NOT share a common root, you can search across all of the domains using the Global Catalog. To do so, update your <cite>config.json</cite> as follows:</p>
+</div>
+<div class="section" id="configure-ad-ldap-deployments-with-multiple-domains">
+<h5>Configure AD/LDAP Deployments with Multiple Domains<a class="headerlink" href="#configure-ad-ldap-deployments-with-multiple-domains" title="Permalink to this headline">¶</a></h5>
+<p>Organizations using multiple domains can integrate with Mattermost using a “Forest” configuration to bring together multiple domains. Please see <a class="reference external" href="https://technet.microsoft.com/en-us/library/cc759073%28v=ws.10%29.aspx?f=255&amp;MSPPError=-2147217396">Forests as Collections of Domain Controllers that Trust Each Other</a> for more information.</p>
+<p>For forest configurations that contain multiple domains which do NOT share a common root, you can search across all of the domains using the Global Catalog. To do so, update your <code class="docutils literal notranslate"><span class="pre">config.json</span></code> as follows:</p>
 <ul class="simple">
 <li><p>Set the LdapPort to 3268 (instead of 389)</p></li>
 <li><p>Set the BaseDN to ” ” (A single space character)</p></li>
 </ul>
-<p>See [Global Catalog and LDAP Searches](<a class="reference external" href="https://technet.microsoft.com/en-us/library/cc978012.aspx">https://technet.microsoft.com/en-us/library/cc978012.aspx</a>) for additional details.</p>
+<p>See <a class="reference external" href="https://technet.microsoft.com/en-us/library/cc978012.aspx">Global Catalog and LDAP Searches</a> for additional details.</p>
 </div>
 </div>
 </div>
 <div class="section" id="troubleshooting-faq">
 <h3>Troubleshooting/FAQ<a class="headerlink" href="#troubleshooting-faq" title="Permalink to this headline">¶</a></h3>
 <p>The following are frequently asked questions and troubleshooting suggestions on common error messages and issues. It is recommended that you check your logs for errors as they can provide an idea of what the issue is.</p>
-<p>Check that your AD/LDAP connection settings are correct by running an AD/LDAP user query in an external system. See [LDAP Connection Test Example](<a class="reference external" href="http://ldaptool.sourceforge.net">http://ldaptool.sourceforge.net</a>). If the AD/LDAP connection is verified to be working out side of Mattermost, try the following:</p>
+<p>Check that your AD/LDAP connection settings are correct by running an AD/LDAP user query in an external system. See <a class="reference external" href="http://ldaptool.sourceforge.net">LDAP Connection Test Example</a>. If the AD/LDAP connection is verified to be working out side of Mattermost, try the following:</p>
 <ul class="simple">
-<li><p>Check your AD/LDAP system to verify your <cite>Bind Username</cite> format.</p></li>
+<li><p>Check your AD/LDAP system to verify your <code class="docutils literal notranslate"><span class="pre">Bind</span> <span class="pre">Username</span></code> format.</p></li>
 <li><p>Check your <strong>AD/LDAP Port</strong> and <strong>Connection Security</strong> settings in the System Console. (<strong>AD/LDAP Port</strong> set to 389 typically uses <strong>Connection Security</strong> set to <cite>None</cite>. <strong>AD/LDAP Port</strong> set to 636 typically ties to <strong>Connection Security</strong> set to <strong>TLS</strong>).</p></li>
-<li><p>If you’re seeing <cite>x509: certificate signed by unknown authority</cite> in your logs, try installing an intermediate SSL certificate on the Mattermost servers or have your LDAP server send the complete certificate chain.</p></li>
+<li><p>If you’re seeing <code class="docutils literal notranslate"><span class="pre">x509:</span> <span class="pre">certificate</span> <span class="pre">signed</span> <span class="pre">by</span> <span class="pre">unknown</span> <span class="pre">authority</span></code> in your logs, try installing an intermediate SSL certificate on the Mattermost servers or have your LDAP server send the complete certificate chain.</p></li>
 </ul>
 <p>If these options don’t work, please contact Mattermost support via the email address that came with your license key.</p>
-<p>#### When I first set up and synchronize AD/LDAP, are the users automatically created in Mattermost?</p>
 <p>No, each user is created on their first login.</p>
-<p>#### When I try to synchronize AD/LDAP, why does the Status show as <cite>Pending</cite> and not complete?</p>
-<p>Go to <strong>System Console &gt; AD/LDAP</strong> and make sure that the <strong>Enable Synchronization with AD/LDAP</strong> setting is set to <cite>true</cite>.</p>
-<p>If the issue persists, try performing a sync with the <strong>User Filter</strong> field blank. If the sync completes in this scenario, then the general syntax was formatted incorrectly. Refer to this [document](<a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#user-filter">https://docs.mattermost.com/administration/config-settings.html#user-filter</a>) for guidance on setting a correct syntax format.</p>
+<p>Go to <strong>System Console &gt; AD/LDAP</strong> and make sure that the <strong>Enable Synchronization with AD/LDAP</strong> setting is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+<p>If the issue persists, try performing a sync with the <strong>User Filter</strong> field blank. If the sync completes in this scenario, then the general syntax was formatted incorrectly. Refer to this <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#user-filter">document</a> for guidance on setting a correct syntax format.</p>
 <p>Make sure that you also have at least one LDAP user in Mattermost or the sync will not complete.</p>
-<p>#### What is the difference between the Username Attribute, ID Attribute, and Login ID Attribute?</p>
 <p>There are three AD/LDAP attributes that apear to be similar but serve a different purpose:</p>
 <ol class="arabic simple">
-<li><p><strong>Username Attribute</strong>: Used within the Mattermost user interface to identify and mention users. For example, if <strong>Username Attribute</strong> is set to <cite>john.smith</cite>, a user typing <cite>&#64;john</cite> will see <cite>&#64;john.smith</cite> in their autocomplete options and posting a message with <cite>&#64;john.smith</cite> will send a notification to that user that they’ve been mentioned.</p></li>
-<li><p><strong>ID Attribute</strong>: Used as the unique identifier in Mattermost. It should be an AD/LDAP attribute with a value that does not change, such as <cite>ObjectGUID</cite>. If a user’s ID attribute changes, it will create a new Mattermost account unassociated with their old one. If you need to change this field after users have already logged in, use the [mattermost ldap idmigrate CLI tool](<a class="reference external" href="https://docs.mattermost.com/administration/command-line-tools.html#mattermost-ldap-idmigrate">https://docs.mattermost.com/administration/command-line-tools.html#mattermost-ldap-idmigrate</a>).</p></li>
+<li><p><strong>Username Attribute</strong>: Used within the Mattermost user interface to identify and mention users. For example, if <strong>Username Attribute</strong> is set to <code class="docutils literal notranslate"><span class="pre">john.smith</span></code>, a user typing <code class="docutils literal notranslate"><span class="pre">&#64;john</span></code> will see <code class="docutils literal notranslate"><span class="pre">&#64;john.smith</span></code> in their autocomplete options and posting a message with <code class="docutils literal notranslate"><span class="pre">&#64;john.smith</span></code> will send a notification to that user that they’ve been mentioned.</p></li>
+<li><p><strong>ID Attribute</strong>: Used as the unique identifier in Mattermost. It should be an AD/LDAP attribute with a value that does not change, such as <code class="docutils literal notranslate"><span class="pre">ObjectGUID</span></code>. If a user’s ID attribute changes, it will create a new Mattermost account unassociated with their old one. If you need to change this field after users have already logged in, use the <a class="reference external" href="https://docs.mattermost.com/administration/command-line-tools.html#mattermost-ldap-idmigrate">mattermost ldap idmigrate CLI tool</a>.</p></li>
 <li><p><strong>Login ID Attribute</strong>: The attribute in the AD/LDAP server used to log in to Mattermost. Normally this attribute is the same as the <strong>Username Attribute</strong> field above, or another field that users can easily remember.</p></li>
 </ol>
-<p>#### If I want to add people to channels, can I pre-create users?</p>
-<p>Yes, using the [bulk import tool](<a class="reference external" href="https://docs.mattermost.com/deployment/bulk-loading.html#bulk-loading-data">https://docs.mattermost.com/deployment/bulk-loading.html#bulk-loading-data</a>).</p>
-<p>#### How do I deactivate users?</p>
+<p>Yes, using the <a class="reference external" href="https://docs.mattermost.com/deployment/bulk-loading.html#bulk-loading-data">bulk import tool</a>.</p>
 <p>When AD/LDAP authentication is used in Mattermost, user deactivation must be done via the AD/LDAP server.</p>
 <p>There are two main ways to do this:</p>
 <ol class="arabic simple">
 <li><p><strong>User deletion:</strong> If the user is completely removed from the AD/LDAP server, they will be deactivated in Mattermost on the next synchronization.</p></li>
-<li><p><strong>User filter:</strong> Set the [user filter](<a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#user-filter">https://docs.mattermost.com/administration/config-settings.html#user-filter</a>) to only select the subset of AD/LDAP users you want to have access to Mattermost. When someone is removed from the selected group, they will be deactivated in Mattermost on the next synchronization.</p></li>
+<li><p><strong>User filter:</strong> Set the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#user-filter">user filter</a> to only select the subset of AD/LDAP users you want to have access to Mattermost. When someone is removed from the selected group, they will be deactivated in Mattermost on the next synchronization.</p></li>
 </ol>
 <p>For Active Directory, to filter out deactivated users you must set the user filter to:</p>
-<p><cite>(&amp;(objectCategory=Person)(!(UserAccountControl:1.2.840.113556.1.4.803:=2)))</cite></p>
+<p><code class="docutils literal notranslate"><span class="pre">(&amp;(objectCategory=Person)(!(UserAccountControl:1.2.840.113556.1.4.803:=2)))</span></code></p>
 <p>Filters can also be used for excluding users who belong to certain groups. For Active Directory, the query to filter out groups is:</p>
-<p><cite>(&amp;(memberof=cn=ACME_ALL,ou=Users,dc=sademo,dc=com)</cite></p>
-<p><cite>(!(memberof=cn=DEV_OPS,ou=Users,dc=sademo,dc=com)))</cite></p>
+<p><code class="docutils literal notranslate"><span class="pre">(&amp;(memberof=cn=ACME_ALL,ou=Users,dc=sademo,dc=com)</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">(!(memberof=cn=DEV_OPS,ou=Users,dc=sademo,dc=com)))</span></code></p>
 <p>When a user is deactivated in Mattermost, all the user’s current sessions are revoked and they will be unable to log in or access Mattermost.</p>
-<p>#### Can I connect to multiple Active Directory servers?</p>
 <p>There is currently no built-in way to connect to multiple AD servers. You will need to connect the instances in a forest before connecting to Mattermost.</p>
-<p>Consider upvoting the [feature request](<a class="reference external" href="https://mattermost.uservoice.com/forums/306457-general/suggestions/13589904-add-the-abilitiry">https://mattermost.uservoice.com/forums/306457-general/suggestions/13589904-add-the-abilitiry</a>) on our forum.</p>
-<p>#### When trying to sign in, I see the error <cite>AD/LDAP not available on this server</cite>.</p>
+<p>Consider upvoting the <a class="reference external" href="https://mattermost.uservoice.com/forums/306457-general/suggestions/13589904-add-the-abilitiry">feature request</a> on our forum.</p>
 <p>This indicates that there is a problem somewhere with your configuration. We recommend that you:</p>
 <ol class="arabic simple">
 <li><p>Confirm Enterprise Edition is installed.</p></li>
 <li><p>Check your license to confirm it’s uploaded and not expired.</p></li>
 <li><p>Check your Mattermost configuration settings to ensure that AD/LDAP is enabled, and the settings are correct.</p></li>
 </ol>
-<p>If you’re still having issues, you can [contact support](<a class="reference external" href="https://mattermost.com/support/">https://mattermost.com/support/</a>) for additional troubleshooting.</p>
-<p>#### I see the error <cite>User not registered on AD/LDAP server</cite>.</p>
+<p>If you’re still having issues, you can <a class="reference external" href="https://mattermost.com/support/">contact support</a> for additional troubleshooting.</p>
 <p>This means the query sent back to the AD/LDAP server returned no results. We recommend that you:</p>
 <ol class="arabic simple">
-<li><p>Check that the user credentials were entered properly - you should log in with the field set as the [<cite>ID Attribute</cite>](<a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#id-attribute">https://docs.mattermost.com/administration/config-settings.html#id-attribute</a>).</p></li>
+<li><p>Check that the user credentials were entered properly - you should log in with the field set as the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#id-attribute">ID Attribute</a>.</p></li>
 <li><p>Check that the user account exists in the AD/LDAP server.</p></li>
 <li><p>Check the AD/LDAP configuration settings are correct.</p></li>
 </ol>
-<p>If you’re still having issues, you can [contact support](<a class="reference external" href="https://mattermost.com/support/">https://mattermost.com/support/</a>) for additional troubleshooting.</p>
-<p>#### I updated a user account in AD/LDAP, and they can no longer log in to Mattermost.</p>
+<p>If you’re still having issues, you can <a class="reference external" href="https://mattermost.com/support/">contact support</a> for additional troubleshooting.</p>
 <p>If the user can no longer log in to Mattermost with their AD/LDAP credentials - for example, they get an error message <cite>An account with that email already exists</cite>, or a new Mattermost account is created when they try to log in - this means the <strong>ID Attribute</strong> for their account has changed.</p>
 <p>The issue can be fixed by changing the value of the field used for the <strong>ID Attribute</strong> back to the old value. If you’re currently using a field that sometimes changes for an <strong>ID Attribute</strong> (e.g. username, email that changes when someone gets married), we recommend you switch to using a non-changing field such as a GUID.</p>
 <p>To do this, you can:</p>
 <ol class="arabic simple">
-<li><p>Use the [CLI to migrate the <strong>ID Attribute</strong>](<a class="reference external" href="https://docs.mattermost.com/administration/command-line-tools.html#mattermost-ldap-idmigrate">https://docs.mattermost.com/administration/command-line-tools.html#mattermost-ldap-idmigrate</a>) to a non-changing field.</p></li>
-<li><p>Set the [<strong>Login ID Attribute</strong>](<a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#login-id-attribute">https://docs.mattermost.com/administration/config-settings.html#login-id-attribute</a>) to whatever you would like users to log in with (e.g. username or email).</p></li>
+<li><p>Use the <a class="reference external" href="https://docs.mattermost.com/administration/command-line-tools.html#mattermost-ldap-idmigrate">CLI to migrate the **ID Attribute**</a> to a non-changing field.</p></li>
+<li><p>Set the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#login-id-attribute">**Login ID Attribute**</a> to whatever you would like users to log in with (e.g. username or email).</p></li>
 </ol>
-<p><strong>Note:</strong> Currently the value is case sensitive. If the <strong>ID Attribute</strong> is set to the username and the username changes from <cite>John.Smith</cite> to <cite>john.smith</cite>, the user will experience problems logging in.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Currently the value is case sensitive. If the <strong>ID Attribute</strong> is set to the username and the username changes from <code class="docutils literal notranslate"><span class="pre">John.Smith</span></code> to <code class="docutils literal notranslate"><span class="pre">john.smith</span></code>, the user will experience problems logging in.</p>
+</div>
 <p>This indicates your AD/LDAP server configuration has a maximum page size set and the query coming from Mattermost is returning a result set in excess of that limit.</p>
 <p>To address this issue you can set the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#maximum-page-size">max page size</a> in your Mattermost configuration to match the limit on your AD/LDAP server. This will return a sequence of result sets that do not exceed the max page size, rather than returning all results in a single query. A max page size setting of 1500 is recommended.</p>
 <p>If the error is still occurring, it is likely that no AD/LDAP users have logged into Mattermost yet. Ensure that at least one AD/LDAP user has logged into Mattermost and re-run the sync. The error should disappear at that point.</p>
