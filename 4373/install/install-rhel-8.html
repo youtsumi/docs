@@ -255,68 +255,82 @@
 <div class="section" id="installing-mysql-database-server">
 <span id="install-rhel-8-mysql"></span><h2><a class="toc-backref" href="#install-and-configure-the-components-in-the-following-order-note-that-you-need-only-one-database-either-mysql-or-postgresql">Installing MySQL Database Server</a><a class="headerlink" href="#installing-mysql-database-server" title="Permalink to this headline">¶</a></h2>
 <p>Install and set up the database for use by the Mattermost server. You can install either MySQL or PostgreSQL.</p>
-<p><strong>To install MySQL on RHEL 8:</strong></p>
+<p><strong>To install MySQL on RHEL 8</strong></p>
 <ol class="arabic simple">
 <li><p>Log in to the server that will host the database, and open a terminal window.</p></li>
 <li><p>Install MySQL.</p></li>
 </ol>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">yum</span> <span class="pre">install</span> <span class="pre">mysql-community-release</span></code></p>
-</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you have additional questions about the process reference the MySQL docs <a class="reference external" href="https://dev.mysql.com/doc/mysql-repo-excerpt/5.6/en/linux-installation-yum-repo.html">here</a> that matches your system. If your RHEL is a fresh install, you’ll need to add the <a class="reference external" href="https://dev.mysql.com/doc/mysql-repo-excerpt/5.6/en/linux-installation-yum-repo.html">MySQL Yum repository</a>. You can also use the MySQL repo - <a class="reference external" href="https://repo.mysql.com/">https://repo.mysql.com/</a>.</p>
+</div>
 <ol class="arabic simple" start="3">
+<li><p>Download the latest release package using wget:</p></li>
+</ol>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">wget</span> <span class="pre">https://dev.mysql.com/get/mysql80-community-release-el8-1.noarch.rpm</span></code></p>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li><p>Once downloaded, install it: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">yum</span> <span class="pre">localinstall</span> <span class="pre">platform-and-version-specific-package-name.rpm</span></code>. This will be the rpm package you installed in step 2. Now run a <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">yum</span> <span class="pre">update</span></code>, this could take some time.</p></li>
+<li><p>Next disable the system MySQL:</p></li>
+</ol>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">yum</span> <span class="pre">module</span> <span class="pre">disable</span> <span class="pre">mysql</span></code></p>
+<blockquote>
+<div><p>and then install MySQL.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">yum</span> <span class="pre">install</span> <span class="pre">mysql-community-server</span></code></p>
+</div></blockquote>
+<ol class="arabic simple" start="6">
 <li><p>Start the MySQL server.</p></li>
 </ol>
 <blockquote>
 <div><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">start</span> <span class="pre">mysqld.service</span></code></p>
+</div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<ol class="arabic simple">
-<li><p>The first time that you start MySQL, the superuser account <code class="docutils literal notranslate"><span class="pre">'root'&#64;'localhost'</span></code> is created without a password.</p></li>
-<li><p>Also the first time that you start MySQL, the <code class="docutils literal notranslate"><span class="pre">validate_password</span></code> plugin is installed. The plugin forces passwords to contain at least one upper case letter, one lower case letter, one digit, and one special character, and that the total password length is at least 8 characters.</p></li>
-</ol>
+<p>The first time that you start MySQL, the superuser account <code class="docutils literal notranslate"><span class="pre">'root'&#64;'localhost'</span></code> is created with a password. Run the command below to get this password.
+<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">grep</span> <span class="pre">'temporary</span> <span class="pre">password'</span> <span class="pre">/var/log/mysqld.log</span></code>. Also the first time that you start MySQL, the <code class="docutils literal notranslate"><span class="pre">validate_password</span></code> plugin is installed. The plugin forces passwords to contain at least one upper case letter, one lower case letter, one digit, and one special character, and that the total password length is at least 8 characters.</p>
 </div>
-</div></blockquote>
-<ol class="arabic simple" start="4">
-<li><p>Change the root password. Login with the the command below. Since the password is blank by default just press ENTER when prompted for a password.</p></li>
+<ol class="arabic simple" start="7">
+<li><p>Change the root password. Log in with the the command below. Use the password found in <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">grep</span> <span class="pre">'temporary</span> <span class="pre">password'</span> <span class="pre">/var/log/mysqld.log</span></code>.</p></li>
 </ol>
 <blockquote>
 <div><p><code class="docutils literal notranslate"><span class="pre">mysql</span> <span class="pre">-u</span> <span class="pre">root</span> <span class="pre">-p</span></code></p>
 </div></blockquote>
-<ol class="arabic simple" start="5">
+<ol class="arabic simple" start="8">
 <li><p>Change the password. At the prompt, type the following command. Be sure to replace <code class="docutils literal notranslate"><span class="pre">Password42!</span></code> with the password that you want to use:</p></li>
 </ol>
 <blockquote>
 <div><p><code class="docutils literal notranslate"><span class="pre">mysql&gt;</span> <span class="pre">ALTER</span> <span class="pre">USER</span> <span class="pre">'root'&#64;'localhost'</span> <span class="pre">IDENTIFIED</span> <span class="pre">BY</span> <span class="pre">'Password42!';</span></code></p>
 </div></blockquote>
-<ol class="arabic simple" start="6">
+<ol class="arabic simple" start="9">
 <li><p>Set MySQL to start automatically when the machine starts.</p></li>
 </ol>
 <blockquote>
 <div><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">enable</span> <span class="pre">mysqld</span></code></p>
 </div></blockquote>
-<ol class="arabic simple" start="7">
+<ol class="arabic simple" start="10">
 <li><p>Create the Mattermost user <em>mmuser</em>.</p></li>
 </ol>
 <blockquote>
 <div><p><code class="docutils literal notranslate"><span class="pre">mysql&gt;</span> <span class="pre">create</span> <span class="pre">user</span> <span class="pre">'mmuser'&#64;'%'</span> <span class="pre">identified</span> <span class="pre">by</span> <span class="pre">'mmuser-password';</span></code></p>
+</div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<ol class="arabic simple">
-<li><p>Use a password that is more secure than ‘mmuser-password’.</p></li>
-<li><p>The ‘%’ means that mmuser can connect from any machine on the network. However, it’s more secure to use the IP address of the machine that hosts Mattermost. For example, if you install Mattermost on the machine with IP address 10.10.10.2, then use the following command:</p></li>
-</ol>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">mysql&gt;</span> <span class="pre">create</span> <span class="pre">user</span> <span class="pre">'mmuser'&#64;'10.10.10.2'</span> <span class="pre">identified</span> <span class="pre">by</span> <span class="pre">'mmuser-password';</span></code></p>
-</div></blockquote>
+<ul class="simple">
+<li><p>Use a password that’s more secure than <em>mmuser-password</em>.</p></li>
+<li><p>The ‘%’ means that <em>mmuser</em> can connect from any machine on the network. However, it’s more secure to use the IP address of the machine that hosts Mattermost.     For example, if you install Mattermost on the machine with IP address 10.10.10.2, then use the following command:</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">mysql&gt;</span> <span class="pre">create</span> <span class="pre">user</span> <span class="pre">'mmuser'&#64;'10.10.10.2'</span> <span class="pre">identified</span> <span class="pre">by</span> <span class="pre">'mmuser-password';</span></code></p>
 </div>
-</div></blockquote>
-<ol class="arabic simple" start="8">
+<ol class="arabic simple" start="11">
 <li><p>Create the Mattermost database.</p></li>
 </ol>
 <blockquote>
 <div><p><code class="docutils literal notranslate"><span class="pre">mysql&gt;</span> <span class="pre">create</span> <span class="pre">database</span> <span class="pre">mattermost;</span></code></p>
 </div></blockquote>
-<ol class="arabic simple" start="9">
+<ol class="arabic simple" start="12">
 <li><p>Grant access privileges to the user <em>mmuser</em>.</p></li>
 </ol>
 <blockquote>
