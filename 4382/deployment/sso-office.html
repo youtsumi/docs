@@ -256,6 +256,29 @@
 <p class="last">If you do not use Azure Active Directory, you may register Mattermost with your Office 365 or Azure account (a personal, work, or school account), then set up Office 365 SSO with Mattermost using the steps provided above.</p>
 </div>
 </div>
+<div class="section" id="confgure-mattermost-config-json-for-office-365-sso">
+<h3>Confgure Mattermost config.json for Office 365 SSO<a class="headerlink" href="#confgure-mattermost-config-json-for-office-365-sso" title="Permalink to this headline">¶</a></h3>
+<p>Instead of using the System Console, you can add the Office 365 settings directly to the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file directly on your Mattermost server.</p>
+<ol class="arabic simple">
+<li>Open <code class="docutils literal notranslate"><span class="pre">config.json</span></code> as root in a text editor. It’s usually in <code class="docutils literal notranslate"><span class="pre">/opt/mattermost/config</span></code> but it might be elsewhere on your system.</li>
+<li>Locate the <code class="docutils literal notranslate"><span class="pre">Office365Settings</span></code> section, then add or update the following information:</li>
+</ol>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&quot;Enable&quot;: false,
+      &quot;Secret&quot;: &quot;i.hddd6Pu3--5dg~cRddddqOrBdd1a&quot;,
+      &quot;Id&quot;: &quot;28ddd714-1f2f-4f9c-9486-90b8dddd27&quot;,
+      &quot;Scope&quot;: &quot;profile openid email&quot;,
+      &quot;AuthEndpoint&quot;: &quot;&quot;,
+      &quot;TokenEndpoint&quot;: &quot;&quot;,
+      &quot;UserApiEndpoint&quot;: &quot;&quot;,
+      &quot;DiscoveryEndpoint&quot;: &quot;https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration&quot;,
+      &quot;DirectoryId&quot;: &quot;common&quot;
+}
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>Save your changes, then restart your Mattermost server. After the server restarts, users must change their sign-in method before they can sign in with Office 365.</li>
+</ol>
+</div>
 </div>
 </div>
 
