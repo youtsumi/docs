@@ -246,48 +246,48 @@
 <li>ADFS installed on your Microsoft Server. You can find a detailed guide for deploying and configuring ADFS in <a class="reference external" href="https://msdn.microsoft.com/en-us/library/gg188612.aspx">this article</a>.</li>
 </ul>
 </div></blockquote>
-<p>On your ADFS installation, open the ADFS console. Select <strong>Service</strong> and then <strong>Endpoints</strong>. In the <strong>Type</strong> column search for <code class="docutils literal notranslate"><span class="pre">SAML</span> <span class="pre">2.0/WS-Federation</span></code> and note down the value of <strong>URL Path</strong> column. This is also known as the <strong>SAML SSO URL Endpoint</strong> in this guide. If you chose the defaults for the installation, this will be <code class="docutils literal notranslate"><span class="pre">/adfs/ls</span></code>.</p>
+<p>On your ADFS installation, open the ADFS console. Select <strong>Service</strong>, then select <strong>Endpoints</strong>. In the <strong>Type</strong> column, search for <code class="docutils literal notranslate"><span class="pre">SAML</span> <span class="pre">2.0/WS-Federation</span></code> and note down the value of <strong>URL Path</strong> column. This is also known as the <strong>SAML SSO URL Endpoint</strong> in this guide. If you chose the defaults for the installation, this will be <code class="docutils literal notranslate"><span class="pre">/adfs/ls</span></code>.</p>
 </div>
 <div class="section" id="add-a-relying-party-trust">
 <h2><a class="toc-backref" href="#contents">Add a Relying Party Trust</a><a class="headerlink" href="#add-a-relying-party-trust" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p class="first">Open the ADFS management snap-in and select <strong>AD FS &gt; Relying Party Trusts &gt; Add Relying Party Trust</strong> on the right sidebar. You can also right-click <strong>Relying Party Trusts</strong> and choose <strong>Add Relying Party Trust</strong> from the context menu.</p>
+<li><p class="first">Open the ADFS management snap-in, then select <strong>AD FS &gt; Relying Party Trusts &gt; Add Relying Party Trust</strong> from the right sidebar. You can also right-click <strong>Relying Party Trusts</strong>, then select <strong>Add Relying Party Trust</strong> from the context menu.</p>
 <blockquote>
 <div><img alt="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_000.png" src="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_000.png" />
 </div></blockquote>
 </li>
-<li><p class="first">In the <strong>Welcome</strong> screen of the configuration wizard choose <strong>Claims aware</strong> and select <strong>Start</strong>.</p>
+<li><p class="first">On the <strong>Welcome</strong> screen of the configuration wizard, select <strong>Claims aware</strong>, then select <strong>Start</strong>.</p>
 <blockquote>
 <div><img alt="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_001.png" src="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_001.png" />
 </div></blockquote>
 </li>
-<li><p class="first">In the <strong>Select Data Source</strong> screen, choose <strong>Enter data about the relying party manually</strong>.</p>
+<li><p class="first">On the <strong>Select Data Source</strong> screen, select <strong>Enter data about the relying party manually</strong>.</p>
 <blockquote>
 <div><img alt="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_002.png" src="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_002.png" />
 </div></blockquote>
 </li>
-<li><p class="first">In the <strong>Specify Display Name</strong> screen enter a <strong>Display Name</strong> (e.g., <code class="docutils literal notranslate"><span class="pre">Mattermost</span></code>). You can add optional notes.</p>
+<li><p class="first">On the <strong>Specify Display Name</strong> screen, enter a <strong>Display Name</strong> (e.g., <code class="docutils literal notranslate"><span class="pre">Mattermost</span></code>). You can add optional notes.</p>
 <blockquote>
 <div><img alt="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_003.png" src="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_003.png" />
 </div></blockquote>
 </li>
-<li><p class="first">In the <strong>Configure Certificate</strong> screen, leave the certificate settings at their default values.</p>
+<li><p class="first">On the <strong>Configure Certificate</strong> screen, leave the certificate settings at their default values.</p>
 <blockquote>
 <div><img alt="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_004.png" src="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_004.png" />
 </div></blockquote>
 </li>
 </ol>
-<p>If you would like to set up encryption for your SAML connection, select <strong>Browse</strong> and upload your Service Provider Public Certificate.</p>
+<p>If you would like to set up encryption for your SAML connection, select <strong>Browse</strong>, then upload your Service Provider Public Certificate.</p>
 <blockquote>
 <div><img alt="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_005.png" src="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_005.png" />
 </div></blockquote>
 <ol class="arabic" start="6">
-<li><p class="first">In the <strong>Configure URL</strong> screen, select <strong>Enable Support for the SAML 2.0 WebSSO protocol</strong> and enter the <strong>SAML 2.0 SSO service URL</strong> in the following format:<code class="docutils literal notranslate"><span class="pre">https://&lt;your-mattermost-url&gt;/login/sso/saml</span></code> where <code class="docutils literal notranslate"><span class="pre">&lt;your-mattermost-url&gt;</span></code> should typically match the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#site-url">Mattermost Site URL</a>.</p>
+<li><p class="first">On the <strong>Configure URL</strong> screen, select <strong>Enable Support for the SAML 2.0 WebSSO protocol</strong>, then enter the <strong>SAML 2.0 SSO service URL</strong> in the following format:<code class="docutils literal notranslate"><span class="pre">https://&lt;your-mattermost-url&gt;/login/sso/saml</span></code> where <code class="docutils literal notranslate"><span class="pre">&lt;your-mattermost-url&gt;</span></code> should typically match the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#site-url">Mattermost Site URL</a>.</p>
 <blockquote>
 <div><img alt="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_006.png" src="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_006.png" />
 </div></blockquote>
 </li>
-<li><p class="first">In the <strong>Configure Identifiers</strong> screen, enter the <strong>Relying party trust identifier</strong>. This identifies the claims being requested. The <strong>SAML 2.0 SSO service URL</strong> format should be <code class="docutils literal notranslate"><span class="pre">https://&lt;your-mattermost-url&gt;/login/sso/saml</span></code> where <code class="docutils literal notranslate"><span class="pre">&lt;your-mattermost-url&gt;</span></code> matches your <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#site-url">Mattermost Site URL</a>. Then choose <strong>Next</strong>.</p>
+<li><p class="first">On the <strong>Configure Identifiers</strong> screen, enter the <strong>Relying party trust identifier</strong>. This identifies the claims being requested. The <strong>SAML 2.0 SSO service URL</strong> format should be <code class="docutils literal notranslate"><span class="pre">https://&lt;your-mattermost-url&gt;/login/sso/saml</span></code> where <code class="docutils literal notranslate"><span class="pre">&lt;your-mattermost-url&gt;</span></code> matches your <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#site-url">Mattermost Site URL</a>. Then choose <strong>Next</strong>.</p>
 <blockquote>
 <div><img alt="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_007.png" src="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_007.png" />
 <img alt="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_008.png" src="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_008.png" />
@@ -295,19 +295,19 @@
 </li>
 </ol>
 <p>This string must match the <strong>Service Provider Identifier</strong> string. For more information about the Relying party trust identifier and how prefix matching is applied see <a class="reference external" href="https://docs.microsoft.com/en-us/windows-server/identity/ad-fs/technical-reference/how-uris-are-used-in-ad-fs">this documentation</a>.</p>
-<p>Add your <strong>SAML 2.0 SSO service URL</strong> from above the same way.</p>
+<p>Add your <strong>SAML 2.0 SSO service URL</strong> using this same process.</p>
 <ol class="arabic" start="8">
-<li><p class="first">In the <strong>Choose Access Control Policy</strong> screen select the access control policy suitable for your environment. This guide assumes the default values <strong>Permit everyone</strong> and an unchecked box.</p>
+<li><p class="first">On the <strong>Choose Access Control Policy</strong> screen, select the access control policy suitable for your environment. This guide assumes the default values <strong>Permit everyone</strong> and an unchecked box.</p>
 <blockquote>
 <div><img alt="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_009.png" src="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_009.png" />
 </div></blockquote>
 </li>
-<li><p class="first">In the <strong>Ready to Add Trust</strong> screen, you can review your settings.</p>
+<li><p class="first">On the <strong>Ready to Add Trust</strong> screen, review your settings.</p>
 <blockquote>
 <div><img alt="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_010.png" src="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_010.png" />
 </div></blockquote>
 </li>
-<li><p class="first">In the <strong>Finish</strong> screen select <strong>Configure claims issuance policy for this application</strong> and then <strong>Close</strong>.</p>
+<li><p class="first">On the <strong>Finish</strong> screen, select <strong>Configure claims issuance policy for this application</strong>, then select <strong>Close</strong>.</p>
 <blockquote>
 <div><img alt="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_011.png" src="../_images/SSO-SAML-ADFS_add-new-relying-party-trust_011.png" />
 </div></blockquote>
@@ -317,17 +317,17 @@
 <div class="section" id="create-claim-rules">
 <h2><a class="toc-backref" href="#contents">Create Claim Rules</a><a class="headerlink" href="#create-claim-rules" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p class="first">In the <strong>Issuance Transform Rules</strong> tab of the <strong>Claim Rules</strong> editor, choose <strong>Add Rule…</strong>.</p>
+<li><p class="first">In the <strong>Issuance Transform Rules</strong> tab of the <strong>Claim Rules</strong> editor, select <strong>Add Rule…</strong>.</p>
 <blockquote>
 <div><img alt="../_images/SSO-SAML-ADFS_create-claim-rules_001.png" src="../_images/SSO-SAML-ADFS_create-claim-rules_001.png" />
 </div></blockquote>
 </li>
-<li><p class="first">In the <strong>Choose Rule Type</strong> screen, select <strong>Send LDAP Attributes as Claims</strong> from the drop-down menu, then click <strong>Next</strong>.</p>
+<li><p class="first">On the <strong>Choose Rule Type</strong> screen, select <strong>Send LDAP Attributes as Claims</strong> from the drop-down menu, then select <strong>Next</strong>.</p>
 <blockquote>
 <div><img alt="../_images/SSO-SAML-ADFS_create-claim-rules_002.png" src="../_images/SSO-SAML-ADFS_create-claim-rules_002.png" />
 </div></blockquote>
 </li>
-<li><p class="first">In the <strong>Configure Claim Rule</strong> screen, enter a <strong>Claim Rule Name</strong> of your choice, select <strong>Active Directory</strong> as the <strong>Attribute Store</strong> and add the following mapping:</p>
+<li><p class="first">On the <strong>Configure Claim Rule</strong> screen, enter a <strong>Claim Rule Name</strong> of your choice, select <strong>Active Directory</strong> as the <strong>Attribute Store</strong>, then add the following mapping:</p>
 </li>
 </ol>
 <blockquote>
@@ -341,70 +341,73 @@
 </div></blockquote>
 <p>From Mattermost version 3.4, the <code class="docutils literal notranslate"><span class="pre">FirstName</span></code> and <code class="docutils literal notranslate"><span class="pre">LastName</span></code> attributes are optional.</p>
 <p>Select <strong>Finish</strong> to add the rule.</p>
-<p>The entries in the <strong>Outgoing Claim Type</strong> column can be modified and the entries may contain dashes but no spaces. They are used to map the corresponding fields in Mattermost.</p>
+<p>The entries in the <strong>Outgoing Claim Type</strong> column can be modified. The entries may contain dashes but no spaces. They are used to map the corresponding fields in Mattermost.</p>
 <blockquote>
 <div><img alt="../_images/SSO-SAML-ADFS_create-claim-rules_003.png" src="../_images/SSO-SAML-ADFS_create-claim-rules_003.png" />
 </div></blockquote>
 <ol class="arabic" start="4">
 <li><p class="first">Select <strong>Add Rule</strong> to create another new rule.</p>
 </li>
-<li><p class="first">In the <strong>Choose Rule Type</strong> screen, select <strong>Transform an Incoming Claim</strong> from the drop-down menu, then click <strong>Next</strong>.</p>
+<li><p class="first">On the <strong>Choose Rule Type</strong> screen, select <strong>Transform an Incoming Claim</strong> from the drop-down menu, then select <strong>Next</strong>.</p>
 <blockquote>
 <div><img alt="../_images/SSO-SAML-ADFS_create-claim-rules_004.png" src="../_images/SSO-SAML-ADFS_create-claim-rules_004.png" />
 </div></blockquote>
 </li>
-<li><p class="first">In the <strong>Configure Claim Rule</strong> screen, enter a <strong>Claim Rule Name</strong> of your choice, then</p>
+<li><p class="first">On the <strong>Configure Claim Rule</strong> screen, enter a <strong>Claim Rule Name</strong> of your choice, then:</p>
 </li>
 </ol>
 <blockquote>
 <div><ul class="simple">
-<li>Select <em>Name ID</em> for the <strong>Incoming claim type</strong></li>
-<li>Select <em>Unspecified</em> for the <strong>Incoming name ID format</strong></li>
-<li>Select <em>E-Mail Address</em> for the <strong>Outgoing claim type</strong></li>
+<li>Select <strong>Name ID</strong> for the <strong>Incoming claim type</strong></li>
+<li>Select <strong>Unspecified</strong> for the <strong>Incoming name ID format</strong></li>
+<li>Select <strong>E-Mail Address</strong> for the <strong>Outgoing claim type</strong></li>
 </ul>
 </div></blockquote>
-<p>Select the <strong>Pass through all claim values</strong> option and click <strong>Finish</strong>.</p>
+<p>Select <strong>Pass through all claim values</strong>, then select <strong>Finish</strong>.</p>
 <blockquote>
 <div><img alt="../_images/SSO-SAML-ADFS_create-claim-rules_005.png" src="../_images/SSO-SAML-ADFS_create-claim-rules_005.png" />
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li>Click <strong>Finish</strong> to create the claim rule, then <strong>OK</strong> to finish creating rules.</li>
-<li>Open Windows PowerShell as an administrator and run the following command:</li>
+<li>Select <strong>Finish</strong> to create the claim rule, then select <strong>OK</strong> to finish creating rules.</li>
+<li>Open Windows PowerShell as an administrator, then run the following command:</li>
 </ol>
 <blockquote>
 <div><code class="docutils literal notranslate"><span class="pre">Set-ADFSRelyingPartyTrust</span> <span class="pre">-TargetName</span> <span class="pre">&lt;display-name&gt;</span> <span class="pre">-SamlResponseSignature</span> <span class="pre">&quot;MessageAndAssertion&quot;</span></code></div></blockquote>
-<p>where <em>&lt;display-name&gt;</em> is the name you specified in step 4 of <em>Add a Relying Party Trust</em>. In our example it would be <code class="docutils literal notranslate"><span class="pre">mattermost</span></code>.</p>
-<p>This action will add the signature to SAML messages, making verification successful.</p>
+<p>where <em>&lt;display-name&gt;</em> is the name you specified in step 4 when you added a relying party trust*. In this example,  <em>&lt;display-name&gt;</em> would be <code class="docutils literal notranslate"><span class="pre">mattermost</span></code>.</p>
+<p>This action adds the signature to SAML messages, making verification successful.</p>
 </div>
 <div class="section" id="export-identity-provider-certificate">
 <h2><a class="toc-backref" href="#contents">Export Identity Provider Certificate</a><a class="headerlink" href="#export-identity-provider-certificate" title="Permalink to this headline">¶</a></h2>
-<p>Next, we export the identity provider certificate, which will be later uploaded to Mattermost to finish SAML configuration.</p>
+<p>Next, export the identity provider certificate, which will be later uploaded to Mattermost to finish SAML configuration.</p>
 <ol class="arabic">
-<li><p class="first">Open the ADFS management snap-in, select <strong>AD FS &gt; Service &gt; Certificates</strong> and double click on the certificate under <strong>Token-signing</strong>. You can also right-click the field, then click <strong>View Certificate</strong> in the context menu.</p>
+<li><p class="first">Open the ADFS management snap-in, select <strong>AD FS &gt; Service &gt; Certificates</strong>, then double-click on the certificate under <strong>Token-signing</strong>. You can also right-click the field, then select <strong>View Certificate</strong> in the context menu.</p>
 <blockquote>
 <div><img alt="../_images/SSO-SAML-ADFS_export-id-provider-cert_001.png" src="../_images/SSO-SAML-ADFS_export-id-provider-cert_001.png" />
 </div></blockquote>
 </li>
-<li><p class="first">In the <strong>Certificate</strong> screen open the the <strong>Details</strong> tab, select <strong>Copy to File</strong> and then <strong>OK</strong>.</p>
+<li><p class="first">On the <strong>Certificate</strong> screen, open the <strong>Details</strong> tab, select <strong>Copy to File</strong>, then select <strong>OK</strong>.</p>
 <blockquote>
 <div><img alt="../_images/SSO-SAML-ADFS_export-id-provider-cert_003.png" src="../_images/SSO-SAML-ADFS_export-id-provider-cert_003.png" />
 </div></blockquote>
 </li>
-<li><p class="first">In the <strong>Certificate Export Wizard</strong> screen, click <strong>Next</strong>.</p>
+<li><p class="first">On the <strong>Certificate Export Wizard</strong> screen, select <strong>Next</strong>.</p>
 <blockquote>
 <div><img alt="../_images/SSO-SAML-ADFS_export-id-provider-cert_004.png" src="../_images/SSO-SAML-ADFS_export-id-provider-cert_004.png" />
-<p>Then, select the option <strong>Base-64 encoded X.509 (.CER)</strong> and click <strong>Next</strong> again.</p>
-<img alt="../_images/SSO-SAML-ADFS_export-id-provider-cert_005.png" src="../_images/SSO-SAML-ADFS_export-id-provider-cert_005.png" />
 </div></blockquote>
 </li>
-<li><p class="first">In the <strong>Certificate Export Wizard</strong> screen, click <strong>Browse</strong> to specify the location you want the Identity Provider Certificate to be exported, and specify the file name.</p>
+<li><p class="first">Select <strong>Base-64 encoded X.509 (.CER)</strong>, then select <strong>Next</strong> again.</p>
+<blockquote>
+<div><img alt="../_images/SSO-SAML-ADFS_export-id-provider-cert_005.png" src="../_images/SSO-SAML-ADFS_export-id-provider-cert_005.png" />
+</div></blockquote>
+</li>
+<li><p class="first">On the <strong>Certificate Export Wizard</strong> screen, select <strong>Browse</strong> to specify the location where you want the Identity Provider Certificate to be exported, then specify the file name.</p>
 <blockquote>
 <div><img alt="../_images/SSO-SAML-ADFS_export-id-provider-cert_006.png" src="../_images/SSO-SAML-ADFS_export-id-provider-cert_006.png" />
 </div></blockquote>
 </li>
-<li><p class="first">Click <strong>Save</strong>. In the <strong>Certificate Export Wizard</strong> screen, verify the file path is correct, and click <strong>Next</strong>.</p>
+<li><p class="first">Select <strong>Save</strong>. On the <strong>Certificate Export Wizard</strong> screen, verify the file path is correct, then select <strong>Next</strong>.</p>
 </li>
-<li><p class="first">In the <strong>Completing the Certificate Export Wizard</strong>, click <strong>Finish</strong>, then <strong>OK</strong> to confirm the export was successful.</p>
+<li><p class="first">In the <strong>Completing the Certificate Export Wizard</strong>, select <strong>Finish</strong>, then select <strong>OK</strong> to confirm the export was successful.</p>
 <blockquote>
 <div><img alt="../_images/SSO-SAML-ADFS_export-id-provider-cert_007.png" src="../_images/SSO-SAML-ADFS_export-id-provider-cert_007.png" />
 </div></blockquote>
@@ -414,8 +417,8 @@
 <div class="section" id="configure-saml-sign-in-for-mattermost">
 <h2><a class="toc-backref" href="#contents">Configure SAML Sign-in for Mattermost</a><a class="headerlink" href="#configure-saml-sign-in-for-mattermost" title="Permalink to this headline">¶</a></h2>
 <p>Create a metadata URL by appending “FederationMetadata/2007-06/FederationMetadata.xml” to the root URL of the ADFS server, for example: <code class="docutils literal notranslate"><span class="pre">https://&lt;adfs.domain.com&gt;/federationmetadata/2007-06/FederationMetadata.xml&gt;</span></code>.</p>
-<p>Next, start Mattermost server and sign into Mattermost as a System Administrator. Go to <strong>System Console &gt; Authentication &gt; SAML</strong>, paste the  metadata URL in the <strong>Identity Provider Metadata URL</strong> field, and then select <strong>Get SAML Metadata from IdP</strong>.</p>
-<p>This populates the <strong>SAML SSO URL</strong> and the <strong>Identity Provider Issuer URL</strong> fields automatically and the Identity Provider Public Certificate is also downloaded from the server and set locally.</p>
+<p>Next, start the Mattermost server, then sign into Mattermost as a System Administrator. Go to <strong>System Console &gt; Authentication &gt; SAML</strong>, paste the metadata URL in the <strong>Identity Provider Metadata URL</strong> field, then select <strong>Get SAML Metadata from IdP</strong>.</p>
+<p>This populates the <strong>SAML SSO URL</strong> and the <strong>Identity Provider Issuer URL</strong> fields automatically. The Identity Provider Public Certificate is also downloaded from the server and set locally.</p>
 <dl class="docutils">
 <dt>The following fields can be selected:</dt>
 <dd><ul class="first last simple">
@@ -424,7 +427,7 @@
 <li>Set <strong>Override SAML bind data with AD/LDAP information</strong> to suit your environment.</li>
 </ul>
 </dd>
-<dt>If you don’t plan to use a metadata URL you can manually enter the following fields:</dt>
+<dt>If you don’t plan to use a metadata URL, you can manually enter the following fields:</dt>
 <dd><ul class="first last">
 <li><p class="first">For <strong>SAML SSO URL</strong> use the <code class="docutils literal notranslate"><span class="pre">SAML</span> <span class="pre">2.0/W-Federation</span> <span class="pre">URL</span> <span class="pre">ADFS</span> <span class="pre">Endpoint</span></code> you copied at the beginning of the process.</p>
 </li>
@@ -478,12 +481,12 @@
 <div><img alt="../_images/SSO-SAML-ADFS_configure-saml_004.png" src="../_images/SSO-SAML-ADFS_configure-saml_004.png" />
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li>Click <strong>Save</strong>.</li>
-<li>(Optional) If you configured First Name Attribute and Last Name Attribute, go to <strong>System Console &gt; Site Configuration &gt; Users and Teams</strong> (or <strong>System Console &gt; General &gt; Users and Teams</strong> in versions prior to 5.12) and set <strong>Teammate Name Display</strong> to <strong>Show first and last name</strong>. This is recommended for a better user experience.</li>
+<li>Select <strong>Save</strong>.</li>
+<li>(Optional) If you configured <code class="docutils literal notranslate"><span class="pre">First</span> <span class="pre">Name</span></code> Attribute and the <code class="docutils literal notranslate"><span class="pre">Last</span> <span class="pre">Name</span></code> Attribute, go to <strong>System Console &gt; Site Configuration &gt; Users and Teams</strong> (or <strong>System Console &gt; General &gt; Users and Teams</strong> in versions prior to 5.12), then set <strong>Teammate Name Display</strong> to <strong>Show first and last name</strong>. This is recommended for a better user experience.</li>
 </ol>
-<p>You’re done! If you’d like to confirm SAML SSO is successfully enabled, switch your System Administrator account from email to SAML-based authentication via <strong>Account Settings &gt; General &gt; Sign-in Method &gt; Switch to SAML SSO</strong> and sign in with your SAML credentials to complete the switch.</p>
-<p>It’s also recommended to post an announcement about how the migration will work to users.</p>
-<p>You may also configure SAML for ADFS by editing <code class="docutils literal notranslate"><span class="pre">config.json</span></code> to enable SAML based on <a class="reference internal" href="../administration/prev-config-settings.html#saml-enterprise"><span class="std std-ref">SAML configuration settings</span></a>. You must restart the Mattermost server for the changes to take effect.</p>
+<p>You’re done! If you’d like to confirm SAML SSO is successfully enabled, switch your System Administrator account from email to SAML-based authentication via <strong>Account Settings &gt; General &gt; Sign-in Method &gt; Switch to SAML SSO</strong>, then sign in with your SAML credentials to complete the switch.</p>
+<p>We also recommend that you post an announcement about how the migration will work to your users.</p>
+<p>You may also configure SAML for ADFS by editing the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file to enable SAML based on <a class="reference internal" href="../administration/prev-config-settings.html#saml-enterprise"><span class="std std-ref">SAML configuration settings</span></a>. You must restart the Mattermost server for the changes to take effect.</p>
 </div>
 <div class="section" id="frequently-asked-questions">
 <h2><a class="toc-backref" href="#contents">Frequently Asked Questions</a><a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h2>

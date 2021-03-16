@@ -236,13 +236,13 @@
 <div class="section" id="set-up-a-connection-app-for-mattermost-sso">
 <h2><a class="toc-backref" href="#contents">Set Up a Connection App for Mattermost SSO</a><a class="headerlink" href="#set-up-a-connection-app-for-mattermost-sso" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p class="first">Sign into Okta as an administrator.</p>
+<li><p class="first">Sign in to Okta as an administrator.</p>
 </li>
 <li><p class="first">Switch to the <strong>Classic UI</strong>, using the drop-down in the upper left.</p>
 </li>
 <li><p class="first">Go to <strong>Admin Dashboard &gt; Applications &gt; Add Application</strong>.</p>
 </li>
-<li><p class="first">Click <strong>Create New App</strong> and choose <strong>SAML 2.0</strong> as the Sign on method.</p>
+<li><p class="first">Select <strong>Create New App</strong>, then choose <strong>SAML 2.0</strong> as the Sign on method.</p>
 <blockquote>
 <div><img alt="../_images/okta_1_new_app.PNG" src="../_images/okta_1_new_app.PNG" />
 </div></blockquote>
@@ -250,11 +250,9 @@
 <li><p class="first">Enter <strong>General Settings</strong> for the application, including <strong>App name</strong> and <strong>App logo</strong> (optional). It’s recommended to display the application icon to users, including in the Okta Mobile app.</p>
 </li>
 </ol>
-<blockquote>
-<div><p>If you’d like to use a Mattermost logo for the application, you can download one <a class="reference external" href="https://mattermost.org/brand-guidelines/">from our page</a>.</p>
+<p>If you’d like to use a Mattermost logo for the application, you can download one <a class="reference external" href="https://mattermost.org/brand-guidelines/">from our page</a>.</p>
 <blockquote>
 <div><img alt="../_images/okta_2_general_settings.PNG" src="../_images/okta_2_general_settings.PNG" />
-</div></blockquote>
 </div></blockquote>
 <ol class="arabic simple" start="6">
 <li>Enter <strong>SAML Settings</strong>, including:</li>
@@ -275,12 +273,12 @@
 </ul>
 </div></blockquote>
 <ol class="arabic" start="7">
-<li><p class="first">To set up encryption for your SAML connection select <strong>Show Advanced Settings</strong>.</p>
+<li><p class="first">To set up encryption for your SAML connection, select <strong>Show Advanced Settings</strong>.</p>
 <blockquote>
 <div><img alt="../_images/okta_4_initial_saml_settings.PNG" src="../_images/okta_4_initial_saml_settings.PNG" />
 </div></blockquote>
 </li>
-<li><p class="first">Set <strong>Assertion Encryption</strong> as <strong>Encrypted</strong> and upload the Service Provider Public Certificate you generated in step 2 to the <strong>Encryption Certificate</strong> field.</p>
+<li><p class="first">Set <strong>Assertion Encryption</strong> as <strong>Encrypted</strong>, then upload the Service Provider Public Certificate you generated earlier to the <strong>Encryption Certificate</strong> field.</p>
 <blockquote>
 <div><img alt="../_images/okta_5_advanced_saml_settings.PNG" src="../_images/okta_5_advanced_saml_settings.PNG" />
 </div></blockquote>
@@ -290,7 +288,7 @@
 <div><img alt="../_images/okta_6_attribute_statements.PNG" src="../_images/okta_6_attribute_statements.PNG" />
 </div></blockquote>
 </li>
-<li><p class="first">Click <strong>Next</strong>. Then, set Okta support parameters for the application. Recommended settings:</p>
+<li><p class="first">Select <strong>Next</strong>. Then, set Okta support parameters for the application. Recommended settings:</p>
 </li>
 </ol>
 <blockquote>
@@ -304,16 +302,14 @@
 </li>
 </ul>
 </div></blockquote>
-<ol class="arabic simple" start="11">
-<li>Click <strong>Finish</strong>. On the next screen, click the <strong>Sign On</strong> tab and click <strong>View Setup Instructions</strong>.</li>
-</ol>
-<blockquote>
-<div><p>11.1 Select the <strong>Identity Provider metadata</strong> link and copy the link from the browser URL box. This will be used during the SAML configuration steps in the next section.</p>
+<ol class="arabic" start="11">
+<li><p class="first">Select <strong>Finish</strong>. On the next screen, select the <strong>Sign On</strong> tab, then select <strong>View Setup Instructions</strong>.</p>
+</li>
+<li><p class="first">Select the <strong>Identity Provider metadata</strong> link, then copy the link from the browser URL box. This will be used during the SAML configuration steps in the next section.</p>
 <blockquote>
 <div><img alt="../_images/okta_8_view_instructions.PNG" src="../_images/okta_8_view_instructions.PNG" />
 </div></blockquote>
-</div></blockquote>
-<ol class="arabic" start="12">
+</li>
 <li><p class="first">Take note of <strong>Identity Provider Single Sign-On URL</strong> (also known as <strong>SAML SSO URL</strong>), and the Identity Provider Issuer, as both may be needed to configure SAML for Mattermost. Additionally, ensure you download the X.509 Certificate file and save it. You may need to upload it to Mattermost in a later step.</p>
 <blockquote>
 <div><img alt="../_images/okta_9_view_instructions.PNG" src="../_images/okta_9_view_instructions.PNG" />
@@ -323,8 +319,8 @@
 </div>
 <div class="section" id="configure-saml-sign-in-for-mattermost">
 <h2><a class="toc-backref" href="#contents">Configure SAML Sign-in for Mattermost</a><a class="headerlink" href="#configure-saml-sign-in-for-mattermost" title="Permalink to this headline">¶</a></h2>
-<p>Start Mattermost server and sign into Mattermost as a System Administrator. Go to <strong>System Console &gt; Authentication &gt; SAML</strong>, and paste the copied Identity Provider Metadata URL in the <strong>Identity Provider Metadata URL</strong> field, then select <strong>Get SAML Metadata from IdP</strong>.</p>
-<p>This populates the <strong>SAML SSO URL</strong> and the <strong>Identity Provider Issuer URL</strong> fields automatically and the Identity Provider Public Certificate is also downloaded from the server and set locally.</p>
+<p>Start the Mattermost server and sign into Mattermost as a System Administrator. Go to <strong>System Console &gt; Authentication &gt; SAML</strong>, and paste the copied Identity Provider Metadata URL in the <strong>Identity Provider Metadata URL</strong> field, then select <strong>Get SAML Metadata from IdP</strong>.</p>
+<p>This populates the <strong>SAML SSO URL</strong> and the <strong>Identity Provider Issuer URL</strong> fields automatically. The Identity Provider Public Certificate is also downloaded from the server and set locally.</p>
 <dl class="docutils">
 <dt>Alternatively you can enter the following fields manually:</dt>
 <dd><ul class="first last">
@@ -366,14 +362,14 @@
 <div><img alt="../_images/okta_14_mattermost_login_button.PNG" src="../_images/okta_14_mattermost_login_button.PNG" />
 </div></blockquote>
 </li>
-<li><p class="first">Click <strong>Save</strong>.</p>
+<li><p class="first">Select <strong>Save</strong>.</p>
 </li>
-<li><p class="first">(Optional) If you configured First Name Attribute and Last Name Attribute, go to <strong>System Console</strong> &gt; <strong>Site Configuration</strong> &gt; <strong>Users and Teams</strong> (or <strong>System Console &gt; General &gt; Users and Teams</strong> in versions prior to 5.12) and set <strong>Teammate Name Display</strong> to <em>Show first and last name</em>. This is recommended for a better user experience.</p>
+<li><p class="first">(Optional) If you configured <code class="docutils literal notranslate"><span class="pre">First</span> <span class="pre">Name</span></code> Attribute and <code class="docutils literal notranslate"><span class="pre">Last</span> <span class="pre">Name</span></code> Attribute, go to <strong>System Console &gt; Site Configuration &gt; Users and Teams</strong> (or <strong>System Console &gt; General &gt; Users and Teams</strong> in versions prior to 5.12), then set <strong>Teammate Name Display</strong> to <strong>Show first and last name</strong>. This is recommended for a better user experience.</p>
 </li>
 </ol>
-<p>Once complete, and to confirm SAML SSO is successfully enabled, switch your System Administrator account from email to SAML-based authentication via <strong>Account Settings &gt; General &gt; Sign-in Method &gt; Switch to SAML SSO</strong> and sign in with your SAML credentials to complete the switch.</p>
-<p>It’s also recommended to post an announcement for your users to explain how the migration will work.</p>
-<p>You may also configure SAML for Okta by editing <code class="docutils literal notranslate"><span class="pre">config.json</span></code> to enable SAML based on <a class="reference internal" href="../administration/prev-config-settings.html#saml-enterprise"><span class="std std-ref">SAML configuration settings</span></a>. You must restart the Mattermost server for the changes to take effect.</p>
+<p>Once complete, and to confirm SAML SSO is successfully enabled, switch your System Administrator account from email to SAML-based authentication via <strong>Account Settings &gt; General &gt; Sign-in Method &gt; Switch to SAML SSO</strong>, then sign in with your SAML credentials to complete the switch.</p>
+<p>We also recommend that you post an announcement for your users to explain how the migration will work.</p>
+<p>You may also configure SAML for Okta by editing the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file to enable SAML based on <a class="reference internal" href="../administration/prev-config-settings.html#saml-enterprise"><span class="std std-ref">SAML configuration settings</span></a>. You must restart the Mattermost server for the changes to take effect.</p>
 </div>
 <div class="section" id="configure-saml-synchronization-with-ad-ldap">
 <h2><a class="toc-backref" href="#contents">Configure SAML synchronization with AD/LDAP</a><a class="headerlink" href="#configure-saml-synchronization-with-ad-ldap" title="Permalink to this headline">¶</a></h2>
