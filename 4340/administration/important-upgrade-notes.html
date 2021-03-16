@@ -213,8 +213,9 @@
 <tr class="row-even"><td rowspan="2">v5.33.0</td>
 <td colspan="2">Deleting a reaction is now a soft delete in the <code class="docutils literal notranslate"><span class="pre">Reactions</span></code> table. A schema update is required and may take up to 15 seconds on first run with large data sets.</td>
 </tr>
-<tr class="row-odd"><td colspan="2">A new websocket implementation requires the HTTP version to be 1.1. If you are using NGINX as a proxy to Mattermost, please ensure to have
-<code class="docutils literal notranslate"><span class="pre">proxy_http_version</span> <span class="pre">1.1;</span></code> in the block that handles the websocket path. This can potentially affect other proxy/load balancer setups too.</td>
+<tr class="row-odd"><td colspan="2">WebSocket handshakes done with HTTP version lower than 1.1 will result in a warning, and the server will transparently upgrade the version to 1.1 to comply with
+the WebSocket RFC. This is done to work around incorrect Nginx (and other proxy) configs that do not set the <code class="docutils literal notranslate"><span class="pre">proxy_http_version</span></code> directive to 1.1. This
+facility will be removed in a future Mattermost version and it is strongly recommended to fix the proxy configuration to correctly use the WebSocket protocol.</td>
 </tr>
 <tr class="row-even"><td rowspan="2">v5.32.0</td>
 <td colspan="2"><code class="docutils literal notranslate"><span class="pre">ExperimentalChannelOrganization</span></code>, <code class="docutils literal notranslate"><span class="pre">EnableXToLeaveChannelsFromLHS</span></code>, <code class="docutils literal notranslate"><span class="pre">CloseUnusedDirectMessages</span></code>, and <code class="docutils literal notranslate"><span class="pre">ExperimentalHideTownSquareinLHS</span></code> settings are only
