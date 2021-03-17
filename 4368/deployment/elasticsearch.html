@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Elasticsearch (E20) &mdash; Mattermost 5.32 documentation</title>
+  <title>Elasticsearch (E20) &mdash; Mattermost 5.33 documentation</title>
   
 
   
@@ -29,8 +29,6 @@
   
     <link rel="canonical" href="https://docs.mattermost.com/deployment/elasticsearch.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Performance Monitoring (E20)" href="metrics.html" />
-    <link rel="prev" title="High Availability Cluster (v3.10 and earlier)" href="cluster-310.html" />
   
   	<!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -70,7 +68,7 @@
             
             
               <div class="version">
-                5.32
+                5.33
               </div>
             
           
@@ -95,41 +93,9 @@
               
             
             
-              <ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/cloud-admin-guide.html">Cloud Administrator's Guide</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../guides/administrator.html">Self-Managed Administrator's Guide</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../overview/architecture.html">Architecture Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#getting-started">Getting Started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#installing-mattermost">Installing Mattermost</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#deployment">Deployment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#configure-mattermost">Configure Mattermost</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#incident-collaboration">Incident Collaboration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mobile-apps">Mobile Apps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#onboard-users">Onboard Users</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#administration">Administration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#troubleshooting">Troubleshooting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#upgrade-mattermost">Upgrade Mattermost</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-integrations">Mattermost Integrations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#mattermost-compliance">Mattermost Compliance</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../guides/administrator.html#scaling-mattermost">Scaling Mattermost</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="scaling.html">Scaling for Enterprise</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cluster.html">High Availability Cluster (E20)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cluster-310.html">High Availability Cluster (v3.10 and earlier)</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Elasticsearch (E20)</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#deployment-guide">Deployment Guide</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#limitations">Limitations</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#frequently-asked-questions-faq">Frequently Asked Questions (FAQ)</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="metrics.html">Performance Monitoring (E20)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../administration/performance-alerting-guide.html">Mattermost Performance Alerting Guide</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../guides/administrator.html#community-managed-documentation">Community-Managed Documentation</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/user.html">User's Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/integration.html">Integration Guide</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://developers.mattermost.com/">Developer's Guide</a></li>
@@ -166,8 +132,6 @@
 <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
-    
-      <li><a href="../guides/administrator.html">Self-Managed Administrator’s Guide</a> &raquo;</li>
     
     <li>Elasticsearch (E20)</li>
     <li class="wy-breadcrumbs-aside">
@@ -353,6 +317,10 @@
 <p>Mattermost provides the status of each Elasticsearch indexing job in <strong>System Console &gt; Environment &gt; Elasticsearch</strong> (or <strong>System Console &gt; Advanced &gt; Elasticsearch</strong> in versions prior to 5.12). Here you can see if the job succeeded or failed, including the details of the error.</p>
 <p>Failures are returned in the server logs. The error log begins with the string <code class="docutils literal notranslate"><span class="pre">Failed</span> <span class="pre">job</span></code> and includes a job_id key/value pair. Elasticsearch job failures are identified with worker name <code class="docutils literal notranslate"><span class="pre">EnterpriseElasticsearchAggregator</span></code> and <code class="docutils literal notranslate"><span class="pre">EnterpriseElasticsearchIndexer</span></code>. You can optionally create a script that programmatically queries for such failures and notifies the appropriate system.</p>
 </div>
+<div class="section" id="my-elasticsearch-indexes-won-t-complete-what-should-i-do">
+<h3>My Elasticsearch indexes won’t complete, what should I do?<a class="headerlink" href="#my-elasticsearch-indexes-won-t-complete-what-should-i-do" title="Permalink to this headline">¶</a></h3>
+<p>If you have an Elasticsearch indexing job that’s paused, it’s likely your Elasticsearch server has restarted. If you restart your Elasticsearch server you must also restart Mattermost to ensure jobs are completed. If restarting the Mattermost server does not resolve the issue, please contact Mattermost support.</p>
+</div>
 </div>
 </div>
 
@@ -361,15 +329,6 @@
            
           </article>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="metrics.html" class="btn btn-neutral float-right" title="Performance Monitoring (E20)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="cluster-310.html" class="btn btn-neutral" title="High Availability Cluster (v3.10 and earlier)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>
