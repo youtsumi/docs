@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Guest Accounts (Beta) (E10/E20) &mdash; Mattermost 5.32 documentation</title>
+  <title>Guest Accounts (Beta) (E10/E20) &mdash; Mattermost 5.33 documentation</title>
   
 
   
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                5.32
+                5.33
               </div>
             
           
@@ -120,9 +120,11 @@
 <li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html">Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-saml.html">SAML Single Sign-On (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-saml-technical.html">SAML Single-Sign-On (E20): Technical Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-openidconnect.html">OpenID Connect Single Sign-On (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-gitlab.html">GitLab Single Sign-On</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-google.html">Google Single Sign-On (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-office.html">Office 365 Single Sign-On (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="converting-oauth20-service-providers-to-openidconnect.html">Converting OAuth 2.0 Service Providers to OpenID Connect (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ssl-client-certificate.html">SSL Client Certificate Setup (Beta)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="certificate-based-authentication.html">Certificate-Based Authentication (Experimental)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="team-channel-management.html">Managing Team and Channel Members (E20)</a></li>
@@ -229,23 +231,15 @@
 <div class="section" id="enabling-guest-accounts">
 <h2>Enabling Guest Accounts<a class="headerlink" href="#enabling-guest-accounts" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>Navigate to <strong>System Console &gt; Authentication &gt; Guest Access</strong>.</li>
-<li>Set <strong>Enable Guest Access</strong> to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</li>
-<li>(Optional) <strong>Whitelist domains that are acceptable for Guest Access</strong>.</li>
+<li>Go to <strong>System Console &gt; Authentication &gt; Guest Access (Beta)</strong>.</li>
+<li>Set <strong>Enable Guest Access</strong> to <strong>true</strong>.</li>
+<li>(Optional) Specify the <strong>Whitelisted Guest Domains</strong> that are acceptable for guest access. This allows the System Admin to set a list of approved guest domains.</li>
+<li>(Optional) Set <strong>Enforce Multi-factor Authentication</strong> to <strong>true</strong>. If you’re enforcing MFA for your users, you can optionally choose to also enforce MFA for your guest users.</li>
 </ol>
-<blockquote>
-<div><ul class="simple">
-<li>This allows the System Administrators to set a list of approved guest domains. If you have team domain restrictions, you will also need to add your guest domain to <strong>Team Settings &gt; Allow only users with a specific email domain to join this team</strong>.</li>
-</ul>
-</div></blockquote>
-<ol class="arabic simple" start="4">
-<li>(Optional) <strong>Enforce Multi-Factor Authentication (MFA) for your Guests</strong>.</li>
-</ol>
-<blockquote>
-<div><ul class="simple">
-<li>If you are enforcing MFA for your users, you can optionally choose to enforce MFA for your guest users.</li>
-</ul>
-</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you have team domain restrictions, you also need to add your guest domain in <strong>System Console &gt; User Management &gt; Teams</strong>. Select a team, then enable <strong>Only specific email domains can join this team</strong>.</p>
+</div>
 </div>
 <div class="section" id="guest-authentication">
 <h2>Guest Authentication<a class="headerlink" href="#guest-authentication" title="Permalink to this headline">¶</a></h2>
@@ -256,7 +250,10 @@
 <div class="section" id="inviting-guests-to-the-mattermost-server-via-email">
 <h2>Inviting Guests to the Mattermost Server via Email<a class="headerlink" href="#inviting-guests-to-the-mattermost-server-via-email" title="Permalink to this headline">¶</a></h2>
 <p>Guests can be invited into one or more Mattermost channels within a team by System Admins and other roles that have the correct permission to invite guests. A guest can be invited into channels on multiple teams.</p>
-<p><strong>Note:</strong> Guest invitations are revoked after 48 hours per the member email invitation process. If your guest has not accepted the invitation within that period, please follow the steps below to resend an invitation to the guest.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Guest invitations are revoked after 48 hours per the member email invitation process. If your guest has not accepted the invitation within that period, please follow the steps below to resend an invitation to the guest.</p>
+</div>
 <p>To invite guests into one or more Mattermost channels:</p>
 <ol class="arabic simple">
 <li>Enable email invites from <strong>System Console &gt; Signup &gt; Enable Email Invitations</strong>.</li>
@@ -273,9 +270,9 @@
 <p>When enabled, the <strong>Guest Filter</strong> in Mattermost identifies external users whose AD/LDAP role is <code class="docutils literal notranslate"><span class="pre">guest</span></code> and who are invited to join your Mattermost server. These users will have the <code class="docutils literal notranslate"><span class="pre">guest</span></code> role applied immediately upon first sign-in instead of the default member user role. This eliminates having to manually assign the role in the System Console.</p>
 <ol class="arabic simple">
 <li>Enable Guest Access via <strong>System Console &gt; Authentication &gt; Guest Access (Beta)</strong>.</li>
-<li>Navigate to <strong>System Console &gt; Authentication &gt; AD/LDAP</strong>.</li>
+<li>Go to <strong>System Console &gt; Authentication &gt; AD/LDAP</strong>.</li>
 <li>Complete the <strong>Guest Filter</strong> field.</li>
-<li>Choose <strong>Save</strong>.</li>
+<li>Select <strong>Save</strong>.</li>
 </ol>
 <p>If a Mattermost guest user has the <code class="docutils literal notranslate"><span class="pre">guest</span></code> role removed in the AD/LDAP system, the synchronization process will not automatically promote them to a member user role. This is done manually via <strong>System Console &gt; User Management</strong>. If a member user has the <strong>Guest Attribute</strong> added, the synchronization processes will automatically demote the member user to the guest role.</p>
 <p>When a guest logs in without having any channels assigned to their account, they’re advised to contact an administrator.</p>
@@ -288,13 +285,13 @@
 <li>Enable Guest Access via <strong>System Console &gt; Guest Access (Beta)</strong>.</li>
 <li>Navigate to <strong>System Console &gt; Authentication &gt; SAML 2.0</strong>.</li>
 <li>Complete the <strong>Guest Attribute</strong> field.</li>
-<li>Choose <strong>Save</strong>.</li>
+<li>Select <strong>Save</strong>.</li>
 </ol>
 <p>When a guest logs in without having any channels assigned to their account, they’re advised to contact an administrator.</p>
 </div>
 <div class="section" id="guest-permission-settings">
 <h2>Guest Permission Settings<a class="headerlink" href="#guest-permission-settings" title="Permalink to this headline">¶</a></h2>
-<p>In E10 and E20, you can also control which users can invite guests. By default, only the System Admins can invite guests. There are <a class="reference external" href="https://docs.mattermost.com/deployment/advanced-permissions.html">additional permissions</a> in E20 that can be adjusted under <strong>System Console &gt; Advanced Permissions &gt; System Scheme</strong> to control a guest’s ability to:</p>
+<p>In Enterprise Edition E10 and E20, you can also control which users can invite guests. By default, only the System Admins can invite guests. There are <a class="reference external" href="https://docs.mattermost.com/deployment/advanced-permissions.html">additional permissions</a> in E20 that can be adjusted under <strong>System Console &gt; User Management &gt; Permissions &gt; System Scheme</strong> to control a guest’s ability to:</p>
 <blockquote>
 <div><ul class="simple">
 <li>Edit posts</li>
@@ -323,18 +320,21 @@
 </div>
 <div class="section" id="promoting-and-demoting-user-roles">
 <h3>Promoting and Demoting User Roles<a class="headerlink" href="#promoting-and-demoting-user-roles" title="Permalink to this headline">¶</a></h3>
-<p>System Admins can demote a member to guest by updating their role in <strong>System Console &gt; User Management &gt; Users</strong>. The demoted user will retain their existing channel and team memberships but will be restricted from discovering public channels and collaborating with users outside of the channels they are in.  This is useful if you are already collaborating with external contractors and want to restrict their abilities within your Mattermost instance.</p>
-<p>System Admins can also promote a guest to member by updating their role in <strong>System Console &gt; User Management &gt; Users</strong>.</p>
-<p><strong>Note:</strong> You can filter the list in <strong>System Console &gt;  User Management &gt; Users</strong> to view all guests on the system.</p>
+<p>System Admins can demote a member to a guest by updating their role in <strong>System Console &gt; User Management &gt; Users</strong>. Select the member, then select <strong>Demote to Guest</strong>.</p>
+<p>The demoted user retains their existing channel and team memberships but is restricted from discovering public channels and collaborating with users outside of the channels they’re in. This is useful if you’re already collaborating with external contractors, and want to restrict their abilities within Mattermost.</p>
+<p>System Admins can also promote a guest to member by updating their role in <strong>System Console &gt; User Management &gt; Users</strong>. Select the guest, then select <strong>Promote to Member</strong>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can filter the list in <strong>System Console &gt; User Management &gt; Users</strong> to view all guests in the system.</p>
+</div>
 </div>
 </div>
 <div class="section" id="disabling-guest-accounts">
 <h2>Disabling Guest Accounts<a class="headerlink" href="#disabling-guest-accounts" title="Permalink to this headline">¶</a></h2>
-<p>To disable the Guest Accounts feature, go to <strong>System Console &gt; Authentication &gt; Guest Access (Beta) &gt; Enable Guest Access</strong> and select <code class="docutils literal notranslate"><span class="pre">False</span></code>. In versions prior to 5.18, current Guest Accounts will remain active until guest users are manually marked <code class="docutils literal notranslate"><span class="pre">inactive</span></code> in <strong>System Console &gt; User Management &gt; Users</strong>.</p>
-<p>From 5.18, if you’re using AD/LDAP and the Guest Access setting is disabled, the Guest Filter and existing guest users in System Console are deactivated. Additionally, no new guests can be invited or added using the filter as an authentication method. If a previous guest’s credentials match the user filter (the only filter which is active when Guest Access is disabled), they will be reactivated and promoted to a member user upon their next login.</p>
-<p>To disable the Guest Accounts feature, go to <strong>System Console &gt; Authentication &gt; Guest Access (Beta) &gt; Enable Guest Access</strong> and select <code class="docutils literal notranslate"><span class="pre">False</span></code>. In versions prior to 5.18, current Guest Accounts will remain active until guest users are manually marked <code class="docutils literal notranslate"><span class="pre">inactive</span></code> in <strong>System Console &gt; User Management &gt; Users</strong>.</p>
+<p>To disable the Guest Accounts feature, go to <strong>System Console &gt; Authentication &gt; Guest Access (Beta)</strong>, then set <strong>Enable Guest Access</strong> to <strong>False</strong>. To deactivate individual guest accounts, go to <strong>System Console &gt; User Management &gt; Users</strong>. Select a user, then select <strong>Deactivate</strong>. You can re-activate individual guest accounts by selecting <strong>Activate</strong>.</p>
+<p>From Mattermost Server version 5.18, when a single Guest Account is deactivated or the Guest Account feature is disabled, guests are marked as <code class="docutils literal notranslate"><span class="pre">inactive</span></code>, are logged out of Mattermost, and all guest sessions are revoked. In Mattermost Server versions prior to 5.18, disabling the Guest Account feature leaves current Guest Accounts as active until they are manually deactivated.</p>
+<p>From Mattermost Server version 5.18, if you’re using AD/LDAP and the Guest Access setting is disabled, the Guest Filter and existing guest users in System Console are deactivated. Additionally, no new guests can be invited or added using the filter as an authentication method. If a previous guest’s credentials match the user filter (the only filter which is active when Guest Access is disabled), they will be reactivated and promoted to a member user upon their next login.</p>
 <p>Similarly, for SAML, when the Guest Access setting is disabled, the Guest Attribute and existing guest users in System Console are deactivated. Additionally, no new guests can be invited or added using the attribute as an authentication method. If a previous guest’s credentials match the user attribute (the only attribute which is active when Guest Access is disabled), they will be reactivated and promoted to a member user upon their next login.</p>
-<p>You can disable individual guest accounts in <strong>System Console &gt; User Management</strong> via <strong>Manage Members</strong>. From version 5.18, when a single Guest Account is disabled or the feature is disabled, the guest will be marked as <code class="docutils literal notranslate"><span class="pre">inactive</span></code>, be logged out of Mattermost, and all their sessions will be revoked.</p>
 </div>
 <div class="section" id="reinstating-guest-accounts">
 <h2>Reinstating Guest Accounts<a class="headerlink" href="#reinstating-guest-accounts" title="Permalink to this headline">¶</a></h2>
@@ -372,7 +372,7 @@
 </div>
 <div class="section" id="how-can-i-validate-my-guests-identity">
 <h3>How can I validate my guests’ identity?<a class="headerlink" href="#how-can-i-validate-my-guests-identity" title="Permalink to this headline">¶</a></h3>
-<p>Guests can be authenticated via SAML and/or AD/LDAP to ensure that only the named guest can sign in. Alternatively, you can whitelist domains via <strong>System Console &gt; Guest Access &gt; Whitelisted Guest Domains</strong>.</p>
+<p>Guests can be authenticated via SAML and/or AD/LDAP to ensure that only the named guest can sign in. Alternatively, you can whitelist domains via <strong>System Console &gt; Authentication &gt; Guest Access (Beta) &gt; Whitelisted Guest Domains</strong>.</p>
 </div>
 <div class="section" id="can-i-restrict-guests-ability-to-upload-content">
 <h3>Can I restrict guests’ ability to upload content?<a class="headerlink" href="#can-i-restrict-guests-ability-to-upload-content" title="Permalink to this headline">¶</a></h3>

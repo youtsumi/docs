@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Office 365 Single Sign-On &mdash; Mattermost 5.32 documentation</title>
+  <title>Office 365 Single Sign-On &mdash; Mattermost 5.33 documentation</title>
   
 
   
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                5.32
+                5.33
               </div>
             
           
@@ -167,7 +167,7 @@
     <li class="wy-breadcrumbs-aside">
       
         
-          <a href="https://github.com/mattermost/docs/blob/master/source/cloud/cloud-administration/sso-office.md" class="fa fa-github"> Edit</a>
+          <a href="https://github.com/mattermost/docs/blob/master/source/cloud/cloud-administration/sso-office.rst" class="fa fa-github"> Edit</a>
         
       
     </li>
@@ -181,46 +181,41 @@
 <h1>Office 365 Single Sign-On<a class="headerlink" href="#office-365-single-sign-on" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="migrating-from-oauth-to-openid-connect">
 <h2>Migrating from OAuth to OpenID Connect<a class="headerlink" href="#migrating-from-oauth-to-openid-connect" title="Permalink to this headline">¶</a></h2>
-<p>OAuth 2.0 is being deprecated and replaced by OpenID Connect. Refer to the product documentation to <a class="reference external" href="https://docs.mattermost.com/cloud/cloud-administration/converting-oauth-2.0-to-openid-connect.html">convert your existing OAuth configuration</a> for Office 365 to the OpenID Connect standard.</p>
+<p>OAuth 2.0 is being deprecated and replaced by OpenID Connect. Refer to the product documentation to <a class="reference external" href="https://docs.mattermost.com/cloud/cloud-administration/converting-oauth-2.0-to-openid-connect.html">convert your existing OAuth 2.0 service provider configuration</a> for Office 365 to the OpenID Connect standard.</p>
 </div>
 <div class="section" id="configuring-office-365-as-a-single-sign-on-sso-service">
 <h2>Configuring Office 365 as a Single Sign-On (SSO) service<a class="headerlink" href="#configuring-office-365-as-a-single-sign-on-sso-service" title="Permalink to this headline">¶</a></h2>
 <p>Follow these steps to configure Mattermost to use your Office 365 logon credentials and Azure Active Directory account as a Single Sign-on (SSO) service for team creation, account creation, and sign-in.</p>
-<p><strong>Note:</strong> The system must be using SSL for use with Office365 as Microsoft only allows OAuth redirect URIs that are SSL enabled.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The system must be using SSL as Microsoft only allows OAuth redirect URIs that are SSL-enabled.</p>
+</div>
 <div class="section" id="step-1-register-an-application-in-azure-portal">
 <h3>Step 1: Register an application in Azure Portal<a class="headerlink" href="#step-1-register-an-application-in-azure-portal" title="Permalink to this headline">¶</a></h3>
-<ol>
-<li><p class="first">Log in to the <a class="reference external" href="https://portal.azure.com/">Azure Portal</a> with the account that relates to the Azure Active Directory tenant where you want to register the application. You can confirm the tenant in the top right corner of the portal.</p>
-</li>
-<li><p class="first">In the left-hand navigation pane, select the <strong>Azure Active Directory service</strong>, then select <strong>App registrations &gt; New registration</strong>.</p>
-</li>
-<li><p class="first">Give your new registration a <strong>Name</strong>.</p>
-</li>
-<li><p class="first">Define which <strong>Supported account types</strong> can access the application. For example, if this is to be only accessed from your enterprise’s Azure AD accounts, then select <strong>Accounts in this organizational directory only</strong>.</p>
-</li>
-<li><p class="first">Define the <strong>Redirect URI</strong> as Web client, then input the URL with the host name that will be specific to your Mattermost service followed by <code class="docutils literal notranslate"><span class="pre">/signup/office365/complete</span></code>. An example below is: <code class="docutils literal notranslate"><span class="pre">https://your.mattermost.com/signup/office365/complete</span></code></p>
-<p><img alt="../../_images/AzureApp_New_Registration.png" src="../../_images/AzureApp_New_Registration.png" /></p>
-<p><img alt="../../_images/AzureApp_SetupMenuv2.png" src="../../_images/AzureApp_SetupMenuv2.png" /></p>
-</li>
+<ol class="arabic simple">
+<li>Log in to the <a class="reference external" href="https://portal.azure.com/">Azure Portal</a> with the account that relates to the Azure Active Directory tenant where you want to register the application. You can confirm the tenant in the top right corner of the portal.</li>
+<li>In the left-hand navigation pane, select the <strong>Azure Active Directory service</strong>, then select <strong>App registrations &gt; New registration</strong>.</li>
+<li>Give your new registration a <strong>Name</strong>.</li>
+<li>Define which <strong>Supported account types</strong> can access the application. For example, if this is to be only accessed from your enterprise’s Azure AD accounts, then select <strong>Accounts in this organizational directory only</strong>.</li>
+<li>Define the <strong>Redirect URI</strong> as Web client, then input the URL with the host name that will be specific to your Mattermost service followed by <code class="docutils literal notranslate"><span class="pre">/signup/office365/complete</span></code>. An example below is: <code class="docutils literal notranslate"><span class="pre">https://your.mattermost.com/signup/office365/complete</span></code></li>
 </ol>
-<p>Once the App Registration has been created, you can configure it further. The standard Azure AD documentation is <a class="reference external" href="https://docs.microsoft.com/en-gb/azure/active-directory/develop/quickstart-register-app">here</a> for reference.</p>
+<img alt="../../_images/AzureApp_New_Registration.png" src="../../_images/AzureApp_New_Registration.png" />
+<img alt="../../_images/AzureApp_SetupMenuv2.png" src="../../_images/AzureApp_SetupMenuv2.png" />
+<p>Once the App Registration has been created, you can configure it further. See the standard <a class="reference external" href="https://docs.microsoft.com/en-gb/azure/active-directory/develop/quickstart-register-app">Azure AD documentation</a> for reference.</p>
 </div>
 <div class="section" id="step-2-generate-a-new-client-secret-in-azure-portal">
 <h3>Step 2: Generate a new client secret in Azure Portal<a class="headerlink" href="#step-2-generate-a-new-client-secret-in-azure-portal" title="Permalink to this headline">¶</a></h3>
-<ol>
-<li><p class="first">In the Azure Portal, select <strong>Certificates and Secrets</strong> from the menu, then select the button to generate a <strong>New Client secret</strong>.</p>
-</li>
-<li><p class="first">Provide a description, define the expiry for the token, then select <strong>Add</strong>.</p>
-</li>
-<li><p class="first">In Azure Portal, select <strong>Overview</strong> from the menu, then copy and paste both the Application (client) ID and the Directory (tenant) ID to a temporary location. You will enter these values as an <strong>Application ID</strong> and as part of an <strong>Auth Endpoint</strong> and <strong>Token Endpoint</strong> URL in the Mattermost System Console.</p>
-<p><img alt="../../_images/AzureApp_Client_Secret_Expiry.png" src="../../_images/AzureApp_Client_Secret_Expiry.png" />
-<img alt="../../_images/AzureApp_App_Directory_IDsv2.png" src="../../_images/AzureApp_App_Directory_IDsv2.png" /></p>
-</li>
+<ol class="arabic simple">
+<li>In the Azure Portal, select <strong>Certificates and Secrets</strong> from the menu, then select the button to generate a <strong>New Client secret</strong>.</li>
+<li>Provide a description, define the expiry for the token, then select <strong>Add</strong>.</li>
+<li>In Azure Portal, select <strong>Overview</strong> from the menu, then copy and paste both the Application (client) ID and the Directory (tenant) ID to a temporary location. You will enter these values as an <strong>Application ID</strong> and as part of an <strong>Auth Endpoint</strong> and <strong>Token Endpoint</strong> URL in the Mattermost System Console.</li>
 </ol>
+<img alt="../../_images/AzureApp_Client_Secret_Expiry.png" src="../../_images/AzureApp_Client_Secret_Expiry.png" />
+<img alt="../../_images/AzureApp_App_Directory_IDsv2.png" src="../../_images/AzureApp_App_Directory_IDsv2.png" />
 </div>
 <div class="section" id="step-3-configure-mattermost-for-office-365-sso">
 <h3>Step 3: Configure Mattermost for Office 365 SSO<a class="headerlink" href="#step-3-configure-mattermost-for-office-365-sso" title="Permalink to this headline">¶</a></h3>
-<ol class="simple">
+<ol class="arabic simple">
 <li>Log in to Mattermost, then go to <strong>System Console &gt; Authentication &gt; OpenID Connect</strong>.</li>
 <li>Select <strong>Office 365</strong> as the service provider.</li>
 <li>Paste the <strong>Directory (tenant) ID</strong> from the Azure Portal as the <strong>Directory (tenant) ID</strong> in Mattermost.</li>
@@ -232,10 +227,13 @@
 </div>
 <div class="section" id="note-about-microsoft-active-directory-tenants">
 <h3>Note about Microsoft Active Directory Tenants<a class="headerlink" href="#note-about-microsoft-active-directory-tenants" title="Permalink to this headline">¶</a></h3>
-<p>A Microsoft Active Directory (AD) tenant is a dedicated instance of Azure Active Directory (Azure AD) that you own and would have received when signing up for a Microsoft cloud service such as Azure or Office 365. Tenants are commonly used by organizations who want to store information about their users such as passwords, user profile data and permissions. You can learn more about <a class="reference external" href="https://docs.microsoft.com/en-us/azure/active-directory/active-directory-howto-tenant">getting an Azure AD tenant here</a>.</p>
+<p>A Microsoft Active Directory (AD) tenant is a dedicated instance of Azure Active Directory (Azure AD) that you own and would have received when signing up for a Microsoft cloud service such as Azure or Office 365. Tenants are commonly used by organizations who want to store information about their users such as passwords, user profile data, and permissions. You can learn more about <a class="reference external" href="https://docs.microsoft.com/en-us/azure/active-directory/active-directory-howto-tenant">getting an Azure AD tenant here</a>.</p>
 <p>To allow your Azure AD users to sign in to Mattermost using Office 365 SSO, you must register Mattermost in the Microsoft Azure AD tenant that contains the users’ information. The registration can be done from the <a class="reference external" href="https://manage.windowsazure.com/">Microsoft Azure portal</a>. The steps to register the Mattermost account in the tenant should be similar to those provided above, and you can find more information about <a class="reference external" href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-integrating-applications/">integrating apps with Azure AD here</a>.</p>
 <p>If you don’t register Mattermost in the Microsoft Azure AD tenant your organization uses, Office 365 SSO will likely fail for your users.</p>
-<p><strong>Note:</strong> If you do not use Azure Active Directory, you may register Mattermost with your Office 365 or Azure account (a personal, work, or school account), then set up Office 365 SSO with Mattermost using the steps provided above.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you do not use Azure Active Directory, you may register Mattermost with your Office 365 or Azure account (a personal, work, or school account), then set up Office 365 SSO with Mattermost using the steps provided above.</p>
+</div>
 </div>
 </div>
 </div>
@@ -293,7 +291,7 @@
             </dd>
             
             <dd>
-                <a href="https://github.com/mattermost/docs/blob/master/source/cloud/cloud-administration/sso-office.md"> Edit on GitHub</a>
+                <a href="https://github.com/mattermost/docs/blob/master/source/cloud/cloud-administration/sso-office.rst"> Edit on GitHub</a>
             </dd>
             
         </dl>
