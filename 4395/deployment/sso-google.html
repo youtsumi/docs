@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Google Single Sign-On (E20) &mdash; Mattermost 5.32 documentation</title>
+  <title>Google Single Sign-On (E20) &mdash; Mattermost 5.33 documentation</title>
   
 
   
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                5.32
+                5.33
               </div>
             
           
@@ -120,9 +120,15 @@
 <li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html">Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-saml.html">SAML Single Sign-On (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-saml-technical.html">SAML Single-Sign-On (E20): Technical Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-openidconnect.html">OpenID Connect Single Sign-On (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-gitlab.html">GitLab Single Sign-On</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Google Single Sign-On (E20)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Google Single Sign-On (E20)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#migrating-from-oauth-2-0-to-openid-connect">Migrating from OAuth 2.0 to OpenID Connect</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuring-google-apps-as-a-single-sign-on-sso-service">Configuring Google Apps as a Single Sign-On (SSO) service</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="sso-office.html">Office 365 Single Sign-On (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="converting-oauth20-service-providers-to-openidconnect.html">Converting OAuth 2.0 Service Providers to OpenID Connect (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ssl-client-certificate.html">SSL Client Certificate Setup (Beta)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="certificate-based-authentication.html">Certificate-Based Authentication (Experimental)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="team-channel-management.html">Managing Team and Channel Members (E20)</a></li>
@@ -183,7 +189,7 @@
     <li class="wy-breadcrumbs-aside">
       
         
-          <a href="https://github.com/mattermost/docs/blob/master/source/deployment/sso-google.md" class="fa fa-github"> Edit</a>
+          <a href="https://github.com/mattermost/docs/blob/master/source/deployment/sso-google.rst" class="fa fa-github"> Edit</a>
         
       
     </li>
@@ -195,54 +201,76 @@
             
   <div class="section" id="google-single-sign-on-e20">
 <h1>Google Single Sign-On (E20)<a class="headerlink" href="#google-single-sign-on-e20" title="Permalink to this headline">¶</a></h1>
+<p>Available in <a class="reference external" href="https://mattermost.com/pricing-self-managed/">Enterprise Edition E20</a>.</p>
+<div class="section" id="migrating-from-oauth-2-0-to-openid-connect">
+<h2>Migrating from OAuth 2.0 to OpenID Connect<a class="headerlink" href="#migrating-from-oauth-2-0-to-openid-connect" title="Permalink to this headline">¶</a></h2>
+<p>OAuth 2.0 is being deprecated and replaced by OpenID Connect. Refer to the product documentation to <a class="reference external" href="https://docs.mattermost.com/cloud/cloud-administration/converting-oauth-2.0-to-openid-connect.html">convert your existing OAuth service provider configuration</a> for Google Apps to the OpenID Connect standard.</p>
+</div>
+<div class="section" id="configuring-google-apps-as-a-single-sign-on-sso-service">
+<h2>Configuring Google Apps as a Single Sign-On (SSO) service<a class="headerlink" href="#configuring-google-apps-as-a-single-sign-on-sso-service" title="Permalink to this headline">¶</a></h2>
 <p>Follow these steps to configure Mattermost to use Google as a Single Sign-on (SSO) service for team creation, account creation, and sign-in.</p>
-<p><strong>Note:</strong></p>
-<ul class="simple">
-<li>Google SSO is not yet supported in the Mattermost Mobile app. If you want to use Google SSO on mobile, you’ll have to <a class="reference external" href="https://developers.mattermost.com/contribute/mobile/build-your-own/">build your own app</a>.</li>
-<li>The Google People API has replaced the Google+ API, which was deprecated by Google as of March 7th, 2019 per their notice at https://developers.google.com/+/api-shutdown.</li>
-</ul>
-<ol class="simple">
-<li>Go to <a class="reference external" href="https://console.developers.google.com">Google API Manager</a>, click <strong>Credentials</strong> in the left hand sidebar, click <strong>Create a project</strong> and enter “Mattermost - your-company-name” as the <strong>Project Name</strong>, then click <strong>Create</strong>.</li>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <a class="reference external" href="https://developers.google.com/people">Google People API</a> has replaced the Google+ API, which was deprecated by Google as of March 7th, 2019 <a class="reference external" href="https://developers.google.com/+/api-shutdown">per their notice</a>.</p>
+</div>
+<div class="section" id="step-1-create-openid-connect-project-in-google-api-manager">
+<h3>Step 1: Create OpenID Connect project in Google API Manager<a class="headerlink" href="#step-1-create-openid-connect-project-in-google-api-manager" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Go to <a class="reference external" href="https://console.developers.google.com">Google Cloud Platform</a>.</li>
+<li>Select <strong>Credentials</strong> in the left-hand sidebar.</li>
+<li>Select <strong>Create Credentials</strong>, then select <strong>OAuth client ID</strong>.</li>
+<li>Select the <strong>Web application</strong> as the application type.</li>
+<li>Enter <code class="docutils literal notranslate"><span class="pre">Mattermost-&lt;your-company-name&gt;</span></code> as the <strong>Name</strong>, replacing <code class="docutils literal notranslate"><span class="pre">&lt;your-company-name&gt;</span></code> with the name of your organization.</li>
+<li>Under <strong>Authorized redirect URIs</strong>, select <strong>Add URL</strong>, then enter <code class="docutils literal notranslate"><span class="pre">{your-mattermost-url}/signup/google/complete</span></code>. For example: <code class="docutils literal notranslate"><span class="pre">http://localhost:8065/signup/google/complete</span></code>.</li>
+<li>Select <strong>Create</strong>.</li>
+<li>Copy and paste the <strong>Your Client ID</strong> and <strong>Your Client Secret</strong> values to a temporary location. You will enter these values in the Mattermost System Console.</li>
 </ol>
-<p><img alt="../_images/google_1_credentials.png" src="../_images/google_1_credentials.png" /> </p>
-<ol class="simple">
-<li>In the <strong>Dashboard</strong> click the option to <strong>ENABLE APIS AND SERVICES</strong>.</li>
+<img alt="../_images/create-google-sso-credentials.png" src="../_images/create-google-sso-credentials.png" />
+<img alt="../_images/select-google-sso-web-app.png" src="../_images/select-google-sso-web-app.png" />
+<img alt="../_images/google-sso-web-app-name.png" src="../_images/google-sso-web-app-name.png" />
+<img alt="../_images/google-sso-redirect-uri.png" src="../_images/google-sso-redirect-uri.png" />
+<img alt="../_images/google-sso-credentials.png" src="../_images/google-sso-credentials.png" />
+</div>
+<div class="section" id="step-2-enable-google-people-api">
+<h3>Step 2: Enable Google People API<a class="headerlink" href="#step-2-enable-google-people-api" title="Permalink to this headline">¶</a></h3>
+<p>Go to the <a class="reference external" href="https://console.developers.google.com/apis/api/plus/overview">Google People API</a>, then select <strong>Enable</strong> in the header. This might take a few minutes to propagate through Google’s systems.</p>
+</div>
+<div class="section" id="step-3-configure-mattermost-for-google-apps-sso">
+<h3>Step 3: Configure Mattermost for Google Apps SSO<a class="headerlink" href="#step-3-configure-mattermost-for-google-apps-sso" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Log in to Mattermost, then go to <strong>System Console &gt; Authentication &gt; OpenID Connect</strong>.</li>
+<li>Select <strong>Google Apps</strong> as the service provider.</li>
+<li>The <strong>Discovery Endpoint</strong> for OpenID Connect with Google Apps is prepopulated with <code class="docutils literal notranslate"><span class="pre">https://accounts.google.com/.well-known/openid-configuration</span></code>.</li>
+<li>Paste in the <strong>Client ID</strong> from Google in Mattermost.</li>
+<li>Paste in the <strong>Client Secret</strong> from Google in Mattermost.</li>
+<li>Select <strong>Save</strong>.</li>
 </ol>
-<p><img alt="../_images/google_enable_api.png" src="../_images/google_enable_api.png" /> </p>
-<p>Once in the API Library, scroll down to <a class="reference external" href="https://console.developers.google.com/apis/api/plus/overview">Google People API</a> and click <strong>Enable</strong> in the header. This might take a few minutes to propagate through Google’s systems.</p>
-<ol class="simple">
-<li>Leave the Google+ API menu to return to the <strong>APIs &amp; Services menu</strong>. In the left hand sidebar select <strong>Credentials</strong>, click the <strong>OAuth consent screen</strong> header and enter “Mattermost” as the <strong>Application Name</strong>, then click <strong>Save</strong>.</li>
+</div>
+<div class="section" id="configure-mattermost-config-json-for-google-apps-sso">
+<h3>Configure Mattermost <code class="docutils literal notranslate"><span class="pre">config.json</span></code> for Google Apps SSO<a class="headerlink" href="#configure-mattermost-config-json-for-google-apps-sso" title="Permalink to this headline">¶</a></h3>
+<p>Instead of using the System Console, you can add the Google settings directly to the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file directly on your Mattermost server.</p>
+<ol class="arabic simple">
+<li>Open <code class="docutils literal notranslate"><span class="pre">config.json</span></code> as <em>root</em> in a text editor. It’s usually in <code class="docutils literal notranslate"><span class="pre">/opt/mattermost/config</span></code> but it might be elsewhere on your system.</li>
+<li>Locate the <code class="docutils literal notranslate"><span class="pre">GoogleSettings</span></code> section, then add or update the following information:</li>
 </ol>
-<p><img alt="../_images/google_3_oauth_consent_screen.png" src="../_images/google_3_oauth_consent_screen.png" /> </p>
-<p>Scroll further down to add your Mattermost instance to a list of authorized domains that can access the API. For example, if it is hosted on <code class="docutils literal notranslate"><span class="pre">mattermost.yourdomain.com</span></code> add <code class="docutils literal notranslate"><span class="pre">yourdomain.com</span></code>.</p>
-<p><img alt="../_images/google_authorised_domains.png" src="../_images/google_authorised_domains.png" /> </p>
-<ol class="simple">
-<li>Select <strong>Credentials</strong> and click <strong>Create credentials</strong>, then choose <strong>OAuth client ID</strong> from the drop-down list.</li>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&quot;Enable&quot;: true,
+      &quot;Secret&quot;: &quot;P-k9R-7E7ayX9LdddddWdXVg&quot;,
+      &quot;Id&quot;: &quot;1022ddddd5846-bkddddd4a1ddddd9d88j1kb6eqc.apps.googleusercontent.com&quot;,
+      &quot;Scope&quot;: &quot;profile openid email&quot;,
+      &quot;AuthEndpoint&quot;: &quot;&quot;,
+      &quot;TokenEndpoint&quot;: &quot;&quot;,
+      &quot;UserApiEndpoint&quot;: &quot;&quot;,
+      &quot;DiscoveryEndpoint&quot;: &quot;https://accounts.google.com/.well-known/openid-configuration&quot;,
+      &quot;ButtonText&quot;: &quot;&quot;,
+      &quot;ButtonColor&quot;: &quot;&quot;
+}
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>Save your changes, then restart your Mattermost server. After the server restarts, users must change their sign-in method before they can sign in with Google Apps.</li>
 </ol>
-<p><img alt="../_images/google_3_oauth_client_id.png" src="../_images/google_3_oauth_client_id.png" /> </p>
-<ol class="simple">
-<li>Select <strong>Web Application</strong> as the <strong>Application type</strong>, and choose a descriptive <strong>Name</strong> for the OAuth connection.</li>
-</ol>
-<p>Under <strong>Restrictions &gt; Authorized redirect URIs</strong>, enter <code class="docutils literal notranslate"><span class="pre">your-mattermost-url/signup/google/complete</span></code> (example: <code class="docutils literal notranslate"><span class="pre">http://localhost:8065/signup/google/complete</span></code>). Click <strong>Create</strong>.</p>
-<p><img alt="../_images/google_4_web_app.png" src="../_images/google_4_web_app.png" /> </p>
-<ol class="simple">
-<li>Copy the <strong>Client ID</strong> and <strong>Client Secret</strong>, which will be used to configure Google SSO for Mattermost.</li>
-</ol>
-<p><img alt="../_images/google_5_client_id_secret.PNG" src="../_images/google_5_client_id_secret.PNG" /> </p>
-<ol class="simple">
-<li>In <strong>System Console &gt; OAuth 2.0 &gt; Select OAuth 2.0 service provider</strong>, choose <strong>Google Apps</strong> as the service provider and enter <strong>Client ID</strong> and <strong>Client Secret</strong> from step 6 in their respective fields.</li>
-</ol>
-<p><strong>Note:</strong></p>
-<ul class="simple">
-<li>You may also enter <strong>Client ID</strong> and <strong>Client Secret</strong> fields from step 6 directly in <code class="docutils literal notranslate"><span class="pre">GoogleSettings</span></code> section of <code class="docutils literal notranslate"><span class="pre">config/config.json</span></code>.</li>
-<li>The following default values in <code class="docutils literal notranslate"><span class="pre">GoogleSettings</span></code> section of <code class="docutils literal notranslate"><span class="pre">config/config.json</span></code> are recommended:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">Scope</span></code>: <code class="docutils literal notranslate"><span class="pre">profile</span> <span class="pre">email</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">AuthEndpoint</span></code>: <code class="docutils literal notranslate"><span class="pre">https://accounts.google.com/o/oauth2/v2/auth</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">TokenEndpoint</span></code>: <code class="docutils literal notranslate"><span class="pre">https://www.googleapis.com/oauth2/v4/token</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">UserApiEndpoint</span></code>: <code class="docutils literal notranslate"><span class="pre">https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses,nicknames,metadata</span></code></li>
-</ul>
-</li>
-</ul>
+</div>
+</div>
 </div>
 
 
@@ -298,7 +326,7 @@
             </dd>
             
             <dd>
-                <a href="https://github.com/mattermost/docs/blob/master/source/deployment/sso-google.md"> Edit on GitHub</a>
+                <a href="https://github.com/mattermost/docs/blob/master/source/deployment/sso-google.rst"> Edit on GitHub</a>
             </dd>
             
         </dl>
