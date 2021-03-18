@@ -111,7 +111,7 @@
 <li class="toctree-l3"><a class="reference internal" href="mobile-appconfig.html">AppConfig for EMM Solutions with Mattermost Mobile Apps</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Hosted Push Notification Service</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#securing-your-mattermost-push-notification-service">Securing your Mattermost Push Notification Service</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#setting-up-hpns-push-notifications-in-enterprise-edition">Setting up HPNS push notifications in Enterprise Edition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setting-up-hpns-push-notifications-in-enterprise-edition">Setting up HPNS Push Notifications in Enterprise Edition</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="mobile-faq.html">Mobile Apps FAQ</a></li>
@@ -187,39 +187,41 @@
 <h2>Securing your Mattermost Push Notification Service<a class="headerlink" href="#securing-your-mattermost-push-notification-service" title="Permalink to this headline">¶</a></h2>
 <p>When using Mattermost mobile apps in the Apple App Store and Google Play, purchase an annual subscription to <a class="reference external" href="https://mattermost.com/pricing-self-managed/">Mattermost Enterprise Edition E10</a> or higher to receive access to our Hosted Push Notification Service (HPNS).</p>
 <p>Our Hosted Push Notification Service offers:</p>
-<blockquote>
-<div><ul class="simple">
-<li>Access to a publicly-hosted Mattermost Push Notification Service (MPNS) offering an explicit <a class="reference external" href="https://mattermost.com/data-processing-addendum/">privacy policy</a> where the contents of unencrypted messages are not examined or stored</li>
-<li>Encrypted TLS connections between HPNS and Apple Push Notification Services, HPNS and Google’s Firebase Cloud Messaging service, and HPNS and your Mattermost server</li>
-<li>Production-level uptime expectation</li>
+<ul class="simple">
+<li>Access to a publicly-hosted Mattermost Push Notification Service (MPNS) offering an explicit <a class="reference external" href="https://mattermost.com/data-processing-addendum/">privacy policy</a> where the contents of unencrypted messages are not examined or stored.</li>
+<li>Encrypted TLS connections between HPNS and Apple Push Notification Services, HPNS and Google’s Firebase Cloud Messaging service, and HPNS and your Mattermost server.</li>
+<li>Production-level uptime expectation.</li>
 </ul>
-</div></blockquote>
-<p>After purchasing a subscription to Mattermost E10 or higher from Mattermost, Inc. follow the instructions below to set up and test your system.</p>
+<p>After purchasing a subscription to Mattermost Enterprise Edition E10 or higher from Mattermost, Inc. follow the instructions below to set up and test your system.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Both TPNS and HPNS only work with the Mattermost Apple App Store and Google Play apps. If you have compiled the apps yourselves, you must also host your own Mattermost push proxy server. See our FAQ on <a class="reference internal" href="mobile-faq.html#push-faq"><span class="std std-ref">how push notifications work</span></a> for more details. Our push proxy server is <a class="reference external" href="https://github.com/mattermost/mattermost-push-proxy">available on Github.</a></p>
+<ul class="last simple">
+<li>Both TPNS and HPNS only work with the Mattermost Apple App Store and Google Play apps. If you have compiled the apps yourself, you must also host your own Mattermost push proxy server. See our FAQ on <a class="reference internal" href="mobile-faq.html#push-faq"><span class="std std-ref">how push notifications work</span></a> for more details. Our push proxy server is <a class="reference external" href="https://github.com/mattermost/mattermost-push-proxy">available on GitHub.</a></li>
+</ul>
 </div>
-<p>If you use HPNS you need to ensure that the push proxy can be reached on port 443 from the Mattermost server, for TPNS it is port 80. If you host your own proxy server the default port is 8086.</p>
-<p>Mattermost, Inc. also offers a free basic hosted service for testing setups called the Test Push Notification Service (TPNS). It does not offer a production-level uptime service level agreements (SLAs).</p>
+<ul class="simple">
+<li>You must ensure that the push proxy can be reached on the correct port. For HPNS, it’s port 443 from the Mattermost server, and for TPNS, it’s port 80. If you host your own proxy server, the default port is 8086.</li>
+<li>Mattermost, Inc. also offers a free basic hosted service for testing called the Test Push Notification Service (TPNS). It does not offer production-level uptime service level agreements (SLAs).</li>
+</ul>
 </div>
 <div class="section" id="setting-up-hpns-push-notifications-in-enterprise-edition">
-<h2>Setting up HPNS push notifications in Enterprise Edition<a class="headerlink" href="#setting-up-hpns-push-notifications-in-enterprise-edition" title="Permalink to this headline">¶</a></h2>
+<h2>Setting up HPNS Push Notifications in Enterprise Edition<a class="headerlink" href="#setting-up-hpns-push-notifications-in-enterprise-edition" title="Permalink to this headline">¶</a></h2>
 <p>Follow these steps to set up HPNS:</p>
 <ol class="arabic simple">
-<li>Follow the instructions to <a class="reference external" href="https://docs.mattermost.com/install/ee-install.html">install or upgrade to Enterprise Edition</a></li>
-<li>Go to <strong>System Console</strong> &gt; <strong>Notifications</strong> &gt; <strong>Mobile Push</strong> &gt; <strong>Send Push Notifications</strong> in prior versions or <strong>System Console &gt; Environment &gt; Push Notification Server</strong> in versions after 5.12</li>
-<li>Select “Use encrypted, production-quality HPNS connection to iOS and Android apps” (this option appears only in Enterprise Edition)</li>
+<li>Follow the instructions to <a class="reference external" href="https://docs.mattermost.com/install/ee-install.html">install or upgrade to Enterprise Edition</a>.</li>
+<li>Go to <strong>System Console &gt; Environment &gt; Push Notification Server</strong>.</li>
+<li>Set <strong>Enable Push Notifications</strong> to <strong>Use HPNS connection with uptime SLA to send notifications to iOS and Android apps</strong>. Note that this option is only available in Enterprise Edition.</li>
 </ol>
 <img alt="../_images/mobile_hpns.png" src="../_images/mobile_hpns.png" />
 <ol class="arabic simple" start="4">
-<li>Check the box “I understand and accept the Mattermost Hosted Push Notification Service Terms of Service and Privacy Policy” after reading the documents referenced</li>
+<li>Review the Mattermost Terms of Service and the Mattermost Privacy Policy, then select the box “I understand and accept the Mattermost Hosted Push Notification Service Terms of Service and Privacy Policy” to acknowledge that you understand the terms of use.</li>
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The default <strong>Push Notification Server</strong> address is <a class="reference external" href="https://push.mattermost.com">https://push.mattermost.com</a> and the server is hosted inside the United States. Mattermost also offers a push notification server hosted in Germany. If you wish to use that server, please update the <strong>Push Notification Server</strong> address to <a class="reference external" href="https://hpns-de.mattermost.com/">https://hpns-de.mattermost.com/</a>.</p>
+<p class="last">The default <strong>Push Notification Server</strong> address is <code class="docutils literal notranslate"><span class="pre">https://push.mattermost.com</span></code> and the server is hosted inside the United States. Mattermost also offers a push notification server hosted in Germany. If you wish to use that server, please update the <strong>Push Notification Server</strong> address to <code class="docutils literal notranslate"><span class="pre">https://hpns-de.mattermost.com/</span></code>.</p>
 </div>
 <ol class="arabic simple" start="5">
-<li>Click <strong>Save</strong></li>
+<li>Select <strong>Save</strong></li>
 </ol>
 <p>After setup, <a class="reference internal" href="mobile-testing-notifications.html"><span class="doc">test push notifications</span></a> to confirm they are working.</p>
 </div>
