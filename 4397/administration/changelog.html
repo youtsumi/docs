@@ -265,17 +265,17 @@
 <li>Fixing an issue where WebSockets fail with TLS connections. <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-34000">MM-34000</a></li>
 </ul>
 </li>
-<li><strong>v5.33.0, released 2021-03-16</strong><ul>
+<li><strong>v5.33.0, released 2021-03-17</strong><ul>
 <li>Original 5.33.0 release</li>
 </ul>
 </li>
 </ul>
-<p>Mattermost v5.33.0 contains low level security fixes. <a class="reference external" href="https://docs.mattermost.com/administration/upgrade.html">Upgrading</a> is recommended. Details will be posted on our <a class="reference external" href="https://mattermost.com/security-updates/">security updates page</a> 30 days after release as per the <a class="reference external" href="https://mattermost.org/responsible-disclosure-policy/">Mattermost Responsible Disclosure Policy</a>.</p>
+<p>Mattermost v5.33.0 contains low-level security fixes. <a class="reference external" href="https://docs.mattermost.com/administration/upgrade.html">Upgrading</a> to this release is recommended. Details will be posted on our <a class="reference external" href="https://mattermost.com/security-updates/">security updates page</a> 30 days after release as per the <a class="reference external" href="https://mattermost.org/responsible-disclosure-policy/">Mattermost Responsible Disclosure Policy</a>.</p>
 <div class="section" id="important-upgrade-notes">
 <h3>Important Upgrade Notes<a class="headerlink" href="#important-upgrade-notes" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Deleting a reaction is now a soft delete in the <code class="docutils literal notranslate"><span class="pre">Reactions</span></code> table. A schema update is required and may take up to 15 seconds on first run with large data sets.</li>
-<li>WebSocket handshakes done with HTTP version lower than 1.1 will result in a warning, and the server will transparently upgrade the version to 1.1 to comply with the WebSocket RFC. This is done to work around incorrect Nginx (and other proxy) configs that do not set the <code class="docutils literal notranslate"><span class="pre">proxy_http_version</span></code> directive to 1.1. This facility will be removed in a future Mattermost version and it is strongly recommended to fix the proxy configuration to correctly use the WebSocket protocol.</li>
+<li>WebSocket handshakes done with an HTTP version lower than 1.1 will result in a warning, and the server will transparently upgrade the version to 1.1 to comply with the WebSocket RFC. This is done to work around incorrect Nginx (and other proxy) configs that do not set the <code class="docutils literal notranslate"><span class="pre">proxy_http_version</span></code> directive to 1.1. This facility will be removed in a future Mattermost version. It is strongly recommended to fix the proxy configuration to correctly use the WebSocket protocol.</li>
 </ul>
 <p><strong>IMPORTANT:</strong> If you upgrade from a release earlier than v5.32, please read the other <a class="reference external" href="https://docs.mattermost.com/administration/important-upgrade-notes.html">Important Upgrade Notes</a>.</p>
 </div>
@@ -284,7 +284,7 @@
 <div class="section" id="openid-connect-for-oauth-2-0-authentication-e20-edition">
 <h4>OpenID Connect for OAuth 2.0 Authentication (E20 Edition)<a class="headerlink" href="#openid-connect-for-oauth-2-0-authentication-e20-edition" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li>OpenID Connect enables authentication to Mattermost using any OAuth 2.0 provider that adheres to the OpenID Connect specification. This feature is available for Mobile Apps in v1.40 release.</li>
+<li>OpenID Connect enables authentication to Mattermost using any OAuth 2.0 provider that adheres to the OpenID Connect specification. This feature is available for Mobile Apps in the v1.40 release.</li>
 </ul>
 </div>
 <div class="section" id="support-packet-generation-e10-e20-editions">
@@ -294,9 +294,9 @@
 </ul>
 </div>
 <div class="section" id="updated-incident-collaboration-plugin-to-1-4-0-e20-edition">
-<h4>Updated Incident Collaboration plugin to 1.4.0 (E20 Edition)<a class="headerlink" href="#updated-incident-collaboration-plugin-to-1-4-0-e20-edition" title="Permalink to this headline">¶</a></h4>
+<h4>Updated Incident Collaboration Plugin to 1.4.0 (E20 Edition)<a class="headerlink" href="#updated-incident-collaboration-plugin-to-1-4-0-e20-edition" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li>Added an Incident Timeline to add support for status updates and other key events to be shown in the right-hand sidebar in a chronological order. The timeline enables users to easily gather information for post-incident reports.</li>
+<li>Added an Incident Timeline to support status updates and other key events shown chronologically in the right-hand sidebar. The timeline enables users to easily gather information for post-incident reports.</li>
 </ul>
 </div>
 <div class="section" id="custom-statuses">
@@ -313,7 +313,7 @@
 <ul class="simple">
 <li>Improved the <strong>Add Members</strong> to channel modal.</li>
 <li>Added <strong>Formatting</strong> shortcut keys to the <strong>Shortcut</strong> modal.</li>
-<li>Added localization to date picker used when searching for posts around a given date.</li>
+<li>Added localization to the date picker used when searching for posts around a given date.</li>
 <li>The autocomplete popover is now positioned relative to the &#64;, ~, or / trigger in the post draft.</li>
 <li>Removed the 5-page limit on previewing PDFs.</li>
 <li>Added <code class="docutils literal notranslate"><span class="pre">files</span></code> as a reserved team name.</li>
@@ -346,9 +346,9 @@
 <div class="section" id="bug-fixes">
 <h3>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Fixed an issue where the Database Schema upgrade step for version 5.29.1 was not taken into account in releases 5.30 and later.</li>
+<li>Fixed an issue where the Database Schema upgrade step for v5.29.1 was not taken into account in releases v5.30 and later.</li>
 <li>Fixed an issue where <code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">channel</span> <span class="pre">move</span></code> did not allow moving private channels.</li>
-<li>Fixed an issue where <code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">config</span> <span class="pre">set</span> <span class="pre">PluginSettings.EnableUploads</span></code> to try to change a configuration value did not return an error.</li>
+<li>Fixed an issue where <code class="docutils literal notranslate"><span class="pre">mmctl</span> <span class="pre">config</span> <span class="pre">set</span> <span class="pre">PluginSettings.EnableUploads</span></code> to change a configuration value did not return an error.</li>
 <li>Fixed an issue where the instructions to search for users in <strong>System Console &gt; Reporting &gt; Server Logs</strong> were not up-to-date.</li>
 <li>Fixed an issue where no error message was displayed when adding an LDAP Group Synchronized Team in <strong>System Console &gt; User Management &gt; Users</strong>.</li>
 <li>Fixed an issue where markdown tables did not wrap correctly.</li>
@@ -359,9 +359,9 @@
 <li>Fixed an issue where line breaks were ignored when used with inline images.</li>
 <li>Fixed an issue where the channel switcher did not focus on the first list result after a backspace.</li>
 <li>Fixed an issue where demoting a user to a guest would not take effect in an environment with read replicas.</li>
-<li>Fixed a bug with in-product notices where a date constraint might fail to match, and would lead to the notice not being fetched.</li>
+<li>Fixed a bug with in-product notices where a date constraint might fail to match, which would lead to the notice not being fetched.</li>
 <li>Fixed an issue where creation of a bot would fail due to replica lag.</li>
-<li>The <code class="docutils literal notranslate"><span class="pre">DownloadComplianceReport</span></code> function in the golang driver has been fixed to download a full report as a zip archive.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">DownloadComplianceReport</span></code> function in the Golang driver has been fixed to download a full report as a zip archive.</li>
 <li>Fixed Cache-Control headers to instruct that responses may only be cached on browsers.</li>
 <li>Fixed a panic when the OAuth discovery endpoint would not return a Cache-Control header.</li>
 </ul>
@@ -373,11 +373,11 @@
 <h4>Changes to Team Edition and Enterprise Edition:<a class="headerlink" href="#changes-to-team-edition-and-enterprise-edition" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li>Under <code class="docutils literal notranslate"><span class="pre">ClusterSettings</span></code> in <code class="docutils literal notranslate"><span class="pre">config.json</span></code>:<ul>
-<li>Added <code class="docutils literal notranslate"><span class="pre">EnableGossipCompression</span></code>, to disable compression in the Gossip protocol. By default the value of the setting is <code class="docutils literal notranslate"><span class="pre">true</span></code>, which is the existing default. This is done to maintain compatibility with old servers in a cluster. Once all servers in a cluster are upgraded, it is recommended to disable this setting for better performance.</li>
+<li>Added <code class="docutils literal notranslate"><span class="pre">EnableGossipCompression</span></code>, to disable compression in the Gossip protocol. By default the value of the setting is <code class="docutils literal notranslate"><span class="pre">true</span></code>. This is done to maintain compatibility with old servers in a cluster. Once all servers in a cluster are upgraded, it is recommended to disable this setting for better performance.</li>
 </ul>
 </li>
 <li>Under <code class="docutils literal notranslate"><span class="pre">SqlSettings</span></code> in <code class="docutils literal notranslate"><span class="pre">config.json</span></code>:<ul>
-<li>Added <code class="docutils literal notranslate"><span class="pre">ConnMaxIdleTimeMilliseconds</span></code>, to allow controlling the maximum time a database connection can remain idle. The default value is set to 5 minutes.</li>
+<li>Added <code class="docutils literal notranslate"><span class="pre">ConnMaxIdleTimeMilliseconds</span></code>, to allow System Admins to control the maximum time a database connection can remain idle. The default value is set to 5 minutes.</li>
 </ul>
 </li>
 <li>Under <code class="docutils literal notranslate"><span class="pre">TeamSettings</span></code> in <code class="docutils literal notranslate"><span class="pre">config.json</span></code>:<ul>
@@ -390,7 +390,7 @@
 <div class="section" id="go-version">
 <h3>Go Version<a class="headerlink" href="#go-version" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>5.33 is built with Go <code class="docutils literal notranslate"><span class="pre">1.15.5</span></code>.</li>
+<li>v5.33 is built with Go <code class="docutils literal notranslate"><span class="pre">1.15.5</span></code>.</li>
 </ul>
 </div>
 <div class="section" id="open-source-components">
@@ -409,25 +409,25 @@
 <li>Added a new <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/v4/cloud/subscription/stats</span></code> API endpoint.</li>
 <li>Added a new <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/v4/cloud/subscription/limitreached/invite</span></code> API endpoint.</li>
 <li>Added new <code class="docutils literal notranslate"><span class="pre">PUT</span> <span class="pre">/api/v4/users/&lt;id&gt;/status/custom</span></code>, <code class="docutils literal notranslate"><span class="pre">DELETE</span> <span class="pre">/api/v4/users/&lt;id&gt;/status/custom</span></code>, and <code class="docutils literal notranslate"><span class="pre">DELETE</span> <span class="pre">/api/v4/users/&lt;id&gt;/status/custom/recent</span></code> API endpoints.</li>
-<li>The <code class="docutils literal notranslate"><span class="pre">/api/v4/users/me/auth</span></code> API endpoint can no longer be used to change passwords. This was a hidden feature that was not documented, but was nevertheless possible. We are just removing the hidden feature.</li>
-<li>Updated <code class="docutils literal notranslate"><span class="pre">/users/{user_id}/teams/{team_id}/threads</span></code> API to support <code class="docutils literal notranslate"><span class="pre">unread=true</span></code> query parameter.</li>
-<li><code class="docutils literal notranslate"><span class="pre">/api/v4/users/{user_id}/teams/{team_id}/threads</span></code> API endpoint now accepts “before” and “after” parameters instead of a page index.</li>
-<li>Removed session required restriction from <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">api/v4/subscription/stats</span></code> API endpoint.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">/api/v4/users/me/auth</span></code> API endpoint can no longer be used to change passwords. This was a hidden feature that was not documented, but was nevertheless possible. We have removed this hidden feature.</li>
+<li>Updated <code class="docutils literal notranslate"><span class="pre">/users/{user_id}/teams/{team_id}/threads</span></code> API to support the <code class="docutils literal notranslate"><span class="pre">unread=true</span></code> query parameter.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">/api/v4/users/{user_id}/teams/{team_id}/threads</span></code> API endpoint now accepts “before” and “after” parameters instead of a page index.</li>
+<li>Removed the session required restriction from the <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">api/v4/subscription/stats</span></code> API endpoint.</li>
 </ul>
 </div>
 <div class="section" id="websocket-event-changes">
 <h3>Websocket Event Changes<a class="headerlink" href="#websocket-event-changes" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Improved the websocket implementation by using epoll to manually read from a websocket connection. As a result, the number of goroutines is expected to go down by half. This implementation is only available on Linux and FreeBSD-based distributions.</li>
-<li><code class="docutils literal notranslate"><span class="pre">UserUpdate</span></code> WebSocket Event is now broadcast by two more APIs, <code class="docutils literal notranslate"><span class="pre">plugin.UpdateUser</span></code> and <code class="docutils literal notranslate"><span class="pre">ConvertBotToUser</span></code>.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">UserUpdate</span></code> WebSocket Event is now broadcast by two more APIs, <code class="docutils literal notranslate"><span class="pre">plugin.UpdateUser</span></code> and <code class="docutils literal notranslate"><span class="pre">ConvertBotToUser</span></code>.</li>
 </ul>
 </div>
 <div class="section" id="known-issues">
 <h3>Known Issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Config.json can reset when running the command <code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">restart</span> <span class="pre">mattermost</span></code> and when running any commands that write to the config (e.g. <code class="docutils literal notranslate"><span class="pre">config</span></code> or <code class="docutils literal notranslate"><span class="pre">plugin</span></code>) <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-33752">MM-33752</a>, <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-32390">MM-32390</a>.</li>
+<li>Config.json can reset when running the command <code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">restart</span> <span class="pre">mattermost</span></code>, and when running any commands that write to the config (e.g. <code class="docutils literal notranslate"><span class="pre">config</span></code> or <code class="docutils literal notranslate"><span class="pre">plugin</span></code>) <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-33752">MM-33752</a>, <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-32390">MM-32390</a>.</li>
 <li>The server tries to install E20-required plugins on non-E20 installations <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-32387">MM-32387</a>.</li>
-<li>Adding an at-mention at the start of a post draft and pressing the leftwards or rightwards arrow can clear the post draft and the undo history <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-33823">MM-33823</a>.</li>
+<li>Adding an at-mention at the start of a post draft, then pressing the left or right arrow can clear the post draft and the undo history <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-33823">MM-33823</a>.</li>
 <li>Posts created by bots containing attachments sometimes appear as repeated until the user refreshes the page <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-30980">MM-30980</a>.</li>
 <li>Emoji counter in the center channel doesn’t always update immediately when a reaction is added in the right-hand side <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-31994">MM-31994</a>.</li>
 <li>Slow typing has been experienced when the channel sidebar has many channels. This has been reported in older versions too <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-30407">MM-30407</a>.</li>
@@ -595,10 +595,10 @@
 <div class="section" id="id10">
 <h3>Known Issues<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Config.json can reset when running the command <code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">restart</span> <span class="pre">mattermost</span></code> and when running any commands that write to the config (e.g. <code class="docutils literal notranslate"><span class="pre">config</span></code> or <code class="docutils literal notranslate"><span class="pre">plugin</span></code>) <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-33752">MM-33752</a>, <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-32390">MM-32390</a>.</li>
+<li>Config.json can reset when running the command <code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">restart</span> <span class="pre">mattermost</span></code>, and when running any commands that write to the config (e.g. <code class="docutils literal notranslate"><span class="pre">config</span></code> or <code class="docutils literal notranslate"><span class="pre">plugin</span></code>) <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-33752">MM-33752</a>, <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-32390">MM-32390</a>.</li>
 <li>The server tries to install E20 required plugins on non-E20 installations. <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-32387">MM-32387</a></li>
 <li>Some known issues related to the new channel sidebar, such as that the team icon on-click animation is laggy. <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-11820">MM-32198</a></li>
-<li>Adding an at-mention at the start of a post draft and pressing the leftwards or rightwards arrow can clear the post draft and the undo history <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-33823">MM-33823</a>.</li>
+<li>Adding an at-mention at the start of a post draft, then pressing the left or right arrow can clear the post draft and the undo history <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-33823">MM-33823</a>.</li>
 <li>Reddit link previews no longer work in Mattermost. <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-31899">MM-31899</a></li>
 <li>Posts created by bots containing attachments sometimes appear as repeated until the user refreshes the page. <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-30980">MM-30980</a></li>
 <li>Emoji counter in the center channel doesn’t always update immediately when a reaction is added in the right-hand side. <a class="reference external" href="https://mattermost.atlassian.net/browse/MM-31994">MM-31994</a></li>
