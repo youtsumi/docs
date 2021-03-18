@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>GitLab Single Sign-On &mdash; Mattermost 5.32 documentation</title>
+  <title>GitLab Single Sign-On &mdash; Mattermost 5.33 documentation</title>
   
 
   
@@ -30,7 +30,7 @@
     <link rel="canonical" href="https://docs.mattermost.com/deployment/sso-gitlab.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Google Single Sign-On (E20)" href="sso-google.html" />
-    <link rel="prev" title="SAML Single-Sign-On (E20): Technical Documentation" href="sso-saml-technical.html" />
+    <link rel="prev" title="OpenID Connect Single Sign-On (E20)" href="sso-openidconnect.html" />
   
   	<!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                5.32
+                5.33
               </div>
             
           
@@ -120,13 +120,16 @@
 <li class="toctree-l3"><a class="reference internal" href="ldap-group-constrained-team-channel.html">Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-saml.html">SAML Single Sign-On (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-saml-technical.html">SAML Single-Sign-On (E20): Technical Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sso-openidconnect.html">OpenID Connect Single Sign-On (E20)</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">GitLab Single Sign-On</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#step-1-add-an-oauth-application-to-your-gitlab-account">Step 1: Add an OAuth application to your GitLab account</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-1-add-an-application-to-your-gitlab-account">Step 1: Add an application to your GitLab account</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#step-2-configure-mattermost-for-gitlab-sso">Step 2: Configure Mattermost for GitLab SSO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#optional-step-3-force-users-to-sign-up-using-sso-only">(Optional) Step 3: Force users to sign up using SSO only</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="sso-google.html">Google Single Sign-On (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sso-office.html">Office 365 Single Sign-On (E20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="converting-oauth20-service-providers-to-openidconnect.html">Converting OAuth 2.0 Service Providers to OpenID Connect (E20)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ssl-client-certificate.html">SSL Client Certificate Setup (Beta)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="certificate-based-authentication.html">Certificate-Based Authentication (Experimental)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="team-channel-management.html">Managing Team and Channel Members (E20)</a></li>
@@ -202,26 +205,25 @@
 <p>Configure Mattermost to use GitLab as a single sign-on (SSO) service for team creation, account creation, and user sign-in.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Only the default GitLab SSO is officially supported. “Double SSO”, where GitLab SSO is chained to other SSO solutions, is not supported. It may be possible to connect GitLab SSO with AD, LDAP, SAML, or MFA add-ons in some cases, but because of the special logic required they’re not officially supported and are known not to work on some experiences. If having official AD, LDAP, SAML, or MFA support is critical to your enterprise, please consider <a class="reference external" href="https://mattermost.com/pricing/">Mattermost Enterprise Edition</a> as an option.</p>
+<p>Only the default GitLab SSO is officially supported. “Double SSO”, where GitLab SSO is chained to other SSO solutions, is not supported. It may be possible to connect GitLab SSO with AD, LDAP, SAML, or MFA add-ons in some cases, but because of the special logic required they’re not officially supported and are known not to work in some instances. If having official AD, LDAP, SAML, or MFA support is critical to your enterprise, please consider <a class="reference external" href="https://mattermost.com/pricing/">Mattermost Enterprise Edition</a> as an option.</p>
 </div>
-<div class="section" id="step-1-add-an-oauth-application-to-your-gitlab-account">
-<h2>Step 1: Add an OAuth application to your GitLab account<a class="headerlink" href="#step-1-add-an-oauth-application-to-your-gitlab-account" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-1-add-an-application-to-your-gitlab-account">
+<h2>Step 1: Add an application to your GitLab account<a class="headerlink" href="#step-1-add-an-application-to-your-gitlab-account" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li><p>Sign in to your GitLab account and go to <code class="docutils literal notranslate"><span class="pre">https://{gitlab-site-name}/profile/applications</span></code>. For <em>{gitlab-site-name}</em> use the name of your GitLab instance. If you’re using GitLab itself as your OAuth provider, use <em>gitlab.com</em>.</p></li>
+<li><p>Sign in to your GitLab account, then go to <code class="docutils literal notranslate"><span class="pre">https://{gitlab-site-name}/profile/applications</span></code>. For <code class="docutils literal notranslate"><span class="pre">{gitlab-site-name}</span></code> use the name of your GitLab instance. If you’re using GitLab itself as your OAuth provider, use <code class="docutils literal notranslate"><span class="pre">gitlab.com</span></code>.</p></li>
 <li><p>Add a new application:</p></li>
 </ol>
 <blockquote>
 <div><ol class="loweralpha simple">
-<li><p>In the <strong>Name</strong> field, type <em>Mattermost</em>.</p></li>
-<li><p>In the <strong>Redirect URI</strong> field add the following two lines, using your own value for <em>{mattermost-site-name}</em>.</p></li>
+<li><p>In the <strong>Name</strong> field, enter <code class="docutils literal notranslate"><span class="pre">Mattermost</span></code>.</p></li>
+<li><p>In the <strong>Redirect URI</strong> field, add the following two lines, using your own value for <code class="docutils literal notranslate"><span class="pre">{mattermost-site-name}</span></code>:</p></li>
 </ol>
 <blockquote>
-<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span> https://{mattermost-site-name}/login/gitlab/complete
- https://{mattermost-site-name}/signup/gitlab/complete
-
-If your GitLab instance is not set up to use SSL, your URIs must begin with ``http://`` instead of ``https://``.
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>https://{mattermost-site-name}/login/gitlab/complete
+https://{mattermost-site-name}/signup/gitlab/complete
 </pre></div>
 </div>
+<p>If your GitLab instance is not set up to use SSL, your URIs must begin with <code class="docutils literal notranslate"><span class="pre">http://</span></code> instead of <code class="docutils literal notranslate"><span class="pre">https://</span></code>.</p>
 </div></blockquote>
 <ol class="loweralpha simple" start="3">
 <li><p>Do not select any options under <strong>Scopes</strong>.</p></li>
@@ -229,44 +231,120 @@ If your GitLab instance is not set up to use SSL, your URIs must begin with ``ht
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>Click <strong>Save application</strong>.</p></li>
+<li><p>Keep the GitLab window open. You need the <strong>Application Id</strong> and <strong>Application Secret</strong> when you configure Mattermost.</p></li>
 </ol>
-<p>Keep the GitLab window open because you need the <em>Application Id</em> and <em>Secret</em> when you configure Mattermost.</p>
 </div>
 <div class="section" id="step-2-configure-mattermost-for-gitlab-sso">
 <h2>Step 2: Configure Mattermost for GitLab SSO<a class="headerlink" href="#step-2-configure-mattermost-for-gitlab-sso" title="Permalink to this headline">¶</a></h2>
+<p>The steps to configure Mattermost for GitLab SSO depends on your edition of Mattermost. To confirm your Mattermost edition, go to <strong>System Console &gt; About &gt; Edition and License</strong>.</p>
+<div class="section" id="mattermost-team-edition">
+<h3>Mattermost Team Edition<a class="headerlink" href="#mattermost-team-edition" title="Permalink to this headline">¶</a></h3>
+<p>Mattermost Team Edition customers can set up a GitLab OAuth 2.0 identity provider in Mattermost.</p>
 <ol class="arabic simple">
-<li><p>In Team Edition, navigate to <strong>System Console &gt; Authentication &gt; Gitlab</strong> or in Enterprise Edition navigate to <strong>System Console &gt; Authentication &gt; OAuth 2.0</strong>. Select <code class="docutils literal notranslate"><span class="pre">Gitlab</span></code> in the <em>Select OAuth 2.0 service provider</em> dropdown and add other required fields.  Alternatively, on your Mattermost server, add the <em>Application Id</em> and the <em>Secret</em> to the <em>GitLab</em> settings section in the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file:</p></li>
+<li><p>Log in to Mattermost, then go to <strong>System Console &gt; Authentication &gt; Gitlab</strong>.</p></li>
+<li><p>Set <strong>Enable authentication with GitLab</strong> to <strong>true</strong>.</p></li>
+<li><p>Paste the <strong>Application ID</strong> from GitLab into Mattermost.</p></li>
+<li><p>Paste the <strong>Application Secret</strong> from GitLab as the <strong>Application Secret Key</strong> in Mattermost</p></li>
+<li><p>Enter the <strong>GitLab Site URL</strong> of your GitLab instance. If your GitLab instance is not set up with SSL, start the URL with <code class="docutils literal notranslate"><span class="pre">http://</span></code> instead of <code class="docutils literal notranslate"><span class="pre">https://</span></code>. If you’re using GitLab itself as your provider, use <code class="docutils literal notranslate"><span class="pre">gitlab.com</span></code>.</p></li>
+<li><p>(Optional) Enter a <strong>User API Endpoint</strong>.</p></li>
+<li><p>(Optional) Enter an <strong>Auth Endpoint</strong>.</p></li>
+<li><p>(Optional) Enter a <strong>Token Endpoint</strong>.</p></li>
+<li><p>Select <strong>Save</strong>.</p></li>
 </ol>
-<blockquote>
-<div><ol class="loweralpha simple">
-<li><p>Open <code class="docutils literal notranslate"><span class="pre">config.json</span></code> as root in a text editor. It’s usually in <code class="docutils literal notranslate"><span class="pre">/opt/mattermost/config</span></code> but might be elsewhere on your system.</p></li>
-<li><p>Locate the <em>GitLabSettings</em> section and add or update the following information:</p></li>
+<p>Alternatively, you can add the GitLab settings directly to the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file on your Mattermost server.</p>
+<ol class="arabic simple">
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">config.json</span></code> as <em>root</em> in a text editor. It’s usually in <code class="docutils literal notranslate"><span class="pre">/opt/mattermost/config</span></code> but it might be elsewhere on your system.</p></li>
+<li><p>Locate the <code class="docutils literal notranslate"><span class="pre">GitLabSettings</span></code> section, then add or update the following information:</p></li>
 </ol>
-<blockquote>
-<div><div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;GitLabSettings&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;Enable&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">&quot;Secret&quot;</span><span class="o">:</span> <span class="s2">&quot;{mattermost-app-secret-from-gitlab}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Id&quot;</span><span class="o">:</span> <span class="s2">&quot;{mattermost-app-application-id-from-gitlab}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Scope&quot;</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;AuthEndpoint&quot;</span><span class="o">:</span> <span class="s2">&quot;https://{gitlab-site-name}/oauth/authorize&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;TokenEndpoint&quot;</span><span class="o">:</span> <span class="s2">&quot;https://{gitlab-site-name}/oauth/token&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;UserApiEndpoint&quot;</span><span class="o">:</span> <span class="s2">&quot;https://{gitlab-site-name}/api/v4/user&quot;</span>
-<span class="p">}</span>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&quot;GitLabSettings&quot;: {
+  &quot;Enable&quot;: true,
+  &quot;Secret&quot;: &quot;{mattermost-app-secret-from-gitlab}&quot;,
+  &quot;Id&quot;: &quot;{mattermost-app-application-id-from-gitlab}&quot;,
+  &quot;Scope&quot;: &quot;&quot;,
+  &quot;AuthEndpoint&quot;: &quot;https://{gitlab-site-name}/oauth/authorize&quot;,
+  &quot;TokenEndpoint&quot;: &quot;https://{gitlab-site-name}/oauth/token&quot;,
+  &quot;UserApiEndpoint&quot;: &quot;https://{gitlab-site-name}/api/v4/user&quot;
+}
 </pre></div>
 </div>
-<p>For <code class="docutils literal notranslate"><span class="pre">{gitlab-site-name}</span></code> use the name of your GitLab instance. If your GitLab instance is not set up to use SSL, the endpoints must begin with <code class="docutils literal notranslate"><span class="pre">http://</span></code> instead of <code class="docutils literal notranslate"><span class="pre">https://</span></code>. If you are using GitLab itself as your OAuth provider, use <em>gitlab.com</em>.</p>
-<p>For <code class="docutils literal notranslate"><span class="pre">UserApiEndpoint</span></code>, use <code class="docutils literal notranslate"><span class="pre">https://{gitlab-site-name}/api/v3/user</span></code> if you’re running GitLab v8.17.8 or earlier.</p>
-</div></blockquote>
-</div></blockquote>
-<ol class="arabic simple" start="2">
-<li><p>[Optional] To force all users to sign-up with SSO only, set <strong>System Console &gt; Authentication &gt; Email &gt; Enable sign-in with email</strong> to <code class="docutils literal notranslate"><span class="pre">false</span></code> or in the <em>EmailSettings</em> section of <code class="docutils literal notranslate"><span class="pre">config.json</span></code> set <em>EnableSignUpWithEmail</em> to <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
-<li><p>Restart your Mattermost server.</p></li>
+<ol class="arabic simple" start="3">
+<li><p>Save your changes, then restart your Mattermost server. After the server restarts, users must change their sign-in method before they can sign in with GitLab.</p></li>
 </ol>
-<blockquote>
-<div><p>On Ubuntu 14.04 and RHEL 6: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">restart</span> <span class="pre">mattermost</span></code></p>
-<p>On Ubuntu 16.04 and RHEL 7: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">restart</span> <span class="pre">mattermost</span></code></p>
-</div></blockquote>
-<p>After the server restarts, users must change their sign-in method before they can sign in with GitLab.</p>
+</div>
+<div class="section" id="mattermost-enterprise-edition-e10">
+<h3>Mattermost Enterprise Edition E10<a class="headerlink" href="#mattermost-enterprise-edition-e10" title="Permalink to this headline">¶</a></h3>
+<p>Mattermost Enterprise Edition E10 customers can set up a GitLab OAuth 2.0 identity provider in Mattermost.</p>
+<ol class="arabic simple">
+<li><p>Log in to Mattermost, then go to <strong>System Console &gt; Authentication &gt; OAuth 2.0</strong>.</p></li>
+<li><p>Select <strong>GitLab</strong> as the service provider.</p></li>
+<li><p>Paste the <strong>Application ID</strong> from GitLab into Mattermost.</p></li>
+<li><p>Paste the <strong>Application Secret</strong> from GitLab as the <strong>Application Secret Key</strong> in Mattermost</p></li>
+<li><p>Enter the <strong>GitLab Site URL</strong> of your GitLab instance. If your GitLab instance is not set up with SSL, start the URL with <code class="docutils literal notranslate"><span class="pre">http://</span></code> instead of <code class="docutils literal notranslate"><span class="pre">https://</span></code>. If you’re using GitLab itself as your provider, use <code class="docutils literal notranslate"><span class="pre">gitlab.com</span></code>.</p></li>
+<li><p>(Optional) Enter a <strong>User API Endpoint</strong>.</p></li>
+<li><p>(Optional) Enter an <strong>Auth Endpoint</strong>.</p></li>
+<li><p>(Optional) Enter a <strong>Token Endpoint</strong>.</p></li>
+<li><p>Select <strong>Save</strong>.</p></li>
+</ol>
+<p>Alternatively, you can add the GitLab settings directly to the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file on your Mattermost server.</p>
+<ol class="arabic simple">
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">config.json</span></code> as <em>root</em> in a text editor. It’s usually in <code class="docutils literal notranslate"><span class="pre">/opt/mattermost/config</span></code> but it might be elsewhere on your system.</p></li>
+<li><p>Locate the <code class="docutils literal notranslate"><span class="pre">GitLabSettings</span></code> section, then add or update the following information:</p></li>
+</ol>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&quot;GitLabSettings&quot;: {
+  &quot;Enable&quot;: true,
+  &quot;Secret&quot;: &quot;{mattermost-app-secret-from-gitlab}&quot;,
+  &quot;Id&quot;: &quot;{mattermost-app-application-id-from-gitlab}&quot;,
+  &quot;Scope&quot;: &quot;&quot;,
+  &quot;AuthEndpoint&quot;: &quot;https://{gitlab-site-name}/oauth/authorize&quot;,
+  &quot;TokenEndpoint&quot;: &quot;https://{gitlab-site-name}/oauth/token&quot;,
+  &quot;UserApiEndpoint&quot;: &quot;https://{gitlab-site-name}/api/v4/user&quot;
+}
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Save your changes, then restart your Mattermost server. After the server restarts, users must change their sign-in method before they can sign in with GitLab.</p></li>
+</ol>
+</div>
+<div class="section" id="mattermost-enterprise-edition-e20">
+<h3>Mattermost Enterprise Edition E20<a class="headerlink" href="#mattermost-enterprise-edition-e20" title="Permalink to this headline">¶</a></h3>
+<p>Mattermost Enterprise Edition E20 customers can set up a new GitLab OpenID Connect identity provider, or they can convert an existing OAuth 2.0 configuration for GitLab to the OpenID Connect standard. From Mattermost Enterprise Edition v5.33, OAuth 2.0 is being deprecated and replaced by OpenID Connect. Refer to product documentation to <a class="reference external" href="https://docs.mattermost.com/deployment/converting-oauth20-service-providers-to-openidconnect.html">convert your existing OAuth 2.0 service provider configuration for GitLab</a> to the OpenID Connect Standard.</p>
+<ol class="arabic simple">
+<li><p>Log in to Mattermost, then go to <strong>System Console &gt; Authentication &gt; OpenID Connect</strong>.</p></li>
+<li><p>Select <strong>GitLab</strong> as the service provider.</p></li>
+<li><p>Enter the <strong>Gitlab Site URL</strong> of your GitLab instance. If your GitLab instance is not set up to use SSL, start the URL with <code class="docutils literal notranslate"><span class="pre">http://</span></code> instead of <code class="docutils literal notranslate"><span class="pre">https://</span></code>. If you’re using GitLab itself as your provider, use <code class="docutils literal notranslate"><span class="pre">gitlab.com</span></code>.</p></li>
+<li><p>The <strong>Discovery Endpoint</strong> for OpenID Connect with GitLab is prepopulated with <code class="docutils literal notranslate"><span class="pre">https://gitlab.com/.well-known/openid-configuration</span></code>.</p></li>
+<li><p>Paste the <strong>Application ID</strong> from GitLab as the <strong>Client ID</strong> in Mattermost.</p></li>
+<li><p>Paste the <strong>Application Secret Key</strong> from GitLab as the <strong>Client Secret</strong> in Mattermost.</p></li>
+<li><p>Select <strong>Save</strong>.</p></li>
+</ol>
+<p>Alternatively, you can add the GitLab settings directly to the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file on your Mattermost server.</p>
+<ol class="arabic simple">
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">config.json</span></code> as <em>root</em> in a text editor. It’s usually in <code class="docutils literal notranslate"><span class="pre">/opt/mattermost/config</span></code> but it might be elsewhere on your system.</p></li>
+<li><p>Locate the <code class="docutils literal notranslate"><span class="pre">GitLabSettings</span></code> section, then add or update the following information:</p></li>
+</ol>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&quot;GitLabSettings&quot;: {
+  &quot;Enable&quot;: true,
+  &quot;Secret&quot;: &quot;d4ff651332d26b0f76a18141ec6b72d59e04ad&quot;,
+  &quot;Id&quot;: &quot;f4c18eb49f437407758de8b9803668ae6&quot;,
+  &quot;Scope&quot;: &quot;profile openid email&quot;,
+  &quot;AuthEndpoint&quot;: &quot;&quot;,
+  &quot;TokenEndpoint&quot;: &quot;&quot;,
+  &quot;UserApiEndpoint&quot;: &quot;&quot;,
+  &quot;DiscoveryEndpoint&quot;: &quot;https://gitlab.com/.well-known/openid-configuration&quot;,
+  &quot;ButtonText&quot;: &quot;&quot;,
+  &quot;ButtonColor&quot;: &quot;&quot;
+}
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Save your changes, then restart your Mattermost server. After the server restarts, users must change their sign-in method before they can sign in with GitLab.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="optional-step-3-force-users-to-sign-up-using-sso-only">
+<h2>(Optional) Step 3: Force users to sign up using SSO only<a class="headerlink" href="#optional-step-3-force-users-to-sign-up-using-sso-only" title="Permalink to this headline">¶</a></h2>
+<p>To force all users to sign up with SSO only, go to <strong>System Console &gt; Authentication &gt; Email</strong>, then set <strong>Enable sign-in with email</strong> to <strong>false</strong>.</p>
+<p>Alternatively, add this setting to the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file directly in the <code class="docutils literal notranslate"><span class="pre">EmailSettings</span></code> section and set <code class="docutils literal notranslate"><span class="pre">EnableSignUpWithEmail</span></code> to <code class="docutils literal notranslate"><span class="pre">false</span></code>. You must save your changes and restart the Mattermost server. Users must change their sign-in method before they can sign in to Mattermost with GitLab.</p>
 </div>
 </div>
 
@@ -277,7 +355,7 @@ If your GitLab instance is not set up to use SSL, your URIs must begin with ``ht
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
         <a href="sso-google.html" class="btn btn-neutral float-right" title="Google Single Sign-On (E20)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="sso-saml-technical.html" class="btn btn-neutral float-left" title="SAML Single-Sign-On (E20): Technical Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sso-openidconnect.html" class="btn btn-neutral float-left" title="OpenID Connect Single Sign-On (E20)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

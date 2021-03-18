@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Configuration in the Mattermost Database &mdash; Mattermost 5.32 documentation</title>
+  <title>Configuration in the Mattermost Database &mdash; Mattermost 5.33 documentation</title>
   
 
   
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                5.32
+                5.33
               </div>
             
           
@@ -221,7 +221,7 @@ bin/mattermost config get SqlSettings.DataSource
 <p>Be sure to run this command as the <em>mattermost</em> user and not <em>root</em>. Running the Mattermost binary as <em>root</em> will cause permissions errors.</p>
 </div>
 <p>Another way is to view your <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file and get the value in <code class="docutils literal notranslate"><span class="pre">SqlSettings.DataSource</span></code>.</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">SqlSettings.DataSource</span></code> does not start with <code class="docutils literal notranslate"><span class="pre">postgres://</span></code> then you have to add <code class="docutils literal notranslate"><span class="pre">mysql://</span></code> to the beginning. Also, if you see <code class="docutils literal notranslate"><span class="pre">\u0026</span></code> replace it with <code class="docutils literal notranslate"><span class="pre">&amp;</span></code>.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">SqlSettings.DataSource</span></code> does not start with <code class="docutils literal notranslate"><span class="pre">postgres://</span></code> or <code class="docutils literal notranslate"><span class="pre">mysql://</span></code>, then you have to add this line to the beginning based on the database in use. Also, if you see <code class="docutils literal notranslate"><span class="pre">\u0026</span></code> replace it with <code class="docutils literal notranslate"><span class="pre">&amp;</span></code>.</p>
 <p>Here are two example connection strings:</p>
 <p><strong>MySQL</strong></p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>mysql://mmuser:really_secure_password@tcp(127.0.0.1:3306)/mattermost?charset=utf8mb4,utf8&amp;readTimeout=30s&amp;writeTimeout=30s

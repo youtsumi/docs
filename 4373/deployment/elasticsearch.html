@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Elasticsearch (E20) &mdash; Mattermost 5.32 documentation</title>
+  <title>Elasticsearch (E20) &mdash; Mattermost 5.33 documentation</title>
   
 
   
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                5.32
+                5.33
               </div>
             
           
@@ -352,6 +352,10 @@
 <h3>How do I know if an Elasticsearch job fails?<a class="headerlink" href="#how-do-i-know-if-an-elasticsearch-job-fails" title="Permalink to this headline">¶</a></h3>
 <p>Mattermost provides the status of each Elasticsearch indexing job in <strong>System Console &gt; Environment &gt; Elasticsearch</strong> (or <strong>System Console &gt; Advanced &gt; Elasticsearch</strong> in versions prior to 5.12). Here you can see if the job succeeded or failed, including the details of the error.</p>
 <p>Failures are returned in the server logs. The error log begins with the string <code class="docutils literal notranslate"><span class="pre">Failed</span> <span class="pre">job</span></code> and includes a job_id key/value pair. Elasticsearch job failures are identified with worker name <code class="docutils literal notranslate"><span class="pre">EnterpriseElasticsearchAggregator</span></code> and <code class="docutils literal notranslate"><span class="pre">EnterpriseElasticsearchIndexer</span></code>. You can optionally create a script that programmatically queries for such failures and notifies the appropriate system.</p>
+</div>
+<div class="section" id="my-elasticsearch-indexes-won-t-complete-what-should-i-do">
+<h3>My Elasticsearch indexes won’t complete, what should I do?<a class="headerlink" href="#my-elasticsearch-indexes-won-t-complete-what-should-i-do" title="Permalink to this headline">¶</a></h3>
+<p>If you have an Elasticsearch indexing job that’s paused, it’s likely your Elasticsearch server has restarted. If you restart your Elasticsearch server you must also restart Mattermost to ensure jobs are completed. If restarting the Mattermost server does not resolve the issue, please contact Mattermost support.</p>
 </div>
 </div>
 </div>

@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Google Single Sign-On &mdash; Mattermost 5.32 documentation</title>
+  <title>Google Single Sign-On &mdash; Mattermost 5.33 documentation</title>
   
 
   
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                5.32
+                5.33
               </div>
             
           
@@ -167,7 +167,7 @@
     <li class="wy-breadcrumbs-aside">
       
         
-          <a href="https://github.com/mattermost/docs/blob/master/source/cloud/cloud-administration/sso-google.md" class="fa fa-github"> Edit</a>
+          <a href="https://github.com/mattermost/docs/blob/master/source/cloud/cloud-administration/sso-google.rst" class="fa fa-github"> Edit</a>
         
       
     </li>
@@ -181,29 +181,32 @@
 <h1>Google Single Sign-On<a class="headerlink" href="#google-single-sign-on" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="migrating-from-oauth-2-0-to-openid-connect">
 <h2>Migrating from OAuth 2.0 to OpenID Connect<a class="headerlink" href="#migrating-from-oauth-2-0-to-openid-connect" title="Permalink to this headline">¶</a></h2>
-<p>OAuth 2.0 is being deprecated and replaced by OpenID Connect. Refer to the product documentation to <a class="reference external" href="https://docs.mattermost.com/cloud/cloud-administration/converting-oauth-2.0-to-openid-connect.html">convert your existing OAuth configuration</a> for Google Apps to the OpenID Connect standard.</p>
+<p>OAuth 2.0 is being deprecated and replaced by OpenID Connect. Refer to the product documentation to <a class="reference external" href="https://docs.mattermost.com/cloud/cloud-administration/converting-oauth-2.0-to-openid-connect.html">convert your existing OAuth service provider configuration</a> for Google Apps to the OpenID Connect standard.</p>
 </div>
 <div class="section" id="configuring-google-apps-as-a-single-sign-on-sso-service">
 <h2>Configuring Google Apps as a Single Sign-On (SSO) service<a class="headerlink" href="#configuring-google-apps-as-a-single-sign-on-sso-service" title="Permalink to this headline">¶</a></h2>
 <p>Follow these steps to configure Mattermost to use Google as a Single Sign-on (SSO) service for team creation, account creation, and sign-in.</p>
-<p><strong>Note:</strong> The <a class="reference external" href="https://developers.google.com/people">Google People API</a> has replaced the Google+ API, which was deprecated by Google as of March 7th, 2019 <a class="reference external" href="https://developers.google.com/+/api-shutdown">per their notice</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <a class="reference external" href="https://developers.google.com/people">Google People API</a> has replaced the Google+ API, which was deprecated by Google as of March 7th, 2019 <a class="reference external" href="https://developers.google.com/+/api-shutdown">per their notice</a>.</p>
+</div>
 <div class="section" id="step-1-create-openid-connect-project-in-google-api-manager">
 <h3>Step 1: Create OpenID Connect project in Google API Manager<a class="headerlink" href="#step-1-create-openid-connect-project-in-google-api-manager" title="Permalink to this headline">¶</a></h3>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Go to <a class="reference external" href="https://console.developers.google.com">Google Cloud Platform</a>.</p></li>
 <li><p>Select <strong>Credentials</strong> in the left-hand sidebar.</p></li>
 <li><p>Select <strong>Create Credentials</strong>, then select <strong>OAuth client ID</strong>.</p></li>
 <li><p>Select the <strong>Web application</strong> as the application type.</p></li>
-<li><p>Enter <code class="docutils literal notranslate"><span class="pre">Mattermost-&lt;your-company-name&gt;</span></code> as the <strong>Name</strong>, replacing <your-company-name> with the name of your organization.</p></li>
-<li><p>Under **Authorized redirect URIs, select Add URL, then enter <code class="docutils literal notranslate"><span class="pre">{your-mattermost-url}/signup/google/complete</span></code>. For example: <code class="docutils literal notranslate"><span class="pre">http://localhost:8065/signup/google/complete</span></code>.</p></li>
+<li><p>Enter <code class="docutils literal notranslate"><span class="pre">Mattermost-&lt;your-company-name&gt;</span></code> as the <strong>Name</strong>, replacing <code class="docutils literal notranslate"><span class="pre">&lt;your-company-name&gt;</span></code> with the name of your organization.</p></li>
+<li><p>Under <strong>Authorized redirect URIs</strong>, select <strong>Add URL</strong>, then enter <code class="docutils literal notranslate"><span class="pre">{your-mattermost-url}/signup/google/complete</span></code>. For example: <code class="docutils literal notranslate"><span class="pre">http://localhost:8065/signup/google/complete</span></code>.</p></li>
 <li><p>Select <strong>Create</strong>.</p></li>
 <li><p>Copy and paste the <strong>Your Client ID</strong> and <strong>Your Client Secret</strong> values to a temporary location. You will enter these values in the Mattermost System Console.</p></li>
 </ol>
-<p><img alt="../../_images/create-google-sso-credentials.png" src="../../_images/create-google-sso-credentials.png" /></p>
-<p><img alt="../../_images/select-google-sso-web-app.png" src="../../_images/select-google-sso-web-app.png" /></p>
-<p><img alt="../../_images/google-sso-web-app-name.png" src="../../_images/google-sso-web-app-name.png" /></p>
-<p><img alt="../../_images/google-sso-redirect-uri.png" src="../../_images/google-sso-redirect-uri.png" /></p>
-<p><img alt="../../_images/google-sso-credentials.png" src="../../_images/google-sso-credentials.png" /></p>
+<img alt="../../_images/create-google-sso-credentials.png" src="../../_images/create-google-sso-credentials.png" />
+<img alt="../../_images/select-google-sso-web-app.png" src="../../_images/select-google-sso-web-app.png" />
+<img alt="../../_images/google-sso-web-app-name.png" src="../../_images/google-sso-web-app-name.png" />
+<img alt="../../_images/google-sso-redirect-uri.png" src="../../_images/google-sso-redirect-uri.png" />
+<img alt="../../_images/google-sso-credentials.png" src="../../_images/google-sso-credentials.png" />
 </div>
 <div class="section" id="step-2-enable-google-people-api">
 <h3>Step 2: Enable Google People API<a class="headerlink" href="#step-2-enable-google-people-api" title="Permalink to this headline">¶</a></h3>
@@ -211,7 +214,7 @@
 </div>
 <div class="section" id="step-3-configure-mattermost-for-google-apps-sso">
 <h3>Step 3: Configure Mattermost for Google Apps SSO<a class="headerlink" href="#step-3-configure-mattermost-for-google-apps-sso" title="Permalink to this headline">¶</a></h3>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Log in to Mattermost, then go to <strong>System Console &gt; Authentication &gt; OpenID Connect</strong>.</p></li>
 <li><p>Select <strong>Google Apps</strong> as the service provider.</p></li>
 <li><p>The <strong>Discovery Endpoint</strong> for OpenID Connect with Google Apps is prepopulated with <code class="docutils literal notranslate"><span class="pre">https://accounts.google.com/.well-known/openid-configuration</span></code>.</p></li>
@@ -276,7 +279,7 @@
             </dd>
             
             <dd>
-                <a href="https://github.com/mattermost/docs/blob/master/source/cloud/cloud-administration/sso-google.md"> Edit on GitHub</a>
+                <a href="https://github.com/mattermost/docs/blob/master/source/cloud/cloud-administration/sso-google.rst"> Edit on GitHub</a>
             </dd>
             
         </dl>

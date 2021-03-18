@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Configuration Settings &mdash; Mattermost 5.32 documentation</title>
+  <title>Configuration Settings &mdash; Mattermost 5.33 documentation</title>
   
 
   
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                5.32
+                5.33
               </div>
             
           
@@ -612,10 +612,6 @@
 <div class="section" id="maximum-connection-idle-timeout">
 <h4>Maximum Connection Idle Timeout<a class="headerlink" href="#maximum-connection-idle-timeout" title="Permalink to this headline">¶</a></h4>
 <p>Maximum time a database connection can remain idle.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This configuration setting is available in Mattermost Cloud, and will be available in Mattermost Server v5.33 on March 16, 2021.</p>
-</div>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 100%" />
@@ -1428,10 +1424,6 @@
 <h4>Enable Gossip Compression<a class="headerlink" href="#enable-gossip-compression" title="Permalink to this headline">¶</a></h4>
 <p><strong>True</strong>: All communication through the cluster uses gossip compression. This is set to <code class="docutils literal notranslate"><span class="pre">true</span></code> by default to maintain compatibility with older servers.</p>
 <p><strong>False</strong>: All communication using the gossip protocol remains uncompressed. Once all servers in a cluster are upgraded to Mattermost v5.33 or later, we recommend that you disable this configuration setting for better performance.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This configuration setting is available in Mattermost Cloud. It will be available in Mattermost Server v5.33 on March 16, 2021.</p>
-</div>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 100%" />
@@ -2347,6 +2339,20 @@
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p>This feature’s <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is <code class="docutils literal notranslate"><span class="pre">&quot;ShowFullName&quot;:</span> <span class="pre">true</span></code> with options <code class="docutils literal notranslate"><span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="enable-custom-user-statuses">
+<h4>Enable Custom User Statuses<a class="headerlink" href="#enable-custom-user-statuses" title="Permalink to this headline">¶</a></h4>
+<p><strong>True</strong>: Users can set descriptive status messages and optional status emojis that are visible to all users.</p>
+<p><strong>False</strong>: Users are unable to set custom user statuses.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>This feature’s <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is <code class="docutils literal notranslate"><span class="pre">&quot;EnableCustomUserStatuses&quot;:</span> <span class="pre">true</span></code> with options <code class="docutils literal notranslate"><span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></td>
 </tr>
 </tbody>
 </table>
@@ -3966,6 +3972,7 @@
 </div>
 <div class="section" id="select-oauth-2-0-service-provider">
 <h3>Select OAuth 2.0 service provider<a class="headerlink" href="#select-oauth-2-0-service-provider" title="Permalink to this headline">¶</a></h3>
+<p><em>Available in Team Edition and Enterprise Edition E10</em></p>
 <p>Choose whether OAuth can be used for account creation and login. Options include:</p>
 <blockquote>
 <div><ul class="simple">
@@ -4239,6 +4246,272 @@
 </table>
 </div>
 </div>
+<div class="section" id="select-openid-connect-service-provider">
+<h3>Select OpenID Connect service provider<a class="headerlink" href="#select-openid-connect-service-provider" title="Permalink to this headline">¶</a></h3>
+<p><em>Available in Enterprise Edition E20</em></p>
+<p>Choose whether OpenID Connect can be used for account creation and login. Options include:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Do not allow sign-in via an OpenID provider</strong></p></li>
+<li><p><strong>GitLab</strong> (see <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#gitlab-settings">GitLab Settings</a> for more detail)</p></li>
+<li><p><strong>Google Apps</strong> (available in Enterprise Edition E20, see <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#google-settings">Google Settings</a> for more detail)</p></li>
+<li><p><strong>Office 365</strong> (available in Enterprise Edition E20, see <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#office-365-settings">Office 365 Settings</a> for more detail)</p></li>
+<li><p><strong>OpenID Connect (Other)</strong> (available in Enterprise Edition E20, see <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#openid-connect-other-settings">OpenID Connect Settings</a> for more detail)</p></li>
+</ul>
+</div></blockquote>
+<p>This feature’s setting does not appear in <code class="docutils literal notranslate"><span class="pre">config.json</span></code>.</p>
+</div>
+<div class="section" id="gitlab-settings">
+<h3>GitLab Settings<a class="headerlink" href="#gitlab-settings" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id30">
+<h4>Enable authentication with GitLab<a class="headerlink" href="#id30" title="Permalink to this headline">¶</a></h4>
+<p><strong>True</strong>: Allow team creation and account signup using GitLab OpenID Connect. To configure, input the <strong>Secret</strong>, <strong>Id</strong>, and <strong>DiscoveryEndpoint</strong> credentials.</p>
+<p><strong>False</strong>: GitLab OpenID Connect cannot be used for team creation or account signup.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>This feature’s <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is <code class="docutils literal notranslate"><span class="pre">&quot;Enable&quot;:</span> <span class="pre">false</span></code> with options <code class="docutils literal notranslate"><span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id31">
+<h4>Application ID<a class="headerlink" href="#id31" title="Permalink to this headline">¶</a></h4>
+<p>Obtain this value by logging into your GitLab account. Go to <strong>Profile Settings &gt; Applications &gt; New Application</strong>, enter a <strong>Name</strong>, then enter Redirect URLs <code class="docutils literal notranslate"><span class="pre">https://&lt;your-mattermost-url&gt;/login/gitlab/complete</span></code> (example: <code class="docutils literal notranslate"><span class="pre">https://example.com:8065/login/gitlab/complete</span></code> and <code class="docutils literal notranslate"><span class="pre">https://&lt;your-mattermost-url&gt;/signup/gitlab/complete</span></code>.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>This feature’s <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is <code class="docutils literal notranslate"><span class="pre">&quot;Id&quot;:</span> <span class="pre">&quot;&quot;</span></code> with string input.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id32">
+<h4>Application Secret Key<a class="headerlink" href="#id32" title="Permalink to this headline">¶</a></h4>
+<p>Obtain this value by logging into your GitLab account. Go to <strong>Profile Settings &gt; Applications &gt; New Application</strong>, enter a <strong>Name</strong>, then enter Redirect URLs <code class="docutils literal notranslate"><span class="pre">https://&lt;your-mattermost-url&gt;/login/gitlab/complete</span></code> (example: <code class="docutils literal notranslate"><span class="pre">https://example.com:8065/login/gitlab/complete</span></code> and <code class="docutils literal notranslate"><span class="pre">https://&lt;your-mattermost-url&gt;/signup/gitlab/complete</span></code>.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>This feature’s <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is <code class="docutils literal notranslate"><span class="pre">&quot;Secret&quot;:</span> <span class="pre">&quot;&quot;</span></code> with string input.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="discovery-endpoint">
+<h4>Discovery Endpoint<a class="headerlink" href="#discovery-endpoint" title="Permalink to this headline">¶</a></h4>
+<p>This value is prepopulated with <code class="docutils literal notranslate"><span class="pre">https://gitlab.com/.well-known/openid-configuration</span></code>.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>This feature’s <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is <code class="docutils literal notranslate"><span class="pre">&quot;DiscoveryEndpoint&quot;:</span> <span class="pre">&quot;&quot;</span></code> with string input.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="google-settings">
+<h3>Google Settings<a class="headerlink" href="#google-settings" title="Permalink to this headline">¶</a></h3>
+<p><em>Available in Enterprise Edition E20</em></p>
+<p>Enable authentication with Google by selecting <code class="docutils literal notranslate"><span class="pre">Google</span> <span class="pre">Apps</span></code> from <strong>System Console &gt; Authentication &gt; OpenID Connect &gt; Select service provider</strong>.</p>
+<p><strong>True</strong>: Allow team creation and account signup using Google OpenID Connect. To configure, input the <strong>Client ID</strong>, <strong>Client Secret</strong>, and <strong>DiscoveryEndpoint</strong> credentials. See <a class="reference external" href="https://docs.mattermost.com/deployment/sso-google.html">the documentation</a> for more detail.</p>
+<p><strong>False</strong>: Google OpenID Connect cannot be used for team creation or account signup.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>This feature’s <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is <code class="docutils literal notranslate"><span class="pre">&quot;Enable&quot;:</span> <span class="pre">false</span></code> with options <code class="docutils literal notranslate"><span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="id33">
+<h4>Client ID<a class="headerlink" href="#id33" title="Permalink to this headline">¶</a></h4>
+<p>Obtain this value by registering Mattermost as an application in your Google account.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>This feature’s <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is <code class="docutils literal notranslate"><span class="pre">&quot;Id&quot;:</span> <span class="pre">&quot;&quot;</span></code> with string input.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id34">
+<h4>Client Secret<a class="headerlink" href="#id34" title="Permalink to this headline">¶</a></h4>
+<p>Obtain this value by registering Mattermost as an application in your Google account.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>This feature’s <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is <code class="docutils literal notranslate"><span class="pre">&quot;Secret&quot;:</span> <span class="pre">&quot;&quot;</span></code> with string input.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id35">
+<h4>Discovery Endpoint<a class="headerlink" href="#id35" title="Permalink to this headline">¶</a></h4>
+<p>This value is prepopulated with <code class="docutils literal notranslate"><span class="pre">https://accounts.google.com/.well-known/openid-configuration</span></code>.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>This feature’s <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is <code class="docutils literal notranslate"><span class="pre">&quot;DiscoveryEndpoint&quot;:</span> <span class="pre">&quot;&quot;</span></code> with string input.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="office-365-settings">
+<h3>Office 365 Settings<a class="headerlink" href="#office-365-settings" title="Permalink to this headline">¶</a></h3>
+<p><em>Available in Enterprise Edition E20</em></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In line with Microsoft ADFS guidance, we recommend <a class="reference external" href="https://docs.microsoft.com/en-us/windows-server/identity/ad-fs/operations/configure-intranet-forms-based-authentication-for-devices-that-do-not-support-wia">configuring intranet forms-based authentication for devices that do not support WIA</a>.</p>
+</div>
+<p>Enable authentication with Office 365 by selecting <strong>Office 365</strong> from <strong>System Console &gt; Authentication &gt; OpenID Connect &gt; Select service provider</strong>.</p>
+<p><strong>True</strong>: Allow team creation and account signup using Office 365 OpenID Connect. To configure, input the <strong>Application ID</strong> and <strong>Application Secret Password</strong> credentials. See <a class="reference external" href="https://docs.mattermost.com/deployment/sso-office.html">the documentation</a> for more detail.</p>
+<p><strong>False</strong>: Office 365 OpenID Connect cannot be used for team creation or account signup.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>This feature’s <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is <code class="docutils literal notranslate"><span class="pre">&quot;Enable&quot;:</span> <span class="pre">false</span></code> with options <code class="docutils literal notranslate"><span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="id37">
+<h4>Application ID<a class="headerlink" href="#id37" title="Permalink to this headline">¶</a></h4>
+<p>Obtain this value by registering Mattermost as an application in your Microsoft or Office account.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>This feature’s <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is <code class="docutils literal notranslate"><span class="pre">&quot;Id&quot;:</span> <span class="pre">&quot;&quot;</span></code> with string input.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id38">
+<h4>Application Secret Password<a class="headerlink" href="#id38" title="Permalink to this headline">¶</a></h4>
+<p>Obtain this value by registering Mattermost as an application in your Microsoft or Office account.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>This feature’s <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is <code class="docutils literal notranslate"><span class="pre">&quot;Secret&quot;:</span> <span class="pre">&quot;&quot;</span></code> with string input.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id39">
+<h4>Discovery Endpoint<a class="headerlink" href="#id39" title="Permalink to this headline">¶</a></h4>
+<p>This value is prepopulated with <code class="docutils literal notranslate"><span class="pre">https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration</span></code>.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>This feature’s <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is <code class="docutils literal notranslate"><span class="pre">&quot;DiscoveryEndpoint&quot;:</span> <span class="pre">&quot;&quot;</span></code> with string input.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="openid-connect-other-settings">
+<h3>OpenID Connect (Other) Settings<a class="headerlink" href="#openid-connect-other-settings" title="Permalink to this headline">¶</a></h3>
+<p><em>Available in Enterprise Edition E20</em></p>
+<p>Enable authentication with a service provider by selecting <code class="docutils literal notranslate"><span class="pre">OpenID</span> <span class="pre">Connect</span> <span class="pre">(Other)</span></code> from <strong>System Console &gt; Authentication &gt; OpenID Connect &gt; Select service provider</strong>.</p>
+<p><strong>True</strong>: Allow team creation and account signup using OpenID Connect. To configure, input the <strong>Client ID</strong>, <strong>Client Secret</strong>, and <strong>DiscoveryEndpoint</strong> credentials. See <a class="reference external" href="https://docs.mattermost.com/deployment/sso-openidconnect.html">the documentation</a> for more detail.</p>
+<p><strong>False</strong>: OpenID Connect cannot be used for team creation or account signup.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>This feature’s <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is <code class="docutils literal notranslate"><span class="pre">&quot;Enable&quot;:</span> <span class="pre">false</span></code> with options <code class="docutils literal notranslate"><span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="id40">
+<h4>Client ID<a class="headerlink" href="#id40" title="Permalink to this headline">¶</a></h4>
+<p>Obtain this value by registering Mattermost as an application in your service provider account.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>This feature’s <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is <code class="docutils literal notranslate"><span class="pre">&quot;Id&quot;:</span> <span class="pre">&quot;&quot;</span></code> with string input.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id41">
+<h4>Client Secret<a class="headerlink" href="#id41" title="Permalink to this headline">¶</a></h4>
+<p>Obtain this value by registering Mattermost as an application in your service provider account.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>This feature’s <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is <code class="docutils literal notranslate"><span class="pre">&quot;Secret&quot;:</span> <span class="pre">&quot;&quot;</span></code> with string input.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id42">
+<h4>Discovery Endpoint<a class="headerlink" href="#id42" title="Permalink to this headline">¶</a></h4>
+<p>Obtain this value by registering Mattermost as an application in your service provider account. Should be in the format <code class="docutils literal notranslate"><span class="pre">https://myopenid.provider.com/{my_company}/.well-known/openid-configuration</span></code> where the value of <em>{my_company}</em> is replaced with your organization.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>This feature’s <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is <code class="docutils literal notranslate"><span class="pre">&quot;DiscoveryEndpoint&quot;:</span> <span class="pre">&quot;&quot;</span></code> with string input.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="button-text">
+<h4>Button Text<a class="headerlink" href="#button-text" title="Permalink to this headline">¶</a></h4>
+<p>Specify the text that displays on the OpenID login button.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>This feature’s <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is <code class="docutils literal notranslate"><span class="pre">&quot;ButtonText&quot;:</span> <span class="pre">&quot;&quot;</span></code> with string input.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="button-color">
+<h4>Button Color<a class="headerlink" href="#button-color" title="Permalink to this headline">¶</a></h4>
+<p>Specify the color of the OpenID login button for white labeling purposes. Use a hex code with a #-sign before the code, for example <code class="docutils literal notranslate"><span class="pre">#145DBF</span></code>.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>This feature’s <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is <code class="docutils literal notranslate"><span class="pre">&quot;ButtonColor&quot;:</span> <span class="pre">&quot;&quot;</span></code> with string input.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <div class="section" id="guest-access-beta">
 <h3>Guest Access (Beta)<a class="headerlink" href="#guest-access-beta" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="enable-guest-access">
@@ -4268,8 +4541,8 @@
 </tbody>
 </table>
 </div>
-<div class="section" id="id30">
-<h4>Enforce Multi-factor Authentication<a class="headerlink" href="#id30" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id43">
+<h4>Enforce Multi-factor Authentication<a class="headerlink" href="#id43" title="Permalink to this headline">¶</a></h4>
 <p>This setting defaults to false and is read-only if multi-factor authentication is not enforced for regular users.</p>
 <p><strong>True</strong>: When true, multi-factor authentication (MFA) is required for login. New guest users will be required to configure MFA on sign-up. Logged in guest users without MFA configured are redirected to the MFA setup page until configuration is complete.</p>
 <p><strong>False</strong>: Multi-factor authentication for guests is optional.</p>
@@ -6000,8 +6273,8 @@
 </table>
 </div>
 </div>
-<div class="section" id="gitlab-settings">
-<h3>GitLab Settings<a class="headerlink" href="#gitlab-settings" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id56">
+<h3>GitLab Settings<a class="headerlink" href="#id56" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="scope">
 <h4>Scope<a class="headerlink" href="#scope" title="Permalink to this headline">¶</a></h4>
 <p>Standard setting for OAuth to determine the scope of information shared with OAuth client. Not currently supported by GitLab OAuth.</p>
@@ -6016,10 +6289,10 @@
 </table>
 </div>
 </div>
-<div class="section" id="google-settings">
-<h3>Google Settings<a class="headerlink" href="#google-settings" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="id43">
-<h4>Scope<a class="headerlink" href="#id43" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id57">
+<h3>Google Settings<a class="headerlink" href="#id57" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id58">
+<h4>Scope<a class="headerlink" href="#id58" title="Permalink to this headline">¶</a></h4>
 <p>Standard setting for OAuth to determine the scope of information shared with OAuth client. Recommended setting is <code class="docutils literal notranslate"><span class="pre">profile</span> <span class="pre">email</span></code>.</p>
 <table class="docutils align-default">
 <colgroup>
@@ -6032,10 +6305,10 @@
 </table>
 </div>
 </div>
-<div class="section" id="office-365-settings">
-<h3>Office 365 Settings<a class="headerlink" href="#office-365-settings" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="id44">
-<h4>Scope<a class="headerlink" href="#id44" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id59">
+<h3>Office 365 Settings<a class="headerlink" href="#id59" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id60">
+<h4>Scope<a class="headerlink" href="#id60" title="Permalink to this headline">¶</a></h4>
 <p>Standard setting for OAuth to determine the scope of information shared with OAuth client. Recommended setting is <code class="docutils literal notranslate"><span class="pre">User.Read</span></code>.</p>
 <table class="docutils align-default">
 <colgroup>
@@ -6050,8 +6323,8 @@
 </div>
 <div class="section" id="cluster-settings">
 <h3>Cluster Settings<a class="headerlink" href="#cluster-settings" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="id45">
-<h4>Maximum Idle Connections<a class="headerlink" href="#id45" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id61">
+<h4>Maximum Idle Connections<a class="headerlink" href="#id61" title="Permalink to this headline">¶</a></h4>
 <p>The maximum number of idle connections held open from one server to all others in the cluster.</p>
 <table class="docutils align-default">
 <colgroup>
@@ -6363,8 +6636,8 @@
 <div class="section" id="advanced-audit-logging-configuration">
 <h3>Advanced Audit Logging Configuration<a class="headerlink" href="#advanced-audit-logging-configuration" title="Permalink to this headline">¶</a></h3>
 <p><em>Available in Enterprise Edition E20</em></p>
-<div class="section" id="id46">
-<h4>Output logs to multiple targets<a class="headerlink" href="#id46" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id62">
+<h4>Output logs to multiple targets<a class="headerlink" href="#id62" title="Permalink to this headline">¶</a></h4>
 <p>Send log records to multiple targets:</p>
 <ul class="simple">
 <li><p>Multiple local file targets</p></li>
@@ -6376,8 +6649,8 @@
 <p>This feature’s <code class="docutils literal notranslate"><span class="pre">config.json</span></code> setting is <code class="docutils literal notranslate"><span class="pre">ExperimentalAuditSettings.AdvancedLoggingConfig</span></code> which can contain a filespec to another config file, a database DSN, or JSON. Options are outlined in this txt file: <a class="reference external" href="https://github.com/mattermost/docs/files/5066579/Log.Settings.Options.txt">Log Settings Options</a>. Sample config: <a class="reference external" href="https://github.com/mattermost/docs/files/5066597/Advanced.Logging.Options.Sample.json.zip">Advanced Logging Options Sample.json.zip</a>.</p>
 </div>
 </div>
-<div class="section" id="id49">
-<h3>Service Settings<a class="headerlink" href="#id49" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id65">
+<h3>Service Settings<a class="headerlink" href="#id65" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="group-unread-channels-experimental">
 <h4>Group Unread Channels (Experimental)<a class="headerlink" href="#group-unread-channels-experimental" title="Permalink to this headline">¶</a></h4>
 <p>This setting applies to the new sidebar only. You must disable the <a class="reference external" href="https://docs.mattermost.com/administration/config-settings.html#enable-legacy-sidebar">Enable Legacy Sidebar</a> configuration setting to see and enable this functionality in the System Console.</p>
@@ -6453,8 +6726,8 @@
 </div>
 <div class="section" id="team-settings">
 <h3>Team Settings<a class="headerlink" href="#team-settings" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="id50">
-<h4>Teammate Name Display<a class="headerlink" href="#id50" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id66">
+<h4>Teammate Name Display<a class="headerlink" href="#id66" title="Permalink to this headline">¶</a></h4>
 <p><em>Available in Enterprise Edition E20</em></p>
 <p>Control Teammate Name Display at the system level.</p>
 <p><strong>True</strong>: Allows System Admins to control Teammate Name Display at the system level.</p>
@@ -6485,8 +6758,8 @@
 </table>
 </div>
 </div>
-<div class="section" id="id51">
-<h3>Email Settings<a class="headerlink" href="#id51" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id67">
+<h3>Email Settings<a class="headerlink" href="#id67" title="Permalink to this headline">¶</a></h3>
 </div>
 <div class="section" id="client-requirement-settings-experimental">
 <h3>Client Requirement Settings (Experimental)<a class="headerlink" href="#client-requirement-settings-experimental" title="Permalink to this headline">¶</a></h3>
